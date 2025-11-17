@@ -1,0 +1,1 @@
+# arquivo de especificação da issue "Importar dados do SIGAA" (Sprint 1)

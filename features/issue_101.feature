@@ -1,0 +1,1 @@
+# arquivo de especificação da issue "Gerar relatório do administrador" (Sprint 1)

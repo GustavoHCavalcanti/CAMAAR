@@ -1,0 +1,1 @@
+# arquivo de especificação da issue "Cadastrar usuários do sistema" (Sprint 1)

@@ -1,0 +1,1 @@
+# arquivo de especificação da issue "Sistema de gerenciamento por departamento" (Sprint 1)
