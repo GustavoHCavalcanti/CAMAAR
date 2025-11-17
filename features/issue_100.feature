@@ -1,6 +1,6 @@
 # arquivo de especificação da issue "Cadastrar usuários do sistema" (Sprint 1)
 @issue-100
-Feature: Cadastro de participantes do SIGAA
+Feature: Cadastrar usuários do sistema
   Como administrador
   Quero cadastrar participantes de turmas do SIGAA ao importar dados
   A fim de que possam acessar o sistema CAMAAR (ativação após definição de senha)

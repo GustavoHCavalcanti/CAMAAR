@@ -1,6 +1,6 @@
 # arquivo de especificação da issue "Responder formulário" (Sprint 1)
 @issue-99
-Feature: Responder questionário da turma
+Feature: Responder questionário
   Como participante de uma turma
   Quero responder o questionário da turma em que estou matriculado
   A fim de submeter minha avaliação
