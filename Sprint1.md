@@ -52,42 +52,26 @@ Especificar **todos os cenários de teste de aceitação (BDD)** utilizando Gher
 ## Responsáveis por Cada Funcionalidade (com link para arquivo `.feature`)
 
 ### Gustavo — Issues #98 a #103
-- #98 Importar dados do SIGAA  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/importar_sigaa.feature  
-- #99 Responder formulário  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/responder_formulario.feature  
-- #100 Cadastrar usuários  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/cadastrar_usuarios.feature  
-- #101 Gerar relatório (CSV)  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerar_relatorio.feature  
-- #102 Criar template  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_template.feature  
-- #103 Criar formulário de avaliação  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_avaliacao.feature  
+- [#98 Importar dados do SIGAA](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/importar_sigaa.feature)
+- [#99 Responder formulário](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/responder_formulario.feature)  
+- [#100 Cadastrar usuários](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/cadastrar_usuarios.feature)
+- [#101 Gerar relatório (CSV)](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerar_relatorio.feature) 
+- [#102 Criar template](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_template.feature) 
+- [#103 Criar formulário de avaliação](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_avaliacao.feature)
 
 ### Gabriel — Issues #104 a #109
-- #104 Login  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/login.feature  
-- #105 Definição de senha  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/definicao_senha.feature  
-- #106 Gerenciamento por departamento  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerenciamento_departamento.feature  
-- #107 Redefinição de senha  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/redefinicao_senha.feature  
-- #108 Atualizar base com dados do SIGAA  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/atualizar_base_sigaa.feature  
-- #109 Visualizar formulários para responder  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_formularios.feature  
+- [#104 Login](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/login.feature)
+- [#105 Definição de senha](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/definicao_senha.feature)
+- [#106 Gerenciamento por departamento](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerenciamento_departamento.feature)
+- [#107 Redefinição de senha](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/redefinicao_senha.feature)
+- [#108 Atualizar base com dados do SIGAA](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/atualizar_base_sigaa.feature)
+- [#109 Visualizar formulários para responder](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_formularios.feature)
 
 ### Vitor — Issues #110 a #113
-- #110 Visualizar resultados dos formulários  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_resultados_formularios.feature  
-- #111 Visualização dos templates criados  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_templates.feature  
-- #112 Edição e deleção de templates  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/editar_deletar_templates.feature  
-- #113 Criar formulário para docentes ou dicentes  
-  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_docentes.feature  
+- [#110 Visualizar resultados dos formulários](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_resultados_formularios.feature)
+- [#111 Visualização dos templates criados](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_templates.feature)
+- [#112 Edição e deleção de templates](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/editar_deletar_templates.feature)
+- [#113 Criar formulário para docentes ou dicentes](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_docentes.feature)
 
 ---
 
