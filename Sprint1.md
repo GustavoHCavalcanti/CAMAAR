@@ -9,105 +9,117 @@
 CAMAAR – Sistema de Avaliação de Turmas da UnB
 
 ## Escopo do Projeto
-O CAMAAR é um sistema para avaliação institucional de turmas, permitindo que administradores gerenciem turmas, formulários e dados do SIGAA, enquanto participantes respondem formulários vinculados às turmas em que estão matriculados. O sistema também possibilita geração de relatórios e controle por departamento.
+O CAMAAR é um sistema para avaliação de turmas, permitindo que administradores gerenciem turmas, formulários e dados do SIGAA, enquanto participantes respondem formulários vinculados às turmas em que estão matriculados.
 
 ---
 
-## Papéis da Equipe na Sprint
+## Papéis da Equipe
 - **Scrum Master:** Gabriel Caixeta Romero  
 - **Product Owner:** Gustavo Henrique Andrade Cavalcanti  
 
 ---
 
 ## Objetivo da Sprint
-A Sprint 1 teve como objetivo especificar todos os cenários de teste de aceitação (BDD) do projeto utilizando a linguagem Gherkin.  
-A sprint concentrou-se exclusivamente na documentação comportamental, sem implementação funcional.
+Especificar **todos os cenários de teste de aceitação (BDD)** utilizando Gherkin. Não houve implementação funcional, apenas documentação de comportamento.
 
 ---
 
 ## Funcionalidades e Regras de Negócio
 
-### Autenticação e Acesso
-- Login por e-mail ou matrícula.
-- Definição e redefinição de senha via link seguro.
-- Administradores visualizam menus adicionais.
+### Autenticação
+- Login por e-mail/matrícula  
+- Definição e redefinição de senha  
+- Diferenciação entre usuários e administradores  
 
-### Integração com SIGAA
-- Importação de turmas, docentes e discentes via JSON.
-- Atualização incremental da base, evitando duplicidades.
-- Cadastro automático de usuários importados.
+### SIGAA
+- Importação e atualização de dados  
+- Cadastro automático de usuários importados  
 
 ### Formulários
-- Participantes visualizam e respondem formulários pendentes.
-- Administradores criam templates, podem editá-los e excluí-los.
-- Formularios podem ser criados para discentes e docentes.
+- Participantes respondem formulários pendentes  
+- Administradores criam templates, editam e deletam  
+- Criação de formulários para docentes/discentes  
 
 ### Relatórios
-- Visualização agregada das respostas.
-- Exportação de relatórios em CSV.
+- Visualização de resultados  
+- Exportação CSV  
 
 ### Departamentos
-- Administradores só gerenciam turmas de seu próprio departamento.
+- Administradores gerenciam apenas seu próprio departamento  
 
 ---
 
-## Responsáveis por Cada Funcionalidade
+## Responsáveis por Cada Funcionalidade (com link para arquivo `.feature`)
 
 ### Gustavo — Issues #98 a #103
-- [#98 Importar dados do SIGAA](https://github.com/GustavoHCavalcanti/CAMAAR/issues/98)  
-- [#99 Responder formulário](https://github.com/GustavoHCavalcanti/CAMAAR/issues/99)  
-- [#100 Cadastrar usuários](https://github.com/GustavoHCavalcanti/CAMAAR/issues/100)  
-- [#101 Gerar relatório (CSV)](https://github.com/GustavoHCavalcanti/CAMAAR/issues/101)  
-- [#102 Criar template de formulário](https://github.com/GustavoHCavalcanti/CAMAAR/issues/102)  
-- [#103 Criar formulário de avaliação](https://github.com/GustavoHCavalcanti/CAMAAR/issues/103)  
+- #98 Importar dados do SIGAA  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/importar_sigaa.feature  
+- #99 Responder formulário  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/responder_formulario.feature  
+- #100 Cadastrar usuários  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/cadastrar_usuarios.feature  
+- #101 Gerar relatório (CSV)  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerar_relatorio.feature  
+- #102 Criar template  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_template.feature  
+- #103 Criar formulário de avaliação  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_avaliacao.feature  
 
 ### Gabriel — Issues #104 a #109
-- [#104 Login](https://github.com/GustavoHCavalcanti/CAMAAR/issues/104)  
-- [#105 Definição de senha](https://github.com/GustavoHCavalcanti/CAMAAR/issues/105)  
-- [#106 Gerenciamento por departamento](https://github.com/GustavoHCavalcanti/CAMAAR/issues/106)  
-- [#107 Redefinição de senha](https://github.com/GustavoHCavalcanti/CAMAAR/issues/107)  
-- [#108 Atualizar base com dados do SIGAA](https://github.com/GustavoHCavalcanti/CAMAAR/issues/108)  
-- [#109 Visualizar formulários para responder](https://github.com/GustavoHCavalcanti/CAMAAR/issues/109)  
+- #104 Login  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/login.feature  
+- #105 Definição de senha  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/definicao_senha.feature  
+- #106 Gerenciamento por departamento  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerenciamento_departamento.feature  
+- #107 Redefinição de senha  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/redefinicao_senha.feature  
+- #108 Atualizar base com dados do SIGAA  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/atualizar_base_sigaa.feature  
+- #109 Visualizar formulários para responder  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_formularios.feature  
 
 ### Vitor — Issues #110 a #113
-- [#110 Visualização de resultados dos formulários](https://github.com/GustavoHCavalcanti/CAMAAR/issues/110)  
-- [#111 Visualização dos templates criados](https://github.com/GustavoHCavalcanti/CAMAAR/issues/111)  
-- [#112 Edição e deleção de templates](https://github.com/GustavoHCavalcanti/CAMAAR/issues/112)  
-- [#113 Criação de formulário para docentes ou dicentes](https://github.com/GustavoHCavalcanti/CAMAAR/issues/113)  
+- #110 Visualizar resultados dos formulários  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_resultados_formularios.feature  
+- #111 Visualização dos templates criados  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_templates.feature  
+- #112 Edição e deleção de templates  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/editar_deletar_templates.feature  
+- #113 Criar formulário para docentes ou dicentes  
+  https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_docentes.feature  
 
 ---
 
-## Política de Branching Utilizada Pelo Grupo
-A política adotada foi a seguinte:
-
+## Política de Branching
 - Branch principal: `main`  
 - Branch da sprint: `sprint-1`  
-- Cada integrante adicionava seus arquivos `.feature` diretamente à branch `sprint-1`  
-- Sem criação de branches individuais por funcionalidade  
-- Ao final, um Pull Request consolidou a sprint no repositório principal  
+- **Cada integrante adicionava diretamente seus arquivos `.feature` na branch `sprint-1`**  
+- Sem branches individuais por funcionalidade  
+- Ao final, PR consolidou a sprint  
 
 ---
 
-## Backlog da Sprint 1 (Todas Concluídas)
+## Backlog da Sprint 1
 
-| ID   | História                                      | Tipo          | Status            |
-|------|-----------------------------------------------|---------------|-------------------|
-| [#98](https://github.com/GustavoHCavalcanti/CAMAAR/issues/98)  | Importar dados do SIGAA                       | Administrador | Concluída (BDD) |
-| [#99](https://github.com/GustavoHCavalcanti/CAMAAR/issues/99)  | Responder formulário                          | Participante  | Concluída (BDD) |
-| [#100](https://github.com/GustavoHCavalcanti/CAMAAR/issues/100) | Cadastrar usuários do sistema                 | Administrador | Concluída (BDD) |
-| [#101](https://github.com/GustavoHCavalcanti/CAMAAR/issues/101) | Gerar relatório (CSV)                         | Administrador | Concluída (BDD) |
-| [#102](https://github.com/GustavoHCavalcanti/CAMAAR/issues/102) | Criar template de formulário                  | Administrador | Concluída (BDD) |
-| [#103](https://github.com/GustavoHCavalcanti/CAMAAR/issues/103) | Criar formulário de avaliação                 | Administrador | Concluída (BDD) |
-| [#104](https://github.com/GustavoHCavalcanti/CAMAAR/issues/104) | Login                                         | Usuário       | Concluída (BDD) |
-| [#105](https://github.com/GustavoHCavalcanti/CAMAAR/issues/105) | Definição de senha                            | Usuário       | Concluída (BDD) |
-| [#106](https://github.com/GustavoHCavalcanti/CAMAAR/issues/106) | Gerenciamento de turmas por departamento      | Administrador | Concluída (BDD) |
-| [#107](https://github.com/GustavoHCavalcanti/CAMAAR/issues/107) | Redefinição de senha                          | Usuário       | Concluída (BDD) |
-| [#108](https://github.com/GustavoHCavalcanti/CAMAAR/issues/108) | Atualizar base com dados do SIGAA             | Administrador | Concluída (BDD) |
-| [#109](https://github.com/GustavoHCavalcanti/CAMAAR/issues/109) | Visualizar formulários para responder         | Participante  | Concluída (BDD) |
-| [#110](https://github.com/GustavoHCavalcanti/CAMAAR/issues/110) | Visualização de resultados dos formulários    | Administrador | Concluída (BDD) |
-| [#111](https://github.com/GustavoHCavalcanti/CAMAAR/issues/111) | Visualização dos templates criados            | Administrador | Concluída (BDD) |
-| [#112](https://github.com/GustavoHCavalcanti/CAMAAR/issues/112) | Edição e deleção de templates                 | Administrador | Concluída (BDD) |
-| [#113](https://github.com/GustavoHCavalcanti/CAMAAR/issues/113) | Criar formulário para docentes ou dicentes    | Administrador | Concluída (BDD) |
+| ID | História | Tipo | Arquivo `.feature` | Status |
+|----|----------|------|--------------------|--------|
+| #98 | Importar dados do SIGAA | Administrador | [importar_sigaa.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/importar_sigaa.feature) | Concluída |
+| #99 | Responder formulário | Participante | [responder_formulario.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/responder_formulario.feature) | Concluída |
+| #100 | Cadastrar usuários | Administrador | [cadastrar_usuarios.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/cadastrar_usuarios.feature) | Concluída |
+| #101 | Gerar relatório | Administrador | [gerar_relatorio.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerar_relatorio.feature) | Concluída |
+| #102 | Criar template | Administrador | [criar_template.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_template.feature) | Concluída |
+| #103 | Criar formulário de avaliação | Administrador | [criar_formulario_avaliacao.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_avaliacao.feature) | Concluída |
+| #104 | Login | Usuário | [login.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/login.feature) | Concluída |
+| #105 | Definição de senha | Usuário | [definicao_senha.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/definicao_senha.feature) | Concluída |
+| #106 | Gerenciamento por departamento | Administrador | [gerenciamento_departamento.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerenciamento_departamento.feature) | Concluída |
+| #107 | Redefinição de senha | Usuário | [redefinicao_senha.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/redefinicao_senha.feature) | Concluída |
+| #108 | Atualizar base com SIGAA | Administrador | [atualizar_base_sigaa.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/atualizar_base_sigaa.feature) | Concluída |
+| #109 | Visualizar formulários | Participante | [visualizar_formularios.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_formularios.feature) | Concluída |
+| #110 | Visualizar resultados | Administrador | [visualizar_resultados_formularios.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_resultados_formularios.feature) | Concluída |
+| #111 | Visualizar templates | Administrador | [visualizar_templates.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_templates.feature) | Concluída |
+| #112 | Edição/deleção de templates | Administrador | [editar_deletar_templates.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/editar_deletar_templates.feature) | Concluída |
+| #113 | Formulário para docentes/discentes | Administrador | [criar_formulario_docentes.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_docentes.feature) | Concluída |
 
 ---
 
