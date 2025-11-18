@@ -1,1 +1,0 @@
-# arquivo de especificação da issue "Sistema de definição de senha" (Sprint 1)
