@@ -1,1 +1,0 @@
-# arquivo de especificação da issue "Redefinição de senha" (Sprint 1)
