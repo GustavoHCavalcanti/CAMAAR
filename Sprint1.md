@@ -19,6 +19,8 @@ Todas as 16 histórias planejadas para o projeto foram especificadas em BDD.
 | #101 | Gerar relatório (CSV) | Administrador | Concluída (BDD) |
 | #102 | Criar template de formulário | Administrador | Concluída (BDD) |
 | #103 | Criar formulário de avaliação | Administrador | Concluída (BDD) |
+| #104  | Login | Usuário | Concluída (BDD) |
+| #105  | Definição de senha | Usuário | Concluída (BDD) |
 | #106 | Gerenciamento de turmas por departamento | Administrador | Concluída (BDD) |
 | #107 | Redefinição de senha | Usuário | Concluída (BDD) |
 | #108 | Atualizar base com dados do SIGAA | Administrador | Concluída (BDD) |
@@ -27,8 +29,6 @@ Todas as 16 histórias planejadas para o projeto foram especificadas em BDD.
 | #111 | Visualização dos templates criados | Administrador | Concluída (BDD) |
 | #112 | Edição e deleção de templates | Administrador | Concluída (BDD) |
 | #113 | Criação de formulário para docentes ou dicentes | Administrador | Concluída (BDD) |
-| — | Login | Usuário | Concluída (BDD) |
-| — | Definição de senha | Usuário | Concluída (BDD) |
 
 ---
 
