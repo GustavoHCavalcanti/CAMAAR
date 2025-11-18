@@ -1,5 +1,6 @@
 # language: pt
 
+@issue-106
 Funcionalidade: Gerenciamento de turmas por departamento
   Como administrador
   Quero visualizar e gerenciar apenas as turmas do meu departamento

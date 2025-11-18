@@ -1,5 +1,6 @@
 # language: pt
 
+@issue-104
 Funcionalidade: Login de usuário
   Como usuário do sistema
   Quero acessar o sistema usando e-mail ou matrícula e uma senha cadastrada

@@ -1,5 +1,6 @@
 # language: pt
 
+@issue-105
 Funcionalidade: Definição de senha de acesso
   Como usuário
   Quero definir uma senha a partir do link enviado por e-mail

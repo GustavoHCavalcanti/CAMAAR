@@ -1,5 +1,6 @@
 # language: pt
 
+@issue-107
 Funcionalidade: Redefinição de senha
   Como usuário
   Quero redefinir minha senha a partir do link recebido após solicitar a troca

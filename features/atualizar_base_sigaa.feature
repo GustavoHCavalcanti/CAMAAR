@@ -1,5 +1,6 @@
 # language: pt
 
+@issue-108
 Funcionalidade: Atualização da base de dados com informações do SIGAA
   Como administrador
   Quero atualizar a base de dados com os dados atuais do SIGAA
