@@ -4,6 +4,7 @@ require "spec_helper"
 require_relative "../lib/password_manager"
 
 RSpec.describe PasswordManager do
+  # 🔥 ESSENCIAL → torna 'manager' visível em todos os testes
   subject(:manager) { described_class.new }
 
   describe "#definir_senha" do
@@ -11,8 +12,8 @@ RSpec.describe PasswordManager do
       it "retorna :sucesso" do
         resultado = manager.definir_senha(
           token_valido: true,
-          senha: "NovaSenha123",
-          confirmacao: "NovaSenha123"
+          senha: "NovaSenhaValida123",
+          confirmacao: "NovaSenhaValida123"
         )
 
         expect(resultado).to eq :sucesso
@@ -23,8 +24,8 @@ RSpec.describe PasswordManager do
       it "retorna :token_invalido" do
         resultado = manager.definir_senha(
           token_valido: false,
-          senha: "NovaSenha123",
-          confirmacao: "NovaSenha123"
+          senha: "NovaSenhaValida123",
+          confirmacao: "NovaSenhaValida123"
         )
 
         expect(resultado).to eq :token_invalido
@@ -35,8 +36,8 @@ RSpec.describe PasswordManager do
       it "retorna :confirmacao_divergente" do
         resultado = manager.definir_senha(
           token_valido: true,
-          senha: "NovaSenha123",
-          confirmacao: "OutraSenha456"
+          senha: "NovaSenhaValida123",
+          confirmacao: "OutraSenha"
         )
 
         expect(resultado).to eq :confirmacao_divergente
@@ -57,14 +58,52 @@ RSpec.describe PasswordManager do
   end
 
   describe "#redefinir_senha" do
-    it "segue as mesmas regras da definição de senha" do
-      resultado = manager.redefinir_senha(
-        token_valido: true,
-        senha: "SenhaNova123",
-        confirmacao: "SenhaNova123"
-      )
+    context "quando o token é válido e a senha atende aos requisitos" do
+      it "retorna :sucesso" do
+        resultado = manager.redefinir_senha(
+          token_valido: true,
+          senha: "SenhaNova123",
+          confirmacao: "SenhaNova123"
+        )
 
-      expect(resultado).to eq :sucesso
+        expect(resultado).to eq :sucesso
+      end
+    end
+
+    context "quando o token é inválido ou expirado" do
+      it "retorna :token_invalido" do
+        resultado = manager.redefinir_senha(
+          token_valido: false,
+          senha: "SenhaNova123",
+          confirmacao: "SenhaNova123"
+        )
+
+        expect(resultado).to eq :token_invalido
+      end
+    end
+
+    context "quando a confirmação da senha é divergente" do
+      it "retorna :confirmacao_divergente" do
+        resultado = manager.redefinir_senha(
+          token_valido: true,
+          senha: "SenhaNova123",
+          confirmacao: "OutraSenha"
+        )
+
+        expect(resultado).to eq :confirmacao_divergente
+      end
+    end
+
+    context "quando a senha não atende aos requisitos mínimos" do
+      it "retorna :senha_fraca" do
+        resultado = manager.redefinir_senha(
+          token_valido: true,
+          senha: "123",
+          confirmacao: "123"
+        )
+
+        expect(resultado).to eq :senha_fraca
+      end
     end
   end
 end
