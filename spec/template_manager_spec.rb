@@ -1,25 +1,26 @@
 # spec/template_manager_spec.rb
-require_relative '../lib/template_manager'
+require "spec_helper"
+require_relative "../lib/template_manager"
 
 RSpec.describe TemplateManager do
-  let(:admin_id)      { 1 }
-  let(:other_admin_id){ 2 }
+  let(:admin_id)       { 1 }
+  let(:other_admin_id) { 2 }
 
   let(:templates) do
     [
-      { id: 1, nome: 'Template de Avaliação 2024', owner_id: admin_id },
-      { id: 2, nome: 'Template de Pesquisa',        owner_id: other_admin_id }
+      { id: 1, nome: "Template de Avaliação 2024", owner_id: admin_id },
+      { id: 2, nome: "Template de Pesquisa",        owner_id: other_admin_id }
     ]
   end
 
-  describe 'Listar templates criados pelo próprio administrador' do
-    it 'marca o template próprio com opções de editar e deletar e o de outro admin como somente leitura' do
-      manager = TemplateManager.new(templates)
+  describe "Listar templates criados pelo próprio administrador" do
+    it "marca o template próprio com opções de editar e deletar e o de outro admin como somente leitura" do
+      manager = described_class.new(templates)
 
       lista = manager.list_for(admin_id)
 
-      avaliacao = lista.find { |t| t[:nome] == 'Template de Avaliação 2024' }
-      pesquisa  = lista.find { |t| t[:nome] == 'Template de Pesquisa' }
+      avaliacao = lista.find { |t| t[:nome] == "Template de Avaliação 2024" }
+      pesquisa  = lista.find { |t| t[:nome] == "Template de Pesquisa" }
 
       expect(avaliacao[:can_edit]).to   be true
       expect(avaliacao[:can_delete]).to be true
@@ -29,37 +30,37 @@ RSpec.describe TemplateManager do
     end
   end
 
-  describe 'Acesso à tela de edição' do
-    it 'abre o editor quando o administrador clica em editar em um template próprio' do
-      manager = TemplateManager.new(templates)
+  describe "Acesso à tela de edição" do
+    it "abre o editor quando o administrador clica em editar em um template próprio" do
+      manager = described_class.new(templates)
 
-      resultado = manager.open_editor('Template de Avaliação 2024', admin_id)
+      resultado = manager.open_editor("Template de Avaliação 2024", admin_id)
 
       expect(resultado).to eq(:editor_opened)
     end
 
-    it 'impede a edição de template que pertence a outro administrador' do
-      manager = TemplateManager.new(templates)
+    it "impede a edição de template que pertence a outro administrador" do
+      manager = described_class.new(templates)
 
-      resultado = manager.open_editor('Template de Pesquisa', admin_id)
+      resultado = manager.open_editor("Template de Pesquisa", admin_id)
 
       expect(resultado).to eq(:forbidden)
     end
   end
 
-  describe 'Administrador sem templates criados' do
-    it 'exibe mensagem de vazio e sugere criação de novo template' do
-      # admin 3 não possui nenhum template
-      manager = TemplateManager.new(templates)
-      mensagem = manager.empty_state_for(3)
+  describe "Administrador sem templates criados" do
+    it "exibe mensagem de vazio e sugere criação de novo template quando não há templates do admin" do
+      manager = described_class.new(templates)
+
+      mensagem = manager.empty_state_for(3) # admin 3 não tem templates
 
       expect(mensagem).not_to be_nil
-      expect(mensagem[:message]).to eq('Nenhum template criado por você')
+      expect(mensagem[:message]).to eq("Nenhum template criado por você")
       expect(mensagem[:suggest_new_template]).to be true
     end
 
-    it 'não exibe mensagem de vazio quando o admin possui templates' do
-      manager = TemplateManager.new(templates)
+    it "não exibe mensagem de vazio quando o admin possui templates" do
+      manager = described_class.new(templates)
 
       mensagem = manager.empty_state_for(admin_id)
 

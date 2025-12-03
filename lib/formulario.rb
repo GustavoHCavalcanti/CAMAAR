@@ -10,6 +10,7 @@ class Formulario
     @respondido_por = respondido_por
   end
 
+  # Retorna true se o formulário ainda está pendente para esse usuário
   def pendente_para?(usuario)
     !respondido_por.include?(usuario)
   end
