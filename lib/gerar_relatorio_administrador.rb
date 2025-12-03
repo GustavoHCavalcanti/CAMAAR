@@ -1,5 +1,5 @@
 # lib/gerar_relatorio_administrador.rb
-require 'csv'
+require "csv"
 
 class NoDataToExportError < StandardError; end
 
@@ -15,10 +15,14 @@ class AdminReportGenerator
   end
 
   # Parâmetro opcional turma: exporta tudo ou só de uma turma específica
+  #
+  # Retorno:
+  # - String CSV (com header) quando há dados
+  # - lança NoDataToExportError quando não há dados
   def export_csv(turma: nil)
     selecionadas = turma ? filtrar_por_turma(turma) : @responses
 
-    raise NoDataToExportError, 'Nenhum dado disponível para exportação' if selecionadas.empty?
+    raise NoDataToExportError, "Nenhum dado disponível para exportação" if selecionadas.empty?
 
     gerar_csv(selecionadas)
   end
