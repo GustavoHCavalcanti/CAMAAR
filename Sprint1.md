@@ -1,140 +1,110 @@
-# Sprint 1 — Especificação de Testes de Aceitação (BDD)
+# Sprint 2 — Implementação de Funcionalidades e Testes Automatizados
+Integrantes:
+  . Gabriel Caixeta Romero – 232036896
+  . Gustavo Henrique Andrade Cavalcanti – 222034109
+  . Vitor Amorim Mello – 231037048
 
-## Integrantes
-- Gabriel Caixeta Romero – 232036896  
-- Gustavo Henrique Andrade Cavalcanti – 222034109  
-- Vitor Amorim Mello – 231037048  
 
-## Projeto
+Projeto:
 CAMAAR – Sistema de Avaliação de Turmas da UnB
 
-## Escopo do Projeto
-O CAMAAR é um sistema para avaliação de turmas, permitindo que administradores gerenciem turmas, formulários e dados do SIGAA, enquanto participantes respondem formulários vinculados às turmas em que estão matriculados.
 
----
+Objetivo da Sprint:
+A Sprint 2 teve como objetivo implementar funcionalidades reais do sistema descritas no BDD da Sprint 1, garantindo:
+  ✔ Execução lógica das regras de negócio
+  ✔ Cobertura com testes RSpec (unitários e de integração simples)
+  ✔ Organização do backlog em Kanban
 
-## Papéis da Equipe
-- **Scrum Master:** Gabriel Caixeta Romero  
-- **Product Owner:** Gustavo Henrique Andrade Cavalcanti  
+link da sprint: https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-2
 
----
+Papéis da Equipe:
+  . Scrum Master: Gustavo Henrique Andrade Cavalcanti
+  . Product Owner: Gabriel Caixeta Romero
 
-## Objetivo da Sprint
-Especificar **todos os cenários de teste de aceitação (BDD)** utilizando Gherkin. Não houve implementação funcional, apenas documentação de comportamento.
 
----
+Backlog da Sprint 2:
+Nesta sprint implementamos funcionalidades-chave do sistema, todas acompanhadas de testes e controladas no Kanban do GitHub Projects.
 
-## Funcionalidades e Regras de Negócio
 
-### Autenticação
-- Login por e-mail/matrícula  
-- Definição e redefinição de senha  
-- Diferenciação entre usuários e administradores  
+Funcionalidades Implementadas:
 
-### SIGAA
-- Importação e atualização de dados  
-- Cadastro automático de usuários importados  
+Gustavo
+🔹 [Sistema de Login (#7)]
+🔹 [Sistema de definição de senha (#8)]
+🔹 [Redefinição de senha (#10)]
+🔹 [Visualização de formulários pendentes (#12 / Issue 109)]
+🔹 [Gerar relatório CSV do administrador (#4)]
+🔹 [Template Manager – gerenciamento de templates (#11)]
+➡️ Implementação envolvendo validações, filtros, persistência em memória e testes.
 
-### Formulários
-- Participantes respondem formulários pendentes  
-- Administradores criam templates, editam e deletam  
-- Criação de formulários para docentes/discentes  
+Gabriel
+🔹 [Importação de dados SIGAA (#1)]
+🔹 [Cadastro de usuários (#3)]
+🔹 [Atualização incremental da base SIGAA (#108)]
+🔹 [Sistema de respostas do formulário (#2)]
+🔹 [Controle de acesso por departamento (#106)]
+➡️ Foco em lógica condicional, modelos e consistência da base.
 
-### Relatórios
-- Visualização de resultados  
-- Exportação CSV  
+Vitor
+🔹 [Listagem de formulários para relatórios (#110)]
+🔹 [Visualização de templates e permissões (#111)]
+🔹 [Criação do template e vinculação (#102/#112)]
+🔹 [Criação de formulário (docentes/discentes) (#113)]
+🔹 [Visualização de resultados de avaliação (#110 complementares)]
+➡️ Foco em exibição, filtragem e regras de autorização.
 
-### Departamentos
-- Administradores gerenciam apenas seu próprio departamento  
 
----
+Artefatos Entregues
+✔ Código Ruby funcional na pasta lib/
+✔ Testes unitários e comportamentais em spec/
+✔ Projeto Kanban configurado com colunas: Backlog → Doing → Done → Accepted
+✔ Movimentação automática das issues
+✔ Relatório .txt com link repositório enviado
 
-## Responsáveis por Cada Funcionalidade (com link para arquivo `.feature`)
 
-### Gustavo — Issues #98 a #103
-- [#98 Importar dados do SIGAA](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/importar_sigaa.feature)
-- [#99 Responder formulário](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/responder_formulario.feature)  
-- [#100 Cadastrar usuários](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/cadastrar_usuarios.feature)
-- [#101 Gerar relatório (CSV)](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerar_relatorio.feature) 
-- [#102 Criar template](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_template.feature) 
-- [#103 Criar formulário de avaliação](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_avaliacao.feature)
+Política de Branching
+Branch principal: main
+Branch de desenvolvimento: sprint-2
+Cada integrante implementou diretamente na branch sprint-2
 
-### Gabriel — Issues #104 a #109
-- [#104 Login](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/login.feature)
-- [#105 Definição de senha](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/definicao_senha.feature)
-- [#106 Gerenciamento por departamento](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerenciamento_departamento.feature)
-- [#107 Redefinição de senha](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/redefinicao_senha.feature)
-- [#108 Atualizar base com dados do SIGAA](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/atualizar_base_sigaa.feature)
-- [#109 Visualizar formulários para responder](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_formularios.feature)
 
-### Vitor — Issues #110 a #113
-- [#110 Visualizar resultados dos formulários](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_resultados_formularios.feature)
-- [#111 Visualização dos templates criados](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_templates.feature)
-- [#112 Edição e deleção de templates](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/editar_deletar_templates.feature)
-- [#113 Criar formulário para docentes ou dicentes](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_docentes.feature)
+Funcionalidades com Testes e Critérios de Aceite
+Cada funcionalidade implementada possui:
+✔ testes RSpec
+✔ cenários felizes e tristes
+✔ regras de negócio traduzidas no código
 
----
 
-## Política de Branching
-- Branch principal: `main`  
-- Branch da sprint: `sprint-1`  
-- **Cada integrante adicionava diretamente seus arquivos `.feature` na branch `sprint-1`**  
-- Sem branches individuais por funcionalidade  
-- Ao final, PR consolidou a sprint  
+Resumo Técnico da Sprint
+  . Desenvolvimento orientado por testes (TDD simplificado)
+  . Modelagem mínima para suportar regras da sprint
+  . Testes cobrindo fluxo completo de autenticação, permissões, criação, visualização e filtros
+  . Design modular permitindo reaproveitamento
+  . Refatorações periódicas conforme falhas detectadas nos testes
 
----
 
-## Backlog da Sprint 1
+Pontuação (Velocity)
+16 funcionalidades implementadas com testes
+Total do backlog completado
+➡️ Velocity final: 16 pontos entregues
 
-| ID | História | Tipo | Arquivo `.feature` | Status |
-|----|----------|------|--------------------|--------|
-| #98 | Importar dados do SIGAA | Administrador | [importar_sigaa.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/importar_sigaa.feature) | Concluída |
-| #99 | Responder formulário | Participante | [responder_formulario.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/responder_formulario.feature) | Concluída |
-| #100 | Cadastrar usuários | Administrador | [cadastrar_usuarios.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/cadastrar_usuarios.feature) | Concluída |
-| #101 | Gerar relatório | Administrador | [gerar_relatorio.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerar_relatorio.feature) | Concluída |
-| #102 | Criar template | Administrador | [criar_template.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_template.feature) | Concluída |
-| #103 | Criar formulário de avaliação | Administrador | [criar_formulario_avaliacao.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_avaliacao.feature) | Concluída |
-| #104 | Login | Usuário | [login.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/login.feature) | Concluída |
-| #105 | Definição de senha | Usuário | [definicao_senha.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/definicao_senha.feature) | Concluída |
-| #106 | Gerenciamento por departamento | Administrador | [gerenciamento_departamento.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/gerenciamento_departamento.feature) | Concluída |
-| #107 | Redefinição de senha | Usuário | [redefinicao_senha.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/redefinicao_senha.feature) | Concluída |
-| #108 | Atualizar base com SIGAA | Administrador | [atualizar_base_sigaa.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/atualizar_base_sigaa.feature) | Concluída |
-| #109 | Visualizar formulários | Participante | [visualizar_formularios.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_formularios.feature) | Concluída |
-| #110 | Visualizar resultados | Administrador | [visualizar_resultados_formularios.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_resultados_formularios.feature) | Concluída |
-| #111 | Visualizar templates | Administrador | [visualizar_templates.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/visualizar_templates.feature) | Concluída |
-| #112 | Edição/deleção de templates | Administrador | [editar_deletar_templates.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/editar_deletar_templates.feature) | Concluída |
-| #113 | Formulário para docentes/discentes | Administrador | [criar_formulario_docentes.feature](https://github.com/GustavoHCavalcanti/CAMAAR/blob/sprint-1/features/criar_formulario_docentes.feature) | Concluída |
 
----
+Kanban
+O controle do fluxo foi feito no GitHub Projects, utilizando:
+✔ Backlog
+✔ Doing
+✔ Done
+✔ Accepted
+Todas as issues foram movimentadas automaticamente conforme commits e revisões.
+link: https://github.com/users/GustavoHCavalcanti/projects/1/views/1
 
-## Pontuação (Velocity)
-Cada história recebeu **1 ponto**.  
-Total da Sprint 1: **16 pontos entregues**.
 
----
+Dificuldades Encontradas
+  . Conflitos iniciais com leitura dos testes por inconsistência de nome de classes
+  . Ajustes na modelagem para alinhar com cenários BDD
+  . Erros de sintaxe e interpretação de RSpec
+  . Refatorar funcionalidades sem quebrar outras dependentes
 
-## Artefatos Entregues
-- Todos os 16 arquivos `.feature` concluídos.  
-- Pull Request consolidando a sprint.  
-- Arquivo `.txt` entregue com dados do grupo e link para o repositório.  
-
----
-
-## Resumo Técnico da Sprint
-- Todas as regras de negócio foram traduzidas para cenários BDD claros e verificáveis.  
-- Cenários completos incluem fluxos felizes e casos de erro.  
-- Estrutura padronizada (Given/When/Then).  
-- Divisão de responsabilidades mantida conforme as issues da sprint.  
-
----
-
-## Dificuldades Encontradas
-- Nivelamento da granularidade entre membros.  
-- Interpretação de regras implícitas nas issues.  
-- Padronização dos arquivos `.feature`.  
-
----
-
-## Conclusão
-A Sprint 1 cumpriu integralmente seu objetivo, entregando a especificação comportamental completa do sistema.  
-A equipe encontra-se preparada para iniciar a etapa de implementação com base sólida de critérios de aceite.
+Conclusão
+A Sprint 2 atingiu seu objetivo principal:
+➡️ transformar especificações BDD em código executável, testado e validado.
