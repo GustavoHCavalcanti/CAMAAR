@@ -64,3 +64,12 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :test do
+  gem "rspec"
+end
+
+group :test do
+  gem "cucumber"
+  gem "rspec"
+end
