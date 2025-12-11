@@ -1,9 +1,208 @@
-<div class="container py-4">
+<div style="
+  max-width: 700px;
+  margin: 20px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+">
 
-  <h1 class="fw-bold mb-4">Novo Template</h1>
+  <h3 style="margin-bottom: 20px;">Criar Template</h3>
 
-  <%= render "form", template: @template %>
+  <% if @template.errors.any? %>
+    <div style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 20px;">
+      <strong>Erros ao criar template:</strong>
+      <ul style="margin: 10px 0 0 20px;">
+        <% @template.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <%= link_to "Voltar", admin_templates_path, class: "btn btn-link mt-3" %>
+  <%= form_with model: [:admin, @template] do |f| %>
 
+    <!-- Nome do Template -->
+    <label style="font-weight: 600;">Nome do template:</label>
+    <%= f.text_field :nome, placeholder: "Ex: Avaliação Docente",
+          class: "form-control mb-4",
+          style: "border: none; border-bottom: 2px solid #333;",
+          required: true %>
+
+    <!-- Contêiner de Questões -->
+    <div id="questions-container">
+      <%= f.fields_for :questions do |question_form| %>
+        <%= render "question_fields", f: question_form, index: question_form.index %>
+      <% end %>
+    </div>
+
+    <!-- Botão de adicionar questão -->
+    <div style="text-align: center; margin: 20px 0;">
+      <button type="button"
+              id="add-question-btn"
+              style="
+                width: 55px; height: 55px;
+                border-radius: 50%;
+                background: #5E2A86;
+                color: white;
+                font-size: 30px;
+                border: none;
+                cursor: pointer;
+              ">
+        +
+      </button>
+    </div>
+
+    <!-- Botão CRIAR -->
+    <div style="text-align: center; margin-top: 30px;">
+      <%= f.submit "Criar",
+            style: "
+              background: #4CAF50;
+              color: white;
+              font-size: 20px;
+              padding: 10px 40px;
+              border-radius: 8px;
+              border: none;
+              cursor: pointer;
+            " %>
+    </div>
+
+  <% end %>
 </div>
+
+<script>
+  let questionIndex = <%= @template.questions.size %>;
+  
+  // Validar antes de submeter
+  document.querySelector('form').addEventListener('submit', function(e) {
+    const nome = document.querySelector('input[name="template[nome]"]').value.trim();
+    
+    if (!nome) {
+      e.preventDefault();
+      alert('Por favor, preencha o nome do template');
+      return false;
+    }
+
+    // Validar questões
+    const questions = document.querySelectorAll('.question-block');
+    let valid = true;
+
+    questions.forEach((q, idx) => {
+      const texto = q.querySelector('input[name*="[texto]"]')?.value.trim();
+      const tipo = q.querySelector('select[name*="[tipo]"]')?.value;
+      const optionsContainer = q.querySelector('.options-container');
+      
+      if (!texto) {
+        alert(`Questão ${idx + 1}: Preencha o texto da pergunta`);
+        valid = false;
+        return;
+      }
+
+      if (tipo === 'radio' && optionsContainer.style.display !== 'none') {
+        const options = q.querySelectorAll('.options-container input[type="text"]');
+        if (options.length === 0) {
+          alert(`Questão ${idx + 1}: Adicione pelo menos uma opção para tipo radio`);
+          valid = false;
+          return;
+        }
+      }
+    });
+
+    if (!valid) {
+      e.preventDefault();
+      return false;
+    }
+  });
+  
+  // Função para adicionar nova questão
+  document.getElementById('add-question-btn').addEventListener('click', function() {
+    const container = document.getElementById('questions-container');
+    const newQuestion = `
+      <div class="question-block" style="
+        background: #f7f7f7;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+      ">
+        <h4>Questão ${questionIndex + 1}</h4>
+
+        <label><strong>Tipo:</strong></label>
+        <select name="template[questions_attributes][${questionIndex}][tipo]"
+                class="form-select mb-3 question-tipo"
+                onchange="toggleOptions(this)"
+                style="width: 200px;">
+          <option value="radio">Radio</option>
+          <option value="texto">Texto</option>
+        </select>
+
+        <label><strong>Texto da pergunta:</strong></label>
+        <input type="text" 
+               name="template[questions_attributes][${questionIndex}][texto]"
+               placeholder="Digite a pergunta"
+               class="form-control mb-3"
+               style="border: none; border-bottom: 2px solid #333; width: 100%;">
+               
+        <div class="options-container">
+          <label><strong>Opções:</strong></label>
+          <div class="options-list"></div>
+          <button type="button" 
+                  onclick="addOption(this)"
+                  style="background: #6A2A8A; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+            + Adicionar Opção
+          </button>
+        </div>
+               
+        <div style="text-align: right; margin-top: 15px;">
+          <button type="button" 
+                  onclick="this.closest('.question-block').remove();"
+                  style="background: #dc3545; color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer;">
+            Remover Questão
+          </button>
+        </div>
+      </div>
+    `;
+    
+    container.insertAdjacentHTML('beforeend', newQuestion);
+    questionIndex++;
+  });
+
+  // Função para mostrar/ocultar container de opções
+  function toggleOptions(select) {
+    const questionBlock = select.closest('.question-block');
+    const optionsContainer = questionBlock.querySelector('.options-container');
+    
+    if (select.value === 'radio') {
+      optionsContainer.style.display = 'block';
+    } else {
+      optionsContainer.style.display = 'none';
+    }
+  }
+
+  // Função para adicionar nova opção
+  function addOption(button) {
+    const optionsList = button.previousElementSibling;
+    const questionBlock = button.closest('.question-block');
+    const questionIndex = Array.from(document.querySelectorAll('.question-block')).indexOf(questionBlock);
+    const optionIndex = optionsList.querySelectorAll('.option-item').length;
+    
+    const newOption = document.createElement('div');
+    newOption.className = 'option-item mb-2';
+    newOption.style.display = 'flex';
+    newOption.style.gap = '10px';
+    newOption.style.alignItems = 'center';
+    
+    newOption.innerHTML = `
+      <input type="text" 
+             name="template[questions_attributes][${questionIndex}][options][]"
+             placeholder="Opção ${optionIndex + 1}"
+             class="form-control"
+             style="flex: 1; border: none; border-bottom: 1px solid #999;">
+      <button type="button" onclick="this.parentElement.remove()" 
+              style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+        ✕
+      </button>
+    `;
+    
+    optionsList.appendChild(newOption);
+  }
+</script>

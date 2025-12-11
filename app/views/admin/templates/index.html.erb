@@ -1,44 +1,88 @@
-<div class="container py-4">
+<div style="padding: 20px;">
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="fw-bold">Templates</h1>
-    <%= link_to "Novo Template", new_admin_template_path, class: "btn btn-primary" %>
-  </div>
+  <h2 class="mb-4">Gerenciamento - Templates</h2>
 
-  <% if @templates.any? %>
-    <table class="table table-hover bg-white shadow-sm">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Criado em</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
+  <!-- GRID DE CARDS -->
+  <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    ">
 
-      <tbody>
-        <% @templates.each do |template| %>
-          <tr>
-            <td><%= template.id %></td>
-            <td><%= template.nome %></td>
-            <td><%= template.created_at.strftime("%d/%m/%Y") %></td>
-            <td>
-              <%= link_to "Ver", admin_template_path(template), class: "btn btn-sm btn-outline-secondary" %>
-              <%= link_to "Editar", edit_admin_template_path(template), class: "btn btn-sm btn-outline-primary" %>
-              <%= button_to "Excluir", admin_template_path(template),
-                    method: :delete,
-                    form: { data: { turbo_confirm: "Tem certeza que deseja excluir este template?" }, class: "d-inline" },
-                    class: "btn btn-sm btn-outline-danger" %>
-            </td>
-          </tr>
+    <% @templates.each do |template| %>
+      <div style="
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+          position: relative;
+          border-left: 4px solid <%= template.formularios.any? ? '#ff9800' : '#4CAF50' %>;
+        ">
+
+        <h4 style="margin: 0 0 4px 0;"><%= template.nome %></h4>
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.9rem;">
+          <strong><%= template.questions.count %></strong> pergunta(s)
+        </p>
+        <p class="text-muted" style="margin: 0 0 16px 0; font-size: 0.9rem;">
+          <strong><%= template.formularios.count %></strong> formulário(s)
+        </p>
+
+        <% if template.formularios.any? %>
+          <div style="background-color: #fff3cd; border-left: 3px solid #ff9800; padding: 8px; margin-bottom: 12px; border-radius: 4px; font-size: 0.85rem;">
+            ⚠️ Este template está em uso
+          </div>
         <% end %>
-      </tbody>
-    </table>
 
-  <% else %>
-    <div class="alert alert-info mt-3">
-      Nenhum template encontrado.
-    </div>
-  <% end %>
+        <!-- AÇÕES -->
+        <div style="
+            display: flex;
+            gap: 10px;
+          ">
+
+          <!-- VER -->
+          <%= link_to admin_template_path(template),
+              style: "flex: 1; text-align: center; padding: 8px; background: #e3f2fd; color: #1976d2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Ver
+          <% end %>
+
+          <!-- EDITAR -->
+          <%= link_to edit_admin_template_path(template),
+              style: "flex: 1; text-align: center; padding: 8px; background: #f3e5f5; color: #7b1fa2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Editar
+          <% end %>
+
+          <!-- DELETAR -->
+          <%= button_to admin_template_path(template),
+              method: :delete,
+              form: { data: { turbo_confirm: template.formularios.any? ? "⚠️ ATENÇÃO: Este template está associado a #{template.formularios.count} formulário(s). Ao excluir, todos serão removidos. Tem certeza?" : "Tem certeza que deseja excluir?" }, class: "d-inline" },
+              style: "flex: 1; background: #ffebee; color: #c62828; border: none; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: 500; font-size: 0.9rem;" do %>
+            Excluir
+          <% end %>
+
+        </div>
+
+      </div>
+    <% end %>
+
+    <!-- CARD DE CRIAÇÃO -->
+    <%= link_to new_admin_template_path,
+        style: "
+          background: white;
+          border-radius: 10px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 40px;
+          text-decoration: none;
+          color: #5E2A86;
+          font-weight: bold;
+          border-left: 4px solid #4CAF50;
+        " do %>
+      +
+    <% end %>
+
+  </div>
 
 </div>

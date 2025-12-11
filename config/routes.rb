@@ -26,4 +26,8 @@ Rails.application.routes.draw do
     resources :formularios, only: [ :index, :show ]
     get "perfil", to: "perfil#show"
   end
+
+  get "admin/templates/new_question/:index",
+    to: "admin/templates#new_question",
+    as: :new_admin_template_question
 end

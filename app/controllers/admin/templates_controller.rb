@@ -14,6 +14,7 @@ module Admin
 
     def new
       @template = ::Template.new
+      @template.questions.build # Inicializa com uma pergunta vazia
     end
 
     def create
@@ -47,7 +48,10 @@ module Admin
     private
 
     def template_params
-      params.require(:template).permit(:nome, :descricao)
+      params.require(:template).permit(
+        :nome,
+        questions_attributes: [ :id, :texto, :tipo, :_destroy, options: [] ]
+      )
     end
 
     def require_admin
