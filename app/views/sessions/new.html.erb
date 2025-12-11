@@ -1,25 +1,33 @@
-<div class="row justify-content-center">
-  <div class="col-md-5">
-    <div class="card shadow-sm">
-      <div class="card-body p-4">
-        <h3 class="text-center mb-4">Entrar</h3>
+<div class="d-flex justify-content-center align-items-center" style="min-height:100vh; background:#f8f9fa;">
+  <div class="card shadow-lg p-4" style="width: 100%; max-width: 420px; border-radius: 12px;">
+    
+    <h3 class="text-center mb-4 fw-bold">Entrar no CAMAAR</h3>
 
-        <%= form_with url: login_path, method: :post, local: true do |f| %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
 
-          <div class="mb-3">
-            <%= f.label :email_or_matricula, "E-mail ou Matrícula", class: "form-label" %>
-            <%= f.text_field :email_or_matricula, class: "form-control" %>
-          </div>
+    <%= form_with url: login_path, method: :post, local: true do |f| %>
 
-          <div class="mb-3">
-            <%= f.label :password, "Senha", class: "form-label" %>
-            <%= f.password_field :password, class: "form-control" %>
-          </div>
-
-          <%= f.submit "Entrar", class: "btn btn-primary w-100" %>
-
-        <% end %>
+      <div class="mb-3">
+        <%= f.label :login, "E-mail ou Matrícula", class: "form-label fw-semibold" %>
+        <%= f.text_field :login, class: "form-control", placeholder: "exemplo@unb.br", required: true %>
       </div>
-    </div>
+
+      <div class="mb-3">
+        <%= f.label :password, "Senha", class: "form-label fw-semibold" %>
+        <%= f.password_field :password, class: "form-control", placeholder: "••••••••", required: true %>
+      </div>
+
+      <div class="d-grid mt-4">
+        <%= f.submit "Entrar", class: "btn btn-primary btn-lg" %>
+      </div>
+
+    <% end %>
+
+    <p class="mt-4 mb-0 text-center text-muted" style="font-size: 0.9rem;">
+      Problemas para acessar? Fale com o administrador.
+    </p>
+
   </div>
 </div>
