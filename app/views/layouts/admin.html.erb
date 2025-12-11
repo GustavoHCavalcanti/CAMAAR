@@ -146,31 +146,30 @@
     <div class="admin-navbar">
       <div style="display: flex; align-items: center; gap: 10px;">
         <div class="hamburger" onclick="openSidebar()">☰</div>
-        <%= link_to admin_formularios_path, 
-              style: "text-decoration: none; color: #333; display: flex; align-items: center;" do %>
-          <h4 style="margin: 0; font-size: 18px; line-height: 1;">
-            <%= content_for?(:page_title) ? yield(:page_title) : "Avaliações" %>
-          </h4>
-        <% end %>
+        <h4 style="margin: 0; font-size: 18px; line-height: 1; color: #333;">
+          <%= content_for?(:page_title) ? yield(:page_title) : "Avaliações" %>
+        </h4>
       </div>
       
-      <!-- Barra de Pesquisa - Centralizada -->
-      <div style="position: absolute; left: 50%; transform: translateX(-50%); max-width: 500px; width: 40%;">
-        <input 
-          type="text" 
-          id="search-input" 
-          placeholder="🔍 Pesquisar avaliações..."
-          style="
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 14px;
-            outline: none;
-          "
-          onkeyup="filterAvaliacoes()"
-        />
-      </div>
+      <% if current_page?(admin_formularios_path) %>
+        <!-- Barra de Pesquisa - Centralizada -->
+        <div style="position: absolute; left: 50%; transform: translateX(-50%); max-width: 500px; width: 40%;">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="🔍 Pesquisar avaliações..."
+            style="
+              width: 100%;
+              padding: 8px 12px;
+              border: 1px solid #ddd;
+              border-radius: 20px;
+              font-size: 14px;
+              outline: none;
+            "
+            onkeyup="filterAvaliacoes()"
+          />
+        </div>
+      <% end %>
 
       <%= link_to admin_perfil_path, class: "user-circle", title: "Ver perfil" do %>
         <%= current_user.nome.first.upcase %>
