@@ -8,4 +8,6 @@ class Formulario < ApplicationRecord
   enum :status, { aberto: 0, fechado: 1 }
 
   validates :titulo, presence: true
+  validates :template_id, presence: true
+  validates :turma_id, presence: true
 end

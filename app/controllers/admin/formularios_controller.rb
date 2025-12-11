@@ -18,10 +18,8 @@ class Admin::FormulariosController < ApplicationController
 
   def create
     @formulario = Formulario.new(formulario_params)
-    @formulario.template ||= default_template
-    @formulario.turma ||= default_turma
     if @formulario.save
-      redirect_to admin_formularios_path, notice: "Formulário criado com sucesso!"
+      redirect_to admin_formularios_path, notice: "Avaliação criada com sucesso!"
     else
       load_collections
       render :new, status: :unprocessable_entity
@@ -36,7 +34,7 @@ class Admin::FormulariosController < ApplicationController
   def update
     @formulario = Formulario.find(params[:id])
     if @formulario.update(formulario_params)
-      redirect_to admin_formularios_path, notice: "Formulário atualizado!"
+      redirect_to admin_formularios_path, notice: "Avaliação atualizada!"
     else
       load_collections
       render :edit, status: :unprocessable_entity
@@ -46,26 +44,13 @@ class Admin::FormulariosController < ApplicationController
   def destroy
     @formulario = Formulario.find(params[:id])
     @formulario.destroy
-    redirect_to admin_formularios_path, notice: "Formulário removido."
+    redirect_to admin_formularios_path, notice: "Avaliação removida."
   end
 
   private
 
   def formulario_params
     params.require(:formulario).permit(:titulo, :descricao, :template_id, :turma_id)
-  end
-
-  def default_template
-    ::Template.find_or_create_by!(nome: "Template padrão") do |template|
-      template.descricao = "Gerado automaticamente"
-    end
-  end
-
-  def default_turma
-    ::Turma.find_or_create_by!(codigo: "TURMA-PADRAO") do |turma|
-      turma.departamento = "Padrão"
-      turma.semestre = ""
-    end
   end
 
   def load_collections
