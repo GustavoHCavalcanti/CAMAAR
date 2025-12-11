@@ -1,2 +1,44 @@
-<h1>Turmas</h1>
-<%= link_to "Nova Turma", new_admin_turma_path %>
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold">Turmas</h1>
+    <%= link_to "Nova Turma", new_admin_turma_path, class: "btn btn-primary" %>
+  </div>
+
+  <% if @turmas.any? %>
+    <table class="table table-hover bg-white shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Período</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @turmas.each do |turma| %>
+          <tr>
+            <td><%= turma.id %></td>
+            <td><%= turma.nome %></td>
+            <td><%= turma.periodo %></td>
+            <td>
+              <%= link_to "Ver", admin_turma_path(turma), class: "btn btn-sm btn-outline-secondary" %>
+              <%= link_to "Editar", edit_admin_turma_path(turma), class: "btn btn-sm btn-outline-primary" %>
+              <%= button_to "Excluir", admin_turma_path(turma),
+                    method: :delete,
+                    form: { data: { turbo_confirm: "Tem certeza que deseja excluir esta turma?" }, class: "d-inline" },
+                    class: "btn btn-sm btn-outline-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+    <div class="alert alert-info mt-3">
+      Nenhuma turma registrada.
+    </div>
+  <% end %>
+
+</div>
