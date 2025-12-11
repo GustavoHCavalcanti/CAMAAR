@@ -16,6 +16,8 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 1.2"
+gem "bootstrap", "~> 5.3"
+gem "sassc-rails"
 
 # -------------------------------
 # DEVELOPMENT + TEST
