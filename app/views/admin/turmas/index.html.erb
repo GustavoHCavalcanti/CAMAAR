@@ -1,47 +1,97 @@
-<div class="container py-4">
+<div style="padding: 20px;">
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="fw-bold">Turmas</h1>
-    <%= link_to "Nova Turma", new_admin_turma_path, class: "btn btn-primary" %>
+  <h2 class="mb-4">Gerenciamento - Turmas</h2>
+
+  <!-- GRID DE CARDS -->
+  <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    ">
+
+    <% @turmas.each do |turma| %>
+      <div style="
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+          position: relative;
+          border-left: 4px solid #5E2A86;
+        ">
+
+        <h4 style="margin: 0 0 8px 0;"><%= turma.codigo %></h4>
+        
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.9rem;">
+          <%= turma.departamento %>
+        </p>
+
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.85rem;">
+          <strong>Professor:</strong> <%= turma.professor || "Não informado" %>
+        </p>
+
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.85rem;">
+          <strong>Semestre:</strong> <%= turma.semestre || "Não informado" %>
+        </p>
+
+        <p class="text-muted" style="margin: 0 0 16px 0; font-size: 0.85rem;">
+          <strong><%= turma.users.count %></strong> aluno(s)
+        </p>
+
+        <!-- AÇÕES -->
+        <div style="
+            display: flex;
+            gap: 10px;
+          ">
+
+          <!-- VER -->
+          <%= link_to admin_turma_path(turma),
+              style: "flex: 1; text-align: center; padding: 8px; background: #e3f2fd; color: #1976d2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Ver
+          <% end %>
+
+          <!-- EDITAR -->
+          <%= link_to edit_admin_turma_path(turma),
+              style: "flex: 1; text-align: center; padding: 8px; background: #f3e5f5; color: #7b1fa2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Editar
+          <% end %>
+
+          <!-- DELETAR -->
+          <%= button_to admin_turma_path(turma),
+              method: :delete,
+              form: { data: { turbo_confirm: "Tem certeza que deseja excluir esta turma?" }, class: "d-inline" },
+              style: "flex: 1; background: #ffebee; color: #c62828; border: none; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: 500; font-size: 0.9rem;" do %>
+            Excluir
+          <% end %>
+
+        </div>
+
+      </div>
+    <% end %>
+
+    <!-- CARD DE CRIAÇÃO -->
+    <%= link_to new_admin_turma_path,
+        style: "
+          background: white;
+          border-radius: 10px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 40px;
+          text-decoration: none;
+          color: #5E2A86;
+          font-weight: bold;
+          border-left: 4px solid #4CAF50;
+        " do %>
+      +
+    <% end %>
+
   </div>
 
-  <% if @turmas.any? %>
-    <table class="table table-hover bg-white shadow-sm">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Código</th>
-          <th>Departamento</th>
-          <th>Professor</th>
-          <th>Semestre</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @turmas.each do |turma| %>
-          <tr>
-            <td><%= turma.id %></td>
-            <td><%= turma.codigo %></td>
-            <td><%= turma.departamento %></td>
-            <td><%= turma.professor || "-" %></td>
-            <td><%= turma.semestre %></td>
-            <td>
-              <%= link_to "Ver", admin_turma_path(turma), class: "btn btn-sm btn-outline-secondary" %>
-              <%= link_to "Editar", edit_admin_turma_path(turma), class: "btn btn-sm btn-outline-primary" %>
-              <%= button_to "Excluir", admin_turma_path(turma),
-                    method: :delete,
-                    form: { data: { turbo_confirm: "Tem certeza que deseja excluir esta turma?" }, class: "d-inline" },
-                    class: "btn btn-sm btn-outline-danger" %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-  <% else %>
-    <div class="alert alert-info mt-3">
-      Nenhuma turma registrada.
+  <% if @turmas.empty? %>
+    <div style="background: #e3f2fd; border-left: 3px solid #1976d2; padding: 16px; margin-top: 24px; border-radius: 4px; font-size: 0.9rem; text-align: center;">
+      Nenhuma turma cadastrada. Clique no botão + para criar a primeira!
     </div>
   <% end %>
 

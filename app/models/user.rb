@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
   enum :role, { participante: "participante", administrador: "administrador" }, prefix: true
 
-  belongs_to :turma, optional: true
+  has_many :turma_users, dependent: :destroy
+  has_many :turmas, through: :turma_users
   has_many :respostas, dependent: :destroy
   has_many :formularios_respondidos, through: :respostas, source: :formulario
 

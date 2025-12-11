@@ -1,31 +1,122 @@
-<%= form_with(model: [:admin, turma], local: true) do |f| %>
+<div style="
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+">
 
-  <div class="card shadow-sm p-4">
+  <% if turma.errors.any? %>
+    <div style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 20px;">
+      <strong>Erros:</strong>
+      <ul style="margin: 10px 0 0 20px;">
+        <% turma.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <div class="mb-3">
-      <%= f.label :codigo, "Código da Turma", class: "form-label fw-semibold" %>
-      <%= f.text_field :codigo, class: "form-control", required: true, placeholder: "Ex: CIC0001" %>
+  <%= form_with model: [:admin, turma], local: true do |f| %>
+
+    <!-- Código da Turma -->
+    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Código da Turma:</label>
+    <%= f.text_field :codigo, 
+          placeholder: "Ex: CIC0001",
+          class: "form-control mb-4",
+          style: "border: none; border-bottom: 2px solid #333;",
+          required: true %>
+
+    <!-- Departamento -->
+    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Departamento:</label>
+    <%= f.text_field :departamento, 
+          placeholder: "Ex: Ciência da Computação",
+          class: "form-control mb-4",
+          style: "border: none; border-bottom: 2px solid #333;",
+          required: true %>
+
+    <!-- Professor -->
+    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Professor:</label>
+    <%= f.text_field :professor, 
+          placeholder: "Ex: Prof. João Silva",
+          class: "form-control mb-4",
+          style: "border: none; border-bottom: 2px solid #333;" %>
+
+    <!-- Semestre -->
+    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Semestre:</label>
+    <%= f.text_field :semestre, 
+          placeholder: "Ex: 2024/1",
+          class: "form-control mb-4",
+          style: "border: none; border-bottom: 2px solid #333;" %>
+
+    <!-- Alunos -->
+    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Alunos:</label>
+    
+    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
+      <% alunos_atuais = turma.persisted? ? @alunos_da_turma : [] %>
+      
+      <% if @alunos_disponiveis.any? %>
+        <% @alunos_disponiveis.each do |aluno| %>
+          <div style="margin-bottom: 8px;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <%= check_box_tag 'turma[aluno_ids][]', aluno.id, 
+                    alunos_atuais.include?(aluno),
+                    style: "margin-right: 8px;" %>
+              <span style="font-size: 0.9rem;">
+                <%= aluno.email %> 
+                <span style="color: #666;">(Mat: <%= aluno.matricula %>)</span>
+                <% if aluno.turmas.any? && !alunos_atuais.include?(aluno) %>
+                  <span style="color: #ff9800; font-size: 0.8rem; margin-left: 5px;">
+                    (já em <%= aluno.turmas.count %> turma(s))
+                  </span>
+                <% end %>
+              </span>
+            </label>
+          </div>
+        <% end %>
+      <% else %>
+        <p style="color: #666; font-size: 0.9rem; margin: 0;">
+          Nenhum aluno disponível no momento.
+        </p>
+      <% end %>
     </div>
 
-    <div class="mb-3">
-      <%= f.label :departamento, "Departamento", class: "form-label fw-semibold" %>
-      <%= f.text_field :departamento, class: "form-control", required: true, placeholder: "Ex: Ciência da Computação" %>
+    <p style="font-size: 0.85rem; color: #666; margin-top: -10px; margin-bottom: 20px;">
+      💡 Alunos podem estar matriculados em múltiplas turmas.
+    </p>
+
+    <!-- Botões -->
+    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 40px; margin-bottom: 20px;">
+      
+        <%= link_to "Voltar", admin_turmas_path, 
+            style: "
+              background: #6c757d;
+              color: white;
+              font-size: 16px;
+              padding: 12px 40px;
+              border-radius: 8px;
+              border: none;
+              cursor: pointer;
+              text-decoration: none;
+              display: inline-block;
+              min-width: 150px;
+              text-align: center;
+            " %>
+
+        <%= f.submit turma.new_record? ? "Criar Turma" : "Atualizar Turma",
+            style: "
+              background: #4CAF50;
+              color: white;
+              font-size: 16px;
+              padding: 12px 40px;
+              border-radius: 8px;
+              border: none;
+              cursor: pointer;
+              min-width: 150px;
+            " %>
     </div>
 
-    <div class="mb-3">
-      <%= f.label :professor, "Professor", class: "form-label fw-semibold" %>
-      <%= f.text_field :professor, class: "form-control", placeholder: "Ex: Prof. João Silva" %>
-    </div>
+  <% end %>
 
-    <div class="mb-3">
-      <%= f.label :semestre, "Semestre", class: "form-label fw-semibold" %>
-      <%= f.text_field :semestre, class: "form-control", placeholder: "Ex: 2024/1" %>
-    </div>
-
-    <div class="d-flex justify-content-end">
-      <%= f.submit class: "btn btn-primary px-4" %>
-    </div>
-
-  </div>
-
-<% end %>
+</div>

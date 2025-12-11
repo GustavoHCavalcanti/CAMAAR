@@ -8039,3 +8039,542 @@ Processing by Admin::FormulariosController#index as HTML
 Completed 200 OK in 1058ms (Views: 29.0ms | ActiveRecord: 1023.2ms (3 queries, 0 cached) | GC: 1.9ms)
 
 
+Started GET "/admin/gerenciamento" for ::1 at 2025-12-11 16:08:54 -0300
+Processing by Admin::GerenciamentoController#index as HTML
+  [1m[36mUser Load (341.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='gerenciamento'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/gerenciamento/index.html.erb within layouts/admin
+  Rendered admin/gerenciamento/index.html.erb within layouts/admin (Duration: 2.7ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 33.3ms | GC: 10.8ms)
+Completed 200 OK in 1443ms (Views: 36.8ms | ActiveRecord: 1380.5ms (1 query, 0 cached) | GC: 10.8ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:09:29 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (346.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Exists? (344.0ms)[0m  [1m[34mSELECT 1 AS one FROM "turmas" LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:9
+  [1m[36mTurma Load (342.2ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:23
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 1394.8ms | GC: 1.8ms)
+  Rendered layout layouts/admin.html.erb (Duration: 1414.3ms | GC: 3.2ms)
+Completed 200 OK in 1778ms (Views: 44.4ms | ActiveRecord: 1718.7ms (3 queries, 0 cached) | GC: 3.2ms)
+
+
+Started GET "/admin/gerenciamento" for ::1 at 2025-12-11 16:19:00 -0300
+Processing by Admin::GerenciamentoController#index as HTML
+  [1m[36mUser Load (6038.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='gerenciamento'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/gerenciamento/index.html.erb within layouts/admin
+  Rendered admin/gerenciamento/index.html.erb within layouts/admin (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 15.6ms | GC: 3.1ms)
+Completed 200 OK in 6094ms (Views: 17.2ms | ActiveRecord: 8681.6ms (1 query, 0 cached) | GC: 18.8ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:19:07 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (331.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (336.0ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (332.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 1028.1ms | GC: 0.1ms)
+  Rendered layout layouts/admin.html.erb (Duration: 1028.3ms | GC: 0.1ms)
+Completed 500 Internal Server Error in 1374ms (ActiveRecord: 1355.6ms (3 queries, 0 cached) | GC: 1.0ms)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column users.turma_id does not exist
+LINE 1: SELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*...
+                                           ^
+)
+Caused by: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column users.turma_id does not exist
+LINE 1: SELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*...
+                                           ^
+)
+Caused by: PG::UndefinedColumn (ERROR:  column users.turma_id does not exist
+LINE 1: SELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*...
+                                           ^
+)
+
+Information for: ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column users.turma_id does not exist
+LINE 1: SELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*...
+                                           ^
+):
+    35: 
+    36:         <p class="text-muted" style="margin: 0 0 16px 0; font-size: 0.85rem;">
+    37:           <strong><%= turma.users.count %></strong> aluno(s)
+    38:         </p>
+    39: 
+    40:         <!-- AÇÕES -->
+    41:         <div style="
+  
+
+Information for cause: ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column users.turma_id does not exist
+LINE 1: SELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*...
+                                           ^
+):
+  
+
+Information for cause: PG::UndefinedColumn (ERROR:  column users.turma_id does not exist
+LINE 1: SELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*...
+                                           ^
+):
+  
+app/views/admin/turmas/index.html.erb:38
+app/views/admin/turmas/index.html.erb:13
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[35m (325.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (319.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (356.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Camaar'*/[0m
+Migrating to AddTurmaIdToUsers (20251211191943)
+  [1m[36mTRANSACTION (322.2ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (645.6ms)[0m  [1m[35mALTER TABLE "users" ADD "turma_id" integer /*application='Camaar'*/[0m
+  [1m[35m (326.3ms)[0m  [1m[35mCREATE INDEX "index_users_on_turma_id" ON "users" ("turma_id") /*application='Camaar'*/[0m
+  [1m[35m (328.2ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_70ebb050d1"
+FOREIGN KEY ("turma_id")
+  REFERENCES "turmas" ("id")
+ ON DELETE SET NULL /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (327.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251211191943') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (323.9ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+  [1m[35m (322.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (325.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[35mSQL (325.5ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (323.9ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+  [1m[35mSQL (324.5ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (363.7ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:21:00 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (367.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (345.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (333.9ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (326.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 1348.7ms | GC: 1.1ms)
+  Rendered layout layouts/admin.html.erb (Duration: 1370.0ms | GC: 2.5ms)
+Completed 200 OK in 2754ms (Views: 46.1ms | ActiveRecord: 2679.6ms (3 queries, 0 cached) | GC: 5.9ms)
+
+
+Started GET "/admin/turmas/2" for ::1 at 2025-12-11 16:21:13 -0300
+Processing by Admin::TurmasController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (329.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='show',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTurma Load (327.6ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" WHERE "turmas"."id" = 2 LIMIT 1 /*action='show',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:12:in `show'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/show.html.erb within layouts/admin
+  [1m[36mUser Count (326.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='show',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/show.html.erb:34
+  [1m[36mUser Exists? (330.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."turma_id" = 2 LIMIT 1 /*action='show',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/show.html.erb:39
+  Rendered admin/turmas/show.html.erb within layouts/admin (Duration: 669.7ms | GC: 0.5ms)
+  Rendered layout layouts/admin.html.erb (Duration: 680.2ms | GC: 1.0ms)
+Completed 200 OK in 1348ms (Views: 25.0ms | ActiveRecord: 1313.4ms (4 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:21:18 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (331.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (329.0ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (329.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 666.1ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 680.9ms | GC: 0.0ms)
+Completed 200 OK in 1017ms (Views: 23.6ms | ActiveRecord: 989.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/turmas/2/edit" for ::1 at 2025-12-11 16:21:21 -0300
+Processing by Admin::TurmasController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (329.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTurma Load (329.5ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" WHERE "turmas"."id" = 2 LIMIT 1 /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:37:in `edit'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/edit.html.erb within layouts/admin
+  [1m[36mUser Load (326.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = 'participante' AND "users"."turma_id" IS NULL /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:59
+  [1m[36mUser Load (327.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."turma_id" = 2 /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:59
+  Rendered admin/turmas/_form.html.erb (Duration: 668.7ms | GC: 0.0ms)
+  Rendered admin/turmas/edit.html.erb within layouts/admin (Duration: 671.9ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 686.5ms | GC: 0.0ms)
+Completed 200 OK in 1357ms (Views: 34.8ms | ActiveRecord: 1311.7ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:21:37 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (328.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (325.3ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (329.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 663.3ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 688.8ms | GC: 14.5ms)
+Completed 200 OK in 1023ms (Views: 35.4ms | ActiveRecord: 982.5ms (3 queries, 0 cached) | GC: 14.5ms)
+
+
+Started GET "/admin/turmas/new" for ::1 at 2025-12-11 16:21:40 -0300
+Processing by Admin::TurmasController#new as HTML
+  [1m[36mUser Load (327.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/new.html.erb within layouts/admin
+  [1m[36mUser Load (326.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = 'participante' AND "users"."turma_id" IS NULL /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:59
+  Rendered admin/turmas/_form.html.erb (Duration: 333.4ms | GC: 0.0ms)
+  Rendered admin/turmas/new.html.erb within layouts/admin (Duration: 336.0ms | GC: 1.5ms)
+  Rendered layout layouts/admin.html.erb (Duration: 351.5ms | GC: 2.1ms)
+Completed 200 OK in 690ms (Views: 26.6ms | ActiveRecord: 653.2ms (2 queries, 0 cached) | GC: 2.1ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:21:44 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (331.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (330.6ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (327.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 666.1ms | GC: 0.9ms)
+  Rendered layout layouts/admin.html.erb (Duration: 679.2ms | GC: 1.2ms)
+Completed 200 OK in 1015ms (Views: 22.7ms | ActiveRecord: 989.1ms (3 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/admin/turmas/new" for ::1 at 2025-12-11 16:22:28 -0300
+Processing by Admin::TurmasController#new as HTML
+  [1m[36mUser Load (327.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/new.html.erb within layouts/admin
+  [1m[36mUser Load (332.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = 'participante' AND "users"."turma_id" IS NULL /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:59
+  Rendered admin/turmas/_form.html.erb (Duration: 338.7ms | GC: 0.0ms)
+  Rendered admin/turmas/new.html.erb within layouts/admin (Duration: 340.0ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 358.6ms | GC: 1.2ms)
+Completed 200 OK in 2378ms (Views: 30.5ms | ActiveRecord: 2310.1ms (2 queries, 0 cached) | GC: 4.9ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:22:33 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (331.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (335.2ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (351.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 699.1ms | GC: 0.4ms)
+  Rendered layout layouts/admin.html.erb (Duration: 711.8ms | GC: 0.7ms)
+Completed 200 OK in 1050ms (Views: 26.8ms | ActiveRecord: 1017.9ms (3 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/admin/turmas/2/edit" for ::1 at 2025-12-11 16:22:35 -0300
+Processing by Admin::TurmasController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (333.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTurma Load (332.8ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" WHERE "turmas"."id" = 2 LIMIT 1 /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:37:in `edit'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/edit.html.erb within layouts/admin
+  [1m[36mUser Load (331.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = 'participante' AND "users"."turma_id" IS NULL /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:59
+  [1m[36mUser Load (332.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."turma_id" = 2 /*action='edit',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:59
+  Rendered admin/turmas/_form.html.erb (Duration: 675.2ms | GC: 0.2ms)
+  Rendered admin/turmas/edit.html.erb within layouts/admin (Duration: 676.3ms | GC: 0.2ms)
+  Rendered layout layouts/admin.html.erb (Duration: 687.9ms | GC: 0.2ms)
+Completed 200 OK in 1368ms (Views: 25.1ms | ActiveRecord: 1330.1ms (4 queries, 0 cached) | GC: 0.6ms)
+
+
+Started PATCH "/admin/turmas/2" for ::1 at 2025-12-11 16:22:39 -0300
+Processing by Admin::TurmasController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "turma"=>{"codigo"=>"CIC0012", "departamento"=>"CIC", "professor"=>"Joao Silva", "semestre"=>"2024/2", "aluno_ids"=>["3"]}, "commit"=>"Atualizar Turma", "id"=>"2"}
+  [1m[36mUser Load (344.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='update',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTurma Load (344.9ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" WHERE "turmas"."id" = 2 LIMIT 1 /*action='update',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:44:in `update'
+[31mUnpermitted parameter: :aluno_ids. Context: { controller: Admin::TurmasController, action: update, request: #<ActionDispatch::Request:0x00000001244fa5b8>, params: {"_method"=>"patch", "authenticity_token"=>"[FILTERED]", "turma"=>{"codigo"=>"CIC0012", "departamento"=>"CIC", "professor"=>"Joao Silva", "semestre"=>"2024/2", "aluno_ids"=>["3"]}, "commit"=>"Atualizar Turma", "controller"=>"admin/turmas", "action"=>"update", "id"=>"2"} }[0m
+  [1m[36mTRANSACTION (334.9ms)[0m  [1m[35mBEGIN /*action='update',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:45:in `update'
+  [1m[36mTurma Exists? (332.4ms)[0m  [1m[34mSELECT 1 AS one FROM "turmas" WHERE "turmas"."codigo" = 'CIC0012' AND "turmas"."id" != 2 LIMIT 1 /*action='update',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:45:in `update'
+  [1m[36mTRANSACTION (334.9ms)[0m  [1m[35mCOMMIT /*action='update',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:45:in `update'
+  [1m[36mUser Update All (329.4ms)[0m  [1m[33mUPDATE "users" SET "turma_id" = NULL WHERE "users"."turma_id" = 2 /*action='update',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:48:in `update'
+  [1m[36mUser Update All (331.1ms)[0m  [1m[33mUPDATE "users" SET "turma_id" = 2 WHERE "users"."id" = 3 /*action='update',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:51:in `update'
+Redirected to http://[::1]:3000/admin/turmas
+↳ app/controllers/admin/turmas_controller.rb:53:in `update'
+Completed 302 Found in 2723ms (ActiveRecord: 3031.2ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:22:42 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (333.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (326.7ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (330.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 664.1ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 677.8ms | GC: 0.0ms)
+Completed 200 OK in 1017ms (Views: 22.2ms | ActiveRecord: 989.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/turmas/new" for ::1 at 2025-12-11 16:22:47 -0300
+Processing by Admin::TurmasController#new as HTML
+  [1m[36mUser Load (334.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/new.html.erb within layouts/admin
+  [1m[36mUser Load (324.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = 'participante' AND "users"."turma_id" IS NULL /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:59
+  Rendered admin/turmas/_form.html.erb (Duration: 328.5ms | GC: 0.0ms)
+  Rendered admin/turmas/new.html.erb within layouts/admin (Duration: 328.8ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 339.5ms | GC: 1.8ms)
+Completed 200 OK in 692ms (Views: 15.8ms | ActiveRecord: 659.2ms (2 queries, 0 cached) | GC: 14.4ms)
+
+
+Started POST "/admin/turmas" for ::1 at 2025-12-11 16:23:01 -0300
+Processing by Admin::TurmasController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "turma"=>{"codigo"=>"adsad", "departamento"=>"dasdas", "professor"=>"dsads", "semestre"=>"2023/1"}, "commit"=>"Criar Turma"}
+  [1m[36mUser Load (333.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTRANSACTION (328.9ms)[0m  [1m[35mBEGIN /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+  [1m[36mTurma Exists? (662.8ms)[0m  [1m[34mSELECT 1 AS one FROM "turmas" WHERE "turmas"."codigo" = 'adsad' LIMIT 1 /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+  [1m[36mTurma Create (335.7ms)[0m  [1m[32mINSERT INTO "turmas" ("codigo", "departamento", "semestre", "created_at", "updated_at", "professor") VALUES ('adsad', 'dasdas', '2023/1', '2025-12-11 19:23:02.342880', '2025-12-11 19:23:02.342880', 'dsads') RETURNING "id" /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+  [1m[36mTRANSACTION (335.7ms)[0m  [1m[35mCOMMIT /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+Redirected to http://[::1]:3000/admin/turmas
+↳ app/controllers/admin/turmas_controller.rb:28:in `create'
+Completed 302 Found in 1684ms (ActiveRecord: 1996.4ms (3 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:23:03 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (330.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (326.2ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (332.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  [1m[36mUser Count (341.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 3 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 1013.9ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 1024.0ms | GC: 0.6ms)
+Completed 200 OK in 1360ms (Views: 24.6ms | ActiveRecord: 1330.6ms (4 queries, 0 cached) | GC: 0.6ms)
+
+
+Started DELETE "/admin/turmas/3" for ::1 at 2025-12-11 16:23:09 -0300
+Processing by Admin::TurmasController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"3"}
+  [1m[36mUser Load (336.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTurma Load (329.1ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" WHERE "turmas"."id" = 3 LIMIT 1 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:63:in `destroy'
+  [1m[36mTRANSACTION (330.2ms)[0m  [1m[35mBEGIN /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:64:in `destroy'
+  [1m[36mFormulario Load (336.1ms)[0m  [1m[34mSELECT "formularios".* FROM "formularios" WHERE "formularios"."turma_id" = 3 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:64:in `destroy'
+  [1m[36mTurma Destroy (335.2ms)[0m  [1m[31mDELETE FROM "turmas" WHERE "turmas"."id" = 3 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:64:in `destroy'
+  [1m[36mTRANSACTION (328.7ms)[0m  [1m[35mCOMMIT /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:64:in `destroy'
+Redirected to http://[::1]:3000/admin/turmas
+↳ app/controllers/admin/turmas_controller.rb:65:in `destroy'
+Completed 302 Found in 2719ms (ActiveRecord: 2999.0ms (4 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:23:12 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (329.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (335.5ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (333.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 676.3ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 688.7ms | GC: 0.0ms)
+Completed 200 OK in 1024ms (Views: 20.8ms | ActiveRecord: 998.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[35m (349.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (346.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (348.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Camaar'*/[0m
+Migrating to CreateTurmaUsers (20251211192410)
+  [1m[36mTRANSACTION (344.2ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (346.9ms)[0m  [1m[35mCREATE TABLE "turma_users" ("id" bigserial primary key, "user_id" bigint NOT NULL, "turma_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_cea943ec87"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_391759b052"
+FOREIGN KEY ("turma_id")
+  REFERENCES "turmas" ("id")
+) /*application='Camaar'*/[0m
+  [1m[35m (350.5ms)[0m  [1m[35mCREATE INDEX "index_turma_users_on_user_id" ON "turma_users" ("user_id") /*application='Camaar'*/[0m
+  [1m[35m (350.5ms)[0m  [1m[35mCREATE INDEX "index_turma_users_on_turma_id" ON "turma_users" ("turma_id") /*application='Camaar'*/[0m
+  [1m[35m (346.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_turma_users_on_user_id_and_turma_id" ON "turma_users" ("user_id", "turma_id") /*application='Camaar'*/[0m
+  [1m[35m (359.4ms)[0m  [1m[32m          INSERT INTO turma_users (user_id, turma_id, created_at, updated_at)
+          SELECT id, turma_id, NOW(), NOW()
+          FROM users
+          WHERE turma_id IS NOT NULL
+ /*application='Camaar'*/[0m
+  [1m[35m (346.1ms)[0m  [1m[35mALTER TABLE "users" DROP CONSTRAINT "fk_rails_70ebb050d1" /*application='Camaar'*/[0m
+  [1m[35m (347.0ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "turma_id" /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (346.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251211192410') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (349.4ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+  [1m[35m (345.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (350.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[35mSQL (352.2ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (345.3ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+  [1m[35mSQL (347.5ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (433.5ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+Started GET "/admin/turmas/new" for ::1 at 2025-12-11 16:26:42 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (341.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+Processing by Admin::TurmasController#new as HTML
+  [1m[36mUser Load (325.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/new.html.erb within layouts/admin
+  [1m[36mUser Exists? (335.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."role" = 'participante' LIMIT 1 /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:60
+  [1m[36mUser Load (330.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role" = 'participante' /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:61
+  [1m[36mTurma Exists? (328.7ms)[0m  [1m[34mSELECT 1 AS one FROM "turmas" INNER JOIN "turma_users" ON "turmas"."id" = "turma_users"."turma_id" WHERE "turma_users"."user_id" = 3 LIMIT 1 /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:70
+  [1m[36mTurma Count (328.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "turmas" INNER JOIN "turma_users" ON "turmas"."id" = "turma_users"."turma_id" WHERE "turma_users"."user_id" = 3 /*action='new',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/_form.html.erb:72
+  Rendered admin/turmas/_form.html.erb (Duration: 1695.4ms | GC: 0.0ms)
+  Rendered admin/turmas/new.html.erb within layouts/admin (Duration: 1696.1ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 1714.9ms | GC: 0.0ms)
+Completed 200 OK in 3714ms (Views: 61.5ms | ActiveRecord: 3637.9ms (5 queries, 0 cached) | GC: 0.4ms)
+
+
+Started POST "/admin/turmas" for ::1 at 2025-12-11 16:27:04 -0300
+Processing by Admin::TurmasController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "turma"=>{"codigo"=>"dasd", "departamento"=>"dasd", "professor"=>"dasd", "semestre"=>"das", "aluno_ids"=>["3"]}, "commit"=>"Criar Turma"}
+  [1m[36mUser Load (557.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+[31mUnpermitted parameter: :aluno_ids. Context: { controller: Admin::TurmasController, action: create, request: #<ActionDispatch::Request:0x00000001219b2db0>, params: {"authenticity_token"=>"[FILTERED]", "turma"=>{"codigo"=>"dasd", "departamento"=>"dasd", "professor"=>"dasd", "semestre"=>"das", "aluno_ids"=>["3"]}, "commit"=>"Criar Turma", "controller"=>"admin/turmas", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (339.6ms)[0m  [1m[35mBEGIN /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+  [1m[36mTurma Exists? (794.2ms)[0m  [1m[34mSELECT 1 AS one FROM "turmas" WHERE "turmas"."codigo" = 'dasd' LIMIT 1 /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+  [1m[36mTurma Create (455.3ms)[0m  [1m[32mINSERT INTO "turmas" ("codigo", "departamento", "semestre", "created_at", "updated_at", "professor") VALUES ('dasd', 'dasd', 'das', '2025-12-11 19:27:06.208421', '2025-12-11 19:27:06.208421', 'dasd') RETURNING "id" /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+  [1m[36mTRANSACTION (367.6ms)[0m  [1m[35mCOMMIT /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:23:in `create'
+  [1m[36mTRANSACTION (332.5ms)[0m  [1m[35mBEGIN /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:27:in `block in create'
+  [1m[36mUser Load (671.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:27:in `block in create'
+  [1m[36mTurmaUser Exists? (329.7ms)[0m  [1m[34mSELECT 1 AS one FROM "turma_users" WHERE "turma_users"."user_id" = 3 AND "turma_users"."turma_id" = 4 LIMIT 1 /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:27:in `block in create'
+  [1m[36mTurmaUser Create (329.5ms)[0m  [1m[32mINSERT INTO "turma_users" ("user_id", "turma_id", "created_at", "updated_at") VALUES (3, 4, '2025-12-11 19:27:08.419640', '2025-12-11 19:27:08.419640') RETURNING "id" /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (336.4ms)[0m  [1m[35mCOMMIT /*action='create',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:27:in `block in create'
+Redirected to http://[::1]:3000/admin/turmas
+↳ app/controllers/admin/turmas_controller.rb:30:in `create'
+Completed 302 Found in 4246ms (ActiveRecord: 4861.4ms (6 queries, 0 cached) | GC: 16.4ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:27:09 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (354.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (331.5ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (332.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "turma_users" ON "users"."id" = "turma_users"."user_id" WHERE "turma_users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  [1m[36mUser Count (335.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "turma_users" ON "users"."id" = "turma_users"."user_id" WHERE "turma_users"."turma_id" = 4 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 1015.0ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 1027.3ms | GC: 1.3ms)
+Completed 200 OK in 1390ms (Views: 29.7ms | ActiveRecord: 1353.1ms (4 queries, 0 cached) | GC: 3.1ms)
+
+
+Started DELETE "/admin/turmas/4" for ::1 at 2025-12-11 16:27:17 -0300
+Processing by Admin::TurmasController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"4"}
+  [1m[36mUser Load (332.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  [1m[36mTurma Load (331.1ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" WHERE "turmas"."id" = 4 LIMIT 1 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:67:in `destroy'
+  [1m[36mTRANSACTION (329.8ms)[0m  [1m[35mBEGIN /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:68:in `destroy'
+  [1m[36mTurmaUser Load (666.7ms)[0m  [1m[34mSELECT "turma_users".* FROM "turma_users" WHERE "turma_users"."turma_id" = 4 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:68:in `destroy'
+  [1m[36mTurmaUser Destroy (326.6ms)[0m  [1m[31mDELETE FROM "turma_users" WHERE "turma_users"."id" = 2 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:68:in `destroy'
+  [1m[36mFormulario Load (327.8ms)[0m  [1m[34mSELECT "formularios".* FROM "formularios" WHERE "formularios"."turma_id" = 4 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:68:in `destroy'
+  [1m[36mTurma Destroy (327.6ms)[0m  [1m[31mDELETE FROM "turmas" WHERE "turmas"."id" = 4 /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:68:in `destroy'
+  [1m[36mTRANSACTION (329.6ms)[0m  [1m[35mCOMMIT /*action='destroy',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/admin/turmas_controller.rb:68:in `destroy'
+Redirected to http://[::1]:3000/admin/turmas
+↳ app/controllers/admin/turmas_controller.rb:69:in `destroy'
+Completed 302 Found in 3356ms (ActiveRecord: 3646.7ms (6 queries, 0 cached) | GC: 1.7ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-11 16:27:20 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (327.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (329.0ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:13
+  [1m[36mUser Count (329.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "turma_users" ON "users"."id" = "turma_users"."user_id" WHERE "turma_users"."turma_id" = 2 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:38
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 667.1ms | GC: 0.4ms)
+  Rendered layout layouts/admin.html.erb (Duration: 678.9ms | GC: 0.8ms)
+Completed 200 OK in 1011ms (Views: 21.5ms | ActiveRecord: 985.8ms (3 queries, 0 cached) | GC: 0.8ms)
+
+

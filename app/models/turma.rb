@@ -1,5 +1,6 @@
 class Turma < ApplicationRecord
-  has_many :users
+  has_many :turma_users, dependent: :destroy
+  has_many :users, through: :turma_users
   has_many :formularios, dependent: :destroy
 
   validates :codigo, presence: true, uniqueness: true
