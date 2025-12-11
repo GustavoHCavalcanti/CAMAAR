@@ -2,10 +2,6 @@
 Rails.application.routes.draw do
   root "sessions#new"
 
-  # Informações públicas
-  get "about",   to: "home#about"
-  get "contact", to: "home#contact"
-
   # Sessões (login/logout)
   get  "/login",  to: "sessions#new"
   post "/login",  to: "sessions#create"
