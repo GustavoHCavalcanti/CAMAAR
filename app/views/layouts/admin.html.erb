@@ -79,9 +79,12 @@
       }
 
       .hamburger {
-        font-size: 32px;
+        font-size: 28px;
         cursor: pointer;
-        margin-right: 20px;
+        margin-right: 15px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
       }
 
       .user-circle {
@@ -101,6 +104,8 @@
 
       .user-circle:hover {
         background: #7A3AA0;
+        color: white;
+        text-decoration: none;
       }
 
       body {
@@ -139,9 +144,32 @@
 
     <!-- NAVBAR -->
     <div class="admin-navbar">
-      <div style="display: flex; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 10px;">
         <div class="hamburger" onclick="openSidebar()">☰</div>
-        <h4 class="m-0">Avaliações</h4>
+        <%= link_to admin_formularios_path, 
+              style: "text-decoration: none; color: #333; display: flex; align-items: center;" do %>
+          <h4 style="margin: 0; font-size: 18px; line-height: 1;">
+            <%= content_for?(:page_title) ? yield(:page_title) : "Avaliações" %>
+          </h4>
+        <% end %>
+      </div>
+      
+      <!-- Barra de Pesquisa - Centralizada -->
+      <div style="position: absolute; left: 50%; transform: translateX(-50%); max-width: 500px; width: 40%;">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="🔍 Pesquisar avaliações..."
+          style="
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+          "
+          onkeyup="filterAvaliacoes()"
+        />
       </div>
 
       <%= link_to admin_perfil_path, class: "user-circle", title: "Ver perfil" do %>
@@ -163,6 +191,41 @@
       function closeSidebar() {
         document.getElementById("sidebar").classList.remove("open");
         document.getElementById("overlay").classList.remove("show");
+      }
+
+      function filterAvaliacoes() {
+        const input = document.getElementById('search-input');
+        const filter = input.value.toLowerCase();
+        const cards = document.querySelectorAll('[data-avaliacao-card]');
+        
+        let visibleCount = 0;
+        
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(filter)) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Mostrar mensagem se não houver resultados
+        let noResultsMsg = document.getElementById('no-results-message');
+        if (visibleCount === 0 && filter !== '') {
+          if (!noResultsMsg) {
+            noResultsMsg = document.createElement('div');
+            noResultsMsg.id = 'no-results-message';
+            noResultsMsg.style.cssText = 'background: #fff3cd; border-left: 3px solid #ff9800; padding: 16px; margin-top: 24px; border-radius: 4px; font-size: 0.9rem; text-align: center; grid-column: 1 / -1;';
+            noResultsMsg.textContent = `Nenhuma avaliação encontrada para "${input.value}"`;
+            const gridContainer = document.querySelector('[data-avaliacoes-grid]');
+            if (gridContainer) {
+              gridContainer.appendChild(noResultsMsg);
+            }
+          }
+        } else if (noResultsMsg) {
+          noResultsMsg.remove();
+        }
       }
     </script>
 
