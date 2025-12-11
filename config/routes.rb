@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "formularios#index"
     get "gerenciamento", to: "gerenciamento#index"
-    resources :formularios
+    resources :formularios do
+      member do
+        get :respostas
+      end
+    end
     resources :templates
     resources :turmas do
       collection do

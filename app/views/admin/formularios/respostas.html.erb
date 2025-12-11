@@ -1,0 +1,119 @@
+<% content_for :page_title, "Respostas - #{@formulario.titulo}" %>
+
+<div style="padding: 20px;">
+  <div style="margin-bottom: 20px;">
+    <%= link_to "← Voltar", admin_formularios_path, style: "color: #5E2A86; text-decoration: none; font-weight: 600;" %>
+  </div>
+
+  <h2 style="margin-bottom: 8px;"><%= @formulario.titulo %></h2>
+  <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem;">
+    <% if @formulario.turma.present? %>
+      <%= @formulario.turma.codigo %> - <%= @formulario.turma.departamento %>
+      <% if @formulario.turma.semestre.present? %>
+        (<%= @formulario.turma.semestre %>)
+      <% end %>
+    <% end %>
+  </p>
+
+  <!-- INFO: Total de respondentes -->
+  <div style="background: #e8f5e9; border-left: 3px solid #4CAF50; padding: 14px; border-radius: 4px; margin-bottom: 24px;">
+    <strong>Total de respondentes:</strong> <%= @total_respondentes %>
+  </div>
+
+  <% if @perguntas.any? %>
+    <% @perguntas.each_with_index do |pergunta, idx| %>
+      <div style="background: white; padding: 24px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.12); margin-bottom: 20px;">
+        
+        <h4 style="margin-top: 0; margin-bottom: 16px; color: #333;">
+          <%= idx + 1 %>. <%= pergunta.texto %>
+        </h4>
+
+        <% respostas = @respostas_por_pergunta[pergunta.id] || [] %>
+        <% if respostas.empty? %>
+          <p style="color: #999; font-style: italic;">Nenhuma resposta até o momento.</p>
+        <% elsif pergunta.tipo == "radio" && pergunta.options.is_a?(Array) %>
+          <!-- GRÁFICO PARA RADIO/LIKERT -->
+          <div style="margin-top: 16px;">
+            <% opcoes_contagem = respostas.group_by { |r| r }.transform_values { |v| v.count } %>
+            <% total = respostas.length %>
+            
+            <% pergunta.options.each do |option| %>
+              <% count = opcoes_contagem[option] || 0 %>
+              <% percentual = total > 0 ? ((count.to_f / total) * 100).round(1) : 0 %>
+              
+              <div style="margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <span style="font-weight: 500; color: #333;"><%= option %></span>
+                  <span style="color: #666; font-size: 0.9rem;">
+                    <%= count %> (<%= percentual %>%)
+                  </span>
+                </div>
+                <div style="background: #e0e0e0; border-radius: 4px; height: 24px; overflow: hidden;">
+                  <div style="background: #5E2A86; height: 100%; width: <%= percentual %>%; transition: width 0.3s;"></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+        <% elsif pergunta.tipo == "likert" %>
+          <!-- GRÁFICO PARA LIKERT -->
+          <div style="margin-top: 16px;">
+            <% likert_opcoes = ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"] %>
+            <% opcoes_contagem = respostas.group_by { |r| r }.transform_values { |v| v.count } %>
+            <% total = respostas.length %>
+            
+            <% likert_opcoes.each do |option| %>
+              <% count = opcoes_contagem[option] || 0 %>
+              <% percentual = total > 0 ? ((count.to_f / total) * 100).round(1) : 0 %>
+              
+              <div style="margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <span style="font-weight: 500; color: #333;"><%= option %></span>
+                  <span style="color: #666; font-size: 0.9rem;">
+                    <%= count %> (<%= percentual %>%)
+                  </span>
+                </div>
+                <div style="background: #e0e0e0; border-radius: 4px; height: 24px; overflow: hidden;">
+                  <div style="background: #5E2A86; height: 100%; width: <%= percentual %>%; transition: width 0.3s;"></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+        <% elsif pergunta.tipo == "texto" %>
+          <!-- LISTA DE RESPOSTAS TEXTO (ANÔNIMO) -->
+          <div style="margin-top: 16px;">
+            <% respostas.each_with_index do |resposta, i| %>
+              <div style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-bottom: 8px;">
+                <span style="color: #999; font-size: 0.85rem;">Resposta <%= i + 1 %>:</span>
+                <p style="margin: 4px 0 0 0; color: #333;">
+                  <%= resposta %>
+                </p>
+              </div>
+            <% end %>
+          </div>
+
+        <% elsif pergunta.tipo == "textarea" %>
+          <!-- LISTA DE RESPOSTAS TEXTAREA (ANÔNIMO) -->
+          <div style="margin-top: 16px;">
+            <% respostas.each_with_index do |resposta, i| %>
+              <div style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-bottom: 8px; border-left: 3px solid #5E2A86;">
+                <span style="color: #999; font-size: 0.85rem;">Resposta <%= i + 1 %>:</span>
+                <p style="margin: 4px 0 0 0; color: #333; white-space: pre-wrap; word-wrap: break-word;">
+                  <%= resposta %>
+                </p>
+              </div>
+            <% end %>
+          </div>
+
+        <% end %>
+
+      </div>
+    <% end %>
+  <% else %>
+    <div style="background: #e3f2fd; border-left: 3px solid #1976d2; padding: 16px; border-radius: 4px; text-align: center;">
+      Este formulário não possui perguntas cadastradas.
+    </div>
+  <% end %>
+
+</div>
