@@ -40,13 +40,27 @@
               <a class="nav-link" href="/contact">Contato</a>
             </li>
 
-            <!-- Se quiser colocar login na navbar -->
-            <li class="nav-item ms-lg-3">
-              <a class="btn btn-light text-primary fw-semibold px-3" href="/login">
-                Login
-              </a>
-            </li>
+            <!-- LOGIN / LOGOUT DINÂMICO -->
+            <% if defined?(current_user) && current_user.present? %>
 
+              <li class="nav-item d-flex align-items-center text-white me-3">
+                Olá, <strong class="ms-1"><%= current_user.nome %></strong>
+              </li>
+
+              <li class="nav-item">
+                <%= button_to "Sair", logout_path,
+                      method: :delete,
+                      class: "btn btn-outline-light px-3" %>
+              </li>
+
+            <% else %>
+
+              <li class="nav-item ms-lg-3">
+                <a class="btn btn-light text-primary fw-semibold px-3" href="/login">
+                  Login
+                </a>
+              </li>
+            <% end %>
           </ul>
         </div>
 
