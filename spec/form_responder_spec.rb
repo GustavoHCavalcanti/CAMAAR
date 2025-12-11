@@ -2,7 +2,7 @@
 
 require "spec_helper"
 require_relative "../lib/simple_user"
-require_relative "../lib/formulario"
+require_relative "../lib/simple_formulario"
 require_relative "../lib/form_responder"
 
 RSpec.describe FormResponder do
@@ -16,7 +16,7 @@ RSpec.describe FormResponder do
   end
 
   let(:formulario) do
-    Formulario.new(
+    SimpleFormulario.new(
       id: 1,
       turma_id: "CIC101",
       respondido_por: []

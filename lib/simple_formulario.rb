@@ -1,6 +1,6 @@
-# lib/formulario.rb
+# lib/simple_formulario.rb
 
-class Formulario
+class SimpleFormulario
   attr_reader :id, :turma_id
   attr_accessor :respondido_por
 

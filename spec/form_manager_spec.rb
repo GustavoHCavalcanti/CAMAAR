@@ -2,7 +2,7 @@
 
 require "spec_helper"
 require_relative "../lib/simple_user"
-require_relative "../lib/formulario"
+require_relative "../lib/simple_formulario"
 require_relative "../lib/form_manager"
 
 RSpec.describe FormManager do
@@ -18,7 +18,7 @@ RSpec.describe FormManager do
   end
 
   let(:form1) do
-    Formulario.new(
+    SimpleFormulario.new(
       id: 1,
       turma_id: "CIC101",
       respondido_por: []
@@ -26,7 +26,7 @@ RSpec.describe FormManager do
   end
 
   let(:form2) do
-    Formulario.new(
+    SimpleFormulario.new(
       id: 2,
       turma_id: "MAT001",
       respondido_por: []

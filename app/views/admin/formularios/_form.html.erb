@@ -1,0 +1,28 @@
+<%= form_with model: [:admin, formulario], local: true, class: "card shadow-sm p-4" do |f| %>
+
+  <div class="mb-3">
+    <%= f.label :titulo, "Título", class: "form-label fw-semibold" %>
+    <%= f.text_field :titulo, class: "form-control", placeholder: "Ex: Avaliação do Professor" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :descricao, "Descrição", class: "form-label fw-semibold" %>
+    <%= f.text_area :descricao, class: "form-control", rows: 4 %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :template_id, "Template", class: "form-label fw-semibold" %>
+    <%= f.collection_select :template_id, (@templates || ::Template.all), :id, :nome, { prompt: "Selecione um template" }, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :turma_id, "Turma", class: "form-label fw-semibold" %>
+    <%= f.collection_select :turma_id, (@turmas || ::Turma.all), :id, :codigo, { prompt: "Selecione uma turma" }, class: "form-select" %>
+  </div>
+
+  <div class="mt-3">
+    <%= f.submit "Salvar", class: "btn btn-primary px-4" %>
+    <%= link_to "Cancelar", admin_formularios_path, class: "btn btn-secondary ms-2" %>
+  </div>
+
+<% end %>

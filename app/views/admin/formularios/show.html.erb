@@ -1,1 +1,18 @@
-<h1>Detalhes do Formulário</h1>
+<div class="container py-4">
+
+  <h1 class="fw-bold text-primary"><%= @formulario.titulo %></h1>
+  <p class="text-muted"><%= @formulario.descricao %></p>
+
+  <hr>
+
+  <div class="mt-4">
+    <%= link_to "Editar", edit_admin_formulario_path(@formulario), class: "btn btn-secondary" %>
+    <%= button_to "Excluir", admin_formulario_path(@formulario),
+        method: :delete,
+        form: { data: { turbo_confirm: "Tem certeza?" } },
+        class: "btn btn-danger ms-2" %>
+
+    <%= link_to "Voltar", admin_formularios_path, class: "btn btn-outline-primary ms-2" %>
+  </div>
+
+</div>

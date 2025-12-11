@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_11_135347) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_11_144803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "formularios", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.text "descricao"
     t.string "publico_alvo"
-    t.string "status", default: "aberto"
+    t.integer "status", default: 0, null: false
     t.bigint "template_id", null: false
+    t.string "titulo", default: "", null: false
     t.bigint "turma_id", null: false
     t.datetime "updated_at", null: false
     t.index ["template_id"], name: "index_formularios_on_template_id"
