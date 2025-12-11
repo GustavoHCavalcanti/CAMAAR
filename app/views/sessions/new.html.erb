@@ -1,3 +1,25 @@
-<div class="alert alert-primary">
-  Bootstrap carregou!
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h3 class="text-center mb-4">Entrar</h3>
+
+        <%= form_with url: login_path, method: :post, local: true do |f| %>
+
+          <div class="mb-3">
+            <%= f.label :email_or_matricula, "E-mail ou Matrícula", class: "form-label" %>
+            <%= f.text_field :email_or_matricula, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, "Senha", class: "form-label" %>
+            <%= f.password_field :password, class: "form-control" %>
+          </div>
+
+          <%= f.submit "Entrar", class: "btn btn-primary w-100" %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
