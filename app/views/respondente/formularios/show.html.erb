@@ -1,72 +1,226 @@
-<!-- Título (navbar já vem do layout respondente) -->
-<h4 class="fw-semibold mb-4">
-  <%= @formulario.titulo %>
-  <% if @formulario.turma.present? %>
-    - <%= @formulario.turma.codigo %>
-    <% if @formulario.turma.semestre.present? %>
-      (<%= @formulario.turma.semestre %>)
-    <% end %>
-  <% end %>
-</h4>
+<% content_for :page_title, "Respondendo Avaliação" %>
 
-<div class="d-flex justify-content-center">
-  <div class="bg-white p-4 shadow-sm"
-       style="width: 70%; border-radius: 12px;">
+<!-- Título -->
+<div style="padding: 20px; padding-bottom: 0;">
+  <h2 class="mb-4" style="margin-bottom: 8px;">
+    <%= @formulario.titulo %>
+    <% if @formulario.turma.present? %>
+      <span style="color: #666; font-size: 0.85em;">
+        - <%= @formulario.turma.codigo %>
+        <% if @formulario.turma.semestre.present? %>
+          (<%= @formulario.turma.semestre %>)
+        <% end %>
+      </span>
+    <% end %>
+  </h2>
+  <% if @formulario.descricao.present? %>
+    <p style="color: #666; margin: 0; font-size: 0.95rem;">
+      <%= @formulario.descricao %>
+    </p>
+  <% end %>
+  
+  <% if @ja_respondeu %>
+    <div style="margin-top: 12px; padding: 10px 14px; background: #c8e6c9; border-left: 3px solid #4CAF50; border-radius: 4px; color: #2e7d32; font-size: 0.9rem;">
+      ✓ Você já respondeu este formulário
+    </div>
+  <% end %>
+</div>
+
+<div style="padding: 20px; display: flex; justify-content: center;">
+  <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.12); width: 100%; max-width: 700px;">
 
     <% if @perguntas.any? %>
-      <% @perguntas.each do |pergunta| %>
+      
+      <% if @ja_respondeu %>
+        <!-- MODO VISUALIZAÇÃO (JÁ RESPONDEU) -->
+        <% @perguntas.each_with_index do |pergunta, idx| %>
+          <!-- PERGUNTA -->
+          <div style="margin-bottom: 28px; padding: 16px; background: #f5f5f5; border-radius: 6px;">
+            <p style="font-weight: 600; margin-bottom: 12px; color: #333;">
+              <%= idx + 1 %>. <%= pergunta.texto %>
+            </p>
 
-        <!-- BLOCOS CINZA -->
-        <div class="p-4 mb-3" style="background-color: #e6e6e6; border-radius: 4px;">
+            <% resposta = @respostas_user[pergunta.id] %>
+            <% if resposta %>
+              <div style="padding: 10px; background: white; border-left: 3px solid #4CAF50; border-radius: 4px; color: #333;">
+                <strong>Sua resposta:</strong> <%= resposta.valor %>
+              </div>
+            <% else %>
+              <div style="padding: 10px; background: white; border-left: 3px solid #f44336; border-radius: 4px; color: #d32f2f;">
+                Não respondida
+              </div>
+            <% end %>
+          </div>
+        <% end %>
 
-          <!-- TÍTULO DA PERGUNTA -->
-          <p class="fw-semibold mb-2"><%= pergunta.texto %></p>
-
-          <% if pergunta.tipo == "likert" %>
-            <div class="ms-3">
-              <% ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"].each do |op| %>
-                <div class="form-check mb-1">
-                  <input class="form-check-input" type="radio" name="question_<%= pergunta.id %>" value="<%= op %>">
-                  <label class="form-check-label"><%= op %></label>
-                </div>
-              <% end %>
-            </div>
-
-          <% elsif pergunta.tipo == "texto" %>
-            <input type="text"
-                   class="form-control border-0 border-bottom rounded-0 bg-transparent"
-                   name="question_<%= pergunta.id %>"
-                   placeholder="Digite sua resposta">
-          <% end %>
-
+        <!-- BOTÃO VOLTAR -->
+        <div style="display: flex; gap: 12px; margin-top: 28px; padding-top: 16px; border-top: 1px solid #ddd;">
+          <%= link_to "Voltar", respondente_formularios_path,
+                style: "flex: 1; text-align: center; padding: 12px; background: #6c757d; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;" %>
         </div>
 
+      <% else %>
+        <!-- MODO EDIÇÃO (NÃO RESPONDEU) -->
+        <%= form_with url: submit_respondente_formulario_path(@formulario), method: :post, local: true, id: "form-respostas" do |f| %>
+
+          <% @perguntas.each_with_index do |pergunta, idx| %>
+            <!-- PERGUNTA -->
+            <div style="margin-bottom: 28px; padding: 16px; background: #f5f5f5; border-radius: 6px;">
+              <p style="font-weight: 600; margin-bottom: 12px; color: #333;">
+                <%= idx + 1 %>. <%= pergunta.texto %>
+              </p>
+
+              <% if pergunta.tipo == "radio" && pergunta.options.is_a?(Array) %>
+                <div style="margin-left: 12px;">
+                  <% pergunta.options.each do |option| %>
+                    <div style="margin-bottom: 8px;">
+                      <label style="display: flex; align-items: center; cursor: pointer; color: #555;">
+                        <input type="radio" 
+                               name="question_<%= pergunta.id %>" 
+                               value="<%= option %>"
+                               class="resposta-input"
+                               data-pergunta="<%= pergunta.id %>"
+                               style="margin-right: 8px;" />
+                        <%= option %>
+                      </label>
+                    </div>
+                  <% end %>
+                </div>
+
+              <% elsif pergunta.tipo == "likert" %>
+                <div style="margin-left: 12px;">
+                  <% ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"].each do |op| %>
+                    <div style="margin-bottom: 8px;">
+                      <label style="display: flex; align-items: center; cursor: pointer; color: #555;">
+                        <input type="radio" 
+                               name="question_<%= pergunta.id %>" 
+                               value="<%= op %>"
+                               class="resposta-input"
+                               data-pergunta="<%= pergunta.id %>"
+                               style="margin-right: 8px;" />
+                        <%= op %>
+                      </label>
+                    </div>
+                  <% end %>
+                </div>
+
+              <% elsif pergunta.tipo == "texto" %>
+                <input type="text"
+                       name="question_<%= pergunta.id %>"
+                       class="resposta-input"
+                       data-pergunta="<%= pergunta.id %>"
+                       placeholder="Digite sua resposta aqui..."
+                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem;" />
+
+              <% elsif pergunta.tipo == "textarea" %>
+                <textarea name="question_<%= pergunta.id %>"
+                          class="resposta-input"
+                          data-pergunta="<%= pergunta.id %>"
+                          placeholder="Digite sua resposta aqui..."
+                          rows="4"
+                          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; font-family: inherit;"></textarea>
+              <% end %>
+
+            </div>
+          <% end %>
+
+          <!-- AVISO DE CAMPOS OBRIGATÓRIOS (inicialmente oculto) -->
+          <div id="aviso-campos" style="
+              display: none;
+              background: #ffebee;
+              border-left: 3px solid #c62828;
+              padding: 14px;
+              border-radius: 4px;
+              color: #c62828;
+              margin-bottom: 16px;
+              font-weight: 500;
+            ">
+            ⚠ Você deve responder todas as perguntas antes de enviar.
+          </div>
+
+          <!-- BOTÕES -->
+          <div style="display: flex; gap: 12px; margin-top: 28px; padding-top: 16px; border-top: 1px solid #ddd;">
+            <%= link_to "Cancelar", respondente_formularios_path,
+                  style: "flex: 1; text-align: center; padding: 12px; background: #6c757d; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;" %>
+            <%= f.submit "Enviar Respostas",
+                  id: "btn-enviar",
+                  style: "flex: 1; padding: 12px; background: #5E2A86; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem;" %>
+          </div>
+
+        <% end %>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const totalPerguntas = <%= @perguntas.length %>;
+            const avisoCampos = document.getElementById('aviso-campos');
+            const btnEnviar = document.getElementById('btn-enviar');
+            const formRespostas = document.getElementById('form-respostas');
+            const respostaInputs = document.querySelectorAll('.resposta-input');
+            let tentouEnviar = false;
+
+            function validarRespostas() {
+              const perguntasRespondidas = new Set();
+              
+              respostaInputs.forEach(input => {
+                const perguntaId = input.dataset.pergunta;
+                if (input.type === 'radio') {
+                  if (input.checked) {
+                    perguntasRespondidas.add(perguntaId);
+                  }
+                } else {
+                  if (input.value.trim() !== '') {
+                    perguntasRespondidas.add(perguntaId);
+                  }
+                }
+              });
+
+              const todasRespondidas = perguntasRespondidas.size === totalPerguntas;
+              
+              if (!todasRespondidas && tentouEnviar) {
+                avisoCampos.style.display = 'block';
+                btnEnviar.disabled = true;
+              } else if (todasRespondidas) {
+                avisoCampos.style.display = 'none';
+                btnEnviar.disabled = false;
+              }
+            }
+
+            btnEnviar.addEventListener('click', function(e) {
+              tentouEnviar = true;
+              validarRespostas();
+              
+              const perguntasRespondidas = new Set();
+              respostaInputs.forEach(input => {
+                const perguntaId = input.dataset.pergunta;
+                if (input.type === 'radio') {
+                  if (input.checked) {
+                    perguntasRespondidas.add(perguntaId);
+                  }
+                } else {
+                  if (input.value.trim() !== '') {
+                    perguntasRespondidas.add(perguntaId);
+                  }
+                }
+              });
+
+              if (perguntasRespondidas.size !== totalPerguntas) {
+                e.preventDefault();
+              }
+            });
+
+            respostaInputs.forEach(input => {
+              input.addEventListener('change', validarRespostas);
+              input.addEventListener('input', validarRespostas);
+            });
+          });
+        </script>
       <% end %>
+
     <% else %>
-      <div class="alert alert-info">
+      <div style="background: #e3f2fd; border-left: 3px solid #1976d2; padding: 16px; border-radius: 4px; text-align: center;">
         Este formulário ainda não possui perguntas cadastradas.
       </div>
     <% end %>
 
   </div>
 </div>
-
-<!-- BOTÃO FLUTUANTE -->
-<a href="#"
-   class="position-fixed"
-   style="
-    bottom: 40px;
-    right: 40px;
-    background-color: #9333ea;
-    color: white;
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    text-decoration: none;
-   ">
-  >
-</a>

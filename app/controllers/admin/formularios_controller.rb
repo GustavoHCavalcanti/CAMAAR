@@ -47,6 +47,18 @@ class Admin::FormulariosController < ApplicationController
     redirect_to admin_formularios_path, notice: "Avaliação removida."
   end
 
+  def respostas
+    @formulario = Formulario.find(params[:id])
+    @perguntas = @formulario.template&.questions || []
+    # Agrupar respostas por pergunta, sem informar o aluno
+    @respostas_por_pergunta = {}
+    @perguntas.each do |pergunta|
+      @respostas_por_pergunta[pergunta.id] = @formulario.respostas.where(question_id: pergunta.id).pluck(:valor)
+    end
+    # Contar total de respondentes
+    @total_respondentes = @formulario.respostas.select(:user_id).distinct.count
+  end
+
   private
 
   def formulario_params

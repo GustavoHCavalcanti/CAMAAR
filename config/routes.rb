@@ -24,7 +24,11 @@ Rails.application.routes.draw do
 
   # Respondente: página de formulários disponíveis
   namespace :respondente do
-    resources :formularios, only: [ :index, :show ]
+    resources :formularios, only: [ :index, :show ] do
+      member do
+        post :submit
+      end
+    end
     get "perfil", to: "perfil#show"
   end
 

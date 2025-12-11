@@ -36,16 +36,20 @@
         </div>
       </div>
 
-      <% if @user.turma.present? %>
+      <% if @user.turmas.any? %>
         <div class="row mb-3">
           <div class="col-12">
-            <p><strong>Turma:</strong></p>
-            <p class="text-muted">
-              <%= @user.turma.codigo %> - <%= @user.turma.departamento %>
-              <% if @user.turma.semestre.present? %>
-                (<%= @user.turma.semestre %>)
+            <p><strong>Turma(s):</strong></p>
+            <div class="text-muted">
+              <% @user.turmas.each do |turma| %>
+                <div style="margin-bottom: 8px;">
+                  <%= turma.codigo %> - <%= turma.departamento %>
+                  <% if turma.semestre.present? %>
+                    (<%= turma.semestre %>)
+                  <% end %>
+                </div>
               <% end %>
-            </p>
+            </div>
           </div>
         </div>
       <% end %>
