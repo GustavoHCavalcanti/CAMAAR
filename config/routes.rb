@@ -13,7 +13,12 @@ Rails.application.routes.draw do
     get "gerenciamento", to: "gerenciamento#index"
     resources :formularios
     resources :templates
-    resources :turmas
+    resources :turmas do
+      collection do
+        get :import_form
+        post :import
+      end
+    end
     get "perfil", to: "perfil#show"
   end
 

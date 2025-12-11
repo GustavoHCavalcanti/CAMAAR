@@ -69,6 +69,26 @@ module Admin
       redirect_to admin_turmas_path, notice: "Turma removida."
     end
 
+    def import_form
+      # Apenas renderiza o formulário de upload
+    end
+
+    def import
+      if params[:file].blank?
+        redirect_to import_form_admin_turmas_path, alert: "Envie um arquivo CSV para importar." and return
+      end
+
+      result = ::TurmaImportService.new(file: params[:file]).call
+
+      if result.success?
+        msg = "Importação concluída. Turmas novas: #{result.created_turmas}. Alunos novos: #{result.created_users}. Alunos já existentes: #{result.existing_users}."
+        msg += " Observações: #{result.errors.first(3).join(' | ')}" if result.errors.present?
+        redirect_to admin_turmas_path, notice: msg
+      else
+        redirect_to import_form_admin_turmas_path, alert: result.message
+      end
+    end
+
     private
 
     def turma_params
