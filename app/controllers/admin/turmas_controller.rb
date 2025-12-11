@@ -43,7 +43,7 @@ module Admin
     private
 
     def turma_params
-      params.require(:turma).permit(:codigo, :departamento, :semestre)
+      params.require(:turma).permit(:codigo, :departamento, :semestre, :professor)
     end
   end
 end

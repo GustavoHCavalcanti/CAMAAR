@@ -7,7 +7,7 @@ class Respondente::FormulariosController < ApplicationController
   end
 
   def show
-    @formulario = Formulario.find(params[:id])
-    # perguntas mock
+    @formulario = ::Formulario.find(params[:id])
+    @perguntas = @formulario.template&.questions || []
   end
 end

@@ -12,10 +12,23 @@
 
             <div class="card-body">
 
-              <h5 class="card-title fw-bold"><%= form.titulo %></h5>
+              <h5 class="card-title fw-bold mb-1"><%= form.titulo %></h5>
+              
+              <p class="text-muted mb-1" style="font-size: 0.9rem;">
+                <% if form.turma.present? %>
+                  <%= form.turma.codigo %> - <%= form.turma.departamento %>
+                  <% if form.turma.semestre.present? %>
+                    • <%= form.turma.semestre %>
+                  <% end %>
+                <% end %>
+              </p>
 
-              <p class="card-text text-muted">
-                <%= form.descricao.presence || "Sem descrição." %>
+              <p class="text-muted mb-3" style="font-size: 0.85rem;">
+                <% if form.turma&.professor.present? %>
+                  <%= form.turma.professor %>
+                <% else %>
+                  Professor não informado
+                <% end %>
               </p>
 
               <a href="<%= respondente_formulario_path(form) %>" class="btn btn-primary">

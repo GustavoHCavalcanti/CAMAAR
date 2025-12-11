@@ -1,38 +1,51 @@
 <!-- Título (navbar já vem do layout respondente) -->
 <h4 class="fw-semibold mb-4">
-  Avaliação - <%= @formulario.nome %> - <%= @formulario.semestre %>
+  <%= @formulario.titulo %>
+  <% if @formulario.turma.present? %>
+    - <%= @formulario.turma.codigo %>
+    <% if @formulario.turma.semestre.present? %>
+      (<%= @formulario.turma.semestre %>)
+    <% end %>
+  <% end %>
 </h4>
 
 <div class="d-flex justify-content-center">
   <div class="bg-white p-4 shadow-sm"
        style="width: 70%; border-radius: 12px;">
 
-    <% @perguntas.each do |p| %>
+    <% if @perguntas.any? %>
+      <% @perguntas.each do |pergunta| %>
 
-      <!-- BLOCOS CINZA -->
-      <div class="p-4 mb-3" style="background-color: #e6e6e6; border-radius: 4px;">
+        <!-- BLOCOS CINZA -->
+        <div class="p-4 mb-3" style="background-color: #e6e6e6; border-radius: 4px;">
 
-        <!-- TÍTULO DA PERGUNTA -->
-        <p class="fw-semibold mb-2"><%= p[:texto] %></p>
+          <!-- TÍTULO DA PERGUNTA -->
+          <p class="fw-semibold mb-2"><%= pergunta.texto %></p>
 
-        <% if p[:tipo] == :likert %>
-          <div class="ms-3">
-            <% ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"].each do |op| %>
-              <div class="form-check mb-1">
-                <input class="form-check-input" type="radio" name="<%= p[:texto] %>" value="<%= op %>">
-                <label class="form-check-label"><%= op %></label>
-              </div>
-            <% end %>
-          </div>
+          <% if pergunta.tipo == "likert" %>
+            <div class="ms-3">
+              <% ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"].each do |op| %>
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="radio" name="question_<%= pergunta.id %>" value="<%= op %>">
+                  <label class="form-check-label"><%= op %></label>
+                </div>
+              <% end %>
+            </div>
 
-        <% elsif p[:tipo] == :texto %>
-          <input type="text"
-                 class="form-control border-0 border-bottom rounded-0 bg-transparent"
-                 placeholder="Placeholder">
-        <% end %>
+          <% elsif pergunta.tipo == "texto" %>
+            <input type="text"
+                   class="form-control border-0 border-bottom rounded-0 bg-transparent"
+                   name="question_<%= pergunta.id %>"
+                   placeholder="Digite sua resposta">
+          <% end %>
 
+        </div>
+
+      <% end %>
+    <% else %>
+      <div class="alert alert-info">
+        Este formulário ainda não possui perguntas cadastradas.
       </div>
-
     <% end %>
 
   </div>
