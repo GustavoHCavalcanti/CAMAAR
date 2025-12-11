@@ -28,25 +28,26 @@
         <div class="collapse navbar-collapse" id="navbarMenu">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-            <li class="nav-item">
-              <a class="nav-link" href="/">Início</a>
-            </li>
+            <% if logged_in? %>
 
-            <li class="nav-item">
-              <a class="nav-link" href="/about">Sobre</a>
-            </li>
+              <% if current_user.role_administrador? %>
+                <!-- MENU DO ADMIN -->
+                <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/formularios">Formulários</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/templates">Templates</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/turmas">Turmas</a></li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="/contact">Contato</a>
-            </li>
+              <% elsif current_user.role_participante? %>
+                <!-- MENU DO RESPONDENTE -->
+                <li class="nav-item"><a class="nav-link" href="/respondente/formularios">Avaliações</a></li>
+              <% end %>
 
-            <!-- LOGIN / LOGOUT DINÂMICO -->
-            <% if defined?(current_user) && current_user.present? %>
-
-              <li class="nav-item d-flex align-items-center text-white me-3">
+              <!-- Saudação -->
+              <li class="nav-item d-flex align-items-center text-white ms-3 me-3">
                 Olá, <strong class="ms-1"><%= current_user.nome %></strong>
               </li>
 
+              <!-- Logout -->
               <li class="nav-item">
                 <%= button_to "Sair", logout_path,
                       method: :delete,
@@ -55,12 +56,19 @@
 
             <% else %>
 
+              <!-- MENU PARA VISITANTES -->
+              <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+              <li class="nav-item"><a class="nav-link" href="/about">Sobre</a></li>
+              <li class="nav-item"><a class="nav-link" href="/contact">Contato</a></li>
+
               <li class="nav-item ms-lg-3">
                 <a class="btn btn-light text-primary fw-semibold px-3" href="/login">
                   Login
                 </a>
               </li>
+
             <% end %>
+
           </ul>
         </div>
 
@@ -75,15 +83,10 @@
     <!-- FOOTER -->
     <footer class="bg-light border-top mt-5 py-4">
       <div class="container text-center text-muted">
-
         <p class="mb-1">
           © <%= Time.current.year %> CAMAAR — Sistema de Avaliação da UnB
         </p>
-
-        <p class="small">
-          Desenvolvido por alunos da UnB
-        </p>
-
+        <p class="small">Desenvolvido por alunos da UnB</p>
       </div>
     </footer>
 
