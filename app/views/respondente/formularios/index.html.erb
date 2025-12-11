@@ -1,1 +1,40 @@
-<h1>Formulários Disponíveis</h1>
+<div class="container py-5">
+
+  <h1 class="mb-4 fw-bold text-center">Avaliações Disponíveis</h1>
+
+  <% if @formularios.present? %>
+
+    <div class="row g-4">
+
+      <% @formularios.each do |form| %>
+        <div class="col-md-6">
+          <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+              <h5 class="card-title fw-bold"><%= form.titulo %></h5>
+
+              <p class="card-text text-muted">
+                <%= form.descricao.presence || "Sem descrição." %>
+              </p>
+
+              <a href="<%= respondente_formulario_path(form) %>" class="btn btn-primary">
+                Responder Avaliação
+              </a>
+
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% else %>
+
+    <div class="alert alert-info text-center mt-4">
+      Nenhuma avaliação disponível no momento.
+    </div>
+
+  <% end %>
+
+</div>

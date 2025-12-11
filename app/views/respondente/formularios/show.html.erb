@@ -1,2 +1,37 @@
-<h1>Responder Formulário</h1>
-<p>Conteúdo será implementado posteriormente.</p>
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-4 text-center"><%= @formulario.titulo %></h1>
+
+  <p class="lead text-muted text-center mb-5">
+    <%= @formulario.descricao.presence || "Avaliação sem descrição." %>
+  </p>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+
+      <h5 class="fw-semibold mb-3">Perguntas da Avaliação</h5>
+
+      <% if @formulario.questions.any? %>
+        <ol class="list-group list-group-numbered">
+          <% @formulario.questions.each do |question| %>
+            <li class="list-group-item">
+              <%= question.texto %>
+            </li>
+          <% end %>
+        </ol>
+      <% else %>
+        <div class="alert alert-info">
+          Nenhuma pergunta cadastrada para este formulário.
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="text-center">
+    <a href="#" class="btn btn-success btn-lg px-4 disabled">
+      Iniciar Resposta (Em desenvolvimento)
+    </a>
+  </div>
+
+</div>
