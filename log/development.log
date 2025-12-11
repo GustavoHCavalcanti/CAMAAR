@@ -2232,3 +2232,168 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.2ms)
 
 
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[35m (221.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Camaar'*/[0m
+  [1m[35m (220.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (219.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[35m (228.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (225.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (227.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (229.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-11 13:49:36.789796', '2025-12-11 13:49:36.789800') RETURNING "key" /*application='Camaar'*/[0m
+Migrating to CreateTurmas (20251210191846)
+  [1m[36mTRANSACTION (223.8ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (224.4ms)[0m  [1m[35mCREATE TABLE "turmas" ("id" bigserial primary key, "codigo" character varying NOT NULL, "departamento" character varying NOT NULL, "semestre" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (228.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191846') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (230.9ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+Migrating to CreateUsers (20251210191859)
+  [1m[36mTRANSACTION (224.3ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (228.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "nome" character varying, "email" character varying NOT NULL, "matricula" character varying, "senha_digest" character varying, "role" character varying DEFAULT 'aluno', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Camaar'*/[0m
+  [1m[35m (225.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email") /*application='Camaar'*/[0m
+  [1m[35m (230.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_matricula" ON "users" ("matricula") /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (229.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191859') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (228.8ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+Migrating to CreateTemplates (20251210191900)
+  [1m[36mTRANSACTION (225.2ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (453.3ms)[0m  [1m[35mCREATE TABLE "templates" ("id" bigserial primary key, "nome" character varying NOT NULL, "descricao" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (225.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191900') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (226.3ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+Migrating to CreateQuestions (20251210191901)
+  [1m[36mTRANSACTION (223.7ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (229.5ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "template_id" bigint NOT NULL, "texto" character varying NOT NULL, "tipo" character varying DEFAULT 'texto', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_1f469ddcb8"
+FOREIGN KEY ("template_id")
+  REFERENCES "templates" ("id")
+) /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[35m (227.8ms)[0m  [1m[35mCREATE INDEX "index_questions_on_template_id" ON "questions" ("template_id") /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (227.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191901') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (223.1ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+Migrating to CreateFormularios (20251210191902)
+  [1m[36mTRANSACTION (221.3ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (230.3ms)[0m  [1m[35mCREATE TABLE "formularios" ("id" bigserial primary key, "template_id" bigint NOT NULL, "turma_id" bigint NOT NULL, "publico_alvo" character varying, "status" character varying DEFAULT 'aberto', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_93cfa19b36"
+FOREIGN KEY ("template_id")
+  REFERENCES "templates" ("id")
+, CONSTRAINT "fk_rails_5a2be0c3c1"
+FOREIGN KEY ("turma_id")
+  REFERENCES "turmas" ("id")
+) /*application='Camaar'*/[0m
+  [1m[35m (223.2ms)[0m  [1m[35mCREATE INDEX "index_formularios_on_template_id" ON "formularios" ("template_id") /*application='Camaar'*/[0m
+  [1m[35m (225.6ms)[0m  [1m[35mCREATE INDEX "index_formularios_on_turma_id" ON "formularios" ("turma_id") /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (224.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191902') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (223.6ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+Migrating to CreateRespostas (20251210191903)
+  [1m[36mTRANSACTION (225.8ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (456.1ms)[0m  [1m[35mCREATE TABLE "respostas" ("id" bigserial primary key, "formulario_id" bigint NOT NULL, "question_id" bigint NOT NULL, "user_id" bigint NOT NULL, "valor" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_bd8b529c1e"
+FOREIGN KEY ("formulario_id")
+  REFERENCES "formularios" ("id")
+, CONSTRAINT "fk_rails_f1d51c38ed"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+, CONSTRAINT "fk_rails_e29282f6b1"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='Camaar'*/[0m
+  [1m[35m (226.3ms)[0m  [1m[35mCREATE INDEX "index_respostas_on_formulario_id" ON "respostas" ("formulario_id") /*application='Camaar'*/[0m
+  [1m[35m (226.7ms)[0m  [1m[35mCREATE INDEX "index_respostas_on_question_id" ON "respostas" ("question_id") /*application='Camaar'*/[0m
+  [1m[35m (227.6ms)[0m  [1m[35mCREATE INDEX "index_respostas_on_user_id" ON "respostas" ("user_id") /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (223.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191903') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (229.1ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+Migrating to CreateResetTokens (20251210191904)
+  [1m[36mTRANSACTION (222.3ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (453.7ms)[0m  [1m[35mCREATE TABLE "reset_tokens" ("id" bigserial primary key, "user_id" bigint NOT NULL, "token" character varying NOT NULL, "expira_em" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_0164532167"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='Camaar'*/[0m
+  [1m[35m (223.9ms)[0m  [1m[35mCREATE INDEX "index_reset_tokens_on_user_id" ON "reset_tokens" ("user_id") /*application='Camaar'*/[0m
+  [1m[35m (218.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[35m (226.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_reset_tokens_on_token" ON "reset_tokens" ("token") /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (224.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191904') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (223.6ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+Migrating to CreateImportLogs (20251210191905)
+  [1m[36mTRANSACTION (224.5ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (455.1ms)[0m  [1m[35mCREATE TABLE "import_logs" ("id" bigserial primary key, "arquivo" character varying, "novos_registros" integer, "registros_existentes" integer, "mensagem" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (222.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251210191905') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (226.1ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+  [1m[35m (231.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (227.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[35mSQL (224.0ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (225.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+  [1m[35mSQL (222.0ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (226.9ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mActiveRecord::SchemaMigration Load (214.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[35m (219.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (213.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (216.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Camaar'*/[0m
+Migrating to RenameSenhaDigestToPasswordDigest (20251211135347)
+  [1m[36mTRANSACTION (214.1ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (432.6ms)[0m  [1m[35mALTER TABLE "users" RENAME COLUMN "senha_digest" TO "password_digest" /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (219.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251211135347') RETURNING "version" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (221.1ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+  [1m[35m (217.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (215.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[35mSQL (218.4ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (220.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+  [1m[35mSQL (213.4ms)[0m  [1m[35mSET search_path TO public /*application='Camaar'*/[0m
+  [1m[35mSQL (307.0ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mActiveRecord::SchemaMigration Load (235.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mTRANSACTION (218.2ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[36mUser Exists? (437.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@unb.br' LIMIT 1 /*application='Camaar'*/[0m
+  [1m[36mUser Create (217.9ms)[0m  [1m[32mINSERT INTO "users" ("nome", "email", "matricula", "password_digest", "role", "created_at", "updated_at") VALUES ('Admin', 'admin@unb.br', '000000000', '$2a$12$t729wsOeKtsE9fI/viriu.dkjCENYL2.26fXmhn5WMD3lmYje/4O2', '1', '2025-12-11 14:16:31.244423', '2025-12-11 14:16:31.244423') RETURNING "id" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (219.9ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[35m (218.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (223.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (216.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Camaar'*/[0m
+Migrating to FixUserTable (20251211141728)
+  [1m[36mTRANSACTION (217.0ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[35m (437.9ms)[0m  [1m[35mALTER TABLE "users" RENAME COLUMN "senha_digest" TO "password_digest" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (218.8ms)[0m  [1m[31mROLLBACK /*application='Camaar'*/[0m
+  [1m[35m (224.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(6765451939666364595) /*application='Camaar'*/[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCACHE ActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mTRANSACTION (209.4ms)[0m  [1m[35mBEGIN /*application='Camaar'*/[0m
+  [1m[36mUser Exists? (427.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin2@unb.br' LIMIT 1 /*application='Camaar'*/[0m
+  [1m[36mUser Create (210.5ms)[0m  [1m[32mINSERT INTO "users" ("nome", "email", "matricula", "password_digest", "role", "created_at", "updated_at") VALUES ('Admin', 'admin2@unb.br', '000000001', '$2a$12$9FFn72qKbS34KE24vBAw2eMWr5Tf1WeoOUg/7BMkC3jSOhI/C.NvW', 'administrador', '2025-12-11 14:19:04.927167', '2025-12-11 14:19:04.927167') RETURNING "id" /*application='Camaar'*/[0m
+  [1m[36mTRANSACTION (209.5ms)[0m  [1m[35mCOMMIT /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mUser Load (211.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin2@unb.br' LIMIT 1 /*application='Camaar'*/[0m

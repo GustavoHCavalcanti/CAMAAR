@@ -1,7 +1,7 @@
 # spec/form_manager_spec.rb
 
 require "spec_helper"
-require_relative "../lib/user"
+require_relative "../lib/simple_user"
 require_relative "../lib/formulario"
 require_relative "../lib/form_manager"
 
@@ -9,7 +9,7 @@ RSpec.describe FormManager do
   subject(:manager) { described_class.new }
 
   let(:user) do
-    User.new(
+    SimpleUser.new(
       email: "aluno@unb.br",
       matricula: "123",
       senha: "abc",
@@ -36,7 +36,7 @@ RSpec.describe FormManager do
   describe "#formularios_pendentes" do
     context "quando o usuário tem formulários pendentes" do
       it "retorna apenas os não respondidos nas turmas em que ele está" do
-        resultado = manager.formularios_pendentes(user, ["CIC101"], [form1, form2])
+        resultado = manager.formularios_pendentes(user, [ "CIC101" ], [ form1, form2 ])
 
         expect(resultado).to contain_exactly(form1)
       end
@@ -48,7 +48,7 @@ RSpec.describe FormManager do
         form1.respondido_por << user
         form2.respondido_por << user
 
-        resultado = manager.formularios_pendentes(user, ["CIC101"], [form1, form2])
+        resultado = manager.formularios_pendentes(user, [ "CIC101" ], [ form1, form2 ])
 
         expect(resultado).to be_empty
       end
@@ -56,7 +56,7 @@ RSpec.describe FormManager do
 
     context "quando o usuário tenta acessar formulário de outra turma" do
       it "não retorna formulários de turmas não cadastradas para ele" do
-        resultado = manager.formularios_pendentes(user, ["CIC101"], [form2])
+        resultado = manager.formularios_pendentes(user, [ "CIC101" ], [ form2 ])
 
         expect(resultado).to be_empty
       end

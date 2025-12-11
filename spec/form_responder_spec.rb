@@ -1,13 +1,13 @@
 # spec/form_responder_spec.rb
 
 require "spec_helper"
-require_relative "../lib/user"
-require_relative "../lib/formulario"      
+require_relative "../lib/simple_user"
+require_relative "../lib/formulario"
 require_relative "../lib/form_responder"
 
 RSpec.describe FormResponder do
   let(:usuario) do
-    User.new(
+    SimpleUser.new(
       email: "aluno@unb.br",
       matricula: "CIC101",
       senha: "Senha123",
@@ -23,7 +23,7 @@ RSpec.describe FormResponder do
     )
   end
 
-  let(:perguntas_obrigatorias) { [:q1, :q2] }
+  let(:perguntas_obrigatorias) { [ :q1, :q2 ] }
 
   subject(:responder) { described_class.new }
 

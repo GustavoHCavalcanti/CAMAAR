@@ -1,5 +1,5 @@
 # spec/cadastrar_usuarios_sistema_spec.rb
-require_relative '../lib/cadastrar_usuarios_sistema'
+require_relative '../lib/user_registrar'
 
 RSpec.describe UserRegistrar do
   let(:users) do

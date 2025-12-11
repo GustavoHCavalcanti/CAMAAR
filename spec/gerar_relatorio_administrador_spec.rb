@@ -1,6 +1,6 @@
 # spec/gerar_relatorio_administrador_spec.rb
 require "spec_helper"
-require_relative "../lib/gerar_relatorio_administrador"
+require_relative "../lib/admin_report_generator"
 
 RSpec.describe AdminReportGenerator do
   let(:responses) do

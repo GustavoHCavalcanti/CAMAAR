@@ -1,5 +1,5 @@
 # spec/criar_formulario_avaliacao_spec.rb
-require_relative '../lib/criar_formulario_avaliacao'
+require_relative '../lib/formulario_avaliacao_creator'
 
 RSpec.describe FormularioAvaliacaoCreator do
   let(:templates) do
@@ -23,7 +23,7 @@ RSpec.describe FormularioAvaliacaoCreator do
 
       resultado = creator.criar_formularios(
         template_nome: "Avaliação de Disciplina",
-        turma_codigos: ["CIC101"]
+        turma_codigos: [ "CIC101" ]
       )
 
       expect(resultado).to eq(:created)
@@ -42,7 +42,7 @@ RSpec.describe FormularioAvaliacaoCreator do
 
       resultado = creator.criar_formularios(
         template_nome: "Avaliação de Disciplina",
-        turma_codigos: ["CIC101", "CIC102"]
+        turma_codigos: [ "CIC101", "CIC102" ]
       )
 
       expect(resultado).to eq(:created)
@@ -63,7 +63,7 @@ RSpec.describe FormularioAvaliacaoCreator do
 
       resultado = creator.criar_formularios(
         template_nome: nil,
-        turma_codigos: ["CIC101"]
+        turma_codigos: [ "CIC101" ]
       )
 
       expect(resultado).to eq(:template_nao_selecionado)

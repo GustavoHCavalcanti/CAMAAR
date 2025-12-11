@@ -1,7 +1,7 @@
 # spec/edicao_delecao_templates_spec.rb
-require_relative '../lib/edicao_delecao_templates'
+require_relative '../lib/template_manager_ed'
 
-RSpec.describe TemplateManagerED do
+RSpec.describe TemplateManagerEd do
   let(:templates) do
     [
       { id: 1, nome: "Template A", owner_id: 10 },
@@ -17,7 +17,7 @@ RSpec.describe TemplateManagerED do
 
   describe "Edição bem-sucedida de um template" do
     it 'atualiza o nome do template e mantém o formulário original intacto' do
-      manager = TemplateManagerED.new(templates, forms)
+      manager = TemplateManagerEd.new(templates, forms)
 
       resultado = manager.editar_template("Template A", "Template B - Revisado")
 
@@ -34,7 +34,7 @@ RSpec.describe TemplateManagerED do
 
   describe "Deleção de template não utilizado" do
     it 'remove o template quando ele nunca foi usado' do
-      manager = TemplateManagerED.new(templates, forms)
+      manager = TemplateManagerEd.new(templates, forms)
 
       resultado = manager.deletar_template("Template Novo")
 
@@ -45,7 +45,7 @@ RSpec.describe TemplateManagerED do
 
   describe "Deleção de template utilizado" do
     it 'solicita confirmação quando há formulários relacionados' do
-      manager = TemplateManagerED.new(templates, forms)
+      manager = TemplateManagerEd.new(templates, forms)
 
       resultado = manager.deletar_template("Template A")
 
@@ -53,7 +53,7 @@ RSpec.describe TemplateManagerED do
     end
 
     it 'remove o template após confirmação explícita, mantendo formulários' do
-      manager = TemplateManagerED.new(templates, forms)
+      manager = TemplateManagerEd.new(templates, forms)
 
       resultado = manager.deletar_template("Template A", confirm: true)
 

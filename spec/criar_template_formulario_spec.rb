@@ -1,10 +1,10 @@
 # spec/criar_template_formulario_spec.rb
-require_relative '../lib/criar_template_formulario'
+require_relative '../lib/template_creator'
 
 RSpec.describe TemplateCreator do
   let(:templates) do
     [
-      { id: 1, nome: "Template Existente", questoes: ["Q1"] }
+      { id: 1, nome: "Template Existente", questoes: [ "Q1" ] }
     ]
   end
 
@@ -12,13 +12,13 @@ RSpec.describe TemplateCreator do
     it 'salva o template e o disponibiliza para uso em novos formulários' do
       creator = TemplateCreator.new(templates)
 
-      resultado = creator.create("Template Avaliação Turma", ["Questão 1", "Questão 2"])
+      resultado = creator.create("Template Avaliação Turma", [ "Questão 1", "Questão 2" ])
 
       expect(resultado).to eq(:created)
       novo = templates.find { |t| t[:nome] == "Template Avaliação Turma" }
 
       expect(novo).not_to be_nil
-      expect(novo[:questoes]).to eq(["Questão 1", "Questão 2"])
+      expect(novo[:questoes]).to eq([ "Questão 1", "Questão 2" ])
       # continua existindo o template antigo também
       expect(templates.size).to eq(2)
     end
@@ -41,13 +41,13 @@ RSpec.describe TemplateCreator do
     it 'rejeita a criação e não altera os templates existentes' do
       creator = TemplateCreator.new(templates)
 
-      resultado = creator.create("Template Existente", ["Nova Questão"])
+      resultado = creator.create("Template Existente", [ "Nova Questão" ])
 
       expect(resultado).to eq(:duplicate_name)
       # continua existindo apenas o template original
       expect(templates.size).to eq(1)
       template = templates.find { |t| t[:nome] == "Template Existente" }
-      expect(template[:questoes]).to eq(["Q1"])
+      expect(template[:questoes]).to eq([ "Q1" ])
     end
   end
 end

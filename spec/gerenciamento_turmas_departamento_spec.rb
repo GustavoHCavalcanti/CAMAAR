@@ -1,5 +1,5 @@
 # spec/gerenciamento_turmas_departamento_spec.rb
-require_relative '../lib/gerenciamento_turmas_departamento'
+require_relative '../lib/turma_manager'
 
 RSpec.describe TurmaManager do
   let(:admin) do

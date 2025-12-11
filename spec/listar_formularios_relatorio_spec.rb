@@ -1,5 +1,5 @@
 # spec/listar_formularios_relatorio_spec.rb
-require_relative '../lib/listar_formularios_relatorio'
+require_relative '../lib/form_manager'
 
 RSpec.describe FormManager do
   let(:admin_id) { 1 }

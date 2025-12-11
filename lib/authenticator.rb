@@ -1,6 +1,6 @@
 # lib/authenticator.rb
 
-class User
+class AuthUser
   attr_reader :email, :matricula, :senha, :role
 
   def initialize(email:, matricula:, senha:, role:)
@@ -18,13 +18,13 @@ class Authenticator
     # Por enquanto vamos deixar os usuários "hardcoded",
     # exatamente como no BDD da issue-104
     @users = [
-      User.new(
+      AuthUser.new(
         email: "usuario@unb.br",
         matricula: "202300000",
         senha: "SenhaValida123",
         role: :respondente
       ),
-      User.new(
+      AuthUser.new(
         email: "admin@unb.br",
         matricula: "ADM0001",
         senha: "SenhaAdmin123",

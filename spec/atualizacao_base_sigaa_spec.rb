@@ -1,15 +1,15 @@
 # spec/atualizacao_base_sigaa_spec.rb
-require_relative '../lib/atualizacao_base_sigaa'
+require_relative '../lib/base_atualizador_sigaa'
 
-RSpec.describe BaseAtualizadorSIGAA do
+RSpec.describe BaseAtualizadorSigaa do
   let(:admin)  { { id: 1, tipo: :admin } }
   let(:comum)  { { id: 2, tipo: :comum } }
 
   let(:base_local) do
     {
-      turmas:    [{ codigo: "CIC101" }],
-      usuarios:  [{ matricula: "111" }],
-      materias:  [{ codigo: "MAT001" }]
+      turmas:    [ { codigo: "CIC101" } ],
+      usuarios:  [ { matricula: "111" } ],
+      materias:  [ { codigo: "MAT001" } ]
     }
   end
 
@@ -18,21 +18,21 @@ RSpec.describe BaseAtualizadorSIGAA do
       sigaa_service = double("SIGAA")
 
       novos_dados = {
-        turmas:    [{ codigo: "CIC202" }],
-        usuarios:  [{ matricula: "222" }],
-        materias:  [{ codigo: "FIS001" }]
+        turmas:    [ { codigo: "CIC202" } ],
+        usuarios:  [ { matricula: "222" } ],
+        materias:  [ { codigo: "FIS001" } ]
       }
 
       allow(sigaa_service).to receive(:fetch_data).and_return(novos_dados)
 
-      atualizador = BaseAtualizadorSIGAA.new(base_local, sigaa_service)
+      atualizador = BaseAtualizadorSigaa.new(base_local, sigaa_service)
 
       resultado = atualizador.atualizar(admin)
 
       expect(resultado).to eq(:sucesso)
-      expect(base_local[:turmas]).to eq([{ codigo: "CIC202" }])
-      expect(base_local[:usuarios]).to eq([{ matricula: "222" }])
-      expect(base_local[:materias]).to eq([{ codigo: "FIS001" }])
+      expect(base_local[:turmas]).to eq([ { codigo: "CIC202" } ])
+      expect(base_local[:usuarios]).to eq([ { matricula: "222" } ])
+      expect(base_local[:materias]).to eq([ { codigo: "FIS001" } ])
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe BaseAtualizadorSIGAA do
 
       base_original = base_local.dup
 
-      atualizador = BaseAtualizadorSIGAA.new(base_local, sigaa_service)
+      atualizador = BaseAtualizadorSigaa.new(base_local, sigaa_service)
 
       resultado = atualizador.atualizar(admin)
 
@@ -58,7 +58,7 @@ RSpec.describe BaseAtualizadorSIGAA do
       allow(sigaa_service).to receive(:fetch_data).and_return(nil)
 
       base_original = base_local.dup
-      atualizador = BaseAtualizadorSIGAA.new(base_local, sigaa_service)
+      atualizador = BaseAtualizadorSigaa.new(base_local, sigaa_service)
 
       resultado = atualizador.atualizar(admin)
 
@@ -72,7 +72,7 @@ RSpec.describe BaseAtualizadorSIGAA do
       sigaa_service = double("SIGAA")
 
       base_original = base_local.dup
-      atualizador = BaseAtualizadorSIGAA.new(base_local, sigaa_service)
+      atualizador = BaseAtualizadorSigaa.new(base_local, sigaa_service)
 
       resultado = atualizador.atualizar(comum)
 

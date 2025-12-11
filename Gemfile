@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 gem "rails", "~> 8.1.1"
 gem "propshaft"
-gem "sqlite3", ">= 2.1"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
@@ -18,10 +17,10 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 gem "bootstrap", "~> 5.3"
 gem "sassc-rails"
+gem "pg", "~> 1.1"
+gem "bcrypt", "~> 3.1.7"
+gem "dotenv-rails", groups: [ :development, :test ]
 
-# -------------------------------
-# DEVELOPMENT + TEST
-# -------------------------------
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "bundler-audit", require: false
@@ -29,18 +28,12 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-# -------------------------------
-# DEVELOPMENT
-# -------------------------------
 group :development do
   gem "web-console"
   gem "saikuro", require: false
   gem "rubycritic"
 end
 
-# -------------------------------
-# TEST
-# -------------------------------
 group :test do
   gem "capybara"
   gem "selenium-webdriver"

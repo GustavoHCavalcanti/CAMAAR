@@ -1,5 +1,5 @@
 # spec/criacao_formulario_publico_alvo_spec.rb
-require_relative '../lib/criacao_formulario_publico_alvo'
+require_relative '../lib/formulario_publico_alvo_creator'
 
 RSpec.describe FormularioPublicoAlvoCreator do
   let(:templates) do
