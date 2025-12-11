@@ -1,18 +1,71 @@
-<div class="container py-4">
+<!-- Título -->
+<h4 class="fw-semibold mb-4">
+  <%= @formulario.titulo %>
+  <% if @formulario.turma.present? %>
+    - <%= @formulario.turma.codigo %>
+    <% if @formulario.turma.semestre.present? %>
+      (<%= @formulario.turma.semestre %>)
+    <% end %>
+  <% end %>
+</h4>
 
-  <h1 class="fw-bold text-primary"><%= @formulario.titulo %></h1>
-  <p class="text-muted"><%= @formulario.descricao %></p>
+<div class="d-flex justify-content-center">
+  <div class="bg-white p-4 shadow-sm"
+       style="width: 70%; border-radius: 12px;">
 
-  <hr>
+    <!-- Informações do formulário -->
+    <div class="mb-4">
+      <p><strong>Descrição:</strong></p>
+      <p class="text-muted"><%= @formulario.descricao.presence || "Sem descrição" %></p>
+    </div>
 
-  <div class="mt-4">
-    <%= link_to "Editar", edit_admin_formulario_path(@formulario), class: "btn btn-secondary" %>
-    <%= button_to "Excluir", admin_formulario_path(@formulario),
-        method: :delete,
-        form: { data: { turbo_confirm: "Tem certeza?" }, class: "d-inline" },
-        class: "btn btn-danger ms-2" %>
+    <% if @formulario.template&.questions&.any? %>
+      <% @formulario.template.questions.each do |pergunta| %>
 
-    <%= link_to "Voltar", admin_formularios_path, class: "btn btn-outline-primary ms-2" %>
+        <!-- BLOCOS CINZA -->
+        <div class="p-4 mb-3" style="background-color: #e6e6e6; border-radius: 4px;">
+
+          <!-- TÍTULO DA PERGUNTA -->
+          <p class="fw-semibold mb-2"><%= pergunta.texto %></p>
+
+          <% if pergunta.tipo == "likert" %>
+            <div class="ms-3">
+              <% ["Muito bom", "Bom", "Satisfatório", "Ruim", "Péssimo"].each do |op| %>
+                <div class="form-check mb-1">
+                  <input class="form-check-input" type="radio" name="question_<%= pergunta.id %>" value="<%= op %>" disabled>
+                  <label class="form-check-label"><%= op %></label>
+                </div>
+              <% end %>
+            </div>
+
+          <% elsif pergunta.tipo == "texto" %>
+            <input type="text"
+                   class="form-control border-0 border-bottom rounded-0 bg-transparent"
+                   name="question_<%= pergunta.id %>"
+                   placeholder="Resposta de texto"
+                   disabled>
+          <% end %>
+
+        </div>
+
+      <% end %>
+    <% else %>
+      <div class="alert alert-info">
+        Este formulário ainda não possui perguntas cadastradas.
+      </div>
+    <% end %>
+
+    <hr>
+
+    <div class="mt-4">
+      <%= link_to "Editar", edit_admin_formulario_path(@formulario), class: "btn btn-secondary" %>
+      <%= button_to "Excluir", admin_formulario_path(@formulario),
+          method: :delete,
+          form: { data: { turbo_confirm: "Tem certeza?" }, class: "d-inline" },
+          class: "btn btn-danger ms-2" %>
+
+      <%= link_to "Voltar", admin_formularios_path, class: "btn btn-outline-primary ms-2" %>
+    </div>
+
   </div>
-
 </div>

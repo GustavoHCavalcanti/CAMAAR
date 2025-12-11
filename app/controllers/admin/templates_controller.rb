@@ -1,5 +1,9 @@
 module Admin
   class TemplatesController < ApplicationController
+    layout "admin"
+    before_action :require_login
+    before_action :require_admin
+
     def index
       @templates = ::Template.all
     end
@@ -44,6 +48,10 @@ module Admin
 
     def template_params
       params.require(:template).permit(:nome, :descricao)
+    end
+
+    def require_admin
+      redirect_to root_path, alert: "Acesso negado." unless current_user&.role_administrador?
     end
   end
 end

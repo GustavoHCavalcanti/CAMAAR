@@ -1,5 +1,9 @@
 module Admin
   class TurmasController < ApplicationController
+    layout "admin"
+    before_action :require_login
+    before_action :require_admin
+
     def index
       @turmas = ::Turma.all
     end
@@ -44,6 +48,10 @@ module Admin
 
     def turma_params
       params.require(:turma).permit(:codigo, :departamento, :semestre, :professor)
+    end
+
+    def require_admin
+      redirect_to root_path, alert: "Acesso negado." unless current_user&.role_administrador?
     end
   end
 end

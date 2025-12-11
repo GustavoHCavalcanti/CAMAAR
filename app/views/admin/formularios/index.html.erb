@@ -1,38 +1,53 @@
-<div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="fw-bold text-primary">Formulários</h1>
-    <%= link_to "Novo Formulário", new_admin_formulario_path, class: "btn btn-primary" %>
-  </div>
+<div class="container py-5">
 
-  <% if @formularios.any? %>
-    <table class="table table-hover shadow-sm">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Título</th>
-          <th>Criado em</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @formularios.each do |f| %>
-          <tr>
-            <td><%= f.id %></td>
-            <td><%= f.titulo %></td>
-            <td><%= l(f.created_at, format: :short) %></td>
-            <td>
-              <%= link_to "Ver", admin_formulario_path(f), class: "btn btn-sm btn-outline-primary" %>
-              <%= link_to "Editar", edit_admin_formulario_path(f), class: "btn btn-sm btn-outline-secondary" %>
-              <%= button_to "Excluir", admin_formulario_path(f),
-                      method: :delete,
-                      form: { data: { turbo_confirm: "Tem certeza?" }, class: "d-inline" },
-                      class: "btn btn-sm btn-outline-danger" %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <h1 class="mb-4 fw-bold text-center">Avaliações Disponíveis</h1>
+
+  <% if @formularios.present? %>
+
+    <div class="row g-4">
+
+      <% @formularios.each do |form| %>
+        <div class="col-md-6">
+          <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+              <h5 class="card-title fw-bold mb-1"><%= form.titulo %></h5>
+              
+              <p class="text-muted mb-1" style="font-size: 0.9rem;">
+                <% if form.turma.present? %>
+                  <%= form.turma.codigo %> - <%= form.turma.departamento %>
+                  <% if form.turma.semestre.present? %>
+                    • <%= form.turma.semestre %>
+                  <% end %>
+                <% end %>
+              </p>
+
+              <p class="text-muted mb-3" style="font-size: 0.85rem;">
+                <% if form.turma&.professor.present? %>
+                  <%= form.turma.professor %>
+                <% else %>
+                  Professor não informado
+                <% end %>
+              </p>
+
+              <a href="<%= admin_formulario_path(form) %>" class="btn btn-primary">
+                Ver Avaliação
+              </a>
+
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
   <% else %>
-    <div class="alert alert-info">Nenhum formulário cadastrado.</div>
+
+    <div class="alert alert-info text-center mt-4">
+      Nenhuma avaliação disponível no momento.
+    </div>
+
   <% end %>
+
 </div>

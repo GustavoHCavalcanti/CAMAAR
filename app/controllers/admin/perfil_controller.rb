@@ -1,9 +1,11 @@
 module Admin
-  class DashboardController < ApplicationController
+  class PerfilController < ApplicationController
+    layout "admin"
     before_action :require_login
     before_action :require_admin
 
-    def index
+    def show
+      @user = current_user
     end
 
     private

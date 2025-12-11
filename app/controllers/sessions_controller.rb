@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
 
       # Redirecionar baseado no role do usuário
-      redirect_path = user.role_administrador? ? admin_dashboard_path : respondente_formularios_path
+      redirect_path = user.role_administrador? ? admin_formularios_path : respondente_formularios_path
       redirect_to redirect_path, notice: "Login realizado com sucesso!"
     else
       flash.now[:alert] = "Email, matrícula ou senha inválidos."

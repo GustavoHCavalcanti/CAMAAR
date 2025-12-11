@@ -1,4 +1,8 @@
 class Admin::FormulariosController < ApplicationController
+  layout "admin"
+  before_action :require_login
+  before_action :require_admin
+
   def index
     @formularios = Formulario.all
   end
@@ -67,5 +71,9 @@ class Admin::FormulariosController < ApplicationController
   def load_collections
     @templates = ::Template.all
     @turmas = ::Turma.all
+  end
+
+  def require_admin
+    redirect_to root_path, alert: "Acesso negado." unless current_user&.role_administrador?
   end
 end
