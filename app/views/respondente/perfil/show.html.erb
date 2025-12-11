@@ -1,0 +1,50 @@
+<div class="container py-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Meu Perfil</h3>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>Nome:</strong></p>
+          <p class="text-muted"><%= @user.nome || "Não informado" %></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Email:</strong></p>
+          <p class="text-muted"><%= @user.email %></p>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>Matrícula:</strong></p>
+          <p class="text-muted"><%= @user.matricula || "Não informado" %></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Tipo de Usuário:</strong></p>
+          <p class="text-muted"><%= @user.role.capitalize %></p>
+        </div>
+      </div>
+
+      <% if @user.turma.present? %>
+        <div class="row mb-3">
+          <div class="col-12">
+            <p><strong>Turma:</strong></p>
+            <p class="text-muted">
+              <%= @user.turma.codigo %> - <%= @user.turma.departamento %>
+              <% if @user.turma.semestre.present? %>
+                (<%= @user.turma.semestre %>)
+              <% end %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+
+      <hr>
+
+      <div class="mt-4">
+        <%= link_to "Voltar", respondente_formularios_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

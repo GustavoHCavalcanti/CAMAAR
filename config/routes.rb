@@ -1,6 +1,6 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  root "home#index"
+  root "sessions#new"
 
   # Informações públicas
   get "about",   to: "home#about"
@@ -38,10 +38,6 @@ Rails.application.routes.draw do
     get "dashboard", to: "dashboard#index"
   end
 
-  namespace :respondente do
-    get "dashboard", to: "dashboard#index"
-  end
-
   # Admin: formulários + templates + turmas
   namespace :admin do
     resources :formularios
@@ -51,6 +47,7 @@ Rails.application.routes.draw do
 
   # Respondente: página de formulários disponíveis
   namespace :respondente do
-    resources :formularios, only: [:index, :show]
+    resources :formularios, only: [ :index, :show ]
+    get "perfil", to: "perfil#show"
   end
 end

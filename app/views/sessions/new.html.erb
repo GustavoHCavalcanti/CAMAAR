@@ -1,33 +1,66 @@
-<div class="d-flex justify-content-center align-items-center" style="min-height:100vh; background:#f8f9fa;">
-  <div class="card shadow-lg p-4" style="width: 100%; max-width: 420px; border-radius: 12px;">
-    
-    <h3 class="text-center mb-4 fw-bold">Entrar no CAMAAR</h3>
+<div class="container-fluid px-0">
+  <div class="row g-0" style="min-height: 100vh;">
 
-    <% if flash[:alert] %>
-      <div class="alert alert-danger"><%= flash[:alert] %></div>
-    <% end %>
+    <!-- ESQUERDA – FORMULÁRIO -->
+    <div class="col-lg-6 d-flex align-items-center justify-content-center bg-white">
 
-    <%= form_with url: login_path, method: :post, local: true do |f| %>
+      <div style="width: 100%; max-width: 420px;">
 
-      <div class="mb-3">
-        <%= f.label :login, "E-mail ou Matrícula", class: "form-label fw-semibold" %>
-        <%= f.text_field :login, class: "form-control", placeholder: "exemplo@unb.br", required: true %>
+        <h2 class="text-center fw-bold mb-5" style="letter-spacing: 1px;">
+          LOGIN
+        </h2>
+
+        <% if flash[:alert] %>
+          <div class="alert alert-danger">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+
+        <%= form_with url: login_path, method: :post, local: true do %>
+
+          <!-- EMAIL -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Email</label>
+            <%= text_field_tag :login, nil,
+                class: "form-control form-control-lg",
+                placeholder: "aluno@aluno.unb.br" %>
+          </div>
+
+          <!-- SENHA -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Senha</label>
+            <%= password_field_tag :password, nil,
+                class: "form-control form-control-lg",
+                placeholder: "Password" %>
+          </div>
+
+          <!-- BOTÃO -->
+          <div class="d-grid mt-4">
+            <button class="btn btn-lg text-white fw-semibold"
+                    style="background-color: #4CAF50;">
+              Entrar
+            </button>
+          </div>
+
+        <% end %>
+
       </div>
 
-      <div class="mb-3">
-        <%= f.label :password, "Senha", class: "form-label fw-semibold" %>
-        <%= f.password_field :password, class: "form-control", placeholder: "••••••••", required: true %>
+    </div>
+
+    <!-- DIREITA – PAINEL ROXO -->
+    <div class="col-lg-6 d-flex align-items-center justify-content-center"
+         style="background-color: #5A246E; color: white;">
+
+      <div class="text-center px-4">
+        <h1 class="fw-bold" style="font-size: 3.5rem; line-height: 1.2;">
+          Bem vindo<br>
+          ao<br>
+          Camaar
+        </h1>
       </div>
 
-      <div class="d-grid mt-4">
-        <%= f.submit "Entrar", class: "btn btn-primary btn-lg" %>
-      </div>
-
-    <% end %>
-
-    <p class="mt-4 mb-0 text-center text-muted" style="font-size: 0.9rem;">
-      Problemas para acessar? Fale com o administrador.
-    </p>
+    </div>
 
   </div>
 </div>
