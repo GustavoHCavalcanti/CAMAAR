@@ -9,7 +9,10 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Login realizado com sucesso!"
+
+      # Redirecionar baseado no role do usuário
+      redirect_path = user.role_administrador? ? admin_dashboard_path : respondente_dashboard_path
+      redirect_to redirect_path, notice: "Login realizado com sucesso!"
     else
       flash.now[:alert] = "Email, matrícula ou senha inválidos."
       render :new, status: :unprocessable_entity
