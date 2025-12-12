@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-11 14:52:16 -0300'>2025-12-11 14:52:16 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
         
       </span>
     </div>
@@ -68,12 +68,12 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">19</span><small> lines of codes</small></div>
+              <div><span class="metric">27</span><small> lines of codes</small></div>
               <div><span class="metric">4</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">2.4</span><small> complexity/method</small></div>
-              <div><span class="metric">3</span><small> churn</small></div>
+              <div><span class="metric">4</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">9.48</span><small> complexity</small></div>
@@ -100,18 +100,26 @@
     <code class="prettyprint linenums lang-ruby file-code js-file-code">class ApplicationController &lt; ActionController::Base<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>ApplicationController has no descriptive comment</span>          </div>  </li></ol>
   helper_method :current_user, :logged_in?
 
+  # Resolve o usuário autenticado a partir da sessão e memoriza para evitar consultas repetidas.
+  # @return [User, nil] usuário autenticado ou nil quando não há sessão ativa
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
+  # Verifica se há usuário autenticado disponível.
+  # @return [Boolean] true quando existe usuário atual, false caso contrário
   def logged_in?
     current_user.present?
   end
 
+  # Garante que apenas usuários autenticados acessem a rota.
+  # @side_effect Redireciona para login_path quando não autenticado
   def require_login
     redirect_to login_path unless logged_in?
   end
 
+  # Define o layout padrão para telas de respondente.
+  # @return [String] nome do layout utilizado para respondentes
   def respondente_layout
     &quot;respondente&quot;
   end

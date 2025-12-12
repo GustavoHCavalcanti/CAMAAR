@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-11 15:17:54 -0300'>2025-12-11 15:17:54 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
         
       </span>
     </div>
@@ -68,12 +68,12 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">16</span><small> lines of codes</small></div>
+              <div><span class="metric">22</span><small> lines of codes</small></div>
               <div><span class="metric">2</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">2.4</span><small> complexity/method</small></div>
-              <div><span class="metric">3</span><small> churn</small></div>
+              <div><span class="metric">4</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">4.81</span><small> complexity</small></div>
@@ -97,17 +97,23 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Admin
+    <code class="prettyprint linenums lang-ruby file-code js-file-code"># Namespace de controllers administrativos para páginas de gerenciamento.
+module Admin
   class GerenciamentoController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Admin::GerenciamentoController has no descriptive comment</span>          </div>  </li></ol>
     layout &quot;admin&quot;
     before_action :require_login
     before_action :require_admin
 
+    # Tela principal de gestão administrativa (dashboard).
+    # @return [void]
     def index
     end
 
     private
 
+    # Restringe acesso a administradores.
+    # @return [void]
+    # @side_effect Redireciona com alerta quando não admin
     def require_admin
       redirect_to root_path, alert: &quot;Acesso negado.&quot; unless current_user&amp;.role_administrador?
     end

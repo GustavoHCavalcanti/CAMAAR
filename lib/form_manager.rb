@@ -21,28 +21,9 @@ class FormManager
   # -------------------------
   def list_for(_admin_id, turma: nil, status: nil)
     resultado = @forms
-
-    resultado = resultado.select { |f| f[:turma] == turma } if turma
-
-    if status
-      filtro_status = status.to_s.strip.downcase
-
-      resultado = resultado.select do |f|
-        form_status = f[:status].to_s.strip.downcase
-        form_status == filtro_status
-      end
-    end
-
-    resultado.map do |form|
-      {
-        id:        form[:id],
-        codigo:    form[:codigo],
-        turma:     form[:turma],
-        respostas: form[:respostas],
-        status:    form[:status],
-        can_generate_report: form[:respostas].to_i > 0
-      }
-    end
+    resultado = filtrar_por_turma(resultado, turma) if turma
+    resultado = filtrar_por_status(resultado, status) if status
+    resultado.map { |form| mapear_form(form) }
   end
 
   # -------------------------
@@ -54,5 +35,27 @@ class FormManager
     return :no_responses if form[:respostas].to_i.zero?
 
     :open_report_config
+  end
+
+  private
+
+  def filtrar_por_turma(forms, turma)
+    forms.select { |f| f[:turma] == turma }
+  end
+
+  def filtrar_por_status(forms, status)
+    filtro_status = status.to_s.strip.downcase
+    forms.select { |f| f[:status].to_s.strip.downcase == filtro_status }
+  end
+
+  def mapear_form(form)
+    {
+      id:        form[:id],
+      codigo:    form[:codigo],
+      turma:     form[:turma],
+      respostas: form[:respostas],
+      status:    form[:status],
+      can_generate_report: form[:respostas].to_i > 0
+    }
   end
 end

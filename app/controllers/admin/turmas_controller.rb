@@ -32,11 +32,7 @@ module Admin
       @turma = ::Turma.new(turma_params)
       if @turma.save
         # Associar alunos selecionados
-        if params[:turma][:aluno_ids].present?
-          params[:turma][:aluno_ids].each do |aluno_id|
-            @turma.turma_users.create(user_id: aluno_id) unless aluno_id.blank?
-          end
-        end
+        associar_alunos(@turma, params[:turma][:aluno_ids]) if params[:turma][:aluno_ids].present?
         redirect_to admin_turmas_path, notice: "Turma criada com sucesso!"
       else
         @alunos_disponiveis = ::User.where(role: "participante")
@@ -61,14 +57,7 @@ module Admin
       @turma = ::Turma.find(params[:id])
       if @turma.update(turma_params)
         # Atualizar alunos da turma
-        # Primeiro, remover todas as associações
-        @turma.turma_users.destroy_all
-        # Depois, adicionar os selecionados
-        if params[:turma][:aluno_ids].present?
-          params[:turma][:aluno_ids].each do |aluno_id|
-            @turma.turma_users.create(user_id: aluno_id) unless aluno_id.blank?
-          end
-        end
+        redefinir_associacoes_alunos(@turma, params[:turma][:aluno_ids])
         redirect_to admin_turmas_path, notice: "Turma atualizada!"
       else
         @alunos_disponiveis = ::User.where(role: "participante")
@@ -97,19 +86,10 @@ module Admin
     # @return [void]
     # @side_effect Cria/atualiza Turma e Users via serviço; redireciona com mensagem de resultado
     def import
-      if params[:file].blank?
-        redirect_to import_form_admin_turmas_path, alert: "Envie um arquivo CSV para importar." and return
-      end
+      return redirect_to(import_form_admin_turmas_path, alert: "Envie um arquivo CSV para importar.") if params[:file].blank?
 
       result = ::TurmaImportService.new(file: params[:file]).call
-
-      if result.success?
-        msg = "Importação concluída. Turmas novas: #{result.created_turmas}. Alunos novos: #{result.created_users}. Alunos já existentes: #{result.existing_users}."
-        msg += " Observações: #{result.errors.first(3).join(' | ')}" if result.errors.present?
-        redirect_to admin_turmas_path, notice: msg
-      else
-        redirect_to import_form_admin_turmas_path, alert: result.message
-      end
+      handle_import_result(result)
     end
 
     private
@@ -125,6 +105,40 @@ module Admin
     # @side_effect Redireciona com alerta quando não admin
     def require_admin
       redirect_to root_path, alert: "Acesso negado." unless current_user&.role_administrador?
+    end
+
+    def associar_alunos(turma, aluno_ids)
+      return if aluno_ids.blank?
+      aluno_ids.each do |aluno_id|
+        next if aluno_id.blank?
+        turma.turma_users.create(user_id: aluno_id)
+      end
+    end
+
+    def preparar_listas_turma(turma = nil)
+      @alunos_disponiveis = ::User.where(role: "participante")
+      @professores = ::User.where(role: "administrador")
+      @alunos_da_turma = turma&.users if turma
+    end
+
+    def redefinir_associacoes_alunos(turma, aluno_ids)
+      turma.turma_users.destroy_all
+      associar_alunos(turma, aluno_ids)
+    end
+
+    def handle_import_result(result)
+      if result.success?
+        redirect_to admin_turmas_path, notice: build_import_message(result)
+      else
+        redirect_to import_form_admin_turmas_path, alert: result.message
+      end
+    end
+
+    def build_import_message(result)
+      base = "Importação concluída. Turmas novas: #{result.created_turmas}. Alunos novos: #{result.created_users}. Alunos já existentes: #{result.existing_users}."
+      return base unless result.errors.present?
+      observacoes = result.errors.first(3).join(' | ')
+      "#{base} Observações: #{observacoes}"
     end
   end
 end

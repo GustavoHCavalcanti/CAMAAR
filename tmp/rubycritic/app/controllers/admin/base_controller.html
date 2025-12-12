@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-11 15:17:54 -0300'>2025-12-11 15:17:54 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
         
       </span>
     </div>
@@ -68,12 +68,12 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">8</span><small> lines of codes</small></div>
+              <div><span class="metric">11</span><small> lines of codes</small></div>
               <div><span class="metric">1</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">4.8</span><small> complexity/method</small></div>
-              <div><span class="metric">1</span><small> churn</small></div>
+              <div><span class="metric">2</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">4.81</span><small> complexity</small></div>
@@ -101,6 +101,9 @@
   layout &quot;admin&quot;
   before_action :require_admin
 
+  # Restringe acesso a usuários administradores; redireciona visitantes ou participantes.
+  # @return [void]
+  # @side_effect Redireciona para root_path se o usuário não for administrador
   def require_admin
     redirect_to root_path unless current_user&amp;.administrador?
   end

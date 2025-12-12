@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-11 17:23:32 -0300'>2025-12-11 17:23:32 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
         
       </span>
     </div>
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">76</span><small> lines of codes</small></div>
-              <div><span class="metric">11</span><small> methods</small></div>
+              <div><span class="metric">110</span><small> lines of codes</small></div>
+              <div><span class="metric">13</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">6.2</span><small> complexity/method</small></div>
-              <div><span class="metric">5</span><small> churn</small></div>
+              <div><span class="metric">5.5</span><small> complexity/method</small></div>
+              <div><span class="metric">6</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">68.6</span><small> complexity</small></div>
+              <div><span class="metric">72.06</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                8
+                7
                 smells
               </a>
             </li>
@@ -97,24 +97,33 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code">class Admin::FormulariosController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::FormulariosController assumes too much for instance variable '@formulario'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::FormulariosController assumes too much for instance variable '@perguntas'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::FormulariosController assumes too much for instance variable '@respostas_por_pergunta'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Admin::FormulariosController has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Admin::FormulariosController has at least 7 instance variables</span>          </div>  </li></ol>
+    <code class="prettyprint linenums lang-ruby file-code js-file-code">class Admin::FormulariosController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::FormulariosController assumes too much for instance variable '@formulario'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::FormulariosController assumes too much for instance variable '@perguntas'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Admin::FormulariosController has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Admin::FormulariosController has at least 7 instance variables</span>          </div>  </li></ol>
   layout &quot;admin&quot;
   before_action :require_login
   before_action :require_admin
 
+  # Lista todas as avaliações disponíveis para administração.
+  # @return [void]
   def index
     @formularios = Formulario.all
   end
 
+  # Exibe detalhes de um formulário específico.
+  # @return [void]
   def show
     @formulario = Formulario.find(params[:id])
   end
 
+  # Inicializa um novo formulário com coleções auxiliares.
+  # @return [void]
   def new
     @formulario = Formulario.new
     load_collections
   end
 
+  # Cria um formulário e redireciona em caso de sucesso.
+  # @return [void]
+  # @side_effect Persiste Formulario; redireciona ou renderiza :new com status 422
   def create
     @formulario = Formulario.new(formulario_params)
     if @formulario.save
@@ -125,11 +134,16 @@
     end
   end
 
+  # Carrega formulário para edição.
+  # @return [void]
   def edit
     @formulario = Formulario.find(params[:id])
     load_collections
   end
 
+  # Atualiza um formulário e redireciona em caso de sucesso.
+  # @return [void]
+  # @side_effect Persiste alterações; redireciona ou renderiza :edit com status 422
   def update
     @formulario = Formulario.find(params[:id])
     if @formulario.update(formulario_params)
@@ -140,37 +154,57 @@
     end
   end
 
+  # Remove um formulário definitivamente.
+  # @return [void]
+  # @side_effect Destroi registro e redireciona
   def destroy
     @formulario = Formulario.find(params[:id])
     @formulario.destroy
     redirect_to admin_formularios_path, notice: &quot;Avaliação removida.&quot;
   end
 
-  def respostas<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Admin::FormulariosController#respostas has approx 6 statements</span>          </div>  </li></ol>
+  # Consolida respostas de um formulário por pergunta, sem expor identidade dos respondentes.
+  # @return [void]
+  def respostas
     @formulario = Formulario.find(params[:id])
     @perguntas = @formulario.template&amp;.questions || []
-    # Agrupar respostas por pergunta, sem informar o aluno
-    @respostas_por_pergunta = {}
-    @perguntas.each do |pergunta|
-      @respostas_por_pergunta[pergunta.id] = @formulario.respostas.where(question_id: pergunta.id).pluck(:valor)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::FormulariosController#respostas calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L56" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L59" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::FormulariosController#respostas calls 'pergunta.id' 2 times</span>          </div>  </li></ol>
-    end
-    # Contar total de respondentes
-    @total_respondentes = @formulario.respostas.select(:user_id).distinct.count<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::FormulariosController#respostas calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L56" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L59" class="js-smell-location">1</a>                  </div>  </li></ol>
+    @respostas_por_pergunta = agrupar_respostas_por_pergunta(@formulario, @perguntas)
+    @total_respondentes = contar_respondentes(@formulario)
   end
 
   private
 
+  # Strong params do formulário administrado.
+  # @return [ActionController::Parameters]
   def formulario_params
     params.require(:formulario).permit(:titulo, :descricao, :template_id, :turma_id)
   end
 
+  # Carrega coleções auxiliares para views de formulário.
+  # @return [void]
   def load_collections
     @templates = ::Template.all
     @turmas = ::Turma.all
   end
 
+  # Restringe acesso a administradores.
+  # @return [void]
+  # @side_effect Redireciona com alerta quando não admin
   def require_admin
     redirect_to root_path, alert: &quot;Acesso negado.&quot; unless current_user&amp;.role_administrador?
+  end
+
+  def agrupar_respostas_por_pergunta(formulario, perguntas)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Admin::FormulariosController#agrupar_respostas_por_pergunta doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    respostas = {}
+    perguntas.each do |pergunta|
+      valores = formulario.respostas.where(question_id: pergunta.id).pluck(:valor)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::FormulariosController#agrupar_respostas_por_pergunta calls 'pergunta.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L101" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L102" class="js-smell-location">1</a>                  </div>  </li></ol>
+      respostas[pergunta.id] = valores<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::FormulariosController#agrupar_respostas_por_pergunta calls 'pergunta.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L101" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L102" class="js-smell-location">1</a>                  </div>  </li></ol>
+    end
+    respostas
+  end
+
+  def contar_respondentes(formulario)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Admin::FormulariosController#contar_respondentes doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    formulario.respostas.select(:user_id).distinct.count
   end
 end
 </code>

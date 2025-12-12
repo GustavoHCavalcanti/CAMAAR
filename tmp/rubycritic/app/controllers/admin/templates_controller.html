@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-11 15:43:46 -0300'>2025-12-11 15:43:46 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
         
       </span>
     </div>
@@ -68,12 +68,12 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">61</span><small> lines of codes</small></div>
+              <div><span class="metric">84</span><small> lines of codes</small></div>
               <div><span class="metric">9</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">4.9</span><small> complexity/method</small></div>
-              <div><span class="metric">4</span><small> churn</small></div>
+              <div><span class="metric">5</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">43.77</span><small> complexity</small></div>
@@ -97,25 +97,35 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Admin
+    <code class="prettyprint linenums lang-ruby file-code js-file-code"># Namespace de controllers administrativos, com layout &quot;admin&quot; e filtros de acesso.
+module Admin
   class TemplatesController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::TemplatesController assumes too much for instance variable '@template'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Admin::TemplatesController has no descriptive comment</span>          </div>  </li></ol>
     layout &quot;admin&quot;
     before_action :require_login
     before_action :require_admin
 
+    # Lista todos os templates cadastrados.
+    # @return [void]
     def index
       @templates = ::Template.all
     end
 
+    # Exibe um template específico.
+    # @return [void]
     def show
       @template = ::Template.find(params[:id])
     end
 
+    # Inicializa um novo template com uma pergunta vazia.
+    # @return [void]
     def new
       @template = ::Template.new
       @template.questions.build # Inicializa com uma pergunta vazia
     end
 
+    # Cria um template e redireciona em caso de sucesso.
+    # @return [void]
+    # @side_effect Persiste Template; redireciona ou renderiza :new com status 422
     def create
       @template = ::Template.new(template_params)
       if @template.save
@@ -125,10 +135,15 @@
       end
     end
 
+    # Carrega template para edição.
+    # @return [void]
     def edit
       @template = ::Template.find(params[:id])
     end
 
+    # Atualiza um template existente.
+    # @return [void]
+    # @side_effect Persiste alterações; redireciona ou renderiza :edit com status 422
     def update
       @template = ::Template.find(params[:id])
       if @template.update(template_params)
@@ -138,6 +153,9 @@
       end
     end
 
+    # Remove um template definitivamente.
+    # @return [void]
+    # @side_effect Destroi registro e redireciona
     def destroy
       @template = ::Template.find(params[:id])
       @template.destroy
@@ -146,6 +164,8 @@
 
     private
 
+    # Strong params para template e perguntas associadas.
+    # @return [ActionController::Parameters]
     def template_params
       params.require(:template).permit(
         :nome,
@@ -153,6 +173,9 @@
       )
     end
 
+    # Restringe acesso a administradores.
+    # @return [void]
+    # @side_effect Redireciona com alerta quando não admin
     def require_admin
       redirect_to root_path, alert: &quot;Acesso negado.&quot; unless current_user&amp;.role_administrador?
     end

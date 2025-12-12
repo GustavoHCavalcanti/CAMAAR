@@ -69,13 +69,8 @@ class Admin::FormulariosController < ApplicationController
   def respostas
     @formulario = Formulario.find(params[:id])
     @perguntas = @formulario.template&.questions || []
-    # Agrupar respostas por pergunta, sem informar o aluno
-    @respostas_por_pergunta = {}
-    @perguntas.each do |pergunta|
-      @respostas_por_pergunta[pergunta.id] = @formulario.respostas.where(question_id: pergunta.id).pluck(:valor)
-    end
-    # Contar total de respondentes
-    @total_respondentes = @formulario.respostas.select(:user_id).distinct.count
+    @respostas_por_pergunta = agrupar_respostas_por_pergunta(@formulario, @perguntas)
+    @total_respondentes = contar_respondentes(@formulario)
   end
 
   private
@@ -98,5 +93,18 @@ class Admin::FormulariosController < ApplicationController
   # @side_effect Redireciona com alerta quando não admin
   def require_admin
     redirect_to root_path, alert: "Acesso negado." unless current_user&.role_administrador?
+  end
+
+  def agrupar_respostas_por_pergunta(formulario, perguntas)
+    respostas = {}
+    perguntas.each do |pergunta|
+      valores = formulario.respostas.where(question_id: pergunta.id).pluck(:valor)
+      respostas[pergunta.id] = valores
+    end
+    respostas
+  end
+
+  def contar_respondentes(formulario)
+    formulario.respostas.select(:user_id).distinct.count
   end
 end

@@ -9,20 +9,12 @@ class SessionsController < ApplicationController
   # @return [void]
   # @side_effect Define session[:user_id] e redireciona conforme o role; renderiza :new com 422 em falha
   def create
-    # Aceita email OU matrícula como identificador
     login_param = params[:login]
-    user = User.find_by("email = ? OR matricula = ?", login_param, login_param)
+    user = localizar_usuario(login_param)
+    return falha_login unless user&.authenticate(params[:password])
 
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-
-      # Redirecionar baseado no role do usuário
-      redirect_path = user.role_administrador? ? admin_formularios_path : respondente_formularios_path
-      redirect_to redirect_path, notice: "Login realizado com sucesso!"
-    else
-      flash.now[:alert] = "Email, matrícula ou senha inválidos."
-      render :new, status: :unprocessable_entity
-    end
+    session[:user_id] = user.id
+    redirect_to caminho_pos_login(user), notice: "Login realizado com sucesso!"
   end
 
   # Encerra a sessão do usuário autenticado.
@@ -31,5 +23,20 @@ class SessionsController < ApplicationController
   def destroy
     session.delete(:user_id)
     redirect_to login_path, notice: "Você saiu da sessão."
+  end
+
+  private
+
+  def localizar_usuario(identificador)
+    User.find_by("email = ? OR matricula = ?", identificador, identificador)
+  end
+
+  def falha_login
+    flash.now[:alert] = "Email, matrícula ou senha inválidos."
+    render :new, status: :unprocessable_entity
+  end
+
+  def caminho_pos_login(user)
+    user.role_administrador? ? admin_formularios_path : respondente_formularios_path
   end
 end

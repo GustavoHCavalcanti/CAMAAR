@@ -36,38 +36,29 @@ class Respondente::FormulariosController < ApplicationController
     @formulario = ::Formulario.find(params[:id])
     @perguntas = @formulario.template&.questions || []
 
-    # Verificar se o usuário já respondeu
-    if @formulario.respostas.exists?(user_id: current_user.id)
-      redirect_to respondente_formulario_path(@formulario), alert: "Você já respondeu este formulário."
-      return
-    end
+    return redirect_to(respondente_formulario_path(@formulario), alert: "Você já respondeu este formulário.") if ja_respondeu?(@formulario)
+    return redirect_to(respondente_formulario_path(@formulario), alert: "Formulário sem perguntas.") if @perguntas.empty?
 
-    if @perguntas.empty?
-      redirect_to respondente_formulario_path(@formulario), alert: "Formulário sem perguntas."
-      return
-    end
-
-    # Processar respostas
-    success = true
-    @perguntas.each do |pergunta|
-      resposta_valor = params["question_#{pergunta.id}"].presence
-      if resposta_valor.present?
-        resposta = @formulario.respostas.build(
-          user_id: current_user.id,
-          question_id: pergunta.id,
-          valor: resposta_valor
-        )
-        unless resposta.save
-          success = false
-          break
-        end
-      end
-    end
-
-    if success
+    if salvar_respostas(@formulario, @perguntas)
       redirect_to respondente_formularios_path, notice: "Respostas enviadas com sucesso!"
     else
       redirect_to respondente_formulario_path(@formulario), alert: "Erro ao salvar respostas."
     end
+  end
+
+  private
+
+  def ja_respondeu?(formulario)
+    formulario.respostas.exists?(user_id: current_user.id)
+  end
+
+  def salvar_respostas(formulario, perguntas)
+    perguntas.each do |pergunta|
+      valor = params["question_#{pergunta.id}"].presence
+      next unless valor.present?
+      resposta = formulario.respostas.build(user_id: current_user.id, question_id: pergunta.id, valor: valor)
+      return false unless resposta.save
+    end
+    true
   end
 end

@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-11 15:17:54 -0300'>2025-12-11 15:17:54 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
         
       </span>
     </div>
@@ -68,12 +68,12 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">26</span><small> lines of codes</small></div>
+              <div><span class="metric">35</span><small> lines of codes</small></div>
               <div><span class="metric">3</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">7.8</span><small> complexity/method</small></div>
-              <div><span class="metric">5</span><small> churn</small></div>
+              <div><span class="metric">6</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">23.38</span><small> complexity</small></div>
@@ -98,9 +98,15 @@
     </div>
 
     <code class="prettyprint linenums lang-ruby file-code js-file-code">class SessionsController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>SessionsController has no descriptive comment</span>          </div>  </li></ol>
+  # Renderiza o formulário de login.
+  # @return [void]
   def new
   end
 
+  # Autentica o usuário usando email ou matrícula e inicia a sessão.
+  # @param [ActionController::Parameters] params credenciais :login (email ou matrícula) e :password
+  # @return [void]
+  # @side_effect Define session[:user_id] e redireciona conforme o role; renderiza :new com 422 em falha
   def create<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>SessionsController#create has approx 8 statements</span>          </div>  </li></ol>
     # Aceita email OU matrícula como identificador
     login_param = params[:login]
@@ -118,6 +124,9 @@
     end
   end
 
+  # Encerra a sessão do usuário autenticado.
+  # @return [void]
+  # @side_effect Remove session[:user_id] e redireciona para a tela de login
   def destroy
     session.delete(:user_id)
     redirect_to login_path, notice: &quot;Você saiu da sessão.&quot;

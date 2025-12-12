@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-11 17:04:39 -0300'>2025-12-11 17:04:39 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
         
       </span>
     </div>
@@ -68,12 +68,12 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">102</span><small> lines of codes</small></div>
+              <div><span class="metric">130</span><small> lines of codes</small></div>
               <div><span class="metric">11</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">11.4</span><small> complexity/method</small></div>
-              <div><span class="metric">6</span><small> churn</small></div>
+              <div><span class="metric">7</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">125.19</span><small> complexity</small></div>
@@ -97,32 +97,42 @@
       </div>
     </div>
 
-    <code class="prettyprint linenums lang-ruby file-code js-file-code">module Admin
+    <code class="prettyprint linenums lang-ruby file-code js-file-code"># Namespace de controllers administrativos para gestão de turmas.
+module Admin
   class TurmasController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::TurmasController assumes too much for instance variable '@turma'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Admin::TurmasController has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Admin::TurmasController has at least 5 instance variables</span>          </div>  </li></ol>
     layout &quot;admin&quot;
     before_action :require_login
     before_action :require_admin
 
+    # Lista turmas cadastradas.
+    # @return [void]
     def index
       @turmas = ::Turma.all
     end
 
+    # Exibe detalhes de uma turma.
+    # @return [void]
     def show
       @turma = ::Turma.find(params[:id])
     end
 
+    # Inicializa formulário de criação de turma com listas de alunos e professores.
+    # @return [void]
     def new
       @turma = ::Turma.new
       @alunos_disponiveis = ::User.where(role: &quot;participante&quot;)
       @professores = ::User.where(role: &quot;administrador&quot;)
     end
 
+    # Cria turma e associa alunos selecionados.
+    # @return [void]
+    # @side_effect Persiste Turma e TurmaUsers; redireciona ou renderiza :new com status 422
     def create<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Admin::TurmasController#create has a flog score of 27</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Admin::TurmasController#create has approx 7 statements</span>          </div>  </li></ol>
       @turma = ::Turma.new(turma_params)
       if @turma.save
         # Associar alunos selecionados
-        if params[:turma][:aluno_ids].present?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L25" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L52" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L25" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L26" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L25" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L26" class="js-smell-location">1</a>                  </div>  </li></ol>
-          params[:turma][:aluno_ids].each do |aluno_id|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L25" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L26" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L25" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L26" class="js-smell-location">1</a>                  </div>  </li></ol>
+        if params[:turma][:aluno_ids].present?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L35" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L67" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L35" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L35" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li></ol>
+          params[:turma][:aluno_ids].each do |aluno_id|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L35" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L35" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li></ol>
             @turma.turma_users.create(user_id: aluno_id) unless aluno_id.blank?
           end
         end
@@ -134,6 +144,8 @@
       end
     end
 
+    # Carrega turma para edição e popula alunos atuais e disponíveis.
+    # @return [void]
     def edit
       @turma = ::Turma.find(params[:id])
       @alunos_disponiveis = ::User.where(role: &quot;participante&quot;)
@@ -141,16 +153,19 @@
       @professores = ::User.where(role: &quot;administrador&quot;)
     end
 
+    # Atualiza turma e redefine associações de alunos conforme seleção.
+    # @return [void]
+    # @side_effect Limpa e recria TurmaUsers; redireciona ou renderiza :edit com status 422
     def update<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Admin::TurmasController#update has a flog score of 33</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Admin::TurmasController#update has approx 9 statements</span>          </div>  </li></ol>
       @turma = ::Turma.find(params[:id])
       if @turma.update(turma_params)
         # Atualizar alunos da turma
         # Primeiro, remover todas as associações
-        @turma.turma_users.destroy_all<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls '@turma.turma_users' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L50" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L54" class="js-smell-location">1</a>                  </div>  </li></ol>
+        @turma.turma_users.destroy_all<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls '@turma.turma_users' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L65" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L69" class="js-smell-location">1</a>                  </div>  </li></ol>
         # Depois, adicionar os selecionados
-        if params[:turma][:aluno_ids].present?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L25" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L52" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L52" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L53" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L52" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L53" class="js-smell-location">1</a>                  </div>  </li></ol>
-          params[:turma][:aluno_ids].each do |aluno_id|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L52" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L53" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L52" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L53" class="js-smell-location">1</a>                  </div>  </li></ol>
-            @turma.turma_users.create(user_id: aluno_id) unless aluno_id.blank?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls '@turma.turma_users' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L50" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L54" class="js-smell-location">1</a>                  </div>  </li></ol>
+        if params[:turma][:aluno_ids].present?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Identical code found in 2 nodes</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L35" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L67" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L67" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L68" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L67" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L68" class="js-smell-location">1</a>                  </div>  </li></ol>
+          params[:turma][:aluno_ids].each do |aluno_id|<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L67" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L68" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls 'params[:turma][:aluno_ids]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L67" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L68" class="js-smell-location">1</a>                  </div>  </li></ol>
+            @turma.turma_users.create(user_id: aluno_id) unless aluno_id.blank?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#update calls '@turma.turma_users' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L65" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L69" class="js-smell-location">1</a>                  </div>  </li></ol>
           end
         end
         redirect_to admin_turmas_path, notice: &quot;Turma atualizada!&quot;
@@ -162,22 +177,30 @@
       end
     end
 
+    # Remove turma definitivamente.
+    # @return [void]
+    # @side_effect Destroi Turma e associações; redireciona
     def destroy
       @turma = ::Turma.find(params[:id])
       @turma.destroy
       redirect_to admin_turmas_path, notice: &quot;Turma removida.&quot;
     end
 
+    # Exibe formulário de importação CSV de turmas/alunos.
+    # @return [void]
     def import_form
       # Apenas renderiza o formulário de upload
     end
 
+    # Processa importação de turmas/alunos via CSV.
+    # @return [void]
+    # @side_effect Cria/atualiza Turma e Users via serviço; redireciona com mensagem de resultado
     def import<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Admin::TurmasController#import has a flog score of 32</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Admin::TurmasController#import has approx 6 statements</span>          </div>  </li></ol>
-      if params[:file].blank?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L77" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L81" class="js-smell-location">1</a>                  </div>  </li></ol>
+      if params[:file].blank?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L100" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L104" class="js-smell-location">1</a>                  </div>  </li></ol>
         redirect_to import_form_admin_turmas_path, alert: &quot;Envie um arquivo CSV para importar.&quot; and return
       end
 
-      result = ::TurmaImportService.new(file: params[:file]).call<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L77" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L81" class="js-smell-location">1</a>                  </div>  </li></ol>
+      result = ::TurmaImportService.new(file: params[:file]).call<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L100" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L104" class="js-smell-location">1</a>                  </div>  </li></ol>
 
       if result.success?
         msg = &quot;Importação concluída. Turmas novas: #{result.created_turmas}. Alunos novos: #{result.created_users}. Alunos já existentes: #{result.existing_users}.&quot;
@@ -190,10 +213,15 @@
 
     private
 
+    # Strong params da turma.
+    # @return [ActionController::Parameters]
     def turma_params
       params.require(:turma).permit(:codigo, :departamento, :semestre, :professor)
     end
 
+    # Restringe acesso a administradores.
+    # @return [void]
+    # @side_effect Redireciona com alerta quando não admin
     def require_admin
       redirect_to root_path, alert: &quot;Acesso negado.&quot; unless current_user&amp;.role_administrador?
     end
