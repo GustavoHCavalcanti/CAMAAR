@@ -66,7 +66,7 @@
               <span style="font-size: 0.9rem;">
                 <%= aluno.email %> 
                 <span style="color: #666;">(Mat: <%= aluno.matricula %>)</span>
-                <% turmas_count = @turmas_por_aluno[aluno.id] || 0 %>
+                <% turmas_count = (@turmas_por_aluno&.[](aluno.id)) || 0 %>
                 <% if turmas_count > 0 && !alunos_atuais.include?(aluno) %>
                   <span style="color: #ff9800; font-size: 0.8rem; margin-left: 5px;">
                     (já em <%= turmas_count %> turma(s))

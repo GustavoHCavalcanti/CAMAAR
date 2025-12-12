@@ -4,8 +4,8 @@ module Admin
     layout "admin"
     before_action :require_login
     before_action :require_admin
-    before_action :load_turma, only: [:show, :edit, :update, :destroy]
-    before_action :prepare_lists, only: [:new, :edit]
+    before_action :load_turma, only: [ :show, :edit, :update, :destroy ]
+    before_action :prepare_lists, only: [ :new, :edit ]
 
     # Lista turmas cadastradas.
     # @return [void]
@@ -33,8 +33,7 @@ module Admin
         associar_alunos(@turma, params[:turma][:aluno_ids]) if params[:turma][:aluno_ids].present?
         redirect_to admin_turmas_path, notice: "Turma criada com sucesso!"
       else
-        @alunos_disponiveis = ::User.where(role: "participante")
-        @professores = ::User.where(role: "administrador")
+        prepare_lists
         render :new, status: :unprocessable_entity
       end
     end
@@ -53,9 +52,7 @@ module Admin
         redefinir_associacoes_alunos(@turma, params[:turma][:aluno_ids])
         redirect_to admin_turmas_path, notice: "Turma atualizada!"
       else
-        @alunos_disponiveis = ::User.where(role: "participante")
-        @alunos_da_turma = @turma.users
-        @professores = ::User.where(role: "administrador")
+        prepare_lists
         render :edit, status: :unprocessable_entity
       end
     end
@@ -119,7 +116,7 @@ module Admin
       @alunos_disponiveis = ::User.where(role: "participante").select(:id, :nome, :matricula, :email).order(:nome)
       @professores = ::User.where(role: "administrador").select(:id, :nome, :email).order(:nome)
       @alunos_da_turma = turma&.users if turma
-      
+
       # Pré-calcular contagem de turmas para evitar N+1 na view
       aluno_ids = @alunos_disponiveis.pluck(:id)
       @turmas_por_aluno = TurmaUser.where(user_id: aluno_ids)
@@ -143,7 +140,7 @@ module Admin
     def build_import_message(result)
       base = "Importação concluída. Turmas novas: #{result.created_turmas}. Alunos novos: #{result.created_users}. Alunos já existentes: #{result.existing_users}."
       return base unless result.errors.present?
-      observacoes = result.errors.first(3).join(' | ')
+      observacoes = result.errors.first(3).join(" | ")
       "#{base} Observações: #{observacoes}"
     end
   end
