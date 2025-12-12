@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Net::SFTP - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-start">::start</a>
+    <li ><a href="#method-i-dir">#dir</a>
+    <li ><a href="#method-i-download">#download</a>
+    <li ><a href="#method-i-download-21">#download!</a>
+    <li ><a href="#method-i-file">#file</a>
+    <li ><a href="#method-i-upload-21">#upload!</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Net::SFTP">
+  <h1 id="module-Net::SFTP" class="module">
+    module Net::SFTP
+  </h1>
+
+  <section class="description">
+    
+<p><a href="SFTP.html"><code>Net::SFTP</code></a> is a pure-Ruby module for programmatically interacting with a remote host via the <a href="SFTP.html"><code>SFTP</code></a> protocol (that’s <a href="SFTP.html"><code>SFTP</code></a> as in “Secure <a href="../File.html"><code>File</code></a> Transfer Protocol” produced by the Secure Shell Working Group, not “Secure FTP” and certainly not “Simple FTP”).</p>
+
+<p>See Net::SFTP#start for an introduction to the library. Also, see <a href="SFTP/Session.html"><code>Net::SFTP::Session</code></a> for further documentation.</p>
+
+<p><a href="SFTP.html"><code>Net::SFTP</code></a> is a pure-Ruby module for programmatically interacting with a remote host via the <a href="SFTP.html"><code>SFTP</code></a> protocol (that’s <a href="SFTP.html"><code>SFTP</code></a> as in “Secure <a href="../File.html"><code>File</code></a> Transfer Protocol” produced by the Secure Shell Working Group, not “Secure FTP” and certainly not “Simple FTP”).</p>
+
+<p>See Net::SFTP#start for an introduction to the library. Also, see <a href="SFTP/Session.html"><code>Net::SFTP::Session</code></a> for further documentation.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-start" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start</span><span
+              class="method-args">(host, user, ssh_options={}, sftp_options={}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>A convenience method for starting a standalone <a href="SFTP.html"><code>SFTP</code></a> session. It will start up an <a href="SSH.html"><code>SSH</code></a> session using the given arguments (see the documentation for Net::SSH::Session for details), and will then start a new <a href="SFTP.html"><code>SFTP</code></a> session with the <a href="SSH.html"><code>SSH</code></a> session. This will block until the new <a href="SFTP.html"><code>SFTP</code></a> is fully open and initialized before returning it.</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">SFTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-string">&quot;localhost&quot;</span>, <span class="ruby-string">&quot;user&quot;</span>)
+<span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">upload!</span> <span class="ruby-string">&quot;/local/file.tgz&quot;</span>, <span class="ruby-string">&quot;/remote/file.tgz&quot;</span>
+</pre>
+
+<p>If a block is given, it will be passed to the <a href="SFTP.html"><code>SFTP</code></a> session and will be called once the <a href="SFTP.html"><code>SFTP</code></a> session is fully open and initialized. When the block terminates, the new <a href="SSH.html"><code>SSH</code></a> session will automatically be closed.</p>
+
+<pre class="ruby"><span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">SFTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-string">&quot;localhost&quot;</span>, <span class="ruby-string">&quot;user&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sftp</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">upload!</span> <span class="ruby-string">&quot;/local/file.tgz&quot;</span>, <span class="ruby-string">&quot;/remote/file.tgz&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Extra parameters can be passed:</p>
+<ul><li>
+<p>The <a href="SSH.html"><code>Net::SSH</code></a> connection options (see <a href="SSH.html"><code>Net::SSH</code></a> for more information)</p>
+</li><li>
+<p>The <a href="SFTP.html"><code>Net::SFTP</code></a> connection options (only :version is supported, to let you  set the <a href="SFTP.html"><code>SFTP</code></a> protocol version to be used)</p>
+</li></ul>
+
+          <div class="method-source-code" id="start-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">start</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">user</span>, <span class="ruby-identifier">ssh_options</span>={}, <span class="ruby-identifier">sftp_options</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">session</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">SSH</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">user</span>, <span class="ruby-identifier">ssh_options</span>)
+  <span class="ruby-comment"># We only use a single option here, but this leaves room for more later</span>
+  <span class="ruby-comment"># without breaking the external API.</span>
+  <span class="ruby-identifier">version</span> = <span class="ruby-identifier">sftp_options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:version</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">sftp</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">SFTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">session</span>, <span class="ruby-identifier">version</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">connect!</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">loop</span>
+    <span class="ruby-identifier">session</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">sftp</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Object</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">anything</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">session</span>.<span class="ruby-identifier">shutdown!</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span>
+    <span class="ruby-comment"># swallow exceptions that occur while trying to shutdown</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">anything</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-dir" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dir</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a <a href="SFTP/Operations/Dir.html"><code>Net::SFTP::Operations::Dir</code></a> instance, which can be used to conveniently iterate over and search directories on the remote server.</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&quot;/base/path&quot;</span>, <span class="ruby-string">&quot;*/**/*.rb&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">p</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>See <a href="SFTP/Operations/Dir.html"><code>Net::SFTP::Operations::Dir</code></a> for a more detailed discussion of how to use this.</p>
+
+          <div class="method-source-code" id="dir-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/session.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dir</span>
+  <span class="ruby-ivar">@dir</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Operations</span><span class="ruby-operator">::</span><span class="ruby-constant">Dir</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-download" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">download</span><span
+              class="method-args">(remote, local, options={}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initiates a download from <code>remote</code> to <code>local</code>, asynchronously. This method will return a new <a href="SFTP/Operations/Download.html"><code>Net::SFTP::Operations::Download</code></a> instance, and requires that the event loop be run in order for the download to progress. See <a href="SFTP/Operations/Download.html"><code>Net::SFTP::Operations::Download</code></a> for a full discussion of how this method can be used.</p>
+
+<pre class="ruby"><span class="ruby-identifier">download</span> = <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download</span>(<span class="ruby-string">&quot;/remote/path&quot;</span>, <span class="ruby-string">&quot;/local/path&quot;</span>)
+<span class="ruby-identifier">download</span>.<span class="ruby-identifier">wait</span>
+</pre>
+
+          <div class="method-source-code" id="download-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/session.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">download</span>(<span class="ruby-identifier">remote</span>, <span class="ruby-identifier">local</span>, <span class="ruby-identifier">options</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Operations</span><span class="ruby-operator">::</span><span class="ruby-constant">Download</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">local</span>, <span class="ruby-identifier">remote</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-download-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">download!</span><span
+              class="method-args">(remote, local=nil, options={}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Identical to <a href="SFTP.html#method-i-download"><code>download</code></a>, but blocks until the download is complete. If <code>local</code> is omitted, downloads the file to an in-memory buffer and returns the result as a string; otherwise, returns the <a href="SFTP/Operations/Download.html"><code>Net::SFTP::Operations::Download</code></a> instance.</p>
+
+          <div class="method-source-code" id="download-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/session.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">download!</span>(<span class="ruby-identifier">remote</span>, <span class="ruby-identifier">local</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;stringio&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">StringIO</span>)
+  <span class="ruby-identifier">destination</span> = <span class="ruby-identifier">local</span> <span class="ruby-operator">||</span> <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">download</span>(<span class="ruby-identifier">remote</span>, <span class="ruby-identifier">destination</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">wait</span>
+  <span class="ruby-identifier">local</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">file</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an <a href="SFTP/Operations/FileFactory.html"><code>Net::SFTP::Operations::FileFactory</code></a> instance, which can be used to mimic synchronous, IO-like file operations on a remote file via <a href="SFTP.html"><code>SFTP</code></a>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&quot;/path/to/file&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">gets</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">line</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>See <a href="SFTP/Operations/FileFactory.html"><code>Net::SFTP::Operations::FileFactory</code></a> and <a href="SFTP/Operations/File.html"><code>Net::SFTP::Operations::File</code></a> for more details.</p>
+
+          <div class="method-source-code" id="file-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/session.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">file</span>
+  <span class="ruby-ivar">@file</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Operations</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFactory</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-upload-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">upload!</span><span
+              class="method-args">(local, remote = File.basename(local), options={}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Identical to upload, but blocks until the upload is complete.</p>
+
+          <div class="method-source-code" id="upload-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/session.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">upload!</span>(<span class="ruby-identifier">local</span>, <span class="ruby-identifier">remote</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">local</span>), <span class="ruby-identifier">options</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">upload</span>(<span class="ruby-identifier">local</span>, <span class="ruby-identifier">remote</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">wait</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

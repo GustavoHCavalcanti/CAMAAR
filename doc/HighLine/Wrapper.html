@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module HighLine::Wrapper - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-actual_length">::actual_length</a>
+    <li ><a href="#method-c-wrap">::wrap</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-HighLine::Wrapper">
+  <h1 id="module-HighLine::Wrapper" class="module">
+    module HighLine::Wrapper
+  </h1>
+
+  <section class="description">
+    
+<p>A simple <a href="Wrapper.html"><code>Wrapper</code></a> module that is aware of ANSI escape codes. It compensates for the ANSI escape codes so it works on the actual (visual) line length.</p>
+
+<p>A simple <a href="Wrapper.html"><code>Wrapper</code></a> module that is aware of ANSI escape codes. It compensates for the ANSI escape codes so it works on the actual (visual) line length.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-actual_length" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">actual_length</span><span
+              class="method-args">(string_with_escapes)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the length of the passed <code>string_with_escapes</code>, minus and color sequence escapes.</p>
+
+<p>@param string_with_escapes [String] any ANSI colored <a href="String.html"><code>String</code></a> @return [Integer] length based on the visual size of the <a href="String.html"><code>String</code></a></p>
+
+<pre class="ruby">(<span class="ruby-identifier">without</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">escape</span> <span class="ruby-identifier">codes</span>)
+</pre>
+
+          <div class="method-source-code" id="actual_length-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline/wrapper.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">actual_length</span>(<span class="ruby-identifier">string_with_escapes</span>)
+  <span class="ruby-identifier">string_with_escapes</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\e\[\d{1,2}m/</span>, <span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-wrap" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">wrap</span><span
+              class="method-args">(text, wrap_at)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Wrap a sequence of <em>lines</em> at <em>wrap_at</em> characters per line.  Existing newlines will not be affected by this process, but additional newlines may be added.</p>
+
+<p>@param text [String] text to be wrapped @param wrap_at [#to_i] column count to wrap the text into</p>
+
+          <div class="method-source-code" id="wrap-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline/wrapper.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">wrap</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">wrap_at</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">text</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">wrap_at</span>
+  <span class="ruby-identifier">wrap_at</span> = <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">wrap_at</span>)
+
+  <span class="ruby-identifier">wrapped</span> = []
+  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># take into account color escape sequences when wrapping</span>
+    <span class="ruby-identifier">wrap_at</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">line</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">actual_length</span>(<span class="ruby-identifier">line</span>))
+    <span class="ruby-keyword">while</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/([^\n]{#{wrap_at + 1},})/</span>
+      <span class="ruby-identifier">search</span>  = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">replace</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">index</span> = <span class="ruby-identifier">replace</span>.<span class="ruby-identifier">rindex</span>(<span class="ruby-string">&quot; &quot;</span>, <span class="ruby-identifier">wrap_at</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span>
+        <span class="ruby-identifier">replace</span>[<span class="ruby-identifier">index</span>, <span class="ruby-value">1</span>] = <span class="ruby-string">&quot;\n&quot;</span>
+        <span class="ruby-identifier">replace</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\n[ \t]+/</span>, <span class="ruby-string">&quot;\n&quot;</span>)
+        <span class="ruby-identifier">line</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-identifier">search</span>, <span class="ruby-identifier">replace</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">line</span>[<span class="ruby-identifier">$LAST_MATCH_INFO</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">wrap_at</span>, <span class="ruby-value">0</span>] = <span class="ruby-string">&quot;\n&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">wrapped</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">wrapped</span>.<span class="ruby-identifier">join</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Brakeman::ControllerAliasProcessor - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="AliasProcessor.html">Brakeman::AliasProcessor</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="RenderHelper.html">Brakeman::RenderHelper</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-before_filter_list">#before_filter_list</a>
+    <li ><a href="#method-i-layout_name">#layout_name</a>
+    <li ><a href="#method-i-process_before_filter">#process_before_filter</a>
+    <li class="calls-super" ><a href="#method-i-process_call">#process_call</a>
+    <li ><a href="#method-i-process_class">#process_class</a>
+    <li ><a href="#method-i-process_controller">#process_controller</a>
+    <li ><a href="#method-i-process_default_render">#process_default_render</a>
+    <li ><a href="#method-i-process_defn">#process_defn</a>
+    <li class="calls-super" ><a href="#method-i-process_iter">#process_iter</a>
+    <li ><a href="#method-i-process_mixins">#process_mixins</a>
+    <li class="calls-super" ><a href="#method-i-process_template">#process_template</a>
+    <li ><a href="#method-i-route-3F">#route?</a>
+    <li ><a href="#method-i-template_name">#template_name</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Brakeman::ControllerAliasProcessor">
+  <h1 id="class-Brakeman::ControllerAliasProcessor" class="class">
+    class Brakeman::ControllerAliasProcessor
+  </h1>
+
+  <section class="description">
+    
+<p>Processes aliasing in controllers, but includes following renders in routes and putting variables into templates</p>
+
+<p>Processes aliasing in controllers, but includes following renders in routes and putting variables into templates</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(tracker, only_method = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>If only_method is specified, only that method will be processed, other methods will be skipped. This is for rescanning just a single action.</p>
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="AliasProcessor.html#method-c-new"><code>Brakeman::AliasProcessor::new</code></a>
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-identifier">tracker</span>, <span class="ruby-identifier">only_method</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">super</span> <span class="ruby-identifier">tracker</span>
+  <span class="ruby-ivar">@app_tree</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">app_tree</span>
+  <span class="ruby-ivar">@only_method</span> = <span class="ruby-identifier">only_method</span>
+  <span class="ruby-ivar">@rendered</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@current_class</span> = <span class="ruby-ivar">@current_module</span> = <span class="ruby-ivar">@current_method</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@method_cache</span> = {} <span class="ruby-comment">#Cache method lookups</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-before_filter_list" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">before_filter_list</span><span
+              class="method-args">(method, klass)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Get list of filters, including those that are inherited</p>
+
+          <div class="method-source-code" id="before_filter_list-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">before_filter_list</span> <span class="ruby-identifier">method</span>, <span class="ruby-identifier">klass</span>
+  <span class="ruby-identifier">controller</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">controllers</span>[<span class="ruby-identifier">klass</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">controller</span>
+    <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">before_filter_list</span> <span class="ruby-keyword">self</span>, <span class="ruby-identifier">method</span>
+  <span class="ruby-keyword">else</span>
+    []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-layout_name" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">layout_name</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Determines default layout name</p>
+
+          <div class="method-source-code" id="layout_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">layout_name</span>
+  <span class="ruby-identifier">controller</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">controllers</span>[<span class="ruby-ivar">@current_class</span>]
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">layout</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">layout</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">layout</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+
+  <span class="ruby-identifier">app_controller</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">controllers</span>[<span class="ruby-value">:ApplicationController</span>]
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">app_controller</span>.<span class="ruby-identifier">layout</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">app_controller</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">app_controller</span>.<span class="ruby-identifier">layout</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_before_filter" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_before_filter</span><span
+              class="method-args">(name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Processes a call to a before filter. Basically, adds any instance variable assignments to the environment. TODO: method arguments?</p>
+
+          <div class="method-source-code" id="process_before_filter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_before_filter</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">filter</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">find_method</span> <span class="ruby-identifier">name</span>, <span class="ruby-ivar">@current_class</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-constant">Brakeman</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;[Notice] Could not find filter #{name}&quot;</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">method</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">src</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ivars</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">filter_cache</span>[[<span class="ruby-identifier">filter</span>.<span class="ruby-identifier">owner</span>, <span class="ruby-identifier">name</span>]]
+    <span class="ruby-identifier">ivars</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">variable</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">env</span>[<span class="ruby-identifier">variable</span>] = <span class="ruby-identifier">value</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">processor</span> = <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">AliasProcessor</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@tracker</span>
+    <span class="ruby-identifier">processor</span>.<span class="ruby-identifier">process_safely</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">body_list</span>, <span class="ruby-identifier">only_ivars</span>(<span class="ruby-value">:include_request_vars</span>))
+
+    <span class="ruby-identifier">ivars</span> = <span class="ruby-identifier">processor</span>.<span class="ruby-identifier">only_ivars</span>(<span class="ruby-value">:include_request_vars</span>).<span class="ruby-identifier">all</span>
+
+    <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">filter_cache</span>[[<span class="ruby-identifier">filter</span>.<span class="ruby-identifier">owner</span>, <span class="ruby-identifier">name</span>]] = <span class="ruby-identifier">ivars</span>
+
+    <span class="ruby-identifier">ivars</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">variable</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">env</span>[<span class="ruby-identifier">variable</span>] = <span class="ruby-identifier">value</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_call" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_call</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Look for calls to head()</p>
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="AliasProcessor.html#method-i-process_call"><code>Brakeman::AliasProcessor#process_call</code></a>
+            </div>
+
+          <div class="method-source-code" id="process_call-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_call</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">exp</span> = <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">exp</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">call?</span> <span class="ruby-identifier">exp</span>
+
+  <span class="ruby-identifier">method</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">method</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:head</span>
+    <span class="ruby-ivar">@rendered</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:template_exists?</span>
+    <span class="ruby-identifier">env</span>[<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">first_arg</span>] = <span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:lit</span>, <span class="ruby-value">:&quot;brakeman:existing_template&quot;</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:interprocedural</span>] <span class="ruby-keyword">and</span>
+    <span class="ruby-ivar">@current_method</span> <span class="ruby-keyword">and</span> (<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">node_type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:self</span>)
+
+    <span class="ruby-identifier">exp</span> = <span class="ruby-identifier">get_call_value</span>(<span class="ruby-identifier">exp</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">exp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_class" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_class</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Skip it, must be an inner class</p>
+
+          <div class="method-source-code" id="process_class-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_class</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">exp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_controller" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_controller</span><span
+              class="method-args">(name, src, current_file)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_controller-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_controller</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">src</span>, <span class="ruby-identifier">current_file</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">node_type?</span> <span class="ruby-identifier">src</span>, <span class="ruby-value">:class</span>
+    <span class="ruby-constant">Brakeman</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;#{name} is not a class, it&#39;s a #{src.node_type}&quot;</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@current_class</span> = <span class="ruby-identifier">name</span>
+    <span class="ruby-ivar">@current_file</span> = <span class="ruby-ivar">@app_tree</span>.<span class="ruby-identifier">file_path</span>(<span class="ruby-identifier">current_file</span>)
+
+    <span class="ruby-identifier">process_default</span> <span class="ruby-identifier">src</span>
+
+    <span class="ruby-identifier">process_mixins</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_default_render" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_default_render</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Processes the default template for the current action</p>
+
+          <div class="method-source-code" id="process_default_render-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_default_render</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">process_layout</span>
+  <span class="ruby-identifier">process_template</span> <span class="ruby-identifier">template_name</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_defn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_defn</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Processes a method definition, which may include processing any rendered templates.</p>
+
+          <div class="method-source-code" id="process_defn-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_defn</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">meth_name</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">method_name</span>
+
+  <span class="ruby-constant">Brakeman</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Processing #{@current_class}##{meth_name}&quot;</span>
+
+  <span class="ruby-comment">#Skip if instructed to only process a specific method</span>
+  <span class="ruby-comment">#(but don&#39;t skip if this method was called from elsewhere)</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">exp</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_method</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@only_method</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@only_method</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">meth_name</span>
+
+  <span class="ruby-identifier">is_route</span> = <span class="ruby-identifier">route?</span> <span class="ruby-identifier">meth_name</span>
+  <span class="ruby-identifier">other_method</span> = <span class="ruby-ivar">@current_method</span>
+  <span class="ruby-ivar">@current_method</span> = <span class="ruby-identifier">meth_name</span>
+  <span class="ruby-ivar">@rendered</span> = <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_route</span>
+
+  <span class="ruby-identifier">meth_env</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_route</span>
+      <span class="ruby-identifier">before_filter_list</span>(<span class="ruby-ivar">@current_method</span>, <span class="ruby-ivar">@current_class</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">process_before_filter</span> <span class="ruby-identifier">f</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">process_all</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_route</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@rendered</span>
+      <span class="ruby-identifier">process_default_render</span> <span class="ruby-identifier">exp</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@current_method</span> = <span class="ruby-identifier">other_method</span>
+  <span class="ruby-identifier">exp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_iter" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_iter</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Check for <code>respond_to</code></p>
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="AliasProcessor.html#method-i-process_iter"><code>Brakeman::AliasProcessor#process_iter</code></a>
+            </div>
+
+          <div class="method-source-code" id="process_iter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_iter</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">call?</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">block_call</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">block_call</span>.<span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:respond_to</span>
+    <span class="ruby-ivar">@rendered</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">exp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_mixins" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_mixins</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Process modules mixed into the controller, in case they contain actions.</p>
+
+          <div class="method-source-code" id="process_mixins-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_mixins</span>
+  <span class="ruby-identifier">controller</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">controllers</span>[<span class="ruby-ivar">@current_class</span>]
+  <span class="ruby-identifier">original_file</span> = <span class="ruby-ivar">@current_file</span>
+
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">includes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">mixin</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">libs</span>[<span class="ruby-identifier">i</span>]
+
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">mixin</span>
+
+    <span class="ruby-comment">#Process methods in alphabetical order for consistency</span>
+    <span class="ruby-identifier">methods</span> = <span class="ruby-identifier">mixin</span>.<span class="ruby-identifier">methods_public</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_sym</span> }
+
+    <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment">#Need to process the method like it was in a controller in order</span>
+      <span class="ruby-comment">#to get the renders set</span>
+      <span class="ruby-identifier">processor</span> = <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">ControllerProcessor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@tracker</span>, <span class="ruby-identifier">mixin</span>.<span class="ruby-identifier">file</span>)
+      <span class="ruby-identifier">method</span> = <span class="ruby-identifier">mixin</span>.<span class="ruby-identifier">get_method</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">src</span>.<span class="ruby-identifier">deep_clone</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">node_type?</span> <span class="ruby-identifier">method</span>, <span class="ruby-value">:defn</span>
+        <span class="ruby-identifier">method</span> = <span class="ruby-identifier">processor</span>.<span class="ruby-identifier">process_defn</span> <span class="ruby-identifier">method</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment">#Should be a defn, but this will catch other cases</span>
+        <span class="ruby-identifier">method</span> = <span class="ruby-identifier">processor</span>.<span class="ruby-identifier">process</span> <span class="ruby-identifier">method</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-ivar">@current_file</span> = <span class="ruby-identifier">mixin</span>.<span class="ruby-identifier">file</span>
+      <span class="ruby-comment">#Then process it like any other method in the controller</span>
+      <span class="ruby-identifier">process</span> <span class="ruby-identifier">method</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@current_file</span> = <span class="ruby-identifier">original_file</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_template" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_template</span><span
+              class="method-args">(name, args, _, line)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Process template and add the current class and method name as called_from info</p>
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="RenderHelper.html#method-i-process_template"><code>Brakeman::RenderHelper#process_template</code></a>
+            </div>
+
+          <div class="method-source-code" id="process_template-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 180</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_template</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">_</span>, <span class="ruby-identifier">line</span>
+  <span class="ruby-comment"># If line is null, assume implicit render and set the end of the action</span>
+  <span class="ruby-comment"># method as the line number</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">controller</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">controllers</span>[<span class="ruby-ivar">@current_class</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">meth</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">get_method</span>(<span class="ruby-ivar">@current_method</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">src</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">src</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">src</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">line</span>
+        <span class="ruby-identifier">line</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">line</span> = <span class="ruby-value">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">render_path</span> = <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">RenderPath</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">add_controller_render</span>(<span class="ruby-ivar">@current_class</span>, <span class="ruby-ivar">@current_method</span>, <span class="ruby-identifier">line</span>, <span class="ruby-ivar">@current_file</span>)
+  <span class="ruby-keyword">super</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">render_path</span>, <span class="ruby-identifier">line</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-route-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">route?</span><span
+              class="method-args">(method)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns true if the given method name is also a route</p>
+
+          <div class="method-source-code" id="route-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 225</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">route?</span> <span class="ruby-identifier">method</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">routes</span>[<span class="ruby-value">:allow_all_actions</span>] <span class="ruby-keyword">or</span> <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:assume_all_routes</span>]
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">routes</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">routes</span>[<span class="ruby-ivar">@current_class</span>]
+    <span class="ruby-identifier">routes</span> <span class="ruby-keyword">and</span> (<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value">:allow_all_actions</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">routes</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">method</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-template_name" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">template_name</span><span
+              class="method-args">(name = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Turns a method name into a template name</p>
+
+          <div class="method-source-code" id="template_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/controller_alias_processor.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">template_name</span> <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@current_method</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">include?</span> <span class="ruby-string">&quot;/&quot;</span>
+    <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">controller</span> = <span class="ruby-ivar">@current_class</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;Controller&quot;</span>, <span class="ruby-string">&quot;&quot;</span>)
+    <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&quot;::&quot;</span>, <span class="ruby-string">&quot;/&quot;</span>)
+    <span class="ruby-identifier">underscore</span>(<span class="ruby-identifier">controller</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

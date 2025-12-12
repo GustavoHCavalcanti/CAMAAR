@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Net::IMAP::UIDPlusData - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-Net::IMAP::UIDPlusData-label-Required+capability">Required capability</a>
+          <li>      <a href="#class-Net::IMAP::UIDPlusData-label-Required+capability">Required capability</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Struct.new(:uidvalidity, :source_uids, :assigned_uids)
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-assigned_uids">#assigned_uids</a>
+    <li ><a href="#method-i-source_uids">#source_uids</a>
+    <li ><a href="#method-i-uid_mapping">#uid_mapping</a>
+    <li ><a href="#method-i-uidvalidity">#uidvalidity</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Net::IMAP::UIDPlusData">
+  <h1 id="class-Net::IMAP::UIDPlusData" class="class">
+    class Net::IMAP::UIDPlusData
+  </h1>
+
+  <section class="description">
+    
+<p><strong>NOTE:</strong> <em>UIDPlusData is deprecated and will be removed in the <code>0.6.0</code> release.</em>  To use <a href="AppendUIDData.html"><code>AppendUIDData</code></a> and <a href="CopyUIDData.html"><code>CopyUIDData</code></a> before <code>0.6.0</code>, set <a href="Config.html#attribute-i-parser_use_deprecated_uidplus_data"><code>Config#parser_use_deprecated_uidplus_data</code></a> to <code>false</code>.</p>
+
+<p><a href="UIDPlusData.html"><code>UIDPlusData</code></a> represents the <a href="ResponseCode.html#method-i-data"><code>ResponseCode#data</code></a> that accompanies the <code>APPENDUID</code> and <code>COPYUID</code> <a href="ResponseCode.html">response codes</a>.</p>
+
+<p>A server that supports <code>UIDPLUS</code> should send <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in response to the <a href="../IMAP.html#method-i-append">append</a>, <a href="../IMAP.html#method-i-copy">copy</a>, <a href="../IMAP.html#method-i-move">move</a>, <a href="../IMAP.html#method-i-uid_copy">uid copy</a>, and <a href="../IMAP.html#method-i-uid_move">uid move</a> commands—unless the destination mailbox reports <code>UIDNOTSTICKY</code>.</p>
+
+<p>Note that <a href="../IMAP.html#method-i-append">append</a>, <a href="../IMAP.html#method-i-copy">copy</a> and <a href="../IMAP.html#method-i-uid_copy">uid_copy</a> return <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in their <a href="TaggedResponse.html"><code>TaggedResponse</code></a>.  But <a href="../IMAP.html#method-i-copy">move</a> and <a href="../IMAP.html#method-i-uid_move">uid_move</a> <em>should</em> send <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in an <a href="UntaggedResponse.html"><code>UntaggedResponse</code></a> response before sending their <a href="TaggedResponse.html"><code>TaggedResponse</code></a>.  However some servers do send <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in the <a href="TaggedResponse.html"><code>TaggedResponse</code></a> for <code>MOVE</code> commands—this complies with the older <code>UIDPLUS</code> specification but is discouraged by the <code>MOVE</code> extension and disallowed by <code>IMAP4rev2</code>.</p>
+
+<h2 id="class-Net::IMAP::UIDPlusData-label-Required+capability">Required capability<span><a href="#class-Net::IMAP::UIDPlusData-label-Required+capability">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Requires either <code>UIDPLUS</code> [<a href="https://www.rfc-editor.org/rfc/rfc4315">RFC4315</a>] or <code>IMAP4rev2</code> capability.</p>
+
+<p><strong>NOTE:</strong> <em>UIDPlusData is deprecated and will be removed in the <code>0.6.0</code> release.</em>  To use <a href="AppendUIDData.html"><code>AppendUIDData</code></a> and <a href="CopyUIDData.html"><code>CopyUIDData</code></a> before <code>0.6.0</code>, set <a href="Config.html#attribute-i-parser_use_deprecated_uidplus_data"><code>Config#parser_use_deprecated_uidplus_data</code></a> to <code>false</code>.</p>
+
+<p><a href="UIDPlusData.html"><code>UIDPlusData</code></a> represents the <a href="ResponseCode.html#method-i-data"><code>ResponseCode#data</code></a> that accompanies the <code>APPENDUID</code> and <code>COPYUID</code> <a href="ResponseCode.html">response codes</a>.</p>
+
+<p>A server that supports <code>UIDPLUS</code> should send <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in response to the <a href="../IMAP.html#method-i-append">append</a>, <a href="../IMAP.html#method-i-copy">copy</a>, <a href="../IMAP.html#method-i-move">move</a>, <a href="../IMAP.html#method-i-uid_copy">uid copy</a>, and <a href="../IMAP.html#method-i-uid_move">uid move</a> commands—unless the destination mailbox reports <code>UIDNOTSTICKY</code>.</p>
+
+<p>Note that <a href="../IMAP.html#method-i-append">append</a>, <a href="../IMAP.html#method-i-copy">copy</a> and <a href="../IMAP.html#method-i-uid_copy">uid_copy</a> return <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in their <a href="TaggedResponse.html"><code>TaggedResponse</code></a>.  But <a href="../IMAP.html#method-i-copy">move</a> and <a href="../IMAP.html#method-i-uid_move">uid_move</a> <em>should</em> send <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in an <a href="UntaggedResponse.html"><code>UntaggedResponse</code></a> response before sending their <a href="TaggedResponse.html"><code>TaggedResponse</code></a>.  However some servers do send <a href="UIDPlusData.html"><code>UIDPlusData</code></a> in the <a href="TaggedResponse.html"><code>TaggedResponse</code></a> for <code>MOVE</code> commands—this complies with the older <code>UIDPLUS</code> specification but is discouraged by the <code>MOVE</code> extension and disallowed by <code>IMAP4rev2</code>.</p>
+
+<h2 id="class-Net::IMAP::UIDPlusData-label-Required+capability">Required capability<span><a href="#class-Net::IMAP::UIDPlusData-label-Required+capability">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Requires either <code>UIDPLUS</code> [<a href="https://www.rfc-editor.org/rfc/rfc4315">RFC4315</a>] or <code>IMAP4rev2</code> capability.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-assigned_uids" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assigned_uids &rarr; an array of nonzero uint32
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The newly assigned UIDs of the copied, moved, or appended messages.</p>
+<dl class="rdoc-list note-list"><dt>Note
+<dd>
+<p>This always returns an array, even when it contains only one UID.</p>
+</dd></dl>
+
+          <div class="method-source-code" id="assigned_uids-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/uidplus_data.rb, line 48</span>
+      </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-source_uids" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              source_uids &rarr; nil or an array of nonzero uint32
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The UIDs of the copied or moved messages.</p>
+<dl class="rdoc-list note-list"><dt>Note
+<dd>
+<p>Returns <code>nil</code> for <a href="../IMAP.html#method-i-append"><code>Net::IMAP#append</code></a>.</p>
+</dd></dl>
+
+          <div class="method-source-code" id="source_uids-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/uidplus_data.rb, line 40</span>
+      </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-uid_mapping" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              uid_mapping &rarr; nil or a hash
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a hash mapping each source UID to the newly assigned destination UID.</p>
+<dl class="rdoc-list note-list"><dt>Note
+<dd>
+<p>Returns <code>nil</code> for <a href="../IMAP.html#method-i-append"><code>Net::IMAP#append</code></a>.</p>
+</dd></dl>
+
+          <div class="method-source-code" id="uid_mapping-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/uidplus_data.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uid_mapping</span>
+  <span class="ruby-identifier">source_uids</span>&amp;.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">assigned_uids</span>)&amp;.<span class="ruby-identifier">to_h</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-uidvalidity" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              uidvalidity &rarr; nonzero uint32
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The UIDVALIDITY of the destination mailbox.</p>
+
+          <div class="method-source-code" id="uidvalidity-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/uidplus_data.rb, line 34</span>
+      </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

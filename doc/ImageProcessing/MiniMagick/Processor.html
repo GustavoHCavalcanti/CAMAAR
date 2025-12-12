@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ImageProcessing::MiniMagick::Processor - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Processor.html">ImageProcessing::Processor</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-load_image">::load_image</a>
+    <li ><a href="#method-c-save_image">::save_image</a>
+    <li ><a href="#method-i-append">#append</a>
+    <li ><a href="#method-i-composite">#composite</a>
+    <li ><a href="#method-i-crop">#crop</a>
+    <li ><a href="#method-i-define">#define</a>
+    <li ><a href="#method-i-limits">#limits</a>
+    <li ><a href="#method-i-resize_and_pad">#resize_and_pad</a>
+    <li ><a href="#method-i-resize_to_cover">#resize_to_cover</a>
+    <li ><a href="#method-i-resize_to_fill">#resize_to_fill</a>
+    <li ><a href="#method-i-resize_to_fit">#resize_to_fit</a>
+    <li ><a href="#method-i-resize_to_limit">#resize_to_limit</a>
+    <li ><a href="#method-i-rotate">#rotate</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ImageProcessing::MiniMagick::Processor">
+  <h1 id="class-ImageProcessing::MiniMagick::Processor" class="class">
+    class ImageProcessing::MiniMagick::Processor
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="SHARPEN_PARAMETERS">SHARPEN_PARAMETERS
+        <dd><p>Default sharpening parameters used on generated thumbnails.</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-load_image" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load_image</span><span
+              class="method-args">(path_or_magick, loader: nil, page: nil, geometry: nil, auto_orient: true, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initializes the image on disk into a <a href="../../MiniMagick/Tool.html"><code>MiniMagick::Tool</code></a> object. Accepts additional options related to loading the image (e.g. geometry). Additionally auto-orients the image to be upright.</p>
+
+          <div class="method-source-code" id="load_image-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">load_image</span>(<span class="ruby-identifier">path_or_magick</span>, <span class="ruby-value">loader:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">page:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">geometry:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">auto_orient:</span> <span class="ruby-keyword">true</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path_or_magick</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">MiniMagick</span><span class="ruby-operator">::</span><span class="ruby-constant">Tool</span>)
+    <span class="ruby-identifier">magick</span> = <span class="ruby-identifier">path_or_magick</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">source_path</span> = <span class="ruby-identifier">path_or_magick</span>
+    <span class="ruby-identifier">magick</span> = <span class="ruby-operator">::</span><span class="ruby-constant">ImageProcessing</span><span class="ruby-operator">::</span><span class="ruby-constant">MiniMagick</span>.<span class="ruby-identifier">convert_shim</span>
+
+    <span class="ruby-constant">Utils</span>.<span class="ruby-identifier">apply_options</span>(<span class="ruby-identifier">magick</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+
+    <span class="ruby-identifier">input</span>  = <span class="ruby-identifier">source_path</span>
+    <span class="ruby-identifier">input</span>  = <span class="ruby-node">&quot;#{loader}:#{input}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">loader</span>
+    <span class="ruby-identifier">input</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;[#{page}]&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>
+    <span class="ruby-identifier">input</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;[#{geometry}]&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">geometry</span>
+
+    <span class="ruby-identifier">magick</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">input</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">auto_orient</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">auto_orient</span>
+  <span class="ruby-identifier">magick</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-save_image" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">save_image</span><span
+              class="method-args">(magick, destination_path, allow_splitting: false, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Calls the built ImageMagick command to perform processing and save the result to disk. Accepts additional options related to saving the image (e.g. quality).</p>
+
+          <div class="method-source-code" id="save_image-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">save_image</span>(<span class="ruby-identifier">magick</span>, <span class="ruby-identifier">destination_path</span>, <span class="ruby-value">allow_splitting:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-constant">Utils</span>.<span class="ruby-identifier">apply_options</span>(<span class="ruby-identifier">magick</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+
+  <span class="ruby-identifier">magick</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">destination_path</span>
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">call</span>
+
+  <span class="ruby-constant">Utils</span>.<span class="ruby-identifier">disallow_split_layers!</span>(<span class="ruby-identifier">destination_path</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">allow_splitting</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-append" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">append</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Appends a raw ImageMagick command-line argument to the command.</p>
+
+          <div class="method-source-code" id="append-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">append</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">append</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">merge!</span> <span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-composite" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">composite</span><span
+              class="method-args">(overlay = :none, mask: nil, mode: nil, gravity: nil, offset: nil, args: nil, **options) { |magick| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Overlays the specified image over the current one. Supports specifying an additional mask, composite mode, direction or offset of the overlay image.</p>
+
+          <div class="method-source-code" id="composite-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">composite</span>(<span class="ruby-identifier">overlay</span> = <span class="ruby-value">:none</span>, <span class="ruby-value">mask:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">mode:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">gravity:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">args:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">composite</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">overlay</span> <span class="ruby-operator">==</span> <span class="ruby-value">:none</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:compose</span>)
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;[IMAGE_PROCESSING] The :compose parameter in #composite has been renamed to :mode, the :compose alias will be removed in ImageProcessing 2.&quot;</span>
+    <span class="ruby-identifier">mode</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:compose</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:geometry</span>)
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;[IMAGE_PROCESSING] The :geometry parameter in #composite has been deprecated and will be removed in ImageProcessing 2. Use :offset instead, e.g. `geometry: \&quot;+10+15\&quot;` should be replaced with `offset: [10, 15]`.&quot;</span>
+    <span class="ruby-identifier">geometry</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:geometry</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">geometry</span> = <span class="ruby-string">&quot;%+d%+d&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">offset</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">offset</span>
+
+  <span class="ruby-identifier">overlay_path</span> = <span class="ruby-identifier">convert_to_path</span>(<span class="ruby-identifier">overlay</span>, <span class="ruby-string">&quot;overlay&quot;</span>)
+  <span class="ruby-identifier">mask_path</span>    = <span class="ruby-identifier">convert_to_path</span>(<span class="ruby-identifier">mask</span>, <span class="ruby-string">&quot;mask&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">mask</span>
+
+  <span class="ruby-identifier">magick</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">overlay_path</span>
+  <span class="ruby-identifier">magick</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">mask_path</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mask_path</span>
+
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">compose</span>(<span class="ruby-identifier">mode</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">mode</span>
+  <span class="ruby-identifier">define</span>(<span class="ruby-value">compose:</span> { <span class="ruby-value">args:</span> <span class="ruby-identifier">args</span> }) <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>
+
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">gravity</span>(<span class="ruby-identifier">gravity</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">gravity</span>
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">geometry</span>(<span class="ruby-identifier">geometry</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">geometry</span>
+
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">magick</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">composite</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-crop" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">crop</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Crops the image with the specified crop points.</p>
+
+          <div class="method-source-code" id="crop-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">crop</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">crop</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">4</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">crop</span>(<span class="ruby-node">&quot;#{args[2]}x#{args[3]}+#{args[0]}+#{args[1]}&quot;</span>)
+  <span class="ruby-keyword">else</span> <span class="ruby-identifier">fail</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;wrong number of arguments (expected 1 or 4, got #{args.count})&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-define" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">define</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Defines settings from the provided hash.</p>
+
+          <div class="method-source-code" id="define-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">define</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">define</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+  <span class="ruby-constant">Utils</span>.<span class="ruby-identifier">apply_define</span>(<span class="ruby-identifier">magick</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-limits" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">limits</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Specifies resource limits from the provided hash.</p>
+
+          <div class="method-source-code" id="limits-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">limits</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">args</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-string">&quot;-limit&quot;</span>, <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>) }
+  <span class="ruby-identifier">magick</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resize_and_pad" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resize_and_pad</span><span
+              class="method-args">(width, height, background: :transparent, gravity: &quot;Center&quot;, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resizes the image to fit within the specified dimensions and fills the remaining area with the specified background color.</p>
+
+          <div class="method-source-code" id="resize_and_pad-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resize_and_pad</span>(<span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>, <span class="ruby-value">background:</span> <span class="ruby-value">:transparent</span>, <span class="ruby-value">gravity:</span> <span class="ruby-string">&quot;Center&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">thumbnail</span>(<span class="ruby-node">&quot;#{width}x#{height}&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">background</span> <span class="ruby-identifier">color</span>(<span class="ruby-identifier">background</span>)
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">gravity</span> <span class="ruby-identifier">gravity</span>
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">extent</span> <span class="ruby-node">&quot;#{width}x#{height}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resize_to_cover" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resize_to_cover</span><span
+              class="method-args">(width, height, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resizes the image to cover the specified dimensions, without cropping the excess.</p>
+
+          <div class="method-source-code" id="resize_to_cover-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resize_to_cover</span>(<span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">thumbnail</span>(<span class="ruby-node">&quot;#{width}x#{height}^&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resize_to_fill" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resize_to_fill</span><span
+              class="method-args">(width, height, gravity: &quot;Center&quot;, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resizes the image to fill the specified dimensions, applying any necessary cropping.</p>
+
+          <div class="method-source-code" id="resize_to_fill-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resize_to_fill</span>(<span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>, <span class="ruby-value">gravity:</span> <span class="ruby-string">&quot;Center&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">thumbnail</span>(<span class="ruby-node">&quot;#{width}x#{height}^&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">gravity</span> <span class="ruby-identifier">gravity</span>
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">background</span> <span class="ruby-identifier">color</span>(<span class="ruby-value">:transparent</span>)
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">extent</span> <span class="ruby-node">&quot;#{width}x#{height}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resize_to_fit" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resize_to_fit</span><span
+              class="method-args">(width, height, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resizes the image to fit within the specified dimensions.</p>
+
+          <div class="method-source-code" id="resize_to_fit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resize_to_fit</span>(<span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">thumbnail</span>(<span class="ruby-node">&quot;#{width}x#{height}&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resize_to_limit" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resize_to_limit</span><span
+              class="method-args">(width, height, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resizes the image to not be larger than the specified dimensions.</p>
+
+          <div class="method-source-code" id="resize_to_limit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resize_to_limit</span>(<span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">thumbnail</span>(<span class="ruby-node">&quot;#{width}x#{height}&gt;&quot;</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rotate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rotate</span><span
+              class="method-args">(degrees, background: nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Rotates the image by an arbitrary angle. For angles that are not multiple of 90 degrees an optional background color can be specified to fill in the gaps.</p>
+
+          <div class="method-source-code" id="rotate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/image_processing-1.14.0/lib/image_processing/mini_magick.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rotate</span>(<span class="ruby-identifier">degrees</span>, <span class="ruby-value">background:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">background</span> <span class="ruby-identifier">color</span>(<span class="ruby-identifier">background</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">background</span>
+  <span class="ruby-identifier">magick</span>.<span class="ruby-identifier">rotate</span>(<span class="ruby-identifier">degrees</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

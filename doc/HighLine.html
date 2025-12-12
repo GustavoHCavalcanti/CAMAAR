@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class HighLine - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="HighLine/BuiltinStyles.html">HighLine::BuiltinStyles</a>
+    <li><a class="include" href="HighLine/CustomErrors.html">HighLine::CustomErrors</a>
+  </ul>
+</div>
+
+    
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    <li><span class="extend">SingleForwardable</span>
+    <li><span class="extend">SingleForwardable</span>
+  </ul>
+</div>
+
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-add_to_color_scheme">::add_to_color_scheme</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-reset">::reset</a>
+    <li ><a href="#method-c-reset_color_scheme">::reset_color_scheme</a>
+    <li ><a href="#method-c-supports_rgb_color-3F">::supports_rgb_color?</a>
+    <li ><a href="#method-c-using_color_scheme-3F">::using_color_scheme?</a>
+    <li ><a href="#method-i-agree">#agree</a>
+    <li ><a href="#method-i-ask">#ask</a>
+    <li ><a href="#method-i-choose">#choose</a>
+    <li ><a href="#method-i-color">#color</a>
+    <li ><a href="#method-i-color_code">#color_code</a>
+    <li ><a href="#method-i-get_response_character_mode">#get_response_character_mode</a>
+    <li ><a href="#method-i-get_response_getc_mode">#get_response_getc_mode</a>
+    <li ><a href="#method-i-get_response_line_mode">#get_response_line_mode</a>
+    <li ><a href="#method-i-indent">#indent</a>
+    <li ><a href="#method-i-indentation">#indentation</a>
+    <li ><a href="#method-i-list">#list</a>
+    <li ><a href="#method-i-new_scope">#new_scope</a>
+    <li ><a href="#method-i-newline">#newline</a>
+    <li ><a href="#method-i-output_cols">#output_cols</a>
+    <li ><a href="#method-i-output_rows">#output_rows</a>
+    <li ><a href="#method-i-page_at-3D">#page_at=</a>
+    <li ><a href="#method-i-puts">#puts</a>
+    <li ><a href="#method-i-render_and_ident_statement">#render_and_ident_statement</a>
+    <li ><a href="#method-i-render_statement">#render_statement</a>
+    <li ><a href="#method-i-reset_use_color">#reset_use_color</a>
+    <li ><a href="#method-i-say">#say</a>
+    <li ><a href="#method-i-shell_style_lambda">#shell_style_lambda</a>
+    <li ><a href="#method-i-track_eof-3F">#track_eof?</a>
+    <li ><a href="#method-i-uncolor">#uncolor</a>
+    <li ><a href="#method-i-use_color-3F">#use_color?</a>
+    <li ><a href="#method-i-wrap_at-3D">#wrap_at=</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-HighLine">
+  <h1 id="class-HighLine" class="class">
+    class HighLine
+  </h1>
+
+  <section class="description">
+    
+<p>A <a href="HighLine.html"><code>HighLine</code></a> object is a “high-level line oriented” shell over an input and an output stream.  <a href="HighLine.html"><code>HighLine</code></a> simplifies common console interaction, effectively replacing {Kernel#puts} and {Kernel#gets}.  <a href="User.html"><code>User</code></a> code can simply specify the question to ask and any details about user interaction, then leave the rest of the work to <a href="HighLine.html"><code>HighLine</code></a>.  When {HighLine#ask} returns, you’ll have the answer you requested, even if <a href="HighLine.html"><code>HighLine</code></a> had to ask many times, validate results, perform range checking, convert types, etc.</p>
+
+<p>@example Basic usage</p>
+
+<pre class="ruby"><span class="ruby-identifier">cli</span> = <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">answer</span> = <span class="ruby-identifier">cli</span>.<span class="ruby-identifier">ask</span> <span class="ruby-string">&quot;What do you think?&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;You have answered: #{answer}&quot;</span>
+</pre>
+
+<p>A <a href="HighLine.html"><code>HighLine</code></a> object is a “high-level line oriented” shell over an input and an output stream.  <a href="HighLine.html"><code>HighLine</code></a> simplifies common console interaction, effectively replacing {Kernel#puts} and {Kernel#gets}.  <a href="User.html"><code>User</code></a> code can simply specify the question to ask and any details about user interaction, then leave the rest of the work to <a href="HighLine.html"><code>HighLine</code></a>.  When {HighLine#ask} returns, you’ll have the answer you requested, even if <a href="HighLine.html"><code>HighLine</code></a> had to ask many times, validate results, perform range checking, convert types, etc.</p>
+
+<p>@example Basic usage</p>
+
+<pre class="ruby"><span class="ruby-identifier">cli</span> = <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">answer</span> = <span class="ruby-identifier">cli</span>.<span class="ruby-identifier">ask</span> <span class="ruby-string">&quot;What do you think?&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;You have answered: #{answer}&quot;</span>
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="VERSION">VERSION
+        <dd><p>The version of the installed library.</p>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-c-color_scheme" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">color_scheme</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Pass <a href="HighLine/ColorScheme.html"><code>ColorScheme</code></a> to set a <a href="HighLine.html"><code>HighLine</code></a> color scheme.</p>
+        </div>
+      </div>
+      <div id="attribute-c-default_instance" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">default_instance</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-indent_level" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">indent_level</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [Integer] The indentation level</p>
+        </div>
+      </div>
+      <div id="attribute-i-indent_size" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">indent_size</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [Integer] The indentation size in characters</p>
+        </div>
+      </div>
+      <div id="attribute-i-input" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">input</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [IO] the default input stream for a <a href="HighLine.html"><code>HighLine</code></a> instance</p>
+        </div>
+      </div>
+      <div id="attribute-i-key" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">key</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>When gathering a <a href="Hash.html"><code>Hash</code></a> with {QuestionAsker#gather_hash}, it tracks the current key being asked.</p>
+
+<p>@todo We should probably move this into the <a href="HighLine/Question.html"><code>HighLine::Question</code></a></p>
+
+<pre>object.</pre>
+        </div>
+      </div>
+      <div id="attribute-i-multi_indent" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">multi_indent</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [Boolean] Indentation over multiple lines</p>
+        </div>
+      </div>
+      <div id="attribute-i-output" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">output</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [IO] the default output stream for a <a href="HighLine.html"><code>HighLine</code></a> instance</p>
+        </div>
+      </div>
+      <div id="attribute-i-page_at" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">page_at</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [Integer] The current row setting for paging output.</p>
+        </div>
+      </div>
+      <div id="attribute-i-terminal" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">terminal</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>System specific that responds to initialize_system_extensions, terminal_size, raw_no_echo_mode, restore_mode, get_character. It polymorphically handles specific cases for different platforms. @return [HighLine::Terminal]</p>
+        </div>
+      </div>
+      <div id="attribute-i-track_eof" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">track_eof</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Pass <code>false</code> to turn off HighLine’s EOF tracking.</p>
+        </div>
+      </div>
+      <div id="attribute-i-use_color" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">use_color</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p><a href="Set.html"><code>Set</code></a> it to false to disable ANSI coloring</p>
+        </div>
+      </div>
+      <div id="attribute-i-wrap_at" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">wrap_at</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [Integer] The current column setting for wrapping output.</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-add_to_color_scheme" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">add_to_color_scheme</span><span
+              class="method-args">(hash)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Pass a <code>Hash</code> to add <code>new</code> colors to the current scheme.</p>
+
+          <div class="method-source-code" id="add_to_color_scheme-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_to_color_scheme</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-identifier">old_hash</span> = (<span class="ruby-identifier">color_scheme</span> <span class="ruby-operator">||</span> {}).<span class="ruby-identifier">to_hash</span>
+  <span class="ruby-identifier">fail</span> <span class="ruby-node">&quot;Overlapping color schemes: #{old_hash.keys &amp; hash.keys}&quot;</span>  <span class="ruby-keyword">unless</span>
+    (<span class="ruby-identifier">old_hash</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>).<span class="ruby-identifier">empty?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">color_scheme</span> = <span class="ruby-constant">ColorScheme</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">old_hash</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">hash</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(input = $stdin, output = $stdout, wrap_at = nil, page_at = nil, indent_size = 3, indent_level = 0)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create an instance of <a href="HighLine.html"><code>HighLine</code></a> connected to the given <em>input</em> and <em>output</em> streams.</p>
+
+<p>@param input [IO] the default input stream for <a href="HighLine.html"><code>HighLine</code></a>. @param output [IO] the default output stream for <a href="HighLine.html"><code>HighLine</code></a>. @param <a href="HighLine.html#attribute-i-wrap_at"><code>wrap_at</code></a> [Integer] all statements outputed through</p>
+
+<pre>HighLine will be wrapped to this column size if set.</pre>
+
+<p>@param <a href="HighLine.html#attribute-i-page_at"><code>page_at</code></a> [Integer] page size and paginating. @param <a href="HighLine.html#attribute-i-indent_size"><code>indent_size</code></a> [Integer] indentation size in spaces. @param <a href="HighLine.html#attribute-i-indent_level"><code>indent_level</code></a> [Integer] how deep is indentated.</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">input</span> = <span class="ruby-identifier">$stdin</span>, <span class="ruby-identifier">output</span> = <span class="ruby-identifier">$stdout</span>,
+               <span class="ruby-identifier">wrap_at</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">page_at</span> = <span class="ruby-keyword">nil</span>,
+               <span class="ruby-identifier">indent_size</span> = <span class="ruby-value">3</span>, <span class="ruby-identifier">indent_level</span> = <span class="ruby-value">0</span>)
+  <span class="ruby-ivar">@input</span>   = <span class="ruby-identifier">input</span>
+  <span class="ruby-ivar">@output</span>  = <span class="ruby-identifier">output</span>
+
+  <span class="ruby-ivar">@multi_indent</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@indent_size</span>  = <span class="ruby-identifier">indent_size</span>
+  <span class="ruby-ivar">@indent_level</span> = <span class="ruby-identifier">indent_level</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">wrap_at</span> = <span class="ruby-identifier">wrap_at</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">page_at</span> = <span class="ruby-identifier">page_at</span>
+
+  <span class="ruby-ivar">@header</span>   = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@prompt</span>   = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@key</span>      = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@use_color</span> = <span class="ruby-identifier">default_use_color</span>
+  <span class="ruby-ivar">@track_eof</span> = <span class="ruby-keyword">true</span> <span class="ruby-comment"># The setting used to disable EOF tracking.</span>
+  <span class="ruby-ivar">@terminal</span> = <span class="ruby-constant">HighLine</span><span class="ruby-operator">::</span><span class="ruby-constant">Terminal</span>.<span class="ruby-identifier">get_terminal</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">output</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-reset" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reset</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Reset <a href="HighLine.html"><code>HighLine</code></a> to default. Clears <a href="HighLine/Style.html"><code>Style</code></a> index and resets <a href="HighLine.html#attribute-c-color_scheme"><code>color_scheme</code></a> and <a href="HighLine.html#attribute-i-use_color"><code>use_color</code></a> settings.</p>
+
+          <div class="method-source-code" id="reset-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>
+  <span class="ruby-constant">Style</span>.<span class="ruby-identifier">clear_index</span>
+  <span class="ruby-identifier">reset_color_scheme</span>
+  <span class="ruby-identifier">reset_use_color</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-reset_color_scheme" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reset_color_scheme</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Reset color scheme to default (<code>nil</code>)</p>
+
+          <div class="method-source-code" id="reset_color_scheme-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset_color_scheme</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">color_scheme</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-supports_rgb_color-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_rgb_color?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>For checking if the current version of <a href="HighLine.html"><code>HighLine</code></a> supports RGB colors Usage: <a href="HighLine.html#method-c-supports_rgb_color-3F"><code>HighLine.supports_rgb_color?</code></a> rescue false</p>
+
+<pre>using rescue for compatibility with older versions</pre>
+
+<p>Note: color usage also depends on <a href="HighLine.html#attribute-i-use_color"><code>HighLine.use_color</code></a> being set TODO: Discuss removing this method</p>
+
+          <div class="method-source-code" id="supports_rgb_color-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_rgb_color?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-using_color_scheme-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">using_color_scheme?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns <code>true</code> if <a href="HighLine.html"><code>HighLine</code></a> is currently using a color scheme.</p>
+
+          <div class="method-source-code" id="using_color_scheme-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">using_color_scheme?</span>
+  <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@color_scheme</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-agree" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">agree</span><span
+              class="method-args">(yes_or_no_question, character = nil) { |q| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>A shortcut to <a href="HighLine.html#method-i-ask"><code>HighLine.ask()</code></a> a question that only accepts “yes” or “no” answers (“y” and “n” are allowed) and returns <code>true</code> or <code>false</code> (<code>true</code> for “yes”).  If provided a <code>true</code> value, <em>character</em> will cause <a href="HighLine.html"><code>HighLine</code></a> to fetch a single character response. A block can be provided to further configure the question as in <a href="HighLine.html#method-i-ask"><code>HighLine.ask()</code></a></p>
+
+<p>Raises EOFError if input is exhausted.</p>
+
+<p>@param yes_or_no_question [String] a question that accepts yes and no as</p>
+
+<pre class="ruby"><span class="ruby-identifier">answers</span>
+</pre>
+
+<p>@param character [Boolean, :getc] character mode to be passed to</p>
+
+<pre class="ruby"><span class="ruby-constant">Question</span><span class="ruby-comment">#character</span>
+</pre>
+
+<p>@see <a href="HighLine/Question.html#attribute-i-character"><code>Question#character</code></a></p>
+
+          <div class="method-source-code" id="agree-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">agree</span>(<span class="ruby-identifier">yes_or_no_question</span>, <span class="ruby-identifier">character</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">yes_or_no_question</span>, <span class="ruby-operator">-&gt;</span>(<span class="ruby-identifier">yn</span>) { <span class="ruby-identifier">yn</span>.<span class="ruby-identifier">downcase</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;y&quot;</span> }) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">q</span>.<span class="ruby-identifier">validate</span>                 = <span class="ruby-regexp">/\A(?:y(?:es)?|no?)\Z/i</span>
+    <span class="ruby-identifier">q</span>.<span class="ruby-identifier">responses</span>[<span class="ruby-value">:not_valid</span>]    = <span class="ruby-string">&#39;Please enter &quot;yes&quot; or &quot;no&quot;.&#39;</span>
+    <span class="ruby-identifier">q</span>.<span class="ruby-identifier">responses</span>[<span class="ruby-value">:ask_on_error</span>] = <span class="ruby-value">:question</span>
+    <span class="ruby-identifier">q</span>.<span class="ruby-identifier">character</span>                = <span class="ruby-identifier">character</span>
+    <span class="ruby-identifier">q</span>.<span class="ruby-identifier">completion</span>               = <span class="ruby-node">%w[yes no]</span>
+
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">q</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-ask" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">ask</span><span
+              class="method-args">(template_or_question, answer_type = nil, &amp;details)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>This method is the primary interface for user input.  Just provide a <em>question</em> to ask the user, the <em>answer_type</em> you want returned, and optionally a code block setting up details of how you want the question handled.  See {#say} for details on the format of <em>question</em>, and {Question} for more information about <em>answer_type</em> and what’s valid in the code block.</p>
+
+<p>Raises EOFError if input is exhausted.</p>
+
+<p>@param (see <a href="HighLine/Question.html#method-c-build"><code>Question.build</code></a>) @return answer converted to the class in answer_type</p>
+
+          <div class="method-source-code" id="ask-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ask</span>(<span class="ruby-identifier">template_or_question</span>, <span class="ruby-identifier">answer_type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">details</span>)
+  <span class="ruby-identifier">question</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">template_or_question</span>, <span class="ruby-identifier">answer_type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">details</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">gather</span>
+    <span class="ruby-constant">QuestionAsker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">question</span>, <span class="ruby-keyword">self</span>).<span class="ruby-identifier">gather_answers</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">QuestionAsker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">question</span>, <span class="ruby-keyword">self</span>).<span class="ruby-identifier">ask_once</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-choose" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">choose</span><span
+              class="method-args">(*items, &amp;details)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>This method is HighLine’s menu handler.  For simple usage, you can just pass all the menu items you wish to display.  At that point, choose() will build and display a menu, walk the user through selection, and return their choice among the provided items.  You might use this in a case statement for quick and dirty menus.</p>
+
+<p>However, choose() is capable of much more.  If provided, a block will be passed a <a href="HighLine/Menu.html"><code>HighLine::Menu</code></a> object to configure.  Using this method, you can customize all the details of menu handling from index display, to building a complete shell-like menuing system.  See <a href="HighLine/Menu.html"><code>HighLine::Menu</code></a> for all the methods it responds to.</p>
+
+<p>Raises EOFError if input is exhausted.</p>
+
+<p>@param items [Array&lt;String&gt;] @param details [Proc] to be passed to <a href="HighLine/Menu.html#method-c-new"><code>Menu.new</code></a> @return [String] answer</p>
+
+          <div class="method-source-code" id="choose-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">choose</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">items</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">details</span>)
+  <span class="ruby-identifier">menu</span> = <span class="ruby-constant">Menu</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">details</span>)
+  <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">choices</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">items</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">items</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-comment"># Set auto-completion</span>
+  <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">completion</span> = <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">options</span>
+
+  <span class="ruby-comment"># Set _answer_type_ so we can double as the Question for ask().</span>
+  <span class="ruby-comment"># menu.option = normal menu selection, by index or name</span>
+  <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">answer_type</span> = <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">shell</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">shell_style_lambda</span>(<span class="ruby-identifier">menu</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">options</span>
+
+  <span class="ruby-identifier">selected</span> = <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">menu</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">selected</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">shell</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">gather</span>
+      <span class="ruby-identifier">selection</span> = []
+      <span class="ruby-identifier">details</span> = []
+      <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">selection</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-identifier">details</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">selection</span>, <span class="ruby-identifier">details</span> = <span class="ruby-identifier">selected</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">selection</span> = <span class="ruby-identifier">selected</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">gather</span>
+    <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">gather_selected</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">selection</span>, <span class="ruby-identifier">details</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">select</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">selection</span>, <span class="ruby-identifier">details</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-color" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">color</span><span
+              class="method-args">(string, *colors)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>This method provides easy access to ANSI color sequences, without the user needing to remember to CLEAR at the end of each sequence.  Just pass the <em>string</em> to color, followed by a list of <em>colors</em> you would like it to be affected by.  The <em>colors</em> can be <a href="HighLine.html"><code>HighLine</code></a> class constants, or symbols (:blue for BLUE, for example).  A CLEAR will automatically be embedded to the end of the returned <a href="HighLine/String.html"><code>String</code></a>.</p>
+
+<p>This method returns the original <em>string</em> unchanged if <a href="HighLine.html#attribute-i-use_color"><code>use_color</code></a>? is <code>false</code>.</p>
+
+<p>@param string [String] string to be colored @param colors [Array&lt;Symbol&gt;] array of colors like [:red, :blue] @return [String] (ANSI escaped) colored string @example</p>
+
+<pre class="ruby"><span class="ruby-identifier">cli</span> = <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">cli</span>.<span class="ruby-identifier">color</span>(<span class="ruby-string">&quot;Sustainable&quot;</span>, <span class="ruby-value">:green</span>, <span class="ruby-value">:bold</span>)
+<span class="ruby-comment"># =&gt; &quot;\e[32m\e[1mSustainable\e[0m&quot;</span>
+
+<span class="ruby-comment"># As class method (delegating to HighLine.default_instance)</span>
+<span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">color</span>(<span class="ruby-string">&quot;Sustainable&quot;</span>, <span class="ruby-value">:green</span>, <span class="ruby-value">:bold</span>)
+</pre>
+
+          <div class="method-source-code" id="color-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 328</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">color</span>(<span class="ruby-identifier">string</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">colors</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">use_color?</span>
+  <span class="ruby-constant">HighLine</span>.<span class="ruby-constant">Style</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">colors</span>).<span class="ruby-identifier">color</span>(<span class="ruby-identifier">string</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-color_code" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">color_code</span><span
+              class="method-args">(*colors)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>In case you just want the color code, without the embedding and the CLEAR sequence.</p>
+
+<p>@param colors [Array&lt;Symbol&gt;] @return [String] ANSI escape code for the given colors.</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">HighLine</span>.<span class="ruby-constant">Style</span>(<span class="ruby-value">:red</span>, <span class="ruby-value">:blue</span>)
+<span class="ruby-identifier">s</span>.<span class="ruby-identifier">code</span> <span class="ruby-comment"># =&gt; &quot;\e[31m\e[34m&quot;</span>
+
+<span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">color_code</span>(<span class="ruby-value">:red</span>, <span class="ruby-value">:blue</span>) <span class="ruby-comment"># =&gt; &quot;\e[31m\e[34m&quot;</span>
+
+<span class="ruby-identifier">cli</span> = <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">cli</span>.<span class="ruby-identifier">color_code</span>(<span class="ruby-value">:red</span>, <span class="ruby-value">:blue</span>) <span class="ruby-comment"># =&gt; &quot;\e[31m\e[34m&quot;</span>
+</pre>
+
+          <div class="method-source-code" id="color_code-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 348</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">color_code</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">colors</span>)
+  <span class="ruby-constant">HighLine</span>.<span class="ruby-constant">Style</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">colors</span>).<span class="ruby-identifier">code</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-get_response_character_mode" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_response_character_mode</span><span
+              class="method-args">(question)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Get response each character per turn @param question [Question] @return [String] response</p>
+
+          <div class="method-source-code" id="get_response_character_mode-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 633</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_response_character_mode</span>(<span class="ruby-identifier">question</span>)
+  <span class="ruby-identifier">terminal</span>.<span class="ruby-identifier">raw_no_echo_mode_exec</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">terminal</span>.<span class="ruby-identifier">get_character</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">overwrite</span>
+      <span class="ruby-identifier">erase_current_line</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">echo</span> = <span class="ruby-identifier">question</span>.<span class="ruby-identifier">get_echo_for_response</span>(<span class="ruby-identifier">response</span>)
+      <span class="ruby-identifier">say</span>(<span class="ruby-node">&quot;#{echo}\n&quot;</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">question</span>.<span class="ruby-identifier">format_answer</span>(<span class="ruby-identifier">response</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-get_response_getc_mode" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_response_getc_mode</span><span
+              class="method-args">(question)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Get response using getc @param question [Question] @return [String] response</p>
+
+          <div class="method-source-code" id="get_response_getc_mode-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 623</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_response_getc_mode</span>(<span class="ruby-identifier">question</span>)
+  <span class="ruby-identifier">terminal</span>.<span class="ruby-identifier">raw_no_echo_mode_exec</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-ivar">@input</span>.<span class="ruby-identifier">getc</span>
+    <span class="ruby-identifier">question</span>.<span class="ruby-identifier">format_answer</span>(<span class="ruby-identifier">response</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-get_response_line_mode" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_response_line_mode</span><span
+              class="method-args">(question)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Get response one line at time @param question [Question] @return [String] response</p>
+
+          <div class="method-source-code" id="get_response_line_mode-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 531</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_response_line_mode</span>(<span class="ruby-identifier">question</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">question</span>.<span class="ruby-identifier">echo</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">question</span>.<span class="ruby-identifier">limit</span>
+    <span class="ruby-identifier">get_line</span>(<span class="ruby-identifier">question</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">get_line_raw_no_echo_mode</span>(<span class="ruby-identifier">question</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-indent" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">indent</span><span
+              class="method-args">(increase = 1, statement = nil, multiline = nil) { |self| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Executes block or outputs statement with indentation</p>
+
+<p>@param increase [Integer] how much to increase indentation @param statement [Statement, String] to be said @param multiline [Boolean] @return [void] @see <a href="HighLine.html#attribute-i-multi_indent"><code>multi_indent</code></a></p>
+
+          <div class="method-source-code" id="indent-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 448</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">indent</span>(<span class="ruby-identifier">increase</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">statement</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">multiline</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@indent_level</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">increase</span>
+  <span class="ruby-identifier">multi</span> = <span class="ruby-ivar">@multi_indent</span>
+  <span class="ruby-ivar">@multi_indent</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">multiline</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">say</span>(<span class="ruby-identifier">statement</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-ivar">@multi_indent</span> = <span class="ruby-identifier">multi</span>
+    <span class="ruby-ivar">@indent_level</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">increase</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-indentation" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">indentation</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Outputs indentation with current settings</p>
+
+          <div class="method-source-code" id="indentation-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 436</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">indentation</span>
+  <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@indent_size</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@indent_level</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-list" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">list</span><span
+              class="method-args">(items, mode = :rows, option = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Renders a list of itens using a {ListRenderer} @param items [Array] @param mode [Symbol] @param option @return [String] @see ListRenderer#initialize ListRenderer#initialize for parameter details</p>
+
+          <div class="method-source-code" id="list-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 365</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list</span>(<span class="ruby-identifier">items</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-value">:rows</span>, <span class="ruby-identifier">option</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">ListRenderer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">items</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">option</span>, <span class="ruby-keyword">self</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-new_scope" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new_scope</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new <a href="HighLine.html"><code>HighLine</code></a> instance with the same options</p>
+
+          <div class="method-source-code" id="new_scope-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 502</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_scope</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@input</span>, <span class="ruby-ivar">@output</span>, <span class="ruby-ivar">@wrap_at</span>,
+                 <span class="ruby-ivar">@page_at</span>, <span class="ruby-ivar">@indent_size</span>, <span class="ruby-ivar">@indent_level</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-newline" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">newline</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Outputs newline</p>
+
+          <div class="method-source-code" id="newline-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 467</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">newline</span>
+  <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">puts</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-output_cols" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">output_cols</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of columns for the console, or a default it they cannot be determined.</p>
+
+          <div class="method-source-code" id="output_cols-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 475</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_cols</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">80</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">tty?</span>
+  <span class="ruby-identifier">terminal</span>.<span class="ruby-identifier">terminal_size</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">80</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-output_rows" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">output_rows</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of rows for the console, or a default if they cannot be determined.</p>
+
+          <div class="method-source-code" id="output_rows-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 486</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_rows</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">24</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">tty?</span>
+  <span class="ruby-identifier">terminal</span>.<span class="ruby-identifier">terminal_size</span>.<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">24</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-page_at-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">page_at=</span><span
+              class="method-args">(setting)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="Set.html"><code>Set</code></a> to an integer value to cause <a href="HighLine.html"><code>HighLine</code></a> to page output lines over the indicated line limit.  When <code>nil</code>, the default, no paging occurs.  If set to <code>:auto</code>, <a href="HighLine.html"><code>HighLine</code></a> will attempt to determine the rows available for the <code>@output</code> or use a sensible default.</p>
+
+          <div class="method-source-code" id="page_at-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 429</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">page_at=</span>(<span class="ruby-identifier">setting</span>)
+  <span class="ruby-ivar">@page_at</span> = <span class="ruby-identifier">setting</span> <span class="ruby-operator">==</span> <span class="ruby-value">:auto</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">output_rows</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">setting</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-puts" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">puts</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Call <a href="HighLine.html#method-i-puts"><code>puts</code></a> on the HighLine’s output stream @param args [String] same args for Kernel#puts</p>
+
+          <div class="method-source-code" id="puts-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 495</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">puts</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-render_and_ident_statement" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">render_and_ident_statement</span><span
+              class="method-args">(statement)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Renders and indents a statement.</p>
+
+<p>Note: extracted here to be used by readline to render its prompt.</p>
+
+<p>@param statement [String] The statement to be rendered and indented. @return [String] The rendered and indented statement.</p>
+
+          <div class="method-source-code" id="render_and_ident_statement-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 400</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render_and_ident_statement</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-identifier">statement</span> = <span class="ruby-identifier">render_statement</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-identifier">statement</span> = (<span class="ruby-identifier">indentation</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">statement</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">statement</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">statement</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-render_statement" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">render_statement</span><span
+              class="method-args">(statement)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Renders a statement using {HighLine::Statement} @param statement [String] any string @return [Statement] rendered statement</p>
+
+          <div class="method-source-code" id="render_statement-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 409</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render_statement</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-constant">Statement</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">statement</span>, <span class="ruby-keyword">self</span>).<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-reset_use_color" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reset_use_color</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resets the use of color.</p>
+
+          <div class="method-source-code" id="reset_use_color-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset_use_color</span>
+  <span class="ruby-ivar">@use_color</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-say" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">say</span><span
+              class="method-args">(statement)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The basic output method for <a href="HighLine.html"><code>HighLine</code></a> objects.  If the provided <em>statement</em> ends with a space or tab character, a newline will not be appended (output will be flush()ed).  All other cases are passed straight to Kernel.puts().</p>
+
+<p>The <em>statement</em> argument is processed as an ERb template, supporting embedded Ruby code.  The template is evaluated within a <a href="HighLine.html"><code>HighLine</code></a> instance’s binding for providing easy access to the ANSI color constants and the <a href="HighLine.html#method-i-color"><code>HighLine#color()</code></a> method.</p>
+
+<p>@param statement [Statement, String] what to be said</p>
+
+          <div class="method-source-code" id="say-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 380</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">say</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-identifier">statement</span> = <span class="ruby-identifier">render_and_ident_statement</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">statement</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">statement</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-comment"># Don&#39;t add a newline if statement ends with whitespace, OR</span>
+  <span class="ruby-comment"># if statement ends with whitespace before a color escape code.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/[ \t](\e\[\d+(;\d+)*m)?\Z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">statement</span>
+    <span class="ruby-identifier">output</span>.<span class="ruby-identifier">print</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">statement</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">output</span>.<span class="ruby-identifier">flush</span> <span class="ruby-comment"># See: https://github.com/JEG2/highline/pull/276</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-shell_style_lambda" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">shell_style_lambda</span><span
+              class="method-args">(menu)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Convenience method to craft a lambda suitable for beind used in autocompletion operations by {#choose} @return [lambda] lambda to be used in autocompletion operations</p>
+
+          <div class="method-source-code" id="shell_style_lambda-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 292</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shell_style_lambda</span>(<span class="ruby-identifier">menu</span>)
+  <span class="ruby-identifier">lambda</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">command</span><span class="ruby-operator">|</span> <span class="ruby-comment"># shell-style selection</span>
+    <span class="ruby-identifier">first_word</span> = <span class="ruby-identifier">command</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;&quot;</span>
+
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">Completion</span>)
+    <span class="ruby-identifier">answer</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">complete</span>(<span class="ruby-identifier">first_word</span>)
+
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">Question</span><span class="ruby-operator">::</span><span class="ruby-constant">NoAutoCompleteMatch</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">answer</span>
+
+    [<span class="ruby-identifier">answer</span>.<span class="ruby-identifier">last</span>, <span class="ruby-identifier">command</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^\s*#{first_word}\s*/</span>, <span class="ruby-string">&quot;&quot;</span>)]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-track_eof-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">track_eof?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns true if <a href="HighLine.html"><code>HighLine</code></a> is currently tracking EOF for input.</p>
+
+          <div class="method-source-code" id="track_eof-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">track_eof?</span>
+  <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">track_eof</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-uncolor" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">uncolor</span><span
+              class="method-args">(string)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Remove color codes from a string. @param string [String] to be decolorized @return [String] without the ANSI escape sequence (colors)</p>
+
+          <div class="method-source-code" id="uncolor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 355</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uncolor</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-constant">Style</span>.<span class="ruby-identifier">uncolor</span>(<span class="ruby-identifier">string</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-use_color-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">use_color?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns truethy if <a href="HighLine.html"><code>HighLine</code></a> instance is currently using color escapes.</p>
+
+          <div class="method-source-code" id="use_color-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">use_color?</span>
+  <span class="ruby-identifier">use_color</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-wrap_at-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">wrap_at=</span><span
+              class="method-args">(setting)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="Set.html"><code>Set</code></a> to an integer value to cause <a href="HighLine.html"><code>HighLine</code></a> to wrap output lines at the indicated character limit.  When <code>nil</code>, the default, no wrapping occurs.  If set to <code>:auto</code>, <a href="HighLine.html"><code>HighLine</code></a> will attempt to determine the columns available for the <code>@output</code> or use a sensible default.</p>
+
+          <div class="method-source-code" id="wrap_at-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/highline-3.1.2/lib/highline.rb, line 419</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">wrap_at=</span>(<span class="ruby-identifier">setting</span>)
+  <span class="ruby-ivar">@wrap_at</span> = <span class="ruby-identifier">setting</span> <span class="ruby-operator">==</span> <span class="ruby-value">:auto</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">output_cols</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">setting</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Brakeman::CheckSQLCVEs - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="BaseCheck.html">Brakeman::BaseCheck</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-check_cve_2014_0080">#check_cve_2014_0080</a>
+    <li ><a href="#method-i-check_rails_versions_against_cve_issues">#check_rails_versions_against_cve_issues</a>
+    <li ><a href="#method-i-cve_warning_for">#cve_warning_for</a>
+    <li ><a href="#method-i-run_check">#run_check</a>
+    <li ><a href="#method-i-upgrade_version-3F">#upgrade_version?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Brakeman::CheckSQLCVEs">
+  <h1 id="class-Brakeman::CheckSQLCVEs" class="class">
+    class Brakeman::CheckSQLCVEs
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-check_cve_2014_0080" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_cve_2014_0080</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="check_cve_2014_0080-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/checks/check_sql_cves.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_cve_2014_0080</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">version_between?</span> <span class="ruby-string">&quot;4.0.0&quot;</span>, <span class="ruby-string">&quot;4.0.2&quot;</span> <span class="ruby-keyword">and</span>
+                <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">has_gem?</span> <span class="ruby-value">:pg</span>
+
+  <span class="ruby-identifier">warn</span> <span class="ruby-value">:warning_type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;SQL Injection&#39;</span>,
+    <span class="ruby-value">:warning_code</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:CVE_2014_0080</span>,
+    <span class="ruby-value">:message</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">msg</span>(<span class="ruby-identifier">msg_version</span>(<span class="ruby-identifier">rails_version</span>), <span class="ruby-string">&quot; contains a SQL injection vulnerability &quot;</span>, <span class="ruby-identifier">msg_cve</span>(<span class="ruby-string">&quot;CVE-2014-0080&quot;</span>), <span class="ruby-string">&quot; with PostgreSQL. Upgrade to &quot;</span>, <span class="ruby-identifier">msg_version</span>(<span class="ruby-string">&quot;4.0.3&quot;</span>)),
+    <span class="ruby-value">:confidence</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:high</span>,
+    <span class="ruby-value">:gem_info</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">gemfile_or_environment</span>(<span class="ruby-value">:pg</span>),
+    <span class="ruby-value">:link_path</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/msg/rubyonrails-security/Wu96YkTUR6s/pPLBMZrlwvYJ&quot;</span>,
+    <span class="ruby-value">:cwe_id</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-value">89</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-check_rails_versions_against_cve_issues" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_rails_versions_against_cve_issues</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="check_rails_versions_against_cve_issues-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/checks/check_sql_cves.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_rails_versions_against_cve_issues</span>
+  <span class="ruby-identifier">issues</span> = [
+    {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2012-2660&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[2.0.0 2.3.14 2.3.17]</span>, <span class="ruby-node">%w[3.0.0 3.0.12 3.0.13]</span>, <span class="ruby-node">%w[3.1.0 3.1.4 3.1.5]</span>, <span class="ruby-node">%w[3.2.0 3.2.3 3.2.4]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/topic/rubyonrails-security/8SA-M3as7A8/discussion&quot;</span>
+    },
+    {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2012-2661&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[3.0.0 3.0.12 3.0.13]</span>, <span class="ruby-node">%w[3.1.0 3.1.4 3.1.5]</span>, <span class="ruby-node">%w[3.2.0 3.2.3 3.2.5]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/topic/rubyonrails-security/dUaiOOGWL1k/discussion&quot;</span>
+    },
+    {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2012-2695&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[2.0.0 2.3.14 2.3.15]</span>, <span class="ruby-node">%w[3.0.0 3.0.13 3.0.14]</span>, <span class="ruby-node">%w[3.1.0 3.1.5 3.1.6]</span>, <span class="ruby-node">%w[3.2.0 3.2.5 3.2.6]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/topic/rubyonrails-security/l4L0TEVAz1k/discussion&quot;</span>
+    },
+    {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2012-5664&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[2.0.0 2.3.14 2.3.15]</span>, <span class="ruby-node">%w[3.0.0 3.0.17 3.0.18]</span>, <span class="ruby-node">%w[3.1.0 3.1.8 3.1.9]</span>, <span class="ruby-node">%w[3.2.0 3.2.9 3.2.18]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/topic/rubyonrails-security/DCNTNp_qjFM/discussion&quot;</span>
+    },
+    {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2013-0155&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[2.0.0 2.3.15 2.3.16]</span>, <span class="ruby-node">%w[3.0.0 3.0.18 3.0.19]</span>, <span class="ruby-node">%w[3.1.0 3.1.9 3.1.10]</span>, <span class="ruby-node">%w[3.2.0 3.2.10 3.2.11]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/topic/rubyonrails-security/c7jT-EeN9eI/discussion&quot;</span>
+    },
+    {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2016-6317&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[4.2.0 4.2.7.0 4.2.7.1]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/msg/ruby-security-ann/WccgKSKiPZA/9DrsDVSoCgAJ&quot;</span>
+    },
+
+  ]
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lts_version?</span> <span class="ruby-string">&#39;2.3.18.6&#39;</span>
+   <span class="ruby-identifier">issues</span> <span class="ruby-operator">&lt;&lt;</span> {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2013-6417&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[2.0.0 3.2.15 3.2.16]</span>, <span class="ruby-node">%w[4.0.0 4.0.1 4.0.2]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/msg/ruby-security-ann/niK4drpSHT4/g8JW8ZsayRkJ&quot;</span>
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">has_gem?</span> <span class="ruby-value">:pg</span>
+    <span class="ruby-identifier">issues</span> <span class="ruby-operator">&lt;&lt;</span> {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2014-3482&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[2.0.0 2.9.9 3.2.19]</span>, <span class="ruby-node">%w[3.0.0 3.2.18 3.2.19]</span>, <span class="ruby-node">%w[4.0.0 4.0.6 4.0.7]</span>, <span class="ruby-node">%w[4.1.0 4.1.2 4.1.3]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/msg/rubyonrails-security/wDxePLJGZdI/WP7EasCJTA4J&quot;</span>
+    } <span class="ruby-operator">&lt;&lt;</span>
+    {
+      <span class="ruby-value">:cve</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;CVE-2014-3483&quot;</span>,
+      <span class="ruby-value">:versions</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-node">%w[2.0.0 2.9.9 3.2.19]</span>, <span class="ruby-node">%w[3.0.0 3.2.18 3.2.19]</span>, <span class="ruby-node">%w[4.0.0 4.0.6 4.0.7]</span>, <span class="ruby-node">%w[4.1.0 4.1.2 4.1.3]</span>],
+      <span class="ruby-value">:url</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;https://groups.google.com/d/msg/rubyonrails-security/wDxePLJGZdI/WP7EasCJTA4J&quot;</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">issues</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cve_issue</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">cve_warning_for</span> <span class="ruby-identifier">cve_issue</span>[<span class="ruby-value">:versions</span>], <span class="ruby-identifier">cve_issue</span>[<span class="ruby-value">:cve</span>], <span class="ruby-identifier">cve_issue</span>[<span class="ruby-value">:url</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-cve_warning_for" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cve_warning_for</span><span
+              class="method-args">(versions, cve, link)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="cve_warning_for-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/checks/check_sql_cves.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cve_warning_for</span> <span class="ruby-identifier">versions</span>, <span class="ruby-identifier">cve</span>, <span class="ruby-identifier">link</span>
+  <span class="ruby-identifier">upgrade_version</span> = <span class="ruby-identifier">upgrade_version?</span> <span class="ruby-identifier">versions</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">upgrade_version</span>
+
+  <span class="ruby-identifier">code</span> = <span class="ruby-identifier">cve</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39;_&#39;</span>).<span class="ruby-identifier">to_sym</span>
+
+  <span class="ruby-identifier">warn</span> <span class="ruby-value">:warning_type</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;SQL Injection&#39;</span>,
+    <span class="ruby-value">:warning_code</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">code</span>,
+    <span class="ruby-value">:message</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">msg</span>(<span class="ruby-identifier">msg_version</span>(<span class="ruby-identifier">rails_version</span>), <span class="ruby-string">&quot; contains a SQL injection vulnerability &quot;</span>, <span class="ruby-identifier">msg_cve</span>(<span class="ruby-identifier">cve</span>), <span class="ruby-string">&quot;. Upgrade to &quot;</span>, <span class="ruby-identifier">msg_version</span>(<span class="ruby-identifier">upgrade_version</span>)),
+    <span class="ruby-value">:confidence</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:high</span>,
+    <span class="ruby-value">:gem_info</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">gemfile_or_environment</span>,
+    <span class="ruby-value">:link_path</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">link</span>,
+    <span class="ruby-value">:cwe_id</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-value">89</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-run_check" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">run_check</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="run_check-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/checks/check_sql_cves.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run_check</span>
+  <span class="ruby-identifier">check_rails_versions_against_cve_issues</span>
+  <span class="ruby-identifier">check_cve_2014_0080</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-upgrade_version-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">upgrade_version?</span><span
+              class="method-args">(versions)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="upgrade_version-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/checks/check_sql_cves.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">upgrade_version?</span> <span class="ruby-identifier">versions</span>
+  <span class="ruby-identifier">versions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">low</span>, <span class="ruby-identifier">high</span>, <span class="ruby-identifier">upgrade</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">upgrade</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">version_between?</span> <span class="ruby-identifier">low</span>, <span class="ruby-identifier">high</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

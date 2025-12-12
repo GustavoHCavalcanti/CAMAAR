@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Mail::IMAP - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-Mail::IMAP-label-Example+of+retrieving+Emails+from+GMail-3A">Example of retrieving Emails from GMail:</a>
+          <li>      <a href="#class-Mail::IMAP-label-Example+of+retrieving+Emails+from+GMail-3A">Example of retrieving Emails from GMail:</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="Retriever.html">Mail::Retriever</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-connection">#connection</a>
+    <li ><a href="#method-i-delete_all">#delete_all</a>
+    <li ><a href="#method-i-find">#find</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Mail::IMAP">
+  <h1 id="class-Mail::IMAP" class="class">
+    class Mail::IMAP
+  </h1>
+
+  <section class="description">
+    
+<p>The <a href="IMAP.html"><code>IMAP</code></a> retriever allows to get the last, first or all emails from a <a href="IMAP.html"><code>IMAP</code></a> server. Each email retrieved (RFC2822) is given as an instance of <code>Message</code>.</p>
+
+<p>While being retrieved, emails can be yielded if a block is given.</p>
+
+<h3 id="class-Mail::IMAP-label-Example+of+retrieving+Emails+from+GMail-3A">Example of retrieving Emails from GMail:<span><a href="#class-Mail::IMAP-label-Example+of+retrieving+Emails+from+GMail-3A">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-constant">Mail</span>.<span class="ruby-identifier">defaults</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">retriever_method</span> <span class="ruby-value">:imap</span>, { <span class="ruby-value">:address</span>             <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;imap.googlemail.com&quot;</span>,
+                            <span class="ruby-value">:port</span>                <span class="ruby-operator">=&gt;</span> <span class="ruby-value">993</span>,
+                            <span class="ruby-value">:user_name</span>           <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&lt;username&gt;&#39;</span>,
+                            <span class="ruby-value">:password</span>            <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&lt;password&gt;&#39;</span>,
+                            <span class="ruby-value">:enable_ssl</span>          <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> }
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">Mail</span>.<span class="ruby-identifier">all</span>    <span class="ruby-comment">#=&gt; Returns an array of all emails</span>
+<span class="ruby-constant">Mail</span>.<span class="ruby-identifier">first</span>  <span class="ruby-comment">#=&gt; Returns the first unread email</span>
+<span class="ruby-constant">Mail</span>.<span class="ruby-identifier">last</span>   <span class="ruby-comment">#=&gt; Returns the last unread email</span>
+</pre>
+
+<p>You can also pass options into <a href="../Mail.html#method-c-find"><code>Mail.find</code></a> to locate an email in your imap mailbox with the following options:</p>
+
+<pre>mailbox: name of the mailbox used for email retrieval. The default is &#39;INBOX&#39;.
+what:    last or first emails. The default is :first.
+order:   order of emails returned. Possible values are :asc or :desc. Default value is :asc.
+count:   number of emails to retrieve. The default value is 10. A value of 1 returns an
+         instance of Message, not an array of Message instances.
+keys:    are passed as criteria to the SEARCH command.  They can either be a string holding the entire search string,
+         or a single-dimension array of search keywords and arguments.  Refer to  [IMAP] section 6.4.4 for a full list
+         The default is &#39;ALL&#39;
+
+Mail.find(:what =&gt; :first, :count =&gt; 10, :order =&gt; :asc, :keys=&gt;&#39;ALL&#39;)
+#=&gt; Returns the first 10 emails in ascending order</pre>
+
+<p>The <a href="IMAP.html"><code>IMAP</code></a> retriever allows to get the last, first or all emails from a <a href="IMAP.html"><code>IMAP</code></a> server. Each email retrieved (RFC2822) is given as an instance of <code>Message</code>.</p>
+
+<p>While being retrieved, emails can be yielded if a block is given.</p>
+
+<h3 id="class-Mail::IMAP-label-Example+of+retrieving+Emails+from+GMail-3A">Example of retrieving Emails from GMail:<span><a href="#class-Mail::IMAP-label-Example+of+retrieving+Emails+from+GMail-3A">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-constant">Mail</span>.<span class="ruby-identifier">defaults</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">retriever_method</span> <span class="ruby-value">:imap</span>, { <span class="ruby-value">:address</span>             <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;imap.googlemail.com&quot;</span>,
+                            <span class="ruby-value">:port</span>                <span class="ruby-operator">=&gt;</span> <span class="ruby-value">993</span>,
+                            <span class="ruby-value">:user_name</span>           <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&lt;username&gt;&#39;</span>,
+                            <span class="ruby-value">:password</span>            <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&lt;password&gt;&#39;</span>,
+                            <span class="ruby-value">:enable_ssl</span>          <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> }
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">Mail</span>.<span class="ruby-identifier">all</span>    <span class="ruby-comment">#=&gt; Returns an array of all emails</span>
+<span class="ruby-constant">Mail</span>.<span class="ruby-identifier">first</span>  <span class="ruby-comment">#=&gt; Returns the first unread email</span>
+<span class="ruby-constant">Mail</span>.<span class="ruby-identifier">last</span>   <span class="ruby-comment">#=&gt; Returns the last unread email</span>
+</pre>
+
+<p>You can also pass options into <a href="../Mail.html#method-c-find"><code>Mail.find</code></a> to locate an email in your imap mailbox with the following options:</p>
+
+<pre>mailbox: name of the mailbox used for email retrieval. The default is &#39;INBOX&#39;.
+what:    last or first emails. The default is :first.
+order:   order of emails returned. Possible values are :asc or :desc. Default value is :asc.
+count:   number of emails to retrieve. The default value is 10. A value of 1 returns an
+         instance of Message, not an array of Message instances.
+keys:    are passed as criteria to the SEARCH command.  They can either be a string holding the entire search string,
+         or a single-dimension array of search keywords and arguments.  Refer to  [IMAP] section 6.4.4 for a full list
+         The default is &#39;ALL&#39;
+
+Mail.find(:what =&gt; :first, :count =&gt; 10, :order =&gt; :asc, :keys=&gt;&#39;ALL&#39;)
+#=&gt; Returns the first 10 emails in ascending order</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-settings" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">settings</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(values)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/network/retriever_methods/imap.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">values</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">settings</span> = { <span class="ruby-value">:address</span>              <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;localhost&quot;</span>,
+                    <span class="ruby-value">:port</span>                 <span class="ruby-operator">=&gt;</span> <span class="ruby-value">143</span>,
+                    <span class="ruby-value">:user_name</span>            <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>,
+                    <span class="ruby-value">:password</span>             <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>,
+                    <span class="ruby-value">:authentication</span>       <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>,
+                    <span class="ruby-value">:enable_ssl</span>           <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
+                    <span class="ruby-value">:enable_starttls</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">values</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-connection" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">connection</span><span
+              class="method-args">() { |imap| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the connection object of the retrievable (<a href="IMAP.html"><code>IMAP</code></a> or <a href="POP3.html"><code>POP3</code></a>)</p>
+
+          <div class="method-source-code" id="connection-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/network/retriever_methods/imap.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connection</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Mail::Retrievable#connection takes a block&#39;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-identifier">start</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">imap</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">imap</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-delete_all" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">delete_all</span><span
+              class="method-args">(mailbox=&#39;INBOX&#39;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Delete all emails from a <a href="IMAP.html"><code>IMAP</code></a> mailbox</p>
+
+          <div class="method-source-code" id="delete_all-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/network/retriever_methods/imap.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_all</span>(<span class="ruby-identifier">mailbox</span>=<span class="ruby-string">&#39;INBOX&#39;</span>)
+  <span class="ruby-identifier">mailbox</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;INBOX&#39;</span>
+  <span class="ruby-identifier">mailbox</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">IMAP</span>.<span class="ruby-identifier">encode_utf7</span>(<span class="ruby-identifier">mailbox</span>)
+
+  <span class="ruby-identifier">start</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">imap</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">mailbox</span>)
+    <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">uid_search</span>([<span class="ruby-string">&#39;ALL&#39;</span>]).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">uid</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">uid_store</span>(<span class="ruby-identifier">uid</span>, <span class="ruby-string">&quot;+FLAGS&quot;</span>, [<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">IMAP</span><span class="ruby-operator">::</span><span class="ruby-constant">DELETED</span>])
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">expunge</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-find" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find</span><span
+              class="method-args">(options=nil) { |new_message, imap, uid, attr| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find emails in a <a href="IMAP.html"><code>IMAP</code></a> mailbox. Without any options, the 10 last received emails are returned.</p>
+
+<p>Possible options:</p>
+
+<pre>mailbox: mailbox to search the email(s) in. The default is &#39;INBOX&#39;.
+what:    last or first emails. The default is :first.
+order:   order of emails returned. Possible values are :asc or :desc. Default value is :asc.
+count:   number of emails to retrieve. The default value is 10. A value of 1 returns an
+         instance of Message, not an array of Message instances.
+read_only: will ensure that no writes are made to the inbox during the session.  Specifically, if this is
+           set to true, the code will use the EXAMINE command to retrieve the mail.  If set to false, which
+           is the default, a SELECT command will be used to retrieve the mail
+           This is helpful when you don&#39;t want your messages to be set to read automatically. Default is false.
+delete_after_find: flag for whether to delete each retreived email after find. Default
+        is false. Use #find_and_delete if you would like this to default to true.
+keys:   are passed as criteria to the SEARCH command.  They can either be a string holding the entire search string,
+        or a single-dimension array of search keywords and arguments.  Refer to  [IMAP] section 6.4.4 for a full list
+        The default is &#39;ALL&#39;
+search_charset: charset to pass to IMAP server search. Omitted by default. Example: &#39;UTF-8&#39; or &#39;ASCII&#39;.</pre>
+
+          <div class="method-source-code" id="find-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/network/retriever_methods/imap.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find</span>(<span class="ruby-identifier">options</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">validate_options</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-identifier">start</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">imap</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:read_only</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">examine</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:mailbox</span>]) <span class="ruby-operator">:</span> <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:mailbox</span>])
+
+    <span class="ruby-identifier">uids</span> = <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">uid_search</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:keys</span>], <span class="ruby-identifier">options</span>[<span class="ruby-value">:search_charset</span>])
+      .<span class="ruby-identifier">to_a</span> <span class="ruby-comment"># older net-imap may return nil, newer may return ESearchResult struct</span>
+      .<span class="ruby-identifier">sort</span> <span class="ruby-comment"># RFC3501 does _not_ require UIDs to be returned in order</span>
+    <span class="ruby-identifier">uids</span>.<span class="ruby-identifier">reverse!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:what</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:last</span>
+    <span class="ruby-identifier">uids</span> = <span class="ruby-identifier">uids</span>.<span class="ruby-identifier">first</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:count</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:count</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>)
+    <span class="ruby-identifier">uids</span>.<span class="ruby-identifier">reverse!</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">options</span>[<span class="ruby-value">:what</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:last</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:order</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:asc</span>) <span class="ruby-operator">||</span>
+                            (<span class="ruby-identifier">options</span>[<span class="ruby-value">:what</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:last</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:order</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:desc</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">uids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">uid</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">uid</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:uid</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:uid</span>].<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">fetchdata</span> = <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">uid_fetch</span>(<span class="ruby-identifier">uid</span>, [<span class="ruby-string">&#39;RFC822&#39;</span>, <span class="ruby-string">&#39;FLAGS&#39;</span>])[<span class="ruby-value">0</span>]
+        <span class="ruby-identifier">new_message</span> = <span class="ruby-constant">Mail</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fetchdata</span>.<span class="ruby-identifier">attr</span>[<span class="ruby-string">&#39;RFC822&#39;</span>])
+        <span class="ruby-identifier">new_message</span>.<span class="ruby-identifier">mark_for_delete</span> = <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:delete_after_find</span>]
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>
+          <span class="ruby-keyword">yield</span> <span class="ruby-identifier">new_message</span>, <span class="ruby-identifier">imap</span>, <span class="ruby-identifier">uid</span>, <span class="ruby-identifier">fetchdata</span>.<span class="ruby-identifier">attr</span>[<span class="ruby-string">&#39;FLAGS&#39;</span>]
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+          <span class="ruby-keyword">yield</span> <span class="ruby-identifier">new_message</span>, <span class="ruby-identifier">imap</span>, <span class="ruby-identifier">uid</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-keyword">yield</span> <span class="ruby-identifier">new_message</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">uid_store</span>(<span class="ruby-identifier">uid</span>, <span class="ruby-string">&quot;+FLAGS&quot;</span>, [<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">IMAP</span><span class="ruby-operator">::</span><span class="ruby-constant">DELETED</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:delete_after_find</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">new_message</span>.<span class="ruby-identifier">is_marked_for_delete?</span>
+        <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:uid</span>].<span class="ruby-identifier">nil?</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">expunge</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:delete_after_find</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">emails</span> = []
+      <span class="ruby-identifier">uids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">uid</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">uid</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:uid</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:uid</span>].<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">fetchdata</span> = <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">uid_fetch</span>(<span class="ruby-identifier">uid</span>, [<span class="ruby-string">&#39;RFC822&#39;</span>])[<span class="ruby-value">0</span>]
+        <span class="ruby-identifier">emails</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Mail</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fetchdata</span>.<span class="ruby-identifier">attr</span>[<span class="ruby-string">&#39;RFC822&#39;</span>])
+        <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">uid_store</span>(<span class="ruby-identifier">uid</span>, <span class="ruby-string">&quot;+FLAGS&quot;</span>, [<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">IMAP</span><span class="ruby-operator">::</span><span class="ruby-constant">DELETED</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:delete_after_find</span>]
+        <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:uid</span>].<span class="ruby-identifier">nil?</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">imap</span>.<span class="ruby-identifier">expunge</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:delete_after_find</span>]
+      <span class="ruby-identifier">emails</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:count</span>] <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">emails</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">emails</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

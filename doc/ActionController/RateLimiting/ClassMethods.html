@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module ActionController::RateLimiting::ClassMethods - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-rate_limit">#rate_limit</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-ActionController::RateLimiting::ClassMethods">
+  <h1 id="module-ActionController::RateLimiting::ClassMethods" class="module">
+    module ActionController::RateLimiting::ClassMethods
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-rate_limit" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rate_limit</span><span
+              class="method-args">(to:, within:, by: -&gt; { request.remote_ip }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Applies a rate limit to all actions or those specified by the normal <code>before_action</code> filters with <code>only:</code> and <code>except:</code>.</p>
+
+<p>The maximum number of requests allowed is specified <code>to:</code> and constrained to the window of time given by <code>within:</code>.</p>
+
+<p>Rate limits are by default unique to the ip address making the request, but you can provide your own identity function by passing a callable in the <code>by:</code> parameter. It’s evaluated within the context of the controller processing the request.</p>
+
+<p>By default, rate limits are scoped to the controller’s path. If you want to share rate limits across multiple controllers, you can provide your own scope, by passing value in the <code>scope:</code> parameter.</p>
+
+<p>Requests that exceed the rate limit will raise an <code>ActionController::TooManyRequests</code> error. By default, Action Dispatch will rescue from the error and refuse the request with a <code>429 Too Many Requests</code> response. You can specialize this by passing a callable in the <code>with:</code> parameter. It’s evaluated within the context of the controller processing the request.</p>
+
+<p>Rate limiting relies on a backing <code>ActiveSupport::Cache</code> store and defaults to <code>config.action_controller.cache_store</code>, which itself defaults to the global <code>config.cache_store</code>. If you don’t want to store rate limits in the same datastore as your general caches, you can pass a custom store in the <code>store</code> parameter.</p>
+
+<p>If you want to use multiple rate limits per controller, you need to give each of them an explicit name via the <code>name:</code> option.</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">SessionsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-identifier">rate_limit</span> <span class="ruby-value">to:</span> <span class="ruby-value">10</span>, <span class="ruby-value">within:</span> <span class="ruby-value">3</span>.<span class="ruby-identifier">minutes</span>, <span class="ruby-value">only:</span> <span class="ruby-value">:create</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">SignupsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-identifier">rate_limit</span> <span class="ruby-value">to:</span> <span class="ruby-value">1000</span>, <span class="ruby-value">within:</span> <span class="ruby-value">10</span>.<span class="ruby-identifier">seconds</span>,
+    <span class="ruby-value">by:</span> <span class="ruby-operator">-&gt;</span> { <span class="ruby-identifier">request</span>.<span class="ruby-identifier">domain</span> }, <span class="ruby-value">with:</span> <span class="ruby-value">:redirect_to_busy</span>, <span class="ruby-value">only:</span> <span class="ruby-value">:new</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">redirect_to_busy</span>
+      <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">busy_controller_url</span>, <span class="ruby-value">alert:</span> <span class="ruby-string">&quot;Too many signups on domain!&quot;</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">APIController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-constant">RATE_LIMIT_STORE</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span><span class="ruby-operator">::</span><span class="ruby-constant">RedisCacheStore</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">url:</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;REDIS_URL&quot;</span>])
+  <span class="ruby-identifier">rate_limit</span> <span class="ruby-value">to:</span> <span class="ruby-value">10</span>, <span class="ruby-value">within:</span> <span class="ruby-value">3</span>.<span class="ruby-identifier">minutes</span>, <span class="ruby-value">store:</span> <span class="ruby-constant">RATE_LIMIT_STORE</span>
+  <span class="ruby-identifier">rate_limit</span> <span class="ruby-value">to:</span> <span class="ruby-value">100</span>, <span class="ruby-value">within:</span> <span class="ruby-value">5</span>.<span class="ruby-identifier">minutes</span>, <span class="ruby-value">scope:</span> <span class="ruby-value">:api_global</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">SessionsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-identifier">rate_limit</span> <span class="ruby-value">to:</span> <span class="ruby-value">3</span>, <span class="ruby-value">within:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">seconds</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&quot;short-term&quot;</span>
+  <span class="ruby-identifier">rate_limit</span> <span class="ruby-value">to:</span> <span class="ruby-value">10</span>, <span class="ruby-value">within:</span> <span class="ruby-value">5</span>.<span class="ruby-identifier">minutes</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&quot;long-term&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+          <div class="method-source-code" id="rate_limit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/rate_limiting.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rate_limit</span>(<span class="ruby-value">to:</span>, <span class="ruby-value">within:</span>, <span class="ruby-value">by:</span> <span class="ruby-operator">-&gt;</span> { <span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_ip</span> }, <span class="ruby-value">with:</span> <span class="ruby-operator">-&gt;</span> { <span class="ruby-identifier">raise</span> <span class="ruby-constant">TooManyRequests</span> }, <span class="ruby-value">store:</span> <span class="ruby-identifier">cache_store</span>, <span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">scope:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">before_action</span> <span class="ruby-operator">-&gt;</span> { <span class="ruby-identifier">rate_limiting</span>(<span class="ruby-value">to:</span> <span class="ruby-identifier">to</span>, <span class="ruby-value">within:</span> <span class="ruby-identifier">within</span>, <span class="ruby-value">by:</span> <span class="ruby-identifier">by</span>, <span class="ruby-value">with:</span> <span class="ruby-identifier">with</span>, <span class="ruby-value">store:</span> <span class="ruby-identifier">store</span>, <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>, <span class="ruby-value">scope:</span> <span class="ruby-identifier">scope</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">controller_path</span>) }, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

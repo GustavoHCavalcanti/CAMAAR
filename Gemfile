@@ -30,7 +30,8 @@ end
 
 group :development do
   gem "web-console"
-  gem "saikuro", require: false
+  gem "rdoc", require: false
+  gem "flay", require: false
   gem "rubycritic"
 end
 

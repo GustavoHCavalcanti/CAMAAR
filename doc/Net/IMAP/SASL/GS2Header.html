@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Net::IMAP::SASL::GS2Header - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-gs2_authzid">#gs2_authzid</a>
+    <li ><a href="#method-i-gs2_cb_flag">#gs2_cb_flag</a>
+    <li ><a href="#method-i-gs2_header">#gs2_header</a>
+    <li ><a href="#method-i-gs2_saslname_encode">#gs2_saslname_encode</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Net::IMAP::SASL::GS2Header">
+  <h1 id="module-Net::IMAP::SASL::GS2Header" class="module">
+    module Net::IMAP::SASL::GS2Header
+  </h1>
+
+  <section class="description">
+    
+<p>Originally defined for the GS2 mechanism family in <a href="https://www.rfc-editor.org/rfc/rfc5801">RFC5801</a>, several different mechanisms start with a GS2 header:</p>
+<ul><li>
+<p><code>GS2-*</code>       — <a href="https://www.rfc-editor.org/rfc/rfc5801">RFC5801</a></p>
+</li><li>
+<p><code>SCRAM-*</code>     — <a href="https://www.rfc-editor.org/rfc/rfc5802">RFC5802</a> (<a href="ScramAuthenticator.html"><code>ScramAuthenticator</code></a>)</p>
+</li><li>
+<p><code>SAML20</code>      — <a href="https://www.rfc-editor.org/rfc/rfc6595">RFC6595</a></p>
+</li><li>
+<p><code>OPENID20</code>    — <a href="https://www.rfc-editor.org/rfc/rfc6616">RFC6616</a></p>
+</li><li>
+<p><code>OAUTH10A</code>    — <a href="https://www.rfc-editor.org/rfc/rfc7628">RFC7628</a></p>
+</li><li>
+<p><code>OAUTHBEARER</code> — <a href="https://www.rfc-editor.org/rfc/rfc7628">RFC7628</a> (<a href="OAuthBearerAuthenticator.html"><code>OAuthBearerAuthenticator</code></a>)</p>
+</li></ul>
+
+<p>Classes that include this module must implement <code>#authzid</code>.</p>
+
+<p>Originally defined for the GS2 mechanism family in <a href="https://www.rfc-editor.org/rfc/rfc5801">RFC5801</a>, several different mechanisms start with a GS2 header:</p>
+<ul><li>
+<p><code>GS2-*</code>       — <a href="https://www.rfc-editor.org/rfc/rfc5801">RFC5801</a></p>
+</li><li>
+<p><code>SCRAM-*</code>     — <a href="https://www.rfc-editor.org/rfc/rfc5802">RFC5802</a> (<a href="ScramAuthenticator.html"><code>ScramAuthenticator</code></a>)</p>
+</li><li>
+<p><code>SAML20</code>      — <a href="https://www.rfc-editor.org/rfc/rfc6595">RFC6595</a></p>
+</li><li>
+<p><code>OPENID20</code>    — <a href="https://www.rfc-editor.org/rfc/rfc6616">RFC6616</a></p>
+</li><li>
+<p><code>OAUTH10A</code>    — <a href="https://www.rfc-editor.org/rfc/rfc7628">RFC7628</a></p>
+</li><li>
+<p><code>OAUTHBEARER</code> — <a href="https://www.rfc-editor.org/rfc/rfc7628">RFC7628</a> (<a href="OAuthBearerAuthenticator.html"><code>OAuthBearerAuthenticator</code></a>)</p>
+</li></ul>
+
+<p>Classes that include this module must implement <code>#authzid</code>.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="RFC5801_SASLNAME">RFC5801_SASLNAME
+        <dd><p>Matches <a href="https://www.rfc-editor.org/rfc/rfc5801#section-4">RFC5801 §4</a> <code>saslname</code>.  The output from <a href="GS2Header.html#method-i-gs2_saslname_encode"><code>gs2_saslname_encode</code></a> matches this Regexp.</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-gs2_authzid" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">gs2_authzid</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The <a href="https://www.rfc-editor.org/rfc/rfc5801#section-4">RFC5801 §4</a> <code>gs2-authzid</code> header, when <code>#authzid</code> is not empty.</p>
+
+<p>If <code>#authzid</code> is empty or <code>nil</code>, an empty string is returned.</p>
+
+          <div class="method-source-code" id="gs2_authzid-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/gs2_header.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gs2_authzid</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">authzid</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">authzid</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-node">&quot;a=#{gs2_saslname_encode(authzid)}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-gs2_cb_flag" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">gs2_cb_flag</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The <a href="https://www.rfc-editor.org/rfc/rfc5801#section-4">RFC5801 §4</a> <code>gs2-cb-flag</code>:</p>
+<dl class="rdoc-list note-list"><dt>“<code>n</code>”
+<dd>
+<p>The client doesn’t support channel binding.</p>
+</dd><dt>“<code>y</code>”
+<dd>
+<p>The client does support channel binding but thinks the server does not.</p>
+</dd><dt>“<code>p</code>”
+<dd>
+<p>The client requires channel binding. The selected channel binding follows “<code>p=</code>”.</p>
+</dd></dl>
+
+<p>The default always returns “<code>n</code>”.  A mechanism that supports channel binding must override this method.</p>
+
+          <div class="method-source-code" id="gs2_cb_flag-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/gs2_header.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gs2_cb_flag</span>; <span class="ruby-string">&quot;n&quot;</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-gs2_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">gs2_header</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The <a href="https://www.rfc-editor.org/rfc/rfc5801#section-4">RFC5801 §4</a> <code>gs2-header</code>, which prefixes the initial_client_response.</p>
+
+<blockquote>
+<p><em>Note: the actual GS2 header includes an optional flag to indicate that the GSS mechanism is not “standard”, but since all of the SASL mechanisms using GS2 are “standard”, we don’t include that flag.  A class for a nonstandard GSSAPI mechanism should prefix with “<code>F,</code>”.</em></p>
+</blockquote>
+
+          <div class="method-source-code" id="gs2_header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/gs2_header.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gs2_header</span>
+  <span class="ruby-node">&quot;#{gs2_cb_flag},#{gs2_authzid},&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-gs2_saslname_encode" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">gs2_saslname_encode</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Encodes <code>str</code> to match <a href="GS2Header.html#RFC5801_SASLNAME"><code>RFC5801_SASLNAME</code></a>.</p>
+
+          <div class="method-source-code" id="gs2_saslname_encode-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/gs2_header.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gs2_saslname_encode</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-string">&quot;UTF-8&quot;</span>)
+  <span class="ruby-comment"># Regexp#match raises &quot;invalid byte sequence&quot; for invalid UTF-8</span>
+  <span class="ruby-constant">NO_NULL_CHARS</span>.<span class="ruby-identifier">match</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">or</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;invalid saslname: %p&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">str</span>]
+  <span class="ruby-identifier">str</span>
+    .<span class="ruby-identifier">gsub</span>(<span class="ruby-value">?=</span>, <span class="ruby-string">&quot;=3D&quot;</span>)
+    .<span class="ruby-identifier">gsub</span>(<span class="ruby-value">?,</span>, <span class="ruby-string">&quot;=2C&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module DEBUGGER__::UI_DAP - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-local_fs_map_set">::local_fs_map_set</a>
+    <li ><a href="#method-c-local_to_remote_path">::local_to_remote_path</a>
+    <li ><a href="#method-c-remote_to_local_path">::remote_to_local_path</a>
+    <li ><a href="#method-c-setup">::setup</a>
+    <li ><a href="#method-i-dap_setup">#dap_setup</a>
+    <li ><a href="#method-i-event">#event</a>
+    <li ><a href="#method-i-ignore_output_on_suspend-3F">#ignore_output_on_suspend?</a>
+    <li ><a href="#method-i-load_extensions">#load_extensions</a>
+    <li ><a href="#method-i-process">#process</a>
+    <li ><a href="#method-i-process_request">#process_request</a>
+    <li ><a href="#method-i-puts">#puts</a>
+    <li ><a href="#method-i-recv_request">#recv_request</a>
+    <li ><a href="#method-i-respond">#respond</a>
+    <li ><a href="#method-i-send">#send</a>
+    <li ><a href="#method-i-send_event">#send_event</a>
+    <li ><a href="#method-i-send_response">#send_response</a>
+    <li ><a href="#method-i-show_protocol">#show_protocol</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-DEBUGGER__::UI_DAP">
+  <h1 id="module-DEBUGGER__::UI_DAP" class="module">
+    module DEBUGGER__::UI_DAP
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="SHOW_PROTOCOL">SHOW_PROTOCOL
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-local_fs_map_set" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">local_fs_map_set</span><span
+              class="method-args">(map)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="local_fs_map_set-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">local_fs_map_set</span> <span class="ruby-identifier">map</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@local_fs_map</span> <span class="ruby-comment"># already setup</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">map</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-ivar">@local_fs_map</span> = <span class="ruby-identifier">map</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">delete_suffix</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span>}}
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-ivar">@local_fs_map</span> = <span class="ruby-identifier">map</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-ivar">@local_fs_map</span> = <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:local_fs_map</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-local_to_remote_path" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">local_to_remote_path</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="local_to_remote_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">local_to_remote_path</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@local_fs_map</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">else</span> <span class="ruby-comment"># Array</span>
+    <span class="ruby-ivar">@local_fs_map</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">remote_path_prefix</span>, <span class="ruby-identifier">local_path_prefix</span>)<span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">start_with?</span> <span class="ruby-identifier">local_path_prefix</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">local_path_prefix</span>){ <span class="ruby-identifier">remote_path_prefix</span> }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-remote_to_local_path" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">remote_to_local_path</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="remote_to_local_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">remote_to_local_path</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@local_fs_map</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">else</span> <span class="ruby-comment"># Array</span>
+    <span class="ruby-ivar">@local_fs_map</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">remote_path_prefix</span>, <span class="ruby-identifier">local_path_prefix</span>)<span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">start_with?</span> <span class="ruby-identifier">remote_path_prefix</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">remote_path_prefix</span>){ <span class="ruby-identifier">local_path_prefix</span> }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-setup" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">setup</span><span
+              class="method-args">(debug_port)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="setup-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 12</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">setup</span> <span class="ruby-identifier">debug_port</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span> <span class="ruby-string">&#39;.vscode&#39;</span>
+        <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mktmpdir</span>(<span class="ruby-string">&quot;ruby-debug-vscode-&quot;</span>)
+        <span class="ruby-identifier">tempdir</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">at_exit</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">skip_all</span>
+        <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span> <span class="ruby-identifier">dir</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tempdir</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">key</span> = <span class="ruby-identifier">rand</span>.<span class="ruby-identifier">to_s</span>
+
+      <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword">do</span>
+        <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-string">&#39;.vscode&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">tempdir</span>
+
+        <span class="ruby-comment"># vscode-rdbg 0.0.9 or later is needed</span>
+        <span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;.vscode/rdbg_autoattach.json&#39;</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>({
+            <span class="ruby-value">type:</span> <span class="ruby-string">&quot;rdbg&quot;</span>,
+            <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Attach with rdbg&quot;</span>,
+            <span class="ruby-value">request:</span> <span class="ruby-string">&quot;attach&quot;</span>,
+            <span class="ruby-value">rdbgPath:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&#39;../../exe/rdbg&#39;</span>, <span class="ruby-identifier">__dir__</span>),
+            <span class="ruby-value">debugPort:</span> <span class="ruby-identifier">debug_port</span>,
+            <span class="ruby-value">localfs:</span> <span class="ruby-keyword">true</span>,
+            <span class="ruby-value">autoAttach:</span> <span class="ruby-identifier">key</span>,
+          })
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">cmds</span> = [<span class="ruby-string">&#39;code&#39;</span>, <span class="ruby-node">&quot;#{dir}/&quot;</span>]
+      <span class="ruby-identifier">cmdline</span> = <span class="ruby-identifier">cmds</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+      <span class="ruby-identifier">ssh_cmdline</span> = <span class="ruby-node">&quot;code --remote ssh-remote+[SSH hostname] #{dir}/&quot;</span>
+
+      <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Launching: #{cmdline}&quot;</span>
+      <span class="ruby-identifier">env</span> = <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">delete_if</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-regexp">/RUBY/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">k</span>}.<span class="ruby-identifier">to_h</span>
+      <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;RUBY_DEBUG_AUTOATTACH&#39;</span>] = <span class="ruby-identifier">key</span>
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">system</span>(<span class="ruby-identifier">env</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">cmds</span>)
+        <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">&lt;&lt;~MESSAGE</span>
+<span class="ruby-value">        Can not invoke the command.
+        Use the command-line on your terminal (with modification if you need).
+
+          #{cmdline}
+
+        If your application is running on a SSH remote host, please try:
+
+          #{ssh_cmdline}
+
+</span><span class="ruby-identifier">        MESSAGE</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-dap_setup" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dap_setup</span><span
+              class="method-args">(bytes)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="dap_setup-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 125</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dap_setup</span> <span class="ruby-identifier">bytes</span>
+      <span class="ruby-constant">CONFIG</span>.<span class="ruby-identifier">set_config</span> <span class="ruby-value">no_color:</span> <span class="ruby-keyword">true</span>
+      <span class="ruby-ivar">@seq</span> = <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@send_lock</span> = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+
+      <span class="ruby-keyword">case</span> <span class="ruby-keyword">self</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">UI_UnixDomainServer</span>
+        <span class="ruby-comment"># If the user specified a mapping, respect it, otherwise, make sure that no mapping is used</span>
+        <span class="ruby-constant">UI_DAP</span>.<span class="ruby-identifier">local_fs_map_set</span> <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:local_fs_map</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">UI_TcpServer</span>
+        <span class="ruby-comment"># TODO: loopback address can be used to connect other FS env, like Docker containers</span>
+        <span class="ruby-comment"># UI_DAP.local_fs_set if @local_addr.ipv4_loopback? || @local_addr.ipv6_loopback?</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">show_protocol</span> <span class="ruby-value">:&gt;</span>, <span class="ruby-identifier">bytes</span>
+      <span class="ruby-identifier">req</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">bytes</span>)
+
+      <span class="ruby-comment"># capability</span>
+      <span class="ruby-identifier">send_response</span>(<span class="ruby-identifier">req</span>,
+             <span class="ruby-comment">## Supported</span>
+             <span class="ruby-value">supportsConfigurationDoneRequest:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">supportsFunctionBreakpoints:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">supportsConditionalBreakpoints:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">supportTerminateDebuggee:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">supportsTerminateRequest:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">exceptionBreakpointFilters:</span> [
+               {
+                 <span class="ruby-value">filter:</span> <span class="ruby-string">&#39;any&#39;</span>,
+                 <span class="ruby-value">label:</span> <span class="ruby-string">&#39;rescue any exception&#39;</span>,
+                 <span class="ruby-value">supportsCondition:</span> <span class="ruby-keyword">true</span>,
+                 <span class="ruby-comment">#conditionDescription: &#39;&#39;,</span>
+               },
+               {
+                 <span class="ruby-value">filter:</span> <span class="ruby-string">&#39;RuntimeError&#39;</span>,
+                 <span class="ruby-value">label:</span> <span class="ruby-string">&#39;rescue RuntimeError&#39;</span>,
+                 <span class="ruby-value">supportsCondition:</span> <span class="ruby-keyword">true</span>,
+                 <span class="ruby-comment">#conditionDescription: &#39;&#39;,</span>
+               },
+             ],
+             <span class="ruby-value">supportsExceptionFilterOptions:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">supportsStepBack:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">supportsEvaluateForHovers:</span> <span class="ruby-keyword">true</span>,
+             <span class="ruby-value">supportsCompletionsRequest:</span> <span class="ruby-keyword">true</span>,
+
+             <span class="ruby-comment">## Will be supported</span>
+             <span class="ruby-comment"># supportsExceptionOptions: true,</span>
+             <span class="ruby-comment"># supportsHitConditionalBreakpoints:</span>
+             <span class="ruby-comment"># supportsSetVariable: true,</span>
+             <span class="ruby-comment"># supportSuspendDebuggee:</span>
+             <span class="ruby-comment"># supportsLogPoints:</span>
+             <span class="ruby-comment"># supportsLoadedSourcesRequest:</span>
+             <span class="ruby-comment"># supportsDataBreakpoints:</span>
+             <span class="ruby-comment"># supportsBreakpointLocationsRequest:</span>
+
+             <span class="ruby-comment">## Possible?</span>
+             <span class="ruby-comment"># supportsRestartFrame:</span>
+             <span class="ruby-comment"># completionTriggerCharacters:</span>
+             <span class="ruby-comment"># supportsModulesRequest:</span>
+             <span class="ruby-comment"># additionalModuleColumns:</span>
+             <span class="ruby-comment"># supportedChecksumAlgorithms:</span>
+             <span class="ruby-comment"># supportsRestartRequest:</span>
+             <span class="ruby-comment"># supportsValueFormattingOptions:</span>
+             <span class="ruby-comment"># supportsExceptionInfoRequest:</span>
+             <span class="ruby-comment"># supportsDelayedStackTraceLoading:</span>
+             <span class="ruby-comment"># supportsTerminateThreadsRequest:</span>
+             <span class="ruby-comment"># supportsSetExpression:</span>
+             <span class="ruby-comment"># supportsClipboardContext:</span>
+
+             <span class="ruby-comment">## Never</span>
+             <span class="ruby-comment"># supportsGotoTargetsRequest:</span>
+             <span class="ruby-comment"># supportsStepInTargetsRequest:</span>
+             <span class="ruby-comment"># supportsReadMemoryRequest:</span>
+             <span class="ruby-comment"># supportsDisassembleRequest:</span>
+             <span class="ruby-comment"># supportsCancelRequest:</span>
+             <span class="ruby-comment"># supportsSteppingGranularity:</span>
+             <span class="ruby-comment"># supportsInstructionBreakpoints:</span>
+      )
+      <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;initialized&#39;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">&lt;&lt;~WELCOME</span>
+<span class="ruby-value">        Ruby REPL: You can run any Ruby expression here.
+        Note that output to the STDOUT/ERR printed on the TERMINAL.
+        [experimental]
+          `,COMMAND` runs `COMMAND` debug command (ex: `,info`).
+          `,help` to list all debug commands.
+</span><span class="ruby-identifier">      WELCOME</span>
+    <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-event" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">event</span><span
+              class="method-args">(type, *args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="event-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 513</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">event</span> <span class="ruby-identifier">type</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:load</span>
+    <span class="ruby-identifier">file_path</span>, <span class="ruby-identifier">reloaded</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">file_path</span>
+      <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;loadedSource&#39;</span>,
+                 <span class="ruby-value">reason:</span> (<span class="ruby-identifier">reloaded</span> <span class="ruby-operator">?</span> <span class="ruby-value">:changed</span> <span class="ruby-operator">:</span> <span class="ruby-value">:new</span>),
+                 <span class="ruby-value">source:</span> {
+                   <span class="ruby-value">path:</span> <span class="ruby-identifier">file_path</span>,
+                 }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:suspend_bp</span>
+    <span class="ruby-identifier">_i</span>, <span class="ruby-identifier">bp</span>, <span class="ruby-identifier">tid</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">bp</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">CatchBreakpoint</span>)
+      <span class="ruby-identifier">reason</span> = <span class="ruby-string">&#39;exception&#39;</span>
+      <span class="ruby-identifier">text</span> = <span class="ruby-identifier">bp</span>.<span class="ruby-identifier">description</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">reason</span> = <span class="ruby-string">&#39;breakpoint&#39;</span>
+      <span class="ruby-identifier">text</span> = <span class="ruby-identifier">bp</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">bp</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;temporary bp&#39;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;stopped&#39;</span>, <span class="ruby-value">reason:</span> <span class="ruby-identifier">reason</span>,
+                          <span class="ruby-value">description:</span> <span class="ruby-identifier">text</span>,
+                          <span class="ruby-value">text:</span> <span class="ruby-identifier">text</span>,
+                          <span class="ruby-value">threadId:</span> <span class="ruby-identifier">tid</span>,
+                          <span class="ruby-value">allThreadsStopped:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:suspend_trap</span>
+    <span class="ruby-identifier">_sig</span>, <span class="ruby-identifier">tid</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+    <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;stopped&#39;</span>, <span class="ruby-value">reason:</span> <span class="ruby-string">&#39;pause&#39;</span>,
+                          <span class="ruby-value">threadId:</span> <span class="ruby-identifier">tid</span>,
+                          <span class="ruby-value">allThreadsStopped:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:suspended</span>
+    <span class="ruby-identifier">tid</span>, = <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+    <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;stopped&#39;</span>, <span class="ruby-value">reason:</span> <span class="ruby-string">&#39;step&#39;</span>,
+                          <span class="ruby-value">threadId:</span> <span class="ruby-identifier">tid</span>,
+                          <span class="ruby-value">allThreadsStopped:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-ignore_output_on_suspend-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">ignore_output_on_suspend?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="ignore_output_on_suspend-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 509</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ignore_output_on_suspend?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-load_extensions" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load_extensions</span><span
+              class="method-args">(req)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="load_extensions-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_extensions</span> <span class="ruby-identifier">req</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">exts</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;rdbgExtensions&#39;</span>)
+    <span class="ruby-identifier">exts</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">require_relative</span> <span class="ruby-node">&quot;dap_custom/#{File.basename(ext)}&quot;</span>
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">scripts</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;rdbgInitialScripts&#39;</span>)
+    <span class="ruby-identifier">scripts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">script</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">script</span>)
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">inspect</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 296</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">req</span> = <span class="ruby-identifier">recv_request</span>
+    <span class="ruby-identifier">process_request</span>(<span class="ruby-identifier">req</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">send_event</span> <span class="ruby-value">:terminated</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@sock</span>.<span class="ruby-identifier">closed?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_request" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_request</span><span
+              class="method-args">(req)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_request-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 304</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_request</span> <span class="ruby-identifier">req</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;not a request: #{req.inspect}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;type&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;request&#39;</span>
+  <span class="ruby-identifier">args</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;command&#39;</span>]
+
+  <span class="ruby-comment">## boot/configuration</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;launch&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-comment"># `launch` runs on debuggee on the same file system</span>
+    <span class="ruby-constant">UI_DAP</span>.<span class="ruby-identifier">local_fs_map_set</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;localfs&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;localfsMap&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-ivar">@nonstop</span> = <span class="ruby-keyword">true</span>
+
+    <span class="ruby-identifier">load_extensions</span> <span class="ruby-identifier">req</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;attach&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-constant">UI_DAP</span>.<span class="ruby-identifier">local_fs_map_set</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;localfs&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;localfsMap&#39;</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;nonstop&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+      <span class="ruby-ivar">@nonstop</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@nonstop</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">load_extensions</span> <span class="ruby-identifier">req</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;configurationDone&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@nonstop</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;continue&#39;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">in_subsession?</span>
+        <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;stopped&#39;</span>, <span class="ruby-value">reason:</span> <span class="ruby-string">&#39;pause&#39;</span>,
+                              <span class="ruby-value">threadId:</span> <span class="ruby-value">1</span>, <span class="ruby-comment"># maybe ...</span>
+                              <span class="ruby-value">allThreadsStopped:</span> <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;setBreakpoints&#39;</span>
+    <span class="ruby-identifier">req_path</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;source&#39;</span>, <span class="ruby-string">&#39;path&#39;</span>)
+    <span class="ruby-identifier">path</span> = <span class="ruby-constant">UI_DAP</span>.<span class="ruby-identifier">local_to_remote_path</span>(<span class="ruby-identifier">req_path</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>
+      <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">clear_line_breakpoints</span> <span class="ruby-identifier">path</span>
+
+      <span class="ruby-identifier">bps</span> = []
+      <span class="ruby-identifier">args</span>[<span class="ruby-string">&#39;breakpoints&#39;</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">bp</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">line</span> = <span class="ruby-identifier">bp</span>[<span class="ruby-string">&#39;line&#39;</span>]
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">cond</span> = <span class="ruby-identifier">bp</span>[<span class="ruby-string">&#39;condition&#39;</span>]
+          <span class="ruby-identifier">bps</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_line_breakpoint</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">line</span>, <span class="ruby-value">cond:</span> <span class="ruby-identifier">cond</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">bps</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_line_breakpoint</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">line</span>)
+        <span class="ruby-keyword">end</span>
+      }
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-value">breakpoints:</span> (<span class="ruby-identifier">bps</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">bp</span><span class="ruby-operator">|</span> {<span class="ruby-value">verified:</span> <span class="ruby-keyword">true</span>,} <span class="ruby-keyword">end</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-value">success:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">message:</span> <span class="ruby-node">&quot;#{req_path} is not available&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;setFunctionBreakpoints&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;setExceptionBreakpoints&#39;</span>
+    <span class="ruby-identifier">process_filter</span> = <span class="ruby-operator">-&gt;</span>(<span class="ruby-identifier">filter_id</span>, <span class="ruby-identifier">cond</span> = <span class="ruby-keyword">nil</span>) {
+      <span class="ruby-identifier">bp</span> =
+        <span class="ruby-keyword">case</span> <span class="ruby-identifier">filter_id</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;any&#39;</span>
+          <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_catch_breakpoint</span> <span class="ruby-string">&#39;Exception&#39;</span>, <span class="ruby-value">cond:</span> <span class="ruby-identifier">cond</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RuntimeError&#39;</span>
+          <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_catch_breakpoint</span> <span class="ruby-string">&#39;RuntimeError&#39;</span>, <span class="ruby-value">cond:</span> <span class="ruby-identifier">cond</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-keyword">nil</span>
+        <span class="ruby-keyword">end</span>
+        {
+          <span class="ruby-value">verified:</span> <span class="ruby-operator">!</span><span class="ruby-identifier">bp</span>.<span class="ruby-identifier">nil?</span>,
+          <span class="ruby-value">message:</span> <span class="ruby-identifier">bp</span>.<span class="ruby-identifier">inspect</span>,
+        }
+      }
+
+      <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">clear_catch_breakpoints</span> <span class="ruby-string">&#39;Exception&#39;</span>, <span class="ruby-string">&#39;RuntimeError&#39;</span>
+
+      <span class="ruby-identifier">filters</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;filters&#39;</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">filter_id</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">process_filter</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">filter_id</span>)
+      }
+
+      <span class="ruby-identifier">filters</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;filterOptions&#39;</span>, {}).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">bp_info</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">process_filter</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">bp_info</span>[<span class="ruby-string">&#39;filterId&#39;</span>], <span class="ruby-identifier">bp_info</span>[<span class="ruby-string">&#39;condition&#39;</span>])
+    }
+
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-value">breakpoints:</span> <span class="ruby-identifier">filters</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;disconnect&#39;</span>
+    <span class="ruby-identifier">terminate</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&quot;terminateDebuggee&quot;</span>, <span class="ruby-keyword">false</span>)
+
+    <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">clear_all_breakpoints</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">in_subsession?</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">terminate</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;kill!&#39;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;continue&#39;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">terminate</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;kill!&#39;</span>
+        <span class="ruby-identifier">pause</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment">## control</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;continue&#39;</span>
+    <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;c&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-value">allThreadsContinued:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;next&#39;</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-ivar">@session</span>.<span class="ruby-identifier">check_postmortem</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;n&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">PostmortemError</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                    <span class="ruby-value">success:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&#39;postmortem mode&#39;</span>,
+                    <span class="ruby-value">result:</span> <span class="ruby-string">&quot;&#39;Next&#39; is not supported while postmortem mode&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;stepIn&#39;</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-ivar">@session</span>.<span class="ruby-identifier">check_postmortem</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;s&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">PostmortemError</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                    <span class="ruby-value">success:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&#39;postmortem mode&#39;</span>,
+                    <span class="ruby-value">result:</span> <span class="ruby-string">&quot;&#39;stepIn&#39; is not supported while postmortem mode&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;stepOut&#39;</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-ivar">@session</span>.<span class="ruby-identifier">check_postmortem</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;fin&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">PostmortemError</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                    <span class="ruby-value">success:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&#39;postmortem mode&#39;</span>,
+                    <span class="ruby-value">result:</span> <span class="ruby-string">&quot;&#39;stepOut&#39; is not supported while postmortem mode&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;terminate&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-identifier">exit</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;pause&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-constant">UI_ServerBase</span><span class="ruby-operator">::</span><span class="ruby-constant">TRAP_SIGNAL</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;reverseContinue&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                  <span class="ruby-value">success:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&#39;cancelled&#39;</span>,
+                  <span class="ruby-value">result:</span> <span class="ruby-string">&quot;Reverse Continue is not supported. Only \&quot;Step back\&quot; is supported.&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;stepBack&#39;</span>
+    <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+
+  <span class="ruby-comment">## query</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;threads&#39;</span>
+    <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-value">threads:</span> <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">managed_thread_clients</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">tc</span><span class="ruby-operator">|</span>
+      { <span class="ruby-value">id:</span> <span class="ruby-identifier">tc</span>.<span class="ruby-identifier">id</span>,
+        <span class="ruby-value">name:</span> <span class="ruby-identifier">tc</span>.<span class="ruby-identifier">name</span>,
+      }
+    }
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;evaluate&#39;</span>
+    <span class="ruby-identifier">expr</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;arguments&#39;</span>, <span class="ruby-string">&#39;expression&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\s*,(.+)\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">expr</span>
+      <span class="ruby-identifier">dbg_expr</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">strip</span>
+      <span class="ruby-identifier">dbg_expr</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;;;&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">cmd</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">cmd</span> }
+
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                    <span class="ruby-value">result:</span> <span class="ruby-node">&quot;(rdbg:command) #{dbg_expr}&quot;</span>,
+                    <span class="ruby-value">variablesReference:</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;stackTrace&#39;</span>,
+       <span class="ruby-string">&#39;scopes&#39;</span>,
+       <span class="ruby-string">&#39;variables&#39;</span>,
+       <span class="ruby-string">&#39;source&#39;</span>,
+       <span class="ruby-string">&#39;completions&#39;</span>
+    <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">mid</span> = <span class="ruby-node">&quot;custom_dap_request_#{req[&#39;command&#39;]}&quot;</span>
+      <span class="ruby-identifier">__send__</span> <span class="ruby-identifier">mid</span>, <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown request: #{req.inspect}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-puts" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">puts</span><span
+              class="method-args">(result = &quot;&quot;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="puts-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 504</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">puts</span> <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-comment"># STDERR.puts &quot;puts: #{result}&quot;</span>
+  <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;output&#39;</span>, <span class="ruby-value">category:</span> <span class="ruby-string">&#39;console&#39;</span>, <span class="ruby-value">output:</span> <span class="ruby-node">&quot;#{result&amp;.chomp}\n&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-recv_request" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">recv_request</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="recv_request-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">recv_request</span>
+  <span class="ruby-constant">IO</span>.<span class="ruby-identifier">select</span>([<span class="ruby-ivar">@sock</span>])
+
+  <span class="ruby-ivar">@session</span>.<span class="ruby-identifier">process_group</span>.<span class="ruby-identifier">sync</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RetryBecauseCantRead</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">select</span>([<span class="ruby-ivar">@sock</span>], <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-value">0</span>)
+
+    <span class="ruby-keyword">case</span> <span class="ruby-ivar">@sock</span>.<span class="ruby-identifier">gets</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/Content-Length: (\d+)/</span>
+      <span class="ruby-identifier">b</span> = <span class="ruby-ivar">@sock</span>.<span class="ruby-identifier">read</span>(<span class="ruby-value">2</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\r\n&quot;</span>
+
+      <span class="ruby-identifier">l</span> = <span class="ruby-ivar">@sock</span>.<span class="ruby-identifier">read</span>(<span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>)
+      <span class="ruby-identifier">show_protocol</span> <span class="ruby-value">:&gt;</span>, <span class="ruby-identifier">l</span>
+      <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">l</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unrecognized line: #{l} (#{l.size} bytes)&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">RetryBecauseCantRead</span>
+  <span class="ruby-keyword">retry</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-respond" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">respond</span><span
+              class="method-args">(req, res)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>called by the SESSION thread</p>
+
+          <div class="method-source-code" id="respond-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 500</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">respond</span> <span class="ruby-identifier">req</span>, <span class="ruby-identifier">res</span>
+  <span class="ruby-identifier">send_response</span>(<span class="ruby-identifier">req</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">res</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-send" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send</span><span
+              class="method-args">(**kw)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 212</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send</span> <span class="ruby-operator">**</span><span class="ruby-identifier">kw</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">sock</span> = <span class="ruby-ivar">@sock</span>
+    <span class="ruby-identifier">kw</span>[<span class="ruby-value">:seq</span>] = <span class="ruby-ivar">@seq</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">str</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">kw</span>)
+    <span class="ruby-ivar">@send_lock</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">sock</span>.<span class="ruby-identifier">write</span> <span class="ruby-node">&quot;Content-Length: #{str.bytesize}\r\n\r\n#{str}&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">show_protocol</span> <span class="ruby-string">&#39;&lt;&#39;</span>, <span class="ruby-identifier">str</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EPIPE</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{e.inspect} rescued during sending message&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-send_event" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_event</span><span
+              class="method-args">(name, **kw)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send_event-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 242</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_event</span> <span class="ruby-identifier">name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kw</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">kw</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">send</span> <span class="ruby-value">type:</span> <span class="ruby-string">&#39;event&#39;</span>, <span class="ruby-value">event:</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">send</span> <span class="ruby-value">type:</span> <span class="ruby-string">&#39;event&#39;</span>, <span class="ruby-value">event:</span> <span class="ruby-identifier">name</span>, <span class="ruby-value">body:</span> <span class="ruby-identifier">kw</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-send_response" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_response</span><span
+              class="method-args">(req, success: true, message: nil, **kw)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send_response-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 225</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-value">success:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">message:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kw</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">kw</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">send</span> <span class="ruby-value">type:</span> <span class="ruby-string">&#39;response&#39;</span>,
+         <span class="ruby-value">command:</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;command&#39;</span>],
+         <span class="ruby-value">request_seq:</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;seq&#39;</span>],
+         <span class="ruby-value">success:</span> <span class="ruby-identifier">success</span>,
+         <span class="ruby-value">message:</span> <span class="ruby-identifier">message</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">success</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;Success&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;Failed&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">send</span> <span class="ruby-value">type:</span> <span class="ruby-string">&#39;response&#39;</span>,
+         <span class="ruby-value">command:</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;command&#39;</span>],
+         <span class="ruby-value">request_seq:</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;seq&#39;</span>],
+         <span class="ruby-value">success:</span> <span class="ruby-identifier">success</span>,
+         <span class="ruby-value">message:</span> <span class="ruby-identifier">message</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">success</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;Success&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;Failed&#39;</span>),
+         <span class="ruby-value">body:</span> <span class="ruby-identifier">kw</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-show_protocol" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">show_protocol</span><span
+              class="method-args">(dir, msg)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="show_protocol-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_dap.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_protocol</span> <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">msg</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">SHOW_PROTOCOL</span>
+    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\##{Process.pid}:[#{dir}] #{msg}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

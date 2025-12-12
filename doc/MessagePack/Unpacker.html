@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class MessagePack::Unpacker - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-allow_unknown_ext-3F">#allow_unknown_ext?</a>
+    <li ><a href="#method-i-buffer">#buffer</a>
+    <li ><a href="#method-i-each">#each</a>
+    <li ><a href="#method-i-feed">#feed</a>
+    <li ><a href="#method-i-feed_each">#feed_each</a>
+    <li ><a href="#method-i-feed_reference">#feed_reference</a>
+    <li ><a href="#method-i-freeze-3F">#freeze?</a>
+    <li ><a href="#method-i-full_unpack">#full_unpack</a>
+    <li ><a href="#method-i-read">#read</a>
+    <li ><a href="#method-i-read_array_header">#read_array_header</a>
+    <li ><a href="#method-i-read_map_header">#read_map_header</a>
+    <li ><a href="#method-i-register_type">#register_type</a>
+    <li ><a href="#method-i-registered_types">#registered_types</a>
+    <li ><a href="#method-i-reset">#reset</a>
+    <li ><a href="#method-i-skip">#skip</a>
+    <li ><a href="#method-i-skip_nil">#skip_nil</a>
+    <li ><a href="#method-i-symbolize_keys-3F">#symbolize_keys?</a>
+    <li ><a href="#method-i-type_registered-3F">#type_registered?</a>
+    <li ><a href="#method-i-unpack">#unpack</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-MessagePack::Unpacker">
+  <h1 id="class-MessagePack::Unpacker" class="class">
+    class MessagePack::Unpacker
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre>VALUE MessagePack_Unpacker_initialize(int argc, VALUE* argv, VALUE self)
+{
+    VALUE io = Qnil;
+    VALUE options = Qnil;
+
+    if(argc == 0 || (argc == 1 &amp;&amp; argv[0] == Qnil)) {
+        /* Qnil */
+
+    } else if(argc == 1) {
+        VALUE v = argv[0];
+        if(rb_type(v) == T_HASH) {
+            options = v;
+        } else {
+            io = v;
+        }
+
+    } else if(argc == 2) {
+        io = argv[0];
+        options = argv[1];
+        if(options != Qnil &amp;&amp; rb_type(options) != T_HASH) {
+            rb_raise(rb_eArgError, &quot;expected Hash but found %s.&quot;, rb_obj_classname(options));
+        }
+
+    } else {
+        rb_raise(rb_eArgError, &quot;wrong number of arguments (%d for 0..2)&quot;, argc);
+    }
+
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    uk-&gt;buffer_ref = Qnil;
+
+    MessagePack_Buffer_set_options(UNPACKER_BUFFER_(uk), io, options);
+
+    if(options != Qnil) {
+        VALUE v;
+
+        v = rb_hash_aref(options, sym_key_cache);
+        msgpack_unpacker_set_key_cache(uk, RTEST(v));
+
+        v = rb_hash_aref(options, sym_symbolize_keys);
+        msgpack_unpacker_set_symbolized_keys(uk, RTEST(v));
+
+        v = rb_hash_aref(options, sym_freeze);
+        msgpack_unpacker_set_freeze(uk, RTEST(v));
+
+        v = rb_hash_aref(options, sym_allow_unknown_ext);
+        msgpack_unpacker_set_allow_unknown_ext(uk, RTEST(v));
+    }
+
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-allow_unknown_ext-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">allow_unknown_ext?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="allow_unknown_ext-3F-source">
+            <pre>static VALUE Unpacker_allow_unknown_ext_p(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+    return uk-&gt;allow_unknown_ext ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: allow_unknown_ext?
+        </div>
+
+      </div>
+
+      <div id="method-i-buffer" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">buffer</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="buffer-source">
+            <pre>static VALUE Unpacker_buffer(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+    if (!RTEST(uk-&gt;buffer_ref)) {
+        uk-&gt;buffer_ref = MessagePack_Buffer_wrap(UNPACKER_BUFFER_(uk), self);
+    }
+    return uk-&gt;buffer_ref;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: buffer
+        </div>
+
+      </div>
+
+      <div id="method-i-each" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">each</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="each-source">
+            <pre>static VALUE Unpacker_each(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+#ifdef RETURN_ENUMERATOR
+    RETURN_ENUMERATOR(self, 0, 0);
+#endif
+
+    if(msgpack_buffer_has_io(UNPACKER_BUFFER_(uk))) {
+        /* rescue EOFError only if io is set */
+        return rb_rescue2(Unpacker_each_impl, self,
+                Unpacker_rescue_EOFError, self,
+                rb_eEOFError, NULL);
+    } else {
+        return Unpacker_each_impl(self);
+    }
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: each
+        </div>
+
+      </div>
+
+      <div id="method-i-feed" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">feed</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="feed-source">
+            <pre>static VALUE Unpacker_feed_reference(VALUE self, VALUE data)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    StringValue(data);
+
+    msgpack_buffer_append_string_reference(UNPACKER_BUFFER_(uk), data);
+
+    return self;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Unpacker.html#method-i-feed_reference">feed_reference</a>, feed, feed_reference
+        </div>
+
+      </div>
+
+      <div id="method-i-feed_each" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">feed_each</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="feed_each-source">
+            <pre>static VALUE Unpacker_feed_each(VALUE self, VALUE data)
+{
+#ifdef RETURN_ENUMERATOR
+    {
+        VALUE argv[] = { data };
+        RETURN_ENUMERATOR(self, sizeof(argv) / sizeof(VALUE), argv);
+    }
+#endif
+
+    Unpacker_feed_reference(self, data);
+    return Unpacker_each(self);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: feed_each
+        </div>
+
+      </div>
+
+      <div id="method-i-feed_reference" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">feed_reference</span><span
+              class="method-args">(p1)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Unpacker.html#method-i-feed">feed</a>
+        </div>
+      </div>
+
+      <div id="method-i-freeze-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">freeze?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="freeze-3F-source">
+            <pre>static VALUE Unpacker_freeze_p(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+    return uk-&gt;freeze ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: freeze?
+        </div>
+
+      </div>
+
+      <div id="method-i-full_unpack" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">full_unpack</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="full_unpack-source">
+            <pre>static VALUE Unpacker_full_unpack(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    int r = msgpack_unpacker_read(uk, 0);
+    if(r &lt; 0) {
+        raise_unpacker_error(uk, r);
+    }
+
+    /* raise if extra bytes follow */
+    size_t extra = msgpack_buffer_top_readable_size(UNPACKER_BUFFER_(uk));
+    if(extra &gt; 0) {
+        rb_raise(eMalformedFormatError, &quot;%zd extra bytes after the deserialized object&quot;, extra);
+    }
+
+    return msgpack_unpacker_get_last_object(uk);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: full_unpack
+        </div>
+
+      </div>
+
+      <div id="method-i-read" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">read</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="read-source">
+            <pre>static VALUE Unpacker_read(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    int r = msgpack_unpacker_read(uk, 0);
+    if(r &lt; 0) {
+        raise_unpacker_error(uk, r);
+    }
+
+    return msgpack_unpacker_get_last_object(uk);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Unpacker.html#method-i-unpack">unpack</a>, read, unpack
+        </div>
+
+      </div>
+
+      <div id="method-i-read_array_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">read_array_header</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="read_array_header-source">
+            <pre>static VALUE Unpacker_read_array_header(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    uint32_t size;
+    int r = msgpack_unpacker_read_array_header(uk, &amp;size);
+    if(r &lt; 0) {
+        raise_unpacker_error(uk, r);
+    }
+
+    return ULONG2NUM(size); // long at least 32 bits
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: read_array_header
+        </div>
+
+      </div>
+
+      <div id="method-i-read_map_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">read_map_header</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="read_map_header-source">
+            <pre>static VALUE Unpacker_read_map_header(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    uint32_t size;
+    int r = msgpack_unpacker_read_map_header(uk, &amp;size);
+    if(r &lt; 0) {
+        raise_unpacker_error(uk, r);
+    }
+
+    return ULONG2NUM(size); // long at least 32 bits
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: read_map_header
+        </div>
+
+      </div>
+
+      <div id="method-i-register_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">register_type</span><span
+              class="method-args">(type, klass = nil, method_name = nil, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="register_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/unpacker.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">register_type</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">method_name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">method_name</span>
+    <span class="ruby-identifier">block</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">method</span>(<span class="ruby-identifier">method_name</span>).<span class="ruby-identifier">to_proc</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;register_type takes either 3 arguments or a block&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">register_type_internal</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-registered_types" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">registered_types</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="registered_types-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/unpacker.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">registered_types</span>
+  <span class="ruby-identifier">list</span> = []
+
+  <span class="ruby-identifier">registered_types_internal</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">ary</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">type:</span> <span class="ruby-identifier">type</span>, <span class="ruby-value">class:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>], <span class="ruby-value">unpacker:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]}
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">list</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">:type</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-reset" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reset</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="reset-source">
+            <pre>static VALUE Unpacker_reset(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    _msgpack_unpacker_reset(uk);
+
+    return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: reset
+        </div>
+
+      </div>
+
+      <div id="method-i-skip" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">skip</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="skip-source">
+            <pre>static VALUE Unpacker_skip(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    int r = msgpack_unpacker_skip(uk, 0);
+    if(r &lt; 0) {
+        raise_unpacker_error(uk, r);
+    }
+
+    return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: skip
+        </div>
+
+      </div>
+
+      <div id="method-i-skip_nil" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">skip_nil</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="skip_nil-source">
+            <pre>static VALUE Unpacker_skip_nil(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+
+    int r = msgpack_unpacker_skip_nil(uk);
+    if(r &lt; 0) {
+        raise_unpacker_error(uk, r);
+    }
+
+    if(r) {
+        return Qtrue;
+    }
+    return Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: skip_nil
+        </div>
+
+      </div>
+
+      <div id="method-i-symbolize_keys-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">symbolize_keys?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="symbolize_keys-3F-source">
+            <pre>static VALUE Unpacker_symbolized_keys_p(VALUE self)
+{
+    msgpack_unpacker_t *uk = MessagePack_Unpacker_get(self);
+    return uk-&gt;symbolize_keys ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: symbolize_keys?
+        </div>
+
+      </div>
+
+      <div id="method-i-type_registered-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">type_registered?</span><span
+              class="method-args">(klass_or_type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="type_registered-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/unpacker.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type_registered?</span>(<span class="ruby-identifier">klass_or_type</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">klass_or_type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Class</span>
+    <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">klass_or_type</span>
+    <span class="ruby-identifier">registered_types</span>.<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">klass</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">:class</span>] }
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Integer</span>
+    <span class="ruby-identifier">type</span> = <span class="ruby-identifier">klass_or_type</span>
+    <span class="ruby-identifier">registered_types</span>.<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">:type</span>] }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;class or type id&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-unpack" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">unpack</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Unpacker.html#method-i-read">read</a>
+        </div>
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

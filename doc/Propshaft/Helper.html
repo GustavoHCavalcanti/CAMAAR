@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Propshaft::Helper - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#module-Propshaft::Helper-label-Subresource+Integrity+-28SRI-29+Support">Subresource Integrity (SRI) Support</a>
+          <li>      <a href="#module-Propshaft::Helper-label-Bulk+Stylesheet+Inclusion">Bulk Stylesheet Inclusion</a>
+          <li>      <a href="#module-Propshaft::Helper-label-Subresource+Integrity+-28SRI-29+Support">Subresource Integrity (SRI) Support</a>
+          <li>      <a href="#module-Propshaft::Helper-label-Bulk+Stylesheet+Inclusion">Bulk Stylesheet Inclusion</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-all_stylesheets_paths">#all_stylesheets_paths</a>
+    <li ><a href="#method-i-app_stylesheets_paths">#app_stylesheets_paths</a>
+    <li ><a href="#method-i-asset_integrity">#asset_integrity</a>
+    <li ><a href="#method-i-compute_asset_path">#compute_asset_path</a>
+    <li class="calls-super" ><a href="#method-i-javascript_include_tag">#javascript_include_tag</a>
+    <li class="calls-super" ><a href="#method-i-stylesheet_link_tag">#stylesheet_link_tag</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Propshaft::Helper">
+  <h1 id="module-Propshaft::Helper" class="module">
+    module Propshaft::Helper
+  </h1>
+
+  <section class="description">
+    
+<p><a href="Helper.html"><code>Helper</code></a> module that provides asset path resolution and integrity support for <a href="../Rails.html"><code>Rails</code></a> applications.</p>
+
+<p>This module extends Rails’ built-in asset helpers with additional functionality:</p>
+<ul><li>
+<p>Subresource Integrity (SRI) support for enhanced security</p>
+</li><li>
+<p>Bulk stylesheet inclusion with :all and :app options</p>
+</li><li>
+<p><a href="Asset.html"><code>Asset</code></a> path resolution with proper error handling</p>
+</li></ul>
+
+<h2 id="module-Propshaft::Helper-label-Subresource+Integrity+-28SRI-29+Support">Subresource Integrity (SRI) Support<span><a href="#module-Propshaft::Helper-label-Subresource+Integrity+-28SRI-29+Support">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>SRI helps protect against malicious modifications of assets by ensuring that resources fetched from CDNs or other sources haven’t been tampered with.</p>
+
+<p>SRI is automatically enabled in secure contexts (HTTPS or local development) when the ‘integrity’ option is set to true:</p>
+
+<pre>&lt;%= stylesheet_link_tag &quot;application&quot;, integrity: true %&gt;
+&lt;%= javascript_include_tag &quot;application&quot;, integrity: true %&gt;</pre>
+
+<p>This will generate integrity hashes and include them in the HTML:</p>
+
+<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/application-abc123.css&quot;
+      integrity=&quot;sha256-xyz789...&quot;&gt;
+&lt;script src=&quot;/assets/application-def456.js&quot;
+        integrity=&quot;sha256-uvw012...&quot;&gt;&lt;/script&gt;</pre>
+
+<h2 id="module-Propshaft::Helper-label-Bulk+Stylesheet+Inclusion">Bulk Stylesheet Inclusion<span><a href="#module-Propshaft::Helper-label-Bulk+Stylesheet+Inclusion">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The <a href="Helper.html#method-i-stylesheet_link_tag"><code>stylesheet_link_tag</code></a> helper supports special symbols for bulk inclusion:</p>
+<ul><li>
+<p>:all - includes all CSS files found in the load path</p>
+</li><li>
+<p>:app - includes only CSS files from app/assets/<strong>*/</strong>.css</p>
+
+<p>&lt;%= <a href="Helper.html#method-i-stylesheet_link_tag"><code>stylesheet_link_tag</code></a> :all %&gt;  # All stylesheets &lt;%= <a href="Helper.html#method-i-stylesheet_link_tag"><code>stylesheet_link_tag</code></a> :app %&gt;  # Only app stylesheets</p>
+</li></ul>
+
+<p><a href="Helper.html"><code>Helper</code></a> module that provides asset path resolution and integrity support for <a href="../Rails.html"><code>Rails</code></a> applications.</p>
+
+<p>This module extends Rails’ built-in asset helpers with additional functionality:</p>
+<ul><li>
+<p>Subresource Integrity (SRI) support for enhanced security</p>
+</li><li>
+<p>Bulk stylesheet inclusion with :all and :app options</p>
+</li><li>
+<p><a href="Asset.html"><code>Asset</code></a> path resolution with proper error handling</p>
+</li></ul>
+
+<h2 id="module-Propshaft::Helper-label-Subresource+Integrity+-28SRI-29+Support">Subresource Integrity (SRI) Support<span><a href="#module-Propshaft::Helper-label-Subresource+Integrity+-28SRI-29+Support">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>SRI helps protect against malicious modifications of assets by ensuring that resources fetched from CDNs or other sources haven’t been tampered with.</p>
+
+<p>SRI is automatically enabled in secure contexts (HTTPS or local development) when the ‘integrity’ option is set to true:</p>
+
+<pre>&lt;%= stylesheet_link_tag &quot;application&quot;, integrity: true %&gt;
+&lt;%= javascript_include_tag &quot;application&quot;, integrity: true %&gt;</pre>
+
+<p>This will generate integrity hashes and include them in the HTML:</p>
+
+<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/application-abc123.css&quot;
+      integrity=&quot;sha256-xyz789...&quot;&gt;
+&lt;script src=&quot;/assets/application-def456.js&quot;
+        integrity=&quot;sha256-uvw012...&quot;&gt;&lt;/script&gt;</pre>
+
+<h2 id="module-Propshaft::Helper-label-Bulk+Stylesheet+Inclusion">Bulk Stylesheet Inclusion<span><a href="#module-Propshaft::Helper-label-Bulk+Stylesheet+Inclusion">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The <a href="Helper.html#method-i-stylesheet_link_tag"><code>stylesheet_link_tag</code></a> helper supports special symbols for bulk inclusion:</p>
+<ul><li>
+<p>:all - includes all CSS files found in the load path</p>
+</li><li>
+<p>:app - includes only CSS files from app/assets/<strong>*/</strong>.css</p>
+
+<p>&lt;%= <a href="Helper.html#method-i-stylesheet_link_tag"><code>stylesheet_link_tag</code></a> :all %&gt;  # All stylesheets &lt;%= <a href="Helper.html#method-i-stylesheet_link_tag"><code>stylesheet_link_tag</code></a> :app %&gt;  # Only app stylesheets</p>
+</li></ul>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-all_stylesheets_paths" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">all_stylesheets_paths</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a sorted and unique array of logical paths for all stylesheets in the load path.</p>
+
+          <div class="method-source-code" id="all_stylesheets_paths-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/propshaft-1.3.1/lib/propshaft/helper.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_stylesheets_paths</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">assets</span>.<span class="ruby-identifier">load_path</span>.<span class="ruby-identifier">asset_paths_by_type</span>(<span class="ruby-string">&quot;css&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-app_stylesheets_paths" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">app_stylesheets_paths</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a sorted and unique array of logical paths for all stylesheets in app/assets/<strong>*/</strong>.css.</p>
+
+          <div class="method-source-code" id="app_stylesheets_paths-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/propshaft-1.3.1/lib/propshaft/helper.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">app_stylesheets_paths</span>
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">assets</span>.<span class="ruby-identifier">load_path</span>.<span class="ruby-identifier">asset_paths_by_glob</span>(<span class="ruby-node">&quot;#{Rails.root.join(&quot;app/assets&quot;)}/**/*.css&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-asset_integrity" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">asset_integrity</span><span
+              class="method-args">(path, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Computes the Subresource Integrity (SRI) hash for the given asset path.</p>
+
+<p>This method generates a cryptographic hash of the asset content that can be used to verify the integrity of the resource when it’s loaded by the browser.</p>
+
+<pre class="ruby"><span class="ruby-identifier">asset_integrity</span>(<span class="ruby-string">&quot;application.css&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;sha256-xyz789abcdef...&quot;</span>
+</pre>
+
+          <div class="method-source-code" id="asset_integrity-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/propshaft-1.3.1/lib/propshaft/helper.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">asset_integrity</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">path</span> = <span class="ruby-identifier">_path_with_extname</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">assets</span>.<span class="ruby-identifier">resolver</span>.<span class="ruby-identifier">integrity</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-compute_asset_path" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">compute_asset_path</span><span
+              class="method-args">(path, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resolves the full path for an asset, raising an error if not found.</p>
+
+          <div class="method-source-code" id="compute_asset_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/propshaft-1.3.1/lib/propshaft/helper.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compute_asset_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">assets</span>.<span class="ruby-identifier">resolver</span>.<span class="ruby-identifier">resolve</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">MissingAssetError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-javascript_include_tag" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">javascript_include_tag</span><span
+              class="method-args">(*sources)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Enhanced <code>javascript_include_tag</code> with automatic SRI (Subresource Integrity) support.</p>
+
+<p>This method extends Rails’ built-in <code>javascript_include_tag</code> to automatically generate and include integrity hashes when running in secure contexts.</p>
+
+<h4 id="method-i-javascript_include_tag-label-Options">Options<span><a href="#method-i-javascript_include_tag-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:integrity</code> - Enable SRI hash generation</p>
+</li></ul>
+
+<h4 id="method-i-javascript_include_tag-label-Examples">Examples<span><a href="#method-i-javascript_include_tag-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">javascript_include_tag</span> <span class="ruby-string">&quot;application&quot;</span>, <span class="ruby-value">integrity:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-comment"># =&gt; &lt;script src=&quot;/assets/application-abc123.js&quot;</span>
+<span class="ruby-comment">#           integrity=&quot;sha256-xyz789...&quot;&gt;&lt;/script&gt;</span>
+</pre>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="javascript_include_tag-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/propshaft-1.3.1/lib/propshaft/helper.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_include_tag</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">sources</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">sources</span>.<span class="ruby-identifier">extract_options!</span>
+
+  <span class="ruby-identifier">_build_asset_tags</span>(<span class="ruby-identifier">sources</span>, <span class="ruby-identifier">options</span>, <span class="ruby-value">:javascript</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">source</span>, <span class="ruby-identifier">opts</span><span class="ruby-operator">|</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">opts</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-stylesheet_link_tag" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">stylesheet_link_tag</span><span
+              class="method-args">(*sources)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Enhanced <code>stylesheet_link_tag</code> with integrity support and bulk inclusion options.</p>
+
+<p>In addition to the standard <a href="../Rails.html"><code>Rails</code></a> functionality, this method supports:</p>
+<ul><li>
+<p>Automatic SRI (Subresource Integrity) hash generation in secure contexts</p>
+</li><li>
+<p>Add an option to call <code>stylesheet_link_tag</code> with <code>:all</code> to include every css file found on the load path or <code>:app</code> to include css files found in <code>Rails.root(&quot;app/assets/<strong>*/</strong>.css&quot;)</code>, which will exclude lib/ and plugins.</p>
+</li></ul>
+
+<h4 id="method-i-stylesheet_link_tag-label-Options">Options<span><a href="#method-i-stylesheet_link_tag-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:integrity</code> - Enable SRI hash generation</p>
+</li></ul>
+
+<h4 id="method-i-stylesheet_link_tag-label-Examples">Examples<span><a href="#method-i-stylesheet_link_tag-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-identifier">stylesheet_link_tag</span> <span class="ruby-string">&quot;application&quot;</span>, <span class="ruby-value">integrity:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-comment"># =&gt; &lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/application-abc123.css&quot;</span>
+<span class="ruby-comment">#          integrity=&quot;sha256-xyz789...&quot;&gt;</span>
+
+<span class="ruby-identifier">stylesheet_link_tag</span> <span class="ruby-value">:all</span>    <span class="ruby-comment"># All stylesheets in load path</span>
+<span class="ruby-identifier">stylesheet_link_tag</span> <span class="ruby-value">:app</span>    <span class="ruby-comment"># Only app/assets stylesheets</span>
+</pre>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="stylesheet_link_tag-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/propshaft-1.3.1/lib/propshaft/helper.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stylesheet_link_tag</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">sources</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">sources</span>.<span class="ruby-identifier">extract_options!</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">sources</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:all</span>
+    <span class="ruby-identifier">sources</span> = <span class="ruby-identifier">all_stylesheets_paths</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:app</span>
+    <span class="ruby-identifier">sources</span> = <span class="ruby-identifier">app_stylesheets_paths</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">_build_asset_tags</span>(<span class="ruby-identifier">sources</span>, <span class="ruby-identifier">options</span>, <span class="ruby-value">:stylesheet</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">source</span>, <span class="ruby-identifier">opts</span><span class="ruby-operator">|</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">opts</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Capybara::Window - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-3D-3D">#==</a>
+    <li ><a href="#method-i-close">#close</a>
+    <li ><a href="#method-i-closed-3F">#closed?</a>
+    <li ><a href="#method-i-current-3F">#current?</a>
+    <li ><a href="#method-i-eql-3F">#eql?</a>
+    <li ><a href="#method-i-exists-3F">#exists?</a>
+    <li ><a href="#method-i-fullscreen">#fullscreen</a>
+    <li ><a href="#method-i-hash">#hash</a>
+    <li ><a href="#method-i-inspect">#inspect</a>
+    <li ><a href="#method-i-maximize">#maximize</a>
+    <li ><a href="#method-i-resize_to">#resize_to</a>
+    <li ><a href="#method-i-size">#size</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Capybara::Window">
+  <h1 id="class-Capybara::Window" class="class">
+    class Capybara::Window
+  </h1>
+
+  <section class="description">
+    
+<p>The {Window} class represents a browser window.</p>
+
+<p>You can get an instance of the class by calling any of:</p>
+<ul><li>
+<p>{Capybara::Session#windows}</p>
+</li><li>
+<p>{Capybara::Session#current_window}</p>
+</li><li>
+<p>{Capybara::Session#window_opened_by}</p>
+</li><li>
+<p>{Capybara::Session#switch_to_window}</p>
+</li></ul>
+
+<p>Note that some drivers (e.g. <a href="Selenium.html"><code>Selenium</code></a>) support getting size of/resizing/closing only current window. So if you invoke such method for:</p>
+<ul><li>
+<p>window that is current, <a href="../Capybara.html"><code>Capybara</code></a> will make 2 <a href="Selenium.html"><code>Selenium</code></a> method invocations (get handle of current window + get size/resize/close).</p>
+</li><li>
+<p>window that is not current, <a href="../Capybara.html"><code>Capybara</code></a> will make 4 <a href="Selenium.html"><code>Selenium</code></a> method invocations (get handle of current window + switch to given handle + get size/resize/close + switch to original handle)</p>
+</li></ul>
+
+<p>The {Window} class represents a browser window.</p>
+
+<p>You can get an instance of the class by calling any of:</p>
+<ul><li>
+<p>{Capybara::Session#windows}</p>
+</li><li>
+<p>{Capybara::Session#current_window}</p>
+</li><li>
+<p>{Capybara::Session#window_opened_by}</p>
+</li><li>
+<p>{Capybara::Session#switch_to_window}</p>
+</li></ul>
+
+<p>Note that some drivers (e.g. <a href="Selenium.html"><code>Selenium</code></a>) support getting size of/resizing/closing only current window. So if you invoke such method for:</p>
+<ul><li>
+<p>window that is current, <a href="../Capybara.html"><code>Capybara</code></a> will make 2 <a href="Selenium.html"><code>Selenium</code></a> method invocations (get handle of current window + get size/resize/close).</p>
+</li><li>
+<p>window that is not current, <a href="../Capybara.html"><code>Capybara</code></a> will make 4 <a href="Selenium.html"><code>Selenium</code></a> method invocations (get handle of current window + switch to given handle + get size/resize/close + switch to original handle)</p>
+</li></ul>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-handle" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">handle</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [String]   a string that uniquely identifies window within session</p>
+        </div>
+      </div>
+      <div id="attribute-i-session" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">session</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [Capybara::Session] session that this window belongs to</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(session, handle)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">session</span>, <span class="ruby-identifier">handle</span>)
+  <span class="ruby-ivar">@session</span> = <span class="ruby-identifier">session</span>
+  <span class="ruby-ivar">@driver</span> = <span class="ruby-identifier">session</span>.<span class="ruby-identifier">driver</span>
+  <span class="ruby-ivar">@handle</span> = <span class="ruby-identifier">handle</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-3D-3D" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">==</span><span
+              class="method-args">(other)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Window.html#method-i-eql-3F">eql?</a>
+        </div>
+      </div>
+
+      <div id="method-i-close" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">close</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Close window.</p>
+
+<p>If this method was called for window that is current, then after calling this method future invocations of other <a href="../Capybara.html"><code>Capybara</code></a> methods should raise {Capybara::Driver::Base#no_such_window_error session.driver.no_such_window_error} until another window will be switched to.</p>
+
+<p>@!macro about_current</p>
+
+<pre>If this method was called for window that is not current, then after calling this method
+current window should remain the same as it was before calling this method.</pre>
+
+          <div class="method-source-code" id="close-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+  <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">close_window</span>(<span class="ruby-identifier">handle</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-closed-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">closed?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@return [Boolean] whether the window is closed</p>
+
+          <div class="method-source-code" id="closed-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">closed?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">exists?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-current-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">current?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@return [Boolean] whether this window is the window in which commands are being executed</p>
+
+          <div class="method-source-code" id="current-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current?</span>
+  <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">current_window_handle</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@handle</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">no_such_window_error</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-eql-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">eql?</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="eql-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eql?</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@session</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">session</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@handle</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">handle</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Window.html#method-i-3D-3D">==</a>, ==
+        </div>
+
+      </div>
+
+      <div id="method-i-exists-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">exists?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@return [Boolean] whether the window is not closed</p>
+
+          <div class="method-source-code" id="exists-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exists?</span>
+  <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">window_handles</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@handle</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fullscreen" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fullscreen</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Fullscreen window.</p>
+
+<p>If a particular driver doesn’t have concept of fullscreen it may not support this method.</p>
+
+<p>@macro about_current</p>
+
+          <div class="method-source-code" id="fullscreen-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fullscreen</span>
+  <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">fullscreen_window</span>(<span class="ruby-identifier">handle</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-hash" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">hash</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="hash-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hash</span>
+  [<span class="ruby-ivar">@session</span>, <span class="ruby-ivar">@handle</span>].<span class="ruby-identifier">hash</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-inspect" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">inspect</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="inspect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
+  <span class="ruby-node">&quot;#&lt;Window @handle=#{@handle.inspect}&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-maximize" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">maximize</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Maximize window.</p>
+
+<p>If a particular driver (e.g. headless driver) doesn’t have concept of maximizing it may not support this method.</p>
+
+<p>@macro about_current</p>
+
+          <div class="method-source-code" id="maximize-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">maximize</span>
+  <span class="ruby-identifier">wait_for_stable_size</span> { <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">maximize_window</span>(<span class="ruby-identifier">handle</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resize_to" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resize_to</span><span
+              class="method-args">(width, height)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resize window.</p>
+
+<p>@macro about_current @param width [Integer]  the new window width in pixels @param height [Integer]  the new window height in pixels</p>
+
+          <div class="method-source-code" id="resize_to-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resize_to</span>(<span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>)
+  <span class="ruby-identifier">wait_for_stable_size</span> { <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">resize_window_to</span>(<span class="ruby-identifier">handle</span>, <span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-size" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">size</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Get window size.</p>
+
+<p>@macro about_current @return [Array&lt;(<a href="../Integer.html"><code>Integer</code></a>, <a href="../Integer.html"><code>Integer</code></a>)&gt;] an array with width and height</p>
+
+          <div class="method-source-code" id="size-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/window.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
+  <span class="ruby-ivar">@driver</span>.<span class="ruby-identifier">window_size</span>(<span class="ruby-identifier">handle</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

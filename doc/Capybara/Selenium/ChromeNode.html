@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Capybara::Selenium::ChromeNode - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="Node.html">Capybara::Selenium::Node</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><span class="include">Html5Drag</span>
+    <li><span class="include">FileInputClickEmulation</span>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-i-click">#click</a>
+    <li ><a href="#method-i-disabled-3F">#disabled?</a>
+    <li ><a href="#method-i-drop">#drop</a>
+    <li ><a href="#method-i-select_option">#select_option</a>
+    <li class="calls-super" ><a href="#method-i-send_keys">#send_keys</a>
+    <li class="calls-super" ><a href="#method-i-set_file">#set_file</a>
+    <li class="calls-super" ><a href="#method-i-set_text">#set_text</a>
+    <li class="calls-super" ><a href="#method-i-visible-3F">#visible?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Capybara::Selenium::ChromeNode">
+  <h1 id="class-Capybara::Selenium::ChromeNode" class="class">
+    class Capybara::Selenium::ChromeNode
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-click" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">click</span><span
+              class="method-args">(*, **)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Node.html#method-i-click"><code>Capybara::Selenium::Node#click</code></a>
+            </div>
+
+          <div class="method-source-code" id="click-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">click</span>(<span class="ruby-operator">*</span>, <span class="ruby-operator">**</span>)
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Selenium</span><span class="ruby-operator">::</span><span class="ruby-constant">WebDriver</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">ElementClickInterceptedError</span>
+  <span class="ruby-identifier">raise</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Selenium</span><span class="ruby-operator">::</span><span class="ruby-constant">WebDriver</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">WebDriverError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-comment"># chromedriver 74 (at least on mac) raises the wrong error for this</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;element click intercepted&#39;</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">Selenium</span><span class="ruby-operator">::</span><span class="ruby-constant">WebDriver</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">ElementClickInterceptedError</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">raise</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-disabled-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">disabled?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="disabled-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disabled?</span>
+  <span class="ruby-identifier">driver</span>.<span class="ruby-identifier">evaluate_script</span>(<span class="ruby-string">&quot;arguments[0].matches(&#39;:disabled, select:disabled *&#39;)&quot;</span>, <span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-drop" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">drop</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="drop-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">drop</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">html5_drop</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-select_option" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">select_option</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="select_option-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 50</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_option</span>
+    <span class="ruby-comment"># To optimize to only one check and then click</span>
+    <span class="ruby-identifier">selected_or_disabled</span> = <span class="ruby-identifier">driver</span>.<span class="ruby-identifier">evaluate_script</span>(<span class="ruby-identifier">&lt;&lt;~JS</span>, <span class="ruby-keyword">self</span>)
+<span class="ruby-value">      arguments[0].matches(&#39;:disabled, select:disabled *, :checked&#39;)
+</span><span class="ruby-identifier">    JS</span>
+    <span class="ruby-identifier">click</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">selected_or_disabled</span>
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-send_keys" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_keys</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Node.html#method-i-send_keys"><code>Capybara::Selenium::Node#send_keys</code></a>
+            </div>
+
+          <div class="method-source-code" id="send_keys-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_keys</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">chunk</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">inp</span><span class="ruby-operator">|</span> <span class="ruby-identifier">inp</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">inp</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-regexp">/\p{Emoji Presentation}/</span>) }
+      .<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">contains_emoji</span>, <span class="ruby-identifier">inputs</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">contains_emoji</span>
+      <span class="ruby-identifier">inputs</span>.<span class="ruby-identifier">join</span>.<span class="ruby-identifier">grapheme_clusters</span>.<span class="ruby-identifier">chunk</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">gc</span><span class="ruby-operator">|</span> <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-regexp">/\p{Emoji Presentation}/</span>) }
+            .<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">emoji</span>, <span class="ruby-identifier">clusters</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">emoji</span>
+          <span class="ruby-identifier">driver</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:execute_cdp</span>, <span class="ruby-string">&#39;Input.insertText&#39;</span>, <span class="ruby-value">text:</span> <span class="ruby-identifier">clusters</span>.<span class="ruby-identifier">join</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-keyword">super</span>(<span class="ruby-identifier">clusters</span>.<span class="ruby-identifier">join</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">inputs</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-set_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">set_file</span><span
+              class="method-args">(value)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="set_file-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 17</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_file</span>(<span class="ruby-identifier">value</span>) <span class="ruby-comment"># rubocop:disable Naming/AccessorMethodName</span>
+    <span class="ruby-comment"># In Chrome 75+ files are appended (due to WebDriver spec - why?) so we have to clear here if its multiple and already set</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">browser_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">75.0</span>
+      <span class="ruby-identifier">driver</span>.<span class="ruby-identifier">execute_script</span>(<span class="ruby-identifier">&lt;&lt;~JS</span>, <span class="ruby-keyword">self</span>)
+<span class="ruby-value">        if (arguments[0].multiple &amp;&amp; arguments[0].files.length){
+          arguments[0].value = null;
+        }
+</span><span class="ruby-identifier">      JS</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-set_text" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">set_text</span><span
+              class="method-args">(value, clear: nil, **_unused)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="set_text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_text</span>(<span class="ruby-identifier">value</span>, <span class="ruby-value">clear:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">_unused</span>)
+  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># React doesn&#39;t see the chromedriver element clear</span>
+    <span class="ruby-identifier">send_keys</span>(<span class="ruby-value">:space</span>, <span class="ruby-value">:backspace</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">clear</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visible-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visible?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Node.html#method-i-visible-3F"><code>Capybara::Selenium::Node#visible?</code></a>
+            </div>
+
+          <div class="method-source-code" id="visible-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/selenium/nodes/chrome_node.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visible?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">native_displayed?</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">bridge</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:execute</span>, <span class="ruby-value">:is_element_displayed</span>, <span class="ruby-value">id:</span> <span class="ruby-identifier">native_id</span>)
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Selenium</span><span class="ruby-operator">::</span><span class="ruby-constant">WebDriver</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">UnknownCommandError</span>
+    <span class="ruby-comment"># If the is_element_displayed command is unknown, no point in trying again</span>
+    <span class="ruby-identifier">driver</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:native_displayed</span>] = <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

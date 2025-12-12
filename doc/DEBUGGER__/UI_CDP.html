@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module DEBUGGER__::UI_CDP - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-get_chrome_path">::get_chrome_path</a>
+    <li ><a href="#method-c-get_devtools_endpoint">::get_devtools_endpoint</a>
+    <li ><a href="#method-c-run_new_chrome">::run_new_chrome</a>
+    <li ><a href="#method-c-setup_chrome">::setup_chrome</a>
+    <li ><a href="#method-i-activate_bp">#activate_bp</a>
+    <li ><a href="#method-i-add_line_breakpoint">#add_line_breakpoint</a>
+    <li class="calls-super" ><a href="#method-i-cleanup_reader">#cleanup_reader</a>
+    <li ><a href="#method-i-deactivate_bp">#deactivate_bp</a>
+    <li ><a href="#method-i-del_bp">#del_bp</a>
+    <li ><a href="#method-i-fire_event">#fire_event</a>
+    <li ><a href="#method-i-get_source_code">#get_source_code</a>
+    <li ><a href="#method-i-process">#process</a>
+    <li ><a href="#method-i-puts">#puts</a>
+    <li ><a href="#method-i-respond">#respond</a>
+    <li ><a href="#method-i-respond_fail">#respond_fail</a>
+    <li ><a href="#method-i-send_chrome_response">#send_chrome_response</a>
+    <li ><a href="#method-i-send_event">#send_event</a>
+    <li ><a href="#method-i-send_fail_response">#send_fail_response</a>
+    <li ><a href="#method-i-send_http_res">#send_http_res</a>
+    <li ><a href="#method-i-send_response">#send_response</a>
+    <li ><a href="#method-i-sock">#sock</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-DEBUGGER__::UI_CDP">
+  <h1 id="module-DEBUGGER__::UI_CDP" class="module">
+    module DEBUGGER__::UI_CDP
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="INVALID_REQUEST">INVALID_REQUEST
+        <dd>
+        <dt id="ITERATIONS">ITERATIONS
+        <dd>
+        <dt id="SHOW_PROTOCOL">SHOW_PROTOCOL
+        <dd>
+        <dt id="TIMEOUT_SEC">TIMEOUT_SEC
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-get_chrome_path" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_chrome_path</span><span
+              class="method-args">(candidates)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="get_chrome_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 176</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_chrome_path</span> <span class="ruby-identifier">candidates</span>
+  <span class="ruby-identifier">candidates</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">c</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">c</span>
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnsupportedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-get_devtools_endpoint" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_devtools_endpoint</span><span
+              class="method-args">(tf)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="get_devtools_endpoint-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_devtools_endpoint</span> <span class="ruby-identifier">tf</span>
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">1</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ITERATIONS</span>
+    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">tf</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">tf</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/DevTools listening on ws:\/\/127.0.0.1:(\d+)(.*)/</span>)
+        <span class="ruby-identifier">port</span> = <span class="ruby-node">$1</span>
+        <span class="ruby-identifier">path</span> = <span class="ruby-node">$2</span>
+        <span class="ruby-keyword">return</span> [<span class="ruby-identifier">port</span>, <span class="ruby-identifier">path</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">sleep</span> <span class="ruby-value">0.1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotFoundChromeEndpointError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-run_new_chrome" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">run_new_chrome</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="run_new_chrome-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run_new_chrome</span>
+  <span class="ruby-identifier">path</span> = <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:chrome_path</span>]
+
+  <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">port</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">wait_thr</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment"># The process to check OS is based on `selenium` project.</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-string">&#39;host_os&#39;</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/mswin|msys|mingw|cygwin|emc/</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">candidates</span> = [<span class="ruby-string">&#39;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe&#39;</span>, <span class="ruby-string">&#39;C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe&#39;</span>]
+      <span class="ruby-identifier">path</span> = <span class="ruby-identifier">get_chrome_path</span> <span class="ruby-identifier">candidates</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># The path is based on https://github.com/sindresorhus/open/blob/v8.4.0/index.js#L128.</span>
+    <span class="ruby-identifier">stdin</span>, <span class="ruby-identifier">stdout</span>, <span class="ruby-identifier">stderr</span>, <span class="ruby-identifier">wait_thr</span> = <span class="ruby-operator">*</span><span class="ruby-constant">Open3</span>.<span class="ruby-identifier">popen3</span>(<span class="ruby-node">&quot;#{ENV[&#39;SystemRoot&#39;]}\\System32\\WindowsPowerShell\\v1.0\\powershell&quot;</span>)
+    <span class="ruby-identifier">tf</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">create</span>([<span class="ruby-string">&#39;debug-&#39;</span>, <span class="ruby-string">&#39;.txt&#39;</span>])
+
+    <span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot;Start-process &#39;#{path}&#39; -Argumentlist &#39;--remote-debugging-port=0&#39;, &#39;--no-first-run&#39;, &#39;--no-default-browser-check&#39;, &#39;--user-data-dir=C:\\temp&#39; -Wait -RedirectStandardError #{tf.path}&quot;</span>)
+    <span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">stdout</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">port</span>, <span class="ruby-identifier">path</span> = <span class="ruby-identifier">get_devtools_endpoint</span>(<span class="ruby-identifier">tf</span>.<span class="ruby-identifier">path</span>)
+
+    <span class="ruby-identifier">at_exit</span>{
+      <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">skip_all</span>
+
+      <span class="ruby-identifier">stdin</span>, <span class="ruby-identifier">stdout</span>, <span class="ruby-identifier">stderr</span>, <span class="ruby-identifier">wait_thr</span> = <span class="ruby-operator">*</span><span class="ruby-constant">Open3</span>.<span class="ruby-identifier">popen3</span>(<span class="ruby-node">&quot;#{ENV[&#39;SystemRoot&#39;]}\\System32\\WindowsPowerShell\\v1.0\\powershell&quot;</span>)
+      <span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-string">&quot;Stop-process -Name chrome&quot;</span>)
+      <span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-identifier">stdout</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-identifier">tf</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-identifier">tf</span>)
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EACCES</span>
+      <span class="ruby-keyword">end</span>
+    }
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/darwin|mac os/</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">path</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome&#39;</span>
+    <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mktmpdir</span>
+    <span class="ruby-comment"># The command line flags are based on: https://developer.mozilla.org/en-US/docs/Tools/Remote_Debugging/Chrome_Desktop#connecting.</span>
+    <span class="ruby-identifier">stdin</span>, <span class="ruby-identifier">stdout</span>, <span class="ruby-identifier">stderr</span>, <span class="ruby-identifier">wait_thr</span> = <span class="ruby-operator">*</span><span class="ruby-constant">Open3</span>.<span class="ruby-identifier">popen3</span>(<span class="ruby-node">&quot;#{path} --remote-debugging-port=0 --no-first-run --no-default-browser-check --user-data-dir=#{dir}&quot;</span>)
+    <span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">stdout</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">data</span> = <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">readpartial</span> <span class="ruby-value">4096</span>
+    <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/DevTools listening on ws:\/\/127.0.0.1:(\d+)(.*)/</span>)
+      <span class="ruby-identifier">port</span> = <span class="ruby-node">$1</span>
+      <span class="ruby-identifier">path</span> = <span class="ruby-node">$2</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">at_exit</span>{
+      <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">skip_all</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span> <span class="ruby-identifier">dir</span>
+    }
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/linux/</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">path</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;google-chrome&#39;</span>
+    <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mktmpdir</span>
+    <span class="ruby-comment"># The command line flags are based on: https://developer.mozilla.org/en-US/docs/Tools/Remote_Debugging/Chrome_Desktop#connecting.</span>
+    <span class="ruby-identifier">stdin</span>, <span class="ruby-identifier">stdout</span>, <span class="ruby-identifier">stderr</span>, <span class="ruby-identifier">wait_thr</span> = <span class="ruby-operator">*</span><span class="ruby-constant">Open3</span>.<span class="ruby-identifier">popen3</span>(<span class="ruby-node">&quot;#{path} --remote-debugging-port=0 --no-first-run --no-default-browser-check --user-data-dir=#{dir}&quot;</span>)
+    <span class="ruby-identifier">stdin</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">stdout</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">data</span> = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-constant">Timeout</span>.<span class="ruby-identifier">timeout</span>(<span class="ruby-constant">TIMEOUT_SEC</span>) <span class="ruby-keyword">do</span>
+        <span class="ruby-keyword">until</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-regexp">/DevTools listening on ws:\/\/127.0.0.1:\d+.*/</span>)
+          <span class="ruby-identifier">data</span> = <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">readpartial</span> <span class="ruby-value">4096</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotFoundChromeEndpointError</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">stderr</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/DevTools listening on ws:\/\/127.0.0.1:(\d+)(.*)/</span>)
+      <span class="ruby-identifier">port</span> = <span class="ruby-node">$1</span>
+      <span class="ruby-identifier">path</span> = <span class="ruby-node">$2</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">at_exit</span>{
+      <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">skip_all</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span> <span class="ruby-identifier">dir</span>
+    }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnsupportedError</span>
+  <span class="ruby-keyword">end</span>
+
+  [<span class="ruby-identifier">port</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">wait_thr</span>.<span class="ruby-identifier">pid</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-setup_chrome" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">setup_chrome</span><span
+              class="method-args">(addr, uuid)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="setup_chrome-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup_chrome</span> <span class="ruby-identifier">addr</span>, <span class="ruby-identifier">uuid</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:chrome_path</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span>
+
+  <span class="ruby-identifier">port</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">pid</span> = <span class="ruby-identifier">run_new_chrome</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">s</span> = <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">tcp</span> <span class="ruby-string">&#39;127.0.0.1&#39;</span>, <span class="ruby-identifier">port</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ECONNREFUSED</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EADDRNOTAVAIL</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">ws_client</span> = <span class="ruby-constant">WebSocketClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">handshake</span> <span class="ruby-identifier">port</span>, <span class="ruby-identifier">path</span>
+  <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">method:</span> <span class="ruby-string">&#39;Target.getTargets&#39;</span>
+
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">extract_data</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;id&#39;</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">target_info</span> = <span class="ruby-identifier">res</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;result&#39;</span>, <span class="ruby-string">&#39;targetInfos&#39;</span>)
+      <span class="ruby-identifier">page</span> = <span class="ruby-identifier">target_info</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>[<span class="ruby-string">&#39;type&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;page&#39;</span>}
+      <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">id:</span> <span class="ruby-value">2</span>, <span class="ruby-value">method:</span> <span class="ruby-string">&#39;Target.attachToTarget&#39;</span>,
+                    <span class="ruby-value">params:</span> {
+                      <span class="ruby-value">targetId:</span> <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;targetId&#39;</span>],
+                      <span class="ruby-value">flatten:</span> <span class="ruby-keyword">true</span>
+                    }
+    <span class="ruby-keyword">when</span> <span class="ruby-value">2</span>
+      <span class="ruby-identifier">s_id</span> = <span class="ruby-identifier">res</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;result&#39;</span>, <span class="ruby-string">&#39;sessionId&#39;</span>)
+      <span class="ruby-comment"># TODO: change id</span>
+      <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">sessionId:</span> <span class="ruby-identifier">s_id</span>, <span class="ruby-value">id:</span> <span class="ruby-value">100</span>, <span class="ruby-value">method:</span> <span class="ruby-string">&#39;Network.enable&#39;</span>
+      <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">sessionId:</span> <span class="ruby-identifier">s_id</span>, <span class="ruby-value">id:</span> <span class="ruby-value">3</span>,
+                    <span class="ruby-value">method:</span> <span class="ruby-string">&#39;Page.enable&#39;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">3</span>
+      <span class="ruby-identifier">s_id</span> = <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;sessionId&#39;</span>]
+      <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">sessionId:</span> <span class="ruby-identifier">s_id</span>, <span class="ruby-value">id:</span> <span class="ruby-value">4</span>,
+                    <span class="ruby-value">method:</span> <span class="ruby-string">&#39;Page.getFrameTree&#39;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">4</span>
+      <span class="ruby-identifier">s_id</span> = <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;sessionId&#39;</span>]
+      <span class="ruby-identifier">f_id</span> = <span class="ruby-identifier">res</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;result&#39;</span>, <span class="ruby-string">&#39;frameTree&#39;</span>, <span class="ruby-string">&#39;frame&#39;</span>, <span class="ruby-string">&#39;id&#39;</span>)
+      <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">sessionId:</span> <span class="ruby-identifier">s_id</span>, <span class="ruby-value">id:</span> <span class="ruby-value">5</span>,
+                    <span class="ruby-value">method:</span> <span class="ruby-string">&#39;Page.navigate&#39;</span>,
+                    <span class="ruby-value">params:</span> {
+                      <span class="ruby-value">url:</span> <span class="ruby-node">&quot;devtools://devtools/bundled/inspector.html?v8only=true&amp;panel=sources&amp;noJavaScriptCompletion=true&amp;ws=#{addr}/#{uuid}&quot;</span>,
+                      <span class="ruby-value">frameId:</span> <span class="ruby-identifier">f_id</span>
+                    }
+    <span class="ruby-keyword">when</span> <span class="ruby-value">101</span>
+      <span class="ruby-keyword">break</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;method&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Network.webSocketWillSendHandshakeRequest&#39;</span>
+        <span class="ruby-identifier">s_id</span> = <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;sessionId&#39;</span>]
+        <span class="ruby-comment"># Display the console by entering ESC key</span>
+        <span class="ruby-identifier">ws_client</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">sessionId:</span> <span class="ruby-identifier">s_id</span>, <span class="ruby-value">id:</span> <span class="ruby-value">101</span>,  <span class="ruby-comment"># TODO: change id</span>
+                      <span class="ruby-value">method:</span><span class="ruby-string">&quot;Input.dispatchKeyEvent&quot;</span>,
+                      <span class="ruby-value">params:</span> {
+                        <span class="ruby-value">type:</span><span class="ruby-string">&quot;keyDown&quot;</span>,
+                        <span class="ruby-value">windowsVirtualKeyCode:</span><span class="ruby-value">27</span> <span class="ruby-comment"># ESC key</span>
+                      }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">pid</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>, <span class="ruby-constant">UnsupportedError</span>, <span class="ruby-constant">NotFoundChromeEndpointError</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-activate_bp" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">activate_bp</span><span
+              class="method-args">(bps)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="activate_bp-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 658</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">activate_bp</span> <span class="ruby-identifier">bps</span>
+  <span class="ruby-identifier">bps</span>.<span class="ruby-identifier">each_key</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^\d+:(\d+):(.*)/</span>)
+      <span class="ruby-identifier">line</span> = <span class="ruby-node">$1</span>
+      <span class="ruby-identifier">path</span> = <span class="ruby-node">$2</span>
+      <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_line_breakpoint</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">line</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_catch_breakpoint</span> <span class="ruby-string">&#39;Exception&#39;</span>
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-add_line_breakpoint" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">add_line_breakpoint</span><span
+              class="method-args">(req, b_id, path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="add_line_breakpoint-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 623</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_line_breakpoint</span> <span class="ruby-identifier">req</span>, <span class="ruby-identifier">b_id</span>, <span class="ruby-identifier">path</span>
+  <span class="ruby-identifier">cond</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;condition&#39;</span>)
+  <span class="ruby-identifier">line</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;lineNumber&#39;</span>)
+  <span class="ruby-identifier">src</span> = <span class="ruby-identifier">get_source_code</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-identifier">end_line</span> = <span class="ruby-identifier">src</span>.<span class="ruby-identifier">lines</span>.<span class="ruby-identifier">count</span>
+  <span class="ruby-identifier">line</span> = <span class="ruby-identifier">end_line</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">end_line</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cond</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_line_breakpoint</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">line</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-value">cond:</span> <span class="ruby-identifier">cond</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_line_breakpoint</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">line</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># Because we need to return scriptId, responses are returned in SESSION thread.</span>
+  <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;params&#39;</span>][<span class="ruby-string">&#39;scriptId&#39;</span>] = <span class="ruby-identifier">path</span>
+  <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;params&#39;</span>][<span class="ruby-string">&#39;lineNumber&#39;</span>] = <span class="ruby-identifier">line</span>
+  <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;params&#39;</span>][<span class="ruby-string">&#39;breakpointId&#39;</span>] = <span class="ruby-identifier">b_id</span>
+  <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-cleanup_reader" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cleanup_reader</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="cleanup_reader-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 675</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cleanup_reader</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span> <span class="ruby-value">:KILL</span>, <span class="ruby-ivar">@chrome_pid</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@chrome_pid</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESRCH</span> <span class="ruby-comment"># continue if @chrome_pid process is not found</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-deactivate_bp" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">deactivate_bp</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="deactivate_bp-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 670</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deactivate_bp</span>
+  <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;del&#39;</span>
+  <span class="ruby-ivar">@q_ans</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;y&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-del_bp" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">del_bp</span><span
+              class="method-args">(bps, k)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="del_bp-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 641</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">del_bp</span> <span class="ruby-identifier">bps</span>, <span class="ruby-identifier">k</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">bps</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">idx</span> = <span class="ruby-identifier">bps</span>[<span class="ruby-identifier">k</span>]
+
+  <span class="ruby-identifier">bps</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">k</span>
+  <span class="ruby-identifier">bps</span>.<span class="ruby-identifier">each_key</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">bps</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">bps</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">idx</span>}
+  <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;del #{idx}&quot;</span>
+  <span class="ruby-identifier">bps</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fire_event" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fire_event</span><span
+              class="method-args">(method, **params)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="UI_CDP.html#method-i-send_event">send_event</a>
+        </div>
+      </div>
+
+      <div id="method-i-get_source_code" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_source_code</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="get_source_code-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 650</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_source_code</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@src_map</span>[<span class="ruby-identifier">path</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@src_map</span>[<span class="ruby-identifier">path</span>]
+
+  <span class="ruby-identifier">src</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-ivar">@src_map</span>[<span class="ruby-identifier">path</span>] = <span class="ruby-identifier">src</span>
+  <span class="ruby-identifier">src</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 464</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span>
+  <span class="ruby-identifier">bps</span> = {}
+  <span class="ruby-ivar">@src_map</span> = {}
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">req</span> = <span class="ruby-ivar">@ws_server</span>.<span class="ruby-identifier">extract_data</span>
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;method&#39;</span>]
+
+    <span class="ruby-comment">## boot/configuration</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.getScriptSource&#39;</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.enable&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-value">debuggerId:</span> <span class="ruby-identifier">rand</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Runtime.enable&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+      <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;Runtime.executionContextCreated&#39;</span>,
+                  <span class="ruby-value">context:</span> {
+                    <span class="ruby-value">id:</span> <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">hex</span>(<span class="ruby-value">16</span>),
+                    <span class="ruby-value">origin:</span> <span class="ruby-node">&quot;http://#{@local_addr.inspect_sockaddr}&quot;</span>,
+                    <span class="ruby-value">name:</span> <span class="ruby-string">&#39;&#39;</span>
+                  }
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Runtime.getIsolateId&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                    <span class="ruby-value">id:</span> <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">hex</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Runtime.terminateExecution&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+      <span class="ruby-identifier">exit</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Page.startScreencast&#39;</span>, <span class="ruby-string">&#39;Emulation.setTouchEmulationEnabled&#39;</span>, <span class="ruby-string">&#39;Emulation.setEmitTouchEventsForMouse&#39;</span>,
+      <span class="ruby-string">&#39;Runtime.compileScript&#39;</span>, <span class="ruby-string">&#39;Page.getResourceContent&#39;</span>, <span class="ruby-string">&#39;Overlay.setPausedInDebuggerMessage&#39;</span>,
+      <span class="ruby-string">&#39;Runtime.releaseObjectGroup&#39;</span>, <span class="ruby-string">&#39;Runtime.discardConsoleEntries&#39;</span>, <span class="ruby-string">&#39;Log.clear&#39;</span>, <span class="ruby-string">&#39;Runtime.runIfWaitingForDebugger&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+
+    <span class="ruby-comment">## control</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.resume&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+      <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;Debugger.resumed&#39;</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;c&#39;</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.stepOver&#39;</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-ivar">@session</span>.<span class="ruby-identifier">check_postmortem</span>
+        <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+        <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;Debugger.resumed&#39;</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;n&#39;</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">PostmortemError</span>
+        <span class="ruby-identifier">send_fail_response</span> <span class="ruby-identifier">req</span>,
+                          <span class="ruby-value">code:</span> <span class="ruby-constant">INVALID_REQUEST</span>,
+                          <span class="ruby-value">message:</span> <span class="ruby-string">&quot;&#39;stepOver&#39; is not supported while postmortem mode&quot;</span>
+      <span class="ruby-keyword">ensure</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.stepInto&#39;</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-ivar">@session</span>.<span class="ruby-identifier">check_postmortem</span>
+        <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+        <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;Debugger.resumed&#39;</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;s&#39;</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">PostmortemError</span>
+        <span class="ruby-identifier">send_fail_response</span> <span class="ruby-identifier">req</span>,
+                          <span class="ruby-value">code:</span> <span class="ruby-constant">INVALID_REQUEST</span>,
+                          <span class="ruby-value">message:</span> <span class="ruby-string">&quot;&#39;stepInto&#39; is not supported while postmortem mode&quot;</span>
+      <span class="ruby-keyword">ensure</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.stepOut&#39;</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-ivar">@session</span>.<span class="ruby-identifier">check_postmortem</span>
+        <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+        <span class="ruby-identifier">send_event</span> <span class="ruby-string">&#39;Debugger.resumed&#39;</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;fin&#39;</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">PostmortemError</span>
+        <span class="ruby-identifier">send_fail_response</span> <span class="ruby-identifier">req</span>,
+                          <span class="ruby-value">code:</span> <span class="ruby-constant">INVALID_REQUEST</span>,
+                          <span class="ruby-value">message:</span> <span class="ruby-string">&quot;&#39;stepOut&#39; is not supported while postmortem mode&quot;</span>
+      <span class="ruby-keyword">ensure</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.setSkipAllPauses&#39;</span>
+      <span class="ruby-identifier">skip</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;skip&#39;</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip</span>
+        <span class="ruby-identifier">deactivate_bp</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">activate_bp</span> <span class="ruby-identifier">bps</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.pause&#39;</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+      <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-constant">UI_ServerBase</span><span class="ruby-operator">::</span><span class="ruby-constant">TRAP_SIGNAL</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>)
+
+    <span class="ruby-comment"># breakpoint</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.getPossibleBreakpoints&#39;</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.setBreakpointByUrl&#39;</span>
+      <span class="ruby-identifier">line</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;lineNumber&#39;</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">regexp</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;urlRegex&#39;</span>)
+        <span class="ruby-identifier">b_id</span> = <span class="ruby-node">&quot;1:#{line}:#{regexp}&quot;</span>
+        <span class="ruby-identifier">bps</span>[<span class="ruby-identifier">b_id</span>] = <span class="ruby-identifier">bps</span>.<span class="ruby-identifier">size</span>
+        <span class="ruby-identifier">path</span> = <span class="ruby-identifier">regexp</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/(.*)\|/</span>)[<span class="ruby-value">1</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\\&quot;</span>, <span class="ruby-string">&quot;&quot;</span>)
+        <span class="ruby-identifier">add_line_breakpoint</span>(<span class="ruby-identifier">req</span>, <span class="ruby-identifier">b_id</span>, <span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">url</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;url&#39;</span>)
+        <span class="ruby-identifier">b_id</span> = <span class="ruby-node">&quot;#{line}:#{url}&quot;</span>
+        <span class="ruby-comment"># When breakpoints are set in Script snippet, non-existent path such as &quot;snippet:///Script%20snippet%20%231&quot; sent.</span>
+        <span class="ruby-comment"># That&#39;s why we need to check it here.</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">url</span>
+          <span class="ruby-identifier">bps</span>[<span class="ruby-identifier">b_id</span>] = <span class="ruby-identifier">bps</span>.<span class="ruby-identifier">size</span>
+          <span class="ruby-identifier">add_line_breakpoint</span>(<span class="ruby-identifier">req</span>, <span class="ruby-identifier">b_id</span>, <span class="ruby-identifier">url</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                        <span class="ruby-value">breakpointId:</span> <span class="ruby-identifier">b_id</span>,
+                        <span class="ruby-value">locations:</span> []
+        <span class="ruby-keyword">end</span>            
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;scriptHash&#39;</span>)
+          <span class="ruby-identifier">b_id</span> = <span class="ruby-node">&quot;#{line}:#{hash}&quot;</span>
+          <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>,
+                        <span class="ruby-value">breakpointId:</span> <span class="ruby-identifier">b_id</span>,
+                        <span class="ruby-value">locations:</span> []
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Unsupported&#39;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.removeBreakpoint&#39;</span>
+      <span class="ruby-identifier">b_id</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;breakpointId&#39;</span>)
+      <span class="ruby-identifier">bps</span> = <span class="ruby-identifier">del_bp</span> <span class="ruby-identifier">bps</span>, <span class="ruby-identifier">b_id</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.setBreakpointsActive&#39;</span>
+      <span class="ruby-identifier">active</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;active&#39;</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">active</span>
+        <span class="ruby-identifier">activate_bp</span> <span class="ruby-identifier">bps</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">deactivate_bp</span> <span class="ruby-comment"># TODO: Change this part because catch breakpoints should not be deactivated.</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.setPauseOnExceptions&#39;</span>
+      <span class="ruby-identifier">state</span> = <span class="ruby-identifier">req</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;params&#39;</span>, <span class="ruby-string">&#39;state&#39;</span>)
+      <span class="ruby-identifier">ex</span> = <span class="ruby-string">&#39;Exception&#39;</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">state</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;none&#39;</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;config postmortem = false&#39;</span>
+        <span class="ruby-identifier">bps</span> = <span class="ruby-identifier">del_bp</span> <span class="ruby-identifier">bps</span>, <span class="ruby-identifier">ex</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;uncaught&#39;</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;config postmortem = true&#39;</span>
+        <span class="ruby-identifier">bps</span> = <span class="ruby-identifier">del_bp</span> <span class="ruby-identifier">bps</span>, <span class="ruby-identifier">ex</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;all&#39;</span>
+        <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;config postmortem = false&#39;</span>
+        <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">add_catch_breakpoint</span> <span class="ruby-identifier">ex</span>
+        <span class="ruby-identifier">bps</span>[<span class="ruby-identifier">ex</span>] = <span class="ruby-identifier">bps</span>.<span class="ruby-identifier">size</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">send_response</span> <span class="ruby-identifier">req</span>
+
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Debugger.evaluateOnCallFrame&#39;</span>, <span class="ruby-string">&#39;Runtime.getProperties&#39;</span>
+      <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">req</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Detach</span>
+  <span class="ruby-ivar">@q_msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;continue&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-puts" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">puts</span><span
+              class="method-args">(result = &quot;&quot;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="puts-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 691</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">puts</span> <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-comment"># STDERR.puts &quot;puts: #{result}&quot;</span>
+  <span class="ruby-comment"># send_event &#39;output&#39;, category: &#39;stderr&#39;, output: &quot;PUTS!!: &quot; + result.to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-respond" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">respond</span><span
+              class="method-args">(req, **res)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Called by the SESSION thread</p>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="UI_CDP.html#method-i-send_response">send_response</a>
+        </div>
+      </div>
+
+      <div id="method-i-respond_fail" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">respond_fail</span><span
+              class="method-args">(req, **res)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="UI_CDP.html#method-i-send_fail_response">send_fail_response</a>
+        </div>
+      </div>
+
+      <div id="method-i-send_chrome_response" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_chrome_response</span><span
+              class="method-args">(req)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send_chrome_response-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_chrome_response</span> <span class="ruby-identifier">req</span>
+  <span class="ruby-ivar">@repl</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">req</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^GET\s\/json\/version\sHTTP\/1.1/</span>
+    <span class="ruby-identifier">body</span> = {
+      <span class="ruby-value">Browser:</span> <span class="ruby-node">&quot;ruby/v#{RUBY_VERSION}&quot;</span>,
+      <span class="ruby-value">&#39;Protocol-Version&#39;:</span> <span class="ruby-string">&quot;1.1&quot;</span>
+    }
+    <span class="ruby-identifier">send_http_res</span> <span class="ruby-identifier">body</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">UI_ServerBase</span><span class="ruby-operator">::</span><span class="ruby-constant">RetryConnection</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^GET\s\/json\sHTTP\/1.1/</span>
+    <span class="ruby-ivar">@uuid</span> = <span class="ruby-ivar">@uuid</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">uuid</span>
+    <span class="ruby-identifier">addr</span> = <span class="ruby-ivar">@local_addr</span>.<span class="ruby-identifier">inspect_sockaddr</span>
+    <span class="ruby-identifier">body</span> = [{
+      <span class="ruby-value">description:</span> <span class="ruby-string">&quot;ruby instance&quot;</span>,
+      <span class="ruby-value">devtoolsFrontendUrl:</span> <span class="ruby-node">&quot;devtools://devtools/bundled/inspector.html?experiments=true&amp;v8only=true&amp;ws=#{addr}/#{@uuid}&quot;</span>,
+      <span class="ruby-value">id:</span> <span class="ruby-ivar">@uuid</span>,
+      <span class="ruby-value">title:</span> <span class="ruby-identifier">$0</span>,
+      <span class="ruby-value">type:</span> <span class="ruby-string">&quot;node&quot;</span>,
+      <span class="ruby-value">url:</span> <span class="ruby-node">&quot;file://#{File.absolute_path($0)}&quot;</span>,
+      <span class="ruby-value">webSocketDebuggerUrl:</span> <span class="ruby-node">&quot;ws://#{addr}/#{@uuid}&quot;</span>
+    }]
+    <span class="ruby-identifier">send_http_res</span> <span class="ruby-identifier">body</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">UI_ServerBase</span><span class="ruby-operator">::</span><span class="ruby-constant">RetryConnection</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^GET\s\/(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})\sHTTP\/1.1/</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Incorrect uuid&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-node">$1</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@uuid</span>
+
+    <span class="ruby-ivar">@need_pause_at_first</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-constant">CONFIG</span>.<span class="ruby-identifier">set_config</span> <span class="ruby-value">no_color:</span> <span class="ruby-keyword">true</span>
+
+    <span class="ruby-ivar">@ws_server</span> = <span class="ruby-constant">WebSocketServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sock</span>)
+    <span class="ruby-ivar">@ws_server</span>.<span class="ruby-identifier">handshake</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-send_event" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_event</span><span
+              class="method-args">(method, **params)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send_event-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 458</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_event</span> <span class="ruby-identifier">method</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">params</span>
+  <span class="ruby-ivar">@ws_server</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">method:</span> <span class="ruby-identifier">method</span>, <span class="ruby-value">params:</span> <span class="ruby-identifier">params</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="UI_CDP.html#method-i-fire_event">fire_event</a>, fire_event
+        </div>
+
+      </div>
+
+      <div id="method-i-send_fail_response" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_fail_response</span><span
+              class="method-args">(req, **res)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send_fail_response-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 454</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_fail_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">res</span>
+  <span class="ruby-ivar">@ws_server</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">id:</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-value">error:</span> <span class="ruby-identifier">res</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="UI_CDP.html#method-i-respond_fail">respond_fail</a>, respond_fail
+        </div>
+
+      </div>
+
+      <div id="method-i-send_http_res" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_http_res</span><span
+              class="method-args">(body)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send_http_res-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_http_res</span> <span class="ruby-identifier">body</span>
+  <span class="ruby-identifier">json</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span> <span class="ruby-identifier">body</span>
+  <span class="ruby-identifier">header</span> = <span class="ruby-node">&quot;HTTP/1.0 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nCache-Control: no-cache\r\nContent-Length: #{json.bytesize}\r\n\r\n&quot;</span>
+  <span class="ruby-ivar">@sock</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{header}#{json}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-send_response" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_response</span><span
+              class="method-args">(req, **res)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="send_response-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 450</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_response</span> <span class="ruby-identifier">req</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">res</span>
+  <span class="ruby-ivar">@ws_server</span>.<span class="ruby-identifier">send</span> <span class="ruby-value">id:</span> <span class="ruby-identifier">req</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-value">result:</span> <span class="ruby-identifier">res</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="UI_CDP.html#method-i-respond">respond</a>, respond
+        </div>
+
+      </div>
+
+      <div id="method-i-sock" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">sock</span><span
+              class="method-args">(skip: false) { |$stderr| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="sock-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server_cdp.rb, line 687</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sock</span> <span class="ruby-value">skip:</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">$stderr</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

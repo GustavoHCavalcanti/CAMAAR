@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveRecord::MessagePack::Decoder - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-build_record">#build_record</a>
+    <li ><a href="#method-i-decode">#decode</a>
+    <li ><a href="#method-i-resolve_cached_associations">#resolve_cached_associations</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveRecord::MessagePack::Decoder">
+  <h1 id="class-ActiveRecord::MessagePack::Decoder" class="class">
+    class ActiveRecord::MessagePack::Decoder
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(entries)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/message_pack.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entries</span>)
+  <span class="ruby-ivar">@records</span> = <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">build_record</span>(<span class="ruby-identifier">entry</span>) }
+  <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">entries</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">record</span>, <span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">resolve_cached_associations</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">entry</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-build_record" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">build_record</span><span
+              class="method-args">(entry)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="build_record-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/message_pack.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_record</span>(<span class="ruby-identifier">entry</span>)
+  <span class="ruby-identifier">class_name</span>, <span class="ruby-identifier">attributes_hash</span>, <span class="ruby-identifier">is_new_record</span>, <span class="ruby-operator">*</span> = <span class="ruby-identifier">entry</span>
+  <span class="ruby-identifier">klass</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Extensions</span>.<span class="ruby-identifier">load_class</span>(<span class="ruby-identifier">class_name</span>)
+  <span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">attributes_builder</span>.<span class="ruby-identifier">build_from_database</span>(<span class="ruby-identifier">attributes_hash</span>)
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">allocate</span>.<span class="ruby-identifier">init_with_attributes</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">is_new_record</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-decode" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">decode</span><span
+              class="method-args">(ref)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="decode-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/message_pack.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">decode</span>(<span class="ruby-identifier">ref</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@records</span>[<span class="ruby-identifier">r</span>] }
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">ref</span>
+    <span class="ruby-ivar">@records</span>[<span class="ruby-identifier">ref</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resolve_cached_associations" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resolve_cached_associations</span><span
+              class="method-args">(record, entry)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="resolve_cached_associations-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/message_pack.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resolve_cached_associations</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">entry</span>)
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">3</span> <span class="ruby-comment"># entry == [class_name, attributes_hash, is_new_record, *associations]</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">record</span>.<span class="ruby-identifier">association</span>(<span class="ruby-identifier">entry</span>[<span class="ruby-identifier">i</span>]).<span class="ruby-identifier">target</span> = <span class="ruby-identifier">decode</span>(<span class="ruby-identifier">entry</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>])
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">AssociationNotFoundError</span>
+      <span class="ruby-comment"># The association no longer exists, so just skip it.</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">2</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

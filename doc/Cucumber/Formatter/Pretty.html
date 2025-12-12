@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Cucumber::Formatter::Pretty - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="../../FileUtils.html">FileUtils</a>
+    <li><a class="include" href="Console.html">Cucumber::Formatter::Console</a>
+    <li><a class="include" href="Io.html">Cucumber::Formatter::Io</a>
+    <li><a class="include" href="../Gherkin/Formatter/Escaping.html">Cucumber::Gherkin::Formatter::Escaping</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-attach">#attach</a>
+    <li ><a href="#method-i-bind_events">#bind_events</a>
+    <li ><a href="#method-i-on_gherkin_source_read">#on_gherkin_source_read</a>
+    <li ><a href="#method-i-on_step_activated">#on_step_activated</a>
+    <li ><a href="#method-i-on_test_case_finished">#on_test_case_finished</a>
+    <li ><a href="#method-i-on_test_case_started">#on_test_case_started</a>
+    <li ><a href="#method-i-on_test_run_finished">#on_test_run_finished</a>
+    <li ><a href="#method-i-on_test_step_finished">#on_test_step_finished</a>
+    <li ><a href="#method-i-on_test_step_started">#on_test_step_started</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Cucumber::Formatter::Pretty">
+  <h1 id="class-Cucumber::Formatter::Pretty" class="class">
+    class Cucumber::Formatter::Pretty
+  </h1>
+
+  <section class="description">
+    
+<p>The formatter used for <code>--format pretty</code> (the default formatter).</p>
+
+<p>This formatter prints the result of the feature executions to plain text - exactly how they were parsed.</p>
+
+<p>If the output is STDOUT (and not a file), there are bright colours to watch too.</p>
+
+<p>The formatter used for <code>--format pretty</code> (the default formatter).</p>
+
+<p>This formatter prints the result of the feature executions to plain text - exactly how they were parsed.</p>
+
+<p>If the output is STDOUT (and not a file), there are bright colours to watch too.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(config)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-ivar">@io</span> = <span class="ruby-identifier">ensure_io</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">out_stream</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">error_stream</span>)
+  <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">to_hash</span>
+  <span class="ruby-ivar">@snippets_input</span> = []
+  <span class="ruby-ivar">@undefined_parameter_types</span> = []
+  <span class="ruby-ivar">@total_duration</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@exceptions</span> = []
+  <span class="ruby-ivar">@gherkin_sources</span> = {}
+  <span class="ruby-ivar">@step_matches</span> = {}
+  <span class="ruby-ivar">@ast_lookup</span> = <span class="ruby-constant">AstLookup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-ivar">@counts</span> = <span class="ruby-constant">ConsoleCounts</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-ivar">@issues</span> = <span class="ruby-constant">ConsoleIssues</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>, <span class="ruby-ivar">@ast_lookup</span>)
+  <span class="ruby-ivar">@first_feature</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@current_feature_uri</span> = <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-ivar">@current_scenario_outline</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@current_examples</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@current_test_case</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@in_scenario_outline</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@print_background_steps</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@test_step_output</span> = []
+  <span class="ruby-ivar">@passed_test_cases</span> = []
+  <span class="ruby-ivar">@source_indent</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@next_comment_to_be_printed</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">bind_events</span>(<span class="ruby-identifier">config</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-attach" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">attach</span><span
+              class="method-args">(src, media_type, filename)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="attach-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 143</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attach</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">media_type</span>, <span class="ruby-identifier">filename</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">media_type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;text/x.cucumber.log+plain&#39;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">filename</span>
+    <span class="ruby-ivar">@test_step_output</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{filename}: #{src}&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@test_step_output</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-bind_events" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">bind_events</span><span
+              class="method-args">(config)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="bind_events-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bind_events</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:gherkin_source_read</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:on_gherkin_source_read</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:step_activated</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:on_step_activated</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:test_case_started</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:on_test_case_started</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:test_step_started</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:on_test_step_started</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:test_step_finished</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:on_test_step_finished</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:test_case_finished</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:on_test_case_finished</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:test_run_finished</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:on_test_run_finished</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">on_event</span> <span class="ruby-value">:undefined_parameter_type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">method</span>(<span class="ruby-value">:collect_undefined_parameter_type_names</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on_gherkin_source_read" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on_gherkin_source_read</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on_gherkin_source_read-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_gherkin_source_read</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-ivar">@gherkin_sources</span>[<span class="ruby-identifier">event</span>.<span class="ruby-identifier">path</span>] = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">body</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on_step_activated" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on_step_activated</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on_step_activated-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_step_activated</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-identifier">test_step</span>, <span class="ruby-identifier">step_match</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">event</span>.<span class="ruby-identifier">attributes</span>
+  <span class="ruby-ivar">@step_matches</span>[<span class="ruby-identifier">test_step</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">step_match</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on_test_case_finished" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on_test_case_finished</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on_test_case_finished-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_test_case_finished</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-ivar">@total_duration</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">DurationExtractor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>).<span class="ruby-identifier">result_duration</span>
+  <span class="ruby-ivar">@passed_test_cases</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_case</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">wip?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">passed?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">in_scenario_outline</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:expand</span>]
+    <span class="ruby-identifier">print_row_data</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_case</span>, <span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">exception_to_be_printed</span> = <span class="ruby-identifier">find_exception_to_be_printed</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">exception_to_be_printed</span>
+
+    <span class="ruby-identifier">print_exception</span>(<span class="ruby-identifier">exception_to_be_printed</span>, <span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-value">6</span>)
+    <span class="ruby-ivar">@exceptions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exception_to_be_printed</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on_test_case_started" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on_test_case_started</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on_test_case_started-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_test_case_started</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">same_feature_as_previous_test_case?</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_case</span>.<span class="ruby-identifier">location</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">first_feature?</span>
+      <span class="ruby-ivar">@first_feature</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-identifier">print_profile_information</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">print_comments</span>(<span class="ruby-identifier">gherkin_source</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">length</span>, <span class="ruby-value">0</span>)
+      <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@current_feature_uri</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_case</span>.<span class="ruby-identifier">location</span>.<span class="ruby-identifier">file</span>
+    <span class="ruby-ivar">@exceptions</span> = []
+    <span class="ruby-identifier">print_feature_data</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">feature_has_background?</span>
+      <span class="ruby-identifier">print_background_data</span>
+      <span class="ruby-ivar">@print_background_steps</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-ivar">@in_scenario_outline</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@print_background_steps</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@current_test_case</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_case</span>
+  <span class="ruby-identifier">print_step_header</span>(<span class="ruby-identifier">current_test_case</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">print_background_steps</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on_test_run_finished" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on_test_run_finished</span><span
+              class="method-args">(_event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on_test_run_finished-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_test_run_finished</span>(<span class="ruby-identifier">_event</span>)
+  <span class="ruby-identifier">print_comments</span>(<span class="ruby-identifier">gherkin_source</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">length</span>, <span class="ruby-value">0</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">current_feature_uri</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
+  <span class="ruby-identifier">print_summary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on_test_step_finished" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on_test_step_finished</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on_test_step_finished-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_test_step_finished</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-identifier">collect_snippet_data</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_step</span>, <span class="ruby-ivar">@ast_lookup</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">undefined?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">in_scenario_outline</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:expand</span>]
+
+  <span class="ruby-identifier">exception_to_be_printed</span> = <span class="ruby-identifier">find_exception_to_be_printed</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>)
+  <span class="ruby-identifier">print_step_data</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_step</span>, <span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">print_step_data?</span>(<span class="ruby-identifier">event</span>, <span class="ruby-identifier">exception_to_be_printed</span>)
+  <span class="ruby-identifier">print_step_output</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">exception_to_be_printed</span>
+
+  <span class="ruby-identifier">print_exception</span>(<span class="ruby-identifier">exception_to_be_printed</span>, <span class="ruby-identifier">event</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-value">6</span>)
+  <span class="ruby-ivar">@exceptions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exception_to_be_printed</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on_test_step_started" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on_test_step_started</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on_test_step_started-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/formatter/pretty.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_test_step_started</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_step</span>.<span class="ruby-identifier">hook?</span>
+
+  <span class="ruby-identifier">print_step_header</span>(<span class="ruby-identifier">current_test_case</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">first_step_after_printing_background_steps?</span>(<span class="ruby-identifier">event</span>.<span class="ruby-identifier">test_step</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

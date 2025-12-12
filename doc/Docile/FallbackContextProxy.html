@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Docile::FallbackContextProxy - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li class="calls-super" ><a href="#method-i-instance_variables">#instance_variables</a>
+    <li ><a href="#method-i-method_missing">#method_missing</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Docile::FallbackContextProxy">
+  <h1 id="class-Docile::FallbackContextProxy" class="class">
+    class Docile::FallbackContextProxy
+  </h1>
+
+  <section class="description">
+    
+<p>@api private</p>
+
+<p>A proxy object with a primary receiver as well as a secondary fallback receiver.</p>
+
+<p>Will attempt to forward all method calls first to the primary receiver, and then to the fallback receiver if the primary does not handle that method.</p>
+
+<p>This is useful for implementing DSL evaluation in the context of an object.</p>
+
+<p>@see <a href="../Docile.html#method-c-dsl_eval"><code>Docile.dsl_eval</code></a></p>
+
+<p>rubocop:disable Style/MissingRespondToMissing</p>
+
+<p>@api private</p>
+
+<p>A proxy object with a primary receiver as well as a secondary fallback receiver.</p>
+
+<p>Will attempt to forward all method calls first to the primary receiver, and then to the fallback receiver if the primary does not handle that method.</p>
+
+<p>This is useful for implementing DSL evaluation in the context of an object.</p>
+
+<p>@see <a href="../Docile.html#method-c-dsl_eval"><code>Docile.dsl_eval</code></a></p>
+
+<p>rubocop:disable Style/MissingRespondToMissing</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="NON_FALLBACK_METHODS">NON_FALLBACK_METHODS
+        <dd><p>The set of methods which will <strong>not</strong> fallback from the block’s context to the dsl object.</p>
+        <dt id="NON_PROXIED_INSTANCE_VARIABLES">NON_PROXIED_INSTANCE_VARIABLES
+        <dd><p>The set of instance variables which are local to this object and hidden. All other instance variables will be copied in and out of this object from the scope in which this proxy was created.</p>
+        <dt id="NON_PROXIED_METHODS">NON_PROXIED_METHODS
+        <dd><p>The set of methods which will <strong>not</strong> be proxied, but instead answered by this object directly.</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(receiver, fallback)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [Object] receiver  the primary proxy target to which all methods</p>
+
+<pre class="ruby"><span class="ruby-identifier">initially</span> <span class="ruby-identifier">will</span> <span class="ruby-identifier">be</span> <span class="ruby-identifier">forwarded</span>
+</pre>
+
+<p>@param [Object] fallback  the fallback proxy target to which any methods</p>
+
+<pre>not handled by `receiver` will be forwarded</pre>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/docile-1.4.1/lib/docile/fallback_context_proxy.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">receiver</span>, <span class="ruby-identifier">fallback</span>)
+  <span class="ruby-ivar">@__receiver__</span> = <span class="ruby-identifier">receiver</span>
+  <span class="ruby-ivar">@__fallback__</span> = <span class="ruby-identifier">fallback</span>
+
+  <span class="ruby-comment"># Enables calling DSL methods from helper methods in the block&#39;s context</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">fallback</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:method_missing</span>)
+    <span class="ruby-comment"># NOTE: We could switch to {#define_singleton_method} on current Rubies</span>
+    <span class="ruby-identifier">singleton_class</span> = (<span class="ruby-keyword">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">fallback</span>; <span class="ruby-keyword">self</span>; <span class="ruby-keyword">end</span>)
+
+    <span class="ruby-comment"># instrument {#method_missing} on the block&#39;s context to fallback to</span>
+    <span class="ruby-comment"># the DSL object. This allows helper methods in the block&#39;s context to</span>
+    <span class="ruby-comment"># contain calls to methods on the DSL object.</span>
+    <span class="ruby-identifier">singleton_class</span>.
+      <span class="ruby-identifier">send</span>(<span class="ruby-value">:define_method</span>, <span class="ruby-value">:method_missing</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">m</span> = <span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_sym</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">NON_FALLBACK_METHODS</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">&amp;&amp;</span>
+           <span class="ruby-operator">!</span><span class="ruby-identifier">fallback</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">&amp;&amp;</span>
+           <span class="ruby-identifier">receiver</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">m</span>)
+          <span class="ruby-identifier">receiver</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-keyword">super</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:ruby2_keywords</span>, <span class="ruby-keyword">true</span>)
+      <span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:ruby2_keywords</span>, <span class="ruby-value">:method_missing</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># instrument a helper method to remove the above instrumentation</span>
+    <span class="ruby-identifier">singleton_class</span>.
+      <span class="ruby-identifier">send</span>(<span class="ruby-value">:define_method</span>, <span class="ruby-value">:__docile_undo_fallback__</span>) <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:remove_method</span>, <span class="ruby-value">:method_missing</span>)
+        <span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:remove_method</span>, <span class="ruby-value">:__docile_undo_fallback__</span>)
+      <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-instance_variables" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">instance_variables</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@return [Array&lt;Symbol&gt;]  Instance variable names, excluding</p>
+
+<pre>{NON_PROXIED_INSTANCE_VARIABLES}</pre>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="instance_variables-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/docile-1.4.1/lib/docile/fallback_context_proxy.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">instance_variables</span>
+  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-constant">NON_PROXIED_INSTANCE_VARIABLES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">v</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-method_missing" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">method_missing</span><span
+              class="method-args">(method, *args, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Proxy all methods, excluding {NON_PROXIED_METHODS}, first to ‘receiver` and then to `fallback` if not found.</p>
+
+          <div class="method-source-code" id="method_missing-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/docile-1.4.1/lib/docile/fallback_context_proxy.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@__receiver__</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_sym</span>)
+    <span class="ruby-ivar">@__receiver__</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-ivar">@__fallback__</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">e</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">BacktraceFilter</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

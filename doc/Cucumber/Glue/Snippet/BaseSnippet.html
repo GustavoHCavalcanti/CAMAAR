@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Cucumber::Glue::Snippet::BaseSnippet - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-cli_option_string">::cli_option_string</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-step">#step</a>
+    <li ><a href="#method-i-to_s">#to_s</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Cucumber::Glue::Snippet::BaseSnippet">
+  <h1 id="class-Cucumber::Glue::Snippet::BaseSnippet" class="class">
+    class Cucumber::Glue::Snippet::BaseSnippet
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-cli_option_string" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cli_option_string</span><span
+              class="method-args">(type, cucumber_expression_generator)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="cli_option_string-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/glue/snippet.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cli_option_string</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">cucumber_expression_generator</span>)
+  <span class="ruby-identifier">format</span>(<span class="ruby-string">&#39;%&lt;type&gt;-7s: %&lt;description&gt;-28s e.g. %&lt;example&gt;s&#39;</span>, <span class="ruby-value">type:</span> <span class="ruby-identifier">type</span>, <span class="ruby-value">description:</span> <span class="ruby-identifier">description</span>, <span class="ruby-value">example:</span> <span class="ruby-identifier">example</span>(<span class="ruby-identifier">cucumber_expression_generator</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(cucumber_expression_generator, code_keyword, step_name, multiline_argument)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/glue/snippet.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">cucumber_expression_generator</span>, <span class="ruby-identifier">code_keyword</span>, <span class="ruby-identifier">step_name</span>, <span class="ruby-identifier">multiline_argument</span>)
+  <span class="ruby-ivar">@number_of_arguments</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@code_keyword</span> = <span class="ruby-identifier">code_keyword</span>
+  <span class="ruby-ivar">@pattern</span> = <span class="ruby-identifier">replace_and_count_capturing_groups</span>(<span class="ruby-identifier">step_name</span>)
+  <span class="ruby-ivar">@generated_expressions</span> = <span class="ruby-identifier">cucumber_expression_generator</span>.<span class="ruby-identifier">generate_expressions</span>(<span class="ruby-identifier">step_name</span>)
+  <span class="ruby-ivar">@multiline_argument</span> = <span class="ruby-constant">MultilineArgumentSnippet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">multiline_argument</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-step" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">step</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="step-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/glue/snippet.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">step</span>
+  <span class="ruby-node">&quot;#{code_keyword}#{typed_pattern}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_s" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_s</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-10.1.1/lib/cucumber/glue/snippet.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+  <span class="ruby-node">&quot;#{step} #{do_block}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

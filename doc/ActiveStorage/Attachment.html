@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveStorage::Attachment - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-ActiveStorage::Attachment-label-Active+Storage+Attachment">Active Storage Attachment</a>
+          <li>      <a href="#class-ActiveStorage::Attachment-label-Active+Storage+Attachment">Active Storage Attachment</a>
+          <li>      <a href="#class-ActiveStorage::Attachment-label-Active+Storage+Attachment">Active Storage Attachment</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">ActiveStorage::Record
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-with_all_variant_records">::with_all_variant_records</a>
+    <li ><a href="#method-i-blob">#blob</a>
+    <li ><a href="#method-i-preview">#preview</a>
+    <li ><a href="#method-i-purge">#purge</a>
+    <li ><a href="#method-i-purge_later">#purge_later</a>
+    <li ><a href="#method-i-record">#record</a>
+    <li ><a href="#method-i-representation">#representation</a>
+    <li ><a href="#method-i-variant">#variant</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveStorage::Attachment">
+  <h1 id="class-ActiveStorage::Attachment" class="class">
+    class ActiveStorage::Attachment
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActiveStorage::Attachment-label-Active+Storage+Attachment">Active Storage Attachment<span><a href="#class-ActiveStorage::Attachment-label-Active+Storage+Attachment">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Attachments associate records with blobs. Usually that’s a one record-many blobs relationship, but it is possible to associate many different records with the same blob. A foreign-key constraint on the attachments table prevents blobs from being purged if they’re still attached to any records.</p>
+
+<p>Attachments also have access to all methods from <a href="Blob.html"><code>ActiveStorage::Blob</code></a>.</p>
+
+<p>If you wish to preload attachments or blobs, you can use these scopes:</p>
+
+<pre class="ruby"><span class="ruby-comment"># preloads attachments, their corresponding blobs, and variant records (if using `ActiveStorage.track_variants`)</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">with_attached_avatars</span>
+
+<span class="ruby-comment"># preloads blobs and variant records (if using `ActiveStorage.track_variants`)</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">avatars</span>.<span class="ruby-identifier">with_all_variant_records</span>
+</pre>
+
+<h1 id="class-ActiveStorage::Attachment-label-Active+Storage+Attachment">Active Storage Attachment<span><a href="#class-ActiveStorage::Attachment-label-Active+Storage+Attachment">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Attachments associate records with blobs. Usually that’s a one record-many blobs relationship, but it is possible to associate many different records with the same blob. A foreign-key constraint on the attachments table prevents blobs from being purged if they’re still attached to any records.</p>
+
+<p>Attachments also have access to all methods from <a href="Blob.html"><code>ActiveStorage::Blob</code></a>.</p>
+
+<p>If you wish to preload attachments or blobs, you can use these scopes:</p>
+
+<pre class="ruby"><span class="ruby-comment"># preloads attachments, their corresponding blobs, and variant records (if using `ActiveStorage.track_variants`)</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">with_attached_avatars</span>
+
+<span class="ruby-comment"># preloads blobs and variant records (if using `ActiveStorage.track_variants`)</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">avatars</span>.<span class="ruby-identifier">with_all_variant_records</span>
+</pre>
+
+<h1 id="class-ActiveStorage::Attachment-label-Active+Storage+Attachment">Active Storage Attachment<span><a href="#class-ActiveStorage::Attachment-label-Active+Storage+Attachment">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Attachments associate records with blobs. Usually that’s a one record-many blobs relationship, but it is possible to associate many different records with the same blob. A foreign-key constraint on the attachments table prevents blobs from being purged if they’re still attached to any records.</p>
+
+<p>Attachments also have access to all methods from <a href="Blob.html"><code>ActiveStorage::Blob</code></a>.</p>
+
+<p>If you wish to preload attachments or blobs, you can use these scopes:</p>
+
+<pre class="ruby"><span class="ruby-comment"># preloads attachments, their corresponding blobs, and variant records (if using `ActiveStorage.track_variants`)</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">with_attached_avatars</span>
+
+<span class="ruby-comment"># preloads blobs and variant records (if using `ActiveStorage.track_variants`)</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">avatars</span>.<span class="ruby-identifier">with_all_variant_records</span>
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-with_all_variant_records" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">with_all_variant_records</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Eager load all variant records on an attachment at once.</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">avatars</span>.<span class="ruby-identifier">with_all_variant_records</span>
+</pre>
+
+          <div class="method-source-code" id="with_all_variant_records-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 45</span>
+<span class="ruby-identifier">scope</span> <span class="ruby-value">:with_all_variant_records</span>, <span class="ruby-operator">-&gt;</span> { <span class="ruby-identifier">includes</span>(<span class="ruby-value">blob:</span> {
+  <span class="ruby-value">variant_records:</span> { <span class="ruby-value">image_attachment:</span> <span class="ruby-value">:blob</span> },
+  <span class="ruby-value">preview_image_attachment:</span> { <span class="ruby-value">blob:</span> { <span class="ruby-value">variant_records:</span> { <span class="ruby-value">image_attachment:</span> <span class="ruby-value">:blob</span> } } }
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-blob" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">blob</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the associated <a href="Blob.html"><code>ActiveStorage::Blob</code></a>.</p>
+
+          <div class="method-source-code" id="blob-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 31</span>
+<span class="ruby-identifier">belongs_to</span> <span class="ruby-value">:blob</span>, <span class="ruby-value">class_name:</span> <span class="ruby-string">&quot;ActiveStorage::Blob&quot;</span>, <span class="ruby-value">autosave:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">inverse_of:</span> <span class="ruby-value">:attachments</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-preview" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">preview</span><span
+              class="method-args">(transformations)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an <a href="Preview.html"><code>ActiveStorage::Preview</code></a> instance for the attachment with the set of <code>transformations</code> provided. Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">video</span>.<span class="ruby-identifier">preview</span>(<span class="ruby-value">resize_to_limit:</span> [<span class="ruby-value">100</span>, <span class="ruby-value">100</span>]).<span class="ruby-identifier">processed</span>.<span class="ruby-identifier">url</span>
+</pre>
+
+<p>or if you are using pre-defined variants:</p>
+
+<pre class="ruby"><span class="ruby-identifier">video</span>.<span class="ruby-identifier">preview</span>(<span class="ruby-value">:thumb</span>).<span class="ruby-identifier">processed</span>.<span class="ruby-identifier">url</span>
+</pre>
+
+<p>See <a href="Blob/Representable.html#method-i-preview"><code>ActiveStorage::Blob::Representable#preview</code></a> for more information.</p>
+
+<p>Raises an <code>ArgumentError</code> if <code>transformations</code> is a <code>Symbol</code> which is an unknown pre-defined variant of the attachment.</p>
+
+          <div class="method-source-code" id="preview-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">preview</span>(<span class="ruby-identifier">transformations</span>)
+  <span class="ruby-identifier">transformations</span> = <span class="ruby-identifier">transformations_by_name</span>(<span class="ruby-identifier">transformations</span>)
+  <span class="ruby-identifier">blob</span>.<span class="ruby-identifier">preview</span>(<span class="ruby-identifier">transformations</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-purge" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">purge</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Synchronously deletes the attachment and <a href="Blob.html#method-i-purge">purges the blob</a>.</p>
+
+          <div class="method-source-code" id="purge-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">purge</span>
+  <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">delete</span>
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">touch</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">record</span>&amp;.<span class="ruby-identifier">persisted?</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">blob</span>&amp;.<span class="ruby-identifier">purge</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-purge_later" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">purge_later</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Deletes the attachment and <a href="Blob.html#method-i-purge_later">enqueues a background job</a> to purge the blob.</p>
+
+          <div class="method-source-code" id="purge_later-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">purge_later</span>
+  <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">delete</span>
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">touch</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">record</span>&amp;.<span class="ruby-identifier">persisted?</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">blob</span>&amp;.<span class="ruby-identifier">purge_later</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-record" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">record</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the associated record.</p>
+
+          <div class="method-source-code" id="record-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 25</span>
+<span class="ruby-identifier">belongs_to</span> <span class="ruby-value">:record</span>, <span class="ruby-value">polymorphic:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">touch:</span> <span class="ruby-constant">ActiveStorage</span>.<span class="ruby-identifier">touch_attachment_records</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-representation" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">representation</span><span
+              class="method-args">(transformations)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an <a href="Preview.html"><code>ActiveStorage::Preview</code></a> or an <a href="Variant.html"><code>ActiveStorage::Variant</code></a> for the attachment with set of <code>transformations</code> provided. Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">avatar</span>.<span class="ruby-identifier">representation</span>(<span class="ruby-value">resize_to_limit:</span> [<span class="ruby-value">100</span>, <span class="ruby-value">100</span>]).<span class="ruby-identifier">processed</span>.<span class="ruby-identifier">url</span>
+</pre>
+
+<p>or if you are using pre-defined variants:</p>
+
+<pre class="ruby"><span class="ruby-identifier">avatar</span>.<span class="ruby-identifier">representation</span>(<span class="ruby-value">:thumb</span>).<span class="ruby-identifier">processed</span>.<span class="ruby-identifier">url</span>
+</pre>
+
+<p>See <a href="Blob/Representable.html#method-i-representation"><code>ActiveStorage::Blob::Representable#representation</code></a> for more information.</p>
+
+<p>Raises an <code>ArgumentError</code> if <code>transformations</code> is a <code>Symbol</code> which is an unknown pre-defined variant of the attachment.</p>
+
+          <div class="method-source-code" id="representation-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representation</span>(<span class="ruby-identifier">transformations</span>)
+  <span class="ruby-identifier">transformations</span> = <span class="ruby-identifier">transformations_by_name</span>(<span class="ruby-identifier">transformations</span>)
+  <span class="ruby-identifier">blob</span>.<span class="ruby-identifier">representation</span>(<span class="ruby-identifier">transformations</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-variant" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">variant</span><span
+              class="method-args">(transformations)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an <a href="Variant.html"><code>ActiveStorage::Variant</code></a> or <a href="VariantWithRecord.html"><code>ActiveStorage::VariantWithRecord</code></a> instance for the attachment with the set of <code>transformations</code> provided. Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">avatar</span>.<span class="ruby-identifier">variant</span>(<span class="ruby-value">resize_to_limit:</span> [<span class="ruby-value">100</span>, <span class="ruby-value">100</span>]).<span class="ruby-identifier">processed</span>.<span class="ruby-identifier">url</span>
+</pre>
+
+<p>or if you are using pre-defined variants:</p>
+
+<pre class="ruby"><span class="ruby-identifier">avatar</span>.<span class="ruby-identifier">variant</span>(<span class="ruby-value">:thumb</span>).<span class="ruby-identifier">processed</span>.<span class="ruby-identifier">url</span>
+</pre>
+
+<p>See <a href="Blob/Representable.html#method-i-variant"><code>ActiveStorage::Blob::Representable#variant</code></a> for more information.</p>
+
+<p>Raises an <code>ArgumentError</code> if <code>transformations</code> is a <code>Symbol</code> which is an unknown pre-defined variant of the attachment.</p>
+
+          <div class="method-source-code" id="variant-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/app/models/active_storage/attachment.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">variant</span>(<span class="ruby-identifier">transformations</span>)
+  <span class="ruby-identifier">transformations</span> = <span class="ruby-identifier">transformations_by_name</span>(<span class="ruby-identifier">transformations</span>)
+  <span class="ruby-identifier">blob</span>.<span class="ruby-identifier">variant</span>(<span class="ruby-identifier">transformations</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class PG::Result - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">rb_cObject 
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="../Enumerable.html">Enumerable</a>
+    <li><span class="include">rb_mPGconstants</span>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-res_status">::res_status</a>
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    <li ><a href="#method-i-autoclear-3F">#autoclear?</a>
+    <li ><a href="#method-i-binary_tuples">#binary_tuples</a>
+    <li ><a href="#method-i-check">#check</a>
+    <li ><a href="#method-i-check_result">#check_result</a>
+    <li ><a href="#method-i-clear">#clear</a>
+    <li ><a href="#method-i-cleared-3F">#cleared?</a>
+    <li ><a href="#method-i-cmd_status">#cmd_status</a>
+    <li ><a href="#method-i-cmd_tuples">#cmd_tuples</a>
+    <li ><a href="#method-i-cmdtuples">#cmdtuples</a>
+    <li ><a href="#method-i-column_values">#column_values</a>
+    <li ><a href="#method-i-each">#each</a>
+    <li ><a href="#method-i-each_row">#each_row</a>
+    <li ><a href="#method-i-error_field">#error_field</a>
+    <li ><a href="#method-i-error_message">#error_message</a>
+    <li ><a href="#method-i-fformat">#fformat</a>
+    <li ><a href="#method-i-field_name_type">#field_name_type</a>
+    <li ><a href="#method-i-field_name_type-3D">#field_name_type=</a>
+    <li ><a href="#method-i-field_names_as">#field_names_as</a>
+    <li ><a href="#method-i-field_values">#field_values</a>
+    <li ><a href="#method-i-fields">#fields</a>
+    <li ><a href="#method-i-fmod">#fmod</a>
+    <li ><a href="#method-i-fname">#fname</a>
+    <li ><a href="#method-i-fnumber">#fnumber</a>
+    <li ><a href="#method-i-freeze">#freeze</a>
+    <li ><a href="#method-i-fsize">#fsize</a>
+    <li ><a href="#method-i-ftable">#ftable</a>
+    <li ><a href="#method-i-ftablecol">#ftablecol</a>
+    <li ><a href="#method-i-ftype">#ftype</a>
+    <li ><a href="#method-i-getisnull">#getisnull</a>
+    <li ><a href="#method-i-getlength">#getlength</a>
+    <li ><a href="#method-i-getvalue">#getvalue</a>
+    <li ><a href="#method-i-inspect">#inspect</a>
+    <li ><a href="#method-i-map_types-21">#map_types!</a>
+    <li ><a href="#method-i-nfields">#nfields</a>
+    <li ><a href="#method-i-nparams">#nparams</a>
+    <li ><a href="#method-i-ntuples">#ntuples</a>
+    <li ><a href="#method-i-num_fields">#num_fields</a>
+    <li ><a href="#method-i-num_tuples">#num_tuples</a>
+    <li ><a href="#method-i-oid_value">#oid_value</a>
+    <li ><a href="#method-i-paramtype">#paramtype</a>
+    <li ><a href="#method-i-res_status">#res_status</a>
+    <li ><a href="#method-i-result_error_field">#result_error_field</a>
+    <li ><a href="#method-i-result_error_message">#result_error_message</a>
+    <li ><a href="#method-i-result_status">#result_status</a>
+    <li ><a href="#method-i-result_verbose_error_message">#result_verbose_error_message</a>
+    <li ><a href="#method-i-stream_each">#stream_each</a>
+    <li ><a href="#method-i-stream_each_row">#stream_each_row</a>
+    <li ><a href="#method-i-stream_each_tuple">#stream_each_tuple</a>
+    <li ><a href="#method-i-tuple">#tuple</a>
+    <li ><a href="#method-i-tuple_values">#tuple_values</a>
+    <li ><a href="#method-i-type_map">#type_map</a>
+    <li ><a href="#method-i-type_map-3D">#type_map=</a>
+    <li ><a href="#method-i-values">#values</a>
+    <li ><a href="#method-i-verbose_error_message">#verbose_error_message</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PG::Result">
+  <h1 id="class-PG::Result" class="class">
+    class PG::Result
+  </h1>
+
+  <section class="description">
+    
+<p>The class to represent the query result tuples (rows). An instance of this class is created as the result of every query. All result rows and columns are stored in a memory block attached to the <a href="Result.html"><code>PG::Result</code></a> object. Whenever a value is accessed it is casted to a Ruby object by the assigned <a href="Result.html#method-i-type_map"><code>type_map</code></a> .</p>
+
+<p>Since pg-1.1 the amount of memory in use by a <a href="Result.html"><code>PG::Result</code></a> object is estimated and passed to ruby’s garbage collector. You can invoke the <a href="Result.html#method-i-clear"><code>clear</code></a> method to force deallocation of memory of the instance when finished with the result for better memory performance.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;pg&#39;</span>
+<span class="ruby-identifier">conn</span> = <span class="ruby-constant">PG</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-value">:dbname</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;test&#39;</span>)
+<span class="ruby-identifier">res</span>  = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&#39;SELECT 1 AS a, 2 AS b, NULL AS c&#39;</span>)
+<span class="ruby-identifier">res</span>.<span class="ruby-identifier">getvalue</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>) <span class="ruby-comment"># &#39;1&#39;</span>
+<span class="ruby-identifier">res</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;b&#39;</span>]       <span class="ruby-comment"># &#39;2&#39;</span>
+<span class="ruby-identifier">res</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;c&#39;</span>]       <span class="ruby-comment"># nil</span>
+</pre>
+
+<p>The class to represent the query result tuples (rows). An instance of this class is created as the result of every query. All result rows and columns are stored in a memory block attached to the <a href="Result.html"><code>PG::Result</code></a> object. Whenever a value is accessed it is casted to a Ruby object by the assigned <a href="Result.html#method-i-type_map"><code>type_map</code></a> .</p>
+
+<p>Since pg-1.1 the amount of memory in use by a <a href="Result.html"><code>PG::Result</code></a> object is estimated and passed to ruby’s garbage collector. You can invoke the <a href="Result.html#method-i-clear"><code>clear</code></a> method to force deallocation of memory of the instance when finished with the result for better memory performance.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;pg&#39;</span>
+<span class="ruby-identifier">conn</span> = <span class="ruby-constant">PG</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-value">:dbname</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;test&#39;</span>)
+<span class="ruby-identifier">res</span>  = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&#39;SELECT 1 AS a, 2 AS b, NULL AS c&#39;</span>)
+<span class="ruby-identifier">res</span>.<span class="ruby-identifier">getvalue</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>) <span class="ruby-comment"># &#39;1&#39;</span>
+<span class="ruby-identifier">res</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;b&#39;</span>]       <span class="ruby-comment"># &#39;2&#39;</span>
+<span class="ruby-identifier">res</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;c&#39;</span>]       <span class="ruby-comment"># nil</span>
+</pre>
+
+<p>The class to represent the query result tuples (rows). An instance of this class is created as the result of every query. All result rows and columns are stored in a memory block attached to the <a href="Result.html"><code>PG::Result</code></a> object. Whenever a value is accessed it is casted to a Ruby object by the assigned <a href="Result.html#method-i-type_map"><code>type_map</code></a> .</p>
+
+<p>Since pg-1.1 the amount of memory in use by a <a href="Result.html"><code>PG::Result</code></a> object is estimated and passed to ruby’s garbage collector. You can invoke the <a href="Result.html#method-i-clear"><code>clear</code></a> method to force deallocation of memory of the instance when finished with the result for better memory performance.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;pg&#39;</span>
+<span class="ruby-identifier">conn</span> = <span class="ruby-constant">PG</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-value">:dbname</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;test&#39;</span>)
+<span class="ruby-identifier">res</span>  = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&#39;SELECT 1 AS a, 2 AS b, NULL AS c&#39;</span>)
+<span class="ruby-identifier">res</span>.<span class="ruby-identifier">getvalue</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>) <span class="ruby-comment"># &#39;1&#39;</span>
+<span class="ruby-identifier">res</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;b&#39;</span>]       <span class="ruby-comment"># &#39;2&#39;</span>
+<span class="ruby-identifier">res</span>[<span class="ruby-value">0</span>][<span class="ruby-string">&#39;c&#39;</span>]       <span class="ruby-comment"># nil</span>
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-res_status" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              PG::Result.res_status( status ) &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the string representation of <code>status</code>.</p>
+
+          <div class="method-source-code" id="res_status-source">
+            <pre>static VALUE
+pgresult_s_res_status(VALUE self, VALUE status)
+{
+        return rb_utf8_str_new_cstr(PQresStatus(NUM2INT(status)));
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-5B-5D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">[]</span><span
+              class="method-args"> n ] -&gt; Hash</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns tuple <em>n</em> as a hash.</p>
+
+          <div class="method-source-code" id="5B-5D-source">
+            <pre>static VALUE
+pgresult_aref(VALUE self, VALUE index)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        int tuple_num = NUM2INT(index);
+        int field_num;
+        int num_tuples = PQntuples(this-&gt;pgresult);
+        VALUE tuple;
+
+        if( this-&gt;nfields == -1 )
+                pgresult_init_fnames( self );
+
+        if ( tuple_num &lt; 0 || tuple_num &gt;= num_tuples )
+                rb_raise( rb_eIndexError, &quot;Index %d is out of range&quot;, tuple_num );
+
+        /* We reuse the Hash of the previous output for larger row counts.
+         * This is somewhat faster than populating an empty Hash object. */
+        tuple = NIL_P(this-&gt;tuple_hash) ? rb_hash_new() : this-&gt;tuple_hash;
+        for ( field_num = 0; field_num &lt; this-&gt;nfields; field_num++ ) {
+                VALUE val = this-&gt;p_typemap-&gt;funcs.typecast_result_value(this-&gt;p_typemap, self, tuple_num, field_num);
+                rb_hash_aset( tuple, this-&gt;fnames[field_num], val );
+        }
+        /* Store a copy of the filled hash for use at the next row. */
+        if( num_tuples &gt; 10 )
+                RB_OBJ_WRITE(self, &amp;this-&gt;tuple_hash, rb_hash_dup(tuple));
+
+        return tuple;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: [], []
+        </div>
+
+      </div>
+
+      <div id="method-i-autoclear-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              autoclear?      &rarr; boolean
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns <code>true</code> if the underlying C struct will be cleared at the end of a callback. This applies only to <a href="Result.html"><code>Result</code></a> objects received by the block to <a href="Connection.html#method-i-set_notice_receiver"><code>PG::Connection#set_notice_receiver</code></a> .</p>
+
+<p>All other <a href="Result.html"><code>Result</code></a> objects are automatically cleared by the GC when the object is no longer in use or manually by <a href="Result.html#method-i-clear"><code>PG::Result#clear</code></a> .</p>
+
+          <div class="method-source-code" id="autoclear-3F-source">
+            <pre>static VALUE
+pgresult_autoclear_p( VALUE self )
+{
+        t_pg_result *this = pgresult_get_this(self);
+        return this-&gt;autoclear ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: autoclear?, autoclear?
+        </div>
+
+      </div>
+
+      <div id="method-i-binary_tuples" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              binary_tuples() &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns 1 if the <a href="Result.html"><code>PG::Result</code></a> contains binary data and 0 if it contains text data.</p>
+
+<p>This function is deprecated (except for its use in connection with COPY), because it is possible for a single <a href="Result.html"><code>PG::Result</code></a> to contain text data in some columns and binary data in others. <a href="Result.html#method-i-fformat"><code>Result#fformat</code></a> is preferred. <a href="Result.html#method-i-binary_tuples"><code>binary_tuples</code></a> returns 1 only if all columns of the result are binary (format 1).</p>
+
+          <div class="method-source-code" id="binary_tuples-source">
+            <pre>static VALUE
+pgresult_binary_tuples(VALUE self)
+{
+        return INT2NUM(PQbinaryTuples(pgresult_get(self)));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: binary_tuples, binary_tuples
+        </div>
+
+      </div>
+
+      <div id="method-i-check" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              check &rarr; nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Raises appropriate exception if <a href="Result.html"><code>PG::Result</code></a> is in a bad state, which is:</p>
+<ul><li>
+<p><code>PGRES_BAD_RESPONSE</code></p>
+</li><li>
+<p><code>PGRES_FATAL_ERROR</code></p>
+</li><li>
+<p><code>PGRES_NONFATAL_ERROR</code></p>
+</li><li>
+<p><code>PGRES_PIPELINE_ABORTED</code></p>
+</li></ul>
+
+          <div class="method-source-code" id="check-source">
+            <pre>VALUE
+pg_result_check( VALUE self )
+{
+        t_pg_result *this = pgresult_get_this(self);
+        VALUE error, exception, klass;
+        char * sqlstate;
+
+        if(this-&gt;pgresult == NULL)
+        {
+                PGconn *conn = pg_get_pgconn(this-&gt;connection);
+                error = rb_str_new2( PQerrorMessage(conn) );
+        }
+        else
+        {
+                switch (PQresultStatus(this-&gt;pgresult))
+                {
+                case PGRES_TUPLES_OK:
+                case PGRES_COPY_OUT:
+                case PGRES_COPY_IN:
+                case PGRES_COPY_BOTH:
+                case PGRES_SINGLE_TUPLE:
+                case PGRES_EMPTY_QUERY:
+                case PGRES_COMMAND_OK:
+#ifdef HAVE_PQENTERPIPELINEMODE
+                case PGRES_PIPELINE_SYNC:
+#endif
+#ifdef HAVE_PQSETCHUNKEDROWSMODE
+                case PGRES_TUPLES_CHUNK:
+#endif
+                        return self;
+                case PGRES_BAD_RESPONSE:
+                case PGRES_FATAL_ERROR:
+                case PGRES_NONFATAL_ERROR:
+#ifdef HAVE_PQENTERPIPELINEMODE
+                case PGRES_PIPELINE_ABORTED:
+#endif
+                        error = rb_str_new2( PQresultErrorMessage(this-&gt;pgresult) );
+                        break;
+                default:
+                        error = rb_str_new2( &quot;internal error : unknown result status.&quot; );
+                }
+        }
+
+        PG_ENCODING_SET_NOCHECK( error, this-&gt;enc_idx );
+
+        sqlstate = PQresultErrorField( this-&gt;pgresult, PG_DIAG_SQLSTATE );
+        klass = lookup_error_class( sqlstate );
+        exception = rb_exc_new3( klass, error );
+        rb_iv_set( exception, &quot;@connection&quot;, this-&gt;connection );
+        rb_iv_set( exception, &quot;@result&quot;, this-&gt;pgresult ? self : Qnil );
+        rb_exc_raise( exception );
+
+        /* Not reached */
+        return self;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Result.html#method-i-check_result">check_result</a>, check, check_result, check, check_result
+        </div>
+
+      </div>
+
+      <div id="method-i-check_result" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_result</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Raises appropriate exception if <a href="Result.html"><code>PG::Result</code></a> is in a bad state, which is:</p>
+<ul><li>
+<p><code>PGRES_BAD_RESPONSE</code></p>
+</li><li>
+<p><code>PGRES_FATAL_ERROR</code></p>
+</li><li>
+<p><code>PGRES_NONFATAL_ERROR</code></p>
+</li><li>
+<p><code>PGRES_PIPELINE_ABORTED</code></p>
+</li></ul>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Result.html#method-i-check">check</a>
+        </div>
+      </div>
+
+      <div id="method-i-clear" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              clear() &rarr; nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Clears the <a href="Result.html"><code>PG::Result</code></a> object as the result of a query. This frees all underlying memory consumed by the result object. Afterwards access to result methods raises <a href="Error.html"><code>PG::Error</code></a> “result has been cleared”.</p>
+
+<p>Explicit calling <a href="Result.html#method-i-clear"><code>clear</code></a> can lead to better memory performance, but is not generally necessary. Special care must be taken when <a href="Tuple.html"><code>PG::Tuple</code></a> objects are used. In this case <a href="Result.html#method-i-clear"><code>clear</code></a> must not be called unless all <a href="Tuple.html"><code>PG::Tuple</code></a> objects of this result are fully materialized.</p>
+
+<p>If <a href="Result.html#method-i-autoclear-3F"><code>PG::Result#autoclear?</code></a> is <code>true</code> then the result is only marked as cleared but clearing the underlying C struct will happen when the callback returns.</p>
+
+          <div class="method-source-code" id="clear-source">
+            <pre>VALUE
+pg_result_clear(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this(self);
+        rb_check_frozen(self);
+        pgresult_clear( this );
+        return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: clear, clear
+        </div>
+
+      </div>
+
+      <div id="method-i-cleared-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              cleared?      &rarr; boolean
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns <code>true</code> if the backend result memory has been freed.</p>
+
+          <div class="method-source-code" id="cleared-3F-source">
+            <pre>static VALUE
+pgresult_cleared_p( VALUE self )
+{
+        t_pg_result *this = pgresult_get_this(self);
+        return this-&gt;pgresult ? Qfalse : Qtrue;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: cleared?, cleared?
+        </div>
+
+      </div>
+
+      <div id="method-i-cmd_status" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              cmd_status() &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the status string of the last query command.</p>
+
+          <div class="method-source-code" id="cmd_status-source">
+            <pre>static VALUE
+pgresult_cmd_status(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        VALUE ret = rb_str_new2(PQcmdStatus(this-&gt;pgresult));
+        PG_ENCODING_SET_NOCHECK(ret, this-&gt;enc_idx);
+        return ret;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: cmd_status, cmd_status
+        </div>
+
+      </div>
+
+      <div id="method-i-cmd_tuples" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              cmd_tuples() &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of tuples (rows) affected by the SQL command.</p>
+
+<p>If the SQL command that generated the <a href="Result.html"><code>PG::Result</code></a> was not one of:</p>
+<ul><li>
+<p><code>SELECT</code></p>
+</li><li>
+<p><code>CREATE TABLE AS</code></p>
+</li><li>
+<p><code>INSERT</code></p>
+</li><li>
+<p><code>UPDATE</code></p>
+</li><li>
+<p><code>DELETE</code></p>
+</li><li>
+<p><code>MOVE</code></p>
+</li><li>
+<p><code>FETCH</code></p>
+</li><li>
+<p><code>COPY</code></p>
+</li><li>
+<p>an <code>EXECUTE</code> of a prepared query that contains an <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> statement</p>
+</li></ul>
+
+<p>or if no tuples were affected, <code>0</code> is returned.</p>
+
+          <div class="method-source-code" id="cmd_tuples-source">
+            <pre>static VALUE
+pgresult_cmd_tuples(VALUE self)
+{
+        long n;
+        n = strtol(PQcmdTuples(pgresult_get(self)),NULL, 10);
+        return LONG2NUM(n);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Result.html#method-i-cmdtuples">cmdtuples</a>, cmd_tuples, cmdtuples, cmd_tuples, cmdtuples
+        </div>
+
+      </div>
+
+      <div id="method-i-cmdtuples" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cmdtuples</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of tuples (rows) affected by the SQL command.</p>
+
+<p>If the SQL command that generated the <a href="Result.html"><code>PG::Result</code></a> was not one of:</p>
+<ul><li>
+<p><code>SELECT</code></p>
+</li><li>
+<p><code>CREATE TABLE AS</code></p>
+</li><li>
+<p><code>INSERT</code></p>
+</li><li>
+<p><code>UPDATE</code></p>
+</li><li>
+<p><code>DELETE</code></p>
+</li><li>
+<p><code>MOVE</code></p>
+</li><li>
+<p><code>FETCH</code></p>
+</li><li>
+<p><code>COPY</code></p>
+</li><li>
+<p>an <code>EXECUTE</code> of a prepared query that contains an <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> statement</p>
+</li></ul>
+
+<p>or if no tuples were affected, <code>0</code> is returned.</p>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Result.html#method-i-cmd_tuples">cmd_tuples</a>
+        </div>
+      </div>
+
+      <div id="method-i-column_values" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              column_values( n )   &rarr; array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an <a href="../Array.html"><code>Array</code></a> of the values from the nth column of each tuple in the result.</p>
+
+          <div class="method-source-code" id="column_values-source">
+            <pre>static VALUE
+pgresult_column_values(VALUE self, VALUE index)
+{
+        int col = NUM2INT( index );
+        return make_column_result_array( self, col );
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: column_values, column_values
+        </div>
+
+      </div>
+
+      <div id="method-i-each" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              each{ |tuple| ... }
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Invokes block for each tuple in the result set.</p>
+
+          <div class="method-source-code" id="each-source">
+            <pre>static VALUE
+pgresult_each(VALUE self)
+{
+        PGresult *result;
+        int tuple_num;
+
+        RETURN_SIZED_ENUMERATOR(self, 0, NULL, pgresult_ntuples_for_enum);
+
+        result = pgresult_get(self);
+
+        for(tuple_num = 0; tuple_num &lt; PQntuples(result); tuple_num++) {
+                rb_yield(pgresult_aref(self, INT2NUM(tuple_num)));
+        }
+        return self;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: each, each
+        </div>
+
+      </div>
+
+      <div id="method-i-each_row" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              each_row { |row| ... }
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Yields each row of the result. The row is a list of column values.</p>
+
+          <div class="method-source-code" id="each_row-source">
+            <pre>static VALUE
+pgresult_each_row(VALUE self)
+{
+        t_pg_result *this;
+        int row;
+        int field;
+        int num_rows;
+        int num_fields;
+
+        RETURN_SIZED_ENUMERATOR(self, 0, NULL, pgresult_ntuples_for_enum);
+
+        this = pgresult_get_this_safe(self);
+        num_rows = PQntuples(this-&gt;pgresult);
+        num_fields = PQnfields(this-&gt;pgresult);
+
+        for ( row = 0; row &lt; num_rows; row++ ) {
+                PG_VARIABLE_LENGTH_ARRAY(VALUE, row_values, num_fields, PG_MAX_COLUMNS)
+
+                /* populate the row */
+                for ( field = 0; field &lt; num_fields; field++ ) {
+                        row_values[field] = this-&gt;p_typemap-&gt;funcs.typecast_result_value(this-&gt;p_typemap, self, row, field);
+                }
+                rb_yield( rb_ary_new4( num_fields, row_values ));
+        }
+
+        return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: each_row, each_row
+        </div>
+
+      </div>
+
+      <div id="method-i-error_field" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              error_field(fieldcode) &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the individual field of an error.</p>
+
+<p><code>fieldcode</code> is one of:</p>
+<ul><li>
+<p><code>PG_DIAG_SEVERITY</code></p>
+</li><li>
+<p><code>PG_DIAG_SQLSTATE</code></p>
+</li><li>
+<p><code>PG_DIAG_MESSAGE_PRIMARY</code></p>
+</li><li>
+<p><code>PG_DIAG_MESSAGE_DETAIL</code></p>
+</li><li>
+<p><code>PG_DIAG_MESSAGE_HINT</code></p>
+</li><li>
+<p><code>PG_DIAG_STATEMENT_POSITION</code></p>
+</li><li>
+<p><code>PG_DIAG_INTERNAL_POSITION</code></p>
+</li><li>
+<p><code>PG_DIAG_INTERNAL_QUERY</code></p>
+</li><li>
+<p><code>PG_DIAG_CONTEXT</code></p>
+</li><li>
+<p><code>PG_DIAG_SOURCE_FILE</code></p>
+</li><li>
+<p><code>PG_DIAG_SOURCE_LINE</code></p>
+</li><li>
+<p><code>PG_DIAG_SOURCE_FUNCTION</code></p>
+</li></ul>
+
+<p>An example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>( <span class="ruby-string">&quot;SELECT * FROM nonexistent_table&quot;</span> )
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
+    <span class="ruby-identifier">p</span> [
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SEVERITY</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SQLSTATE</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_MESSAGE_PRIMARY</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_MESSAGE_DETAIL</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_MESSAGE_HINT</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_STATEMENT_POSITION</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_INTERNAL_POSITION</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_INTERNAL_QUERY</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_CONTEXT</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SOURCE_FILE</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SOURCE_LINE</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SOURCE_FUNCTION</span> ),
+    ]
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Outputs:</p>
+
+<pre class="ruby">[<span class="ruby-string">&quot;ERROR&quot;</span>, <span class="ruby-string">&quot;42P01&quot;</span>, <span class="ruby-string">&quot;relation \&quot;nonexistent_table\&quot; does not exist&quot;</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>,
+ <span class="ruby-string">&quot;15&quot;</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&quot;path/to/parse_relation.c&quot;</span>, <span class="ruby-string">&quot;857&quot;</span>, <span class="ruby-string">&quot;parserOpenTable&quot;</span>]
+</pre>
+
+          <div class="method-source-code" id="error_field-source">
+            <pre>static VALUE
+pgresult_error_field(VALUE self, VALUE field)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        int fieldcode = NUM2INT( field );
+        char * fieldstr = PQresultErrorField( this-&gt;pgresult, fieldcode );
+        VALUE ret = Qnil;
+
+        if ( fieldstr ) {
+                ret = rb_str_new2( fieldstr );
+                PG_ENCODING_SET_NOCHECK( ret, this-&gt;enc_idx );
+        }
+
+        return ret;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Result.html#method-i-result_error_field">result_error_field</a>, error_field, result_error_field, error_field, result_error_field
+        </div>
+
+      </div>
+
+      <div id="method-i-error_message" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              error_message() &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the error message of the command as a string.</p>
+
+          <div class="method-source-code" id="error_message-source">
+            <pre>static VALUE
+pgresult_error_message(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        VALUE ret = rb_str_new2(PQresultErrorMessage(this-&gt;pgresult));
+        PG_ENCODING_SET_NOCHECK(ret, this-&gt;enc_idx);
+        return ret;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Result.html#method-i-result_error_message">result_error_message</a>, error_message, result_error_message, error_message, result_error_message
+        </div>
+
+      </div>
+
+      <div id="method-i-fformat" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              fformat( column_number ) &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the format (0 for text, 1 for binary) of column <em>column_number</em>.</p>
+
+<p>Raises ArgumentError if <em>column_number</em> is out of range.</p>
+
+          <div class="method-source-code" id="fformat-source">
+            <pre>static VALUE
+pgresult_fformat(VALUE self, VALUE column_number)
+{
+        PGresult *result = pgresult_get(self);
+        int fnumber = NUM2INT(column_number);
+        if (fnumber &lt; 0 || fnumber &gt;= PQnfields(result)) {
+                rb_raise(rb_eArgError, &quot;Column number is out of range: %d&quot;,
+                        fnumber);
+        }
+        return INT2FIX(PQfformat(result, fnumber));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: fformat, fformat
+        </div>
+
+      </div>
+
+      <div id="method-i-field_name_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              field_name_type &rarr; Symbol
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Get type of field names.</p>
+
+<p>See description at <a href="Result.html#method-i-field_name_type-3D"><code>field_name_type=</code></a></p>
+
+          <div class="method-source-code" id="field_name_type-source">
+            <pre>static VALUE
+pgresult_field_name_type_get(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this(self);
+        if( this-&gt;flags &amp; PG_RESULT_FIELD_NAMES_SYMBOL ){
+                return sym_symbol;
+        } else if( this-&gt;flags &amp; PG_RESULT_FIELD_NAMES_STATIC_SYMBOL ){
+                return sym_static_symbol;
+        } else {
+                return sym_string;
+        }
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: field_name_type, field_name_type
+        </div>
+
+      </div>
+
+      <div id="method-i-field_name_type-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              field_name_type = Symbol
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="../Set.html"><code>Set</code></a> type of field names specific to this result. It can be set to one of:</p>
+<ul><li>
+<p><code>:string</code> to use <a href="../String.html"><code>String</code></a> based field names</p>
+</li><li>
+<p><code>:symbol</code> to use Symbol based field names</p>
+</li><li>
+<p><code>:static_symbol</code> to use pinned Symbol (can not be garbage collected) - Don’t use this, it will probably be removed in future.</p>
+</li></ul>
+
+<p>The default is retrieved from <a href="Connection.html#method-i-field_name_type"><code>PG::Connection#field_name_type</code></a> , which defaults to <code>:string</code> .</p>
+
+<p>This setting affects several result methods:</p>
+<ul><li>
+<p>keys of <a href="../Hash.html"><code>Hash</code></a> returned by <a href="Result.html#method-i-5B-5D"><code>[]</code></a> , <a href="Result.html#method-i-each"><code>each</code></a> and <a href="Result.html#method-i-stream_each"><code>stream_each</code></a></p>
+</li><li>
+<p><a href="Result.html#method-i-fields"><code>fields</code></a></p>
+</li><li>
+<p><a href="Result.html#method-i-fname"><code>fname</code></a></p>
+</li><li>
+<p>field names used by <a href="Result.html#method-i-tuple"><code>tuple</code></a> and <a href="Result.html#method-i-stream_each_tuple"><code>stream_each_tuple</code></a></p>
+</li></ul>
+
+<p>The type of field names can only be changed before any of the affected methods have been called.</p>
+
+          <div class="method-source-code" id="field_name_type-3D-source">
+            <pre>static VALUE
+pgresult_field_name_type_set(VALUE self, VALUE sym)
+{
+        t_pg_result *this = pgresult_get_this(self);
+
+        rb_check_frozen(self);
+        if( this-&gt;nfields != -1 ) rb_raise(rb_eArgError, &quot;field names are already materialized&quot;);
+
+        this-&gt;flags &amp;= ~PG_RESULT_FIELD_NAMES_MASK;
+        if( sym == sym_symbol ) this-&gt;flags |= PG_RESULT_FIELD_NAMES_SYMBOL;
+        else if ( sym == sym_static_symbol ) this-&gt;flags |= PG_RESULT_FIELD_NAMES_STATIC_SYMBOL;
+        else if ( sym == sym_string );
+        else rb_raise(rb_eArgError, &quot;invalid argument %+&quot;PRIsVALUE, sym);
+
+        return sym;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: field_name_type=, field_name_type=
+        </div>
+
+      </div>
+
+      <div id="method-i-field_names_as" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">field_names_as</span><span
+              class="method-args">(type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="../Set.html"><code>Set</code></a> the data type for all field name returning methods.</p>
+
+<p><code>type</code>: a Symbol defining the field name type.</p>
+
+<p>This method is equal to <a href="Result.html#method-i-field_name_type-3D"><code>field_name_type=</code></a> , but returns self, so that calls can be chained.</p>
+
+          <div class="method-source-code" id="field_names_as-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/pg-1.6.2-arm64-darwin/lib/pg/result.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_names_as</span>(<span class="ruby-identifier">type</span>)
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">field_name_type</span> = <span class="ruby-identifier">type</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-field_values" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              field_values( field )   &rarr; array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an <a href="../Array.html"><code>Array</code></a> of the values from the given <em>field</em> of each tuple in the result.</p>
+
+          <div class="method-source-code" id="field_values-source">
+            <pre>static VALUE
+pgresult_field_values( VALUE self, VALUE field )
+{
+        PGresult *result = pgresult_get( self );
+        const char *fieldname;
+        int fnum;
+
+        if( RB_TYPE_P(field, T_SYMBOL) ) field = rb_sym_to_s( field );
+        fieldname = StringValueCStr( field );
+        fnum = PQfnumber( result, fieldname );
+
+        if ( fnum &lt; 0 )
+                rb_raise( rb_eIndexError, &quot;no such field &#39;%s&#39; in result&quot;, fieldname );
+
+        return make_column_result_array( self, fnum );
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: field_values, field_values
+        </div>
+
+      </div>
+
+      <div id="method-i-fields" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              fields() &rarr; Array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Depending on <a href="Result.html#method-i-field_name_type-3D"><code>field_name_type=</code></a> returns an array of strings or symbols representing the names of the fields in the result.</p>
+
+          <div class="method-source-code" id="fields-source">
+            <pre>static VALUE
+pgresult_fields(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+
+        if( this-&gt;nfields == -1 )
+                pgresult_init_fnames( self );
+
+        return rb_ary_new4( this-&gt;nfields, this-&gt;fnames );
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: fields, fields
+        </div>
+
+      </div>
+
+      <div id="method-i-fmod" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              fmod( column_number )
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the type modifier associated with column <em>column_number</em>. See the <a href="Result.html#method-i-ftype"><code>ftype</code></a> method for an example of how to use this.</p>
+
+<p>Raises an ArgumentError if <em>column_number</em> is out of range.</p>
+
+          <div class="method-source-code" id="fmod-source">
+            <pre>static VALUE
+pgresult_fmod(VALUE self, VALUE column_number)
+{
+        PGresult *result = pgresult_get(self);
+        int fnumber = NUM2INT(column_number);
+        int modifier;
+        if (fnumber &lt; 0 || fnumber &gt;= PQnfields(result)) {
+                rb_raise(rb_eArgError, &quot;Column number is out of range: %d&quot;,
+                        fnumber);
+        }
+        modifier = PQfmod(result,fnumber);
+
+        return INT2NUM(modifier);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: fmod, fmod
+        </div>
+
+      </div>
+
+      <div id="method-i-fname" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              fname( index ) &rarr; String or Symbol
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the name of the column corresponding to <em>index</em>. Depending on <a href="Result.html#method-i-field_name_type-3D"><code>field_name_type=</code></a> it’s a <a href="../String.html"><code>String</code></a> or Symbol.</p>
+
+          <div class="method-source-code" id="fname-source">
+            <pre>static VALUE
+pgresult_fname(VALUE self, VALUE index)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        int i = NUM2INT(index);
+        char *cfname;
+
+        if (i &lt; 0 || i &gt;= PQnfields(this-&gt;pgresult)) {
+                rb_raise(rb_eArgError,&quot;invalid field number %d&quot;, i);
+        }
+
+        cfname = PQfname(this-&gt;pgresult, i);
+        return pg_cstr_to_sym(cfname, this-&gt;flags, this-&gt;enc_idx);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: fname, fname
+        </div>
+
+      </div>
+
+      <div id="method-i-fnumber" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              fnumber( name ) &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the index of the field specified by the string <code>name</code>. The given <code>name</code> is treated like an identifier in an SQL command, that is, it is downcased unless double-quoted. For example, given a query result generated from the SQL command:</p>
+
+<pre class="ruby"><span class="ruby-identifier">result</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>( <span class="ruby-string">%{SELECT 1 AS FOO, 2 AS &quot;BAR&quot;}</span> )
+</pre>
+
+<p>we would have the results:</p>
+
+<pre class="ruby"><span class="ruby-identifier">result</span>.<span class="ruby-identifier">fname</span>( <span class="ruby-value">0</span> )            <span class="ruby-comment"># =&gt; &quot;foo&quot;</span>
+<span class="ruby-identifier">result</span>.<span class="ruby-identifier">fname</span>( <span class="ruby-value">1</span> )            <span class="ruby-comment"># =&gt; &quot;BAR&quot;</span>
+<span class="ruby-identifier">result</span>.<span class="ruby-identifier">fnumber</span>( <span class="ruby-string">&quot;FOO&quot;</span> )      <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">result</span>.<span class="ruby-identifier">fnumber</span>( <span class="ruby-string">&quot;foo&quot;</span> )      <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">result</span>.<span class="ruby-identifier">fnumber</span>( <span class="ruby-string">&quot;BAR&quot;</span> )      <span class="ruby-comment"># =&gt; ArgumentError</span>
+<span class="ruby-identifier">result</span>.<span class="ruby-identifier">fnumber</span>( <span class="ruby-string">%{&quot;BAR&quot;}</span> )   <span class="ruby-comment"># =&gt; 1</span>
+</pre>
+
+<p>Raises an ArgumentError if the specified <code>name</code> isn’t one of the field names; raises a TypeError if <code>name</code> is not a <a href="../String.html"><code>String</code></a>.</p>
+
+          <div class="method-source-code" id="fnumber-source">
+            <pre>static VALUE
+pgresult_fnumber(VALUE self, VALUE name)
+{
+        int n;
+
+        Check_Type(name, T_STRING);
+
+        n = PQfnumber(pgresult_get(self), StringValueCStr(name));
+        if (n == -1) {
+                rb_raise(rb_eArgError,&quot;Unknown field: %s&quot;, StringValueCStr(name));
+        }
+        return INT2FIX(n);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: fnumber, fnumber
+        </div>
+
+      </div>
+
+      <div id="method-i-freeze" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              freeze
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Freeze the <a href="Result.html"><code>PG::Result</code></a> object and unlink the result from the related <a href="Connection.html"><code>PG::Connection</code></a>.</p>
+
+<p>A frozen <a href="Result.html"><code>PG::Result</code></a> object doesn’t allow any streaming and it can’t be cleared. It also denies setting a <a href="Result.html#method-i-type_map"><code>type_map</code></a> or field_name_type.</p>
+
+          <div class="method-source-code" id="freeze-source">
+            <pre>static VALUE
+pg_result_freeze(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this(self);
+
+        RB_OBJ_WRITE(self, &amp;this-&gt;connection, Qnil);
+        return rb_call_super(0, NULL);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: freeze, freeze
+        </div>
+
+      </div>
+
+      <div id="method-i-fsize" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              fsize( index )
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the size of the field type in bytes.  Returns <code>-1</code> if the field is variable sized.</p>
+
+<pre class="ruby"><span class="ruby-identifier">res</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&quot;SELECT myInt, myVarChar50 FROM foo&quot;</span>)
+<span class="ruby-identifier">res</span>.<span class="ruby-identifier">size</span>(<span class="ruby-value">0</span>) <span class="ruby-operator">=&gt;</span> <span class="ruby-value">4</span>
+<span class="ruby-identifier">res</span>.<span class="ruby-identifier">size</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">=&gt;</span> <span class="ruby-value">-1</span>
+</pre>
+
+          <div class="method-source-code" id="fsize-source">
+            <pre>static VALUE
+pgresult_fsize(VALUE self, VALUE index)
+{
+        PGresult *result;
+        int i = NUM2INT(index);
+
+        result = pgresult_get(self);
+        if (i &lt; 0 || i &gt;= PQnfields(result)) {
+                rb_raise(rb_eArgError,&quot;invalid field number %d&quot;, i);
+        }
+        return INT2NUM(PQfsize(result, i));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: fsize, fsize
+        </div>
+
+      </div>
+
+      <div id="method-i-ftable" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              ftable( column_number ) &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the Oid of the table from which the column <em>column_number</em> was fetched.</p>
+
+<p>Raises ArgumentError if <em>column_number</em> is out of range or if the Oid is undefined for that column.</p>
+
+          <div class="method-source-code" id="ftable-source">
+            <pre>static VALUE
+pgresult_ftable(VALUE self, VALUE column_number)
+{
+        Oid n ;
+        int col_number = NUM2INT(column_number);
+        PGresult *pgresult = pgresult_get(self);
+
+        if( col_number &lt; 0 || col_number &gt;= PQnfields(pgresult))
+                rb_raise(rb_eArgError,&quot;Invalid column index: %d&quot;, col_number);
+
+        n = PQftable(pgresult, col_number);
+        return UINT2NUM(n);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: ftable, ftable
+        </div>
+
+      </div>
+
+      <div id="method-i-ftablecol" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              ftablecol( column_number ) &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the column number (within its table) of the table from which the column <em>column_number</em> is made up.</p>
+
+<p>Raises ArgumentError if <em>column_number</em> is out of range or if the column number from its table is undefined for that column.</p>
+
+          <div class="method-source-code" id="ftablecol-source">
+            <pre>static VALUE
+pgresult_ftablecol(VALUE self, VALUE column_number)
+{
+        int col_number = NUM2INT(column_number);
+        PGresult *pgresult = pgresult_get(self);
+
+        int n;
+
+        if( col_number &lt; 0 || col_number &gt;= PQnfields(pgresult))
+                rb_raise(rb_eArgError,&quot;Invalid column index: %d&quot;, col_number);
+
+        n = PQftablecol(pgresult, col_number);
+        return INT2FIX(n);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: ftablecol, ftablecol
+        </div>
+
+      </div>
+
+      <div id="method-i-ftype" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              ftype( column_number )  &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the data type associated with <em>column_number</em>.</p>
+
+<p>The integer returned is the internal <code>OID</code> number (in PostgreSQL) of the type. To get a human-readable value for the type, use the returned OID and the field’s <a href="Result.html#method-i-fmod"><code>fmod</code></a> value with the format_type() SQL function:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Get the type of the second column of the result &#39;res&#39;</span>
+<span class="ruby-identifier">typename</span> = <span class="ruby-identifier">conn</span>.
+  <span class="ruby-identifier">exec</span>( <span class="ruby-string">&quot;SELECT format_type($1,$2)&quot;</span>, [<span class="ruby-identifier">res</span>.<span class="ruby-identifier">ftype</span>(<span class="ruby-value">1</span>), <span class="ruby-identifier">res</span>.<span class="ruby-identifier">fmod</span>(<span class="ruby-value">1</span>)] ).
+  <span class="ruby-identifier">getvalue</span>( <span class="ruby-value">0</span>, <span class="ruby-value">0</span> )
+</pre>
+
+<p>Raises an ArgumentError if <em>column_number</em> is out of range.</p>
+
+          <div class="method-source-code" id="ftype-source">
+            <pre>static VALUE
+pgresult_ftype(VALUE self, VALUE index)
+{
+        PGresult* result = pgresult_get(self);
+        int i = NUM2INT(index);
+        if (i &lt; 0 || i &gt;= PQnfields(result)) {
+                rb_raise(rb_eArgError, &quot;invalid field number %d&quot;, i);
+        }
+        return UINT2NUM(PQftype(result, i));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: ftype, ftype
+        </div>
+
+      </div>
+
+      <div id="method-i-getisnull" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              getisnull(tuple_position, field_position) &rarr; boolean
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns <code>true</code> if the specified value is <code>nil</code>; <code>false</code> otherwise.</p>
+
+          <div class="method-source-code" id="getisnull-source">
+            <pre>static VALUE
+pgresult_getisnull(VALUE self, VALUE tup_num, VALUE field_num)
+{
+        PGresult *result;
+        int i = NUM2INT(tup_num);
+        int j = NUM2INT(field_num);
+
+        result = pgresult_get(self);
+        if (i &lt; 0 || i &gt;= PQntuples(result)) {
+                rb_raise(rb_eArgError,&quot;invalid tuple number %d&quot;, i);
+        }
+        if (j &lt; 0 || j &gt;= PQnfields(result)) {
+                rb_raise(rb_eArgError,&quot;invalid field number %d&quot;, j);
+        }
+        return PQgetisnull(result, i, j) ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: getisnull, getisnull
+        </div>
+
+      </div>
+
+      <div id="method-i-getlength" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              getlength( tup_num, field_num ) &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the (<a href="../String.html"><code>String</code></a>) length of the field in bytes.</p>
+
+<p>Equivalent to <code>res.value(<em>tup_num</em>,<em>field_num</em>).length</code>.</p>
+
+          <div class="method-source-code" id="getlength-source">
+            <pre>static VALUE
+pgresult_getlength(VALUE self, VALUE tup_num, VALUE field_num)
+{
+        PGresult *result;
+        int i = NUM2INT(tup_num);
+        int j = NUM2INT(field_num);
+
+        result = pgresult_get(self);
+        if (i &lt; 0 || i &gt;= PQntuples(result)) {
+                rb_raise(rb_eArgError,&quot;invalid tuple number %d&quot;, i);
+        }
+        if (j &lt; 0 || j &gt;= PQnfields(result)) {
+                rb_raise(rb_eArgError,&quot;invalid field number %d&quot;, j);
+        }
+        return INT2FIX(PQgetlength(result, i, j));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: getlength, getlength
+        </div>
+
+      </div>
+
+      <div id="method-i-getvalue" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              getvalue( tup_num, field_num )
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the value in tuple number <em>tup_num</em>, field <em>field_num</em>, or <code>nil</code> if the field is <code>NULL</code>.</p>
+
+          <div class="method-source-code" id="getvalue-source">
+            <pre>static VALUE
+pgresult_getvalue(VALUE self, VALUE tup_num, VALUE field_num)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        int i = NUM2INT(tup_num);
+        int j = NUM2INT(field_num);
+
+        if(i &lt; 0 || i &gt;= PQntuples(this-&gt;pgresult)) {
+                rb_raise(rb_eArgError,&quot;invalid tuple number %d&quot;, i);
+        }
+        if(j &lt; 0 || j &gt;= PQnfields(this-&gt;pgresult)) {
+                rb_raise(rb_eArgError,&quot;invalid field number %d&quot;, j);
+        }
+        return this-&gt;p_typemap-&gt;funcs.typecast_result_value(this-&gt;p_typemap, self, i, j);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: getvalue, getvalue
+        </div>
+
+      </div>
+
+      <div id="method-i-inspect" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">inspect</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return a <a href="../String.html"><code>String</code></a> representation of the object suitable for debugging.</p>
+
+          <div class="method-source-code" id="inspect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/pg-1.6.2-arm64-darwin/lib/pg/result.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
+        <span class="ruby-identifier">str</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span>
+        <span class="ruby-identifier">str</span>[<span class="ruby-value">-1</span>,<span class="ruby-value">0</span>] = <span class="ruby-keyword">if</span> <span class="ruby-identifier">cleared?</span>
+                <span class="ruby-string">&quot; cleared&quot;</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-node">&quot; status=#{res_status(result_status)} ntuples=#{ntuples} nfields=#{nfields} cmd_tuples=#{cmd_tuples}&quot;</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-map_types-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">map_types!</span><span
+              class="method-args">(type_map)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Apply a type map for all value retrieving methods.</p>
+
+<p><code>type_map</code>: a <a href="TypeMap.html"><code>PG::TypeMap</code></a> instance.</p>
+
+<p>This method is equal to <a href="Result.html#method-i-type_map-3D"><code>type_map=</code></a> , but returns self, so that calls can be chained.</p>
+
+<p>See also <a href="BasicTypeMapForResults.html"><code>PG::BasicTypeMapForResults</code></a></p>
+
+          <div class="method-source-code" id="map_types-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/pg-1.6.2-arm64-darwin/lib/pg/result.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">map_types!</span>(<span class="ruby-identifier">type_map</span>)
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">type_map</span> = <span class="ruby-identifier">type_map</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-nfields" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              nfields() &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of columns in the query result.</p>
+
+          <div class="method-source-code" id="nfields-source">
+            <pre>static VALUE
+pgresult_nfields(VALUE self)
+{
+        return INT2NUM(PQnfields(pgresult_get(self)));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Result.html#method-i-num_fields">num_fields</a>, nfields, num_fields, nfields, num_fields
+        </div>
+
+      </div>
+
+      <div id="method-i-nparams" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              nparams() &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of parameters of a prepared statement. Only useful for the result returned by conn.describePrepared</p>
+
+          <div class="method-source-code" id="nparams-source">
+            <pre>static VALUE
+pgresult_nparams(VALUE self)
+{
+        PGresult *result;
+
+        result = pgresult_get(self);
+        return INT2FIX(PQnparams(result));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: nparams, nparams
+        </div>
+
+      </div>
+
+      <div id="method-i-ntuples" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              ntuples() &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of tuples in the query result.</p>
+
+          <div class="method-source-code" id="ntuples-source">
+            <pre>static VALUE
+pgresult_ntuples(VALUE self)
+{
+        return INT2FIX(PQntuples(pgresult_get(self)));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Result.html#method-i-num_tuples">num_tuples</a>, ntuples, num_tuples, ntuples, num_tuples
+        </div>
+
+      </div>
+
+      <div id="method-i-num_fields" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">num_fields</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of columns in the query result.</p>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Result.html#method-i-nfields">nfields</a>
+        </div>
+      </div>
+
+      <div id="method-i-num_tuples" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">num_tuples</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of tuples in the query result.</p>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Result.html#method-i-ntuples">ntuples</a>
+        </div>
+      </div>
+
+      <div id="method-i-oid_value" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              oid_value() &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the <code>oid</code> of the inserted row if applicable, otherwise <code>nil</code>.</p>
+
+          <div class="method-source-code" id="oid_value-source">
+            <pre>static VALUE
+pgresult_oid_value(VALUE self)
+{
+        Oid n = PQoidValue(pgresult_get(self));
+        if (n == InvalidOid)
+                return Qnil;
+        else
+                return UINT2NUM(n);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: oid_value, oid_value
+        </div>
+
+      </div>
+
+      <div id="method-i-paramtype" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              paramtype( param_number ) &rarr; Oid
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the Oid of the data type of parameter <em>param_number</em>. Only useful for the result returned by conn.describePrepared</p>
+
+          <div class="method-source-code" id="paramtype-source">
+            <pre>static VALUE
+pgresult_paramtype(VALUE self, VALUE param_number)
+{
+        PGresult *result;
+
+        result = pgresult_get(self);
+        return UINT2NUM(PQparamtype(result,NUM2INT(param_number)));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: paramtype, paramtype
+        </div>
+
+      </div>
+
+      <div id="method-i-res_status" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              res_status &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          <div class="method-heading">
+            <span class="method-callseq">
+              res_status( status ) &rarr; String
+            </span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the string representation of the status of the result or of the provided <code>status</code>.</p>
+
+          <div class="method-source-code" id="res_status-source">
+            <pre>static VALUE
+pgresult_res_status(int argc, VALUE *argv, VALUE self)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        VALUE ret;
+
+        if( argc == 0 ){
+                ret = rb_str_new2(PQresStatus(PQresultStatus(this-&gt;pgresult)));
+        }else if( argc == 1 ){
+                ret = rb_str_new2(PQresStatus(NUM2INT(argv[0])));
+        }else{
+                rb_raise(rb_eArgError, &quot;only 0 or 1 arguments expected&quot;);
+        }
+        PG_ENCODING_SET_NOCHECK(ret, this-&gt;enc_idx);
+        return ret;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: res_status, res_status, res_status, res_status
+        </div>
+
+      </div>
+
+      <div id="method-i-result_error_field" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">result_error_field</span><span
+              class="method-args">(p1)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the individual field of an error.</p>
+
+<p><code>fieldcode</code> is one of:</p>
+<ul><li>
+<p><code>PG_DIAG_SEVERITY</code></p>
+</li><li>
+<p><code>PG_DIAG_SQLSTATE</code></p>
+</li><li>
+<p><code>PG_DIAG_MESSAGE_PRIMARY</code></p>
+</li><li>
+<p><code>PG_DIAG_MESSAGE_DETAIL</code></p>
+</li><li>
+<p><code>PG_DIAG_MESSAGE_HINT</code></p>
+</li><li>
+<p><code>PG_DIAG_STATEMENT_POSITION</code></p>
+</li><li>
+<p><code>PG_DIAG_INTERNAL_POSITION</code></p>
+</li><li>
+<p><code>PG_DIAG_INTERNAL_QUERY</code></p>
+</li><li>
+<p><code>PG_DIAG_CONTEXT</code></p>
+</li><li>
+<p><code>PG_DIAG_SOURCE_FILE</code></p>
+</li><li>
+<p><code>PG_DIAG_SOURCE_LINE</code></p>
+</li><li>
+<p><code>PG_DIAG_SOURCE_FUNCTION</code></p>
+</li></ul>
+
+<p>An example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>( <span class="ruby-string">&quot;SELECT * FROM nonexistent_table&quot;</span> )
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">err</span>
+    <span class="ruby-identifier">p</span> [
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SEVERITY</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SQLSTATE</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_MESSAGE_PRIMARY</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_MESSAGE_DETAIL</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_MESSAGE_HINT</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_STATEMENT_POSITION</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_INTERNAL_POSITION</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_INTERNAL_QUERY</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_CONTEXT</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SOURCE_FILE</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SOURCE_LINE</span> ),
+        <span class="ruby-identifier">err</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">error_field</span>( <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">PG_DIAG_SOURCE_FUNCTION</span> ),
+    ]
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Outputs:</p>
+
+<pre class="ruby">[<span class="ruby-string">&quot;ERROR&quot;</span>, <span class="ruby-string">&quot;42P01&quot;</span>, <span class="ruby-string">&quot;relation \&quot;nonexistent_table\&quot; does not exist&quot;</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>,
+ <span class="ruby-string">&quot;15&quot;</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&quot;path/to/parse_relation.c&quot;</span>, <span class="ruby-string">&quot;857&quot;</span>, <span class="ruby-string">&quot;parserOpenTable&quot;</span>]
+</pre>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Result.html#method-i-error_field">error_field</a>
+        </div>
+      </div>
+
+      <div id="method-i-result_error_message" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">result_error_message</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the error message of the command as a string.</p>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Result.html#method-i-error_message">error_message</a>
+        </div>
+      </div>
+
+      <div id="method-i-result_status" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              result_status() &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the status of the query. The status value is one of:</p>
+<ul><li>
+<p><code>PGRES_EMPTY_QUERY</code></p>
+</li><li>
+<p><code>PGRES_COMMAND_OK</code></p>
+</li><li>
+<p><code>PGRES_TUPLES_OK</code></p>
+</li><li>
+<p><code>PGRES_COPY_OUT</code></p>
+</li><li>
+<p><code>PGRES_COPY_IN</code></p>
+</li><li>
+<p><code>PGRES_BAD_RESPONSE</code></p>
+</li><li>
+<p><code>PGRES_NONFATAL_ERROR</code></p>
+</li><li>
+<p><code>PGRES_FATAL_ERROR</code></p>
+</li><li>
+<p><code>PGRES_COPY_BOTH</code></p>
+</li><li>
+<p><code>PGRES_SINGLE_TUPLE</code></p>
+</li><li>
+<p><code>PGRES_TUPLES_CHUNK</code></p>
+</li><li>
+<p><code>PGRES_PIPELINE_SYNC</code></p>
+</li><li>
+<p><code>PGRES_PIPELINE_ABORTED</code></p>
+</li></ul>
+
+<p>Use <code>res.res_status</code> to retrieve the string representation.</p>
+
+          <div class="method-source-code" id="result_status-source">
+            <pre>static VALUE
+pgresult_result_status(VALUE self)
+{
+        return INT2FIX(PQresultStatus(pgresult_get(self)));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: result_status, result_status
+        </div>
+
+      </div>
+
+      <div id="method-i-result_verbose_error_message" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">result_verbose_error_message</span><span
+              class="method-args">(p1, p2)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a reformatted version of the error message associated with the <a href="Result.html"><code>PG::Result</code></a> object.</p>
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Result.html#method-i-verbose_error_message">verbose_error_message</a>
+        </div>
+      </div>
+
+      <div id="method-i-stream_each" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              stream_each{ |tuple| ... }
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Invokes block for each tuple in the result set in single row mode.</p>
+
+<p>This is a convenience method for retrieving all result tuples as they are transferred. It is an alternative to repeated calls of <a href="Connection.html#method-i-get_result"><code>PG::Connection#get_result</code></a> , but given that it avoids the overhead of wrapping each row into a dedicated result object, it delivers data in nearly the same speed as with ordinary results.</p>
+
+<p>The base result must be in status <code>PGRES_SINGLE_TUPLE</code> or <code>PGRES_TUPLES_CHUNK</code>. It iterates over all tuples until the status changes to <code>PGRES_TUPLES_OK</code>. A <a href="Error.html"><code>PG::Error</code></a> is raised for any errors from the server.</p>
+
+<p>Row description data does not change while the iteration. All value retrieval methods refer to only the current row. <a href="Result.html#method-i-ntuples"><code>Result#ntuples</code></a> returns <code>1</code> while the iteration and <code>0</code> after all tuples were yielded.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">conn</span>.<span class="ruby-identifier">send_query</span>( <span class="ruby-string">&quot;first SQL query; second SQL query&quot;</span> )
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">set_single_row_mode</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">get_result</span>.<span class="ruby-identifier">stream_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># do something with each received row of the first query</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">get_result</span>.<span class="ruby-identifier">stream_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># do something with each received row of the second query</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">get_result</span>  <span class="ruby-comment"># =&gt; nil   (no more results)</span>
+</pre>
+
+          <div class="method-source-code" id="stream_each-source">
+            <pre>static VALUE
+pgresult_stream_each(VALUE self)
+{
+        return pgresult_stream_any(self, yield_hash, NULL);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: stream_each, stream_each
+        </div>
+
+      </div>
+
+      <div id="method-i-stream_each_row" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              stream_each_row { |row| ... }
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Yields each row of the result set in single row mode. The row is a list of column values.</p>
+
+<p>This method works equally to <a href="Result.html#method-i-stream_each"><code>stream_each</code></a> , but yields an <a href="../Array.html"><code>Array</code></a> of values.</p>
+
+          <div class="method-source-code" id="stream_each_row-source">
+            <pre>static VALUE
+pgresult_stream_each_row(VALUE self)
+{
+        return pgresult_stream_any(self, yield_array, NULL);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: stream_each_row, stream_each_row
+        </div>
+
+      </div>
+
+      <div id="method-i-stream_each_tuple" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              stream_each_tuple { |tuple| ... }
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Yields each row of the result set in single row mode.</p>
+
+<p>This method works equally to <a href="Result.html#method-i-stream_each"><code>stream_each</code></a> , but yields a <a href="Tuple.html"><code>PG::Tuple</code></a> object.</p>
+
+          <div class="method-source-code" id="stream_each_tuple-source">
+            <pre>static VALUE
+pgresult_stream_each_tuple(VALUE self)
+{
+        /* allocate VALUEs that are shared between all streamed tuples */
+        ensure_init_for_tuple(self);
+
+        return pgresult_stream_any(self, yield_tuple, NULL);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: stream_each_tuple, stream_each_tuple
+        </div>
+
+      </div>
+
+      <div id="method-i-tuple" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              tuple( n )   &rarr; PG::Tuple
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a <a href="Tuple.html"><code>PG::Tuple</code></a> from the nth row of the result.</p>
+
+          <div class="method-source-code" id="tuple-source">
+            <pre>static VALUE
+pgresult_tuple(VALUE self, VALUE index)
+{
+        int tuple_num = NUM2INT( index );
+        t_pg_result *this;
+        int num_tuples;
+
+        this = pgresult_get_this_safe(self);
+        num_tuples = PQntuples(this-&gt;pgresult);
+
+        if ( tuple_num &lt; 0 || tuple_num &gt;= num_tuples )
+                rb_raise( rb_eIndexError, &quot;Index %d is out of range&quot;, tuple_num );
+
+        ensure_init_for_tuple(self);
+
+  return pg_tuple_new(self, tuple_num);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: tuple, tuple
+        </div>
+
+      </div>
+
+      <div id="method-i-tuple_values" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              tuple_values( n )   &rarr; array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an <a href="../Array.html"><code>Array</code></a> of the field values from the nth row of the result.</p>
+
+          <div class="method-source-code" id="tuple_values-source">
+            <pre>static VALUE
+pgresult_tuple_values(VALUE self, VALUE index)
+{
+        int tuple_num = NUM2INT( index );
+        t_pg_result *this;
+        int field;
+        int num_tuples;
+        int num_fields;
+
+        this = pgresult_get_this_safe(self);
+        num_tuples = PQntuples(this-&gt;pgresult);
+        num_fields = PQnfields(this-&gt;pgresult);
+
+        if ( tuple_num &lt; 0 || tuple_num &gt;= num_tuples )
+                rb_raise( rb_eIndexError, &quot;Index %d is out of range&quot;, tuple_num );
+
+        {
+                PG_VARIABLE_LENGTH_ARRAY(VALUE, row_values, num_fields, PG_MAX_COLUMNS)
+
+                /* populate the row */
+                for ( field = 0; field &lt; num_fields; field++ ) {
+                        row_values[field] = this-&gt;p_typemap-&gt;funcs.typecast_result_value(this-&gt;p_typemap, self, tuple_num, field);
+                }
+                return rb_ary_new4( num_fields, row_values );
+        }
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: tuple_values, tuple_values
+        </div>
+
+      </div>
+
+      <div id="method-i-type_map" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              type_map &rarr; value
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the <a href="TypeMap.html"><code>PG::TypeMap</code></a> that is currently set for type casts of result values to ruby objects.</p>
+
+          <div class="method-source-code" id="type_map-source">
+            <pre>static VALUE
+pgresult_type_map_get(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this(self);
+
+        return this-&gt;typemap;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: type_map, type_map
+        </div>
+
+      </div>
+
+      <div id="method-i-type_map-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              type_map = typemap
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="../Set.html"><code>Set</code></a> the <a href="TypeMap.html"><code>PG::TypeMap</code></a> that is used for type casts of result values to ruby objects.</p>
+
+<p>All value retrieval methods will respect the type map and will do the type casts from PostgreSQL’s wire format to Ruby objects on the fly, according to the rules and decoders defined in the given typemap.</p>
+
+<p><code>typemap</code> must be a kind of <a href="TypeMap.html"><code>PG::TypeMap</code></a> .</p>
+
+          <div class="method-source-code" id="type_map-3D-source">
+            <pre>static VALUE
+pgresult_type_map_set(VALUE self, VALUE typemap)
+{
+        t_pg_result *this = pgresult_get_this(self);
+        t_typemap *p_typemap;
+
+        rb_check_frozen(self);
+        /* Check type of method param */
+        TypedData_Get_Struct(typemap, t_typemap, &amp;pg_typemap_type, p_typemap);
+
+        typemap = p_typemap-&gt;funcs.fit_to_result( typemap, self );
+        RB_OBJ_WRITE(self, &amp;this-&gt;typemap, typemap);
+        this-&gt;p_typemap = RTYPEDDATA_DATA( typemap );
+
+        return typemap;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: type_map=, type_map=
+        </div>
+
+      </div>
+
+      <div id="method-i-values" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              values &rarr; Array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns all tuples as an array of arrays.</p>
+
+          <div class="method-source-code" id="values-source">
+            <pre>static VALUE
+pgresult_values(VALUE self)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        int row;
+        int field;
+        int num_rows = PQntuples(this-&gt;pgresult);
+        int num_fields = PQnfields(this-&gt;pgresult);
+        VALUE results = rb_ary_new2( num_rows );
+
+        for ( row = 0; row &lt; num_rows; row++ ) {
+                PG_VARIABLE_LENGTH_ARRAY(VALUE, row_values, num_fields, PG_MAX_COLUMNS)
+
+                /* populate the row */
+                for ( field = 0; field &lt; num_fields; field++ ) {
+                        row_values[field] = this-&gt;p_typemap-&gt;funcs.typecast_result_value(this-&gt;p_typemap, self, row, field);
+                }
+                rb_ary_store( results, row, rb_ary_new4( num_fields, row_values ) );
+        }
+
+        return results;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: values, values
+        </div>
+
+      </div>
+
+      <div id="method-i-verbose_error_message" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              verbose_error_message( verbosity, show_context ) &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a reformatted version of the error message associated with the <a href="Result.html"><code>PG::Result</code></a> object.</p>
+
+          <div class="method-source-code" id="verbose_error_message-source">
+            <pre>static VALUE
+pgresult_verbose_error_message(VALUE self, VALUE verbosity, VALUE show_context)
+{
+        t_pg_result *this = pgresult_get_this_safe(self);
+        VALUE ret;
+        char *c_str;
+
+        c_str = PQresultVerboseErrorMessage(this-&gt;pgresult, NUM2INT(verbosity), NUM2INT(show_context));
+        if(!c_str)
+                rb_raise(rb_eNoMemError, &quot;insufficient memory to format error message&quot;);
+
+        ret = rb_str_new2(c_str);
+        PQfreemem(c_str);
+        PG_ENCODING_SET_NOCHECK(ret, this-&gt;enc_idx);
+
+        return ret;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Result.html#method-i-result_verbose_error_message">result_verbose_error_message</a>, verbose_error_message, result_verbose_error_message, verbose_error_message, result_verbose_error_message
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

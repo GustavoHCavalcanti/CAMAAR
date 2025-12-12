@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActionText::RichText - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-ActionText::RichText-label-Action+Text+RichText">Action Text RichText</a>
+          <li>      <a href="#class-ActionText::RichText-label-Action+Text+RichText">Action Text RichText</a>
+          <li>      <a href="#class-ActionText::RichText-label-Action+Text+RichText">Action Text RichText</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">ActionText::Record
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-embeds">#embeds</a>
+    <li ><a href="#method-i-record">#record</a>
+    <li ><a href="#method-i-to_plain_text">#to_plain_text</a>
+    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-to_trix_html">#to_trix_html</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActionText::RichText">
+  <h1 id="class-ActionText::RichText" class="class">
+    class ActionText::RichText
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActionText::RichText-label-Action+Text+RichText">Action Text <a href="RichText.html"><code>RichText</code></a><span><a href="#class-ActionText::RichText-label-Action+Text+RichText">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The <a href="RichText.html"><code>RichText</code></a> record holds the content produced by the <a href="../Trix.html"><code>Trix</code></a> editor in a serialized <code>body</code> attribute. It also holds all the references to the embedded files, which are stored using Active Storage. This record is then associated with the Active Record model the application desires to have rich text content using the <code>has_rich_text</code> class method.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Message</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_rich_text</span> <span class="ruby-value">:content</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span> <span class="ruby-comment">#=&gt; #&lt;ActionText::RichText....</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;Funny times!&quot;</span>
+
+<span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;div onclick=&#39;action()&#39;&gt;safe&lt;script&gt;unsafe&lt;/script&gt;&lt;/div&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span> <span class="ruby-comment">#=&gt; #&lt;ActionText::RichText....</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;div&gt;safeunsafe&lt;/div&gt;&quot;</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;safeunsafe&quot;</span>
+</pre>
+
+<h1 id="class-ActionText::RichText-label-Action+Text+RichText">Action Text <a href="RichText.html"><code>RichText</code></a><span><a href="#class-ActionText::RichText-label-Action+Text+RichText">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The <a href="RichText.html"><code>RichText</code></a> record holds the content produced by the <a href="../Trix.html"><code>Trix</code></a> editor in a serialized <code>body</code> attribute. It also holds all the references to the embedded files, which are stored using Active Storage. This record is then associated with the Active Record model the application desires to have rich text content using the <code>has_rich_text</code> class method.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Message</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_rich_text</span> <span class="ruby-value">:content</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span> <span class="ruby-comment">#=&gt; #&lt;ActionText::RichText....</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;Funny times!&quot;</span>
+
+<span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;div onclick=&#39;action()&#39;&gt;safe&lt;script&gt;unsafe&lt;/script&gt;&lt;/div&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span> <span class="ruby-comment">#=&gt; #&lt;ActionText::RichText....</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;div&gt;safeunsafe&lt;/div&gt;&quot;</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;safeunsafe&quot;</span>
+</pre>
+
+<h1 id="class-ActionText::RichText-label-Action+Text+RichText">Action Text <a href="RichText.html"><code>RichText</code></a><span><a href="#class-ActionText::RichText-label-Action+Text+RichText">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The <a href="RichText.html"><code>RichText</code></a> record holds the content produced by the <a href="../Trix.html"><code>Trix</code></a> editor in a serialized <code>body</code> attribute. It also holds all the references to the embedded files, which are stored using Active Storage. This record is then associated with the Active Record model the application desires to have rich text content using the <code>has_rich_text</code> class method.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Message</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_rich_text</span> <span class="ruby-value">:content</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span> <span class="ruby-comment">#=&gt; #&lt;ActionText::RichText....</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;Funny times!&quot;</span>
+
+<span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;div onclick=&#39;action()&#39;&gt;safe&lt;script&gt;unsafe&lt;/script&gt;&lt;/div&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span> <span class="ruby-comment">#=&gt; #&lt;ActionText::RichText....</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;div&gt;safeunsafe&lt;/div&gt;&quot;</span>
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;safeunsafe&quot;</span>
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-embeds" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">embeds</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the <a href="../ActiveStorage/Attachment.html"><code>ActiveStorage::Attachment</code></a> records from the embedded files.</p>
+
+<p>Attached <a href="../ActiveStorage/Blob.html"><code>ActiveStorage::Blob</code></a> records are extracted from the <code>body</code> in a <a href="../ActiveModel/Validations/Callbacks/ClassMethods.html#method-i-before_validation">before_validation</a> callback.</p>
+
+          <div class="method-source-code" id="embeds-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/app/models/action_text/rich_text.rb, line 55</span>
+<span class="ruby-identifier">has_many_attached</span> <span class="ruby-value">:embeds</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-record" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">record</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the associated record.</p>
+
+          <div class="method-source-code" id="record-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/app/models/action_text/rich_text.rb, line 46</span>
+<span class="ruby-identifier">belongs_to</span> <span class="ruby-value">:record</span>, <span class="ruby-value">polymorphic:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">touch:</span> <span class="ruby-keyword">true</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_plain_text" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_plain_text</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a plain-text version of the markup contained by the <code>body</code> attribute, with tags removed but HTML entities encoded.</p>
+
+<pre class="ruby"><span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;Funny times!&quot;</span>
+</pre>
+
+<p>NOTE: that the returned string is not HTML safe and should not be rendered in browsers.</p>
+
+<pre class="ruby"><span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&amp;lt;script&amp;gt;alert()&amp;lt;/script&amp;gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;&lt;script&gt;alert()&lt;/script&gt;&quot;</span>
+</pre>
+
+          <div class="method-source-code" id="to_plain_text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/app/models/action_text/rich_text.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_plain_text</span>
+  <span class="ruby-identifier">body</span>&amp;.<span class="ruby-identifier">to_plain_text</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_s" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_s</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Safely transforms <a href="RichText.html"><code>RichText</code></a> into an HTML <a href="../String.html"><code>String</code></a>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;h1&gt;Funny times!&lt;/h1&gt;&quot;</span>
+
+<span class="ruby-identifier">message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;&lt;div onclick=&#39;action()&#39;&gt;safe&lt;script&gt;unsafe&lt;/script&gt;&lt;/div&gt;&quot;</span>)
+<span class="ruby-identifier">message</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;&lt;div&gt;safeunsafe&lt;/div&gt;&quot;</span>
+</pre>
+
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/app/models/action_text/rich_text.rb, line 39</span>
+<span class="ruby-identifier">serialize</span> <span class="ruby-value">:body</span>, <span class="ruby-value">coder:</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Content</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_trix_html" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_trix_html</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the <code>body</code> attribute in a format that makes it editable in the <a href="../Trix.html"><code>Trix</code></a> editor. Previews of attachments are rendered inline.</p>
+
+<pre>content = &quot;&lt;h1&gt;Funny Times!&lt;/h1&gt;&lt;figure data-trix-attachment=&#39;{\&quot;sgid\&quot;:\&quot;...&quot;\}&#39;&gt;&lt;/figure&gt;&quot;
+message = Message.create!(content: content)
+message.content.to_trix_html # =&gt;
+# &lt;div class=&quot;trix-content&quot;&gt;
+#   &lt;h1&gt;Funny times!&lt;/h1&gt;
+#   &lt;figure data-trix-attachment=&#39;{\&quot;sgid\&quot;:\&quot;...&quot;\}&#39;&gt;
+#      &lt;img src=&quot;http://example.org/rails/active_storage/.../funny.jpg&quot;&gt;
+#   &lt;/figure&gt;
+# &lt;/div&gt;</pre>
+
+          <div class="method-source-code" id="to_trix_html-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/app/models/action_text/rich_text.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_trix_html</span>
+  <span class="ruby-identifier">body</span>&amp;.<span class="ruby-identifier">to_trix_html</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

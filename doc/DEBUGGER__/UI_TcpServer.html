@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class DEBUGGER__::UI_TcpServer - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="UI_ServerBase.html">DEBUGGER__::UI_ServerBase</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li class="calls-super" ><a href="#method-i-accept">#accept</a>
+    <li ><a href="#method-i-chrome_setup">#chrome_setup</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-DEBUGGER__::UI_TcpServer">
+  <h1 id="class-DEBUGGER__::UI_TcpServer" class="class">
+    class DEBUGGER__::UI_TcpServer
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(host: nil, port: nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="UI_ServerBase.html#method-c-new"><code>DEBUGGER__::UI_ServerBase::new</code></a>
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server.rb, line 386</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-value">host:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">port:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@local_addr</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@host</span> = <span class="ruby-identifier">host</span> <span class="ruby-operator">||</span> <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:host</span>]
+  <span class="ruby-ivar">@port_save_file</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@port</span> = <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">port_str</span> = (<span class="ruby-identifier">port</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">port</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:port</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-string">&quot;Specify listening port by RUBY_DEBUG_PORT environment variable.&quot;</span>)
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">port_str</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A\d+\z/</span>
+      <span class="ruby-identifier">port_str</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A(\d+):(.+)\z/</span>
+      <span class="ruby-ivar">@port_save_file</span> = <span class="ruby-node">$2</span>
+      <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Specify digits for port number&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@port_range</span> = <span class="ruby-keyword">if</span> <span class="ruby-ivar">@port</span>.<span class="ruby-identifier">zero?</span>
+    <span class="ruby-value">0</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">port_range_str</span> = (<span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:port_range</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;0&quot;</span>).<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Specify a positive integer &lt;=16 for port range&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">port_range_str</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-regexp">/\A\d+\z/</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">port_range_str</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">16</span>
+    <span class="ruby-identifier">port_range_str</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@uuid</span> = <span class="ruby-keyword">nil</span> <span class="ruby-comment"># for CDP</span>
+
+  <span class="ruby-keyword">super</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-accept" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">accept</span><span
+              class="method-args">() { |sock_for_fork = sock| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="UI_ServerBase.html#method-i-accept"><code>DEBUGGER__::UI_ServerBase#accept</code></a>
+            </div>
+
+          <div class="method-source-code" id="accept-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server.rb, line 427</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accept</span>
+      <span class="ruby-identifier">retry_cnt</span> = <span class="ruby-value">0</span>
+      <span class="ruby-keyword">super</span> <span class="ruby-comment"># for fork</span>
+
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">tcp_server_sockets</span> <span class="ruby-ivar">@host</span>, <span class="ruby-ivar">@port</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">socks</span><span class="ruby-operator">|</span>
+          <span class="ruby-ivar">@local_addr</span> = <span class="ruby-identifier">socks</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">local_address</span> <span class="ruby-comment"># Change this part if `socks` are multiple.</span>
+          <span class="ruby-identifier">rdbg</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&#39;../../exe/rdbg&#39;</span>, <span class="ruby-identifier">__dir__</span>)
+          <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Debugger can attach via TCP/IP (#{@local_addr.inspect_sockaddr})&quot;</span>
+
+          <span class="ruby-keyword">if</span> <span class="ruby-ivar">@port_save_file</span>
+            <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@port_save_file</span>, <span class="ruby-node">&quot;#{socks[0].local_address.ip_port.to_s}\n&quot;</span>)
+            <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Port is saved into #{@port_save_file}&quot;</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">info</span> <span class="ruby-identifier">&lt;&lt;~EOS</span>
+<span class="ruby-value">          With rdbg, use the following command line:
+          #
+          #   #{rdbg} --attach #{@local_addr.ip_address} #{@local_addr.ip_port}
+          #
+</span><span class="ruby-identifier">          EOS</span>
+
+          <span class="ruby-keyword">case</span> <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:open</span>]
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;chrome&#39;</span>
+            <span class="ruby-identifier">chrome_setup</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;vscode&#39;</span>
+            <span class="ruby-identifier">vscode_setup</span> <span class="ruby-ivar">@local_addr</span>.<span class="ruby-identifier">inspect_sockaddr</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">accept_loop</span>(<span class="ruby-identifier">socks</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sock</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">|</span>
+            <span class="ruby-ivar">@client_addr</span> = <span class="ruby-identifier">client</span>
+            <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@sock_for_fork</span> = <span class="ruby-identifier">sock</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EADDRINUSE</span>
+        <span class="ruby-identifier">number_of_retries</span> = <span class="ruby-ivar">@port_range</span>.<span class="ruby-identifier">zero?</span> <span class="ruby-operator">?</span> <span class="ruby-value">10</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@port_range</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">retry_cnt</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">number_of_retries</span>
+          <span class="ruby-ivar">@port</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@port_range</span>.<span class="ruby-identifier">zero?</span>
+          <span class="ruby-identifier">retry_cnt</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">sleep</span> <span class="ruby-value">0.1</span>
+          <span class="ruby-keyword">retry</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">raise</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Terminate</span>
+        <span class="ruby-comment"># OK</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">inspect</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-identifier">pp</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">ensure</span>
+      <span class="ruby-ivar">@sock_for_fork</span> = <span class="ruby-keyword">nil</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@port_save_file</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@port_save_file</span>)
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-ivar">@port_save_file</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-chrome_setup" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">chrome_setup</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="chrome_setup-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/server.rb, line 414</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chrome_setup</span>
+      <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&#39;server_cdp&#39;</span>
+
+      <span class="ruby-ivar">@uuid</span> = <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">uuid</span>
+      <span class="ruby-ivar">@chrome_pid</span> = <span class="ruby-constant">UI_CDP</span>.<span class="ruby-identifier">setup_chrome</span>(<span class="ruby-ivar">@local_addr</span>.<span class="ruby-identifier">inspect_sockaddr</span>, <span class="ruby-ivar">@uuid</span>)
+      <span class="ruby-constant">DEBUGGER__</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">&lt;&lt;~EOS</span>
+<span class="ruby-value">        With Chrome browser, type the following URL in the address-bar:
+
+           devtools://devtools/bundled/inspector.html?v8only=true&amp;panel=sources&amp;noJavaScriptCompletion=true&amp;ws=#{@local_addr.inspect_sockaddr}/#{@uuid}
+
+</span><span class="ruby-identifier">        EOS</span>
+    <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

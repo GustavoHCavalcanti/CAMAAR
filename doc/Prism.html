@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Prism - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-dump">::dump</a>
+    <li ><a href="#method-c-dump_file">::dump_file</a>
+    <li ><a href="#method-c-lex">::lex</a>
+    <li ><a href="#method-c-lex_compat">::lex_compat</a>
+    <li ><a href="#method-c-lex_file">::lex_file</a>
+    <li ><a href="#method-c-lex_ripper">::lex_ripper</a>
+    <li ><a href="#method-c-load">::load</a>
+    <li ><a href="#method-c-parse">::parse</a>
+    <li ><a href="#method-c-parse_comments">::parse_comments</a>
+    <li ><a href="#method-c-parse_failure-3F">::parse_failure?</a>
+    <li ><a href="#method-c-parse_file">::parse_file</a>
+    <li ><a href="#method-c-parse_file_comments">::parse_file_comments</a>
+    <li ><a href="#method-c-parse_file_failure-3F">::parse_file_failure?</a>
+    <li ><a href="#method-c-parse_file_success-3F">::parse_file_success?</a>
+    <li ><a href="#method-c-parse_lex">::parse_lex</a>
+    <li ><a href="#method-c-parse_lex_file">::parse_lex_file</a>
+    <li ><a href="#method-c-parse_stream">::parse_stream</a>
+    <li ><a href="#method-c-parse_success-3F">::parse_success?</a>
+    <li ><a href="#method-c-profile">::profile</a>
+    <li ><a href="#method-c-profile_file">::profile_file</a>
+    <li ><a href="#method-c-scope">::scope</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Prism">
+  <h1 id="module-Prism" class="module">
+    module Prism
+  </h1>
+
+  <section class="description">
+    
+<p>The <a href="Prism.html"><code>Prism</code></a> Ruby parser.</p>
+
+<p>“Parsing Ruby is suddenly manageable!”  - You, hopefully</p>
+
+<p>The <a href="Prism.html"><code>Prism</code></a> Ruby parser.</p>
+
+<p>“Parsing Ruby is suddenly manageable!”  - You, hopefully</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="BACKEND">BACKEND
+        <dd><p>The C extension is the default backend on CRuby.</p>
+        <dt id="VERSION">VERSION
+        <dd><p>The version of the prism library.</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-dump" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::dump(source, **options) &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Dump the <a href="AST.html"><code>AST</code></a> corresponding to the given string to a string. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="dump-source">
+            <pre>static VALUE
+dump(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+    string_options(argc, argv, &amp;input, &amp;options);
+
+#ifdef PRISM_BUILD_DEBUG
+    size_t length = pm_string_length(&amp;input);
+    char* dup = xmalloc(length);
+    memcpy(dup, pm_string_source(&amp;input), length);
+    pm_string_constant_init(&amp;input, dup, length);
+#endif
+
+    VALUE value = dump_input(&amp;input, &amp;options);
+    if (options.freeze) rb_obj_freeze(value);
+
+#ifdef PRISM_BUILD_DEBUG
+    xfree(dup);
+#endif
+
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-dump_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::dump_file(filepath, **options) &rarr; String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Dump the <a href="AST.html"><code>AST</code></a> corresponding to the given file to a string. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="dump_file-source">
+            <pre>static VALUE
+dump_file(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    VALUE encoded_filepath;
+    file_options(argc, argv, &amp;input, &amp;options, &amp;encoded_filepath);
+
+    VALUE value = dump_input(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-lex" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::lex(source, **options) &rarr; LexResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return a <a href="Prism/LexResult.html"><code>LexResult</code></a> instance that contains an array of <a href="Prism/Token.html"><code>Token</code></a> instances corresponding to the given string. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="lex-source">
+            <pre>static VALUE
+lex(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+    string_options(argc, argv, &amp;input, &amp;options);
+
+    VALUE result = parse_lex_input(&amp;input, &amp;options, false);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return result;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-lex_compat" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::lex_compat(source, **options) &rarr; LexCompat::Result
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a parse result whose value is an array of tokens that closely resembles the return value of <a href="Prism/Translation/Ripper.html#method-c-lex"><code>Ripper::lex</code></a>. The main difference is that the <code>:on_sp</code> token is not emitted.</p>
+
+<p>For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="lex_compat-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/prism-1.6.0/lib/prism.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lex_compat</span>(<span class="ruby-identifier">source</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-constant">LexCompat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">result</span> <span class="ruby-comment"># steep:ignore</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-lex_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::lex_file(filepath, **options) &rarr; LexResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return a <a href="Prism/LexResult.html"><code>LexResult</code></a> instance that contains an array of <a href="Prism/Token.html"><code>Token</code></a> instances corresponding to the given file. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="lex_file-source">
+            <pre>static VALUE
+lex_file(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    VALUE encoded_filepath;
+    file_options(argc, argv, &amp;input, &amp;options, &amp;encoded_filepath);
+
+    VALUE value = parse_lex_input(&amp;input, &amp;options, false);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-lex_ripper" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::lex_ripper(source) &rarr; Array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>This lexes with the <a href="Prism/Translation/Ripper.html"><code>Ripper</code></a> lex. It drops any space events but otherwise returns the same tokens. Raises SyntaxError if the syntax in source is invalid.</p>
+
+          <div class="method-source-code" id="lex_ripper-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/prism-1.6.0/lib/prism.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lex_ripper</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-constant">LexRipper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>).<span class="ruby-identifier">result</span> <span class="ruby-comment"># steep:ignore</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-load" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::load(source, serialized, freeze) &rarr; ParseResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Load the serialized <a href="AST.html"><code>AST</code></a> using the source as a reference into a tree.</p>
+
+          <div class="method-source-code" id="load-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/prism-1.6.0/lib/prism.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">load</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">serialized</span>, <span class="ruby-identifier">freeze</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-constant">Serialize</span>.<span class="ruby-identifier">load_parse</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">serialized</span>, <span class="ruby-identifier">freeze</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse(source, **options) &rarr; ParseResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given string and return a <a href="Prism/ParseResult.html"><code>ParseResult</code></a> instance. The options that are supported are:</p>
+<ul><li>
+<p>‘command_line` - either nil or a string of the various options that were</p>
+
+<pre>set on the command line. Valid values are combinations of &quot;a&quot;, &quot;l&quot;,
+&quot;n&quot;, &quot;p&quot;, and &quot;x&quot;.</pre>
+</li><li>
+<p>‘encoding` - the encoding of the source being parsed. This should be an</p>
+
+<pre>encoding or nil.</pre>
+</li><li>
+<p>‘filepath` - the filepath of the source being parsed. This should be a</p>
+
+<pre>string or nil.</pre>
+</li><li>
+<p>‘freeze` - whether or not to deeply freeze the <a href="AST.html"><code>AST</code></a>. This should be a</p>
+
+<pre>boolean or nil.</pre>
+</li><li>
+<p>‘frozen_string_literal` - whether or not the frozen string literal pragma</p>
+
+<pre>has been set. This should be a boolean or nil.</pre>
+</li><li>
+<p>‘line` - the line number that the parse starts on. This should be an</p>
+
+<pre>integer or nil. Note that this is 1-indexed.</pre>
+</li><li>
+<p>‘main_script` - a boolean indicating whether or not the source being parsed</p>
+
+<pre>is the main script being run by the interpreter. This controls whether
+or not shebangs are parsed for additional flags and whether or not the
+parser will attempt to find a matching shebang if the first one does
+not contain the word &quot;ruby&quot;.</pre>
+</li><li>
+<p>‘partial_script` - when the file being parsed is considered a “partial”</p>
+
+<pre>script, jumps will not be marked as errors if they are not contained
+within loops/blocks. This is used in the case that you&#39;re parsing a
+script that you know will be embedded inside another script later, but
+you do not have that context yet. For example, when parsing an ERB
+template that will be evaluated inside another script.</pre>
+</li><li>
+<p>‘scopes` - the locals that are in scope surrounding the code that is being</p>
+
+<pre>parsed. This should be an array of arrays of symbols or nil. Scopes are
+ordered from the outermost scope to the innermost one.</pre>
+</li><li>
+<p>‘version` - the version of Ruby syntax that prism should used to parse Ruby</p>
+
+<pre>code. By default prism assumes you want to parse with the latest
+version of Ruby syntax (which you can trigger with `nil` or
+`&quot;latest&quot;`). You may also restrict the syntax to a specific version of
+Ruby, e.g., with `&quot;3.3.0&quot;`. To parse with the same syntax version that
+the current Ruby is running use `version: &quot;current&quot;`. Raises
+ArgumentError if the version is not currently supported by Prism.</pre>
+</li></ul>
+
+          <div class="method-source-code" id="parse-source">
+            <pre>static VALUE
+parse(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+    string_options(argc, argv, &amp;input, &amp;options);
+
+#ifdef PRISM_BUILD_DEBUG
+    size_t length = pm_string_length(&amp;input);
+    char* dup = xmalloc(length);
+    memcpy(dup, pm_string_source(&amp;input), length);
+    pm_string_constant_init(&amp;input, dup, length);
+#endif
+
+    VALUE value = parse_input(&amp;input, &amp;options);
+
+#ifdef PRISM_BUILD_DEBUG
+    xfree(dup);
+#endif
+
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_comments" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_comments(source, **options) &rarr; Array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given string and return an array of <a href="Prism/Comment.html"><code>Comment</code></a> objects. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_comments-source">
+            <pre>static VALUE
+parse_comments(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+    string_options(argc, argv, &amp;input, &amp;options);
+
+    VALUE result = parse_input_comments(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return result;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_failure-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_failure?(source, **options) &rarr; bool
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given string and return true if it parses with errors. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_failure-3F-source">
+            <pre>static VALUE
+parse_failure_p(int argc, VALUE *argv, VALUE self) {
+    return RTEST(parse_success_p(argc, argv, self)) ? Qfalse : Qtrue;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_file(filepath, **options) &rarr; ParseResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given file and return a <a href="Prism/ParseResult.html"><code>ParseResult</code></a> instance. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_file-source">
+            <pre>static VALUE
+parse_file(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    VALUE encoded_filepath;
+    file_options(argc, argv, &amp;input, &amp;options, &amp;encoded_filepath);
+
+    VALUE value = parse_input(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_file_comments" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_file_comments(filepath, **options) &rarr; Array
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given file and return an array of <a href="Prism/Comment.html"><code>Comment</code></a> objects. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_file_comments-source">
+            <pre>static VALUE
+parse_file_comments(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    VALUE encoded_filepath;
+    file_options(argc, argv, &amp;input, &amp;options, &amp;encoded_filepath);
+
+    VALUE value = parse_input_comments(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_file_failure-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_file_failure?(filepath, **options) &rarr; bool
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given file and return true if it parses with errors. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_file_failure-3F-source">
+            <pre>static VALUE
+parse_file_failure_p(int argc, VALUE *argv, VALUE self) {
+    return RTEST(parse_file_success_p(argc, argv, self)) ? Qfalse : Qtrue;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_file_success-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_file_success?(filepath, **options) &rarr; bool
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given file and return true if it parses without errors. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_file_success-3F-source">
+            <pre>static VALUE
+parse_file_success_p(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    VALUE encoded_filepath;
+    file_options(argc, argv, &amp;input, &amp;options, &amp;encoded_filepath);
+
+    VALUE result = parse_input_success_p(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return result;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_lex" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_lex(source, **options) &rarr; ParseLexResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given string and return a <a href="Prism/ParseLexResult.html"><code>ParseLexResult</code></a> instance that contains a 2-element array, where the first element is the <a href="AST.html"><code>AST</code></a> and the second element is an array of <a href="Prism/Token.html"><code>Token</code></a> instances.</p>
+
+<p>This API is only meant to be used in the case where you need both the <a href="AST.html"><code>AST</code></a> and the tokens. If you only need one or the other, use either <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a> or <a href="Prism.html#method-c-lex"><code>Prism::lex</code></a>.</p>
+
+<p>For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_lex-source">
+            <pre>static VALUE
+parse_lex(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+    string_options(argc, argv, &amp;input, &amp;options);
+
+    VALUE value = parse_lex_input(&amp;input, &amp;options, true);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_lex_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_lex_file(filepath, **options) &rarr; ParseLexResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given file and return a <a href="Prism/ParseLexResult.html"><code>ParseLexResult</code></a> instance that contains a 2-element array, where the first element is the <a href="AST.html"><code>AST</code></a> and the second element is an array of <a href="Prism/Token.html"><code>Token</code></a> instances.</p>
+
+<p>This API is only meant to be used in the case where you need both the <a href="AST.html"><code>AST</code></a> and the tokens. If you only need one or the other, use either <a href="Prism.html#method-c-parse_file"><code>Prism::parse_file</code></a> or <a href="Prism.html#method-c-lex_file"><code>Prism::lex_file</code></a>.</p>
+
+<p>For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_lex_file-source">
+            <pre>static VALUE
+parse_lex_file(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    VALUE encoded_filepath;
+    file_options(argc, argv, &amp;input, &amp;options, &amp;encoded_filepath);
+
+    VALUE value = parse_lex_input(&amp;input, &amp;options, true);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return value;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_stream" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_stream(stream, **options) &rarr; ParseResult
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given object that responds to ‘gets` and return a <a href="Prism/ParseResult.html"><code>ParseResult</code></a> instance. The options that are supported are the same as <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_stream-source">
+            <pre>static VALUE
+parse_stream(int argc, VALUE *argv, VALUE self) {
+    VALUE stream;
+    VALUE keywords;
+    rb_scan_args(argc, argv, &quot;1:&quot;, &amp;stream, &amp;keywords);
+
+    pm_options_t options = { 0 };
+    extract_options(&amp;options, Qnil, keywords);
+
+    pm_parser_t parser;
+    pm_buffer_t buffer;
+
+    pm_node_t *node = pm_parse_stream(&amp;parser, &amp;buffer, (void *) stream, parse_stream_fgets, parse_stream_eof, &amp;options);
+    rb_encoding *encoding = rb_enc_find(parser.encoding-&gt;name);
+
+    VALUE source = pm_source_new(&amp;parser, encoding, options.freeze);
+    VALUE value = pm_ast_new(&amp;parser, node, encoding, source, options.freeze);
+    VALUE result = parse_result_create(rb_cPrismParseResult, &amp;parser, value, encoding, source, options.freeze);
+
+    pm_node_destroy(&amp;parser, node);
+    pm_buffer_free(&amp;buffer);
+    pm_parser_free(&amp;parser);
+
+    return result;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_success-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::parse_success?(source, **options) &rarr; bool
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given string and return true if it parses without errors. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="parse_success-3F-source">
+            <pre>static VALUE
+parse_success_p(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+    string_options(argc, argv, &amp;input, &amp;options);
+
+    VALUE result = parse_input_success_p(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return result;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-profile" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::profile(source, **options) &rarr; nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given string and return nothing. This method is meant to allow profilers to avoid the overhead of reifying the <a href="AST.html"><code>AST</code></a> to Ruby. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="profile-source">
+            <pre>static VALUE
+profile(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    string_options(argc, argv, &amp;input, &amp;options);
+    profile_input(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return Qnil;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-profile_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              Prism::profile_file(filepath, **options) &rarr; nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse the given file and return nothing. This method is meant to allow profilers to avoid the overhead of reifying the <a href="AST.html"><code>AST</code></a> to Ruby. For supported options, see <a href="Prism.html#method-c-parse"><code>Prism::parse</code></a>.</p>
+
+          <div class="method-source-code" id="profile_file-source">
+            <pre>static VALUE
+profile_file(int argc, VALUE *argv, VALUE self) {
+    pm_string_t input;
+    pm_options_t options = { 0 };
+
+    VALUE encoded_filepath;
+    file_options(argc, argv, &amp;input, &amp;options, &amp;encoded_filepath);
+
+    profile_input(&amp;input, &amp;options);
+    pm_string_free(&amp;input);
+    pm_options_free(&amp;options);
+
+    return Qnil;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-scope" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">scope</span><span
+              class="method-args">(locals: [], forwarding: [])</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create a new scope with the given locals and forwarding options that is suitable for passing into one of the Prism.* methods that accepts the <code>scopes</code> option.</p>
+
+          <div class="method-source-code" id="scope-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/prism-1.6.0/lib/prism/parse_result.rb, line 908</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">scope</span>(<span class="ruby-value">locals:</span> [], <span class="ruby-value">forwarding:</span> [])
+  <span class="ruby-constant">Scope</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">locals</span>, <span class="ruby-identifier">forwarding</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

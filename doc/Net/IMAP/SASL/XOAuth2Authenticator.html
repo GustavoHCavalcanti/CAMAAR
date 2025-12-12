@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Net::IMAP::SASL::XOAuth2Authenticator - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-done-3F">#done?</a>
+    <li ><a href="#method-i-initial_response-3F">#initial_response?</a>
+    <li ><a href="#method-i-process">#process</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Net::IMAP::SASL::XOAuth2Authenticator">
+  <h1 id="class-Net::IMAP::SASL::XOAuth2Authenticator" class="class">
+    class Net::IMAP::SASL::XOAuth2Authenticator
+  </h1>
+
+  <section class="description">
+    
+<p><a href="../../../Authenticator.html"><code>Authenticator</code></a> for the “<code>XOAUTH2</code>” SASL mechanism.  This mechanism was originally created for GMail and widely adopted by hosted email providers. <code>XOAUTH2</code> has been documented by <a href="https://developers.google.com/gmail/imap/xoauth2-protocol">Google</a> and <a href="https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth">Microsoft</a>.</p>
+
+<p>This mechanism requires an OAuth2 access token which has been authorized with the appropriate OAuth2 scopes to access the user’s services.  Most of these scopes are not standardized—consult each service provider’s documentation for their scopes.</p>
+
+<p>Although this mechanism was never standardized and has been obsoleted by “<code>OAUTHBEARER</code>”, it is still very widely supported.</p>
+
+<p>See <a href="OAuthBearerAuthenticator.html"><code>Net::IMAP::SASL::OAuthBearerAuthenticator</code></a>.</p>
+
+<p><a href="../../../Authenticator.html"><code>Authenticator</code></a> for the “<code>XOAUTH2</code>” SASL mechanism.  This mechanism was originally created for GMail and widely adopted by hosted email providers. <code>XOAUTH2</code> has been documented by <a href="https://developers.google.com/gmail/imap/xoauth2-protocol">Google</a> and <a href="https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth">Microsoft</a>.</p>
+
+<p>This mechanism requires an OAuth2 access token which has been authorized with the appropriate OAuth2 scopes to access the user’s services.  Most of these scopes are not standardized—consult each service provider’s documentation for their scopes.</p>
+
+<p>Although this mechanism was never standardized and has been obsoleted by “<code>OAUTHBEARER</code>”, it is still very widely supported.</p>
+
+<p>See <a href="OAuthBearerAuthenticator.html"><code>Net::IMAP::SASL::OAuthBearerAuthenticator</code></a>.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-authzid" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">authzid</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>It is unclear from <a href="https://developers.google.com/gmail/imap/xoauth2-protocol">Google’s original XOAUTH2 documentation</a>, whether “User” refers to the authentication identity (<code>authcid</code>) or the authorization identity (<code>authzid</code>).  The authentication identity is established for the client by the OAuth token, so it seems that <code>username</code> must be the authorization identity.</p>
+
+<p><a href="https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#sasl-xoauth2-authentication-for-shared-mailboxes-in-office-365">Microsoft’s documentation for shared mailboxes</a> <em>clearly</em> indicates that the Office 365 server interprets it as the authorization identity.</p>
+
+<p>Although they <em>should</em> validate that the token has been authorized to access the service for <code>username</code>, <em>some</em> servers appear to ignore this field, relying only the identity and scope authorized by the token.</p>
+        </div>
+      </div>
+      <div id="attribute-i-oauth2_token" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">oauth2_token</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>An OAuth2 access token which has been authorized with the appropriate OAuth2 scopes to use the service for <a href="XOAuth2Authenticator.html#attribute-i-username"><code>username</code></a>.</p>
+        </div>
+      </div>
+      <div id="attribute-i-secret" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">secret</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>An OAuth2 access token which has been authorized with the appropriate OAuth2 scopes to use the service for <a href="XOAuth2Authenticator.html#attribute-i-username"><code>username</code></a>.</p>
+        </div>
+      </div>
+      <div id="attribute-i-username" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">username</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>It is unclear from <a href="https://developers.google.com/gmail/imap/xoauth2-protocol">Google’s original XOAUTH2 documentation</a>, whether “User” refers to the authentication identity (<code>authcid</code>) or the authorization identity (<code>authzid</code>).  The authentication identity is established for the client by the OAuth token, so it seems that <code>username</code> must be the authorization identity.</p>
+
+<p><a href="https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#sasl-xoauth2-authentication-for-shared-mailboxes-in-office-365">Microsoft’s documentation for shared mailboxes</a> <em>clearly</em> indicates that the Office 365 server interprets it as the authorization identity.</p>
+
+<p>Although they <em>should</em> validate that the token has been authorized to access the service for <code>username</code>, <em>some</em> servers appear to ignore this field, relying only the identity and scope authorized by the token.</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              new(username,  oauth2_token,  **) &rarr; authenticator
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          <div class="method-heading">
+            <span class="method-callseq">
+              new(username:, oauth2_token:, **) &rarr; authenticator
+            </span>
+          </div>
+          <div class="method-heading">
+            <span class="method-callseq">
+              new(authzid:,  oauth2_token:, **) &rarr; authenticator
+            </span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates an <a href="../../../Authenticator.html"><code>Authenticator</code></a> for the “<code>XOAUTH2</code>” SASL mechanism, as specified by <a href="https://developers.google.com/gmail/imap/xoauth2-protocol">Google</a>, <a href="https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth">Microsoft</a> and <a href="https://senders.yahooinc.com/developer/documentation">Yahoo</a>.</p>
+
+<h3 id="method-c-new-label-Properties">Properties<span><a href="#method-c-new-label-Properties">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a href="XOAuth2Authenticator.html#attribute-i-username"><code>username</code></a> — the username for the account being accessed.</p>
+
+<p><a href="XOAuth2Authenticator.html#attribute-i-authzid"><code>authzid</code></a>  — an alias for <a href="XOAuth2Authenticator.html#attribute-i-username"><code>username</code></a>.</p>
+
+<p>Note that, unlike some other authenticators, <code>username</code> sets the <em>authorization</em> identity and not the <em>authentication</em> identity.  The authenticated identity is established for the client with the OAuth token.</p>
+</li><li>
+<p><a href="XOAuth2Authenticator.html#attribute-i-oauth2_token"><code>oauth2_token</code></a> — An OAuth2.0 access token which is authorized to access the service for <a href="XOAuth2Authenticator.html#attribute-i-username"><code>username</code></a>.</p>
+</li></ul>
+
+<p>Any other keyword parameters are quietly ignored.</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/xoauth2_authenticator.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">token</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">username:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">oauth2_token:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">authzid:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">secret:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span>)
+  <span class="ruby-ivar">@username</span> = <span class="ruby-identifier">authzid</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">username</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">user</span> <span class="ruby-keyword">or</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;missing username (authzid)&quot;</span>
+  <span class="ruby-ivar">@oauth2_token</span> = <span class="ruby-identifier">oauth2_token</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">secret</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">token</span> <span class="ruby-keyword">or</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;missing oauth2_token&quot;</span>
+  <span class="ruby-ivar">@done</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-done-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">done?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns true when the initial client response was sent.</p>
+
+<p>The authentication should not succeed unless this returns true, but it does <strong>not</strong> indicate success.</p>
+
+          <div class="method-source-code" id="done-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/xoauth2_authenticator.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">done?</span>; <span class="ruby-ivar">@done</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-initial_response-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              initial_response? &rarr; true
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><code>XOAUTH2</code> can send an initial client response.</p>
+
+          <div class="method-source-code" id="initial_response-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/xoauth2_authenticator.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initial_response?</span>; <span class="ruby-keyword">true</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process</span><span
+              class="method-args">(_data)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the XOAUTH2 formatted response, which combines the <code>username</code> with the <code>oauth2_token</code>.</p>
+
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/xoauth2_authenticator.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span>(<span class="ruby-identifier">_data</span>)
+  <span class="ruby-identifier">build_oauth2_string</span>(<span class="ruby-ivar">@username</span>, <span class="ruby-ivar">@oauth2_token</span>)
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@done</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

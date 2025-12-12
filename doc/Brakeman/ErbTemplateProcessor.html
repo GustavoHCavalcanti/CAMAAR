@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Brakeman::ErbTemplateProcessor - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="TemplateProcessor.html">Brakeman::TemplateProcessor</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-process_block">#process_block</a>
+    <li ><a href="#method-i-process_call">#process_call</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Brakeman::ErbTemplateProcessor">
+  <h1 id="class-Brakeman::ErbTemplateProcessor" class="class">
+    class Brakeman::ErbTemplateProcessor
+  </h1>
+
+  <section class="description">
+    
+<p>Processes <a href="../ERB.html"><code>ERB</code></a> templates (those ending in .html.erb or .rthml).</p>
+
+<p>Processes <a href="../ERB.html"><code>ERB</code></a> templates (those ending in .html.erb or .rthml).</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-process_block" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_block</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Process block, removing irrelevant expressions</p>
+
+          <div class="method-source-code" id="process_block-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/erb_template_processor.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_block</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">exp</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inside_concat</span>
+    <span class="ruby-ivar">@inside_concat</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">exp</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">process</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@inside_concat</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">process</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">res</span> = <span class="ruby-identifier">process</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">res</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">ignore</span>
+        <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">node_type?</span>(<span class="ruby-identifier">res</span>, <span class="ruby-value">:lvar</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-value">:_erbout</span>
+        <span class="ruby-keyword">nil</span>
+
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">res</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">block</span> = <span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:rlist</span>).<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">exp</span>).<span class="ruby-identifier">compact</span>
+    <span class="ruby-identifier">block</span>.<span class="ruby-identifier">line</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">line</span>)
+    <span class="ruby-identifier">block</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_call" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_call</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>s(:call, TARGET, :method, ARGS)</p>
+
+          <div class="method-source-code" id="process_call-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/erb_template_processor.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_call</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">target</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">target</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">sexp?</span> <span class="ruby-identifier">target</span>
+    <span class="ruby-identifier">target</span> = <span class="ruby-identifier">process</span> <span class="ruby-identifier">target</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">method</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">method</span>
+  
+  <span class="ruby-comment">#_erbout is the default output variable for erb</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node_type?</span> <span class="ruby-identifier">target</span>, <span class="ruby-value">:lvar</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-value">:_erbout</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:concat</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:&lt;&lt;</span>
+      <span class="ruby-ivar">@inside_concat</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">arglist</span> = <span class="ruby-identifier">process</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">arglist</span>)
+      <span class="ruby-ivar">@inside_concat</span> = <span class="ruby-keyword">false</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">second_arg</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Did not expect more than a single argument to _erbout.concat&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">arg</span> = <span class="ruby-identifier">normalize_output</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">first_arg</span>)
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">node_type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:str</span> <span class="ruby-comment">#ignore plain strings</span>
+        <span class="ruby-identifier">ignore</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">add_output</span> <span class="ruby-identifier">arg</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:force_encoding</span>
+      <span class="ruby-identifier">ignore</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Unrecognized action on _erbout: #{method}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">target</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:render</span>
+    <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">arglist</span> = <span class="ruby-identifier">process</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">arglist</span>)
+    <span class="ruby-identifier">make_render_in_view</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">target</span> = <span class="ruby-identifier">target</span>
+    <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">arglist</span> = <span class="ruby-identifier">process</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">arglist</span>)
+    <span class="ruby-identifier">exp</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class MessagePack::Factory - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-dump">#dump</a>
+    <li ><a href="#method-i-dup">#dup</a>
+    <li ><a href="#method-i-freeze">#freeze</a>
+    <li ><a href="#method-i-load">#load</a>
+    <li ><a href="#method-i-pack">#pack</a>
+    <li ><a href="#method-i-packer">#packer</a>
+    <li ><a href="#method-i-pool">#pool</a>
+    <li ><a href="#method-i-register_type">#register_type</a>
+    <li ><a href="#method-i-registered_types">#registered_types</a>
+    <li ><a href="#method-i-type_registered-3F">#type_registered?</a>
+    <li ><a href="#method-i-unpack">#unpack</a>
+    <li ><a href="#method-i-unpacker">#unpacker</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-MessagePack::Factory">
+  <h1 id="class-MessagePack::Factory" class="class">
+    class MessagePack::Factory
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre>static VALUE Factory_initialize(int argc, VALUE* argv, VALUE self)
+{
+    msgpack_factory_t *fc = Factory_get(self);
+
+    msgpack_packer_ext_registry_init(self, &amp;fc-&gt;pkrg);
+    // fc-&gt;ukrg is lazily initialized
+
+    fc-&gt;has_symbol_ext_type = false;
+
+    switch (argc) {
+    case 0:
+        break;
+    default:
+        // TODO options is not supported yet
+        rb_raise(rb_eArgError, &quot;wrong number of arguments (%d for 0)&quot;, argc);
+    }
+
+    return Qnil;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-dump" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dump</span><span
+              class="method-args">(v, *rest)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="dump-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/factory.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dump</span>(<span class="ruby-identifier">v</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rest</span>)
+  <span class="ruby-identifier">packer</span> = <span class="ruby-identifier">packer</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">rest</span>)
+  <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">v</span>)
+  <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">full_pack</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Factory.html#method-i-pack">pack</a>, pack
+        </div>
+
+      </div>
+
+      <div id="method-i-dup" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dup</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="dup-source">
+            <pre>static VALUE Factory_dup(VALUE self)
+{
+    VALUE clone = Factory_alloc(rb_obj_class(self));
+
+    msgpack_factory_t *fc = Factory_get(self);
+    msgpack_factory_t *cloned_fc = Factory_get(clone);
+
+    cloned_fc-&gt;has_symbol_ext_type = fc-&gt;has_symbol_ext_type;
+    cloned_fc-&gt;pkrg = fc-&gt;pkrg;
+    msgpack_unpacker_ext_registry_borrow(fc-&gt;ukrg, &amp;cloned_fc-&gt;ukrg);
+    msgpack_packer_ext_registry_dup(clone, &amp;fc-&gt;pkrg, &amp;cloned_fc-&gt;pkrg);
+
+    return clone;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-freeze" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">freeze</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="freeze-source">
+            <pre>static VALUE Factory_freeze(VALUE self) {
+    if(!rb_obj_frozen_p(self)) {
+        msgpack_factory_t *fc = Factory_get(self);
+
+        if (RTEST(fc-&gt;pkrg.hash)) {
+            rb_hash_freeze(fc-&gt;pkrg.hash);
+            if (!RTEST(fc-&gt;pkrg.cache)) {
+                // If the factory is frozen, we can safely share the packer cache between
+                // all packers. So we eagerly create it now so it&#39;s available when #packer
+                // is called.
+                RB_OBJ_WRITE(self, &amp;fc-&gt;pkrg.cache, rb_hash_new());
+            }
+        }
+
+        rb_obj_freeze(self);
+    }
+
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-load" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load</span><span
+              class="method-args">(src, param = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="load-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/factory.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">param</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">unpacker</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">src</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">unpacker</span> = <span class="ruby-identifier">unpacker</span>(<span class="ruby-identifier">param</span>)
+    <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">feed</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">unpacker</span> = <span class="ruby-identifier">unpacker</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">param</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">full_unpack</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Factory.html#method-i-unpack">unpack</a>, unpack
+        </div>
+
+      </div>
+
+      <div id="method-i-pack" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">pack</span><span
+              class="method-args">(v, *rest)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Factory.html#method-i-dump">dump</a>
+        </div>
+      </div>
+
+      <div id="method-i-packer" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">packer</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="packer-source">
+            <pre>VALUE MessagePack_Factory_packer(int argc, VALUE* argv, VALUE self)
+{
+    msgpack_factory_t *fc = Factory_get(self);
+
+    VALUE packer = MessagePack_Packer_alloc(cMessagePack_Packer);
+    MessagePack_Packer_initialize(argc, argv, packer);
+
+    msgpack_packer_t* pk = MessagePack_Packer_get(packer);
+    msgpack_packer_ext_registry_destroy(&amp;pk-&gt;ext_registry);
+    msgpack_packer_ext_registry_borrow(packer, &amp;fc-&gt;pkrg, &amp;pk-&gt;ext_registry);
+    pk-&gt;has_bigint_ext_type = fc-&gt;has_bigint_ext_type;
+    pk-&gt;has_symbol_ext_type = fc-&gt;has_symbol_ext_type;
+
+    return packer;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-pool" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">pool</span><span
+              class="method-args">(size = 1, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="pool-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/factory.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pool</span>(<span class="ruby-identifier">size</span> = <span class="ruby-value">1</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-constant">Pool</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-identifier">frozen?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">freeze</span>,
+    <span class="ruby-identifier">size</span>,
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">options</span>,
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-register_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">register_type</span><span
+              class="method-args">(type, klass, options = { packer: :to_msgpack_ext, unpacker: :from_msgpack_ext })</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>see ext for other methods</p>
+
+          <div class="method-source-code" id="register_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/factory.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">register_type</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">options</span> = { <span class="ruby-value">packer:</span> <span class="ruby-value">:to_msgpack_ext</span>, <span class="ruby-value">unpacker:</span> <span class="ruby-value">:from_msgpack_ext</span> })
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">FrozenError</span>, <span class="ruby-string">&quot;can&#39;t modify frozen MessagePack::Factory&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">frozen?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">packer</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:packer</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>, <span class="ruby-constant">Proc</span>
+      <span class="ruby-comment"># all good</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:packer</span>] = <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">to_sym</span>.<span class="ruby-identifier">to_proc</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Method</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:packer</span>] = <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">to_proc</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:call</span>)
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:packer</span>] = <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:call</span>).<span class="ruby-identifier">to_proc</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;expected :packer argument to be a callable object, got: #{packer.inspect}&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">unpacker</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:unpacker</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>, <span class="ruby-constant">Proc</span>
+      <span class="ruby-comment"># all good</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:unpacker</span>] = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">method</span>(<span class="ruby-identifier">unpacker</span>).<span class="ruby-identifier">to_proc</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Method</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:unpacker</span>] = <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">to_proc</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:call</span>)
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:unpacker</span>] = <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:call</span>).<span class="ruby-identifier">to_proc</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;expected :unpacker argument to be a callable object, got: #{unpacker.inspect}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">register_type_internal</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-registered_types" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">registered_types</span><span
+              class="method-args">(selector=:both)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <dl class="rdoc-list label-list"><dt> {type: id, class: Class(or nil), packer: arg, unpacker: arg}, … 
+<dd></dd></dl>
+
+          <div class="method-source-code" id="registered_types-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/factory.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">registered_types</span>(<span class="ruby-identifier">selector</span>=<span class="ruby-value">:both</span>)
+  <span class="ruby-identifier">packer</span>, <span class="ruby-identifier">unpacker</span> = <span class="ruby-identifier">registered_types_internal</span>
+  <span class="ruby-comment"># packer: Class -&gt; [tid, proc, _flags]</span>
+  <span class="ruby-comment"># unpacker: tid -&gt; [klass, proc, _flags]</span>
+
+  <span class="ruby-identifier">list</span> = []
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">selector</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:both</span>
+    <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span>, <span class="ruby-identifier">ary</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">type</span> = <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-identifier">packer_proc</span> = <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]
+      <span class="ruby-identifier">unpacker_proc</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">type</span>)
+        <span class="ruby-identifier">unpacker_proc</span> = <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">type</span>)[<span class="ruby-value">1</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">type:</span> <span class="ruby-identifier">type</span>, <span class="ruby-value">class:</span> <span class="ruby-identifier">klass</span>, <span class="ruby-value">packer:</span> <span class="ruby-identifier">packer_proc</span>, <span class="ruby-value">unpacker:</span> <span class="ruby-identifier">unpacker_proc</span>}
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># unpacker definition only</span>
+    <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">ary</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">type:</span> <span class="ruby-identifier">type</span>, <span class="ruby-value">class:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>], <span class="ruby-value">packer:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">unpacker:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]}
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:packer</span>
+    <span class="ruby-identifier">packer</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span>, <span class="ruby-identifier">ary</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]
+        <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">type:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>], <span class="ruby-value">class:</span> <span class="ruby-identifier">klass</span>, <span class="ruby-value">packer:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]}
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:unpacker</span>
+    <span class="ruby-identifier">unpacker</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">ary</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]
+        <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">type:</span> <span class="ruby-identifier">type</span>, <span class="ruby-value">class:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>], <span class="ruby-value">unpacker:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]}
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;invalid selector #{selector}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">list</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">:type</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-type_registered-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">type_registered?</span><span
+              class="method-args">(klass_or_type, selector=:both)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="type_registered-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/factory.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type_registered?</span>(<span class="ruby-identifier">klass_or_type</span>, <span class="ruby-identifier">selector</span>=<span class="ruby-value">:both</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">klass_or_type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Class</span>
+    <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">klass_or_type</span>
+    <span class="ruby-identifier">registered_types</span>(<span class="ruby-identifier">selector</span>).<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">klass</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">:class</span>] }
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Integer</span>
+    <span class="ruby-identifier">type</span> = <span class="ruby-identifier">klass_or_type</span>
+    <span class="ruby-identifier">registered_types</span>(<span class="ruby-identifier">selector</span>).<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">:type</span>] }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;class or type id&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-unpack" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">unpack</span><span
+              class="method-args">(src, param = nil)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Factory.html#method-i-load">load</a>
+        </div>
+      </div>
+
+      <div id="method-i-unpacker" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">unpacker</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="unpacker-source">
+            <pre>VALUE MessagePack_Factory_unpacker(int argc, VALUE* argv, VALUE self)
+{
+    msgpack_factory_t *fc = Factory_get(self);
+
+    VALUE unpacker = MessagePack_Unpacker_alloc(cMessagePack_Unpacker);
+    MessagePack_Unpacker_initialize(argc, argv, unpacker);
+
+    msgpack_unpacker_t* uk = MessagePack_Unpacker_get(unpacker);
+    msgpack_unpacker_ext_registry_borrow(fc-&gt;ukrg, &amp;uk-&gt;ext_registry);
+    uk-&gt;optimized_symbol_ext_type = fc-&gt;optimized_symbol_ext_type;
+    uk-&gt;symbol_ext_type = fc-&gt;symbol_ext_type;
+
+    return unpacker;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

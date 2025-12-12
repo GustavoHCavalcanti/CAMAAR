@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActionController::Renderer - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller Renderer</a>
+          <li>      <a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller Renderer</a>
+          <li>      <a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller Renderer</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-for">::for</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-defaults">#defaults</a>
+    <li ><a href="#method-i-new">#new</a>
+    <li ><a href="#method-i-render">#render</a>
+    <li ><a href="#method-i-render_to_string">#render_to_string</a>
+    <li ><a href="#method-i-with_defaults">#with_defaults</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActionController::Renderer">
+  <h1 id="class-ActionController::Renderer" class="class">
+    class ActionController::Renderer
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller <a href="Renderer.html"><code>Renderer</code></a><span><a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Renderer.html"><code>ActionController::Renderer</code></a> allows you to render arbitrary templates without being inside a controller action.</p>
+
+<p>You can get a renderer instance by calling <code>renderer</code> on a controller class:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>
+</pre>
+
+<p>and render a template by calling the <a href="Renderer.html#method-i-render"><code>render</code></a> method:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
+<p>As a shortcut, you can also call <code>render</code> directly on the controller class itself:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
+<h1 id="class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller <a href="Renderer.html"><code>Renderer</code></a><span><a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Renderer.html"><code>ActionController::Renderer</code></a> allows you to render arbitrary templates without being inside a controller action.</p>
+
+<p>You can get a renderer instance by calling <code>renderer</code> on a controller class:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>
+</pre>
+
+<p>and render a template by calling the <a href="Renderer.html#method-i-render"><code>render</code></a> method:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
+<p>As a shortcut, you can also call <code>render</code> directly on the controller class itself:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
+<h1 id="class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller <a href="Renderer.html"><code>Renderer</code></a><span><a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Renderer.html"><code>ActionController::Renderer</code></a> allows you to render arbitrary templates without being inside a controller action.</p>
+
+<p>You can get a renderer instance by calling <code>renderer</code> on a controller class:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>
+</pre>
+
+<p>and render a template by calling the <a href="Renderer.html#method-i-render"><code>render</code></a> method:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
+<p>As a shortcut, you can also call <code>render</code> directly on the controller class itself:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="DEFAULTS">DEFAULTS
+        <dd>
+        <dt id="RACK_KEY_TRANSLATION">RACK_KEY_TRANSLATION
+        <dd>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-controller" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">controller</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-for" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">for</span><span
+              class="method-args">(controller, env = nil, defaults = DEFAULTS)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new renderer using the given controller class. See <a href="Renderer.html#method-c-new"><code>::new</code></a>.</p>
+
+          <div class="method-source-code" id="for-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-keyword">for</span>(<span class="ruby-identifier ruby-title">controller</span>, <span class="ruby-identifier">env</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">defaults</span> = <span class="ruby-constant">DEFAULTS</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">env</span>, <span class="ruby-identifier">defaults</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(controller, env, defaults)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initializes a new <a href="Renderer.html"><code>Renderer</code></a>.</p>
+
+<h4 id="method-c-new-label-Parameters"><a href="Parameters.html"><code>Parameters</code></a><span><a href="#method-c-new-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>controller</code> - The controller class to instantiate for rendering.</p>
+</li><li>
+<p><code>env</code> - The <a href="../Rack.html"><code>Rack</code></a> env to use for mocking a request when rendering. Entries can be typical <a href="../Rack.html"><code>Rack</code></a> env keys and values, or they can be any of the following, which will be converted appropriately:</p>
+<ul><li>
+<p><code>:http_host</code> - The HTTP host for the incoming request. Converts to Rack’s <code>HTTP_HOST</code>.</p>
+</li><li>
+<p><code>:https</code> - Boolean indicating whether the incoming request uses HTTPS. Converts to Rack’s <code>HTTPS</code>.</p>
+</li><li>
+<p><code>:method</code> - The HTTP method for the incoming request, case-insensitive. Converts to Rack’s <code>REQUEST_METHOD</code>.</p>
+</li><li>
+<p><code>:script_name</code> - The portion of the incoming request’s URL path that corresponds to the application. Converts to Rack’s <code>SCRIPT_NAME</code>.</p>
+</li><li>
+<p><code>:input</code> - The input stream. Converts to Rack’s <code>rack.input</code>.</p>
+</li></ul>
+</li><li>
+<p><code>defaults</code> - Default values for the <a href="../Rack.html"><code>Rack</code></a> env. Entries are specified in the same format as <code>env</code>. <code>env</code> will be merged on top of these values. <code>defaults</code> will be retained when calling <a href="Renderer.html#method-i-new"><code>new</code></a> on a renderer instance.</p>
+</li></ul>
+
+<p>If no <code>http_host</code> is specified, the env HTTP host will be derived from the routes’ <code>default_url_options</code>. In this case, the <code>https</code> boolean and the <code>script_name</code> will also be derived from <code>default_url_options</code> if they were not specified. Additionally, the <code>https</code> boolean will fall back to <code>Rails.application.config.force_ssl</code> if <code>default_url_options</code> does not specify a <code>protocol</code>.</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">env</span>, <span class="ruby-identifier">defaults</span>)
+  <span class="ruby-ivar">@controller</span> = <span class="ruby-identifier">controller</span>
+  <span class="ruby-ivar">@defaults</span> = <span class="ruby-identifier">defaults</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">env</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@defaults</span> <span class="ruby-operator">==</span> <span class="ruby-constant">DEFAULTS</span>
+    <span class="ruby-ivar">@env</span> = <span class="ruby-constant">DEFAULT_ENV</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@env</span> = <span class="ruby-identifier">normalize_env</span>(<span class="ruby-ivar">@defaults</span>)
+    <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">normalize_env</span>(<span class="ruby-identifier">env</span>)) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">env</span>.<span class="ruby-identifier">blank?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-defaults" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">defaults</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="defaults-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">defaults</span>
+  <span class="ruby-ivar">@defaults</span> = <span class="ruby-ivar">@defaults</span>.<span class="ruby-identifier">dup</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@defaults</span>.<span class="ruby-identifier">frozen?</span>
+  <span class="ruby-ivar">@defaults</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(env = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new renderer using the same controller, but with a new <a href="../Rack.html"><code>Rack</code></a> env.</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">method:</span> <span class="ruby-string">&quot;post&quot;</span>)
+</pre>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>(<span class="ruby-identifier">env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">env</span>, <span class="ruby-ivar">@defaults</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-render" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">render</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Renders a template to a string, just like <a href="Rendering.html#method-i-render_to_string"><code>ActionController::Rendering#render_to_string</code></a>.</p>
+
+          <div class="method-source-code" id="render-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env_for_request</span>)
+  <span class="ruby-identifier">request</span>.<span class="ruby-identifier">routes</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">_routes</span>
+
+  <span class="ruby-identifier">instance</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">set_request!</span> <span class="ruby-identifier">request</span>
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">set_response!</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">make_response!</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">render_to_string</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Renderer.html#method-i-render_to_string">render_to_string</a>, render_to_string, render_to_string
+        </div>
+
+      </div>
+
+      <div id="method-i-render_to_string" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">render_to_string</span><span
+              class="method-args">(*args)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Renderer.html#method-i-render">render</a>
+        </div>
+      </div>
+
+      <div id="method-i-with_defaults" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">with_defaults</span><span
+              class="method-args">(defaults)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new renderer using the same controller, but with the given defaults merged on top of the previous defaults.</p>
+
+          <div class="method-source-code" id="with_defaults-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_defaults</span>(<span class="ruby-identifier">defaults</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">controller</span>, <span class="ruby-ivar">@env</span>, <span class="ruby-ivar">@defaults</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">defaults</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

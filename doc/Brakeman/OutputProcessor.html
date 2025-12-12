@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Brakeman::OutputProcessor - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Ruby2Ruby.html">Ruby2Ruby</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="Util.html">Brakeman::Util</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-format">#format</a>
+    <li ><a href="#method-i-output_format">#output_format</a>
+    <li class="calls-super" ><a href="#method-i-process">#process</a>
+    <li ><a href="#method-i-process_const">#process_const</a>
+    <li ><a href="#method-i-process_cookies">#process_cookies</a>
+    <li ><a href="#method-i-process_defn">#process_defn</a>
+    <li ><a href="#method-i-process_escaped_output">#process_escaped_output</a>
+    <li ><a href="#method-i-process_format">#process_format</a>
+    <li ><a href="#method-i-process_format_escaped">#process_format_escaped</a>
+    <li ><a href="#method-i-process_ignore">#process_ignore</a>
+    <li ><a href="#method-i-process_iter">#process_iter</a>
+    <li ><a href="#method-i-process_output">#process_output</a>
+    <li ><a href="#method-i-process_params">#process_params</a>
+    <li ><a href="#method-i-process_render">#process_render</a>
+    <li ><a href="#method-i-process_rlist">#process_rlist</a>
+    <li ><a href="#method-i-process_safely">#process_safely</a>
+    <li ><a href="#method-i-process_session">#process_session</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Brakeman::OutputProcessor">
+  <h1 id="class-Brakeman::OutputProcessor" class="class">
+    class Brakeman::OutputProcessor
+  </h1>
+
+  <section class="description">
+    
+<p>Produces formatted output strings from Sexps. Recommended usage is</p>
+
+<pre class="ruby"><span class="ruby-constant">OutputProcessor</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">format</span>(<span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:str</span>, <span class="ruby-string">&quot;hello&quot;</span>))
+</pre>
+
+<p>Produces formatted output strings from Sexps. Recommended usage is</p>
+
+<pre class="ruby"><span class="ruby-constant">OutputProcessor</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">format</span>(<span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:str</span>, <span class="ruby-string">&quot;hello&quot;</span>))
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="../SexpProcessor.html#method-c-new"><code>SexpProcessor::new</code></a>
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@user_input</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-format" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">format</span><span
+              class="method-args">(exp, user_input = nil, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Copies <code>exp</code> and then formats it.</p>
+
+          <div class="method-source-code" id="format-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span> <span class="ruby-identifier">exp</span>, <span class="ruby-identifier">user_input</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+  <span class="ruby-ivar">@user_input</span> = <span class="ruby-identifier">user_input</span>
+  <span class="ruby-ivar">@user_input_block</span> = <span class="ruby-identifier">block</span>
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">deep_clone</span>) <span class="ruby-operator">||</span> <span class="ruby-string">&quot;[Format Error]&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="OutputProcessor.html#method-i-process_safely">process_safely</a>, process_safely
+        </div>
+
+      </div>
+
+      <div id="method-i-output_format" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">output_format</span><span
+              class="method-args">(exp, tag)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="output_format-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_format</span> <span class="ruby-identifier">exp</span>, <span class="ruby-identifier">tag</span>
+  <span class="ruby-identifier">out</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">node_type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:str</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">node_type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:ignore</span>
+          <span class="ruby-string">&quot;&quot;</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">res</span> = <span class="ruby-identifier">process</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>]
+
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+            <span class="ruby-string">&quot;&quot;</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-node">&quot;[#{tag}] #{res}&quot;</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="../SexpProcessor.html#method-i-process"><code>SexpProcessor#process</code></a>
+            </div>
+
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user_input</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@user_input</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">exp</span>
+      <span class="ruby-ivar">@user_input_block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">exp</span>, <span class="ruby-keyword">super</span>(<span class="ruby-identifier">exp</span>))
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">super</span> <span class="ruby-identifier">exp</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">sexp?</span> <span class="ruby-identifier">exp</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-constant">Brakeman</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;While formatting #{exp}: #{e}\n#{e.backtrace.join(&quot;\n&quot;)}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_const" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_const</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_const-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_const</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">Tracker</span><span class="ruby-operator">::</span><span class="ruby-constant">UNKNOWN_MODEL</span>
+    <span class="ruby-string">&quot;(Unresolved Model)&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">out</span> = <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">out</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_cookies" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_cookies</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_cookies-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_cookies</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-string">&quot;cookies&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_defn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_defn</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_defn-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_defn</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-comment"># Copied from Ruby2Ruby except without the whole</span>
+  <span class="ruby-comment"># &quot;convert methods to attr_*&quot; stuff</span>
+  <span class="ruby-identifier">exp</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">deep_clone</span>
+  <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-identifier">args</span> = <span class="ruby-identifier">process</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-identifier">args</span> = <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;()&quot;</span>
+
+  <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">exp</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">s</span>(<span class="ruby-identifier">s</span>(<span class="ruby-value">:nil</span>)) <span class="ruby-comment"># empty it out of a default nil expression</span>
+
+  <span class="ruby-identifier">body</span> = []
+  <span class="ruby-keyword">until</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">body</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">indent</span>(<span class="ruby-identifier">process</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">shift</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">body</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">indent</span>(<span class="ruby-string">&quot;# do nothing&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">body</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;def #{name}#{args}\n#{body}\nend&quot;</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\n\s*\n+/</span>, <span class="ruby-string">&quot;\n&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_escaped_output" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_escaped_output</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_escaped_output-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_escaped_output</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">output_format</span> <span class="ruby-identifier">exp</span>, <span class="ruby-string">&quot;Escaped Output&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_format" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_format</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_format-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_format</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">output_format</span> <span class="ruby-identifier">exp</span>, <span class="ruby-string">&quot;Format&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_format_escaped" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_format_escaped</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_format_escaped-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_format_escaped</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">output_format</span> <span class="ruby-identifier">exp</span>, <span class="ruby-string">&quot;Escaped&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_ignore" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_ignore</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_ignore-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_ignore</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-string">&quot;[ignored]&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_iter" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_iter</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_iter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_iter</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">call</span> = <span class="ruby-identifier">process</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">block</span> = <span class="ruby-identifier">process_rlist</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">sexp_body</span>(<span class="ruby-value">3</span>)
+  <span class="ruby-identifier">out</span> = <span class="ruby-node">&quot;#{call} do\n #{block}\n end&quot;</span>
+
+  <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_output" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_output</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_output-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_output</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">output_format</span> <span class="ruby-identifier">exp</span>, <span class="ruby-string">&quot;Output&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_params" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_params</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_params-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_params</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-string">&quot;params&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_render" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_render</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_render-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_render</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">exp</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">deep_clone</span>
+  <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">shift</span>
+
+  <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">process</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">sexp?</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">exp</span>[<span class="ruby-value">2</span>] = <span class="ruby-identifier">process</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">2</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">sexp?</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">2</span>]
+  <span class="ruby-identifier">out</span> = <span class="ruby-node">&quot;render(#{exp[0]} =&gt; #{exp[1]}, #{exp[2]})&quot;</span>
+
+  <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_rlist" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_rlist</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_rlist-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_rlist</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">out</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-identifier">process</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">res</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+
+  <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_safely" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_safely</span><span
+              class="method-args">(exp, user_input = nil, &amp;block)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="OutputProcessor.html#method-i-format">format</a>
+        </div>
+      </div>
+
+      <div id="method-i-process_session" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_session</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_session-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/output_processor.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_session</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-string">&quot;session&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

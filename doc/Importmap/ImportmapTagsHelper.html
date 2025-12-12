@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Importmap::ImportmapTagsHelper - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-javascript_import_module_tag">#javascript_import_module_tag</a>
+    <li ><a href="#method-i-javascript_importmap_module_preload_tags">#javascript_importmap_module_preload_tags</a>
+    <li ><a href="#method-i-javascript_importmap_tags">#javascript_importmap_tags</a>
+    <li ><a href="#method-i-javascript_inline_importmap_tag">#javascript_inline_importmap_tag</a>
+    <li ><a href="#method-i-javascript_module_preload_tag">#javascript_module_preload_tag</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Importmap::ImportmapTagsHelper">
+  <h1 id="module-Importmap::ImportmapTagsHelper" class="module">
+    module Importmap::ImportmapTagsHelper
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-javascript_import_module_tag" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">javascript_import_module_tag</span><span
+              class="method-args">(*module_names)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Import a named JavaScript module(s) using a script-module tag.</p>
+
+          <div class="method-source-code" id="javascript_import_module_tag-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/importmap-rails-2.2.2/app/helpers/importmap/importmap_tags_helper.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_import_module_tag</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">module_names</span>)
+  <span class="ruby-identifier">imports</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">module_names</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-node">%(import &quot;#{m}&quot;)</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+  <span class="ruby-identifier">tag</span>.<span class="ruby-identifier">script</span> <span class="ruby-identifier">imports</span>.<span class="ruby-identifier">html_safe</span>, <span class="ruby-value">type:</span> <span class="ruby-string">&quot;module&quot;</span>, <span class="ruby-value">nonce:</span> <span class="ruby-identifier">request</span>&amp;.<span class="ruby-identifier">content_security_policy_nonce</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-javascript_importmap_module_preload_tags" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">javascript_importmap_module_preload_tags</span><span
+              class="method-args">(importmap = Rails.application.importmap, entry_point: &quot;application&quot;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Link tags for preloading all modules marked as preload: true in the ‘importmap` (defaults to <a href="../Rails.html#method-c-application"><code>Rails.application</code></a>.importmap), such that they’ll be fetched in advance by browsers supporting this link type (<a href="https://caniuse.com/?search=modulepreload">caniuse.com/?search=modulepreload</a>).</p>
+
+          <div class="method-source-code" id="javascript_importmap_module_preload_tags-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/importmap-rails-2.2.2/app/helpers/importmap/importmap_tags_helper.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_importmap_module_preload_tags</span>(<span class="ruby-identifier">importmap</span> = <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">importmap</span>, <span class="ruby-value">entry_point:</span> <span class="ruby-string">&quot;application&quot;</span>)
+  <span class="ruby-identifier">packages</span> = <span class="ruby-identifier">importmap</span>.<span class="ruby-identifier">preloaded_module_packages</span>(<span class="ruby-value">resolver:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">entry_point:</span>, <span class="ruby-value">cache_key:</span> <span class="ruby-identifier">entry_point</span>)
+
+  <span class="ruby-identifier">_generate_preload_tags</span>(<span class="ruby-identifier">packages</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span>, <span class="ruby-identifier">package</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">path</span>, { <span class="ruby-value">integrity:</span> <span class="ruby-identifier">package</span>.<span class="ruby-identifier">integrity</span> }] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-javascript_importmap_tags" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">javascript_importmap_tags</span><span
+              class="method-args">(entry_point = &quot;application&quot;, importmap: Rails.application.importmap)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Setup all script tags needed to use an importmap-powered entrypoint (which defaults to <a href="../app/assets/javascripts/application_js.html">application.js</a>)</p>
+
+          <div class="method-source-code" id="javascript_importmap_tags-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/importmap-rails-2.2.2/app/helpers/importmap/importmap_tags_helper.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_importmap_tags</span>(<span class="ruby-identifier">entry_point</span> = <span class="ruby-string">&quot;application&quot;</span>, <span class="ruby-value">importmap:</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">importmap</span>)
+  <span class="ruby-identifier">safe_join</span> [
+    <span class="ruby-identifier">javascript_inline_importmap_tag</span>(<span class="ruby-identifier">importmap</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">resolver:</span> <span class="ruby-keyword">self</span>)),
+    <span class="ruby-identifier">javascript_importmap_module_preload_tags</span>(<span class="ruby-identifier">importmap</span>, <span class="ruby-value">entry_point:</span>),
+    <span class="ruby-identifier">javascript_import_module_tag</span>(<span class="ruby-identifier">entry_point</span>)
+  ], <span class="ruby-string">&quot;\n&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-javascript_inline_importmap_tag" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">javascript_inline_importmap_tag</span><span
+              class="method-args">(importmap_json = Rails.application.importmap.to_json(resolver: self))</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Generate an inline importmap tag using the passed ‘importmap_json` <a href="../JSON.html"><code>JSON</code></a> string. By default, `Rails.application.importmap.to_json(resolver: self)` is used.</p>
+
+          <div class="method-source-code" id="javascript_inline_importmap_tag-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/importmap-rails-2.2.2/app/helpers/importmap/importmap_tags_helper.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_inline_importmap_tag</span>(<span class="ruby-identifier">importmap_json</span> = <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">importmap</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">resolver:</span> <span class="ruby-keyword">self</span>))
+  <span class="ruby-identifier">tag</span>.<span class="ruby-identifier">script</span> <span class="ruby-identifier">importmap_json</span>.<span class="ruby-identifier">html_safe</span>,
+    <span class="ruby-value">type:</span> <span class="ruby-string">&quot;importmap&quot;</span>, <span class="ruby-value">&quot;data-turbo-track&quot;:</span> <span class="ruby-string">&quot;reload&quot;</span>, <span class="ruby-value">nonce:</span> <span class="ruby-identifier">request</span>&amp;.<span class="ruby-identifier">content_security_policy_nonce</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-javascript_module_preload_tag" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">javascript_module_preload_tag</span><span
+              class="method-args">(*paths)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Link tag(s) for preloading the JavaScript module residing in ‘*paths`. Will return one link tag per path element.</p>
+
+          <div class="method-source-code" id="javascript_module_preload_tag-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/importmap-rails-2.2.2/app/helpers/importmap/importmap_tags_helper.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_module_preload_tag</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">paths</span>)
+  <span class="ruby-identifier">_generate_preload_tags</span>(<span class="ruby-identifier">paths</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">path</span>, {}] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

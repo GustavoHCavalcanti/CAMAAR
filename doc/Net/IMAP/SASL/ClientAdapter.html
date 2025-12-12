@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Net::IMAP::SASL::ClientAdapter - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-Net::IMAP::SASL::ClientAdapter-label-Protocol+Requirements">Protocol Requirements</a>
+          <li>      <a href="#class-Net::IMAP::SASL::ClientAdapter-label-Protocol+Requirements">Protocol Requirements</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../../Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="ProtocolAdapters/Generic.html">Net::IMAP::SASL::ProtocolAdapters::Generic</a>
+  </ul>
+</div>
+
+    
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    <li><span class="extend">Forwardable</span>
+    <li><span class="extend">Forwardable</span>
+  </ul>
+</div>
+
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-auth_capable-3F">#auth_capable?</a>
+    <li ><a href="#method-i-authenticate">#authenticate</a>
+    <li ><a href="#method-i-drop_connection">#drop_connection</a>
+    <li ><a href="#method-i-drop_connection-21">#drop_connection!</a>
+    <li ><a href="#method-i-host">#host</a>
+    <li ><a href="#method-i-port">#port</a>
+    <li ><a href="#method-i-response_errors">#response_errors</a>
+    <li ><a href="#method-i-run_command">#run_command</a>
+    <li ><a href="#method-i-sasl_ir_capable-3F">#sasl_ir_capable?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Net::IMAP::SASL::ClientAdapter">
+  <h1 id="class-Net::IMAP::SASL::ClientAdapter" class="class">
+    class Net::IMAP::SASL::ClientAdapter
+  </h1>
+
+  <section class="description">
+    
+<p>This API is <strong>experimental</strong>, and may change.</p>
+
+<p>TODO: use with more clients, to verify the API can accommodate them.</p>
+
+<p>Represents the client to a <a href="AuthenticationExchange.html"><code>SASL::AuthenticationExchange</code></a>.  By default, most methods simply delegate to <a href="ClientAdapter.html#attribute-i-client"><code>client</code></a>.  Clients should subclass <a href="ClientAdapter.html"><code>SASL::ClientAdapter</code></a> and override methods as needed to match the semantics of this API to their API.</p>
+
+<p>Subclasses should also include a protocol adapter mixin when the default <a href="ProtocolAdapters/Generic.html"><code>ProtocolAdapters::Generic</code></a> isn’t sufficient.</p>
+
+<h3 id="class-Net::IMAP::SASL::ClientAdapter-label-Protocol+Requirements">Protocol Requirements<span><a href="#class-Net::IMAP::SASL::ClientAdapter-label-Protocol+Requirements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="https://www.rfc-editor.org/rfc/rfc4422.html#section-4">RFC4422 §4</a> lists requirements for protocol specifications to offer <a href="../SASL.html"><code>SASL</code></a>.  Where possible, <a href="ClientAdapter.html"><code>ClientAdapter</code></a> delegates the handling of these requirements to <a href="ProtocolAdapters.html"><code>SASL::ProtocolAdapters</code></a>.</p>
+
+<p>This API is <strong>experimental</strong>, and may change.</p>
+
+<p>TODO: use with more clients, to verify the API can accommodate them.</p>
+
+<p>Represents the client to a <a href="AuthenticationExchange.html"><code>SASL::AuthenticationExchange</code></a>.  By default, most methods simply delegate to <a href="ClientAdapter.html#attribute-i-client"><code>client</code></a>.  Clients should subclass <a href="ClientAdapter.html"><code>SASL::ClientAdapter</code></a> and override methods as needed to match the semantics of this API to their API.</p>
+
+<p>Subclasses should also include a protocol adapter mixin when the default <a href="ProtocolAdapters/Generic.html"><code>ProtocolAdapters::Generic</code></a> isn’t sufficient.</p>
+
+<h3 id="class-Net::IMAP::SASL::ClientAdapter-label-Protocol+Requirements">Protocol Requirements<span><a href="#class-Net::IMAP::SASL::ClientAdapter-label-Protocol+Requirements">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="https://www.rfc-editor.org/rfc/rfc4422.html#section-4">RFC4422 §4</a> lists requirements for protocol specifications to offer <a href="../SASL.html"><code>SASL</code></a>.  Where possible, <a href="ClientAdapter.html"><code>ClientAdapter</code></a> delegates the handling of these requirements to <a href="ProtocolAdapters.html"><code>SASL::ProtocolAdapters</code></a>.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-client" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">client</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The client that handles communication with the protocol server.</p>
+
+<p>Most <a href="ClientAdapter.html"><code>ClientAdapter</code></a> methods are simply delegated to <a href="ClientAdapter.html#attribute-i-client"><code>client</code></a> by default.</p>
+        </div>
+      </div>
+      <div id="attribute-i-command_proc" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">command_proc</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p><code>command_proc</code> can used to avoid exposing private methods on <a href="ClientAdapter.html#attribute-i-client"><code>client</code></a>. It’s value is set by the block that is passed to <a href="ClientAdapter.html#method-c-new"><code>::new</code></a>, and it is used by the default implementation of <a href="ClientAdapter.html#method-i-run_command"><code>run_command</code></a>.  Subclasses that override <a href="ClientAdapter.html#method-i-run_command"><code>run_command</code></a> may use <a href="ClientAdapter.html#attribute-i-command_proc"><code>command_proc</code></a> for any other purpose they find useful.</p>
+
+<p>In the default implementation of <a href="ClientAdapter.html#method-i-run_command"><code>run_command</code></a>, <a href="ClientAdapter.html#attribute-i-command_proc"><code>command_proc</code></a> is called with the protocols authenticate <code>command</code> name, the <code>mechanism</code> name, an <em>optional</em> <code>initial_response</code> argument, and a <code>continuations</code> block.  <a href="ClientAdapter.html#attribute-i-command_proc"><code>command_proc</code></a> must run the protocol command with the arguments sent to it, <em>yield</em> the payload of each continuation, respond to the continuation with the result of each <em>yield</em>, and <em>return</em> the command’s successful result.  Non-successful results <strong>MUST</strong> raise an exception.</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(client, &amp;command_proc)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>By default, this simply sets the <a href="ClientAdapter.html#attribute-i-client"><code>client</code></a> and <a href="ClientAdapter.html#attribute-i-command_proc"><code>command_proc</code></a> attributes. Subclasses may override it, for example: to set the appropriate <a href="ClientAdapter.html#attribute-i-command_proc"><code>command_proc</code></a> automatically.</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">client</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">command_proc</span>)
+  <span class="ruby-ivar">@client</span>, <span class="ruby-ivar">@command_proc</span> = <span class="ruby-identifier">client</span>, <span class="ruby-identifier">command_proc</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-auth_capable-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              auth_capable?(mechanism)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Does the server advertise support for the <code>mechanism</code>?</p>
+
+          <div class="method-source-code" id="auth_capable-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 76</span>
+<span class="ruby-identifier">def_delegator</span> <span class="ruby-value">:client</span>, <span class="ruby-value">:auth_capable?</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-authenticate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">authenticate</span><span
+              class="method-args">(...)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Attempt to authenticate <a href="ClientAdapter.html#attribute-i-client"><code>client</code></a> to the server.</p>
+
+<p>By default, this simply delegates to <a href="AuthenticationExchange.html#method-c-authenticate"><code>AuthenticationExchange.authenticate</code></a>.</p>
+
+          <div class="method-source-code" id="authenticate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">authenticate</span>(<span class="ruby-operator">...</span>) <span class="ruby-constant">AuthenticationExchange</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-keyword">self</span>, <span class="ruby-operator">...</span>) <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-drop_connection" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">drop_connection</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Drop the connection gracefully, sending a “LOGOUT” command as needed.</p>
+
+          <div class="method-source-code" id="drop_connection-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 113</span>
+<span class="ruby-identifier">def_delegator</span> <span class="ruby-value">:client</span>, <span class="ruby-value">:drop_connection</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-drop_connection-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">drop_connection!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Drop the connection abruptly, closing the socket without logging out.</p>
+
+          <div class="method-source-code" id="drop_connection-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 118</span>
+<span class="ruby-identifier">def_delegator</span> <span class="ruby-value">:client</span>, <span class="ruby-value">:drop_connection!</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-host" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">host</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The hostname to which the client connected.</p>
+
+          <div class="method-source-code" id="host-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 99</span>
+<span class="ruby-identifier">def_delegator</span> <span class="ruby-value">:client</span>, <span class="ruby-value">:host</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-port" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">port</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The destination port to which the client connected.</p>
+
+          <div class="method-source-code" id="port-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 104</span>
+<span class="ruby-identifier">def_delegator</span> <span class="ruby-value">:client</span>, <span class="ruby-value">:port</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-response_errors" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">response_errors</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an array of server responses errors raised by run_command. Exceptions in this array won’t drop the connection.</p>
+
+          <div class="method-source-code" id="response_errors-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">response_errors</span>; [] <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-run_command" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">run_command</span><span
+              class="method-args">(mechanism, initial_response = nil, &amp;continuations_handler)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Calls <a href="ClientAdapter.html#attribute-i-command_proc"><code>command_proc</code></a> with <code>command_name</code> (see <a href="ProtocolAdapters/Generic.html#method-i-command_name"><code>SASL::ProtocolAdapters::Generic#command_name</code></a>), <code>mechanism</code>, <code>initial_response</code>, and a <code>continuations_handler</code> block. The <code>initial_response</code> is optional; when it’s nil, it won’t be sent to command_proc.</p>
+
+<p>Yields each continuation payload, responds to the server with the result of each yield, and returns the result.  Non-successful results <strong>MUST</strong> raise an exception.  Exceptions in the block <strong>MUST</strong> cause the command to fail.</p>
+
+<p>Subclasses that override this may use <a href="ClientAdapter.html#attribute-i-command_proc"><code>command_proc</code></a> differently.</p>
+
+          <div class="method-source-code" id="run_command-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run_command</span>(<span class="ruby-identifier">mechanism</span>, <span class="ruby-identifier">initial_response</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">continuations_handler</span>)
+  <span class="ruby-identifier">command_proc</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-string">&quot;initialize with block or override&quot;</span>
+  <span class="ruby-identifier">args</span> = [<span class="ruby-identifier">command_name</span>, <span class="ruby-identifier">mechanism</span>, <span class="ruby-identifier">initial_response</span>].<span class="ruby-identifier">compact</span>
+  <span class="ruby-identifier">command_proc</span>.<span class="ruby-identifier">call</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">continuations_handler</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-sasl_ir_capable-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">sasl_ir_capable?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Do the protocol, server, and client all support an initial response?</p>
+
+          <div class="method-source-code" id="sasl_ir_capable-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/client_adapter.rb, line 69</span>
+<span class="ruby-identifier">def_delegator</span> <span class="ruby-value">:client</span>, <span class="ruby-value">:sasl_ir_capable?</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

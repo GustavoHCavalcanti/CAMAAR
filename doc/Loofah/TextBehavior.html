@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Loofah::TextBehavior - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-inner_text">#inner_text</a>
+    <li ><a href="#method-i-text">#text</a>
+    <li ><a href="#method-i-to_str">#to_str</a>
+    <li ><a href="#method-i-to_text">#to_text</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Loofah::TextBehavior">
+  <h1 id="module-Loofah::TextBehavior" class="module">
+    module Loofah::TextBehavior
+  </h1>
+
+  <section class="description">
+    
+<p>Overrides <code>text</code> in Document and DocumentFragment classes, and mixes in <code>to_text</code>.</p>
+
+<p>Overrides <code>text</code> in Document and DocumentFragment classes, and mixes in <code>to_text</code>.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-inner_text" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">inner_text</span><span
+              class="method-args">(options = {})</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="TextBehavior.html#method-i-text">text</a>
+        </div>
+      </div>
+
+      <div id="method-i-text" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">text</span><span
+              class="method-args">(options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a plain-text version of the markup contained by the document, with <a href="HTML4.html"><code>HTML</code></a> entities encoded.</p>
+
+<p>This method is significantly faster than <a href="TextBehavior.html#method-i-to_text"><code>to_text</code></a>, but isn’t clever about whitespace around block elements.</p>
+
+<pre class="ruby"><span class="ruby-constant">Loofah</span>.<span class="ruby-identifier">html5_document</span>(<span class="ruby-string">&quot;&lt;h1&gt;Title&lt;/h1&gt;&lt;div&gt;Content&lt;/div&gt;&quot;</span>).<span class="ruby-identifier">text</span>
+<span class="ruby-comment"># =&gt; &quot;TitleContent&quot;</span>
+</pre>
+
+<p>By default, the returned text will have <a href="HTML4.html"><code>HTML</code></a> entities escaped. If you want unescaped entities, and you understand that the result is unsafe to render in a browser, then you can pass an argument as shown:</p>
+
+<pre class="ruby"><span class="ruby-identifier">frag</span> = <span class="ruby-constant">Loofah</span>.<span class="ruby-identifier">html5_fragment</span>(<span class="ruby-string">&quot;&amp;lt;script&amp;gt;alert(&#39;EVIL&#39;);&amp;lt;/script&amp;gt;&quot;</span>)
+<span class="ruby-comment"># ok for browser:</span>
+<span class="ruby-identifier">frag</span>.<span class="ruby-identifier">text</span>                                 <span class="ruby-comment"># =&gt; &quot;&amp;lt;script&amp;gt;alert(&#39;EVIL&#39;);&amp;lt;/script&amp;gt;&quot;</span>
+<span class="ruby-comment"># decidedly not ok for browser:</span>
+<span class="ruby-identifier">frag</span>.<span class="ruby-identifier">text</span>(<span class="ruby-value">:encode_special_chars</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>) <span class="ruby-comment"># =&gt; &quot;&lt;script&gt;alert(&#39;EVIL&#39;);&lt;/script&gt;&quot;</span>
+</pre>
+
+          <div class="method-source-code" id="text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/loofah-2.24.1/lib/loofah/concerns.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">text</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">result</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">serialize_root</span>
+    <span class="ruby-identifier">serialize_root</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:comment?</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:inner_text</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:encode_special_chars</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">result</span> <span class="ruby-comment"># possibly dangerous if rendered in a browser</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">encode_special_chars</span>(<span class="ruby-identifier">result</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="TextBehavior.html#method-i-inner_text">inner_text</a>, <a href="TextBehavior.html#method-i-to_str">to_str</a>, inner_text, to_str
+        </div>
+
+      </div>
+
+      <div id="method-i-to_str" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_str</span><span
+              class="method-args">(options = {})</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="TextBehavior.html#method-i-text">text</a>
+        </div>
+      </div>
+
+      <div id="method-i-to_text" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_text</span><span
+              class="method-args">(options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a plain-text version of the markup contained by the fragment, with <a href="HTML4.html"><code>HTML</code></a> entities encoded.</p>
+
+<p>This method is slower than <a href="TextBehavior.html#method-i-text"><code>text</code></a>, but is clever about whitespace around block elements and line break elements.</p>
+
+<pre class="ruby"><span class="ruby-constant">Loofah</span>.<span class="ruby-identifier">html5_document</span>(<span class="ruby-string">&quot;&lt;h1&gt;Title&lt;/h1&gt;&lt;div&gt;Content&lt;br&gt;Next line&lt;/div&gt;&quot;</span>).<span class="ruby-identifier">to_text</span>
+<span class="ruby-comment"># =&gt; &quot;\nTitle\n\nContent\nNext line\n&quot;</span>
+</pre>
+
+          <div class="method-source-code" id="to_text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/loofah-2.24.1/lib/loofah/concerns.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_text</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Loofah</span>.<span class="ruby-identifier">remove_extraneous_whitespace</span>(<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">scrub!</span>(<span class="ruby-value">:newline_block_elements</span>).<span class="ruby-identifier">text</span>(<span class="ruby-identifier">options</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

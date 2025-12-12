@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class DEBUGGER__::Config - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-config">::config</a>
+    <li ><a href="#method-c-config_to_env_hash">::config_to_env_hash</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-parse_argv">::parse_argv</a>
+    <li ><a href="#method-c-parse_config_value">::parse_config_value</a>
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    <li ><a href="#method-i-5B-5D-3D">#[]=</a>
+    <li ><a href="#method-i-append_config">#append_config</a>
+    <li ><a href="#method-i-inspect">#inspect</a>
+    <li ><a href="#method-i-set_config">#set_config</a>
+    <li ><a href="#method-i-update">#update</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-DEBUGGER__::Config">
+  <h1 id="class-DEBUGGER__::Config" class="class">
+    class DEBUGGER__::Config
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-config" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">config</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="config-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">config</span>
+  <span class="ruby-ivar">@config</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-config_to_env_hash" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">config_to_env_hash</span><span
+              class="method-args">(config)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="config_to_env_hash-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 448</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">config_to_env_hash</span> <span class="ruby-identifier">config</span>
+  <span class="ruby-constant">CONFIG_MAP</span>.<span class="ruby-identifier">each_with_object</span>({}){<span class="ruby-operator">|</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">evname</span>), <span class="ruby-identifier">env</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">nil?</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-constant">CONFIG_SET</span>[<span class="ruby-identifier">key</span>][<span class="ruby-value">2</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-value">:path</span>
+        <span class="ruby-identifier">valstr</span> = <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Regexp</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">e</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;:&#39;</span>)
+      <span class="ruby-keyword">when</span> <span class="ruby-value">:path_map</span>
+        <span class="ruby-identifier">valstr</span> = <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;:&#39;</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;,&#39;</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">valstr</span> = <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">to_s</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">env</span>[<span class="ruby-identifier">evname</span>] = <span class="ruby-identifier">valstr</span>
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(argv)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-identifier">argv</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">config</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Can not make multiple configurations in one process&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">config</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">parse_argv</span>(<span class="ruby-identifier">argv</span>)
+
+  <span class="ruby-comment"># apply defaults</span>
+  <span class="ruby-constant">CONFIG_SET</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">config_detail</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">k</span>)
+      <span class="ruby-identifier">default_value</span> = <span class="ruby-identifier">config_detail</span>[<span class="ruby-value">3</span>]
+      <span class="ruby-identifier">config</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">parse_config_value</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">default_value</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">update</span> <span class="ruby-identifier">config</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_argv" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_argv</span><span
+              class="method-args">(argv)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="parse_argv-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 270</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_argv</span> <span class="ruby-identifier">argv</span>
+  <span class="ruby-identifier">config</span> = {
+    <span class="ruby-value">mode:</span> <span class="ruby-value">:start</span>,
+    <span class="ruby-value">no_color:</span> (<span class="ruby-identifier">nc</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;NO_COLOR&#39;</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">nc</span>.<span class="ruby-identifier">empty?</span>,
+  }
+  <span class="ruby-constant">CONFIG_MAP</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">evname</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">evname</span>]
+      <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">parse_config_value</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">config</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">argv</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;shellwords&#39;</span>
+    <span class="ruby-identifier">argv</span> = <span class="ruby-constant">Shellwords</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">argv</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;optparse&#39;</span>
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&#39;version&#39;</span>
+
+  <span class="ruby-identifier">have_shown_version</span> = <span class="ruby-keyword">false</span>
+
+  <span class="ruby-identifier">opt</span> = <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-node">&quot;#{$0} [options] -- [debuggee options]&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">version</span> = <span class="ruby-operator">::</span><span class="ruby-constant">DEBUGGER__</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;Debug console mode:&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-n&#39;</span>, <span class="ruby-string">&#39;--nonstop&#39;</span>, <span class="ruby-string">&#39;Do not stop at the beginning of the script.&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:nonstop</span>] = <span class="ruby-string">&#39;1&#39;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-e DEBUG_COMMAND&#39;</span>, <span class="ruby-string">&#39;Execute debug command at the beginning of the script.&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cmd</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:commands</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;&#39;</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:commands</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">cmd</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;;;&#39;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-x FILE&#39;</span>, <span class="ruby-string">&#39;--init-script=FILE&#39;</span>, <span class="ruby-string">&#39;Execute debug command in the FILE.&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:init_script</span>] = <span class="ruby-identifier">file</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--no-rc&#39;</span>, <span class="ruby-string">&#39;Ignore ~/.rdbgrc&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:no_rc</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--no-color&#39;</span>, <span class="ruby-string">&#39;Disable colorize&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:no_color</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--no-sigint-hook&#39;</span>, <span class="ruby-string">&#39;Disable to trap SIGINT&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:no_sigint_hook</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-c&#39;</span>, <span class="ruby-string">&#39;--command&#39;</span>, <span class="ruby-string">&#39;Enable command mode.&#39;</span>,
+                            <span class="ruby-string">&#39;The first argument should be a command name in $PATH.&#39;</span>,
+                            <span class="ruby-string">&#39;Example: \&#39;rdbg -c bundle exec rake test\&#39;&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:command</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-O&#39;</span>, <span class="ruby-string">&#39;--open=[FRONTEND]&#39;</span>, <span class="ruby-string">&#39;Start remote debugging with opening the network port.&#39;</span>,
+                                    <span class="ruby-string">&#39;If TCP/IP options are not given, a UNIX domain socket will be used.&#39;</span>,
+                                    <span class="ruby-string">&#39;If FRONTEND is given, prepare for the FRONTEND.&#39;</span>,
+                                    <span class="ruby-string">&#39;Now rdbg, vscode and chrome is supported.&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">f</span> <span class="ruby-comment"># some format patterns are not documented yet</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:open</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A\d\z/</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:open</span>] = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:port</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A(\S+):(\d+)\z/</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:open</span>] = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:host</span>] = <span class="ruby-node">$1</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:port</span>] = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;tcp&#39;</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:open</span>] = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:port</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;vscode&#39;</span>, <span class="ruby-string">&#39;chrome&#39;</span>, <span class="ruby-string">&#39;cdp&#39;</span>
+        <span class="ruby-identifier">config</span>[<span class="ruby-value">:open</span>] = <span class="ruby-identifier">f</span>&amp;.<span class="ruby-identifier">downcase</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown option for --open: #{f}&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--sock-path=SOCK_PATH&#39;</span>, <span class="ruby-string">&#39;UNIX Domain socket path&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:sock_path</span>] = <span class="ruby-identifier">path</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--port=PORT&#39;</span>, <span class="ruby-string">&#39;Listening TCP/IP port&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">port</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:port</span>] = <span class="ruby-identifier">port</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--port-range=PORT_RANGE&#39;</span>, <span class="ruby-string">&#39;Number of ports to try to connect to&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">port_range</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:port_range</span>] = <span class="ruby-identifier">port_range</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--host=HOST&#39;</span>, <span class="ruby-string">&#39;Listening TCP/IP host&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">host</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:host</span>] = <span class="ruby-identifier">host</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--cookie=COOKIE&#39;</span>, <span class="ruby-string">&#39;Set a cookie for connection&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:cookie</span>] = <span class="ruby-identifier">c</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--session-name=NAME&#39;</span>, <span class="ruby-string">&#39;Session name&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:session_name</span>] = <span class="ruby-identifier">name</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">rdbg</span> = <span class="ruby-string">&#39;rdbg&#39;</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;  Debug console mode runs Ruby program with the debug console.&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} target.rb foo bar&#39;                starts like &#39;ruby target.rb foo bar&#39;.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -- -r foo -e bar&#39;                 starts like &#39;ruby -r foo -e bar&#39;.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -c rake test&#39;                     starts like &#39;rake test&#39;.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -c -- rake test -t&#39;               starts like &#39;rake test -t&#39;.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -c bundle exec rake test&#39;         starts like &#39;bundle exec rake test&#39;.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -O target.rb foo bar&#39;             starts and accepts attaching with UNIX domain socket.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -O --port 1234 target.rb foo bar&#39; starts accepts attaching with TCP/IP localhost:1234.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -O --port 1234 -- -r foo -e bar&#39;  starts accepts attaching with TCP/IP localhost:1234.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} target.rb -O chrome --port 1234&#39;  starts and accepts connecting from Chrome Devtools with localhost:1234.&quot;</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;Attach mode:&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-A&#39;</span>, <span class="ruby-string">&#39;--attach&#39;</span>, <span class="ruby-string">&#39;Attach to debuggee process.&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:mode</span>] = <span class="ruby-value">:attach</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;  Attach mode attaches the remote debug console to the debuggee process.&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -A&#39;           tries to connect via UNIX domain socket.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  #{&#39; &#39; * rdbg.size}                If there are multiple processes are waiting for the&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  #{&#39; &#39; * rdbg.size}                debugger connection, list possible debuggee names.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -A path&#39;      tries to connect via UNIX domain socket with given path name.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -A port&#39;      tries to connect to localhost:port via TCP/IP.&quot;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-node">&quot;  &#39;#{rdbg} -A host port&#39; tries to connect to host:port via TCP/IP.&quot;</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;Other options:&#39;</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;-v&#39;</span>, <span class="ruby-string">&#39;Show version number&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">ver</span>
+      <span class="ruby-identifier">have_shown_version</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--version&#39;</span>, <span class="ruby-string">&#39;Show version number and exit&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">ver</span>
+      <span class="ruby-identifier">exit</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-h&quot;</span>, <span class="ruby-string">&quot;--help&quot;</span>, <span class="ruby-string">&quot;Print help&quot;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>
+      <span class="ruby-identifier">exit</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--util=NAME&#39;</span>, <span class="ruby-string">&#39;Utility mode (used by tools)&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&#39;client&#39;</span>
+      <span class="ruby-constant">Client</span>.<span class="ruby-identifier">util</span>(<span class="ruby-identifier">name</span>)
+      <span class="ruby-identifier">exit</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&#39;--stop-at-load&#39;</span>, <span class="ruby-string">&#39;Stop immediately when the debugging feature is loaded.&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">config</span>[<span class="ruby-value">:stop_at_load</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;NOTE&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;  All messages communicated between a debugger and a debuggee are *NOT* encrypted.&#39;</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&#39;  Please use the remote debugging feature carefully.&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">argv</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">case</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-identifier">have_shown_version</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">config</span>[<span class="ruby-value">:mode</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:start</span>
+      <span class="ruby-identifier">exit</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">config</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_config_value" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_config_value</span><span
+              class="method-args">(name, valstr)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="parse_config_value-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 229</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_config_value</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">valstr</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">valstr</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">valstr</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">String</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-constant">CONFIG_SET</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">2</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:bool</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">valstr</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-string">&#39;true&#39;</span>, <span class="ruby-string">&#39;TRUE&#39;</span>, <span class="ruby-string">&#39;T&#39;</span>
+      <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:int</span>
+    <span class="ruby-identifier">valstr</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:loglevel</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">DEBUGGER__</span><span class="ruby-operator">::</span><span class="ruby-constant">LOG_LEVELS</span>[<span class="ruby-identifier">s</span> = <span class="ruby-identifier">valstr</span>.<span class="ruby-identifier">to_sym</span>]
+      <span class="ruby-identifier">s</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown loglevel: #{valstr}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:forkmode</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">sym</span> = <span class="ruby-identifier">valstr</span>.<span class="ruby-identifier">to_sym</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:parent</span>, <span class="ruby-value">:child</span>, <span class="ruby-value">:both</span>, <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">sym</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unknown fork mode: #{sym}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:path</span> <span class="ruby-comment"># array of String</span>
+    <span class="ruby-identifier">valstr</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/:/</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\/(.+)\/\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">compile</span> <span class="ruby-node">$1</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">e</span>
+      <span class="ruby-keyword">end</span>
+    }
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:path_map</span>
+    <span class="ruby-identifier">valstr</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>)}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">valstr</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-5B-5D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">[]</span><span
+              class="method-args">(key)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-5B-5D-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">[]=</span><span
+              class="method-args">(key, val)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="5B-5D-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+  <span class="ruby-identifier">set_config</span>(<span class="ruby-identifier">key</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">val</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-append_config" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">append_config</span><span
+              class="method-args">(key, val)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="append_config-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">append_config</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>
+  <span class="ruby-identifier">conf</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dup</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">CONFIG_SET</span>[<span class="ruby-identifier">key</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">CONFIG_SET</span>[<span class="ruby-identifier">key</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:path</span>
+      <span class="ruby-identifier">conf</span>[<span class="ruby-identifier">key</span>] = [<span class="ruby-operator">*</span><span class="ruby-identifier">conf</span>[<span class="ruby-identifier">key</span>], <span class="ruby-operator">*</span><span class="ruby-identifier">parse_config_value</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)];
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;not an Array type: #{key}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown configuration: #{key}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">update</span> <span class="ruby-identifier">conf</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-inspect" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">inspect</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="inspect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">inspect</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-set_config" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">set_config</span><span
+              class="method-args">(**kw)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="set_config-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_config</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">kw</span>)
+  <span class="ruby-identifier">conf</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">kw</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">CONFIG_MAP</span>[<span class="ruby-identifier">k</span>]
+      <span class="ruby-identifier">conf</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">parse_config_value</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>) <span class="ruby-comment"># TODO: ractor support</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown configuration: #{k}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  }
+
+  <span class="ruby-identifier">update</span> <span class="ruby-identifier">conf</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-update" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">update</span><span
+              class="method-args">(conf)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/lib/debug/config.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span> <span class="ruby-identifier">conf</span>
+  <span class="ruby-identifier">old_conf</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@config</span>) <span class="ruby-operator">||</span> {}
+
+  <span class="ruby-comment"># TODO: Use Ractor.make_shareable(conf)</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-value">:@config</span>, <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">freeze</span>)
+
+  <span class="ruby-comment"># Post process</span>
+  <span class="ruby-identifier">if_updated</span> <span class="ruby-identifier">old_conf</span>, <span class="ruby-identifier">conf</span>, <span class="ruby-value">:keep_alloc_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;objspace&#39;</span>
+      <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">trace_object_allocations_start</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">old</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">new</span>
+      <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">trace_object_allocations_stop</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">if_updated</span> <span class="ruby-identifier">old_conf</span>, <span class="ruby-identifier">conf</span>, <span class="ruby-value">:postmortem</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">new_p</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">SESSION</span>)
+      <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">postmortem</span> = <span class="ruby-identifier">new_p</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">if_updated</span> <span class="ruby-identifier">old_conf</span>, <span class="ruby-identifier">conf</span>, <span class="ruby-value">:sigdump_sig</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">old_sig</span>, <span class="ruby-identifier">new_sig</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">setup_sigdump</span> <span class="ruby-identifier">old_sig</span>, <span class="ruby-identifier">new_sig</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">if_updated</span> <span class="ruby-identifier">old_conf</span>, <span class="ruby-identifier">conf</span>, <span class="ruby-value">:no_sigint_hook</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">SESSION</span>)
+      <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">set_no_sigint_hook</span> <span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">if_updated</span> <span class="ruby-identifier">old_conf</span>, <span class="ruby-identifier">conf</span>, <span class="ruby-value">:irb_console</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">SESSION</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">active?</span>
+      <span class="ruby-comment"># irb_console is switched from true to false</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">old</span>
+        <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">deactivate_irb_integration</span>
+      <span class="ruby-comment"># irb_console is switched from false to true</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-constant">CONFIG</span>[<span class="ruby-value">:open</span>]
+          <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@ui</span>).<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;\nIRB is not supported on the remote console.&quot;</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-constant">SESSION</span>.<span class="ruby-identifier">activate_irb_integration</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

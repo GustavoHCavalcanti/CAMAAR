@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Coercible::Options - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-extended">::extended</a>
+    <li ><a href="#method-i-accept_options">#accept_options</a>
+    <li ><a href="#method-i-accepted_options">#accepted_options</a>
+    <li ><a href="#method-i-add_accepted_options">#add_accepted_options</a>
+    <li ><a href="#method-i-define_option_method">#define_option_method</a>
+    <li ><a href="#method-i-options">#options</a>
+    <li ><a href="#method-i-set_options">#set_options</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Coercible::Options">
+  <h1 id="module-Coercible::Options" class="module">
+    module Coercible::Options
+  </h1>
+
+  <section class="description">
+    
+<p>A module that adds class and instance level options</p>
+
+<p>A module that adds class and instance level options</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="Undefined">Undefined
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-extended" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">extended</span><span
+              class="method-args">(descendant)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Hook called when descendant was extended</p>
+
+<p>@param [Class,Module] descendant</p>
+
+<p>@return [undefined]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="extended-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/coercible-1.0.0/lib/support/options.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">extended</span>(<span class="ruby-identifier">descendant</span>)
+  <span class="ruby-identifier">descendant</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">DescendantsTracker</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-accept_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">accept_options</span><span
+              class="method-args">(*new_options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Defines which options are valid for a given attribute class</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MyAttribute</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Virtus</span><span class="ruby-operator">::</span><span class="ruby-constant">Attribute</span><span class="ruby-operator">::</span><span class="ruby-constant">Object</span>
+  <span class="ruby-identifier">accept_options</span> <span class="ruby-value">:foo</span>, <span class="ruby-value">:bar</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>@return [self]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="accept_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/coercible-1.0.0/lib/support/options.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accept_options</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">new_options</span>)
+  <span class="ruby-identifier">add_accepted_options</span>(<span class="ruby-identifier">new_options</span>)
+  <span class="ruby-identifier">new_options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">option</span><span class="ruby-operator">|</span> <span class="ruby-identifier">define_option_method</span>(<span class="ruby-identifier">option</span>) }
+  <span class="ruby-identifier">descendants</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">descendant</span><span class="ruby-operator">|</span> <span class="ruby-identifier">descendant</span>.<span class="ruby-identifier">add_accepted_options</span>(<span class="ruby-identifier">new_options</span>) }
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-accepted_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">accepted_options</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an array of valid options</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-constant">Virtus</span><span class="ruby-operator">::</span><span class="ruby-constant">Attribute</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">accepted_options</span>
+<span class="ruby-comment"># =&gt; [:primitive, :accessor, :reader, :writer]</span>
+</pre>
+
+<p>@return [Array]</p>
+
+<pre class="ruby"><span class="ruby-identifier">the</span> <span class="ruby-identifier">array</span> <span class="ruby-identifier">of</span> <span class="ruby-identifier">valid</span> <span class="ruby-identifier">option</span> <span class="ruby-identifier">names</span>
+</pre>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="accepted_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/coercible-1.0.0/lib/support/options.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accepted_options</span>
+  <span class="ruby-ivar">@accepted_options</span> <span class="ruby-operator">||=</span> []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">options</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns default options hash for a given attribute class</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-constant">Virtus</span><span class="ruby-operator">::</span><span class="ruby-constant">Attribute</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">options</span>
+<span class="ruby-comment"># =&gt; {:primitive =&gt; String}</span>
+</pre>
+
+<p>@return [Hash]</p>
+
+<pre class="ruby"><span class="ruby-identifier">a</span> <span class="ruby-identifier">hash</span> <span class="ruby-identifier">of</span> <span class="ruby-identifier">default</span> <span class="ruby-identifier">option</span> <span class="ruby-identifier">values</span>
+</pre>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/coercible-1.0.0/lib/support/options.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options</span>
+  <span class="ruby-identifier">accepted_options</span>.<span class="ruby-identifier">each_with_object</span>({}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option_name</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">option_value</span>         = <span class="ruby-identifier">send</span>(<span class="ruby-identifier">option_name</span>)
+    <span class="ruby-identifier">options</span>[<span class="ruby-identifier">option_name</span>] = <span class="ruby-identifier">option_value</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">option_value</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+      <div id="method-i-add_accepted_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">add_accepted_options</span><span
+              class="method-args">(new_options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Adds new options that an attribute class can accept</p>
+
+<p>@param [#to_ary] new_options</p>
+
+<pre class="ruby"><span class="ruby-identifier">new</span> <span class="ruby-identifier">options</span> <span class="ruby-identifier">to</span> <span class="ruby-identifier">be</span> <span class="ruby-identifier">added</span>
+</pre>
+
+<p>@return [self]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="add_accepted_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/coercible-1.0.0/lib/support/options.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_accepted_options</span>(<span class="ruby-identifier">new_options</span>)
+  <span class="ruby-identifier">accepted_options</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">new_options</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-define_option_method" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">define_option_method</span><span
+              class="method-args">(option)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Adds a reader/writer method for the give option name</p>
+
+<p>@return [undefined]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="define_option_method-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/coercible-1.0.0/lib/support/options.rb, line 73</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">define_option_method</span>(<span class="ruby-identifier">option</span>)
+      <span class="ruby-identifier">class_eval</span> <span class="ruby-identifier">&lt;&lt;-RUBY</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="ruby-value">        def self.#{option}(value = Undefined)           # def self.primitive(value = Undefined)
+          return @#{option} if value.equal?(Undefined)  #   return @primitive if value.equal?(Undefined)
+          @#{option} = value                            #   @primitive = value
+          self                                          #   self
+        end                                             # end
+</span><span class="ruby-identifier">      RUBY</span>
+    <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-set_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">set_options</span><span
+              class="method-args">(new_options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Sets default options</p>
+
+<p>@param [#each] new_options</p>
+
+<pre class="ruby"><span class="ruby-identifier">options</span> <span class="ruby-identifier">to</span> <span class="ruby-identifier">be</span> <span class="ruby-identifier">set</span>
+</pre>
+
+<p>@return [self]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="set_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/coercible-1.0.0/lib/support/options.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_options</span>(<span class="ruby-identifier">new_options</span>)
+  <span class="ruby-identifier">new_options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pair</span><span class="ruby-operator">|</span> <span class="ruby-identifier">send</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">pair</span>) }
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

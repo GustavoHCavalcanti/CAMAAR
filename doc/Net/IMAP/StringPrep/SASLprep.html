@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Net::IMAP::StringPrep::SASLprep - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-saslprep">#saslprep</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Net::IMAP::StringPrep::SASLprep">
+  <h1 id="module-Net::IMAP::StringPrep::SASLprep" class="module">
+    module Net::IMAP::StringPrep::SASLprep
+  </h1>
+
+  <section class="description">
+    
+<p><a href="SASLprep.html#method-i-saslprep"><code>SASLprep#saslprep</code></a> can be used to prepare a string according to [RFC4013].</p>
+
+<p>SASLprep maps characters three ways: to nothing, to space, and <a href="../../../Unicode.html"><code>Unicode</code></a> normalization form KC.  SASLprep prohibits codepoints from nearly all standard <a href="../StringPrep.html"><code>StringPrep</code></a> tables (RFC3454, Appendix “C”), and uses StringPrep’s standard bidirectional characters requirements (Appendix “D”).  SASLprep also uses StringPrep’s definition of “Unassigned” codepoints (Appendix “A”).</p>
+
+<p><a href="SASLprep.html#method-i-saslprep"><code>SASLprep#saslprep</code></a> can be used to prepare a string according to [RFC4013].</p>
+
+<p>SASLprep maps characters three ways: to nothing, to space, and <a href="../../../Unicode.html"><code>Unicode</code></a> normalization form KC.  SASLprep prohibits codepoints from nearly all standard <a href="../StringPrep.html"><code>StringPrep</code></a> tables (RFC3454, Appendix “C”), and uses StringPrep’s standard bidirectional characters requirements (Appendix “D”).  SASLprep also uses StringPrep’s definition of “Unassigned” codepoints (Appendix “A”).</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="ASCII_NO_CTRLS">ASCII_NO_CTRLS
+        <dd><p>Used to short-circuit strings that don’t need preparation.</p>
+        <dt id="BIDI_FAILURE">BIDI_FAILURE
+        <dd><p>Bidirectional Characters [StringPrep, §6]</p>
+
+<p>A Regexp for strings that don’t satisfy StringPrep’s Bidirectional Characters rules.</p>
+
+<p>Equal to StringPrep::Tables::BIDI_FAILURE. Redefined here to avoid loading <a href="Tables.html"><code>StringPrep::Tables</code></a> unless necessary.</p>
+        <dt id="MAP_TO_NOTHING">MAP_TO_NOTHING
+        <dd><p>RFC4013 §2.1 Mapping - mapped to nothing</p>
+
+<blockquote>
+<p>the “commonly mapped to nothing” characters (StringPrep["B.1"]) that can be mapped to nothing.</p>
+</blockquote>
+
+<p>Equal to StringPrep["B.1"]. Redefined here to avoid loading <a href="Tables.html"><code>StringPrep::Tables</code></a> unless necessary.</p>
+        <dt id="MAP_TO_SPACE">MAP_TO_SPACE
+        <dd><p>RFC4013 §2.1 Mapping - mapped to space</p>
+
+<blockquote>
+<p>non-ASCII space characters (StringPrep["C.1.2"]) that can be mapped to SPACE (U+0020)</p>
+</blockquote>
+
+<p>Equal to StringPrep["C.1.2"]. Redefined here to avoid loading <a href="Tables.html"><code>StringPrep::Tables</code></a> unless necessary.</p>
+        <dt id="PROHIBITED">PROHIBITED
+        <dd><p>A Regexp matching strings prohibited by RFC4013 §2.3 and §2.4.</p>
+
+<p>This combines <a href="SASLprep.html#PROHIBITED_OUTPUT"><code>PROHIBITED_OUTPUT</code></a> and <a href="SASLprep.html#BIDI_FAILURE"><code>BIDI_FAILURE</code></a>.</p>
+        <dt id="PROHIBITED_OUTPUT">PROHIBITED_OUTPUT
+        <dd><p>A Regexp matching codepoints prohibited by RFC4013 §2.3.</p>
+
+<p>This combines all of the <a href="SASLprep.html#TABLES_PROHIBITED"><code>TABLES_PROHIBITED</code></a> tables.</p>
+        <dt id="PROHIBITED_OUTPUT_STORED">PROHIBITED_OUTPUT_STORED
+        <dd><p>A Regexp matching codepoints prohibited by RFC4013 §2.3 and §2.5.</p>
+
+<p>This combines <a href="SASLprep.html#PROHIBITED_OUTPUT"><code>PROHIBITED_OUTPUT</code></a> and <a href="SASLprep.html#UNASSIGNED"><code>UNASSIGNED</code></a>.</p>
+        <dt id="PROHIBITED_STORED">PROHIBITED_STORED
+        <dd><p>A Regexp matching strings prohibited by RFC4013 §2.3, §2.4, and §2.5.</p>
+
+<p>This combines <a href="SASLprep.html#PROHIBITED_OUTPUT_STORED"><code>PROHIBITED_OUTPUT_STORED</code></a> and <a href="SASLprep.html#BIDI_FAILURE"><code>BIDI_FAILURE</code></a>.</p>
+        <dt id="TABLES_PROHIBITED">TABLES_PROHIBITED
+        <dd><p>RFC4013 §2.3 Prohibited Output</p>
+
+<blockquote><ul><li>
+<p>Non-ASCII space characters — StringPrep["C.1.2"]</p>
+</li><li>
+<p>ASCII control characters — StringPrep["C.2.1"]</p>
+</li><li>
+<p>Non-ASCII control characters — StringPrep["C.2.2"]</p>
+</li><li>
+<p>Private Use characters — StringPrep["C.3"]</p>
+</li><li>
+<p>Non-character code points — StringPrep["C.4"]</p>
+</li><li>
+<p>Surrogate code points — StringPrep["C.5"]</p>
+</li><li>
+<p>Inappropriate for plain text characters — StringPrep["C.6"]</p>
+</li><li>
+<p>Inappropriate for canonical representation characters — StringPrep["C.7"]</p>
+</li><li>
+<p>Change display properties or deprecated characters — StringPrep["C.8"]</p>
+</li><li>
+<p>Tagging characters — StringPrep["C.9"]</p>
+</li></ul>
+</blockquote>
+        <dt id="TABLES_PROHIBITED_STORED">TABLES_PROHIBITED_STORED
+        <dd><p>Adds unassigned (by <a href="../../../Unicode.html"><code>Unicode</code></a> 3.2) codepoints to <a href="SASLprep.html#TABLES_PROHIBITED"><code>TABLES_PROHIBITED</code></a>.</p>
+
+<p>RFC4013 §2.5 Unassigned Code Points</p>
+
+<blockquote>
+<p>This profile specifies the StringPrep["A.1"] table as its list of unassigned code points.</p>
+</blockquote>
+        <dt id="UNASSIGNED">UNASSIGNED
+        <dd><p>RFC4013 §2.5 Unassigned Code Points</p>
+
+<blockquote>
+<p>This profile specifies the StringPrep["A.1"] table as its list of unassigned code points.</p>
+</blockquote>
+
+<p>Equal to StringPrep["A.1"]. Redefined here to avoid loading <a href="Tables.html"><code>StringPrep::Tables</code></a> unless necessary.</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-saslprep" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">saslprep</span><span
+              class="method-args">(str, stored: false, exception: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Prepares a UTF-8 <code>string</code> for comparison, using the SASLprep profile RFC4013 of the <a href="../StringPrep.html"><code>StringPrep</code></a> algorithm RFC3454.</p>
+
+<p>By default, prohibited strings will return <code>nil</code>.  When <code>exception</code> is <code>true</code>, a <a href="StringPrepError.html"><code>StringPrepError</code></a> describing the violation will be raised.</p>
+
+<p>When <code>stored</code> is <code>true</code>, “unassigned” codepoints will be prohibited. For StringPrep and the SASLprep profile, “unassigned” refers to <a href="../../../Unicode.html"><code>Unicode</code></a> 3.2, and not later versions.  See RFC3454 §7 for more information.</p>
+
+          <div class="method-source-code" id="saslprep-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/stringprep/saslprep.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">saslprep</span>(<span class="ruby-identifier">str</span>, <span class="ruby-value">stored:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">exception:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">ASCII_NO_CTRLS</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">str</span>) <span class="ruby-comment"># incompatible encoding raises</span>
+  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-string">&quot;UTF-8&quot;</span>) <span class="ruby-comment"># also dups (and raises for invalid encoding)</span>
+  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-constant">MAP_TO_SPACE</span>, <span class="ruby-string">&quot; &quot;</span>)
+  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-constant">MAP_TO_NOTHING</span>, <span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">unicode_normalize!</span>(<span class="ruby-value">:nfkc</span>)
+  <span class="ruby-comment"># These regexps combine the prohibited and bidirectional checks</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">stored</span> <span class="ruby-operator">?</span> <span class="ruby-constant">PROHIBITED_STORED</span> <span class="ruby-operator">:</span> <span class="ruby-constant">PROHIBITED</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">exception</span>
+  <span class="ruby-comment"># raise helpful errors to indicate *why* it failed:</span>
+  <span class="ruby-identifier">tables</span> = <span class="ruby-identifier">stored</span> <span class="ruby-operator">?</span> <span class="ruby-constant">TABLES_PROHIBITED_STORED</span> <span class="ruby-operator">:</span> <span class="ruby-constant">TABLES_PROHIBITED</span>
+  <span class="ruby-constant">StringPrep</span>.<span class="ruby-identifier">check_prohibited!</span> <span class="ruby-identifier">str</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">tables</span>, <span class="ruby-value">bidi:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">profile:</span> <span class="ruby-string">&quot;SASLprep&quot;</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidStringError</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-string">&quot;unknown error&quot;</span>, <span class="ruby-value">string:</span> <span class="ruby-identifier">string</span>, <span class="ruby-value">profile:</span> <span class="ruby-string">&quot;SASLprep&quot;</span>
+  )
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">CompatibilityError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ex</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/invalid byte sequence|incompatible encoding/</span>.<span class="ruby-identifier">match?</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">exception</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">StringPrepError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>, <span class="ruby-value">string:</span> <span class="ruby-identifier">str</span>, <span class="ruby-value">profile:</span> <span class="ruby-string">&quot;saslprep&quot;</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">ex</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

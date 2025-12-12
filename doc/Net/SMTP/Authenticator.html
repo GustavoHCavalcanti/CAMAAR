@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Net::SMTP::Authenticator - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-auth_class">::auth_class</a>
+    <li ><a href="#method-c-auth_classes">::auth_classes</a>
+    <li ><a href="#method-c-auth_type">::auth_type</a>
+    <li ><a href="#method-c-check_args">::check_args</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-base64_encode">#base64_encode</a>
+    <li ><a href="#method-i-continue">#continue</a>
+    <li ><a href="#method-i-finish">#finish</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Net::SMTP::Authenticator">
+  <h1 id="class-Net::SMTP::Authenticator" class="class">
+    class Net::SMTP::Authenticator
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-smtp" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">smtp</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-auth_class" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">auth_class</span><span
+              class="method-args">(type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="auth_class-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auth_class</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value">?_</span>, <span class="ruby-value">?-</span>).<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-constant">Authenticator</span>.<span class="ruby-identifier">auth_classes</span>[<span class="ruby-identifier">type</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-auth_classes" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">auth_classes</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="auth_classes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auth_classes</span>
+  <span class="ruby-ivar">@classes</span> <span class="ruby-operator">||=</span> {}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-auth_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">auth_type</span><span
+              class="method-args">(type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="auth_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auth_type</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value">?_</span>, <span class="ruby-value">?-</span>).<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-constant">Authenticator</span>.<span class="ruby-identifier">auth_classes</span>[<span class="ruby-identifier">type</span>] = <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-check_args" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_args</span><span
+              class="method-args">(user_arg = nil, secret_arg = nil, *, **)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="check_args-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_args</span>(<span class="ruby-identifier">user_arg</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">secret_arg</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span>, <span class="ruby-operator">**</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_arg</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;SMTP-AUTH requested but missing user name&#39;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">secret_arg</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;SMTP-AUTH requested but missing secret phrase&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(smtp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">smtp</span>)
+  <span class="ruby-ivar">@smtp</span> = <span class="ruby-identifier">smtp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-base64_encode" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">base64_encode</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param str [String] @return [String] <a href="../../Base64.html"><code>Base64</code></a> encoded string</p>
+
+          <div class="method-source-code" id="base64_encode-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">base64_encode</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-comment"># expects &quot;str&quot; may not become too long</span>
+  [<span class="ruby-identifier">str</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;m0&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-continue" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">continue</span><span
+              class="method-args">(arg)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param arg [String] message to server @return [String] message from server</p>
+
+          <div class="method-source-code" id="continue-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">continue</span>(<span class="ruby-identifier">arg</span>)
+  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">smtp</span>.<span class="ruby-identifier">get_response</span> <span class="ruby-identifier">arg</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">exception_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">res</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">continue?</span>
+  <span class="ruby-identifier">res</span>.<span class="ruby-identifier">string</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">1</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-finish" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">finish</span><span
+              class="method-args">(arg)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param arg [String] message to server @return [Net::SMTP::Response] response from server</p>
+
+          <div class="method-source-code" id="finish-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">finish</span>(<span class="ruby-identifier">arg</span>)
+  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">smtp</span>.<span class="ruby-identifier">get_response</span> <span class="ruby-identifier">arg</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">SMTPAuthenticationError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">res</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">success?</span>
+  <span class="ruby-identifier">res</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

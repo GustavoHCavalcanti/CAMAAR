@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Puma::HttpParser - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-body">#body</a>
+    <li ><a href="#method-i-error-3F">#error?</a>
+    <li ><a href="#method-i-execute">#execute</a>
+    <li ><a href="#method-i-finish">#finish</a>
+    <li ><a href="#method-i-finished-3F">#finished?</a>
+    <li ><a href="#method-i-nread">#nread</a>
+    <li ><a href="#method-i-reset">#reset</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Puma::HttpParser">
+  <h1 id="class-Puma::HttpParser" class="class">
+    class Puma::HttpParser
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              new &rarr; parser
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new parser.</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre>VALUE HttpParser_init(VALUE self)
+{
+  puma_parser *http = NULL;
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+  puma_parser_init(http);
+
+  return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-body" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              body &rarr; nil or String
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>If the request included a body, returns it.</p>
+
+          <div class="method-source-code" id="body-source">
+            <pre>VALUE HttpParser_body(VALUE self) {
+  puma_parser *http = NULL;
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+
+  return http-&gt;body;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: body
+        </div>
+
+      </div>
+
+      <div id="method-i-error-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              error? &rarr; true/false
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Tells you whether the parser is in an error state.</p>
+
+          <div class="method-source-code" id="error-3F-source">
+            <pre>VALUE HttpParser_has_error(VALUE self)
+{
+  puma_parser *http = NULL;
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+
+  return puma_parser_has_error(http) ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: error?
+        </div>
+
+      </div>
+
+      <div id="method-i-execute" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              execute(req_hash, data, start) &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Takes a <a href="../Hash.html"><code>Hash</code></a> and a <a href="../String.html"><code>String</code></a> of data, parses the <a href="../String.html"><code>String</code></a> of data filling in the <a href="../Hash.html"><code>Hash</code></a> returning an <a href="../Integer.html"><code>Integer</code></a> to indicate how much of the data has been read.  No matter what the return value, you should call <a href="HttpParser.html#method-i-finished-3F"><code>HttpParser#finished?</code></a> and <a href="HttpParser.html#method-i-error-3F"><code>HttpParser#error?</code></a> to figure out if it’s done parsing or there was an error.</p>
+
+<p>This function now throws an exception when there is a parsing error.  This makes the logic for working with the parser much easier.  You can still test for an error, but now you need to wrap the parser with an exception handling block.</p>
+
+<p>The third argument allows for parsing a partial request and then continuing the parsing from that position.  It needs all of the original data as well so you have to append to the data buffer as you read.</p>
+
+          <div class="method-source-code" id="execute-source">
+            <pre>VALUE HttpParser_execute(VALUE self, VALUE req_hash, VALUE data, VALUE start)
+{
+  puma_parser *http = NULL;
+  int from = 0;
+  char *dptr = NULL;
+  long dlen = 0;
+
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+
+  from = FIX2INT(start);
+  dptr = rb_extract_chars(data, &amp;dlen);
+
+  if(from &gt;= dlen) {
+    rb_free_chars(dptr);
+    rb_raise(eHttpParserError, &quot;%s&quot;, &quot;Requested start is after data buffer end.&quot;);
+  } else {
+    http-&gt;request = req_hash;
+    puma_parser_execute(http, dptr, dlen, from);
+
+    rb_free_chars(dptr);
+    VALIDATE_MAX_LENGTH(puma_parser_nread(http), HEADER);
+
+    if(puma_parser_has_error(http)) {
+      rb_raise(eHttpParserError, &quot;%s&quot;, &quot;Invalid HTTP format, parsing fails. Are you trying to open an SSL connection to a non-SSL Puma?&quot;);
+    } else {
+      return INT2FIX(puma_parser_nread(http));
+    }
+  }
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: execute
+        </div>
+
+      </div>
+
+      <div id="method-i-finish" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              finish &rarr; true/false
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Finishes a parser early which could put in a “good” or bad state. You should call reset after finish it or bad things will happen.</p>
+
+          <div class="method-source-code" id="finish-source">
+            <pre>VALUE HttpParser_finish(VALUE self)
+{
+  puma_parser *http = NULL;
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+  puma_parser_finish(http);
+
+  return puma_parser_is_finished(http) ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: finish
+        </div>
+
+      </div>
+
+      <div id="method-i-finished-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              finished? &rarr; true/false
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Tells you whether the parser is finished or not and in a good state.</p>
+
+          <div class="method-source-code" id="finished-3F-source">
+            <pre>VALUE HttpParser_is_finished(VALUE self)
+{
+  puma_parser *http = NULL;
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+
+  return puma_parser_is_finished(http) ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: finished?
+        </div>
+
+      </div>
+
+      <div id="method-i-nread" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              nread &rarr; Integer
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the amount of data processed so far during this processing cycle.  It is set to 0 on initialize or reset calls and is incremented each time execute is called.</p>
+
+          <div class="method-source-code" id="nread-source">
+            <pre>VALUE HttpParser_nread(VALUE self)
+{
+  puma_parser *http = NULL;
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+
+  return INT2FIX(http-&gt;nread);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: nread
+        </div>
+
+      </div>
+
+      <div id="method-i-reset" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              reset &rarr; nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resets the parser to it’s initial state so that you can reuse it rather than making new ones.</p>
+
+          <div class="method-source-code" id="reset-source">
+            <pre>VALUE HttpParser_reset(VALUE self)
+{
+  puma_parser *http = NULL;
+  DATA_GET(self, puma_parser, &amp;HttpParser_data_type, http);
+  puma_parser_init(http);
+
+  return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: reset
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

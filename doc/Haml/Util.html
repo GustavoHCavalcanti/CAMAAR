@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Haml::Util - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-escape_html">::escape_html</a>
+    <li ><a href="#method-c-escape_html_safe">::escape_html_safe</a>
+    <li ><a href="#method-i-balance">#balance</a>
+    <li ><a href="#method-i-check_encoding">#check_encoding</a>
+    <li ><a href="#method-i-check_haml_encoding">#check_haml_encoding</a>
+    <li ><a href="#method-i-contains_interpolation-3F">#contains_interpolation?</a>
+    <li ><a href="#method-i-handle_interpolation">#handle_interpolation</a>
+    <li ><a href="#method-i-human_indentation">#human_indentation</a>
+    <li ><a href="#method-i-inspect_obj">#inspect_obj</a>
+    <li ><a href="#method-i-rails_xss_safe-3F">#rails_xss_safe?</a>
+    <li ><a href="#method-i-silence_warnings">#silence_warnings</a>
+    <li ><a href="#method-i-unescape_interpolation">#unescape_interpolation</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Haml::Util">
+  <h1 id="module-Haml::Util" class="module">
+    module Haml::Util
+  </h1>
+
+  <section class="description">
+    
+<p>A module containing various useful functions.</p>
+
+<p>A module containing various useful functions.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-escape_html" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">escape_html</span><span
+              class="method-args">(html)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="escape_html-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">escape_html</span>(<span class="ruby-identifier">html</span>)
+  <span class="ruby-constant">CGI</span>.<span class="ruby-identifier">escapeHTML</span>(<span class="ruby-identifier">html</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-escape_html_safe" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">escape_html_safe</span><span
+              class="method-args">(html)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>TODO: Remove <a href="Util.html#method-i-unescape_interpolation"><code>unescape_interpolation</code></a>‘s workaround and get rid of `respond_to?`.</p>
+
+          <div class="method-source-code" id="escape_html_safe-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">escape_html_safe</span>(<span class="ruby-identifier">html</span>)
+  <span class="ruby-identifier">html</span> = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">to_s</span>
+  (<span class="ruby-identifier">html</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:html_safe?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">html</span>.<span class="ruby-identifier">html_safe?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">html</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">escape_html</span>(<span class="ruby-identifier">html</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-balance" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">balance</span><span
+              class="method-args">(scanner, start, finish, count = 0)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Moves a scanner through a balanced pair of characters. For example:</p>
+
+<pre>Foo (Bar (Baz bang) bop) (Bang (bop bip))
+^                       ^
+from                    to</pre>
+
+<p>@param scanner [StringScanner] The string scanner to move @param start [String] The character opening the balanced pair. @param finish [String] The character closing the balanced pair. @param count [Fixnum] The number of opening characters matched</p>
+
+<pre class="ruby"><span class="ruby-identifier">before</span> <span class="ruby-identifier">calling</span> <span class="ruby-identifier">this</span> <span class="ruby-identifier">method</span>
+</pre>
+
+<p>@return [(<a href="../String.html"><code>String</code></a>, <a href="../String.html"><code>String</code></a>)] The string matched within the balanced pair</p>
+
+<pre>and the rest of the string.
+`[&quot;Foo (Bar (Baz bang) bop)&quot;, &quot; (Bang (bop bip))&quot;]` in the example above.</pre>
+
+          <div class="method-source-code" id="balance-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">balance</span>(<span class="ruby-identifier">scanner</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">finish</span>, <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>)
+  <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">scanner</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">scanner</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">StringScanner</span>
+  <span class="ruby-identifier">regexp</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;(.*?)[\\#{start.chr}\\#{finish.chr}]&quot;</span>, <span class="ruby-constant">Regexp</span><span class="ruby-operator">::</span><span class="ruby-constant">MULTILINE</span>)
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">regexp</span>)
+    <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">matched</span>
+    <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">matched</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">start</span>
+    <span class="ruby-identifier">count</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">matched</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">finish</span>
+    <span class="ruby-keyword">return</span> [<span class="ruby-identifier">str</span>.<span class="ruby-identifier">strip</span>, <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">rest</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-check_encoding" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_encoding</span><span
+              class="method-args">(str) { |&lt;&lt;rstrip, i + 1| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Checks that the encoding of a string is valid and cleans up potential encoding gotchas like the UTF-8 BOM. If it’s not, yields an error string describing the invalid character and the line on which it occurs.</p>
+
+<p>@param str [String] The string of which to check the encoding @yield [msg] A block in which an encoding error can be raised.</p>
+
+<pre class="ruby"><span class="ruby-constant">Only</span> <span class="ruby-identifier">yields</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">there</span> <span class="ruby-identifier">is</span> <span class="ruby-identifier">an</span> <span class="ruby-identifier">encoding</span> <span class="ruby-identifier">error</span>
+</pre>
+
+<p>@yieldparam msg [String] The error message to be raised @return [String] ‘str`, potentially with encoding gotchas like BOMs removed</p>
+
+          <div class="method-source-code" id="check_encoding-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 66</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_encoding</span>(<span class="ruby-identifier">str</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">valid_encoding?</span>
+        <span class="ruby-comment"># Get rid of the Unicode BOM if possible</span>
+        <span class="ruby-comment"># Shortcut for UTF-8 which might be the majority case</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">encoding</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UTF_8</span>
+          <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\A\uFEFF/</span>, <span class="ruby-string">&#39;&#39;</span>)
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">encoding</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^UTF-(16|32)(BE|LE)?$/</span>
+          <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;\\A\uFEFF&quot;</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">str</span>.<span class="ruby-identifier">encoding</span>)), <span class="ruby-string">&#39;&#39;</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">encoding</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">encoding</span>
+      <span class="ruby-identifier">newlines</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;\r\n|\r|\n&quot;</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">encoding</span>).<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">ASCII_8BIT</span>))
+      <span class="ruby-identifier">str</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">ASCII_8BIT</span>).<span class="ruby-identifier">split</span>(<span class="ruby-identifier">newlines</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">begin</span>
+          <span class="ruby-identifier">line</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">encoding</span>)
+        <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UndefinedConversionError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-keyword">yield</span> <span class="ruby-identifier">&lt;&lt;MSG</span>.<span class="ruby-identifier">rstrip</span>, <span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="ruby-value">Invalid #{encoding.name} character #{e.error_char.dump}
+</span><span class="ruby-identifier">MSG</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>
+    <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-check_haml_encoding" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_haml_encoding</span><span
+              class="method-args">(str, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Like {#check_encoding}, but also checks for a Ruby-style ‘-# coding:` comment at the beginning of the template and uses that encoding if it exists.</p>
+
+<p>The <a href="../Haml.html"><code>Haml</code></a> encoding rules are simple. If a ‘-# coding:` comment exists, we assume that that’s the original encoding of the document. Otherwise, we use whatever encoding Ruby has.</p>
+
+<p><a href="../Haml.html"><code>Haml</code></a> uses the same rules for parsing coding comments as Ruby. This means that it can understand Emacs-style comments (e.g. ‘-*- encoding: “utf-8” -*-`), and also that it cannot understand non-ASCII-compatible encodings such as `UTF-16` and `UTF-32`.</p>
+
+<p>@param str [String] The <a href="../Haml.html"><code>Haml</code></a> template of which to check the encoding @yield [msg] A block in which an encoding error can be raised.</p>
+
+<pre class="ruby"><span class="ruby-constant">Only</span> <span class="ruby-identifier">yields</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">there</span> <span class="ruby-identifier">is</span> <span class="ruby-identifier">an</span> <span class="ruby-identifier">encoding</span> <span class="ruby-identifier">error</span>
+</pre>
+
+<p>@yieldparam msg [String] The error message to be raised @return [String] The original string encoded properly @raise [ArgumentError] if the document declares an unknown encoding</p>
+
+          <div class="method-source-code" id="check_haml_encoding-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_haml_encoding</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">dup</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">frozen?</span>
+
+  <span class="ruby-identifier">bom</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-identifier">parse_haml_magic_comment</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">encoding</span>; <span class="ruby-identifier">str</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-identifier">encoding</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">bom</span>; <span class="ruby-identifier">str</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UTF_8</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">check_encoding</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-contains_interpolation-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">contains_interpolation?</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="contains_interpolation-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 201</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">contains_interpolation?</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-regexp">/#[\{$@]/</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-handle_interpolation" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">handle_interpolation</span><span
+              class="method-args">(str) { |scan while scan(/(.*?)(\\*)#([\{@$])/)| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Scans through a string looking for the interoplation-opening ‘#{` and, when it’s found, yields the scanner to the calling code so it can handle it properly.</p>
+
+<p>The scanner will have any backslashes immediately in front of the ‘#{` as the second capture group (`<a href="2">scan</a>`), and the text prior to that as the first (`<a href="1">scan</a>`).</p>
+
+<p>@yieldparam scan [StringScanner] The scanner scanning through the string @return [String] The text remaining in the scanner after all ‘#{`s have been processed</p>
+
+          <div class="method-source-code" id="handle_interpolation-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">handle_interpolation</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">scan</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">scan</span> <span class="ruby-keyword">while</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(.*?)(\\*)#([\{@$])/</span>)
+  <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">rest</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-human_indentation" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">human_indentation</span><span
+              class="method-args">(indentation)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Formats a string for use in error messages about indentation.</p>
+
+<p>@param indentation [String] The string used for indentation @return [String] The name of the indentation (e.g. ‘“12 spaces”`, `“1 tab”`)</p>
+
+          <div class="method-source-code" id="human_indentation-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">human_indentation</span>(<span class="ruby-identifier">indentation</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">indentation</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">?\t</span>)
+    <span class="ruby-identifier">noun</span> = <span class="ruby-string">&#39;space&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">indentation</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">?\s</span>)
+    <span class="ruby-identifier">noun</span> = <span class="ruby-string">&#39;tab&#39;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">indentation</span>.<span class="ruby-identifier">inspect</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">singular</span> = <span class="ruby-identifier">indentation</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+  <span class="ruby-node">&quot;#{indentation.length} #{noun}#{&#39;s&#39; unless singular}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-inspect_obj" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">inspect_obj</span><span
+              class="method-args">(obj)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Like ‘Object#inspect`, but preserves non-ASCII characters rather than escaping them. This is necessary so that the precompiled <a href="../Haml.html"><code>Haml</code></a> template can be `#encode`d into `@<a href=":encoding">options</a>` before being evaluated.</p>
+
+<p>@param obj {Object} @return {String}</p>
+
+          <div class="method-source-code" id="inspect_obj-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect_obj</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">obj</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-node">%Q!&quot;#{obj.gsub(/[\x00-\x7F]+/) {|s| s.dump[1...-1]}}&quot;!</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Symbol</span>
+    <span class="ruby-node">&quot;:#{inspect_obj(obj.to_s)}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">inspect</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rails_xss_safe-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rails_xss_safe?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Whether or not ActionView’s XSS protection is available and enabled, as is the default for <a href="../Rails.html"><code>Rails</code></a> 3.0+, and optional for version 2.3.5+. Overridden in haml/template.rb if this is the case.</p>
+
+<p>@return [Boolean]</p>
+
+          <div class="method-source-code" id="rails_xss_safe-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rails_xss_safe?</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-silence_warnings" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">silence_warnings</span><span
+              class="method-args">() { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Silence all output to STDERR within a block.</p>
+
+<p>@yield A block in which no output will be printed to STDERR</p>
+
+          <div class="method-source-code" id="silence_warnings-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">silence_warnings</span>
+  <span class="ruby-identifier">the_real_stderr</span>, <span class="ruby-identifier">$stderr</span> = <span class="ruby-identifier">$stderr</span>, <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">$stderr</span> = <span class="ruby-identifier">the_real_stderr</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-unescape_interpolation" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">unescape_interpolation</span><span
+              class="method-args">(str, escape_html = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="unescape_interpolation-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/util.rb, line 205</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unescape_interpolation</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">escape_html</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">res</span> = <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">rest</span> = <span class="ruby-constant">Haml</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">handle_interpolation</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">dump</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scan</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">escapes</span> = (<span class="ruby-identifier">scan</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">/</span> <span class="ruby-value">2</span>
+    <span class="ruby-identifier">char</span> = <span class="ruby-identifier">scan</span>[<span class="ruby-value">3</span>] <span class="ruby-comment"># &#39;{&#39;, &#39;@&#39; or &#39;$&#39;</span>
+    <span class="ruby-identifier">res</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">matched</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">-3</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">escapes</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">escapes</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">res</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\##{char}&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">interpolated</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">char</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;{&#39;</span>
+        <span class="ruby-identifier">balance</span>(<span class="ruby-identifier">scan</span>, <span class="ruby-value">?{</span>, <span class="ruby-value">?}</span>, <span class="ruby-value">1</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-value">-1</span>]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\w+/</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">content</span> = <span class="ruby-identifier">eval</span>(<span class="ruby-node">&quot;\&quot;#{interpolated}\&quot;&quot;</span>)
+      <span class="ruby-identifier">content</span> = <span class="ruby-node">&quot;#{char}#{content}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">char</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;@&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">char</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;$&#39;</span>
+      <span class="ruby-identifier">content</span> = <span class="ruby-node">&quot;Haml::Util.escape_html_safe((#{content}).to_s)&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">escape_html</span>
+
+      <span class="ruby-identifier">res</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\#{#{content}}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">res</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rest</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

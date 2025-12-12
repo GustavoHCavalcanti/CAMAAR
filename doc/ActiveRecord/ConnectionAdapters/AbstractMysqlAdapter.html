@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveRecord::ConnectionAdapters::AbstractMysqlAdapter - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="AbstractAdapter.html">ActiveRecord::ConnectionAdapters::AbstractAdapter</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="MySQL/DatabaseStatements.html">ActiveRecord::ConnectionAdapters::MySQL::DatabaseStatements</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-dbconsole">::dbconsole</a>
+    <li ><a href="#method-c-emulate_booleans">::emulate_booleans</a>
+    <li ><a href="#method-i-charset">#charset</a>
+    <li ><a href="#method-i-check_constraints">#check_constraints</a>
+    <li ><a href="#method-i-collation">#collation</a>
+    <li ><a href="#method-i-create_database">#create_database</a>
+    <li ><a href="#method-i-current_database">#current_database</a>
+    <li ><a href="#method-i-drop_table">#drop_table</a>
+    <li ><a href="#method-i-foreign_keys">#foreign_keys</a>
+    <li ><a href="#method-i-index_algorithms">#index_algorithms</a>
+    <li ><a href="#method-i-native_database_types">#native_database_types</a>
+    <li ><a href="#method-i-quote_string">#quote_string</a>
+    <li ><a href="#method-i-recreate_database">#recreate_database</a>
+    <li class="calls-super" ><a href="#method-i-rename_index">#rename_index</a>
+    <li ><a href="#method-i-rename_table">#rename_table</a>
+    <li ><a href="#method-i-show_variable">#show_variable</a>
+    <li ><a href="#method-i-strict_mode-3F">#strict_mode?</a>
+    <li ><a href="#method-i-supports_advisory_locks-3F">#supports_advisory_locks?</a>
+    <li ><a href="#method-i-supports_bulk_alter-3F">#supports_bulk_alter?</a>
+    <li ><a href="#method-i-supports_check_constraints-3F">#supports_check_constraints?</a>
+    <li ><a href="#method-i-supports_common_table_expressions-3F">#supports_common_table_expressions?</a>
+    <li ><a href="#method-i-supports_datetime_with_precision-3F">#supports_datetime_with_precision?</a>
+    <li ><a href="#method-i-supports_disabling_indexes-3F">#supports_disabling_indexes?</a>
+    <li ><a href="#method-i-supports_explain-3F">#supports_explain?</a>
+    <li ><a href="#method-i-supports_expression_index-3F">#supports_expression_index?</a>
+    <li ><a href="#method-i-supports_foreign_keys-3F">#supports_foreign_keys?</a>
+    <li ><a href="#method-i-supports_index_sort_order-3F">#supports_index_sort_order?</a>
+    <li ><a href="#method-i-supports_indexes_in_create-3F">#supports_indexes_in_create?</a>
+    <li ><a href="#method-i-supports_insert_on_duplicate_skip-3F">#supports_insert_on_duplicate_skip?</a>
+    <li ><a href="#method-i-supports_insert_on_duplicate_update-3F">#supports_insert_on_duplicate_update?</a>
+    <li ><a href="#method-i-supports_insert_returning-3F">#supports_insert_returning?</a>
+    <li ><a href="#method-i-supports_optimizer_hints-3F">#supports_optimizer_hints?</a>
+    <li ><a href="#method-i-supports_restart_db_transaction-3F">#supports_restart_db_transaction?</a>
+    <li ><a href="#method-i-supports_transaction_isolation-3F">#supports_transaction_isolation?</a>
+    <li ><a href="#method-i-supports_views-3F">#supports_views?</a>
+    <li ><a href="#method-i-supports_virtual_columns-3F">#supports_virtual_columns?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveRecord::ConnectionAdapters::AbstractMysqlAdapter">
+  <h1 id="class-ActiveRecord::ConnectionAdapters::AbstractMysqlAdapter" class="class">
+    class ActiveRecord::ConnectionAdapters::AbstractMysqlAdapter
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="CR_SERVER_GONE_ERROR">CR_SERVER_GONE_ERROR
+        <dd>
+        <dt id="CR_SERVER_LOST">CR_SERVER_LOST
+        <dd>
+        <dt id="EMULATE_BOOLEANS_TRUE">EMULATE_BOOLEANS_TRUE
+        <dd>
+        <dt id="ER_CANNOT_ADD_FOREIGN">ER_CANNOT_ADD_FOREIGN
+        <dd>
+        <dt id="ER_CANNOT_CREATE_TABLE">ER_CANNOT_CREATE_TABLE
+        <dd>
+        <dt id="ER_CHECK_CONSTRAINT_VIOLATED">ER_CHECK_CONSTRAINT_VIOLATED
+        <dd>
+        <dt id="ER_CLIENT_INTERACTION_TIMEOUT">ER_CLIENT_INTERACTION_TIMEOUT
+        <dd>
+        <dt id="ER_CONNECTION_KILLED">ER_CONNECTION_KILLED
+        <dd>
+        <dt id="ER_CONSTRAINT_FAILED">ER_CONSTRAINT_FAILED
+        <dd>
+        <dt id="ER_DATA_TOO_LONG">ER_DATA_TOO_LONG
+        <dd>
+        <dt id="ER_DB_CREATE_EXISTS">ER_DB_CREATE_EXISTS
+        <dd><p>See <a href="https://dev.mysql.com/doc/mysql-errors/en/server-error-reference.html">dev.mysql.com/doc/mysql-errors/en/server-error-reference.html</a></p>
+        <dt id="ER_DO_NOT_HAVE_DEFAULT">ER_DO_NOT_HAVE_DEFAULT
+        <dd>
+        <dt id="ER_DUP_ENTRY">ER_DUP_ENTRY
+        <dd>
+        <dt id="ER_FILSORT_ABORT">ER_FILSORT_ABORT
+        <dd>
+        <dt id="ER_FK_INCOMPATIBLE_COLUMNS">ER_FK_INCOMPATIBLE_COLUMNS
+        <dd>
+        <dt id="ER_LOCK_DEADLOCK">ER_LOCK_DEADLOCK
+        <dd>
+        <dt id="ER_LOCK_WAIT_TIMEOUT">ER_LOCK_WAIT_TIMEOUT
+        <dd>
+        <dt id="ER_NOT_NULL_VIOLATION">ER_NOT_NULL_VIOLATION
+        <dd>
+        <dt id="ER_NO_REFERENCED_ROW">ER_NO_REFERENCED_ROW
+        <dd>
+        <dt id="ER_NO_REFERENCED_ROW_2">ER_NO_REFERENCED_ROW_2
+        <dd>
+        <dt id="ER_OUT_OF_RANGE">ER_OUT_OF_RANGE
+        <dd>
+        <dt id="ER_QUERY_INTERRUPTED">ER_QUERY_INTERRUPTED
+        <dd>
+        <dt id="ER_QUERY_TIMEOUT">ER_QUERY_TIMEOUT
+        <dd>
+        <dt id="ER_ROW_IS_REFERENCED">ER_ROW_IS_REFERENCED
+        <dd>
+        <dt id="ER_ROW_IS_REFERENCED_2">ER_ROW_IS_REFERENCED_2
+        <dd>
+        <dt id="ER_SERVER_SHUTDOWN">ER_SERVER_SHUTDOWN
+        <dd>
+        <dt id="EXTENDED_TYPE_MAPS">EXTENDED_TYPE_MAPS
+        <dd>
+        <dt id="NATIVE_DATABASE_TYPES">NATIVE_DATABASE_TYPES
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-dbconsole" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dbconsole</span><span
+              class="method-args">(config, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="dbconsole-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbconsole</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">mysql_config</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">configuration_hash</span>
+
+  <span class="ruby-identifier">args</span> = {
+    <span class="ruby-value">host:</span> <span class="ruby-string">&quot;--host&quot;</span>,
+    <span class="ruby-value">port:</span> <span class="ruby-string">&quot;--port&quot;</span>,
+    <span class="ruby-value">socket:</span> <span class="ruby-string">&quot;--socket&quot;</span>,
+    <span class="ruby-value">username:</span> <span class="ruby-string">&quot;--user&quot;</span>,
+    <span class="ruby-value">encoding:</span> <span class="ruby-string">&quot;--default-character-set&quot;</span>,
+    <span class="ruby-value">sslca:</span> <span class="ruby-string">&quot;--ssl-ca&quot;</span>,
+    <span class="ruby-value">sslcert:</span> <span class="ruby-string">&quot;--ssl-cert&quot;</span>,
+    <span class="ruby-value">sslcapath:</span> <span class="ruby-string">&quot;--ssl-capath&quot;</span>,
+    <span class="ruby-value">sslcipher:</span> <span class="ruby-string">&quot;--ssl-cipher&quot;</span>,
+    <span class="ruby-value">sslkey:</span> <span class="ruby-string">&quot;--ssl-key&quot;</span>,
+    <span class="ruby-value">ssl_mode:</span> <span class="ruby-string">&quot;--ssl-mode&quot;</span>
+  }.<span class="ruby-identifier">filter_map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span>, <span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{arg}=#{mysql_config[opt]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mysql_config</span>[<span class="ruby-identifier">opt</span>] }
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mysql_config</span>[<span class="ruby-value">:password</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:include_password</span>]
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;--password=#{mysql_config[:password]}&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">mysql_config</span>[<span class="ruby-value">:password</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">mysql_config</span>[<span class="ruby-value">:password</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;-p&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">database</span>
+
+  <span class="ruby-identifier">find_cmd_and_exec</span>(<span class="ruby-constant">ActiveRecord</span>.<span class="ruby-identifier">database_cli</span>[<span class="ruby-value">:mysql</span>], <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-emulate_booleans" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">emulate_booleans</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>By default, the <a href="Mysql2Adapter.html"><code>Mysql2Adapter</code></a> will consider all columns of type <code>tinyint(1)</code> as boolean. If you wish to disable this emulation you can add the following line to your application.rb file:</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ConnectionAdapters</span><span class="ruby-operator">::</span><span class="ruby-constant">Mysql2Adapter</span>.<span class="ruby-identifier">emulate_booleans</span> = <span class="ruby-keyword">false</span>
+</pre>
+
+          <div class="method-source-code" id="emulate_booleans-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 29</span>
+<span class="ruby-identifier">class_attribute</span> <span class="ruby-value">:emulate_booleans</span>, <span class="ruby-value">default:</span> <span class="ruby-keyword">true</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-charset" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">charset</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the database character set.</p>
+
+          <div class="method-source-code" id="charset-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 309</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">charset</span>
+  <span class="ruby-identifier">show_variable</span> <span class="ruby-string">&quot;character_set_database&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-check_constraints" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_constraints</span><span
+              class="method-args">(table_name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="check_constraints-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 536</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_constraints</span>(<span class="ruby-identifier">table_name</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">supports_check_constraints?</span>
+          <span class="ruby-identifier">scope</span> = <span class="ruby-identifier">quoted_scope</span>(<span class="ruby-identifier">table_name</span>)
+
+          <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">&lt;&lt;~SQL</span>
+<span class="ruby-value">            SELECT cc.constraint_name AS &#39;name&#39;,
+                  cc.check_clause AS &#39;expression&#39;
+            FROM information_schema.check_constraints cc
+            JOIN information_schema.table_constraints tc
+            USING (constraint_schema, constraint_name)
+            WHERE tc.table_schema = #{scope[:schema]}
+              AND tc.table_name = #{scope[:name]}
+              AND cc.constraint_schema = #{scope[:schema]}
+</span><span class="ruby-identifier">          SQL</span>
+          <span class="ruby-identifier">sql</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; AND cc.table_name = #{scope[:name]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mariadb?</span>
+
+          <span class="ruby-identifier">chk_info</span> = <span class="ruby-identifier">internal_exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-string">&quot;SCHEMA&quot;</span>)
+
+          <span class="ruby-identifier">chk_info</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">options</span> = {
+              <span class="ruby-value">name:</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;name&quot;</span>]
+            }
+            <span class="ruby-identifier">expression</span> = <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;expression&quot;</span>]
+            <span class="ruby-identifier">expression</span> = <span class="ruby-identifier">expression</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">expression</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;(&quot;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">expression</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&quot;)&quot;</span>)
+            <span class="ruby-identifier">expression</span> = <span class="ruby-identifier">strip_whitespace_characters</span>(<span class="ruby-identifier">expression</span>)
+
+            <span class="ruby-keyword">unless</span> <span class="ruby-identifier">mariadb?</span>
+              <span class="ruby-comment"># MySQL returns check constraints expression in an already escaped form.</span>
+              <span class="ruby-comment"># This leads to duplicate escaping later (e.g. when the expression is used in the SchemaDumper).</span>
+              <span class="ruby-identifier">expression</span> = <span class="ruby-identifier">expression</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\\&#39;&quot;</span>, <span class="ruby-string">&quot;&#39;&quot;</span>)
+            <span class="ruby-keyword">end</span>
+
+            <span class="ruby-constant">CheckConstraintDefinition</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">expression</span>, <span class="ruby-identifier">options</span>)
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-collation" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">collation</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the database collation strategy.</p>
+
+          <div class="method-source-code" id="collation-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 314</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collation</span>
+  <span class="ruby-identifier">show_variable</span> <span class="ruby-string">&quot;collation_database&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-create_database" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create_database</span><span
+              class="method-args">(name, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create a new <a href="MySQL.html"><code>MySQL</code></a> database with optional <code>:charset</code> and <code>:collation</code>. Charset defaults to utf8mb4.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_database</span> <span class="ruby-string">&#39;charset_test&#39;</span>, <span class="ruby-value">charset:</span> <span class="ruby-string">&#39;latin1&#39;</span>, <span class="ruby-value">collation:</span> <span class="ruby-string">&#39;latin1_bin&#39;</span>
+<span class="ruby-identifier">create_database</span> <span class="ruby-string">&#39;matt_development&#39;</span>
+<span class="ruby-identifier">create_database</span> <span class="ruby-string">&#39;matt_development&#39;</span>, <span class="ruby-value">charset:</span> <span class="ruby-value">:big5</span>
+</pre>
+
+          <div class="method-source-code" id="create_database-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_database</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:collation</span>]
+    <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;CREATE DATABASE #{quote_table_name(name)} DEFAULT COLLATE #{quote_table_name(options[:collation])}&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:charset</span>]
+    <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;CREATE DATABASE #{quote_table_name(name)} DEFAULT CHARACTER SET #{quote_table_name(options[:charset])}&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">row_format_dynamic_by_default?</span>
+    <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;CREATE DATABASE #{quote_table_name(name)} DEFAULT CHARACTER SET `utf8mb4`&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Configure a supported :charset and ensure innodb_large_prefix is enabled to support indexes on varchar(255) string columns.&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-current_database" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">current_database</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="current_database-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 304</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current_database</span>
+  <span class="ruby-identifier">query_value</span>(<span class="ruby-string">&quot;SELECT database()&quot;</span>, <span class="ruby-string">&quot;SCHEMA&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-drop_table" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">drop_table</span><span
+              class="method-args">(*table_names, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Drops a table or tables from the database.</p>
+<dl class="rdoc-list label-list"><dt><code>:force</code>
+<dd>
+<p><a href="../../Set.html"><code>Set</code></a> to <code>:cascade</code> to drop dependent objects as well. Defaults to false.</p>
+</dd><dt><code>:if_exists</code>
+<dd>
+<p><a href="../../Set.html"><code>Set</code></a> to <code>true</code> to only drop the table if it exists. Defaults to false.</p>
+</dd><dt><code>:temporary</code>
+<dd>
+<p><a href="../../Set.html"><code>Set</code></a> to <code>true</code> to drop temporary table. Defaults to false.</p>
+</dd></dl>
+
+<p>Although this command ignores most <code>options</code> and the block if one is given, it can be helpful to provide these in a migration’s <code>change</code> method so it can be reverted. In that case, <code>options</code> and the block will be used by create_table except if you provide more than one table which is not supported.</p>
+
+          <div class="method-source-code" id="drop_table-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 362</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">drop_table</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">table_names</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">table_names</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">table_name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">clear_data_source_cache!</span>(<span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">to_s</span>) }
+  <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;DROP#{&#39; TEMPORARY&#39; if options[:temporary]} TABLE#{&#39; IF EXISTS&#39; if options[:if_exists]} #{table_names.map { |table_name| quote_table_name(table_name) }.join(&#39;, &#39;)}#{&#39; CASCADE&#39; if options[:force] == :cascade}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-foreign_keys" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">foreign_keys</span><span
+              class="method-args">(table_name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="foreign_keys-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 491</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">foreign_keys</span>(<span class="ruby-identifier">table_name</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">present?</span>
+
+        <span class="ruby-identifier">scope</span> = <span class="ruby-identifier">quoted_scope</span>(<span class="ruby-identifier">table_name</span>)
+
+        <span class="ruby-comment"># MySQL returns 1 row for each column of composite foreign keys.</span>
+        <span class="ruby-identifier">fk_info</span> = <span class="ruby-identifier">internal_exec_query</span>(<span class="ruby-identifier">&lt;&lt;~SQL</span>, <span class="ruby-string">&quot;SCHEMA&quot;</span>)
+<span class="ruby-value">          SELECT fk.referenced_table_name AS &#39;to_table&#39;,
+                 fk.referenced_column_name AS &#39;primary_key&#39;,
+                 fk.column_name AS &#39;column&#39;,
+                 fk.constraint_name AS &#39;name&#39;,
+                 fk.ordinal_position AS &#39;position&#39;,
+                 rc.update_rule AS &#39;on_update&#39;,
+                 rc.delete_rule AS &#39;on_delete&#39;
+          FROM information_schema.referential_constraints rc
+          JOIN information_schema.key_column_usage fk
+          USING (constraint_schema, constraint_name)
+          WHERE fk.referenced_column_name IS NOT NULL
+            AND fk.table_schema = #{scope[:schema]}
+            AND fk.table_name = #{scope[:name]}
+            AND rc.constraint_schema = #{scope[:schema]}
+            AND rc.table_name = #{scope[:name]}
+</span><span class="ruby-identifier">        SQL</span>
+
+        <span class="ruby-identifier">grouped_fk</span> = <span class="ruby-identifier">fk_info</span>.<span class="ruby-identifier">group_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;name&quot;</span>] }.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">sort_by!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;position&quot;</span>] } }
+        <span class="ruby-identifier">grouped_fk</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">row</span> = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">first</span>
+          <span class="ruby-identifier">options</span> = {
+            <span class="ruby-value">name:</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;name&quot;</span>],
+            <span class="ruby-value">on_update:</span> <span class="ruby-identifier">extract_foreign_key_action</span>(<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;on_update&quot;</span>]),
+            <span class="ruby-value">on_delete:</span> <span class="ruby-identifier">extract_foreign_key_action</span>(<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;on_delete&quot;</span>])
+          }
+
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">one?</span>
+            <span class="ruby-identifier">options</span>[<span class="ruby-value">:column</span>] = <span class="ruby-identifier">unquote_identifier</span>(<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;column&quot;</span>])
+            <span class="ruby-identifier">options</span>[<span class="ruby-value">:primary_key</span>] = <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;primary_key&quot;</span>]
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">options</span>[<span class="ruby-value">:column</span>] = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">unquote_identifier</span>(<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;column&quot;</span>]) }
+            <span class="ruby-identifier">options</span>[<span class="ruby-value">:primary_key</span>] = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;primary_key&quot;</span>] }
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-constant">ForeignKeyDefinition</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">unquote_identifier</span>(<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;to_table&quot;</span>]), <span class="ruby-identifier">options</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-index_algorithms" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">index_algorithms</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="index_algorithms-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index_algorithms</span>
+  {
+    <span class="ruby-value">default:</span> <span class="ruby-string">&quot;ALGORITHM = DEFAULT&quot;</span>,
+    <span class="ruby-value">copy:</span>    <span class="ruby-string">&quot;ALGORITHM = COPY&quot;</span>,
+    <span class="ruby-value">inplace:</span> <span class="ruby-string">&quot;ALGORITHM = INPLACE&quot;</span>,
+    <span class="ruby-value">instant:</span> <span class="ruby-string">&quot;ALGORITHM = INSTANT&quot;</span>,
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-native_database_types" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">native_database_types</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="native_database_types-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-7.2.3/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">native_database_types</span>
+  <span class="ruby-constant">NATIVE_DATABASE_TYPES</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-quote_string" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">quote_string</span><span
+              class="method-args">(string)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Quotes strings for use in SQL input.</p>
+
+          <div class="method-source-code" id="quote_string-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 721</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quote_string</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">with_raw_connection</span>(<span class="ruby-value">allow_retry:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">materialize_transactions:</span> <span class="ruby-keyword">false</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">connection</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-recreate_database" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">recreate_database</span><span
+              class="method-args">(name, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Drops the database specified on the <code>name</code> attribute and creates it again using the provided <code>options</code>.</p>
+
+          <div class="method-source-code" id="recreate_database-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 270</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">recreate_database</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">drop_database</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">create_database</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">reconnect!</span>
+  <span class="ruby-identifier">sql</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rename_index" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rename_index</span><span
+              class="method-args">(table_name, old_name, new_name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="rename_index-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 367</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rename_index</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">old_name</span>, <span class="ruby-identifier">new_name</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">supports_rename_index?</span>
+    <span class="ruby-identifier">validate_index_length!</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">new_name</span>)
+
+    <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;ALTER TABLE #{quote_table_name(table_name)} RENAME INDEX #{quote_table_name(old_name)} TO #{quote_table_name(new_name)}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rename_table" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rename_table</span><span
+              class="method-args">(table_name, new_name, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Renames a table.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">rename_table</span>(<span class="ruby-string">&#39;octopuses&#39;</span>, <span class="ruby-string">&#39;octopi&#39;</span>)
+</pre>
+
+          <div class="method-source-code" id="rename_table-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 339</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rename_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">new_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">validate_table_length!</span>(<span class="ruby-identifier">new_name</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:_uses_legacy_table_name</span>]
+  <span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">clear_data_source_cache!</span>(<span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">clear_data_source_cache!</span>(<span class="ruby-identifier">new_name</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;RENAME TABLE #{quote_table_name(table_name)} TO #{quote_table_name(new_name)}&quot;</span>
+  <span class="ruby-identifier">rename_table_indexes</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">new_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-show_variable" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">show_variable</span><span
+              class="method-args">(name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>SHOW VARIABLES LIKE ‘name’</p>
+
+          <div class="method-source-code" id="show_variable-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 605</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_variable</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">query_value</span>(<span class="ruby-node">&quot;SELECT @@#{name}&quot;</span>, <span class="ruby-string">&quot;SCHEMA&quot;</span>, <span class="ruby-value">materialize_transactions:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">allow_retry:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">StatementInvalid</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-strict_mode-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">strict_mode?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="strict_mode-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 656</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strict_mode?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">type_cast_config_to_boolean</span>(<span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:strict</span>, <span class="ruby-keyword">true</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_advisory_locks-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_advisory_locks?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_advisory_locks-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_advisory_locks?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_bulk_alter-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_bulk_alter?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_bulk_alter-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_bulk_alter?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_check_constraints-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_check_constraints?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_check_constraints-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_check_constraints?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mariadb?</span>
+    <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;10.3.10&quot;</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">database_version</span> <span class="ruby-operator">&lt;</span> <span class="ruby-string">&quot;10.3&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;10.2.22&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;8.0.16&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_common_table_expressions-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_common_table_expressions?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_common_table_expressions-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_common_table_expressions?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mariadb?</span>
+    <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;10.2.1&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;8.0.1&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_datetime_with_precision-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_datetime_with_precision?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_datetime_with_precision-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_datetime_with_precision?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_disabling_indexes-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_disabling_indexes?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>See <a href="https://dev.mysql.com/doc/refman/8.0/en/invisible-indexes.html">dev.mysql.com/doc/refman/8.0/en/invisible-indexes.html</a> for more details on <a href="MySQL.html"><code>MySQL</code></a> feature. See <a href="https://mariadb.com/kb/en/ignored-indexes">mariadb.com/kb/en/ignored-indexes</a>/ for more details on the MariaDB feature.</p>
+
+          <div class="method-source-code" id="supports_disabling_indexes-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_disabling_indexes?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mariadb?</span>
+    <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;10.6.0&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;8.0.0&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_explain-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_explain?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_explain-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_explain?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_expression_index-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_expression_index?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_expression_index-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_expression_index?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">mariadb?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;8.0.13&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_foreign_keys-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_foreign_keys?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_foreign_keys-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_foreign_keys?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_index_sort_order-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_index_sort_order?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_index_sort_order-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_index_sort_order?</span>
+  <span class="ruby-identifier">mariadb?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;10.8.1&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;8.0.1&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_indexes_in_create-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_indexes_in_create?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_indexes_in_create-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_indexes_in_create?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_insert_on_duplicate_skip-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_on_duplicate_skip?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_insert_on_duplicate_skip-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_insert_on_duplicate_skip?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_insert_on_duplicate_update-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_on_duplicate_update?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_insert_on_duplicate_update-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_insert_on_duplicate_update?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_insert_returning-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_returning?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_insert_returning-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_insert_returning?</span>
+  <span class="ruby-identifier">mariadb?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;10.5.0&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_optimizer_hints-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_optimizer_hints?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>See <a href="https://dev.mysql.com/doc/refman/en/optimizer-hints.html">dev.mysql.com/doc/refman/en/optimizer-hints.html</a> for more details.</p>
+
+          <div class="method-source-code" id="supports_optimizer_hints-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_optimizer_hints?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">mariadb?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;5.7.7&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_restart_db_transaction-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_restart_db_transaction?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_restart_db_transaction-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_restart_db_transaction?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_transaction_isolation-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_transaction_isolation?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_transaction_isolation-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_transaction_isolation?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_views-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_views?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_views-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_views?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_virtual_columns-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_virtual_columns?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_virtual_columns-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_mysql_adapter.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_virtual_columns?</span>
+  <span class="ruby-identifier">mariadb?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;5.7.5&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class MessagePack::Packer - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-buffer">#buffer</a>
+    <li ><a href="#method-i-clear">#clear</a>
+    <li ><a href="#method-i-compatibility_mode-3F">#compatibility_mode?</a>
+    <li ><a href="#method-i-empty-3F">#empty?</a>
+    <li ><a href="#method-i-flush">#flush</a>
+    <li ><a href="#method-i-full_pack">#full_pack</a>
+    <li ><a href="#method-i-pack">#pack</a>
+    <li ><a href="#method-i-register_type">#register_type</a>
+    <li ><a href="#method-i-register_type_internal">#register_type_internal</a>
+    <li ><a href="#method-i-registered_types">#registered_types</a>
+    <li ><a href="#method-i-reset">#reset</a>
+    <li ><a href="#method-i-size">#size</a>
+    <li ><a href="#method-i-to_a">#to_a</a>
+    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-to_str">#to_str</a>
+    <li ><a href="#method-i-type_registered-3F">#type_registered?</a>
+    <li ><a href="#method-i-write">#write</a>
+    <li ><a href="#method-i-write_array">#write_array</a>
+    <li ><a href="#method-i-write_array_header">#write_array_header</a>
+    <li ><a href="#method-i-write_bin">#write_bin</a>
+    <li ><a href="#method-i-write_bin_header">#write_bin_header</a>
+    <li ><a href="#method-i-write_ext">#write_ext</a>
+    <li ><a href="#method-i-write_extension">#write_extension</a>
+    <li ><a href="#method-i-write_false">#write_false</a>
+    <li ><a href="#method-i-write_float">#write_float</a>
+    <li ><a href="#method-i-write_float32">#write_float32</a>
+    <li ><a href="#method-i-write_hash">#write_hash</a>
+    <li ><a href="#method-i-write_int">#write_int</a>
+    <li ><a href="#method-i-write_map_header">#write_map_header</a>
+    <li ><a href="#method-i-write_nil">#write_nil</a>
+    <li ><a href="#method-i-write_string">#write_string</a>
+    <li ><a href="#method-i-write_symbol">#write_symbol</a>
+    <li ><a href="#method-i-write_to">#write_to</a>
+    <li ><a href="#method-i-write_true">#write_true</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-MessagePack::Packer">
+  <h1 id="class-MessagePack::Packer" class="class">
+    class MessagePack::Packer
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre>VALUE MessagePack_Packer_initialize(int argc, VALUE* argv, VALUE self)
+{
+    if(argc &gt; 2) {
+        rb_raise(rb_eArgError, &quot;wrong number of arguments (%d for 0..2)&quot;, argc);
+    }
+
+    VALUE io = Qnil;
+    VALUE options = Qnil;
+
+    if(argc &gt;= 1) {
+        io = argv[0];
+    }
+
+    if(argc == 2) {
+        options = argv[1];
+    }
+
+    if (options == Qnil &amp;&amp; rb_type(io) == T_HASH) {
+        options = io;
+        io = Qnil;
+    }
+
+    if(options != Qnil) {
+        Check_Type(options, T_HASH);
+    }
+
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+
+    msgpack_packer_ext_registry_init(self, &amp;pk-&gt;ext_registry);
+    pk-&gt;buffer_ref = MessagePack_Buffer_wrap(PACKER_BUFFER_(pk), self);
+
+    MessagePack_Buffer_set_options(PACKER_BUFFER_(pk), io, options);
+
+    if(options != Qnil) {
+        VALUE v;
+
+        v = rb_hash_aref(options, sym_compatibility_mode);
+        msgpack_packer_set_compat(pk, RTEST(v));
+    }
+
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-buffer" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">buffer</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="buffer-source">
+            <pre>static VALUE Packer_buffer(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    if (!RTEST(pk-&gt;buffer_ref)) {
+        pk-&gt;buffer_ref = MessagePack_Buffer_wrap(PACKER_BUFFER_(pk), self);
+    }
+    return pk-&gt;buffer_ref;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-clear" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">clear</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Packer.html#method-i-reset">reset</a>
+        </div>
+      </div>
+
+      <div id="method-i-compatibility_mode-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">compatibility_mode?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="compatibility_mode-3F-source">
+            <pre>static VALUE Packer_compatibility_mode_p(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    return pk-&gt;compatibility_mode ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-empty-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">empty?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="empty-3F-source">
+            <pre>static VALUE Packer_empty_p(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    if(msgpack_buffer_top_readable_size(PACKER_BUFFER_(pk)) == 0) {
+        return Qtrue;
+    } else {
+        return Qfalse;
+    }
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-flush" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">flush</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="flush-source">
+            <pre>static VALUE Packer_flush(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_buffer_flush(PACKER_BUFFER_(pk));
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-full_pack" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">full_pack</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="full_pack-source">
+            <pre>VALUE Packer_full_pack(VALUE self)
+{
+    VALUE retval;
+
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+
+    if(msgpack_buffer_has_io(PACKER_BUFFER_(pk))) {
+        msgpack_buffer_flush(PACKER_BUFFER_(pk));
+        retval = Qnil;
+    } else {
+        retval = msgpack_buffer_all_as_string(PACKER_BUFFER_(pk));
+    }
+
+    msgpack_buffer_clear(PACKER_BUFFER_(pk)); /* to free rmem before GC */
+
+    return retval;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-pack" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">pack</span><span
+              class="method-args">(p1)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Packer.html#method-i-write">write</a>
+        </div>
+      </div>
+
+      <div id="method-i-register_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">register_type</span><span
+              class="method-args">(type, klass, method_name = nil, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="register_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/packer.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">register_type</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">method_name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;expected Module/Class got: #{klass.inspect}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Module</span>)
+  <span class="ruby-identifier">register_type_internal</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">klass</span>, <span class="ruby-identifier">block</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">to_proc</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-register_type_internal" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">register_type_internal</span><span
+              class="method-args">(p1, p2, p3)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="register_type_internal-source">
+            <pre>static VALUE Packer_register_type_internal(VALUE self, VALUE rb_ext_type, VALUE ext_module, VALUE proc)
+{
+    if (OBJ_FROZEN(self)) {
+        rb_raise(rb_eFrozenError, &quot;can&#39;t modify frozen MessagePack::Packer&quot;);
+    }
+
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+
+    int ext_type = NUM2INT(rb_ext_type);
+    if(ext_type &lt; -128 || ext_type &gt; 127) {
+        rb_raise(rb_eRangeError, &quot;integer %d too big to convert to `signed char&#39;&quot;, ext_type);
+    }
+
+    msgpack_packer_ext_registry_put(self, &amp;pk-&gt;ext_registry, ext_module, ext_type, 0, proc);
+
+    if (ext_module == rb_cSymbol) {
+        pk-&gt;has_symbol_ext_type = true;
+    }
+
+    return Qnil;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-registered_types" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">registered_types</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="registered_types-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/packer.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">registered_types</span>
+  <span class="ruby-identifier">list</span> = []
+
+  <span class="ruby-identifier">registered_types_internal</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span>, <span class="ruby-identifier">ary</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">type:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>], <span class="ruby-value">class:</span> <span class="ruby-identifier">klass</span>, <span class="ruby-value">packer:</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]}
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">list</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">:type</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-reset" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reset</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="reset-source">
+            <pre>static VALUE Packer_reset(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_buffer_clear(PACKER_BUFFER_(pk));
+    return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Packer.html#method-i-clear">clear</a>
+        </div>
+
+      </div>
+
+      <div id="method-i-size" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">size</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="size-source">
+            <pre>static VALUE Packer_size(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    size_t size = msgpack_buffer_all_readable_size(PACKER_BUFFER_(pk));
+    return SIZET2NUM(size);
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_a" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_a</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="to_a-source">
+            <pre>static VALUE Packer_to_a(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    return msgpack_buffer_all_as_string_array(PACKER_BUFFER_(pk));
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_s" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_s</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Packer.html#method-i-to_str">to_str</a>
+        </div>
+      </div>
+
+      <div id="method-i-to_str" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_str</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="to_str-source">
+            <pre>static VALUE Packer_to_str(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    return msgpack_buffer_all_as_string(PACKER_BUFFER_(pk));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Packer.html#method-i-to_s">to_s</a>
+        </div>
+
+      </div>
+
+      <div id="method-i-type_registered-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">type_registered?</span><span
+              class="method-args">(klass_or_type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="type_registered-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/msgpack-1.8.0/lib/msgpack/packer.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type_registered?</span>(<span class="ruby-identifier">klass_or_type</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">klass_or_type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Class</span>
+    <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">klass_or_type</span>
+    <span class="ruby-identifier">registered_types</span>.<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">klass</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">:class</span>] }
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Integer</span>
+    <span class="ruby-identifier">type</span> = <span class="ruby-identifier">klass_or_type</span>
+    <span class="ruby-identifier">registered_types</span>.<span class="ruby-identifier">any?</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">:type</span>] }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;class or type id&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write-source">
+            <pre>static VALUE Packer_write(VALUE self, VALUE v)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_value(pk, v);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Packer.html#method-i-pack">pack</a>
+        </div>
+
+      </div>
+
+      <div id="method-i-write_array" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_array</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_array-source">
+            <pre>static VALUE Packer_write_array(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    Check_Type(obj, T_ARRAY);
+    msgpack_packer_write_array_value(pk, obj);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_array_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_array_header</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_array_header-source">
+            <pre>static VALUE Packer_write_array_header(VALUE self, VALUE n)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_array_header(pk, NUM2UINT(n));
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_bin" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_bin</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_bin-source">
+            <pre>static VALUE Packer_write_bin(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    Check_Type(obj, T_STRING);
+
+    VALUE enc = rb_enc_from_encoding(rb_ascii8bit_encoding());
+    obj = rb_str_encode(obj, enc, 0, Qnil);
+
+    msgpack_packer_write_string_value(pk, obj);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_bin_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_bin_header</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_bin_header-source">
+            <pre>static VALUE Packer_write_bin_header(VALUE self, VALUE n)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_bin_header(pk, NUM2UINT(n));
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_ext" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_ext</span><span
+              class="method-args">(p1, p2)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_ext-source">
+            <pre>static VALUE Packer_write_ext(VALUE self, VALUE type, VALUE data)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    int ext_type = NUM2INT(type);
+    if(ext_type &lt; -128 || ext_type &gt; 127) {
+        rb_raise(rb_eRangeError, &quot;integer %d too big to convert to `signed char&#39;&quot;, ext_type);
+    }
+    StringValue(data);
+    msgpack_packer_write_ext(pk, ext_type, data);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_extension" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_extension</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_extension-source">
+            <pre>static VALUE Packer_write_extension(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    Check_Type(obj, T_STRUCT);
+
+    VALUE rb_ext_type = RSTRUCT_GET(obj, 0);
+    if(!RB_TYPE_P(rb_ext_type, T_FIXNUM)) {
+        rb_raise(rb_eRangeError, &quot;integer %s too big to convert to `signed char&#39;&quot;, RSTRING_PTR(rb_String(rb_ext_type)));
+    }
+
+    int ext_type = FIX2INT(rb_ext_type);
+    if(ext_type &lt; -128 || ext_type &gt; 127) {
+        rb_raise(rb_eRangeError, &quot;integer %d too big to convert to `signed char&#39;&quot;, ext_type);
+    }
+    VALUE payload = RSTRUCT_GET(obj, 1);
+    StringValue(payload);
+    msgpack_packer_write_ext(pk, ext_type, payload);
+
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_false" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_false</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_false-source">
+            <pre>static VALUE Packer_write_false(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_false(pk);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_float" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_float</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_float-source">
+            <pre>static VALUE Packer_write_float(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_float_value(pk, obj);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_float32" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_float32</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_float32-source">
+            <pre>static VALUE Packer_write_float32(VALUE self, VALUE numeric)
+{
+    if(!rb_obj_is_kind_of(numeric, rb_cNumeric)) {
+      rb_raise(rb_eArgError, &quot;Expected numeric&quot;);
+    }
+
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_float(pk, (float)rb_num2dbl(numeric));
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_hash" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_hash</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_hash-source">
+            <pre>static VALUE Packer_write_hash(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    Check_Type(obj, T_HASH);
+    msgpack_packer_write_hash_value(pk, obj);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_int" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_int</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_int-source">
+            <pre>static VALUE Packer_write_int(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+
+    if (FIXNUM_P(obj)) {
+        msgpack_packer_write_fixnum_value(pk, obj);
+    } else {
+        Check_Type(obj, T_BIGNUM);
+        msgpack_packer_write_bignum_value(pk, obj);
+    }
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_map_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_map_header</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_map_header-source">
+            <pre>static VALUE Packer_write_map_header(VALUE self, VALUE n)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_map_header(pk, NUM2UINT(n));
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_nil" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_nil</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_nil-source">
+            <pre>static VALUE Packer_write_nil(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_nil(pk);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_string" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_string</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_string-source">
+            <pre>static VALUE Packer_write_string(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    Check_Type(obj, T_STRING);
+    msgpack_packer_write_string_value(pk, obj);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_symbol" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_symbol</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_symbol-source">
+            <pre>static VALUE Packer_write_symbol(VALUE self, VALUE obj)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    Check_Type(obj, T_SYMBOL);
+    msgpack_packer_write_symbol_value(pk, obj);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_to" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_to</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_to-source">
+            <pre>static VALUE Packer_write_to(VALUE self, VALUE io)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    size_t sz = msgpack_buffer_flush_to_io(PACKER_BUFFER_(pk), io, s_write, true);
+    return SIZET2NUM(sz);
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-write_true" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_true</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write_true-source">
+            <pre>static VALUE Packer_write_true(VALUE self)
+{
+    msgpack_packer_t *pk = MessagePack_Packer_get(self);
+    msgpack_packer_write_true(pk);
+    return self;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

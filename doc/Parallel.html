@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Parallel - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-all-3F">::all?</a>
+    <li ><a href="#method-c-any-3F">::any?</a>
+    <li ><a href="#method-c-each">::each</a>
+    <li ><a href="#method-c-each_with_index">::each_with_index</a>
+    <li ><a href="#method-c-filter_map">::filter_map</a>
+    <li ><a href="#method-c-flat_map">::flat_map</a>
+    <li ><a href="#method-c-in_processes">::in_processes</a>
+    <li ><a href="#method-c-in_threads">::in_threads</a>
+    <li ><a href="#method-c-map">::map</a>
+    <li ><a href="#method-c-map_with_index">::map_with_index</a>
+    <li ><a href="#method-c-physical_processor_count">::physical_processor_count</a>
+    <li ><a href="#method-c-processor_count">::processor_count</a>
+    <li ><a href="#method-c-worker_number">::worker_number</a>
+    <li ><a href="#method-c-worker_number-3D">::worker_number=</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Parallel">
+  <h1 id="module-Parallel" class="module">
+    module Parallel
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="Stop">Stop
+        <dd>
+        <dt id="VERSION">VERSION
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-all-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">all?</span><span
+              class="method-args">(*args, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="all-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 243</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;You must provide a block when calling #all?&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">each</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) { <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">Kill</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-any-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">any?</span><span
+              class="method-args">(*args, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="any-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 238</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">any?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;You must provide a block when calling #any?&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">each</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) { <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">Kill</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-each" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">each</span><span
+              class="method-args">(array, options = {}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="each-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 234</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">map</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">preserve_results:</span> <span class="ruby-keyword">false</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-each_with_index" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">each_with_index</span><span
+              class="method-args">(array, options = {}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="each_with_index-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 248</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_with_index</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">each</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">with_index:</span> <span class="ruby-keyword">true</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-filter_map" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter_map</span><span
+              class="method-args">(...)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="filter_map-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 307</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_map</span>(<span class="ruby-operator">...</span>)
+  <span class="ruby-identifier">map</span>(<span class="ruby-operator">...</span>).<span class="ruby-identifier">compact</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-flat_map" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">flat_map</span><span
+              class="method-args">(...)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="flat_map-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 303</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flat_map</span>(<span class="ruby-operator">...</span>)
+  <span class="ruby-identifier">map</span>(<span class="ruby-operator">...</span>).<span class="ruby-identifier">flatten</span>(<span class="ruby-value">1</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-in_processes" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">in_processes</span><span
+              class="method-args">(options = {}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="in_processes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">in_processes</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">count</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">extract_count_from_options</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">count</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">processor_count</span>
+  <span class="ruby-identifier">map</span>(<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">count</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">in_processes:</span> <span class="ruby-identifier">count</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-in_threads" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">in_threads</span><span
+              class="method-args">(options = { count: 2 }) { |i| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="in_threads-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 212</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">in_threads</span>(<span class="ruby-identifier">options</span> = { <span class="ruby-value">count:</span> <span class="ruby-value">2</span> })
+  <span class="ruby-identifier">threads</span> = []
+  <span class="ruby-identifier">count</span>, = <span class="ruby-identifier">extract_count_from_options</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">handle_interrupt</span>(<span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:never</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">handle_interrupt</span>(<span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:immediate</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">count</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">threads</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> { <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">i</span>) }
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">threads</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:value</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-identifier">threads</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:kill</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-map" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">map</span><span
+              class="method-args">(source, options = {}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="map-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">map</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:mutex</span>] = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:in_processes</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:in_threads</span>]
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Please specify only one of `in_processes` or `in_threads`.&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-operator">=~</span> (<span class="ruby-regexp">/java/</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:in_processes</span>]
+    <span class="ruby-identifier">method</span> = <span class="ruby-value">:in_threads</span>
+    <span class="ruby-identifier">size</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">method</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">processor_count</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:in_threads</span>]
+    <span class="ruby-identifier">method</span> = <span class="ruby-value">:in_threads</span>
+    <span class="ruby-identifier">size</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">method</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:in_ractors</span>]
+    <span class="ruby-identifier">method</span> = <span class="ruby-value">:in_ractors</span>
+    <span class="ruby-identifier">size</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">method</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">method</span> = <span class="ruby-value">:in_processes</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">Process</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:fork</span>)
+      <span class="ruby-identifier">size</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">method</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">processor_count</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Process.fork is not supported by this Ruby&quot;</span>
+      <span class="ruby-identifier">size</span> = <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">job_factory</span> = <span class="ruby-constant">JobFactory</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:mutex</span>])
+  <span class="ruby-identifier">size</span> = [<span class="ruby-identifier">job_factory</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">min</span>
+
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:return_results</span>] = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:preserve_results</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:finish</span>])
+  <span class="ruby-identifier">add_progress_bar!</span>(<span class="ruby-identifier">job_factory</span>, <span class="ruby-identifier">options</span>)
+
+  <span class="ruby-identifier">result</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">work_direct</span>(<span class="ruby-identifier">job_factory</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:in_threads</span>
+      <span class="ruby-identifier">work_in_threads</span>(<span class="ruby-identifier">job_factory</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">count:</span> <span class="ruby-identifier">size</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:in_ractors</span>
+      <span class="ruby-identifier">work_in_ractors</span>(<span class="ruby-identifier">job_factory</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">count:</span> <span class="ruby-identifier">size</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">work_in_processes</span>(<span class="ruby-identifier">job_factory</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">count:</span> <span class="ruby-identifier">size</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Break</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">result</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Exception</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:return_results</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">source</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-map_with_index" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">map_with_index</span><span
+              class="method-args">(array, options = {}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="map_with_index-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 299</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">map_with_index</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">map</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">with_index:</span> <span class="ruby-keyword">true</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-physical_processor_count" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">physical_processor_count</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Number of physical processor cores on the current system.</p>
+
+          <div class="method-source-code" id="physical_processor_count-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 312</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">physical_processor_count</span>
+  <span class="ruby-ivar">@physical_processor_count</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">ppc</span> =
+      <span class="ruby-keyword">case</span> <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-string">&quot;target_os&quot;</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/darwin[12]/</span>
+        <span class="ruby-constant">IO</span>.<span class="ruby-identifier">popen</span>(<span class="ruby-string">&quot;/usr/sbin/sysctl -n hw.physicalcpu&quot;</span>).<span class="ruby-identifier">read</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/linux/</span>
+        <span class="ruby-identifier">cores</span> = {} <span class="ruby-comment"># unique physical ID / core ID combinations</span>
+        <span class="ruby-identifier">phy</span> = <span class="ruby-value">0</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;/proc/cpuinfo&quot;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^physical id.*|^core id.*/</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ln</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">ln</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;physical&quot;</span>)
+            <span class="ruby-identifier">phy</span> = <span class="ruby-identifier">ln</span>[<span class="ruby-regexp">/\d+/</span>]
+          <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">ln</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;core&quot;</span>)
+            <span class="ruby-identifier">cid</span> = <span class="ruby-node">&quot;#{phy}:#{ln[/\d+/]}&quot;</span>
+            <span class="ruby-identifier">cores</span>[<span class="ruby-identifier">cid</span>] = <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cores</span>[<span class="ruby-identifier">cid</span>]
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">cores</span>.<span class="ruby-identifier">count</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/mswin|mingw/</span>
+        <span class="ruby-identifier">physical_processor_count_windows</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">processor_count</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># fall back to logical count if physical info is invalid</span>
+    <span class="ruby-identifier">ppc</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ppc</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">processor_count</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-processor_count" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">processor_count</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Number of processors seen by the OS or value considering CPU quota if the process is inside a cgroup, used for process scheduling</p>
+
+          <div class="method-source-code" id="processor_count-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 342</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">processor_count</span>
+  <span class="ruby-ivar">@processor_count</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Integer</span>(<span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PARALLEL_PROCESSOR_COUNT&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">available_processor_count</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-worker_number" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">worker_number</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="worker_number-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 346</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">worker_number</span>
+  <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-value">:parallel_worker_number</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-worker_number-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">worker_number=</span><span
+              class="method-args">(worker_num)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>TODO: this does not work when doing threads in forks, so should remove and yield the number instead if needed</p>
+
+          <div class="method-source-code" id="worker_number-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/parallel-1.27.0/lib/parallel.rb, line 351</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">worker_number=</span>(<span class="ruby-identifier">worker_num</span>)
+  <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-value">:parallel_worker_number</span>] = <span class="ruby-identifier">worker_num</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

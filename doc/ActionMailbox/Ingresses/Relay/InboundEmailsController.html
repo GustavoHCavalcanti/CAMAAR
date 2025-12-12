@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActionMailbox::Ingresses::Relay::InboundEmailsController - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">Usage</a>
+          <li>      <a href="#class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">Usage</a>
+          <li>      <a href="#class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">Usage</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../BaseController.html">ActionMailbox::BaseController</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-create">#create</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActionMailbox::Ingresses::Relay::InboundEmailsController">
+  <h1 id="class-ActionMailbox::Ingresses::Relay::InboundEmailsController" class="class">
+    class ActionMailbox::Ingresses::Relay::InboundEmailsController
+  </h1>
+
+  <section class="description">
+    
+<p>Ingests inbound emails relayed from an SMTP server.</p>
+
+<p>Authenticates requests using HTTP basic access authentication. The username is always <code>actionmailbox</code>, and the password is read from the application’s encrypted credentials or an environment variable. See the Usage section below.</p>
+
+<p>Note that basic authentication is insecure over unencrypted HTTP. An attacker that intercepts cleartext requests to the ingress can learn its password. You should only use this ingress over HTTPS.</p>
+
+<p>Returns:</p>
+<ul><li>
+<p><code>204 No Content</code> if an inbound email is successfully recorded and enqueued for routing to the appropriate mailbox</p>
+</li><li>
+<p><code>401 Unauthorized</code> if the request could not be authenticated</p>
+</li><li>
+<p><code>404 Not Found</code> if Action Mailbox is not configured to accept inbound emails relayed from an SMTP server</p>
+</li><li>
+<p><code>415 Unsupported Media Type</code> if the request does not contain an RFC 822 message</p>
+</li><li>
+<p><code>500 Server Error</code> if the ingress password is not configured, or if one of the Active Record database, the Active Storage service, or the Active Job backend is misconfigured or unavailable</p>
+</li></ul>
+
+<h2 id="class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">Usage<span><a href="#class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ol><li>
+<p>Tell Action Mailbox to accept emails from an SMTP relay:</p>
+
+<pre class="ruby"><span class="ruby-comment"># config/environments/production.rb</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_mailbox</span>.<span class="ruby-identifier">ingress</span> = <span class="ruby-value">:relay</span>
+</pre>
+</li><li>
+<p>Generate a strong password that Action Mailbox can use to authenticate requests to the ingress.</p>
+
+<p>Use <code>bin/rails credentials:edit</code> to add the password to your application’s encrypted credentials under <code>action_mailbox.ingress_password</code>, where Action Mailbox will automatically find it:</p>
+
+<pre>action_mailbox:
+  ingress_password: ...</pre>
+
+<p>Alternatively, provide the password in the <code>RAILS_INBOUND_EMAIL_PASSWORD</code> environment variable.</p>
+</li><li>
+<p>Configure your SMTP server to pipe inbound emails to the appropriate ingress command, providing the <code>URL</code> of the relay ingress and the <code>INGRESS_PASSWORD</code> you previously generated.</p>
+
+<p>If your application lives at <code>https://example.com</code>, you would configure the Postfix SMTP server to pipe inbound emails to the following command:</p>
+
+<pre>$ bin/rails action_mailbox:ingress:postfix URL=https://example.com/rails/action_mailbox/postfix/inbound_emails INGRESS_PASSWORD=...</pre>
+
+<p>Built-in ingress commands are available for these popular SMTP servers:</p>
+<ul><li>
+<p>Exim (<code>bin/rails action_mailbox:ingress:exim</code>)</p>
+</li><li>
+<p>Postfix (<code>bin/rails action_mailbox:ingress:postfix</code>)</p>
+</li><li>
+<p>Qmail (<code>bin/rails action_mailbox:ingress:qmail</code>)</p>
+</li></ul>
+</li></ol>
+
+<p>Ingests inbound emails relayed from an SMTP server.</p>
+
+<p>Authenticates requests using HTTP basic access authentication. The username is always <code>actionmailbox</code>, and the password is read from the application’s encrypted credentials or an environment variable. See the Usage section below.</p>
+
+<p>Note that basic authentication is insecure over unencrypted HTTP. An attacker that intercepts cleartext requests to the ingress can learn its password. You should only use this ingress over HTTPS.</p>
+
+<p>Returns:</p>
+<ul><li>
+<p><code>204 No Content</code> if an inbound email is successfully recorded and enqueued for routing to the appropriate mailbox</p>
+</li><li>
+<p><code>401 Unauthorized</code> if the request could not be authenticated</p>
+</li><li>
+<p><code>404 Not Found</code> if Action Mailbox is not configured to accept inbound emails relayed from an SMTP server</p>
+</li><li>
+<p><code>415 Unsupported Media Type</code> if the request does not contain an RFC 822 message</p>
+</li><li>
+<p><code>500 Server Error</code> if the ingress password is not configured, or if one of the Active Record database, the Active Storage service, or the Active Job backend is misconfigured or unavailable</p>
+</li></ul>
+
+<h2 id="class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">Usage<span><a href="#class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ol><li>
+<p>Tell Action Mailbox to accept emails from an SMTP relay:</p>
+
+<pre class="ruby"><span class="ruby-comment"># config/environments/production.rb</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_mailbox</span>.<span class="ruby-identifier">ingress</span> = <span class="ruby-value">:relay</span>
+</pre>
+</li><li>
+<p>Generate a strong password that Action Mailbox can use to authenticate requests to the ingress.</p>
+
+<p>Use <code>bin/rails credentials:edit</code> to add the password to your application’s encrypted credentials under <code>action_mailbox.ingress_password</code>, where Action Mailbox will automatically find it:</p>
+
+<pre>action_mailbox:
+  ingress_password: ...</pre>
+
+<p>Alternatively, provide the password in the <code>RAILS_INBOUND_EMAIL_PASSWORD</code> environment variable.</p>
+</li><li>
+<p>Configure your SMTP server to pipe inbound emails to the appropriate ingress command, providing the <code>URL</code> of the relay ingress and the <code>INGRESS_PASSWORD</code> you previously generated.</p>
+
+<p>If your application lives at <code>https://example.com</code>, you would configure the Postfix SMTP server to pipe inbound emails to the following command:</p>
+
+<pre>$ bin/rails action_mailbox:ingress:postfix URL=https://example.com/rails/action_mailbox/postfix/inbound_emails INGRESS_PASSWORD=...</pre>
+
+<p>Built-in ingress commands are available for these popular SMTP servers:</p>
+<ul><li>
+<p>Exim (<code>bin/rails action_mailbox:ingress:exim</code>)</p>
+</li><li>
+<p>Postfix (<code>bin/rails action_mailbox:ingress:postfix</code>)</p>
+</li><li>
+<p>Qmail (<code>bin/rails action_mailbox:ingress:qmail</code>)</p>
+</li></ul>
+</li></ol>
+
+<p>Ingests inbound emails relayed from an SMTP server.</p>
+
+<p>Authenticates requests using HTTP basic access authentication. The username is always <code>actionmailbox</code>, and the password is read from the application’s encrypted credentials or an environment variable. See the Usage section below.</p>
+
+<p>Note that basic authentication is insecure over unencrypted HTTP. An attacker that intercepts cleartext requests to the ingress can learn its password. You should only use this ingress over HTTPS.</p>
+
+<p>Returns:</p>
+<ul><li>
+<p><code>204 No Content</code> if an inbound email is successfully recorded and enqueued for routing to the appropriate mailbox</p>
+</li><li>
+<p><code>401 Unauthorized</code> if the request could not be authenticated</p>
+</li><li>
+<p><code>404 Not Found</code> if Action Mailbox is not configured to accept inbound emails relayed from an SMTP server</p>
+</li><li>
+<p><code>415 Unsupported Media Type</code> if the request does not contain an RFC 822 message</p>
+</li><li>
+<p><code>500 Server Error</code> if the ingress password is not configured, or if one of the Active Record database, the Active Storage service, or the Active Job backend is misconfigured or unavailable</p>
+</li></ul>
+
+<h2 id="class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">Usage<span><a href="#class-ActionMailbox::Ingresses::Relay::InboundEmailsController-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ol><li>
+<p>Tell Action Mailbox to accept emails from an SMTP relay:</p>
+
+<pre class="ruby"><span class="ruby-comment"># config/environments/production.rb</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_mailbox</span>.<span class="ruby-identifier">ingress</span> = <span class="ruby-value">:relay</span>
+</pre>
+</li><li>
+<p>Generate a strong password that Action Mailbox can use to authenticate requests to the ingress.</p>
+
+<p>Use <code>bin/rails credentials:edit</code> to add the password to your application’s encrypted credentials under <code>action_mailbox.ingress_password</code>, where Action Mailbox will automatically find it:</p>
+
+<pre>action_mailbox:
+  ingress_password: ...</pre>
+
+<p>Alternatively, provide the password in the <code>RAILS_INBOUND_EMAIL_PASSWORD</code> environment variable.</p>
+</li><li>
+<p>Configure your SMTP server to pipe inbound emails to the appropriate ingress command, providing the <code>URL</code> of the relay ingress and the <code>INGRESS_PASSWORD</code> you previously generated.</p>
+
+<p>If your application lives at <code>https://example.com</code>, you would configure the Postfix SMTP server to pipe inbound emails to the following command:</p>
+
+<pre>$ bin/rails action_mailbox:ingress:postfix URL=https://example.com/rails/action_mailbox/postfix/inbound_emails INGRESS_PASSWORD=...</pre>
+
+<p>Built-in ingress commands are available for these popular SMTP servers:</p>
+<ul><li>
+<p>Exim (<code>bin/rails action_mailbox:ingress:exim</code>)</p>
+</li><li>
+<p>Postfix (<code>bin/rails action_mailbox:ingress:postfix</code>)</p>
+</li><li>
+<p>Qmail (<code>bin/rails action_mailbox:ingress:qmail</code>)</p>
+</li></ul>
+</li></ol>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-create" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/controllers/action_mailbox/ingresses/relay/inbound_emails_controller.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">body</span>
+    <span class="ruby-constant">ActionMailbox</span><span class="ruby-operator">::</span><span class="ruby-constant">InboundEmail</span>.<span class="ruby-identifier">create_and_extract_message_id!</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">read</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">head</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Constants</span><span class="ruby-operator">::</span><span class="ruby-constant">UNPROCESSABLE_CONTENT</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

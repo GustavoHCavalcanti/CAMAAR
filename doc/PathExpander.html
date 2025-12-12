@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class PathExpander - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-expand_dirs_to_files">#expand_dirs_to_files</a>
+    <li ><a href="#method-i-filter_files">#filter_files</a>
+    <li ><a href="#method-i-process">#process</a>
+    <li ><a href="#method-i-process_args">#process_args</a>
+    <li ><a href="#method-i-process_file">#process_file</a>
+    <li ><a href="#method-i-process_flags">#process_flags</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PathExpander">
+  <h1 id="class-PathExpander" class="class">
+    class PathExpander
+  </h1>
+
+  <section class="description">
+    
+<p><a href="PathExpander.html"><code>PathExpander</code></a> helps pre-process command-line arguments expanding directories into their constituent files. It further helps by providing additional mechanisms to make specifying subsets easier with path subtraction and allowing for command-line arguments to be saved in a file.</p>
+
+<p>NOTE: this is NOT an options processor. It is a path processor (basically everything else besides options). It does provide a mechanism for pre-filtering cmdline options, but not with the intent of actually processing them in <a href="PathExpander.html"><code>PathExpander</code></a>. Use OptionParser to deal with options either before or after passing ARGV through <a href="PathExpander.html"><code>PathExpander</code></a>.</p>
+
+<p><a href="PathExpander.html"><code>PathExpander</code></a> helps pre-process command-line arguments expanding directories into their constituent files. It further helps by providing additional mechanisms to make specifying subsets easier with path subtraction and allowing for command-line arguments to be saved in a file.</p>
+
+<p>NOTE: this is NOT an options processor. It is a path processor (basically everything else besides options). It does provide a mechanism for pre-filtering cmdline options, but not with the intent of actually processing them in <a href="PathExpander.html"><code>PathExpander</code></a>. Use OptionParser to deal with options either before or after passing ARGV through <a href="PathExpander.html"><code>PathExpander</code></a>.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-args" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">args</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The args array to process.</p>
+        </div>
+      </div>
+      <div id="attribute-i-glob" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">glob</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The glob used to expand dirs to files.</p>
+        </div>
+      </div>
+      <div id="attribute-i-path" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">path</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The path to scan if no paths are found in the initial scan.</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(args, glob, path = &quot;.&quot;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create a new path expander that operates on args and expands via glob as necessary. Takes an optional <code>path</code> arg to fall back on if no paths are found on the initial scan (see <a href="PathExpander.html#method-i-process_args"><code>process_args</code></a>).</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/path_expander-1.1.3/lib/path_expander.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-identifier">args</span>, <span class="ruby-identifier">glob</span>, <span class="ruby-identifier">path</span> = <span class="ruby-string">&quot;.&quot;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">args</span> = <span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">glob</span> = <span class="ruby-identifier">glob</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">path</span> = <span class="ruby-identifier">path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-expand_dirs_to_files" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">expand_dirs_to_files</span><span
+              class="method-args">(*dirs)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Takes an array of paths and returns an array of paths where all directories are expanded to all files found via the glob provided to <a href="PathExpander.html"><code>PathExpander</code></a>.</p>
+
+<p>Paths are normalized to not have a leading “./”.</p>
+
+          <div class="method-source-code" id="expand_dirs_to_files-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/path_expander-1.1.3/lib/path_expander.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expand_dirs_to_files</span> <span class="ruby-operator">*</span><span class="ruby-identifier">dirs</span>
+  <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">p</span>, <span class="ruby-identifier">glob</span>)].<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span> <span class="ruby-identifier">f</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">p</span>
+    <span class="ruby-keyword">end</span>
+  }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">delete_prefix</span> <span class="ruby-string">&quot;./&quot;</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-filter_files" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter_files</span><span
+              class="method-args">(files, ignore)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>A file filter mechanism similar to, but not as extensive as, .gitignore files:</p>
+
+<p>+ If a pattern does not contain a slash, it is treated as a shell glob. + If a pattern ends in a slash, it matches on directories (and contents). + Otherwise, it matches on relative paths.</p>
+
+<p>File.fnmatch is used throughout, so glob patterns work for all 3 types.</p>
+
+<p>Takes a list of <code>files</code> and either an io or path of <code>ignore</code> data and returns a list of files left after filtering.</p>
+
+          <div class="method-source-code" id="filter_files-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/path_expander-1.1.3/lib/path_expander.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_files</span> <span class="ruby-identifier">files</span>, <span class="ruby-identifier">ignore</span>
+  <span class="ruby-identifier">ignore_paths</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">ignore</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:read</span> <span class="ruby-keyword">then</span>
+                   <span class="ruby-identifier">ignore</span>.<span class="ruby-identifier">read</span>
+                 <span class="ruby-keyword">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">ignore</span> <span class="ruby-keyword">then</span>
+                   <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span> <span class="ruby-identifier">ignore</span>
+                 <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ignore_paths</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">nonglobs</span>, <span class="ruby-identifier">globs</span> = <span class="ruby-identifier">ignore_paths</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">partition</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">include?</span> <span class="ruby-string">&quot;/&quot;</span> }
+    <span class="ruby-identifier">dirs</span>, <span class="ruby-identifier">ifiles</span>    = <span class="ruby-identifier">nonglobs</span>.<span class="ruby-identifier">partition</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">end_with?</span> <span class="ruby-string">&quot;/&quot;</span> }
+    <span class="ruby-identifier">dirs</span>            = <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">chomp</span> <span class="ruby-string">&quot;/&quot;</span> }
+
+    <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">map!</span>   { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span> <span class="ruby-identifier">i</span> }
+    <span class="ruby-identifier">globs</span>.<span class="ruby-identifier">map!</span>  { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span> <span class="ruby-identifier">i</span> }
+    <span class="ruby-identifier">ifiles</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span> <span class="ruby-identifier">i</span> }
+
+    <span class="ruby-identifier">only_paths</span> = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">FNM_PATHNAME</span>
+    <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">f</span>)
+      <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">any?</span>     { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">fnmatch?</span>(<span class="ruby-identifier">i</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">f</span>), <span class="ruby-identifier">only_paths</span>) } <span class="ruby-operator">||</span>
+        <span class="ruby-identifier">globs</span>.<span class="ruby-identifier">any?</span>  { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">fnmatch?</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">f</span>) } <span class="ruby-operator">||</span>
+        <span class="ruby-identifier">ifiles</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">fnmatch?</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">f</span>, <span class="ruby-identifier">only_paths</span>) }
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">files</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Top-level method processes args. It replaces args’ contents with a new array of flags to process and returns a list of files to process. Eg</p>
+
+<pre class="ruby"><span class="ruby-constant">PathExpander</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">ARGV</span>).<span class="ruby-identifier">process</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;./#{f}&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/path_expander-1.1.3/lib/path_expander.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span>
+  <span class="ruby-identifier">files</span>, <span class="ruby-identifier">flags</span> = <span class="ruby-identifier">process_args</span>
+
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">replace</span> <span class="ruby-identifier">process_flags</span> <span class="ruby-identifier">flags</span>
+
+  <span class="ruby-identifier">files</span>.<span class="ruby-identifier">uniq</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_args" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_args</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Enumerate over args passed to <a href="PathExpander.html"><code>PathExpander</code></a> and return a list of files and flags to process. Arguments are processed as:</p>
+<dl class="rdoc-list note-list"><dt>@file_of_args 
+<dd>
+<p>Read the file and append to args.</p>
+</dd><dt>-file_path    
+<dd>
+<p>Subtract path from file to be processed.</p>
+</dd><dt>-dir_path     
+<dd>
+<p>Expand and subtract paths from files to be processed.</p>
+</dd><dt>-not_a_path   
+<dd>
+<p>Add to flags to be processed.</p>
+</dd><dt>dir_path      
+<dd>
+<p>Expand and add to files to be processed.</p>
+</dd><dt>file_path     
+<dd>
+<p>Add to files to be processed.</p>
+</dd></dl>
+<ul><li><dl class="rdoc-list note-list"><dt>
+<dd>
+<p>Add “-” (stdin) to files to be processed.</p>
+</dd></dl>
+</li></ul>
+
+<p>See <a href="PathExpander.html#method-i-expand_dirs_to_files"><code>expand_dirs_to_files</code></a> for details on how expansion occurs.</p>
+
+<p>Subtraction happens last, regardless of argument ordering.</p>
+
+<p>If no files are found (which is not the same as having an empty file list after subtraction), then fall back to expanding on the default <a href="PathExpander.html#attribute-i-path"><code>path</code></a> given to initialize.</p>
+
+          <div class="method-source-code" id="process_args-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/path_expander-1.1.3/lib/path_expander.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_args</span>
+  <span class="ruby-identifier">pos_files</span> = []
+  <span class="ruby-identifier">neg_files</span> = []
+  <span class="ruby-identifier">flags</span>     = []
+  <span class="ruby-identifier">clean</span>     = <span class="ruby-keyword">true</span>
+
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">arg</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^@(.*)/</span> <span class="ruby-keyword">then</span> <span class="ruby-comment"># push back on, so they can have dirs/-/@ as well</span>
+      <span class="ruby-identifier">clean</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-identifier">args</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">process_file</span> <span class="ruby-node">$1</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">pos_files</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">arg</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^-(.*)/</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-node">$1</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">clean</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-identifier">neg_files</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">expand_dirs_to_files</span>(<span class="ruby-node">$1</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">flags</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">arg</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">root_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">arg</span>) <span class="ruby-operator">==</span> <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-comment"># eg: -n /./</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">arg</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">root_path</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">clean</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-identifier">pos_files</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">expand_dirs_to_files</span>(<span class="ruby-identifier">arg</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">flags</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">arg</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">files</span> = <span class="ruby-identifier">pos_files</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">neg_files</span>
+  <span class="ruby-identifier">files</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">expand_dirs_to_files</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">files</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">clean</span>
+
+  [<span class="ruby-identifier">files</span>, <span class="ruby-identifier">flags</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_file</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Process a file into more arguments. Override this to add additional capabilities.</p>
+
+          <div class="method-source-code" id="process_file-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/path_expander-1.1.3/lib/path_expander.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_file</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:chomp</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_flags" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_flags</span><span
+              class="method-args">(flags)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Process over flags and treat any special ones here. Returns an array of the flags you haven’t processed.</p>
+
+<p>This version does nothing. Subclass and override for customization.</p>
+
+          <div class="method-source-code" id="process_flags-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/path_expander-1.1.3/lib/path_expander.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_flags</span> <span class="ruby-identifier">flags</span>
+  <span class="ruby-identifier">flags</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

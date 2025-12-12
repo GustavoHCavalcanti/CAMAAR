@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Brakeman::Options - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-create_option_parser">::create_option_parser</a>
+    <li ><a href="#method-c-get_options">::get_options</a>
+    <li ><a href="#method-c-parse">::parse</a>
+    <li ><a href="#method-c-parse-21">::parse!</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Brakeman::Options">
+  <h1 id="module-Brakeman::Options" class="module">
+    module Brakeman::Options
+  </h1>
+
+  <section class="description">
+    
+<p>Parses command line arguments for <a href="../Brakeman.html"><code>Brakeman</code></a></p>
+
+<p>Parses command line arguments for <a href="../Brakeman.html"><code>Brakeman</code></a></p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-create_option_parser" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create_option_parser</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="create_option_parser-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/options.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_option_parser</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opts</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-string">&quot;Usage: brakeman [options] rails/root/path&quot;</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-n&quot;</span>, <span class="ruby-string">&quot;--no-threads&quot;</span>, <span class="ruby-string">&quot;Run checks and file parsing sequentially&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:parallel_checks</span>] = <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]progress&quot;</span>, <span class="ruby-string">&quot;Show progress reports&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">progress</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:report_progress</span>] = <span class="ruby-identifier">progress</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-p&quot;</span>, <span class="ruby-string">&quot;--path PATH&quot;</span>, <span class="ruby-string">&quot;Specify path to Rails application&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:app_path</span>] = <span class="ruby-identifier">path</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-q&quot;</span>, <span class="ruby-string">&quot;--[no-]quiet&quot;</span>, <span class="ruby-string">&quot;Suppress informational messages&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">quiet</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>] = <span class="ruby-identifier">quiet</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>( <span class="ruby-string">&quot;-z&quot;</span>, <span class="ruby-string">&quot;--[no-]exit-on-warn&quot;</span>, <span class="ruby-string">&quot;Exit code is non-zero if warnings found (Default)&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exit_on_warn</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:exit_on_warn</span>] = <span class="ruby-identifier">exit_on_warn</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]exit-on-error&quot;</span>, <span class="ruby-string">&quot;Exit code is non-zero if errors raised (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exit_on_error</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:exit_on_error</span>] = <span class="ruby-identifier">exit_on_error</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--ensure-latest&quot;</span>, <span class="ruby-string">&quot;Fail when Brakeman is outdated&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ensure_latest</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--ensure-ignore-notes&quot;</span>, <span class="ruby-string">&quot;Fail when an ignored warnings does not include a note&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ensure_ignore_notes</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--ensure-no-obsolete-ignore-entries&quot;</span>, <span class="ruby-string">&quot;Fail when an obsolete ignore entry is found&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ensure_no_obsolete_ignore_entries</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-3&quot;</span>, <span class="ruby-string">&quot;--rails3&quot;</span>, <span class="ruby-string">&quot;Force Rails 3 mode&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-4&quot;</span>, <span class="ruby-string">&quot;--rails4&quot;</span>, <span class="ruby-string">&quot;Force Rails 4 mode&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-5&quot;</span>, <span class="ruby-string">&quot;--rails5&quot;</span>, <span class="ruby-string">&quot;Force Rails 5 mode&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails5</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-6&quot;</span>, <span class="ruby-string">&quot;--rails6&quot;</span>, <span class="ruby-string">&quot;Force Rails 6 mode&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails5</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails6</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-7&quot;</span>, <span class="ruby-string">&quot;--rails7&quot;</span>, <span class="ruby-string">&quot;Force Rails 7 mode&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails5</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails6</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails7</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-8&quot;</span>, <span class="ruby-string">&quot;--rails8&quot;</span>, <span class="ruby-string">&quot;Force Rails 8 mode&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails5</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails6</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails7</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails8</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;Scanning options:&quot;</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-A&quot;</span>, <span class="ruby-string">&quot;--run-all-checks&quot;</span>, <span class="ruby-string">&quot;Run all default and optional checks&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:run_all_checks</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-a&quot;</span>, <span class="ruby-string">&quot;--[no-]assume-routes&quot;</span>, <span class="ruby-string">&quot;Assume all controller methods are actions (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">assume</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:assume_all_routes</span>] = <span class="ruby-identifier">assume</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-e&quot;</span>, <span class="ruby-string">&quot;--escape-html&quot;</span>, <span class="ruby-string">&quot;Escape HTML by default&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:escape_html</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--faster&quot;</span>, <span class="ruby-string">&quot;Faster, but less accurate scan&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ignore_ifs</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_libs</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:disable_constant_tracking</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--ignore-model-output&quot;</span>, <span class="ruby-string">&quot;Consider model attributes XSS-safe&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ignore_model_output</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--ignore-protected&quot;</span>, <span class="ruby-string">&quot;Consider models with attr_protected safe&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ignore_attr_protected</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]index-libs&quot;</span>, <span class="ruby-string">&quot;Add libraries to call index (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:index_libs</span>] = <span class="ruby-identifier">index</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--interprocedural&quot;</span>, <span class="ruby-string">&quot;Process method calls to known methods&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:interprocedural</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--no-branching&quot;</span>, <span class="ruby-string">&quot;Disable flow sensitivity on conditionals&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ignore_ifs</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--branch-limit LIMIT&quot;</span>, <span class="ruby-constant">Integer</span>, <span class="ruby-string">&quot;Limit depth of values in branches (-1 for no limit)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">limit</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:branch_limit</span>] = <span class="ruby-identifier">limit</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--parser-timeout SECONDS&quot;</span>, <span class="ruby-constant">Integer</span>, <span class="ruby-string">&quot;Set parse timeout (Default: 10)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">timeout</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:parser_timeout</span>] = <span class="ruby-identifier">timeout</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]prism&quot;</span>, <span class="ruby-string">&quot;Use the Prism parser&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">use_prism</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">use_prism</span>
+        <span class="ruby-identifier">min_prism_version</span> = <span class="ruby-string">&#39;1.0.0&#39;</span>
+
+        <span class="ruby-keyword">begin</span>
+          <span class="ruby-identifier">gem</span> <span class="ruby-string">&#39;prism&#39;</span>, <span class="ruby-node">&quot;&gt;=#{min_prism_version}&quot;</span>
+          <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;prism&#39;</span>
+        <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingSpecVersionError</span>, <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingSpecError</span>, <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">LoadError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Please install `prism` version #{min_prism_version} or newer:&quot;</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:use_prism</span>] = <span class="ruby-identifier">use_prism</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-r&quot;</span>, <span class="ruby-string">&quot;--report-direct&quot;</span>, <span class="ruby-string">&quot;Only report direct use of untrusted data&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:check_arguments</span>] = <span class="ruby-operator">!</span><span class="ruby-identifier">option</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-s&quot;</span>, <span class="ruby-string">&quot;--safe-methods meth1,meth2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Set methods as safe for unescaped output in views&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">methods</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:safe_methods</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:safe_methods</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_sym</span> }
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--sql-safe-methods meth1,meth2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Do not warn of SQL if the input is wrapped in a safe method&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">methods</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:sql_safe_methods</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:sql_safe_methods</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_sym</span> }
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--url-safe-methods method1,method2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Do not warn of XSS if the link_to href parameter is wrapped in a safe method&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">methods</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:url_safe_methods</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:url_safe_methods</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_sym</span> }
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--skip-files file1,path2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-node">&quot;Skip processing of these files/directories. Directories are application relative and must end in \&quot;#{File::SEPARATOR}\&quot;&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">files</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_files</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_files</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">files</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--only-files file1,path2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-node">&quot;Process only these files/directories. Directories are application relative and must end in \&quot;#{File::SEPARATOR}\&quot;&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">files</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:only_files</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:only_files</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">files</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]skip-vendor&quot;</span>, <span class="ruby-string">&quot;Skip processing vendor directory (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">skip</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_vendor</span>] = <span class="ruby-identifier">skip</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--skip-libs&quot;</span>, <span class="ruby-string">&quot;Skip processing lib directory&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_libs</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--add-libs-path path1,path2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;An application relative lib directory (ex. app/mailers) to process&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">paths</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:additional_libs_path</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:additional_libs_path</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">paths</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--add-engines-path path1,path2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Include these engines in the scan&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">paths</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:engine_paths</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:engine_paths</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">paths</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&#39;--[no-]follow-symlinks&#39;</span>, <span class="ruby-string">&#39;Follow symbolic links for directions&#39;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">follow_symlinks</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:follow_symlinks</span>] = <span class="ruby-identifier">follow_symlinks</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&#39;--gemfile GEMFILE&#39;</span>, <span class="ruby-string">&#39;Specify Gemfile to scan&#39;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gemfile</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:gemfile</span>] = <span class="ruby-identifier">gemfile</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-E&quot;</span>, <span class="ruby-string">&quot;--enable Check1,Check2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Enable the specified checks&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">checks</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">checks</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">check</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">check</span>.<span class="ruby-identifier">start_with?</span> <span class="ruby-string">&quot;Check&quot;</span>
+          <span class="ruby-identifier">check</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-node">&quot;Check#{check}&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:enable_checks</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:enable_checks</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">checks</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-t&quot;</span>, <span class="ruby-string">&quot;--test Check1,Check2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Only run the specified checks&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">checks</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">checks</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span>,<span class="ruby-value">5</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;Check&quot;</span>
+          <span class="ruby-identifier">checks</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-node">&quot;Check#{s}&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:run_checks</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:run_checks</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">checks</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-x&quot;</span>, <span class="ruby-string">&quot;--except Check1,Check2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Skip the specified checks&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">skip</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">skip</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span>,<span class="ruby-value">5</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;Check&quot;</span>
+          <span class="ruby-identifier">s</span> = <span class="ruby-node">&quot;Check#{s}&quot;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_checks</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_checks</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">s</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--add-checks-path path1,path2,etc&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;A directory containing additional out-of-tree checks to run&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">paths</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:additional_checks_path</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:additional_checks_path</span>].<span class="ruby-identifier">merge</span> <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span> <span class="ruby-identifier">p</span>}
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;Output options:&quot;</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-d&quot;</span>, <span class="ruby-string">&quot;--debug&quot;</span>, <span class="ruby-string">&quot;Lots of output&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:debug</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--timing&quot;</span>, <span class="ruby-string">&quot;Measure time for scan steps&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:show_timing</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-f&quot;</span>,
+      <span class="ruby-string">&quot;--format TYPE&quot;</span>,
+      [<span class="ruby-value">:pdf</span>, <span class="ruby-value">:text</span>, <span class="ruby-value">:html</span>, <span class="ruby-value">:csv</span>, <span class="ruby-value">:tabs</span>, <span class="ruby-value">:json</span>, <span class="ruby-value">:markdown</span>, <span class="ruby-value">:codeclimate</span>, <span class="ruby-value">:cc</span>, <span class="ruby-value">:plain</span>, <span class="ruby-value">:table</span>, <span class="ruby-value">:junit</span>, <span class="ruby-value">:sarif</span>, <span class="ruby-value">:sonar</span>, <span class="ruby-value">:github</span>],
+      <span class="ruby-string">&quot;Specify output formats. Default is text&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
+
+      <span class="ruby-identifier">type</span> = <span class="ruby-string">&quot;s&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:text</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_format</span>] = <span class="ruby-value">:&quot;to_#{type}&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--css-file CSSFile&quot;</span>, <span class="ruby-string">&quot;Specify CSS to use for HTML output&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:html_style</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span> <span class="ruby-identifier">file</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-i IGNOREFILE&quot;</span>, <span class="ruby-string">&quot;--ignore-config IGNOREFILE&quot;</span>, <span class="ruby-string">&quot;Use configuration to ignore warnings&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:ignore_file</span>] = <span class="ruby-identifier">file</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-I&quot;</span>, <span class="ruby-string">&quot;--interactive-ignore&quot;</span>, <span class="ruby-string">&quot;Interactively ignore warnings&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:interactive_ignore</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--show-ignored&quot;</span>, <span class="ruby-string">&quot;Show files that are usually ignored by the ignore configuration file&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:show_ignored</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-l&quot;</span>, <span class="ruby-string">&quot;--[no-]combine-locations&quot;</span>, <span class="ruby-string">&quot;Combine warning locations (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">combine</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:combine_locations</span>] = <span class="ruby-identifier">combine</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]highlights&quot;</span>, <span class="ruby-string">&quot;Highlight user input in report&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">highlight</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:highlight_user_input</span>] = <span class="ruby-identifier">highlight</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]color&quot;</span>, <span class="ruby-string">&quot;Use ANSI colors in report (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">color</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">color</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_color</span>] = <span class="ruby-value">:force</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_color</span>] = <span class="ruby-identifier">color</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-m&quot;</span>, <span class="ruby-string">&quot;--routes&quot;</span>, <span class="ruby-string">&quot;Report controller information&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:report_routes</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--message-limit LENGTH&quot;</span>, <span class="ruby-string">&quot;Limit message length in HTML report&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">limit</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:message_limit</span>] = <span class="ruby-identifier">limit</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]pager&quot;</span>, <span class="ruby-string">&quot;Use pager for output to terminal (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pager</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:pager</span>] = <span class="ruby-identifier">pager</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--table-width WIDTH&quot;</span>, <span class="ruby-string">&quot;Limit table width in text report&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">width</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:table_width</span>] = <span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-o&quot;</span>, <span class="ruby-string">&quot;--output FILE&quot;</span>, <span class="ruby-string">&quot;Specify files for output. Defaults to stdout. Multiple &#39;-o&#39;s allowed&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>] <span class="ruby-operator">||=</span> []
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]separate-models&quot;</span>, <span class="ruby-string">&quot;Warn on each model without attr_accessible (Default)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">separate</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:collapse_mass_assignment</span>] = <span class="ruby-operator">!</span><span class="ruby-identifier">separate</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--[no-]summary&quot;</span>, <span class="ruby-string">&quot;Only output summary of warnings&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">summary_only</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">summary_only</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:summary_only</span>] = <span class="ruby-value">:summary_only</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:summary_only</span>] = <span class="ruby-value">:no_summary</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--absolute-paths&quot;</span>, <span class="ruby-string">&quot;Output absolute file paths in reports&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:absolute_paths</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--github-repo USER/REPO[/PATH][@REF]&quot;</span>, <span class="ruby-string">&quot;Output links to GitHub in markdown and HTML reports using specified repo&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">repo</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:github_repo</span>] = <span class="ruby-identifier">repo</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--text-fields field1,field2,etc.&quot;</span>, <span class="ruby-constant">Array</span>, <span class="ruby-string">&quot;Specify fields for text report format&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">valid_options</span> = [<span class="ruby-value">:category</span>, <span class="ruby-value">:category_id</span>, <span class="ruby-value">:check</span>, <span class="ruby-value">:code</span>, <span class="ruby-value">:confidence</span>, <span class="ruby-value">:cwe</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">:fingerprint</span>, <span class="ruby-value">:line</span>, <span class="ruby-value">:link</span>, <span class="ruby-value">:message</span>, <span class="ruby-value">:render_path</span>]
+
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:text_fields</span>] = <span class="ruby-identifier">format</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_sym</span>)
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:text_fields</span>] <span class="ruby-operator">==</span> [<span class="ruby-value">:all</span>]
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:text_fields</span>] = <span class="ruby-identifier">valid_options</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">invalid_options</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:text_fields</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">valid_options</span>)
+
+        <span class="ruby-keyword">unless</span> <span class="ruby-identifier">invalid_options</span>.<span class="ruby-identifier">empty?</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">ParseError</span>, <span class="ruby-node">&quot;\nInvalid format options: #{invalid_options.inspect}&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-w&quot;</span>,
+      <span class="ruby-string">&quot;--confidence-level LEVEL&quot;</span>,
+      [<span class="ruby-string">&quot;1&quot;</span>, <span class="ruby-string">&quot;2&quot;</span>, <span class="ruby-string">&quot;3&quot;</span>],
+      <span class="ruby-string">&quot;Set minimal confidence level (1 - 3)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">level</span><span class="ruby-operator">|</span>
+
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:min_confidence</span>] =  <span class="ruby-value">3</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">level</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--compare FILE&quot;</span>, <span class="ruby-string">&quot;Compare the results of a previous Brakeman scan (only JSON is supported)&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:previous_results_json</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;Configuration files:&quot;</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-c&quot;</span>, <span class="ruby-string">&quot;--config-file FILE&quot;</span>, <span class="ruby-string">&quot;Use specified configuration file&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:config_file</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-C&quot;</span>, <span class="ruby-string">&quot;--create-config [FILE]&quot;</span>, <span class="ruby-string">&quot;Output configuration file based on options&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">file</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:create_config</span>] = <span class="ruby-identifier">file</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:create_config</span>] = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--allow-check-paths-in-config&quot;</span>, <span class="ruby-string">&quot;Allow loading checks from configuration file (Unsafe)&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:allow_check_paths_in_config</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;&quot;</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-k&quot;</span>, <span class="ruby-string">&quot;--checks&quot;</span>, <span class="ruby-string">&quot;List all available vulnerability checks&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:list_checks</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--optional-checks&quot;</span>, <span class="ruby-string">&quot;List optional checks&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:list_optional_checks</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;-v&quot;</span>, <span class="ruby-string">&quot;--version&quot;</span>, <span class="ruby-string">&quot;Show Brakeman version&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:show_version</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span> <span class="ruby-string">&quot;--force-scan&quot;</span>, <span class="ruby-string">&quot;Scan application even if rails is not detected&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:force_scan</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on_tail</span> <span class="ruby-string">&quot;-h&quot;</span>, <span class="ruby-string">&quot;--help&quot;</span>, <span class="ruby-string">&quot;Display this message&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:show_help</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-get_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_options</span><span
+              class="method-args">(args, destructive = false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return hash of options and the parser</p>
+
+          <div class="method-source-code" id="get_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/options.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_options</span> <span class="ruby-identifier">args</span>, <span class="ruby-identifier">destructive</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">options</span> = {}
+
+  <span class="ruby-identifier">parser</span> = <span class="ruby-identifier">create_option_parser</span> <span class="ruby-identifier">options</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">destructive</span>
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse!</span> <span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:previous_results_json</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>]
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:comparison_output_file</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>].<span class="ruby-identifier">shift</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">options</span>, <span class="ruby-identifier">parser</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse</span><span
+              class="method-args">(args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse argument array</p>
+
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/options.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span> <span class="ruby-identifier">args</span>
+  <span class="ruby-identifier">get_options</span> <span class="ruby-identifier">args</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse!</span><span
+              class="method-args">(args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parse arguments and remove them from the array as they are matched</p>
+
+          <div class="method-source-code" id="parse-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/options.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse!</span> <span class="ruby-identifier">args</span>
+  <span class="ruby-identifier">get_options</span> <span class="ruby-identifier">args</span>, <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Cucumber::CiEnvironment - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="extend" href="CiEnvironment/VariableExpression.html">Cucumber::CiEnvironment::VariableExpression</a>
+    <li><a class="extend" href="CiEnvironment/VariableExpression.html">Cucumber::CiEnvironment::VariableExpression</a>
+  </ul>
+</div>
+
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-detect">::detect</a>
+    <li ><a href="#method-c-detect_ci_environment">::detect_ci_environment</a>
+    <li ><a href="#method-c-detect_git">::detect_git</a>
+    <li ><a href="#method-c-detect_revision">::detect_revision</a>
+    <li ><a href="#method-c-remove_userinfo_from_url">::remove_userinfo_from_url</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Cucumber::CiEnvironment">
+  <h1 id="module-Cucumber::CiEnvironment" class="module">
+    module Cucumber::CiEnvironment
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="CI_ENVIRONMENTS_PATH">CI_ENVIRONMENTS_PATH
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-detect" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">detect</span><span
+              class="method-args">(ci_environment, env)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="detect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-ci-environment-10.0.1/lib/cucumber/ci_environment.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">detect</span>(<span class="ruby-identifier">ci_environment</span>, <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">url</span> = <span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">ci_environment</span>[<span class="ruby-string">&#39;url&#39;</span>], <span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">result</span> = {
+    <span class="ruby-value">name:</span> <span class="ruby-identifier">ci_environment</span>[<span class="ruby-string">&#39;name&#39;</span>],
+    <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>,
+    <span class="ruby-value">buildNumber:</span> <span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">ci_environment</span>[<span class="ruby-string">&#39;buildNumber&#39;</span>], <span class="ruby-identifier">env</span>),
+  }
+
+  <span class="ruby-identifier">detected_git</span> = <span class="ruby-identifier">detect_git</span>(<span class="ruby-identifier">ci_environment</span>, <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">result</span>[<span class="ruby-value">:git</span>] = <span class="ruby-identifier">detected_git</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">detected_git</span>
+  <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-detect_ci_environment" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">detect_ci_environment</span><span
+              class="method-args">(env)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="detect_ci_environment-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-ci-environment-10.0.1/lib/cucumber/ci_environment.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">detect_ci_environment</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">ci_environments</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">IO</span>.<span class="ruby-identifier">read</span>(<span class="ruby-constant">CI_ENVIRONMENTS_PATH</span>))
+  <span class="ruby-identifier">ci_environments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ci_environment</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">detected</span> = <span class="ruby-identifier">detect</span>(<span class="ruby-identifier">ci_environment</span>, <span class="ruby-identifier">env</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">detected</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">detected</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-detect_git" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">detect_git</span><span
+              class="method-args">(ci_environment, env)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="detect_git-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-ci-environment-10.0.1/lib/cucumber/ci_environment.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">detect_git</span>(<span class="ruby-identifier">ci_environment</span>, <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">revision</span> = <span class="ruby-identifier">detect_revision</span>(<span class="ruby-identifier">ci_environment</span>, <span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">revision</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">remote</span> = <span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">ci_environment</span>[<span class="ruby-string">&#39;git&#39;</span>][<span class="ruby-string">&#39;remote&#39;</span>], <span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">remote</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">git_info</span> = {
+    <span class="ruby-value">remote:</span> <span class="ruby-identifier">remove_userinfo_from_url</span>(<span class="ruby-identifier">remote</span>),
+    <span class="ruby-value">revision:</span> <span class="ruby-identifier">revision</span>,
+  }
+
+  <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">ci_environment</span>[<span class="ruby-string">&#39;git&#39;</span>][<span class="ruby-string">&#39;tag&#39;</span>], <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">branch</span> = <span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">ci_environment</span>[<span class="ruby-string">&#39;git&#39;</span>][<span class="ruby-string">&#39;branch&#39;</span>], <span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">git_info</span>[<span class="ruby-value">:tag</span>] = <span class="ruby-identifier">tag</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tag</span>
+  <span class="ruby-identifier">git_info</span>[<span class="ruby-value">:branch</span>] = <span class="ruby-identifier">branch</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">branch</span>
+  <span class="ruby-identifier">git_info</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-detect_revision" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">detect_revision</span><span
+              class="method-args">(ci_environment, env)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="detect_revision-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-ci-environment-10.0.1/lib/cucumber/ci_environment.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">detect_revision</span>(<span class="ruby-identifier">ci_environment</span>, <span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;GITHUB_EVENT_NAME&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;pull_request&#39;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">StandardError</span>(<span class="ruby-string">&#39;GITHUB_EVENT_PATH not set&#39;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;GITHUB_EVENT_PATH&#39;</span>]
+    <span class="ruby-identifier">event</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">IO</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;GITHUB_EVENT_PATH&#39;</span>]))
+    <span class="ruby-identifier">revision</span> = <span class="ruby-identifier">event</span>[<span class="ruby-string">&#39;pull_request&#39;</span>][<span class="ruby-string">&#39;head&#39;</span>][<span class="ruby-string">&#39;sha&#39;</span>] <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">StandardError</span>(<span class="ruby-node">&quot;Could not find .pull_request.head.sha in #{env[&#39;GITHUB_EVENT_PATH&#39;]}:\n#{JSON.pretty_generate(event)}&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">revision</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">revision</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">ci_environment</span>[<span class="ruby-string">&#39;git&#39;</span>][<span class="ruby-string">&#39;revision&#39;</span>], <span class="ruby-identifier">env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-remove_userinfo_from_url" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">remove_userinfo_from_url</span><span
+              class="method-args">(value)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="remove_userinfo_from_url-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-ci-environment-10.0.1/lib/cucumber/ci_environment.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_userinfo_from_url</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">userinfo</span> = <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
+    <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Brakeman - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-add_external_checks">::add_external_checks</a>
+    <li ><a href="#method-c-check_for_missing_checks">::check_for_missing_checks</a>
+    <li ><a href="#method-c-compare">::compare</a>
+    <li ><a href="#method-c-config_file">::config_file</a>
+    <li ><a href="#method-c-debug">::debug</a>
+    <li ><a href="#method-c-debug-3D">::debug=</a>
+    <li ><a href="#method-c-default_options">::default_options</a>
+    <li ><a href="#method-c-dump_config">::dump_config</a>
+    <li ><a href="#method-c-ensure_latest">::ensure_latest</a>
+    <li ><a href="#method-c-filter_warnings">::filter_warnings</a>
+    <li ><a href="#method-c-get_output_formats">::get_output_formats</a>
+    <li ><a href="#method-c-ignore_file_entries_with_empty_notes">::ignore_file_entries_with_empty_notes</a>
+    <li ><a href="#method-c-list_checks">::list_checks</a>
+    <li ><a href="#method-c-load_brakeman_dependency">::load_brakeman_dependency</a>
+    <li ><a href="#method-c-load_options">::load_options</a>
+    <li ><a href="#method-c-notify">::notify</a>
+    <li ><a href="#method-c-quiet-3D">::quiet=</a>
+    <li ><a href="#method-c-rescan">::rescan</a>
+    <li ><a href="#method-c-run">::run</a>
+    <li ><a href="#method-c-scan">::scan</a>
+    <li ><a href="#method-c-set_options">::set_options</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Brakeman">
+  <h1 id="module-Brakeman" class="module">
+    module Brakeman
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="ASTFile">ASTFile
+        <dd>
+        <dt id="CONFIG_FILES">CONFIG_FILES
+        <dd>
+        <dt id="Empty_Ignore_Note_Exit_Code">Empty_Ignore_Note_Exit_Code
+        <dd><p>Exit code returned when an ignored warning has no note and</p>
+        <dt id="Errors_Found_Exit_Code">Errors_Found_Exit_Code
+        <dd><p>Exit code returned when errors were found and the –exit-on-error option is set</p>
+        <dt id="Missing_Checks_Exit_Code">Missing_Checks_Exit_Code
+        <dd><p>Exit code returned when user requests non-existent checks</p>
+        <dt id="No_App_Found_Exit_Code">No_App_Found_Exit_Code
+        <dd><p>Exit code returned when no <a href="Rails.html"><code>Rails</code></a> application is detected</p>
+        <dt id="Not_Latest_Version_Exit_Code">Not_Latest_Version_Exit_Code
+        <dd><p>Exit code returned when brakeman was outdated</p>
+        <dt id="Obsolete_Ignore_Entries_Exit_Code">Obsolete_Ignore_Entries_Exit_Code
+        <dd><p>Exit code returned when at least one obsolete ignore entry is present and ‘–ensure-no-obsolete-ignore-entries` is set.</p>
+        <dt id="Version">Version
+        <dd>
+        <dt id="Warnings_Found_Exit_Code">Warnings_Found_Exit_Code
+        <dd><p>This exit code is used when warnings are found and the –exit-on-warn option is set</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-add_external_checks" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">add_external_checks</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="add_external_checks-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 594</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">add_external_checks</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:additional_checks_path</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">Checks</span>.<span class="ruby-identifier">initialize_checks</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">end</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:additional_checks_path</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-check_for_missing_checks" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_for_missing_checks</span><span
+              class="method-args">(included_checks, excluded_checks, enabled_checks)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="check_for_missing_checks-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 600</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_for_missing_checks</span> <span class="ruby-identifier">included_checks</span>, <span class="ruby-identifier">excluded_checks</span>, <span class="ruby-identifier">enabled_checks</span>
+  <span class="ruby-identifier">checks</span> = <span class="ruby-identifier">included_checks</span>.<span class="ruby-identifier">to_a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">excluded_checks</span>.<span class="ruby-identifier">to_a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">enabled_checks</span>.<span class="ruby-identifier">to_a</span>
+
+  <span class="ruby-identifier">missing</span> = <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">Checks</span>.<span class="ruby-identifier">missing_checks</span>(<span class="ruby-identifier">checks</span>)
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">missing</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingChecksError</span>, <span class="ruby-node">&quot;Could not find specified check#{missing.length &gt; 1 ? &#39;s&#39; : &#39;&#39;}: #{missing.map {|c| &quot;`#{c}`&quot;}.join(&#39;, &#39;)}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-compare" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">compare</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Compare <a href="JSON.html"><code>JSON</code></a> output from a previous scan and return the diff of the two scans</p>
+
+          <div class="method-source-code" id="compare-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 505</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">compare</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;json&#39;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;brakeman/differ&#39;</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Comparison file doesn&#39;t exist&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:previous_results_json</span>]
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">previous_results</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:previous_results_json</span>]), <span class="ruby-value">:symbolize_names</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>)[<span class="ruby-value">:warnings</span>]
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-constant">ParserError</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">notify</span> <span class="ruby-node">&quot;Error parsing comparison file: #{options[:previous_results_json]}&quot;</span>
+    <span class="ruby-identifier">exit!</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">tracker</span> = <span class="ruby-identifier">run</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">new_report</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">report</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-value">symbolize_names:</span> <span class="ruby-keyword">true</span>)
+
+  <span class="ruby-identifier">new_results</span> = <span class="ruby-identifier">new_report</span>[<span class="ruby-value">:warnings</span>]
+  <span class="ruby-identifier">obsolete_ignored</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">unused_fingerprints</span>
+
+  <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">Differ</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">new_results</span>, <span class="ruby-identifier">previous_results</span>).<span class="ruby-identifier">diff</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">diff</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">diff</span>[<span class="ruby-value">:obsolete</span>] = <span class="ruby-identifier">obsolete_ignored</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-config_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">config_file</span><span
+              class="method-args">(custom_location, app_path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="config_file-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">config_file</span> <span class="ruby-identifier">custom_location</span>, <span class="ruby-identifier">app_path</span>
+  <span class="ruby-identifier">app_config</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">app_path</span>, <span class="ruby-string">&quot;config&quot;</span>, <span class="ruby-string">&quot;brakeman.yml&quot;</span>))
+  <span class="ruby-identifier">supported_locations</span> = [<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">custom_location</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;&quot;</span>), <span class="ruby-identifier">app_config</span>] <span class="ruby-operator">+</span> <span class="ruby-constant">CONFIG_FILES</span>
+  <span class="ruby-identifier">supported_locations</span>.<span class="ruby-identifier">detect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">f</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-debug" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">debug</span><span
+              class="method-args">(message)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="debug-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 500</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">debug</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">message</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@debug</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-debug-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">debug=</span><span
+              class="method-args">(val)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="debug-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 610</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">debug=</span> <span class="ruby-identifier">val</span>
+  <span class="ruby-ivar">@debug</span> = <span class="ruby-identifier">val</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-default_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">default_options</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Default set of options</p>
+
+          <div class="method-source-code" id="default_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default_options</span>
+  { <span class="ruby-value">:assume_all_routes</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:check_arguments</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:collapse_mass_assignment</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
+    <span class="ruby-value">:combine_locations</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:engine_paths</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&quot;engines/*&quot;</span>],
+    <span class="ruby-value">:exit_on_error</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:exit_on_warn</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:highlight_user_input</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:html_style</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;#{File.expand_path(File.dirname(__FILE__))}/brakeman/format/style.css&quot;</span>,
+    <span class="ruby-value">:ignore_model_output</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
+    <span class="ruby-value">:ignore_redirect_to_model</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:index_libs</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:message_limit</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">100</span>,
+    <span class="ruby-value">:min_confidence</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">2</span>,
+    <span class="ruby-value">:output_color</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:pager</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:parallel_checks</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:parser_timeout</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">10</span>,
+    <span class="ruby-value">:use_prism</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:relative_path</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
+    <span class="ruby-value">:report_progress</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">:safe_methods</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>,
+    <span class="ruby-value">:show_ignored</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
+    <span class="ruby-value">:sql_safe_methods</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>,
+    <span class="ruby-value">:skip_checks</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>,
+    <span class="ruby-value">:skip_vendor</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>,
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-dump_config" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dump_config</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Output configuration to YAML</p>
+
+          <div class="method-source-code" id="dump_config-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 360</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">dump_config</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;yaml&#39;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:create_config</span>].<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">file</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:create_config</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">file</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value">:create_config</span>
+
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Set</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_a</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">file</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-identifier">file</span>, <span class="ruby-string">&quot;w&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span> <span class="ruby-identifier">options</span>, <span class="ruby-identifier">f</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">notify</span> <span class="ruby-node">&quot;Output configuration to #{file}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">notify</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-ensure_latest" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">ensure_latest</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="ensure_latest-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 386</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">ensure_latest</span>
+  <span class="ruby-identifier">current</span> = <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">Version</span>
+  <span class="ruby-identifier">latest</span> = <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">latest_version_for</span>(<span class="ruby-string">&#39;brakeman&#39;</span>).<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">latest</span>
+    <span class="ruby-node">&quot;Brakeman #{current} is not the latest version #{latest}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-filter_warnings" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter_warnings</span><span
+              class="method-args">(tracker, options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="filter_warnings-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 566</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_warnings</span> <span class="ruby-identifier">tracker</span>, <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;brakeman/report/ignore/config&#39;</span>
+
+  <span class="ruby-identifier">app_tree</span> = <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">AppTree</span>.<span class="ruby-identifier">from_options</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:ignore_file</span>]
+    <span class="ruby-identifier">file</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:ignore_file</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">app_tree</span>.<span class="ruby-identifier">exists?</span> <span class="ruby-string">&quot;config/brakeman.ignore&quot;</span>
+    <span class="ruby-identifier">file</span> = <span class="ruby-identifier">app_tree</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;config/brakeman.ignore&quot;</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:interactive_ignore</span>]
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">notify</span> <span class="ruby-string">&quot;Filtering warnings...&quot;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:interactive_ignore</span>]
+    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;brakeman/report/ignore/interactive&#39;</span>
+    <span class="ruby-identifier">config</span> = <span class="ruby-constant">InteractiveIgnorer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">warnings</span>).<span class="ruby-identifier">start</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">notify</span> <span class="ruby-node">&quot;[Notice] Using &#39;#{file}&#39; to filter warnings&quot;</span>
+    <span class="ruby-identifier">config</span> = <span class="ruby-constant">IgnoreConfig</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">warnings</span>)
+    <span class="ruby-identifier">config</span>.<span class="ruby-identifier">read_from_file</span>
+    <span class="ruby-identifier">config</span>.<span class="ruby-identifier">filter_ignored</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">ignored_filter</span> = <span class="ruby-identifier">config</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-get_output_formats" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_output_formats</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Determine output formats based on <a href=":output_formats">options</a> or <a href=":output_files">options</a></p>
+
+          <div class="method-source-code" id="get_output_formats-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 232</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_output_formats</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-comment">#Set output format</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_format</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Cannot specify output format if multiple output files specified&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_format</span>]
+    <span class="ruby-identifier">get_formats_from_output_format</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_format</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>]
+    <span class="ruby-identifier">get_formats_from_output_files</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">load_brakeman_dependency</span> <span class="ruby-string">&#39;terminal-table&#39;</span>, <span class="ruby-value">:allow_fail</span>
+      <span class="ruby-keyword">return</span> [<span class="ruby-value">:to_s</span>]
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
+      <span class="ruby-keyword">return</span> [<span class="ruby-value">:to_json</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-ignore_file_entries_with_empty_notes" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">ignore_file_entries_with_empty_notes</span><span
+              class="method-args">(file)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns an array of alert fingerprints for any ignored warnings without notes found in the specified ignore file (if it exists).</p>
+
+          <div class="method-source-code" id="ignore_file_entries_with_empty_notes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 556</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">ignore_file_entries_with_empty_notes</span> <span class="ruby-identifier">file</span>
+  <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">file</span>
+
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;brakeman/report/ignore/config&#39;</span>
+
+  <span class="ruby-identifier">config</span> = <span class="ruby-constant">IgnoreConfig</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">read_from_file</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">already_ignored_entries_with_empty_notes</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>[<span class="ruby-value">:fingerprint</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-list_checks" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">list_checks</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Output list of checks (for ‘-k` option)</p>
+
+          <div class="method-source-code" id="list_checks-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 338</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_checks</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;brakeman/scanner&#39;</span>
+
+  <span class="ruby-identifier">add_external_checks</span> <span class="ruby-identifier">options</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:list_optional_checks</span>]
+    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Optional Checks:&quot;</span>
+    <span class="ruby-identifier">checks</span> = <span class="ruby-constant">Checks</span>.<span class="ruby-identifier">optional_checks</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Available Checks:&quot;</span>
+    <span class="ruby-identifier">checks</span> = <span class="ruby-constant">Checks</span>.<span class="ruby-identifier">checks</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">format_length</span> = <span class="ruby-value">30</span>
+
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">format_length</span>
+  <span class="ruby-identifier">checks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">check</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">printf</span>(<span class="ruby-node">&quot;%-#{format_length}s%s\n&quot;</span>, <span class="ruby-identifier">check</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">check</span>.<span class="ruby-identifier">description</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-load_brakeman_dependency" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load_brakeman_dependency</span><span
+              class="method-args">(name, allow_fail = false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="load_brakeman_dependency-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 528</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">load_brakeman_dependency</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">allow_fail</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@loaded_dependencies</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">name</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@vendored_paths</span>
+    <span class="ruby-identifier">path_load</span> = <span class="ruby-node">&quot;#{File.expand_path(File.dirname(__FILE__))}/../bundle/load.rb&quot;</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">path_load</span>
+      <span class="ruby-identifier">require</span> <span class="ruby-identifier">path_load</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@vendored_paths</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">allow_fail</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+      <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Please install the appropriate dependency: #{name}.&quot;</span>
+      <span class="ruby-identifier">exit!</span>(<span class="ruby-value">-1</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-load_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load_options</span><span
+              class="method-args">(line_options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Load options from YAML file</p>
+
+          <div class="method-source-code" id="load_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">load_options</span> <span class="ruby-identifier">line_options</span>
+  <span class="ruby-identifier">custom_location</span> = <span class="ruby-identifier">line_options</span>[<span class="ruby-value">:config_file</span>]
+  <span class="ruby-identifier">quiet</span> = <span class="ruby-identifier">line_options</span>[<span class="ruby-value">:quiet</span>]
+  <span class="ruby-identifier">app_path</span> = <span class="ruby-identifier">line_options</span>[<span class="ruby-value">:app_path</span>]
+
+  <span class="ruby-comment">#Load configuration file</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span> = <span class="ruby-identifier">config_file</span>(<span class="ruby-identifier">custom_location</span>, <span class="ruby-identifier">app_path</span>)
+    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;yaml&#39;</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">safe_load_file</span> <span class="ruby-identifier">config</span>, <span class="ruby-value">permitted_classes:</span> [<span class="ruby-constant">Symbol</span>], <span class="ruby-value">symbolize_names:</span> <span class="ruby-keyword">true</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">v</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span> }
+
+      <span class="ruby-comment"># After parsing the yaml config file for options, convert any string keys into symbols.</span>
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>}.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span> }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>]; <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>) }
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line_options</span>[<span class="ruby-value">:allow_check_paths_in_config</span>]
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value">:additional_checks_path</span>
+          <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value">:additional_checks_path</span>
+
+          <span class="ruby-identifier">notify</span> <span class="ruby-string">&quot;[Notice] Ignoring additional check paths in config file. Use --allow-check-paths-in-config to allow&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">quiet</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># notify if options[:quiet] and quiet is nil||false</span>
+      <span class="ruby-identifier">notify</span> <span class="ruby-node">&quot;[Notice] Using configuration in #{config}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">quiet</span>)
+      <span class="ruby-identifier">options</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">notify</span> <span class="ruby-node">&quot;[Notice] Empty configuration file: #{config}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">quiet</span>
+      {}
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    {}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-notify" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">notify</span><span
+              class="method-args">(message)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="notify-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 496</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">notify</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">message</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@quiet</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-quiet-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">quiet=</span><span
+              class="method-args">(val)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="quiet-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 614</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">quiet=</span> <span class="ruby-identifier">val</span>
+  <span class="ruby-ivar">@quiet</span> = <span class="ruby-identifier">val</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-rescan" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rescan</span><span
+              class="method-args">(tracker, files, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Rescan a subset of files in a <a href="Rails.html"><code>Rails</code></a> application.</p>
+
+<p>A full scan must have been run already to use this method. The returned <a href="Brakeman/Tracker.html"><code>Tracker</code></a> object from <a href="Brakeman.html#method-c-run"><code>Brakeman.run</code></a> is used as a starting point for the rescan.</p>
+
+<p><a href="Brakeman/Options.html"><code>Options</code></a> may be given as a hash with the same values as <a href="Brakeman.html#method-c-run"><code>Brakeman.run</code></a>. Note that these options will be merged into the <a href="Brakeman/Tracker.html"><code>Tracker</code></a>.</p>
+
+<p>This method returns a <a href="Brakeman/RescanReport.html"><code>RescanReport</code></a> object with information about the scan. However, the <a href="Brakeman/Tracker.html"><code>Tracker</code></a> object will also be modified as the scan is run.</p>
+
+          <div class="method-source-code" id="rescan-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 485</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">rescan</span> <span class="ruby-identifier">tracker</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">options</span> = {}
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;brakeman/rescanner&#39;</span>
+
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">options</span>
+
+  <span class="ruby-ivar">@quiet</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>]
+  <span class="ruby-ivar">@debug</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:debug</span>]
+
+  <span class="ruby-constant">Rescanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">processor</span>, <span class="ruby-identifier">files</span>).<span class="ruby-identifier">recheck</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-run" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">run</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Run <a href="Brakeman.html"><code>Brakeman</code></a> scan. Returns <a href="Brakeman/Tracker.html"><code>Tracker</code></a> object.</p>
+
+<p>Options:</p>
+
+<pre>* :app_path - path to root of Rails app (required)
+* :additional_checks_path - array of additional directories containing additional out-of-tree checks to run
+* :additional_libs_path - array of additional application relative lib directories (ex. app/mailers) to process
+* :assume_all_routes - assume all methods are routes (default: true)
+* :check_arguments - check arguments of methods (default: true)
+* :collapse_mass_assignment - report unprotected models in single warning (default: false)
+* :combine_locations - combine warning locations (default: true)
+* :config_file - configuration file
+* :escape_html - escape HTML by default (automatic)
+* :exit_on_error - only affects Commandline module (default: true)
+* :exit_on_warn - only affects Commandline module (default: true)
+* :github_repo - github repo to use for file links (user/repo[/path][@ref])
+* :highlight_user_input - highlight user input in reported warnings (default: true)
+* :html_style - path to CSS file
+* :ignore_model_output - consider models safe (default: false)
+* :index_libs - add libraries to call index (default: true)
+* :interprocedural - limited interprocedural processing of method calls (default: false)
+* :message_limit - limit length of messages
+* :min_confidence - minimum confidence (0-2, 0 is highest)
+* :output_files - files for output
+* :output_formats - formats for output (:to_s, :to_tabs, :to_csv, :to_html)
+* :parallel_checks - run checks in parallel (default: true)
+* :parser_timeout - set timeout for parsing an individual file (default: 10 seconds)
+* :print_report - if no output file specified, print to stdout (default: false)
+* :quiet - suppress most messages (default: true)
+* :rails3 - force Rails 3 mode (automatic)
+* :rails4 - force Rails 4 mode (automatic)
+* :rails5 - force Rails 5 mode (automatic)
+* :rails6 - force Rails 6 mode (automatic)
+* :report_routes - show found routes on controllers (default: false)
+* :run_checks - array of checks to run (run all if not specified)
+* :safe_methods - array of methods to consider safe
+* :show_ignored - Display warnings that are usually ignored
+* :sql_safe_methods - array of sql sanitization methods to consider safe
+* :skip_libs - do not process lib/ directory (default: false)
+* :skip_vendor - do not process vendor/ directory (default: true)
+* :skip_checks - checks not to run (run all if not specified)
+* :absolute_paths - show absolute path of each file (default: false)
+* :summary_only - only output summary section of report for plain/table (:summary_only, :no_summary, true)</pre>
+
+<p>Alternatively, just supply a path as a string.</p>
+
+          <div class="method-source-code" id="run-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">set_options</span> <span class="ruby-identifier">options</span>
+
+  <span class="ruby-ivar">@quiet</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>]
+  <span class="ruby-ivar">@debug</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:debug</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@quiet</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:report_progress</span>] = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:use_prism</span>]
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;prism&#39;</span>
+      <span class="ruby-identifier">notify</span> <span class="ruby-string">&#39;[Notice] Using Prism parser&#39;</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-constant">Brakeman</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;[Notice] Asked to use Prism, but failed to load: #{e}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">scan</span> <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-scan" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">scan</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Run a scan. Generally called from <a href="Brakeman.html#method-c-run"><code>Brakeman.run</code></a> instead of directly.</p>
+
+          <div class="method-source-code" id="scan-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 395</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">scan</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-comment">#Load scanner</span>
+  <span class="ruby-identifier">notify</span> <span class="ruby-string">&quot;Loading scanner...&quot;</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;brakeman/scanner&#39;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoBrakemanError</span>, <span class="ruby-string">&quot;Cannot find lib/ directory.&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">add_external_checks</span> <span class="ruby-identifier">options</span>
+
+  <span class="ruby-comment">#Start scanning</span>
+  <span class="ruby-identifier">scanner</span> = <span class="ruby-constant">Scanner</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">tracker</span> = <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">tracker</span>
+
+  <span class="ruby-identifier">check_for_missing_checks</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:run_checks</span>], <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_checks</span>], <span class="ruby-identifier">options</span>[<span class="ruby-value">:enable_checks</span>]
+
+  <span class="ruby-identifier">notify</span> <span class="ruby-node">&quot;Processing application in #{tracker.app_path}&quot;</span>
+  <span class="ruby-identifier">scanner</span>.<span class="ruby-identifier">process</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:parallel_checks</span>]
+    <span class="ruby-identifier">notify</span> <span class="ruby-string">&quot;Running checks in parallel...&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">notify</span> <span class="ruby-string">&quot;Running checks...&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">run_checks</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_warnings</span> <span class="ruby-identifier">tracker</span>, <span class="ruby-identifier">options</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>]
+    <span class="ruby-identifier">notify</span> <span class="ruby-string">&quot;Generating report...&quot;</span>
+
+    <span class="ruby-identifier">write_report_to_files</span> <span class="ruby-identifier">tracker</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_files</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:print_report</span>]
+    <span class="ruby-identifier">notify</span> <span class="ruby-string">&quot;Generating report...&quot;</span>
+
+    <span class="ruby-identifier">write_report_to_formats</span> <span class="ruby-identifier">tracker</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_formats</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">tracker</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-set_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">set_options</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Sets up options for run, checks given application path</p>
+
+          <div class="method-source-code" id="set_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_options</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">options</span> = { <span class="ruby-value">:app_path</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">options</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:command_line</span>
+    <span class="ruby-identifier">command_line</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value">:quiet</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">default_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">load_options</span>(<span class="ruby-identifier">options</span>)).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">command_line</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>] = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>]
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails5</span>]
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>] = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails6</span>]
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails3</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails4</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails5</span>] = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:output_formats</span>] = <span class="ruby-identifier">get_output_formats</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:github_url</span>] = <span class="ruby-identifier">get_github_url</span> <span class="ruby-identifier">options</span>
+
+
+  <span class="ruby-comment"># Use ENV value only if option was not already explicitly set</span>
+  <span class="ruby-comment"># (i.e. prefer commandline option over environment variable).</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:gemfile</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;BUNDLE_GEMFILE&#39;</span>] <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;BUNDLE_GEMFILE&#39;</span>].<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:gemfile</span>] = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;BUNDLE_GEMFILE&#39;</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

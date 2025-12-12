@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Puma::ClusterAcceptLoopDelay - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-calculate">#calculate</a>
+    <li ><a href="#method-i-on-3F">#on?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Puma::ClusterAcceptLoopDelay">
+  <h1 id="class-Puma::ClusterAcceptLoopDelay" class="class">
+    class Puma::ClusterAcceptLoopDelay
+  </h1>
+
+  <section class="description">
+    
+<p>Calculate a delay value for sleeping when running in clustered mode</p>
+
+<p>The main reason this is a class is so it can be unit tested independently. This makes modification easier in the future if we can encode properties of the delay into a test instead of relying on end-to-end testing only.</p>
+
+<p>This is an imprecise mechanism to address specific goals:</p>
+<ul><li>
+<p>Evenly distribute requests across all workers at start</p>
+</li><li>
+<p>Evenly distribute CPU resources across all workers</p>
+</li></ul>
+
+<p>## Goal: Distribute requests across workers at start</p>
+
+<p>There was a perf bug in <a href="../Puma.html"><code>Puma</code></a> where one worker would wake up slightly before the rest and accept all the requests on the socket even though it didn’t have enough resources to process all of them. This was originally fixed by never calling accept when a worker had more requests than threads already <a href="https://github.com/puma/puma/pull/3678/files/2736ebddb3fc8528e5150b5913fba251c37a8bf7#diff-a95f46e7ce116caddc9b9a9aa81004246d5210d5da5f4df90a818c780630166bL251-L291">github.com/puma/puma/pull/3678/files/2736ebddb3fc8528e5150b5913fba251c37a8bf7#diff-a95f46e7ce116caddc9b9a9aa81004246d5210d5da5f4df90a818c780630166bL251-L291</a></p>
+
+<p>With the introduction of true keepalive support, there are two ways a request can come in:</p>
+<ul><li>
+<p>A new request from a new client comes into the socket and it must be “accept”-ed</p>
+</li><li>
+<p>A keepalive request is served and the connection is retained. Another request is then accepted</p>
+</li></ul>
+
+<p>Ideally the server handles requests in the order they come in, and ideally it doesn’t accept more requests than it can handle. These goals are contradictory, because when the server is at maximum capacity due to keepalive connections, it could mean we block all new requests, even if those came in before the new request on the older keepalive connection.</p>
+
+<p>## Goal: Distribute CPU resources across all workers</p>
+<ul><li>
+<p>This issue was opened <a href="https://github.com/puma/puma/issues/2078">github.com/puma/puma/issues/2078</a></p>
+</li></ul>
+
+<p>There are several entangled issues and it’s not exactly clear what the root cause is, but the observable outcome was that performance was better with a small sleep, and that eventually became the default.</p>
+
+<p>An attempt to describe why this works is here: <a href="https://github.com/puma/puma/issues/2078#issuecomment-3287032470">github.com/puma/puma/issues/2078#issuecomment-3287032470</a>.</p>
+
+<p>Summarizing: The delay is for tuning the rate at which “accept” is called on the socket. <a href="../Puma.html"><code>Puma</code></a> works by calling “accept” nonblock on the socket in a loop. When there are multiple workers (processes), they will “race” to accept a request at roughly the same rate. However, if one worker has all threads busy processing requests, then accepting a new request might “steal” it from a less busy worker. If a worker has no work to do, it should loop as fast as possible.</p>
+
+<p>## Solution: Distribute requests across workers at start</p>
+
+<p>For now, both goals are framed as “load balancing” across workers (processes) and achieved through the same mechanism of sleeping longer to delay busier workers. Rather than the prior <a href="../Puma.html"><code>Puma</code></a> 6.x and earlier behavior of using a binary on/off sleep value, we increase it an amount proportional to the load the server is under, capping the maximum delay to the scenario where all threads are busy and the todo list has reached a multiplier of the maximum number of threads.</p>
+
+<p>Private: API may change unexpectedly</p>
+
+<p>Calculate a delay value for sleeping when running in clustered mode</p>
+
+<p>The main reason this is a class is so it can be unit tested independently. This makes modification easier in the future if we can encode properties of the delay into a test instead of relying on end-to-end testing only.</p>
+
+<p>This is an imprecise mechanism to address specific goals:</p>
+<ul><li>
+<p>Evenly distribute requests across all workers at start</p>
+</li><li>
+<p>Evenly distribute CPU resources across all workers</p>
+</li></ul>
+
+<p>## Goal: Distribute requests across workers at start</p>
+
+<p>There was a perf bug in <a href="../Puma.html"><code>Puma</code></a> where one worker would wake up slightly before the rest and accept all the requests on the socket even though it didn’t have enough resources to process all of them. This was originally fixed by never calling accept when a worker had more requests than threads already <a href="https://github.com/puma/puma/pull/3678/files/2736ebddb3fc8528e5150b5913fba251c37a8bf7#diff-a95f46e7ce116caddc9b9a9aa81004246d5210d5da5f4df90a818c780630166bL251-L291">github.com/puma/puma/pull/3678/files/2736ebddb3fc8528e5150b5913fba251c37a8bf7#diff-a95f46e7ce116caddc9b9a9aa81004246d5210d5da5f4df90a818c780630166bL251-L291</a></p>
+
+<p>With the introduction of true keepalive support, there are two ways a request can come in:</p>
+<ul><li>
+<p>A new request from a new client comes into the socket and it must be “accept”-ed</p>
+</li><li>
+<p>A keepalive request is served and the connection is retained. Another request is then accepted</p>
+</li></ul>
+
+<p>Ideally the server handles requests in the order they come in, and ideally it doesn’t accept more requests than it can handle. These goals are contradictory, because when the server is at maximum capacity due to keepalive connections, it could mean we block all new requests, even if those came in before the new request on the older keepalive connection.</p>
+
+<p>## Goal: Distribute CPU resources across all workers</p>
+<ul><li>
+<p>This issue was opened <a href="https://github.com/puma/puma/issues/2078">github.com/puma/puma/issues/2078</a></p>
+</li></ul>
+
+<p>There are several entangled issues and it’s not exactly clear what the root cause is, but the observable outcome was that performance was better with a small sleep, and that eventually became the default.</p>
+
+<p>An attempt to describe why this works is here: <a href="https://github.com/puma/puma/issues/2078#issuecomment-3287032470">github.com/puma/puma/issues/2078#issuecomment-3287032470</a>.</p>
+
+<p>Summarizing: The delay is for tuning the rate at which “accept” is called on the socket. <a href="../Puma.html"><code>Puma</code></a> works by calling “accept” nonblock on the socket in a loop. When there are multiple workers (processes), they will “race” to accept a request at roughly the same rate. However, if one worker has all threads busy processing requests, then accepting a new request might “steal” it from a less busy worker. If a worker has no work to do, it should loop as fast as possible.</p>
+
+<p>## Solution: Distribute requests across workers at start</p>
+
+<p>For now, both goals are framed as “load balancing” across workers (processes) and achieved through the same mechanism of sleeping longer to delay busier workers. Rather than the prior <a href="../Puma.html"><code>Puma</code></a> 6.x and earlier behavior of using a binary on/off sleep value, we increase it an amount proportional to the load the server is under, capping the maximum delay to the scenario where all threads are busy and the todo list has reached a multiplier of the maximum number of threads.</p>
+
+<p>Private: API may change unexpectedly</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-max_delay" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">max_delay</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">( workers: , max_delay: )</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initialize happens once, ‘call` happens often. Perform global calculations here.</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster_accept_loop_delay.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(
+  <span class="ruby-comment"># Number of workers in the cluster</span>
+  <span class="ruby-value">workers:</span> ,
+  <span class="ruby-comment"># Maximum delay in seconds i.e. 0.005 is 5 milliseconds</span>
+  <span class="ruby-value">max_delay:</span>
+)
+  <span class="ruby-ivar">@on</span> = <span class="ruby-identifier">max_delay</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">workers</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span>
+  <span class="ruby-ivar">@max_delay</span> = <span class="ruby-identifier">max_delay</span>.<span class="ruby-identifier">to_f</span>
+
+  <span class="ruby-comment"># Reach maximum delay when `max_threads * overload_multiplier` is reached in the system</span>
+  <span class="ruby-ivar">@overload_multiplier</span> = <span class="ruby-value">25.0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-calculate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">calculate</span><span
+              class="method-args">( busy_threads_plus_todo:, max_threads: )</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>We want the extreme values of this delay to be known (minimum and maximum) as well as a predictable curve between the two. i.e. no step functions or hard cliffs.</p>
+
+<p>Return value is always numeric. Returns 0 if there should be no delay.</p>
+
+          <div class="method-source-code" id="calculate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster_accept_loop_delay.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">calculate</span>(
+  <span class="ruby-comment"># Number of threads working right now, plus number of requests in the todo list</span>
+  <span class="ruby-value">busy_threads_plus_todo:</span>,
+  <span class="ruby-comment"># Maximum number of threads in the pool, note that the busy threads (alone) may go over this value at times</span>
+  <span class="ruby-comment"># if the pool needs to be reaped. The busy thread plus todo count may go over this value by a large amount.</span>
+  <span class="ruby-value">max_threads:</span>
+)
+  <span class="ruby-identifier">max_value</span> = <span class="ruby-ivar">@overload_multiplier</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">max_threads</span>
+  <span class="ruby-comment"># Approaches max delay when `busy_threads_plus_todo` approaches `max_value`</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">max_delay</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">busy_threads_plus_todo</span>.<span class="ruby-identifier">clamp</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">max_value</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">max_value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-on-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">on?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="on-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster_accept_loop_delay.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on?</span>
+  <span class="ruby-ivar">@on</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

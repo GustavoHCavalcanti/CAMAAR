@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class PG::TextEncoder::Record - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../RecordEncoder.html">PG::RecordEncoder</a>
+</div>
+
+    
+    
+    
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PG::TextEncoder::Record">
+  <h1 id="class-PG::TextEncoder::Record" class="class">
+    class PG::TextEncoder::Record
+  </h1>
+
+  <section class="description">
+    
+<p>This class encodes one record of columns for transmission as query parameter in text format. See PostgreSQL <a href="https://www.postgresql.org/docs/current/rowtypes.html">Composite Types</a> for a description of the format and how it can be used.</p>
+
+<p>PostgreSQL allows composite types to be used in many of the same ways that simple types can be used. For example, a column of a table can be declared to be of a composite type.</p>
+
+<p>The encoder expects the record columns as array of values. The single values are encoded as defined in the assigned <a href="../RecordCoder.html#method-i-type_map"><code>type_map</code></a>. If no type_map was assigned, all values are converted to strings by <a href="String.html"><code>PG::TextEncoder::String</code></a>.</p>
+
+<p>It is possible to manually assign a type encoder for each column per <a href="../TypeMapByColumn.html"><code>PG::TypeMapByColumn</code></a>, or to make use of <a href="../BasicTypeMapBasedOnResult.html"><code>PG::BasicTypeMapBasedOnResult</code></a> to assign them based on the table OIDs.</p>
+
+<p>Encode a record from an <code>Array&lt;String&gt;</code> to a <code>String</code> in PostgreSQL Composite Type format (uses default type map <a href="../TypeMapAllStrings.html"><code>TypeMapAllStrings</code></a>):</p>
+
+<pre class="ruby"><span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">encode</span>([<span class="ruby-value">1</span>, <span class="ruby-value">2</span>])  <span class="ruby-comment"># =&gt; &quot;(\&quot;1\&quot;,\&quot;2\&quot;)&quot;</span>
+</pre>
+
+<p>Encode a record from <code>Array&lt;Float&gt;</code> to <code>String</code> :</p>
+
+<pre class="ruby"><span class="ruby-comment"># Build a type map for two Floats</span>
+<span class="ruby-identifier">tm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Float</span>.<span class="ruby-identifier">new</span>]<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+<span class="ruby-comment"># Use this type map to encode the record:</span>
+<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">type_map:</span> <span class="ruby-identifier">tm</span>).<span class="ruby-identifier">encode</span>([<span class="ruby-value">1</span>,<span class="ruby-value">2</span>])
+<span class="ruby-comment"># =&gt; &quot;(\&quot;1.0\&quot;,\&quot;2.0\&quot;)&quot;</span>
+</pre>
+
+<p>Records can also be encoded and decoded directly to and from the database. This avoids intermediate string allocations and is very fast. Take the following type and table definitions:</p>
+
+<pre class="ruby"><span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&quot;CREATE TYPE complex AS (r float, i float) &quot;</span>)
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&quot;CREATE TABLE my_table (v1 complex, v2 complex) &quot;</span>)
+</pre>
+
+<p>A record can be encoded by adding a type map to <a href="../Connection.html#method-i-exec_params"><code>Connection#exec_params</code></a> and siblings:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Build a type map for the two floats &quot;r&quot; and &quot;i&quot; as in our &quot;complex&quot; type</span>
+<span class="ruby-identifier">tm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Float</span>.<span class="ruby-identifier">new</span>]<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+<span class="ruby-comment"># Build a record encoder to encode this type as a record:</span>
+<span class="ruby-identifier">enco</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">type_map:</span> <span class="ruby-identifier">tm</span>)
+<span class="ruby-comment"># Insert table data and use the encoder to cast the complex value &quot;v1&quot; from ruby array:</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec_params</span>(<span class="ruby-string">&quot;INSERT INTO my_table VALUES ($1) RETURNING v1&quot;</span>, [[<span class="ruby-value">1</span>,<span class="ruby-value">2</span>]], <span class="ruby-value">0</span>, <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">enco</span>])).<span class="ruby-identifier">to_a</span>
+<span class="ruby-comment"># =&gt; [{&quot;v1&quot;=&gt;&quot;(1,2)&quot;}]</span>
+</pre>
+
+<p>Alternatively the typemap can be build based on database OIDs rather than manually assigning encoders.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Fetch a NULL record of our type to retrieve the OIDs of the two fields &quot;r&quot; and &quot;i&quot;</span>
+<span class="ruby-identifier">oids</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>( <span class="ruby-string">&quot;SELECT (NULL::complex).*&quot;</span> )
+<span class="ruby-comment"># Build a type map (PG::TypeMapByColumn) for encoding the &quot;complex&quot; type</span>
+<span class="ruby-identifier">etm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">BasicTypeMapBasedOnResult</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">conn</span>).<span class="ruby-identifier">build_column_map</span>( <span class="ruby-identifier">oids</span> )
+</pre>
+
+<p>It’s also possible to use the <a href="../BasicTypeMapForQueries.html"><code>BasicTypeMapForQueries</code></a> to send records to the database server. In contrast to ORM libraries, <a href="../../PG.html"><code>PG</code></a> doesn’t have information regarding the type of data the server is expecting. So <a href="../BasicTypeMapForQueries.html"><code>BasicTypeMapForQueries</code></a> works based on the class of the values to be sent and it has to be instructed that a ruby array shall be casted to a record.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Retrieve OIDs of all basic types from the database</span>
+<span class="ruby-identifier">etm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">BasicTypeMapForQueries</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">conn</span>)
+<span class="ruby-identifier">etm</span>.<span class="ruby-identifier">encode_array_as</span> = <span class="ruby-value">:record</span>
+<span class="ruby-comment"># Apply the basic type registry to all values sent to the server</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">type_map_for_queries</span> = <span class="ruby-identifier">etm</span>
+<span class="ruby-comment"># Send a complex number as an array of two integers</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec_params</span>(<span class="ruby-string">&quot;INSERT INTO my_table VALUES ($1) RETURNING v1&quot;</span>, [[<span class="ruby-value">1</span>,<span class="ruby-value">2</span>]]).<span class="ruby-identifier">to_a</span>
+<span class="ruby-comment"># =&gt; [{&quot;v1&quot;=&gt;&quot;(1,2)&quot;}]</span>
+</pre>
+
+<p>Records can also be nested or further wrapped into other encoders like <a href="CopyRow.html"><code>PG::TextEncoder::CopyRow</code></a>.</p>
+
+<p>See also <a href="../TextDecoder/Record.html"><code>PG::TextDecoder::Record</code></a> for the decoding direction.</p>
+
+<p>This class encodes one record of columns for transmission as query parameter in text format. See PostgreSQL <a href="https://www.postgresql.org/docs/current/rowtypes.html">Composite Types</a> for a description of the format and how it can be used.</p>
+
+<p>PostgreSQL allows composite types to be used in many of the same ways that simple types can be used. For example, a column of a table can be declared to be of a composite type.</p>
+
+<p>The encoder expects the record columns as array of values. The single values are encoded as defined in the assigned <a href="../RecordCoder.html#method-i-type_map"><code>type_map</code></a>. If no type_map was assigned, all values are converted to strings by <a href="String.html"><code>PG::TextEncoder::String</code></a>.</p>
+
+<p>It is possible to manually assign a type encoder for each column per <a href="../TypeMapByColumn.html"><code>PG::TypeMapByColumn</code></a>, or to make use of <a href="../BasicTypeMapBasedOnResult.html"><code>PG::BasicTypeMapBasedOnResult</code></a> to assign them based on the table OIDs.</p>
+
+<p>Encode a record from an <code>Array&lt;String&gt;</code> to a <code>String</code> in PostgreSQL Composite Type format (uses default type map <a href="../TypeMapAllStrings.html"><code>TypeMapAllStrings</code></a>):</p>
+
+<pre class="ruby"><span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">encode</span>([<span class="ruby-value">1</span>, <span class="ruby-value">2</span>])  <span class="ruby-comment"># =&gt; &quot;(\&quot;1\&quot;,\&quot;2\&quot;)&quot;</span>
+</pre>
+
+<p>Encode a record from <code>Array&lt;Float&gt;</code> to <code>String</code> :</p>
+
+<pre class="ruby"><span class="ruby-comment"># Build a type map for two Floats</span>
+<span class="ruby-identifier">tm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Float</span>.<span class="ruby-identifier">new</span>]<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+<span class="ruby-comment"># Use this type map to encode the record:</span>
+<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">type_map:</span> <span class="ruby-identifier">tm</span>).<span class="ruby-identifier">encode</span>([<span class="ruby-value">1</span>,<span class="ruby-value">2</span>])
+<span class="ruby-comment"># =&gt; &quot;(\&quot;1.0\&quot;,\&quot;2.0\&quot;)&quot;</span>
+</pre>
+
+<p>Records can also be encoded and decoded directly to and from the database. This avoids intermediate string allocations and is very fast. Take the following type and table definitions:</p>
+
+<pre class="ruby"><span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&quot;CREATE TYPE complex AS (r float, i float) &quot;</span>)
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&quot;CREATE TABLE my_table (v1 complex, v2 complex) &quot;</span>)
+</pre>
+
+<p>A record can be encoded by adding a type map to <a href="../Connection.html#method-i-exec_params"><code>Connection#exec_params</code></a> and siblings:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Build a type map for the two floats &quot;r&quot; and &quot;i&quot; as in our &quot;complex&quot; type</span>
+<span class="ruby-identifier">tm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Float</span>.<span class="ruby-identifier">new</span>]<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+<span class="ruby-comment"># Build a record encoder to encode this type as a record:</span>
+<span class="ruby-identifier">enco</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">type_map:</span> <span class="ruby-identifier">tm</span>)
+<span class="ruby-comment"># Insert table data and use the encoder to cast the complex value &quot;v1&quot; from ruby array:</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec_params</span>(<span class="ruby-string">&quot;INSERT INTO my_table VALUES ($1) RETURNING v1&quot;</span>, [[<span class="ruby-value">1</span>,<span class="ruby-value">2</span>]], <span class="ruby-value">0</span>, <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">enco</span>])).<span class="ruby-identifier">to_a</span>
+<span class="ruby-comment"># =&gt; [{&quot;v1&quot;=&gt;&quot;(1,2)&quot;}]</span>
+</pre>
+
+<p>Alternatively the typemap can be build based on database OIDs rather than manually assigning encoders.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Fetch a NULL record of our type to retrieve the OIDs of the two fields &quot;r&quot; and &quot;i&quot;</span>
+<span class="ruby-identifier">oids</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>( <span class="ruby-string">&quot;SELECT (NULL::complex).*&quot;</span> )
+<span class="ruby-comment"># Build a type map (PG::TypeMapByColumn) for encoding the &quot;complex&quot; type</span>
+<span class="ruby-identifier">etm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">BasicTypeMapBasedOnResult</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">conn</span>).<span class="ruby-identifier">build_column_map</span>( <span class="ruby-identifier">oids</span> )
+</pre>
+
+<p>It’s also possible to use the <a href="../BasicTypeMapForQueries.html"><code>BasicTypeMapForQueries</code></a> to send records to the database server. In contrast to ORM libraries, <a href="../../PG.html"><code>PG</code></a> doesn’t have information regarding the type of data the server is expecting. So <a href="../BasicTypeMapForQueries.html"><code>BasicTypeMapForQueries</code></a> works based on the class of the values to be sent and it has to be instructed that a ruby array shall be casted to a record.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Retrieve OIDs of all basic types from the database</span>
+<span class="ruby-identifier">etm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">BasicTypeMapForQueries</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">conn</span>)
+<span class="ruby-identifier">etm</span>.<span class="ruby-identifier">encode_array_as</span> = <span class="ruby-value">:record</span>
+<span class="ruby-comment"># Apply the basic type registry to all values sent to the server</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">type_map_for_queries</span> = <span class="ruby-identifier">etm</span>
+<span class="ruby-comment"># Send a complex number as an array of two integers</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec_params</span>(<span class="ruby-string">&quot;INSERT INTO my_table VALUES ($1) RETURNING v1&quot;</span>, [[<span class="ruby-value">1</span>,<span class="ruby-value">2</span>]]).<span class="ruby-identifier">to_a</span>
+<span class="ruby-comment"># =&gt; [{&quot;v1&quot;=&gt;&quot;(1,2)&quot;}]</span>
+</pre>
+
+<p>Records can also be nested or further wrapped into other encoders like <a href="CopyRow.html"><code>PG::TextEncoder::CopyRow</code></a>.</p>
+
+<p>See also <a href="../TextDecoder/Record.html"><code>PG::TextDecoder::Record</code></a> for the decoding direction.</p>
+
+<p>This class encodes one record of columns for transmission as query parameter in text format. See PostgreSQL <a href="https://www.postgresql.org/docs/current/rowtypes.html">Composite Types</a> for a description of the format and how it can be used.</p>
+
+<p>PostgreSQL allows composite types to be used in many of the same ways that simple types can be used. For example, a column of a table can be declared to be of a composite type.</p>
+
+<p>The encoder expects the record columns as array of values. The single values are encoded as defined in the assigned <a href="../RecordCoder.html#method-i-type_map"><code>type_map</code></a>. If no type_map was assigned, all values are converted to strings by <a href="String.html"><code>PG::TextEncoder::String</code></a>.</p>
+
+<p>It is possible to manually assign a type encoder for each column per <a href="../TypeMapByColumn.html"><code>PG::TypeMapByColumn</code></a>, or to make use of <a href="../BasicTypeMapBasedOnResult.html"><code>PG::BasicTypeMapBasedOnResult</code></a> to assign them based on the table OIDs.</p>
+
+<p>Encode a record from an <code>Array&lt;String&gt;</code> to a <code>String</code> in PostgreSQL Composite Type format (uses default type map <a href="../TypeMapAllStrings.html"><code>TypeMapAllStrings</code></a>):</p>
+
+<pre class="ruby"><span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">encode</span>([<span class="ruby-value">1</span>, <span class="ruby-value">2</span>])  <span class="ruby-comment"># =&gt; &quot;(\&quot;1\&quot;,\&quot;2\&quot;)&quot;</span>
+</pre>
+
+<p>Encode a record from <code>Array&lt;Float&gt;</code> to <code>String</code> :</p>
+
+<pre class="ruby"><span class="ruby-comment"># Build a type map for two Floats</span>
+<span class="ruby-identifier">tm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Float</span>.<span class="ruby-identifier">new</span>]<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+<span class="ruby-comment"># Use this type map to encode the record:</span>
+<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">type_map:</span> <span class="ruby-identifier">tm</span>).<span class="ruby-identifier">encode</span>([<span class="ruby-value">1</span>,<span class="ruby-value">2</span>])
+<span class="ruby-comment"># =&gt; &quot;(\&quot;1.0\&quot;,\&quot;2.0\&quot;)&quot;</span>
+</pre>
+
+<p>Records can also be encoded and decoded directly to and from the database. This avoids intermediate string allocations and is very fast. Take the following type and table definitions:</p>
+
+<pre class="ruby"><span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&quot;CREATE TYPE complex AS (r float, i float) &quot;</span>)
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>(<span class="ruby-string">&quot;CREATE TABLE my_table (v1 complex, v2 complex) &quot;</span>)
+</pre>
+
+<p>A record can be encoded by adding a type map to <a href="../Connection.html#method-i-exec_params"><code>Connection#exec_params</code></a> and siblings:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Build a type map for the two floats &quot;r&quot; and &quot;i&quot; as in our &quot;complex&quot; type</span>
+<span class="ruby-identifier">tm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Float</span>.<span class="ruby-identifier">new</span>]<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+<span class="ruby-comment"># Build a record encoder to encode this type as a record:</span>
+<span class="ruby-identifier">enco</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TextEncoder</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">type_map:</span> <span class="ruby-identifier">tm</span>)
+<span class="ruby-comment"># Insert table data and use the encoder to cast the complex value &quot;v1&quot; from ruby array:</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec_params</span>(<span class="ruby-string">&quot;INSERT INTO my_table VALUES ($1) RETURNING v1&quot;</span>, [[<span class="ruby-value">1</span>,<span class="ruby-value">2</span>]], <span class="ruby-value">0</span>, <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeMapByColumn</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">enco</span>])).<span class="ruby-identifier">to_a</span>
+<span class="ruby-comment"># =&gt; [{&quot;v1&quot;=&gt;&quot;(1,2)&quot;}]</span>
+</pre>
+
+<p>Alternatively the typemap can be build based on database OIDs rather than manually assigning encoders.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Fetch a NULL record of our type to retrieve the OIDs of the two fields &quot;r&quot; and &quot;i&quot;</span>
+<span class="ruby-identifier">oids</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec</span>( <span class="ruby-string">&quot;SELECT (NULL::complex).*&quot;</span> )
+<span class="ruby-comment"># Build a type map (PG::TypeMapByColumn) for encoding the &quot;complex&quot; type</span>
+<span class="ruby-identifier">etm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">BasicTypeMapBasedOnResult</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">conn</span>).<span class="ruby-identifier">build_column_map</span>( <span class="ruby-identifier">oids</span> )
+</pre>
+
+<p>It’s also possible to use the <a href="../BasicTypeMapForQueries.html"><code>BasicTypeMapForQueries</code></a> to send records to the database server. In contrast to ORM libraries, <a href="../../PG.html"><code>PG</code></a> doesn’t have information regarding the type of data the server is expecting. So <a href="../BasicTypeMapForQueries.html"><code>BasicTypeMapForQueries</code></a> works based on the class of the values to be sent and it has to be instructed that a ruby array shall be casted to a record.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Retrieve OIDs of all basic types from the database</span>
+<span class="ruby-identifier">etm</span> = <span class="ruby-constant">PG</span><span class="ruby-operator">::</span><span class="ruby-constant">BasicTypeMapForQueries</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">conn</span>)
+<span class="ruby-identifier">etm</span>.<span class="ruby-identifier">encode_array_as</span> = <span class="ruby-value">:record</span>
+<span class="ruby-comment"># Apply the basic type registry to all values sent to the server</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">type_map_for_queries</span> = <span class="ruby-identifier">etm</span>
+<span class="ruby-comment"># Send a complex number as an array of two integers</span>
+<span class="ruby-identifier">conn</span>.<span class="ruby-identifier">exec_params</span>(<span class="ruby-string">&quot;INSERT INTO my_table VALUES ($1) RETURNING v1&quot;</span>, [[<span class="ruby-value">1</span>,<span class="ruby-value">2</span>]]).<span class="ruby-identifier">to_a</span>
+<span class="ruby-comment"># =&gt; [{&quot;v1&quot;=&gt;&quot;(1,2)&quot;}]</span>
+</pre>
+
+<p>Records can also be nested or further wrapped into other encoders like <a href="CopyRow.html"><code>PG::TextEncoder::CopyRow</code></a>.</p>
+
+<p>See also <a href="../TextDecoder/Record.html"><code>PG::TextDecoder::Record</code></a> for the decoding direction.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module ActionView::RoutingUrlFor - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-i-url_for">#url_for</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-ActionView::RoutingUrlFor">
+  <h1 id="module-ActionView::RoutingUrlFor" class="module">
+    module ActionView::RoutingUrlFor
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-url_for" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">url_for</span><span
+              class="method-args">(options = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the URL for the set of <code>options</code> provided. This takes the same options as <code>url_for</code> in Action Controller (see the documentation for <a href="../ActionDispatch/Routing/UrlFor.html#method-i-url_for"><code>ActionDispatch::Routing::UrlFor#url_for</code></a>). Note that by default <code>:only_path</code> is <code>true</code> so you’ll get the relative <code>&quot;/controller/action&quot;</code> instead of the fully qualified URL like <code>&quot;http://example.com/controller/action&quot;</code>.</p>
+
+<h4 id="method-i-url_for-label-Options">Options<span><a href="#method-i-url_for-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:anchor</code> - Specifies the anchor name to be appended to the path.</p>
+</li><li>
+<p><code>:only_path</code> - If true, returns the relative URL (omitting the protocol, host name, and port) (<code>true</code> by default unless <code>:host</code> is specified).</p>
+</li><li>
+<p><code>:trailing_slash</code> - If true, adds a trailing slash, as in <code>&quot;/archive/2005/&quot;</code>. Note that this is currently not recommended since it breaks caching.</p>
+</li><li>
+<p><code>:host</code> - Overrides the default (current) host if provided.</p>
+</li><li>
+<p><code>:protocol</code> - Overrides the default (current) protocol if provided.</p>
+</li><li>
+<p><code>:user</code> - Inline HTTP authentication (only plucked out if <code>:password</code> is also present).</p>
+</li><li>
+<p><code>:password</code> - Inline HTTP authentication (only plucked out if <code>:user</code> is also present).</p>
+</li></ul>
+
+<h4 id="method-i-url_for-label-Relying+on+named+routes">Relying on named routes<span><a href="#method-i-url_for-label-Relying+on+named+routes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Passing a record (like an Active Record) instead of a hash as the options parameter will trigger the named route for that record. The lookup will happen on the name of the class. So passing a Workshop object will attempt to use the <code>workshop_path</code> route. If you have a nested route, such as <code>admin_workshop_path</code> you’ll have to call that explicitly (it’s impossible for <code>url_for</code> to guess that route).</p>
+
+<h4 id="method-i-url_for-label-Implicit+Controller+Namespacing">Implicit Controller Namespacing<span><a href="#method-i-url_for-label-Implicit+Controller+Namespacing">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Controllers passed in using the <code>:controller</code> option will retain their namespace unless it is an absolute one.</p>
+
+<h4 id="method-i-url_for-label-Examples">Examples<span><a href="#method-i-url_for-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre>&lt;%= url_for(action: &#39;index&#39;) %&gt;
+# =&gt; /blogs/
+
+&lt;%= url_for(action: &#39;find&#39;, controller: &#39;books&#39;) %&gt;
+# =&gt; /books/find
+
+&lt;%= url_for(action: &#39;login&#39;, controller: &#39;members&#39;, only_path: false, protocol: &#39;https&#39;) %&gt;
+# =&gt; https://www.example.com/members/login/
+
+&lt;%= url_for(action: &#39;play&#39;, anchor: &#39;player&#39;) %&gt;
+# =&gt; /messages/play/#player
+
+&lt;%= url_for(action: &#39;jump&#39;, anchor: &#39;tax&amp;ship&#39;) %&gt;
+# =&gt; /testing/jump/#tax&amp;ship
+
+&lt;%= url_for(Workshop) %&gt;
+# =&gt; /workshops
+
+&lt;%= url_for(Workshop.new) %&gt;
+# relies on Workshop answering a persisted? call (and in this case returning false)
+# =&gt; /workshops
+
+&lt;%= url_for(@workshop) %&gt;
+# calls @workshop.to_param which by default returns the id
+# =&gt; /workshops/5
+
+# to_param can be re-defined in a model to provide different URL names:
+# =&gt; /workshops/1-workshop-name
+
+&lt;%= url_for(&quot;http://www.example.com&quot;) %&gt;
+# =&gt; http://www.example.com
+
+&lt;%= url_for(:back) %&gt;
+# if request.env[&quot;HTTP_REFERER&quot;] is set to &quot;http://www.example.com&quot;
+# =&gt; http://www.example.com
+
+&lt;%= url_for(:back) %&gt;
+# if request.env[&quot;HTTP_REFERER&quot;] is not set or is blank
+# =&gt; javascript:history.back()
+
+&lt;%= url_for(action: &#39;index&#39;, controller: &#39;users&#39;) %&gt;
+# Assuming an &quot;admin&quot; namespace
+# =&gt; /admin/users
+
+&lt;%= url_for(action: &#39;index&#39;, controller: &#39;/users&#39;) %&gt;
+# Specify absolute path with beginning slash
+# =&gt; /users</pre>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="url_for-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/routing_url_for.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">url_for</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">super</span>(<span class="ruby-value">only_path:</span> <span class="ruby-identifier">_generate_paths_by_default</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys</span>
+    <span class="ruby-identifier">ensure_only_path_option</span>(<span class="ruby-identifier">options</span>)
+
+    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>
+    <span class="ruby-identifier">ensure_only_path_option</span>(<span class="ruby-identifier">options</span>)
+
+    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:back</span>
+    <span class="ruby-identifier">_back_url</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-identifier">components</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">components</span>.<span class="ruby-identifier">extract_options!</span>
+    <span class="ruby-identifier">ensure_only_path_option</span>(<span class="ruby-identifier">options</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:only_path</span>]
+      <span class="ruby-identifier">polymorphic_path</span>(<span class="ruby-identifier">components</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">polymorphic_url</span>(<span class="ruby-identifier">components</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">method</span> = <span class="ruby-identifier">_generate_paths_by_default</span> <span class="ruby-operator">?</span> <span class="ruby-value">:path</span> <span class="ruby-operator">:</span> <span class="ruby-value">:url</span>
+    <span class="ruby-identifier">builder</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Routing</span><span class="ruby-operator">::</span><span class="ruby-constant">PolymorphicRoutes</span><span class="ruby-operator">::</span><span class="ruby-constant">HelperMethodBuilder</span>.<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">method</span>)
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Symbol</span>
+      <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">handle_string_call</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Class</span>
+      <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">handle_class_call</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">handle_model_call</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

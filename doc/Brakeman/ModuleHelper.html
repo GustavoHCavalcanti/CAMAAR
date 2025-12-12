@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Brakeman::ModuleHelper - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-handle_class">#handle_class</a>
+    <li ><a href="#method-i-handle_module">#handle_module</a>
+    <li ><a href="#method-i-make_defs">#make_defs</a>
+    <li ><a href="#method-i-process_defn">#process_defn</a>
+    <li ><a href="#method-i-process_defs">#process_defs</a>
+    <li ><a href="#method-i-process_sclass">#process_sclass</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Brakeman::ModuleHelper">
+  <h1 id="module-Brakeman::ModuleHelper" class="module">
+    module Brakeman::ModuleHelper
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-handle_class" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">handle_class</span><span
+              class="method-args">(exp, collection, tracker_class) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="handle_class-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/lib/module_helper.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">handle_class</span> <span class="ruby-identifier">exp</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">tracker_class</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">class_name</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">class_name</span>)
+  <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">class_name</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">parent_name</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_class</span>
+    <span class="ruby-identifier">outer_class</span> = <span class="ruby-ivar">@current_class</span>
+    <span class="ruby-identifier">name</span> = (<span class="ruby-identifier">outer_class</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_module</span>
+    <span class="ruby-identifier">name</span> = (<span class="ruby-ivar">@current_module</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">collection</span>[<span class="ruby-identifier">name</span>]
+    <span class="ruby-ivar">@current_class</span> = <span class="ruby-identifier">collection</span>[<span class="ruby-identifier">name</span>]
+    <span class="ruby-ivar">@current_class</span>.<span class="ruby-identifier">add_file</span> <span class="ruby-ivar">@current_file</span>, <span class="ruby-identifier">exp</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@current_class</span> = <span class="ruby-identifier">tracker_class</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">parent</span>, <span class="ruby-ivar">@current_file</span>, <span class="ruby-identifier">exp</span>, <span class="ruby-ivar">@tracker</span>
+    <span class="ruby-identifier">collection</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-ivar">@current_class</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span> = <span class="ruby-identifier">process_all!</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span>
+
+  <span class="ruby-keyword">yield</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">outer_class</span>
+    <span class="ruby-ivar">@current_class</span> = <span class="ruby-identifier">outer_class</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@current_class</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">exp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-handle_module" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">handle_module</span><span
+              class="method-args">(exp, tracker_class, parent = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="handle_module-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/lib/module_helper.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">handle_module</span> <span class="ruby-identifier">exp</span>, <span class="ruby-identifier">tracker_class</span>, <span class="ruby-identifier">parent</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">class_name</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">module_name</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_module</span>
+    <span class="ruby-identifier">outer_module</span> = <span class="ruby-ivar">@current_module</span>
+    <span class="ruby-identifier">name</span> = (<span class="ruby-identifier">outer_module</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_class</span>
+    <span class="ruby-identifier">name</span> = (<span class="ruby-ivar">@current_class</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">libs</span>[<span class="ruby-identifier">name</span>]
+    <span class="ruby-ivar">@current_module</span> = <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">libs</span>[<span class="ruby-identifier">name</span>]
+    <span class="ruby-ivar">@current_module</span>.<span class="ruby-identifier">add_file</span> <span class="ruby-ivar">@current_file</span>, <span class="ruby-identifier">exp</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@current_module</span> = <span class="ruby-identifier">tracker_class</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">parent</span>, <span class="ruby-ivar">@current_file</span>, <span class="ruby-identifier">exp</span>, <span class="ruby-ivar">@tracker</span>
+    <span class="ruby-ivar">@tracker</span>.<span class="ruby-identifier">libs</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-ivar">@current_module</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span> = <span class="ruby-identifier">process_all!</span> <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">outer_module</span>
+    <span class="ruby-ivar">@current_module</span> = <span class="ruby-identifier">outer_module</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@current_module</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">exp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-make_defs" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">make_defs</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="make_defs-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/lib/module_helper.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">make_defs</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-comment"># &#39;What if&#39; there was some crazy code that had a</span>
+  <span class="ruby-comment"># defs inside a def inside an sclass? :|</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">exp</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">node_type?</span> <span class="ruby-identifier">exp</span>, <span class="ruby-value">:defs</span>
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unexpected node type: #{exp.node_type}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">node_type?</span> <span class="ruby-identifier">exp</span>, <span class="ruby-value">:defn</span>
+
+  <span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:defs</span>, <span class="ruby-identifier">s</span>(<span class="ruby-value">:self</span>), <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">method_name</span>, <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">formal_args</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span>).<span class="ruby-identifier">line</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">line</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_defn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_defn</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_defn-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/lib/module_helper.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_defn</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">method_name</span>
+
+  <span class="ruby-ivar">@current_method</span> = <span class="ruby-identifier">name</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inside_sclass</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">:defs</span>, <span class="ruby-identifier">s</span>(<span class="ruby-value">:self</span>), <span class="ruby-identifier">name</span>, <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">formal_args</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">process_all!</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">:defn</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">formal_args</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">process_all!</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">res</span>.<span class="ruby-identifier">line</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">line</span>)
+  <span class="ruby-ivar">@current_method</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_class</span>
+    <span class="ruby-ivar">@current_class</span>.<span class="ruby-identifier">add_method</span> <span class="ruby-ivar">@visibility</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">res</span>, <span class="ruby-ivar">@current_file</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@current_module</span>
+    <span class="ruby-ivar">@current_module</span>.<span class="ruby-identifier">add_method</span> <span class="ruby-ivar">@visibility</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">res</span>, <span class="ruby-ivar">@current_file</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">res</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_defs" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_defs</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="process_defs-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/lib/module_helper.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_defs</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">method_name</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node_type?</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>], <span class="ruby-value">:self</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_class</span>
+      <span class="ruby-identifier">target</span> = <span class="ruby-ivar">@current_class</span>.<span class="ruby-identifier">name</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@current_module</span>
+      <span class="ruby-identifier">target</span> = <span class="ruby-ivar">@current_module</span>.<span class="ruby-identifier">name</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">target</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">target</span> = <span class="ruby-identifier">class_name</span> <span class="ruby-identifier">exp</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@current_method</span> = <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">res</span> = <span class="ruby-constant">Sexp</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">:defs</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">exp</span>.<span class="ruby-identifier">formal_args</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">process_all!</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">res</span>.<span class="ruby-identifier">line</span>(<span class="ruby-identifier">exp</span>.<span class="ruby-identifier">line</span>)
+  <span class="ruby-ivar">@current_method</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment"># TODO: if target is not self/nil, then</span>
+  <span class="ruby-comment"># the method should be added to `target`, not current class</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_class</span>
+    <span class="ruby-ivar">@current_class</span>.<span class="ruby-identifier">add_method</span> <span class="ruby-ivar">@visibility</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">res</span>, <span class="ruby-ivar">@current_file</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@current_module</span>
+    <span class="ruby-ivar">@current_module</span>.<span class="ruby-identifier">add_method</span> <span class="ruby-ivar">@visibility</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">res</span>, <span class="ruby-ivar">@current_file</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">res</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process_sclass" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process_sclass</span><span
+              class="method-args">(exp)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>class &lt;&lt; self</p>
+
+          <div class="method-source-code" id="process_sclass-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/processors/lib/module_helper.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process_sclass</span> <span class="ruby-identifier">exp</span>
+  <span class="ruby-ivar">@inside_sclass</span> = <span class="ruby-keyword">true</span>
+
+  <span class="ruby-identifier">process_all!</span> <span class="ruby-identifier">exp</span>
+
+  <span class="ruby-identifier">exp</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@inside_sclass</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

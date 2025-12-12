@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module ActiveRecord::Querying - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-async_count_by_sql">#async_count_by_sql</a>
+    <li ><a href="#method-i-async_find_by_sql">#async_find_by_sql</a>
+    <li ><a href="#method-i-count_by_sql">#count_by_sql</a>
+    <li ><a href="#method-i-find_by_sql">#find_by_sql</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-ActiveRecord::Querying">
+  <h1 id="module-ActiveRecord::Querying" class="module">
+    module ActiveRecord::Querying
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-async_count_by_sql" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">async_count_by_sql</span><span
+              class="method-args">(sql)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Same as <a href="Querying.html#method-i-count_by_sql"><code>count_by_sql</code></a> but perform the query asynchronously and returns an <a href="Promise.html"><code>ActiveRecord::Promise</code></a>.</p>
+
+          <div class="method-source-code" id="async_count_by_sql-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/querying.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">async_count_by_sql</span>(<span class="ruby-identifier">sql</span>)
+  <span class="ruby-identifier">with_connection</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">select_value</span>(<span class="ruby-identifier">sanitize_sql</span>(<span class="ruby-identifier">sql</span>), <span class="ruby-node">&quot;#{name} Count&quot;</span>, <span class="ruby-value">async:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">then</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_i</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-async_find_by_sql" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">async_find_by_sql</span><span
+              class="method-args">(sql, binds = [], preparable: nil, allow_retry: false, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Same as <a href="Querying.html#method-i-find_by_sql"><code>find_by_sql</code></a> but perform the query asynchronously and returns an <a href="Promise.html"><code>ActiveRecord::Promise</code></a>.</p>
+
+          <div class="method-source-code" id="async_find_by_sql-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/querying.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">async_find_by_sql</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">binds</span> = [], <span class="ruby-value">preparable:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">allow_retry:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">with_connection</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">_query_by_sql</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">sql</span>, <span class="ruby-identifier">binds</span>, <span class="ruby-value">preparable:</span> <span class="ruby-identifier">preparable</span>, <span class="ruby-value">allow_retry:</span> <span class="ruby-identifier">allow_retry</span>, <span class="ruby-value">async:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">then</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">_load_from_sql</span>(<span class="ruby-identifier">result</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-count_by_sql" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">count_by_sql</span><span
+              class="method-args">(sql)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the result of an SQL statement that should only include a COUNT(*) in the SELECT part. The use of this method should be restricted to complicated SQL queries that can’t be executed using the <a href="Calculations.html"><code>ActiveRecord::Calculations</code></a> class methods. Look into those before using this method, as it could lock you into a specific database engine or require a code change to switch database engines.</p>
+
+<pre class="ruby"><span class="ruby-constant">Product</span>.<span class="ruby-identifier">count_by_sql</span> <span class="ruby-string">&quot;SELECT COUNT(*) FROM sales s, customers c WHERE s.customer_id = c.id&quot;</span>
+<span class="ruby-comment"># =&gt; 12</span>
+</pre>
+
+<h4 id="method-i-count_by_sql-label-Parameters">Parameters<span><a href="#method-i-count_by_sql-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>sql</code> - An SQL statement which should return a count query from the database, see the example above.</p>
+</li></ul>
+
+          <div class="method-source-code" id="count_by_sql-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/querying.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">count_by_sql</span>(<span class="ruby-identifier">sql</span>)
+  <span class="ruby-identifier">with_connection</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">select_value</span>(<span class="ruby-identifier">sanitize_sql</span>(<span class="ruby-identifier">sql</span>), <span class="ruby-node">&quot;#{name} Count&quot;</span>).<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-find_by_sql" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find_by_sql</span><span
+              class="method-args">(sql, binds = [], preparable: nil, allow_retry: false, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Executes a custom SQL query against your database and returns all the results. The results will be returned as an array, with the requested columns encapsulated as attributes of the model you call this method from. For example, if you call <code>Product.find_by_sql</code>, then the results will be returned in a <code>Product</code> object with the attributes you specified in the SQL query.</p>
+
+<p>If you call a complicated SQL query which spans multiple tables, the columns specified by the SELECT will be attributes of the model, whether or not they are columns of the corresponding table.</p>
+
+<p>The <code>sql</code> parameter is a full SQL query as a string. It will be called as is; there will be no database agnostic conversions performed. This should be a last resort because using database-specific terms will lock you into using that particular database engine, or require you to change your call if you switch engines.</p>
+
+<pre class="ruby"><span class="ruby-comment"># A simple SQL query spanning multiple tables</span>
+<span class="ruby-constant">Post</span>.<span class="ruby-identifier">find_by_sql</span> <span class="ruby-string">&quot;SELECT p.title, c.author FROM posts p, comments c WHERE p.id = c.post_id&quot;</span>
+<span class="ruby-comment"># =&gt; [#&lt;Post:0x36bff9c @attributes={&quot;title&quot;=&gt;&quot;Ruby Meetup&quot;, &quot;author&quot;=&gt;&quot;Quentin&quot;}&gt;, ...]</span>
+</pre>
+
+<p>You can use the same string replacement techniques as you can with <a href="QueryMethods.html#method-i-where"><code>ActiveRecord::QueryMethods#where</code></a> :</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">find_by_sql</span> [<span class="ruby-string">&quot;SELECT title FROM posts WHERE author = ? AND created &gt; ?&quot;</span>, <span class="ruby-identifier">author_id</span>, <span class="ruby-identifier">start_date</span>]
+<span class="ruby-constant">Post</span>.<span class="ruby-identifier">find_by_sql</span> [<span class="ruby-string">&quot;SELECT body FROM comments WHERE author = :user_id OR approved_by = :user_id&quot;</span>, { <span class="ruby-value">:user_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">user_id</span> }]
+</pre>
+
+<p>Note that building your own SQL query string from user input <a href="https://guides.rubyonrails.org/security.html#sql-injection">may expose your application to injection attacks</a>.</p>
+
+          <div class="method-source-code" id="find_by_sql-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/querying.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_by_sql</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">binds</span> = [], <span class="ruby-value">preparable:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">allow_retry:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">with_connection</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">_query_by_sql</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">sql</span>, <span class="ruby-identifier">binds</span>, <span class="ruby-value">preparable:</span> <span class="ruby-identifier">preparable</span>, <span class="ruby-value">allow_retry:</span> <span class="ruby-identifier">allow_retry</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">_load_from_sql</span>(<span class="ruby-identifier">result</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

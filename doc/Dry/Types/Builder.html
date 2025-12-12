@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Dry::Types::Builder - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="../Core/Constants.html">Dry::Core::Constants</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-26">#&amp;</a>
+    <li ><a href="#method-i-3E">#&gt;</a>
+    <li ><a href="#method-i-compose">#compose</a>
+    <li ><a href="#method-i-constrained">#constrained</a>
+    <li ><a href="#method-i-constrained_type">#constrained_type</a>
+    <li ><a href="#method-i-constructor">#constructor</a>
+    <li ><a href="#method-i-constructor_type">#constructor_type</a>
+    <li ><a href="#method-i-default">#default</a>
+    <li ><a href="#method-i-enum">#enum</a>
+    <li ><a href="#method-i-fallback">#fallback</a>
+    <li ><a href="#method-i-lax">#lax</a>
+    <li ><a href="#method-i-optional">#optional</a>
+    <li ><a href="#method-i-7C">#|</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Dry::Types::Builder">
+  <h1 id="module-Dry::Types::Builder" class="module">
+    module Dry::Types::Builder
+  </h1>
+
+  <section class="description">
+    
+<p>Common API for building types and composition</p>
+
+<p>@api public</p>
+
+<p>Common API for building types and composition</p>
+
+<p>@api public</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-26" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">&amp;</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Compose two types into an <a href="Intersection.html"><code>Intersection</code></a> type</p>
+
+<p>@param [Type] other</p>
+
+<p>@return [Intersection, Intersection::Constrained]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="26-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 37</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&amp;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Intersection</span>)
+
+    <span class="ruby-comment"># Compose two types into an Implication type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Type] other</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Implication, Implication::Constrained]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&gt;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Implication</span>)
+
+    <span class="ruby-comment"># Turn a type into an optional type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Sum]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">optional</span> = <span class="ruby-constant">Types</span>[<span class="ruby-string">&quot;nil&quot;</span>] <span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>
+
+    <span class="ruby-comment"># Turn a type into a constrained type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Hash] options constraining rule (see {Types.Rule})</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Constrained]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained</span>(<span class="ruby-operator">...</span>)
+      <span class="ruby-identifier">constrained_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">rule:</span> <span class="ruby-constant">Types</span>.<span class="ruby-constant">Rule</span>(<span class="ruby-operator">...</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Turn a type into a type with a default value</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Object] input</span>
+    <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+    <span class="ruby-comment"># @param [#call,nil] block</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @raise [ConstraintError]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Default]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default</span>(<span class="ruby-identifier">input</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-identifier">options</span> = <span class="ruby-constant">EMPTY_HASH</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:shared</span>]
+        <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+        <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+          <span class="ruby-node">&quot;#{input.inspect} is mutable. &quot;</span> \
+          <span class="ruby-string">&quot;Be careful: types will return the same instance of the default &quot;</span> \
+          <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the default &quot;</span> \
+          <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+          <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+          <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+        )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">default</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">type</span> = <span class="ruby-constant">Default</span>[<span class="ruby-identifier">value</span>].<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">value</span>)
+
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">type</span>.<span class="ruby-identifier">callable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+          <span class="ruby-node">&quot;default value #{value.inspect} violates constraints&quot;</span>,
+          <span class="ruby-identifier">value</span>
+        )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">type</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Define an enum on top of the existing type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Array] values</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Enum]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+      <span class="ruby-identifier">mapping</span> =
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+          <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">values</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">to_h</span>
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-constant">Enum</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">constrained</span>(<span class="ruby-value">included_in:</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">keys</span>), <span class="ruby-value">mapping:</span> <span class="ruby-identifier">mapping</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Turn a type into a lax type that will rescue from type-errors and</span>
+    <span class="ruby-comment"># return the original input</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Lax]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lax</span> = <span class="ruby-constant">Lax</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+    <span class="ruby-comment"># Define a constructor for the type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [#call,nil] constructor</span>
+    <span class="ruby-comment"># @param [Hash] options</span>
+    <span class="ruby-comment"># @param [#call,nil] block</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Constructor]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:append</span>, <span class="ruby-value">:constructor</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:prepend</span>, <span class="ruby-value">:constructor</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&gt;&gt;</span>, <span class="ruby-value">:constructor</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&lt;&lt;</span>, <span class="ruby-value">:constructor</span>
+
+    <span class="ruby-comment"># Use the given value on type mismatch</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Object] value</span>
+    <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+    <span class="ruby-comment"># @param [#call,nil] fallback</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Constructor]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+          <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+          <span class="ruby-identifier">value</span>
+        )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+        <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+        <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+          <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+          <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+          <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+          <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+          <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+          <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+        )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+            <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">value</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">private</span>
+
+    <span class="ruby-comment"># @api private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+      <span class="ruby-identifier">klass</span> =
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+          <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">composition_class</span>
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-3E" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">&gt;</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Compose two types into an <a href="Implication.html"><code>Implication</code></a> type</p>
+
+<p>@param [Type] other</p>
+
+<p>@return [Implication, Implication::Constrained]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="3E-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 46</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&gt;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Implication</span>)
+
+      <span class="ruby-comment"># Turn a type into an optional type</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @return [Sum]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @api public</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">optional</span> = <span class="ruby-constant">Types</span>[<span class="ruby-string">&quot;nil&quot;</span>] <span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>
+
+      <span class="ruby-comment"># Turn a type into a constrained type</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @param [Hash] options constraining rule (see {Types.Rule})</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @return [Constrained]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @api public</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained</span>(<span class="ruby-operator">...</span>)
+        <span class="ruby-identifier">constrained_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">rule:</span> <span class="ruby-constant">Types</span>.<span class="ruby-constant">Rule</span>(<span class="ruby-operator">...</span>))
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Turn a type into a type with a default value</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @param [Object] input</span>
+      <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+      <span class="ruby-comment"># @param [#call,nil] block</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @raise [ConstraintError]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @return [Default]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @api public</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default</span>(<span class="ruby-identifier">input</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-identifier">options</span> = <span class="ruby-constant">EMPTY_HASH</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:shared</span>]
+          <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+          <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+            <span class="ruby-node">&quot;#{input.inspect} is mutable. &quot;</span> \
+            <span class="ruby-string">&quot;Be careful: types will return the same instance of the default &quot;</span> \
+            <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the default &quot;</span> \
+            <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+            <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+            <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+          )
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">default</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">block</span>)
+        <span class="ruby-identifier">type</span> = <span class="ruby-constant">Default</span>[<span class="ruby-identifier">value</span>].<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">value</span>)
+
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">type</span>.<span class="ruby-identifier">callable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+            <span class="ruby-node">&quot;default value #{value.inspect} violates constraints&quot;</span>,
+            <span class="ruby-identifier">value</span>
+          )
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">type</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Define an enum on top of the existing type</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @param [Array] values</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @return [Enum]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @api public</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+        <span class="ruby-identifier">mapping</span> =
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+            <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">values</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">to_h</span>
+          <span class="ruby-keyword">end</span>
+
+        <span class="ruby-constant">Enum</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">constrained</span>(<span class="ruby-value">included_in:</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">keys</span>), <span class="ruby-value">mapping:</span> <span class="ruby-identifier">mapping</span>)
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Turn a type into a lax type that will rescue from type-errors and</span>
+      <span class="ruby-comment"># return the original input</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @return [Lax]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @api public</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lax</span> = <span class="ruby-constant">Lax</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+      <span class="ruby-comment"># Define a constructor for the type</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @param [#call,nil] constructor</span>
+      <span class="ruby-comment"># @param [Hash] options</span>
+      <span class="ruby-comment"># @param [#call,nil] block</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @return [Constructor]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @api public</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:append</span>, <span class="ruby-value">:constructor</span>
+      <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:prepend</span>, <span class="ruby-value">:constructor</span>
+      <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&gt;&gt;</span>, <span class="ruby-value">:constructor</span>
+      <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&lt;&lt;</span>, <span class="ruby-value">:constructor</span>
+
+      <span class="ruby-comment"># Use the given value on type mismatch</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @param [Object] value</span>
+      <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+      <span class="ruby-comment"># @param [#call,nil] fallback</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @return [Constructor]</span>
+      <span class="ruby-comment">#</span>
+      <span class="ruby-comment"># @api public</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+            <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+            <span class="ruby-identifier">value</span>
+          )
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+          <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+          <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+            <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+            <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+            <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+            <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+            <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+            <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+          )
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+              <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+            <span class="ruby-keyword">else</span>
+              <span class="ruby-identifier">value</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">private</span>
+
+      <span class="ruby-comment"># @api private</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+        <span class="ruby-identifier">klass</span> =
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+            <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">composition_class</span>
+          <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-compose" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">compose</span><span
+              class="method-args">(other, composition_class)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="compose-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+  <span class="ruby-identifier">klass</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+      <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">composition_class</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-constrained" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">constrained</span><span
+              class="method-args">(...)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Turn a type into a constrained type</p>
+
+<p>@param [Hash] options constraining rule (see {Types.Rule})</p>
+
+<p>@return [Constrained]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="constrained-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained</span>(<span class="ruby-operator">...</span>)
+  <span class="ruby-identifier">constrained_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">rule:</span> <span class="ruby-constant">Types</span>.<span class="ruby-constant">Rule</span>(<span class="ruby-operator">...</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-constrained_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">constrained_type</span><span
+              class="method-args">(= Constrained)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@return [Class]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="constrained_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained_type</span> = <span class="ruby-constant">Constrained</span>
+
+<span class="ruby-comment"># @return [Class]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor_type</span> = <span class="ruby-constant">Constructor</span>
+
+<span class="ruby-comment"># Compose two types into a Sum type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Type] other</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Sum, Sum::Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">|</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Sum</span>)
+
+<span class="ruby-comment"># Compose two types into an Intersection type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Type] other</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Intersection, Intersection::Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&amp;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Intersection</span>)
+
+<span class="ruby-comment"># Compose two types into an Implication type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Type] other</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Implication, Implication::Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&gt;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Implication</span>)
+
+<span class="ruby-comment"># Turn a type into an optional type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Sum]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">optional</span> = <span class="ruby-constant">Types</span>[<span class="ruby-string">&quot;nil&quot;</span>] <span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>
+
+<span class="ruby-comment"># Turn a type into a constrained type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Hash] options constraining rule (see {Types.Rule})</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained</span>(<span class="ruby-operator">...</span>)
+  <span class="ruby-identifier">constrained_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">rule:</span> <span class="ruby-constant">Types</span>.<span class="ruby-constant">Rule</span>(<span class="ruby-operator">...</span>))
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Turn a type into a type with a default value</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Object] input</span>
+<span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+<span class="ruby-comment"># @param [#call,nil] block</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @raise [ConstraintError]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Default]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default</span>(<span class="ruby-identifier">input</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-identifier">options</span> = <span class="ruby-constant">EMPTY_HASH</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:shared</span>]
+    <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+    <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+      <span class="ruby-node">&quot;#{input.inspect} is mutable. &quot;</span> \
+      <span class="ruby-string">&quot;Be careful: types will return the same instance of the default &quot;</span> \
+      <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the default &quot;</span> \
+      <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+      <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+      <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">default</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">type</span> = <span class="ruby-constant">Default</span>[<span class="ruby-identifier">value</span>].<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">value</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">type</span>.<span class="ruby-identifier">callable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-node">&quot;default value #{value.inspect} violates constraints&quot;</span>,
+      <span class="ruby-identifier">value</span>
+    )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Define an enum on top of the existing type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Array] values</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Enum]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">mapping</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+      <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">values</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">to_h</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Enum</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">constrained</span>(<span class="ruby-value">included_in:</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">keys</span>), <span class="ruby-value">mapping:</span> <span class="ruby-identifier">mapping</span>)
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Turn a type into a lax type that will rescue from type-errors and</span>
+<span class="ruby-comment"># return the original input</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Lax]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lax</span> = <span class="ruby-constant">Lax</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+<span class="ruby-comment"># Define a constructor for the type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [#call,nil] constructor</span>
+<span class="ruby-comment"># @param [Hash] options</span>
+<span class="ruby-comment"># @param [#call,nil] block</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Constructor]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:append</span>, <span class="ruby-value">:constructor</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:prepend</span>, <span class="ruby-value">:constructor</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&gt;&gt;</span>, <span class="ruby-value">:constructor</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&lt;&lt;</span>, <span class="ruby-value">:constructor</span>
+
+<span class="ruby-comment"># Use the given value on type mismatch</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Object] value</span>
+<span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+<span class="ruby-comment"># @param [#call,nil] fallback</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Constructor]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+      <span class="ruby-identifier">value</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+    <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+    <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+      <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+      <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+      <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+      <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+      <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+      <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+        <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">value</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">private</span>
+
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+  <span class="ruby-identifier">klass</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+      <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">composition_class</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-constructor" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">constructor</span><span
+              class="method-args">(constructor = nil, **options, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Define a constructor for the type</p>
+
+<p>@param [#call,nil] constructor @param [Hash] options @param [#call,nil] block</p>
+
+<p>@return [Constructor]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="constructor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-constructor_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">constructor_type</span><span
+              class="method-args">(= Constructor)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@return [Class]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="constructor_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor_type</span> = <span class="ruby-constant">Constructor</span>
+
+<span class="ruby-comment"># Compose two types into a Sum type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Type] other</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Sum, Sum::Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">|</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Sum</span>)
+
+<span class="ruby-comment"># Compose two types into an Intersection type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Type] other</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Intersection, Intersection::Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&amp;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Intersection</span>)
+
+<span class="ruby-comment"># Compose two types into an Implication type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Type] other</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Implication, Implication::Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&gt;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Implication</span>)
+
+<span class="ruby-comment"># Turn a type into an optional type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Sum]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">optional</span> = <span class="ruby-constant">Types</span>[<span class="ruby-string">&quot;nil&quot;</span>] <span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>
+
+<span class="ruby-comment"># Turn a type into a constrained type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Hash] options constraining rule (see {Types.Rule})</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Constrained]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained</span>(<span class="ruby-operator">...</span>)
+  <span class="ruby-identifier">constrained_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">rule:</span> <span class="ruby-constant">Types</span>.<span class="ruby-constant">Rule</span>(<span class="ruby-operator">...</span>))
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Turn a type into a type with a default value</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Object] input</span>
+<span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+<span class="ruby-comment"># @param [#call,nil] block</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @raise [ConstraintError]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Default]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default</span>(<span class="ruby-identifier">input</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-identifier">options</span> = <span class="ruby-constant">EMPTY_HASH</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:shared</span>]
+    <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+    <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+      <span class="ruby-node">&quot;#{input.inspect} is mutable. &quot;</span> \
+      <span class="ruby-string">&quot;Be careful: types will return the same instance of the default &quot;</span> \
+      <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the default &quot;</span> \
+      <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+      <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+      <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">default</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">type</span> = <span class="ruby-constant">Default</span>[<span class="ruby-identifier">value</span>].<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">value</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">type</span>.<span class="ruby-identifier">callable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-node">&quot;default value #{value.inspect} violates constraints&quot;</span>,
+      <span class="ruby-identifier">value</span>
+    )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Define an enum on top of the existing type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Array] values</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Enum]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">mapping</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+      <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">values</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">to_h</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Enum</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">constrained</span>(<span class="ruby-value">included_in:</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">keys</span>), <span class="ruby-value">mapping:</span> <span class="ruby-identifier">mapping</span>)
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Turn a type into a lax type that will rescue from type-errors and</span>
+<span class="ruby-comment"># return the original input</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Lax]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lax</span> = <span class="ruby-constant">Lax</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+<span class="ruby-comment"># Define a constructor for the type</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [#call,nil] constructor</span>
+<span class="ruby-comment"># @param [Hash] options</span>
+<span class="ruby-comment"># @param [#call,nil] block</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Constructor]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:append</span>, <span class="ruby-value">:constructor</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:prepend</span>, <span class="ruby-value">:constructor</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&gt;&gt;</span>, <span class="ruby-value">:constructor</span>
+<span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&lt;&lt;</span>, <span class="ruby-value">:constructor</span>
+
+<span class="ruby-comment"># Use the given value on type mismatch</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @param [Object] value</span>
+<span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+<span class="ruby-comment"># @param [#call,nil] fallback</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @return [Constructor]</span>
+<span class="ruby-comment">#</span>
+<span class="ruby-comment"># @api public</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+      <span class="ruby-identifier">value</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+    <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+    <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+      <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+      <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+      <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+      <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+      <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+      <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+        <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">value</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">private</span>
+
+<span class="ruby-comment"># @api private</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+  <span class="ruby-identifier">klass</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+      <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">composition_class</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">end</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-default" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">default</span><span
+              class="method-args">(input = Undefined, options = EMPTY_HASH, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Turn a type into a type with a default value</p>
+
+<p>@param [Object] input @option [Boolean] shared Whether it’s safe to share the value across type applications @param [#call,nil] block</p>
+
+<p>@raise [ConstraintError]</p>
+
+<p>@return [Default]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="default-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default</span>(<span class="ruby-identifier">input</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-identifier">options</span> = <span class="ruby-constant">EMPTY_HASH</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:shared</span>]
+    <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+    <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+      <span class="ruby-node">&quot;#{input.inspect} is mutable. &quot;</span> \
+      <span class="ruby-string">&quot;Be careful: types will return the same instance of the default &quot;</span> \
+      <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the default &quot;</span> \
+      <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+      <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+      <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">default</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">type</span> = <span class="ruby-constant">Default</span>[<span class="ruby-identifier">value</span>].<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">value</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">type</span>.<span class="ruby-identifier">callable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-node">&quot;default value #{value.inspect} violates constraints&quot;</span>,
+      <span class="ruby-identifier">value</span>
+    )
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-enum" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">enum</span><span
+              class="method-args">(*values)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Define an enum on top of the existing type</p>
+
+<p>@param [Array] values</p>
+
+<p>@return [Enum]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="enum-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">mapping</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+      <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">values</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">to_h</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Enum</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">constrained</span>(<span class="ruby-value">included_in:</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">keys</span>), <span class="ruby-value">mapping:</span> <span class="ruby-identifier">mapping</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fallback" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fallback</span><span
+              class="method-args">(value = Undefined, shared: false) { |output| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Use the given value on type mismatch</p>
+
+<p>@param [Object] value @option [Boolean] shared Whether it’s safe to share the value across type applications @param [#call,nil] fallback</p>
+
+<p>@return [Constructor]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="fallback-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+      <span class="ruby-identifier">value</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+    <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+    <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+      <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+      <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+      <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+      <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+      <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+      <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+    )
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+        <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">value</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-lax" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">lax</span><span
+              class="method-args">(= Lax.new(self))</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Turn a type into a lax type that will rescue from type-errors and return the original input</p>
+
+<p>@return [Lax]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="lax-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 127</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lax</span> = <span class="ruby-constant">Lax</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+  <span class="ruby-comment"># Define a constructor for the type</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [#call,nil] constructor</span>
+  <span class="ruby-comment"># @param [Hash] options</span>
+  <span class="ruby-comment"># @param [#call,nil] block</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Constructor]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:append</span>, <span class="ruby-value">:constructor</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:prepend</span>, <span class="ruby-value">:constructor</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&gt;&gt;</span>, <span class="ruby-value">:constructor</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&lt;&lt;</span>, <span class="ruby-value">:constructor</span>
+
+  <span class="ruby-comment"># Use the given value on type mismatch</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [Object] value</span>
+  <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+  <span class="ruby-comment"># @param [#call,nil] fallback</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Constructor]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+        <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+        <span class="ruby-identifier">value</span>
+      )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+      <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+      <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+        <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+        <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+        <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+        <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+        <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+        <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+      )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">value</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+
+  <span class="ruby-comment"># @api private</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+    <span class="ruby-identifier">klass</span> =
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+        <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">composition_class</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-optional" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">optional</span><span
+              class="method-args">(= Types[&quot;nil&quot;] | self)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Turn a type into an optional type</p>
+
+<p>@return [Sum]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="optional-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 53</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">optional</span> = <span class="ruby-constant">Types</span>[<span class="ruby-string">&quot;nil&quot;</span>] <span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>
+
+    <span class="ruby-comment"># Turn a type into a constrained type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Hash] options constraining rule (see {Types.Rule})</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Constrained]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained</span>(<span class="ruby-operator">...</span>)
+      <span class="ruby-identifier">constrained_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">rule:</span> <span class="ruby-constant">Types</span>.<span class="ruby-constant">Rule</span>(<span class="ruby-operator">...</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Turn a type into a type with a default value</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Object] input</span>
+    <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+    <span class="ruby-comment"># @param [#call,nil] block</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @raise [ConstraintError]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Default]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default</span>(<span class="ruby-identifier">input</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-identifier">options</span> = <span class="ruby-constant">EMPTY_HASH</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:shared</span>]
+        <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+        <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+          <span class="ruby-node">&quot;#{input.inspect} is mutable. &quot;</span> \
+          <span class="ruby-string">&quot;Be careful: types will return the same instance of the default &quot;</span> \
+          <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the default &quot;</span> \
+          <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+          <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+          <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+        )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">default</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">type</span> = <span class="ruby-constant">Default</span>[<span class="ruby-identifier">value</span>].<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">value</span>)
+
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">type</span>.<span class="ruby-identifier">callable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+          <span class="ruby-node">&quot;default value #{value.inspect} violates constraints&quot;</span>,
+          <span class="ruby-identifier">value</span>
+        )
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">type</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Define an enum on top of the existing type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Array] values</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Enum]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+      <span class="ruby-identifier">mapping</span> =
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+          <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">values</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">to_h</span>
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-constant">Enum</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">constrained</span>(<span class="ruby-value">included_in:</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">keys</span>), <span class="ruby-value">mapping:</span> <span class="ruby-identifier">mapping</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Turn a type into a lax type that will rescue from type-errors and</span>
+    <span class="ruby-comment"># return the original input</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Lax]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lax</span> = <span class="ruby-constant">Lax</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+    <span class="ruby-comment"># Define a constructor for the type</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [#call,nil] constructor</span>
+    <span class="ruby-comment"># @param [Hash] options</span>
+    <span class="ruby-comment"># @param [#call,nil] block</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Constructor]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:append</span>, <span class="ruby-value">:constructor</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:prepend</span>, <span class="ruby-value">:constructor</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&gt;&gt;</span>, <span class="ruby-value">:constructor</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&lt;&lt;</span>, <span class="ruby-value">:constructor</span>
+
+    <span class="ruby-comment"># Use the given value on type mismatch</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @param [Object] value</span>
+    <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+    <span class="ruby-comment"># @param [#call,nil] fallback</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @return [Constructor]</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># @api public</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+          <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+          <span class="ruby-identifier">value</span>
+        )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+        <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+        <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+          <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+          <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+          <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+          <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+          <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+          <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+        )
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+            <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">value</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">private</span>
+
+    <span class="ruby-comment"># @api private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+      <span class="ruby-identifier">klass</span> =
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+          <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">composition_class</span>
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-7C" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">|</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Compose two types into a <a href="Sum.html"><code>Sum</code></a> type</p>
+
+<p>@param [Type] other</p>
+
+<p>@return [Sum, Sum::Constrained]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="7C-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/builder.rb, line 28</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">|</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Sum</span>)
+
+  <span class="ruby-comment"># Compose two types into an Intersection type</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [Type] other</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Intersection, Intersection::Constrained]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api private</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&amp;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Intersection</span>)
+
+  <span class="ruby-comment"># Compose two types into an Implication type</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [Type] other</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Implication, Implication::Constrained]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api private</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&gt;</span>(<span class="ruby-identifier">other</span>) = <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-constant">Implication</span>)
+
+  <span class="ruby-comment"># Turn a type into an optional type</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Sum]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">optional</span> = <span class="ruby-constant">Types</span>[<span class="ruby-string">&quot;nil&quot;</span>] <span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>
+
+  <span class="ruby-comment"># Turn a type into a constrained type</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [Hash] options constraining rule (see {Types.Rule})</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Constrained]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constrained</span>(<span class="ruby-operator">...</span>)
+    <span class="ruby-identifier">constrained_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">rule:</span> <span class="ruby-constant">Types</span>.<span class="ruby-constant">Rule</span>(<span class="ruby-operator">...</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Turn a type into a type with a default value</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [Object] input</span>
+  <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+  <span class="ruby-comment"># @param [#call,nil] block</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @raise [ConstraintError]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Default]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default</span>(<span class="ruby-identifier">input</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-identifier">options</span> = <span class="ruby-constant">EMPTY_HASH</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:shared</span>]
+      <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+      <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+        <span class="ruby-node">&quot;#{input.inspect} is mutable. &quot;</span> \
+        <span class="ruby-string">&quot;Be careful: types will return the same instance of the default &quot;</span> \
+        <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the default &quot;</span> \
+        <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+        <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+        <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+      )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">default</span>(<span class="ruby-identifier">input</span>, <span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">type</span> = <span class="ruby-constant">Default</span>[<span class="ruby-identifier">value</span>].<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">value</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">type</span>.<span class="ruby-identifier">callable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+        <span class="ruby-node">&quot;default value #{value.inspect} violates constraints&quot;</span>,
+        <span class="ruby-identifier">value</span>
+      )
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">type</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Define an enum on top of the existing type</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [Array] values</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Enum]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enum</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+    <span class="ruby-identifier">mapping</span> =
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+        <span class="ruby-identifier">values</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">values</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">values</span>).<span class="ruby-identifier">to_h</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-constant">Enum</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">constrained</span>(<span class="ruby-value">included_in:</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">keys</span>), <span class="ruby-value">mapping:</span> <span class="ruby-identifier">mapping</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Turn a type into a lax type that will rescue from type-errors and</span>
+  <span class="ruby-comment"># return the original input</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Lax]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lax</span> = <span class="ruby-constant">Lax</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+  <span class="ruby-comment"># Define a constructor for the type</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [#call,nil] constructor</span>
+  <span class="ruby-comment"># @param [Hash] options</span>
+  <span class="ruby-comment"># @param [#call,nil] block</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Constructor]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">constructor</span>(<span class="ruby-identifier">constructor</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">constructor_type</span>[<span class="ruby-identifier">with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>), <span class="ruby-value">fn:</span> <span class="ruby-identifier">constructor</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:append</span>, <span class="ruby-value">:constructor</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:prepend</span>, <span class="ruby-value">:constructor</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&gt;&gt;</span>, <span class="ruby-value">:constructor</span>
+  <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:&lt;&lt;</span>, <span class="ruby-value">:constructor</span>
+
+  <span class="ruby-comment"># Use the given value on type mismatch</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @param [Object] value</span>
+  <span class="ruby-comment"># @option [Boolean] shared Whether it&#39;s safe to share the value across type applications</span>
+  <span class="ruby-comment"># @param [#call,nil] fallback</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @return [Constructor]</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># @api public</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fallback</span>(<span class="ruby-identifier">value</span> = <span class="ruby-constant">Undefined</span>, <span class="ruby-value">shared:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">_fallback</span>) <span class="ruby-comment"># rubocop:disable Metrics/PerceivedComplexity</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">Undefined</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;fallback value or a block must be given&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConstraintError</span>.<span class="ruby-identifier">new</span>(
+        <span class="ruby-node">&quot;fallback value #{value.inspect} violates constraints&quot;</span>,
+        <span class="ruby-identifier">value</span>
+      )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">shared</span>
+      <span class="ruby-identifier">where</span> = <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span><span class="ruby-operator">::</span><span class="ruby-constant">STACK</span>.()
+      <span class="ruby-constant">Core</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecations</span>.<span class="ruby-identifier">warn</span>(
+        <span class="ruby-node">&quot;#{value.inspect} is mutable. &quot;</span> \
+        <span class="ruby-string">&quot;Be careful: types will return the same instance of the fallback &quot;</span> \
+        <span class="ruby-string">&quot;value every time. Call `.freeze` when setting the fallback &quot;</span> \
+        <span class="ruby-string">&quot;or pass `shared: true` to discard this warning.&quot;</span> \
+        <span class="ruby-node">&quot;\n#{where}&quot;</span>,
+        <span class="ruby-value">tag:</span> <span class="ruby-value">:&quot;dry-types&quot;</span>
+      )
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">constructor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">&amp;</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">type</span>.(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span> = <span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">output</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">value</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+
+  <span class="ruby-comment"># @api private</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compose</span>(<span class="ruby-identifier">other</span>, <span class="ruby-identifier">composition_class</span>)
+    <span class="ruby-identifier">klass</span> =
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">constrained?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">constrained?</span>
+        <span class="ruby-identifier">composition_class</span><span class="ruby-operator">::</span><span class="ruby-constant">Constrained</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">composition_class</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

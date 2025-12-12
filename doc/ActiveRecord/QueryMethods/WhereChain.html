@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveRecord::QueryMethods::WhereChain - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-associated">#associated</a>
+    <li ><a href="#method-i-missing">#missing</a>
+    <li ><a href="#method-i-not">#not</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveRecord::QueryMethods::WhereChain">
+  <h1 id="class-ActiveRecord::QueryMethods::WhereChain" class="class">
+    class ActiveRecord::QueryMethods::WhereChain
+  </h1>
+
+  <section class="description">
+    
+<p><code>WhereChain</code> objects act as placeholder for queries in which <code>where</code> does not have any parameter. In this case, <code>where</code> can be chained to return a new relation.</p>
+
+<p><code>WhereChain</code> objects act as placeholder for queries in which <code>where</code> does not have any parameter. In this case, <code>where</code> can be chained to return a new relation.</p>
+
+<p><code>WhereChain</code> objects act as placeholder for queries in which <code>where</code> does not have any parameter. In this case, <code>where</code> can be chained to return a new relation.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-associated" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">associated</span><span
+              class="method-args">(*associations)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a new relation with joins and where clause to identify associated relations.</p>
+
+<p>For example, posts that are associated to a related author:</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">associated</span>(<span class="ruby-value">:author</span>)
+<span class="ruby-comment"># SELECT &quot;posts&quot;.* FROM &quot;posts&quot;</span>
+<span class="ruby-comment"># INNER JOIN &quot;authors&quot; ON &quot;authors&quot;.&quot;id&quot; = &quot;posts&quot;.&quot;author_id&quot;</span>
+<span class="ruby-comment"># WHERE &quot;authors&quot;.&quot;id&quot; IS NOT NULL</span>
+</pre>
+
+<p>Additionally, multiple relations can be combined. This will return posts associated to both an author and any comments:</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">associated</span>(<span class="ruby-value">:author</span>, <span class="ruby-value">:comments</span>)
+<span class="ruby-comment"># SELECT &quot;posts&quot;.* FROM &quot;posts&quot;</span>
+<span class="ruby-comment"># INNER JOIN &quot;authors&quot; ON &quot;authors&quot;.&quot;id&quot; = &quot;posts&quot;.&quot;author_id&quot;</span>
+<span class="ruby-comment"># INNER JOIN &quot;comments&quot; ON &quot;comments&quot;.&quot;post_id&quot; = &quot;posts&quot;.&quot;id&quot;</span>
+<span class="ruby-comment"># WHERE &quot;authors&quot;.&quot;id&quot; IS NOT NULL AND &quot;comments&quot;.&quot;id&quot; IS NOT NULL</span>
+</pre>
+
+<p>You can define join type in the scope and <code>associated</code> will not use ‘JOIN` by default.</p>
+
+<pre class="ruby"> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">left_joins</span>(<span class="ruby-value">:author</span>).<span class="ruby-identifier">where</span>.<span class="ruby-identifier">associated</span>(<span class="ruby-value">:author</span>)
+ <span class="ruby-comment"># SELECT &quot;posts&quot;.* FROM &quot;posts&quot;</span>
+ <span class="ruby-comment"># LEFT OUTER JOIN &quot;authors&quot; &quot;authors&quot;.&quot;id&quot; = &quot;posts&quot;.&quot;author_id&quot;</span>
+ <span class="ruby-comment"># WHERE &quot;authors&quot;.&quot;id&quot; IS NOT NULL</span>
+
+ <span class="ruby-constant">Post</span>.<span class="ruby-identifier">left_joins</span>(<span class="ruby-value">:comments</span>).<span class="ruby-identifier">where</span>.<span class="ruby-identifier">associated</span>(<span class="ruby-value">:author</span>)
+ <span class="ruby-comment"># SELECT &quot;posts&quot;.* FROM &quot;posts&quot;</span>
+ <span class="ruby-comment"># INNER JOIN &quot;authors&quot; ON &quot;authors&quot;.&quot;id&quot; = &quot;posts&quot;.&quot;author_id&quot;</span>
+ <span class="ruby-comment"># LEFT OUTER JOIN &quot;comments&quot; ON &quot;comments&quot;.&quot;post_id&quot; = &quot;posts&quot;.&quot;id&quot;</span>
+<span class="ruby-comment">#  WHERE &quot;author&quot;.&quot;id&quot; IS NOT NULL</span>
+</pre>
+
+          <div class="method-source-code" id="associated-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/relation/query_methods.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">associated</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">associations</span>)
+  <span class="ruby-identifier">associations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">association</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">reflection</span> = <span class="ruby-identifier">scope_association_reflection</span>(<span class="ruby-identifier">association</span>)
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">joins_values</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">name</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">left_outer_joins_values</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">name</span>)
+      <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">joins!</span>(<span class="ruby-identifier">association</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">association_conditions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">association_primary_key</span>).<span class="ruby-identifier">index_with</span>(<span class="ruby-keyword">nil</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:class_name</span>]
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">association</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">association_conditions</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">table_name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">association_conditions</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@scope</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-missing" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">missing</span><span
+              class="method-args">(*associations)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a new relation with left outer joins and where clause to identify missing relations.</p>
+
+<p>For example, posts that are missing a related author:</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">missing</span>(<span class="ruby-value">:author</span>)
+<span class="ruby-comment"># SELECT &quot;posts&quot;.* FROM &quot;posts&quot;</span>
+<span class="ruby-comment"># LEFT OUTER JOIN &quot;authors&quot; ON &quot;authors&quot;.&quot;id&quot; = &quot;posts&quot;.&quot;author_id&quot;</span>
+<span class="ruby-comment"># WHERE &quot;authors&quot;.&quot;id&quot; IS NULL</span>
+</pre>
+
+<p>Additionally, multiple relations can be combined. This will return posts that are missing both an author and any comments:</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">missing</span>(<span class="ruby-value">:author</span>, <span class="ruby-value">:comments</span>)
+<span class="ruby-comment"># SELECT &quot;posts&quot;.* FROM &quot;posts&quot;</span>
+<span class="ruby-comment"># LEFT OUTER JOIN &quot;authors&quot; ON &quot;authors&quot;.&quot;id&quot; = &quot;posts&quot;.&quot;author_id&quot;</span>
+<span class="ruby-comment"># LEFT OUTER JOIN &quot;comments&quot; ON &quot;comments&quot;.&quot;post_id&quot; = &quot;posts&quot;.&quot;id&quot;</span>
+<span class="ruby-comment"># WHERE &quot;authors&quot;.&quot;id&quot; IS NULL AND &quot;comments&quot;.&quot;id&quot; IS NULL</span>
+</pre>
+
+          <div class="method-source-code" id="missing-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/relation/query_methods.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">missing</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">associations</span>)
+  <span class="ruby-identifier">associations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">association</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">reflection</span> = <span class="ruby-identifier">scope_association_reflection</span>(<span class="ruby-identifier">association</span>)
+    <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">left_outer_joins!</span>(<span class="ruby-identifier">association</span>)
+    <span class="ruby-identifier">association_conditions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">association_primary_key</span>).<span class="ruby-identifier">index_with</span>(<span class="ruby-keyword">nil</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:class_name</span>]
+      <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">where!</span>(<span class="ruby-identifier">association</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">association_conditions</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">where!</span>(<span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">table_name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">association_conditions</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@scope</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-not" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">not</span><span
+              class="method-args">(opts, *rest)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a new relation expressing WHERE + NOT condition according to the conditions in the arguments.</p>
+
+<p><a href="WhereChain.html#method-i-not"><code>not</code></a> accepts conditions as a string, array, or hash. See <a href="../QueryMethods.html#method-i-where"><code>QueryMethods#where</code></a> for more details on each format.</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-string">&quot;name = &#39;Jon&#39;&quot;</span>)
+<span class="ruby-comment"># SELECT * FROM users WHERE NOT (name = &#39;Jon&#39;)</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>([<span class="ruby-string">&quot;name = ?&quot;</span>, <span class="ruby-string">&quot;Jon&quot;</span>])
+<span class="ruby-comment"># SELECT * FROM users WHERE NOT (name = &#39;Jon&#39;)</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&quot;Jon&quot;</span>)
+<span class="ruby-comment"># SELECT * FROM users WHERE name != &#39;Jon&#39;</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">name:</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-comment"># SELECT * FROM users WHERE name IS NOT NULL</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">name:</span> <span class="ruby-node">%w(Ko1 Nobu)</span>)
+<span class="ruby-comment"># SELECT * FROM users WHERE name NOT IN (&#39;Ko1&#39;, &#39;Nobu&#39;)</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&quot;Jon&quot;</span>, <span class="ruby-value">role:</span> <span class="ruby-string">&quot;admin&quot;</span>)
+<span class="ruby-comment"># SELECT * FROM users WHERE NOT (name = &#39;Jon&#39; AND role = &#39;admin&#39;)</span>
+</pre>
+
+<p>If there is a non-nil condition on a nullable column in the hash condition, the records that have nil values on the nullable column won’t be returned.</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-value">nullable_country:</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">nullable_country:</span> <span class="ruby-string">&quot;UK&quot;</span>)
+<span class="ruby-comment"># SELECT * FROM users WHERE NOT (nullable_country = &#39;UK&#39;)</span>
+<span class="ruby-comment"># =&gt; []</span>
+</pre>
+
+          <div class="method-source-code" id="not-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/relation/query_methods.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">not</span>(<span class="ruby-identifier ruby-title">opts</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rest</span>)
+  <span class="ruby-identifier">where_clause</span> = <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:build_where_clause</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-identifier">rest</span>)
+
+  <span class="ruby-ivar">@scope</span>.<span class="ruby-identifier">where_clause</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">where_clause</span>.<span class="ruby-identifier">invert</span>
+
+  <span class="ruby-ivar">@scope</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

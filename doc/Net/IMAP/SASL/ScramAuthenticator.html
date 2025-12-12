@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Net::IMAP::SASL::ScramAuthenticator - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>
+            <details open>
+              <summary>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-SCRAM+algorithm">SCRAM algorithm</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Server+messages">Server messages</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-TLS+Channel+binding">TLS Channel binding</a>
+          <li>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Caching+SCRAM+secrets">Caching SCRAM secrets</a>
+          <li>
+            <details open>
+              <summary>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-SCRAM+algorithm">SCRAM algorithm</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Server+messages">Server messages</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-TLS+Channel+binding">TLS Channel binding</a>
+          <li>      <a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Caching+SCRAM+secrets">Caching SCRAM secrets</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../../Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="GS2Header.html">Net::IMAP::SASL::GS2Header</a>
+    <li><a class="include" href="ScramAlgorithm.html">Net::IMAP::SASL::ScramAlgorithm</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-digest">#digest</a>
+    <li ><a href="#method-i-done-3F">#done?</a>
+    <li ><a href="#method-i-initial_client_response">#initial_client_response</a>
+    <li ><a href="#method-i-process">#process</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Net::IMAP::SASL::ScramAuthenticator">
+  <h1 id="class-Net::IMAP::SASL::ScramAuthenticator" class="class">
+    class Net::IMAP::SASL::ScramAuthenticator
+  </h1>
+
+  <section class="description">
+    
+<p>Abstract base class for the “<code>SCRAM-*</code>” family of <a href="../SASL.html"><code>SASL</code></a> mechanisms, defined in <a href="https://www.rfc-editor.org/rfc/rfc5802">RFC5802</a>.  Use via <a href="../../IMAP.html#method-i-authenticate"><code>Net::IMAP#authenticate</code></a>.</p>
+
+<p>Directly supported:</p>
+<ul><li>
+<p><code>SCRAM-SHA-1</code>   — <a href="ScramSHA1Authenticator.html"><code>ScramSHA1Authenticator</code></a></p>
+</li><li>
+<p><code>SCRAM-SHA-256</code> — <a href="ScramSHA256Authenticator.html"><code>ScramSHA256Authenticator</code></a></p>
+</li></ul>
+
+<p>New <code>SCRAM-*</code> mechanisms can easily be added for any hash algorithm supported by <a href="../../../Digest.html"><code>OpenSSL::Digest[https://ruby.github.io/openssl/OpenSSL/Digest.html]</code></a>. Subclasses need only set an appropriate <code>DIGEST_NAME</code> constant.</p>
+
+<h3 id="class-Net::IMAP::SASL::ScramAuthenticator-label-SCRAM+algorithm">SCRAM algorithm<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-SCRAM+algorithm">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>See the documentation and method definitions on <a href="ScramAlgorithm.html"><code>ScramAlgorithm</code></a> for an overview of the algorithm.  The different mechanisms differ only by which hash function that is used (or by support for channel binding with <code>-PLUS</code>).</p>
+
+<p>See also the methods on <a href="GS2Header.html"><code>GS2Header</code></a>.</p>
+
+<h4 id="class-Net::IMAP::SASL::ScramAuthenticator-label-Server+messages">Server messages<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Server+messages">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>As server messages are received, they are validated and loaded into the various attributes, e.g: <a href="ScramAuthenticator.html#attribute-i-snonce"><code>snonce</code></a>, <a href="ScramAuthenticator.html#attribute-i-salt"><code>salt</code></a>, <a href="ScramAuthenticator.html#attribute-i-iterations"><code>iterations</code></a>, verifier, <a href="ScramAuthenticator.html#attribute-i-server_error"><code>server_error</code></a>, etc.</p>
+
+<p>Unlike many other <a href="../SASL.html"><code>SASL</code></a> mechanisms, the <code>SCRAM-*</code> family supports mutual authentication and can return server error data in the server messages. If <a href="ScramAuthenticator.html#method-i-process"><code>process</code></a> raises an <a href="../Error.html"><code>Error</code></a> for the server-final-message, then <a href="ScramAuthenticator.html#attribute-i-server_error"><code>server_error</code></a> may contain error details.</p>
+
+<h3 id="class-Net::IMAP::SASL::ScramAuthenticator-label-TLS+Channel+binding">TLS Channel binding<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-TLS+Channel+binding">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><em>The <code>SCRAM-*-PLUS</code> mechanisms and channel binding are not supported yet.</em></p>
+
+<h3 id="class-Net::IMAP::SASL::ScramAuthenticator-label-Caching+SCRAM+secrets">Caching SCRAM secrets<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Caching+SCRAM+secrets">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><em>Caching of salted_password, client_key, stored_key, and server_key is not supported yet.</em></p>
+
+<p>Abstract base class for the “<code>SCRAM-*</code>” family of <a href="../SASL.html"><code>SASL</code></a> mechanisms, defined in <a href="https://www.rfc-editor.org/rfc/rfc5802">RFC5802</a>.  Use via <a href="../../IMAP.html#method-i-authenticate"><code>Net::IMAP#authenticate</code></a>.</p>
+
+<p>Directly supported:</p>
+<ul><li>
+<p><code>SCRAM-SHA-1</code>   — <a href="ScramSHA1Authenticator.html"><code>ScramSHA1Authenticator</code></a></p>
+</li><li>
+<p><code>SCRAM-SHA-256</code> — <a href="ScramSHA256Authenticator.html"><code>ScramSHA256Authenticator</code></a></p>
+</li></ul>
+
+<p>New <code>SCRAM-*</code> mechanisms can easily be added for any hash algorithm supported by <a href="../../../Digest.html"><code>OpenSSL::Digest[https://ruby.github.io/openssl/OpenSSL/Digest.html]</code></a>. Subclasses need only set an appropriate <code>DIGEST_NAME</code> constant.</p>
+
+<h3 id="class-Net::IMAP::SASL::ScramAuthenticator-label-SCRAM+algorithm">SCRAM algorithm<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-SCRAM+algorithm">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>See the documentation and method definitions on <a href="ScramAlgorithm.html"><code>ScramAlgorithm</code></a> for an overview of the algorithm.  The different mechanisms differ only by which hash function that is used (or by support for channel binding with <code>-PLUS</code>).</p>
+
+<p>See also the methods on <a href="GS2Header.html"><code>GS2Header</code></a>.</p>
+
+<h4 id="class-Net::IMAP::SASL::ScramAuthenticator-label-Server+messages">Server messages<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Server+messages">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>As server messages are received, they are validated and loaded into the various attributes, e.g: <a href="ScramAuthenticator.html#attribute-i-snonce"><code>snonce</code></a>, <a href="ScramAuthenticator.html#attribute-i-salt"><code>salt</code></a>, <a href="ScramAuthenticator.html#attribute-i-iterations"><code>iterations</code></a>, verifier, <a href="ScramAuthenticator.html#attribute-i-server_error"><code>server_error</code></a>, etc.</p>
+
+<p>Unlike many other <a href="../SASL.html"><code>SASL</code></a> mechanisms, the <code>SCRAM-*</code> family supports mutual authentication and can return server error data in the server messages. If <a href="ScramAuthenticator.html#method-i-process"><code>process</code></a> raises an <a href="../Error.html"><code>Error</code></a> for the server-final-message, then <a href="ScramAuthenticator.html#attribute-i-server_error"><code>server_error</code></a> may contain error details.</p>
+
+<h3 id="class-Net::IMAP::SASL::ScramAuthenticator-label-TLS+Channel+binding">TLS Channel binding<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-TLS+Channel+binding">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><em>The <code>SCRAM-*-PLUS</code> mechanisms and channel binding are not supported yet.</em></p>
+
+<h3 id="class-Net::IMAP::SASL::ScramAuthenticator-label-Caching+SCRAM+secrets">Caching SCRAM secrets<span><a href="#class-Net::IMAP::SASL::ScramAuthenticator-label-Caching+SCRAM+secrets">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><em>Caching of salted_password, client_key, stored_key, and server_key is not supported yet.</em></p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-authcid" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">authcid</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Authentication identity: the identity that matches the <a href="ScramAuthenticator.html#attribute-i-password"><code>password</code></a>.</p>
+
+<p><a href="https://www.rfc-editor.org/rfc/rfc2831">RFC-2831</a> uses the term <code>username</code>.  “Authentication identity” is the generic term used by <a href="https://www.rfc-editor.org/rfc/rfc4422">RFC-4422</a>. <a href="https://www.rfc-editor.org/rfc/rfc4616">RFC-4616</a> and many later RFCs abbreviate this to <code>authcid</code>.</p>
+        </div>
+      </div>
+      <div id="attribute-i-authzid" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">authzid</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Authorization identity: an identity to act as or on behalf of.  The identity form is application protocol specific.  If not provided or left blank, the server derives an authorization identity from the authentication identity.  For example, an administrator or superuser might take on another role:</p>
+
+<pre class="ruby"><span class="ruby-identifier">imap</span>.<span class="ruby-identifier">authenticate</span> <span class="ruby-string">&quot;SCRAM-SHA-256&quot;</span>, <span class="ruby-string">&quot;root&quot;</span>, <span class="ruby-identifier">passwd</span>, <span class="ruby-value">authzid:</span> <span class="ruby-string">&quot;user&quot;</span>
+</pre>
+
+<p>The server is responsible for verifying the client’s credentials and verifying that the identity it associates with the client’s authentication identity is allowed to act as (or on behalf of) the authorization identity.</p>
+        </div>
+      </div>
+      <div id="attribute-i-cnonce" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cnonce</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The client nonce, generated by <a href="../../../SecureRandom.html"><code>SecureRandom</code></a></p>
+        </div>
+      </div>
+      <div id="attribute-i-iterations" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">iterations</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The iteration count for the selected hash function and user</p>
+        </div>
+      </div>
+      <div id="attribute-i-min_iterations" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">min_iterations</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The minimal allowed iteration count.  Lower <a href="ScramAuthenticator.html#attribute-i-iterations"><code>iterations</code></a> will raise an <a href="../Error.html"><code>Error</code></a>.</p>
+        </div>
+      </div>
+      <div id="attribute-i-password" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">password</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>A password or passphrase that matches the <a href="ScramAuthenticator.html#attribute-i-username"><code>username</code></a>.</p>
+        </div>
+      </div>
+      <div id="attribute-i-salt" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">salt</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The salt used by the server for this user</p>
+        </div>
+      </div>
+      <div id="attribute-i-secret" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">secret</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>A password or passphrase that matches the <a href="ScramAuthenticator.html#attribute-i-username"><code>username</code></a>.</p>
+        </div>
+      </div>
+      <div id="attribute-i-server_error" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">server_error</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>An error reported by the server during the SASL exchange.</p>
+
+<p>Does not include errors reported by the protocol, e.g. <a href="../NoResponseError.html"><code>Net::IMAP::NoResponseError</code></a>.</p>
+        </div>
+      </div>
+      <div id="attribute-i-snonce" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">snonce</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The server nonce, which must start with <a href="ScramAuthenticator.html#attribute-i-cnonce"><code>cnonce</code></a></p>
+        </div>
+      </div>
+      <div id="attribute-i-username" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">username</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Authentication identity: the identity that matches the <a href="ScramAuthenticator.html#attribute-i-password"><code>password</code></a>.</p>
+
+<p><a href="https://www.rfc-editor.org/rfc/rfc2831">RFC-2831</a> uses the term <code>username</code>.  “Authentication identity” is the generic term used by <a href="https://www.rfc-editor.org/rfc/rfc4422">RFC-4422</a>. <a href="https://www.rfc-editor.org/rfc/rfc4616">RFC-4616</a> and many later RFCs abbreviate this to <code>authcid</code>.</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              new(username,  password,  **options) &rarr; auth_ctx
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          <div class="method-heading">
+            <span class="method-callseq">
+              new(username:, password:, **options) &rarr; auth_ctx
+            </span>
+          </div>
+          <div class="method-heading">
+            <span class="method-callseq">
+              new(authcid:,  password:, **options) &rarr; auth_ctx
+            </span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates an authenticator for one of the “<code>SCRAM-*</code>” <a href="../SASL.html"><code>SASL</code></a> mechanisms. Each subclass defines <a href="ScramAuthenticator.html#method-i-digest"><code>digest</code></a> to match a specific mechanism.</p>
+
+<p>Called by <a href="../../IMAP.html#method-i-authenticate"><code>Net::IMAP#authenticate</code></a> and similar methods on other clients.</p>
+
+<h3 id="method-c-new-label-Parameters">Parameters<span><a href="#method-c-new-label-Parameters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a href="ScramAuthenticator.html#attribute-i-authcid"><code>authcid</code></a>  ― Identity whose <a href="ScramAuthenticator.html#attribute-i-password"><code>password</code></a> is used.</p>
+
+<p><a href="ScramAuthenticator.html#attribute-i-username"><code>username</code></a> - An alias for <a href="ScramAuthenticator.html#attribute-i-authcid"><code>authcid</code></a>.</p>
+</li><li>
+<p><a href="ScramAuthenticator.html#attribute-i-password"><code>password</code></a> ― Password or passphrase associated with this <a href="ScramAuthenticator.html#attribute-i-username"><code>username</code></a>.</p>
+</li><li>
+<p><em>optional</em> <a href="ScramAuthenticator.html#attribute-i-authzid"><code>authzid</code></a> ― Alternate identity to act as or on behalf of.</p>
+</li><li>
+<p><em>optional</em> <a href="ScramAuthenticator.html#attribute-i-min_iterations"><code>min_iterations</code></a> - Overrides the default value (4096).</p>
+</li></ul>
+
+<p>Any other keyword parameters are quietly ignored.</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/scram_authenticator.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">username_arg</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">password_arg</span> = <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">authcid:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">username:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">authzid:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">password:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">secret:</span> <span class="ruby-keyword">nil</span>,
+               <span class="ruby-value">min_iterations:</span> <span class="ruby-value">4096</span>, <span class="ruby-comment"># see both RFC5802 and RFC7677</span>
+               <span class="ruby-value">cnonce:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-comment"># must only be set in tests</span>
+               <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-ivar">@username</span> = <span class="ruby-identifier">username</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">username_arg</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">authcid</span> <span class="ruby-keyword">or</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;missing username (authcid)&quot;</span>
+  <span class="ruby-ivar">@password</span> = <span class="ruby-identifier">password</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">secret</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">password_arg</span> <span class="ruby-keyword">or</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;missing password&quot;</span>
+  <span class="ruby-ivar">@authzid</span> = <span class="ruby-identifier">authzid</span>
+
+  <span class="ruby-ivar">@min_iterations</span> = <span class="ruby-constant">Integer</span> <span class="ruby-identifier">min_iterations</span>
+  <span class="ruby-ivar">@min_iterations</span>.<span class="ruby-identifier">positive?</span> <span class="ruby-keyword">or</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;min_iterations must be positive&quot;</span>
+
+  <span class="ruby-ivar">@cnonce</span> = <span class="ruby-identifier">cnonce</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">base64</span>(<span class="ruby-value">32</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-digest" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">digest</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a new <a href="../../../Digest.html"><code>OpenSSL::Digest</code></a> object, set to the appropriate hash function for the chosen mechanism.</p>
+
+<p><em>The class’s <code>DIGEST_NAME</code> constant must be set to the name of an algorithm supported by OpenSSL::Digest.</em></p>
+
+          <div class="method-source-code" id="digest-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/scram_authenticator.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">digest</span>; <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DIGEST_NAME</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-done-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">done?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Is the authentication exchange complete?</p>
+
+<p>If false, another server continuation is required.</p>
+
+          <div class="method-source-code" id="done-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/scram_authenticator.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">done?</span>; <span class="ruby-ivar">@state</span> <span class="ruby-operator">==</span> <span class="ruby-value">:done</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-initial_client_response" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">initial_client_response</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>See <a href="https://www.rfc-editor.org/rfc/rfc5802#section-7">RFC5802 §7</a> <code>client-first-message</code>.</p>
+
+          <div class="method-source-code" id="initial_client_response-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/scram_authenticator.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initial_client_response</span>
+  <span class="ruby-node">&quot;#{gs2_header}#{client_first_message_bare}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-process" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">process</span><span
+              class="method-args">(challenge)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>responds to the server’s challenges</p>
+
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl/scram_authenticator.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">process</span>(<span class="ruby-identifier">challenge</span>)
+  <span class="ruby-keyword">case</span> (<span class="ruby-ivar">@state</span> <span class="ruby-operator">||=</span> <span class="ruby-value">:initial_client_response</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:initial_client_response</span>
+    <span class="ruby-identifier">initial_client_response</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-ivar">@state</span> = <span class="ruby-value">:server_first_message</span> }
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:server_first_message</span>
+    <span class="ruby-identifier">recv_server_first_message</span> <span class="ruby-identifier">challenge</span>
+    <span class="ruby-identifier">final_message_with_proof</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-ivar">@state</span> = <span class="ruby-value">:server_final_message</span> }
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:server_final_message</span>
+    <span class="ruby-identifier">recv_server_final_message</span> <span class="ruby-identifier">challenge</span>
+    <span class="ruby-string">&quot;&quot;</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-ivar">@state</span> = <span class="ruby-value">:done</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-string">&quot;server sent after complete, %p&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">challenge</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ex</span>
+  <span class="ruby-ivar">@state</span> = <span class="ruby-identifier">ex</span>
+  <span class="ruby-identifier">raise</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

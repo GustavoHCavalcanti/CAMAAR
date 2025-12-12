@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Brakeman::Report::Text - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="Base.html">Brakeman::Report::Base</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-add_chunk">#add_chunk</a>
+    <li ><a href="#method-i-confidence">#confidence</a>
+    <li ><a href="#method-i-double_space">#double_space</a>
+    <li ><a href="#method-i-format_code">#format_code</a>
+    <li ><a href="#method-i-format_line">#format_line</a>
+    <li ><a href="#method-i-generate_controllers">#generate_controllers</a>
+    <li ><a href="#method-i-generate_errors">#generate_errors</a>
+    <li ><a href="#method-i-generate_header">#generate_header</a>
+    <li ><a href="#method-i-generate_obsolete">#generate_obsolete</a>
+    <li ><a href="#method-i-generate_overview">#generate_overview</a>
+    <li ><a href="#method-i-generate_report">#generate_report</a>
+    <li ><a href="#method-i-generate_show_ignored_overview">#generate_show_ignored_overview</a>
+    <li ><a href="#method-i-generate_templates">#generate_templates</a>
+    <li ><a href="#method-i-generate_warning_overview">#generate_warning_overview</a>
+    <li ><a href="#method-i-generate_warnings">#generate_warnings</a>
+    <li ><a href="#method-i-header">#header</a>
+    <li ><a href="#method-i-label">#label</a>
+    <li ><a href="#method-i-output_warning">#output_warning</a>
+    <li ><a href="#method-i-render_array">#render_array</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Brakeman::Report::Text">
+  <h1 id="class-Brakeman::Report::Text" class="class">
+    class Brakeman::Report::Text
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-add_chunk" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">add_chunk</span><span
+              class="method-args">(chunk, out = @output_string)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="add_chunk-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_chunk</span> <span class="ruby-identifier">chunk</span>, <span class="ruby-identifier">out</span> = <span class="ruby-ivar">@output_string</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">chunk</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
+      <span class="ruby-identifier">chunk</span> = <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">out</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">chunk</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-confidence" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">confidence</span><span
+              class="method-args">(c)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="confidence-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">confidence</span> <span class="ruby-identifier">c</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">c</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">0</span>
+    <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">color</span>(<span class="ruby-string">&quot;High&quot;</span>, <span class="ruby-value">:red</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>
+    <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">color</span>(<span class="ruby-string">&quot;Medium&quot;</span>, <span class="ruby-value">:yellow</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">2</span>
+    <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">color</span>(<span class="ruby-string">&quot;Weak&quot;</span>, <span class="ruby-value">:none</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-double_space" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">double_space</span><span
+              class="method-args">(title, values)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="double_space-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">double_space</span> <span class="ruby-identifier">title</span>, <span class="ruby-identifier">values</span>
+  <span class="ruby-identifier">values</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>)
+  [<span class="ruby-identifier">header</span>(<span class="ruby-identifier">title</span>), <span class="ruby-identifier">values</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-format_code" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">format_code</span><span
+              class="method-args">(w)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="format_code-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_code</span> <span class="ruby-identifier">w</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@highlight_user_input</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">user_input</span>
+    <span class="ruby-identifier">w</span>.<span class="ruby-identifier">format_with_user_input</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exp</span>, <span class="ruby-identifier">text</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">color</span>(<span class="ruby-identifier">text</span>, <span class="ruby-value">:yellow</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">w</span>.<span class="ruby-identifier">format_code</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-format_line" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">format_line</span><span
+              class="method-args">(w, option)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="format_line-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_line</span> <span class="ruby-identifier">w</span>, <span class="ruby-identifier">option</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">option</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:confidence</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Confidence&#39;</span>, <span class="ruby-identifier">confidence</span>(<span class="ruby-identifier">w</span>.<span class="ruby-identifier">confidence</span>))
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:category</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Category&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">warning_type</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:cwe</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;CWE&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">cwe_id</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>))
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:check</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Check&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">check_name</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:message</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Message&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">message</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:code</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">code</span>
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Code&#39;</span>, <span class="ruby-identifier">format_code</span>(<span class="ruby-identifier">w</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:file</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;File&#39;</span>, <span class="ruby-identifier">warning_file</span>(<span class="ruby-identifier">w</span>))
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:line</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">line</span>
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Line&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">line</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:link</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Link&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">link</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:fingerprint</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Fingerprint&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">fingerprint</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:category_id</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Category ID&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">warning_code</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:render_path</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">called_from</span>
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Render Path&#39;</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">called_from</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &gt; &quot;</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_controllers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_controllers</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_controllers-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_controllers</span>
+  <span class="ruby-identifier">double_space</span> <span class="ruby-string">&quot;Controller Overview&quot;</span>, <span class="ruby-identifier">controller_information</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ci</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">controller</span> = [
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Controller&quot;</span>, <span class="ruby-identifier">ci</span>[<span class="ruby-string">&quot;Name&quot;</span>]),
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Parent&quot;</span>, <span class="ruby-identifier">ci</span>[<span class="ruby-string">&quot;Parent&quot;</span>]),
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Routes&quot;</span>, <span class="ruby-identifier">ci</span>[<span class="ruby-string">&quot;Routes&quot;</span>])
+    ]
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">ci</span>[<span class="ruby-string">&quot;Includes&quot;</span>] <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">ci</span>[<span class="ruby-string">&quot;Includes&quot;</span>].<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">2</span>, <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Includes&quot;</span>, <span class="ruby-identifier">ci</span>[<span class="ruby-string">&quot;Includes&quot;</span>]))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">controller</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_errors" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_errors</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_errors-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_errors</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">full_trace</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:debug</span>]
+
+  <span class="ruby-identifier">errors</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">trace</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">full_trace</span>
+      <span class="ruby-identifier">e</span>[<span class="ruby-value">:backtrace</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">e</span>[<span class="ruby-value">:backtrace</span>][<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">end</span>
+
+    [
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Error&quot;</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">:error</span>]),
+      <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Location&quot;</span>, <span class="ruby-identifier">trace</span>)
+    ]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">double_space</span> <span class="ruby-string">&quot;Errors&quot;</span>, <span class="ruby-identifier">errors</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_header</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_header</span>
+  [
+    <span class="ruby-identifier">header</span>(<span class="ruby-string">&quot;Brakeman Report&quot;</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Application Path&quot;</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">app_path</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Rails Version&quot;</span>, <span class="ruby-identifier">rails_version</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Brakeman Version&quot;</span>, <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">Version</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Scan Date&quot;</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">start_time</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Duration&quot;</span>, <span class="ruby-node">&quot;#{tracker.duration} seconds&quot;</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Checks Run&quot;</span>, <span class="ruby-identifier">checks</span>.<span class="ruby-identifier">checks_run</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>))
+  ]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_obsolete" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_obsolete</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_obsolete-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_obsolete</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">unused_fingerprints</span>.<span class="ruby-identifier">empty?</span>
+
+  [<span class="ruby-identifier">header</span>(<span class="ruby-string">&quot;Obsolete Ignore Entries&quot;</span>)] <span class="ruby-operator">+</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">unused_fingerprints</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_overview" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_overview</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_overview-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_overview</span>
+  <span class="ruby-identifier">overview</span> = [
+    <span class="ruby-identifier">header</span>(<span class="ruby-string">&quot;Overview&quot;</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Controllers&#39;</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">controllers</span>.<span class="ruby-identifier">length</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Models&#39;</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">models</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Templates&#39;</span>, <span class="ruby-identifier">number_of_templates</span>(<span class="ruby-ivar">@tracker</span>)),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Errors&#39;</span>, <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">length</span>),
+    <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Security Warnings&#39;</span>, <span class="ruby-identifier">all_warnings</span>.<span class="ruby-identifier">length</span>)
+  ]
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ignored_warnings</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">overview</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">label</span>(<span class="ruby-string">&#39;Ignored Warnings&#39;</span>, <span class="ruby-identifier">ignored_warnings</span>.<span class="ruby-identifier">length</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">overview</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_report" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_report</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_report-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_report</span>
+  <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">use_color</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:output_color</span>]
+  <span class="ruby-identifier">summary_option</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:summary_only</span>]
+  <span class="ruby-ivar">@output_string</span> = <span class="ruby-string">+&quot;\n&quot;</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">summary_option</span> <span class="ruby-operator">==</span> <span class="ruby-value">:no_summary</span>
+    <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_header</span>
+    <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_overview</span>
+    <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_warning_overview</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">summary_option</span> <span class="ruby-operator">==</span> <span class="ruby-value">:summary_only</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">summary_option</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@output_string</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_controllers</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:debug</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:report_routes</span>]
+  <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_templates</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:debug</span>]
+  <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_obsolete</span>
+  <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_errors</span>
+  <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_warnings</span>
+  <span class="ruby-identifier">add_chunk</span> <span class="ruby-identifier">generate_show_ignored_overview</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:show_ignored</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ignored_warnings</span>.<span class="ruby-identifier">any?</span>
+
+  <span class="ruby-ivar">@output_string</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_show_ignored_overview" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_show_ignored_overview</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_show_ignored_overview-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_show_ignored_overview</span>
+  <span class="ruby-identifier">double_space</span>(<span class="ruby-string">&quot;Ignored Warnings&quot;</span>, <span class="ruby-identifier">ignored_warnings</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">output_warning</span> <span class="ruby-identifier">w</span>})
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_templates" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_templates</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_templates-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_templates</span>
+  <span class="ruby-identifier">out_processor</span> = <span class="ruby-constant">Brakeman</span><span class="ruby-operator">::</span><span class="ruby-constant">OutputProcessor</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-identifier">template_rows</span> = {}
+  <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">templates</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">template</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">template</span>.<span class="ruby-identifier">each_output</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">out</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">out</span> = <span class="ruby-identifier">out_processor</span>.<span class="ruby-identifier">format</span> <span class="ruby-identifier">out</span>
+      <span class="ruby-identifier">template_rows</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||=</span> []
+      <span class="ruby-identifier">template_rows</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">out</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-string">&quot;;&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s+/</span>, <span class="ruby-string">&quot; &quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">double_space</span> <span class="ruby-string">&quot;Template Output&quot;</span>, <span class="ruby-identifier">template_rows</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">template</span><span class="ruby-operator">|</span>
+    [<span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">color</span>(<span class="ruby-node">&quot;#{template.first}\n&quot;</span>, <span class="ruby-value">:cyan</span>)] <span class="ruby-operator">+</span> <span class="ruby-identifier">template</span>[<span class="ruby-value">1</span>]
+  }.<span class="ruby-identifier">compact</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_warning_overview" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_warning_overview</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_warning_overview-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_warning_overview</span>
+  <span class="ruby-identifier">warning_types</span> = <span class="ruby-identifier">warnings_summary</span>
+  <span class="ruby-identifier">warning_types</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value">:high_confidence</span>
+
+  <span class="ruby-identifier">warning_types</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span> }.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">count</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">label</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">count</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">header</span>(<span class="ruby-string">&#39;Warning Types&#39;</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_warnings" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_warnings</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_warnings-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_warnings</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">filtered_warnings</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">color</span>(<span class="ruby-string">&quot;No warnings found&quot;</span>, <span class="ruby-value">:bold</span>, <span class="ruby-value">:green</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">warnings</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">filtered_warnings</span>.<span class="ruby-identifier">sort_by</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+      [<span class="ruby-identifier">w</span>.<span class="ruby-identifier">confidence</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">warning_type</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">file</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">line</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">w</span>.<span class="ruby-identifier">fingerprint</span>]
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">output_warning</span> <span class="ruby-identifier">w</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">double_space</span> <span class="ruby-string">&quot;Warnings&quot;</span>, <span class="ruby-identifier">warnings</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">header</span><span
+              class="method-args">(text)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header</span> <span class="ruby-identifier">text</span>
+  <span class="ruby-constant">HighLine</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">color</span>(<span class="ruby-node">&quot;== #{text} ==\n&quot;</span>, <span class="ruby-value">:bold</span>, <span class="ruby-value">:magenta</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-label" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">label</span><span
+              class="method-args">(l, value, color = :green)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="label-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">label</span> <span class="ruby-identifier">l</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">color</span> = <span class="ruby-value">:green</span>
+  <span class="ruby-node">&quot;#{HighLine.new.color(l, color)}: #{value}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-output_warning" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">output_warning</span><span
+              class="method-args">(w)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="output_warning-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_warning</span> <span class="ruby-identifier">w</span>
+  <span class="ruby-identifier">text_format</span> = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:text_fields</span>] <span class="ruby-operator">||</span>
+    [<span class="ruby-value">:confidence</span>, <span class="ruby-value">:category</span>, <span class="ruby-value">:check</span>, <span class="ruby-value">:message</span>, <span class="ruby-value">:code</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">:line</span>]
+
+  <span class="ruby-identifier">text_format</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format_line</span>(<span class="ruby-identifier">w</span>, <span class="ruby-identifier">option</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">compact</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-render_array" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">render_array</span><span
+              class="method-args">(name, cols, values, locals)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>ONLY used for <a href="Text.html#method-i-generate_controllers"><code>generate_controllers</code></a> to avoid duplication</p>
+
+          <div class="method-source-code" id="render_array-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/lib/brakeman/report/report_text.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render_array</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">cols</span>, <span class="ruby-identifier">values</span>, <span class="ruby-identifier">locals</span>
+  <span class="ruby-identifier">controllers</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">controller_name</span>, <span class="ruby-identifier">parent</span>, <span class="ruby-identifier">includes</span>, <span class="ruby-identifier">routes</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span> = [ <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Controller&quot;</span>, <span class="ruby-identifier">controller_name</span>) ]
+    <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Parent&quot;</span>, <span class="ruby-identifier">parent</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Includes&quot;</span>, <span class="ruby-identifier">includes</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">includes</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">label</span>(<span class="ruby-string">&quot;Routes&quot;</span>, <span class="ruby-identifier">routes</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">double_space</span> <span class="ruby-string">&quot;Controller Overview&quot;</span>, <span class="ruby-identifier">controllers</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

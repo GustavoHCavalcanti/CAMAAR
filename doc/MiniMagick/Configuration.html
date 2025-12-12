@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module MiniMagick::Configuration - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-extended">::extended</a>
+    <li ><a href="#method-i-configure">#configure</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-MiniMagick::Configuration">
+  <h1 id="module-MiniMagick::Configuration" class="module">
+    module MiniMagick::Configuration
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-cli_env" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cli_env</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Adds environment variables to every CLI command call. For example, you could use it to set ‘LD_PRELOAD=“/path/to/libsomething.so”`. Must be a hash of strings keyed to valid environment variable name strings. e.g. {’MY_ENV’ =&gt; ‘my value’}</p>
+
+<p>@return [Hash]</p>
+        </div>
+      </div>
+      <div id="attribute-i-cli_prefix" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cli_prefix</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Adds a prefix to the CLI command. For example, you could use ‘firejail` to run all commands in a sandbox. Can be a string, or an array of strings. e.g. ’firejail’, or [‘firejail’, ‘–force’]</p>
+
+<p>@return [String] @return [Array&lt;String&gt;]</p>
+        </div>
+      </div>
+      <div id="attribute-i-errors" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">errors</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>If set to ‘false`, it will not raise errors when ImageMagick returns status code different than 0. Defaults to `true`.</p>
+
+<p>@return [Boolean]</p>
+        </div>
+      </div>
+      <div id="attribute-i-graphicsmagick" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">graphicsmagick</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Uses [GraphicsMagick](<a href="http://www.graphicsmagick.org">www.graphicsmagick.org</a>/) instead of ImageMagick, by prefixing commands with ‘gm` instead of `magick`.</p>
+
+<p>@return [Boolean]</p>
+        </div>
+      </div>
+      <div id="attribute-i-logger" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">logger</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p><a href="../Logger.html"><code>Logger</code></a> for commands, default is ‘Logger.new($stdout)`, but you can override it, for example if you want the logs to be written to a file.</p>
+
+<p>@return [Logger]</p>
+        </div>
+      </div>
+      <div id="attribute-i-restricted_env" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">restricted_env</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>If set to true, Open3 will restrict system calls to access only environment variables defined in :cli_env, plus HOME, PATH, and LANG since those are required for such system calls. It will not pass on any other environment variables from the system.</p>
+
+<p>@return [Boolean]</p>
+        </div>
+      </div>
+      <div id="attribute-i-timeout" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">timeout</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>If you don’t want commands to take too long, you can set a timeout (in seconds).</p>
+
+<p>@return [Integer]</p>
+        </div>
+      </div>
+      <div id="attribute-i-tmpdir" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tmpdir</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Temporary directory used by <a href="../MiniMagick.html"><code>MiniMagick</code></a>, default is ‘Dir.tmpdir`, but you can override it.</p>
+
+<p>@return [String]</p>
+        </div>
+      </div>
+      <div id="attribute-i-warnings" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">warnings</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>If set to ‘false`, it will not forward warnings from ImageMagick to standard error.</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-extended" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">extended</span><span
+              class="method-args">(base)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="extended-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mini_magick-5.3.1/lib/mini_magick/configuration.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">extended</span>(<span class="ruby-identifier">base</span>)
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">tmpdir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">tmpdir</span>
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">errors</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">logger</span> = <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">$stdout</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">level</span> = <span class="ruby-constant">Logger</span><span class="ruby-operator">::</span><span class="ruby-constant">INFO</span> }
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">warnings</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">cli_env</span> = {}.<span class="ruby-identifier">freeze</span>
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">restricted_env</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">graphicsmagick</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-configure" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">configure</span><span
+              class="method-args">() { |self| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@yield [self] @example</p>
+
+<pre class="ruby"><span class="ruby-constant">MiniMagick</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">timeout</span> = <span class="ruby-value">5</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+          <div class="method-source-code" id="configure-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mini_magick-5.3.1/lib/mini_magick/configuration.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">configure</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

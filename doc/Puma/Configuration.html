@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Puma::Configuration - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-random_token">::random_token</a>
+    <li ><a href="#method-c-temp_path">::temp_path</a>
+    <li ><a href="#method-i-app">#app</a>
+    <li ><a href="#method-i-app_configured-3F">#app_configured?</a>
+    <li ><a href="#method-i-clamp">#clamp</a>
+    <li ><a href="#method-i-config_files">#config_files</a>
+    <li ><a href="#method-i-configure">#configure</a>
+    <li ><a href="#method-i-environment">#environment</a>
+    <li ><a href="#method-i-final_options">#final_options</a>
+    <li ><a href="#method-i-flatten">#flatten</a>
+    <li ><a href="#method-i-flatten-21">#flatten!</a>
+    <li ><a href="#method-i-initialize_copy">#initialize_copy</a>
+    <li ><a href="#method-i-load">#load</a>
+    <li ><a href="#method-i-load_plugin">#load_plugin</a>
+    <li ><a href="#method-i-options">#options</a>
+    <li ><a href="#method-i-puma_default_options">#puma_default_options</a>
+    <li ><a href="#method-i-puma_options_from_env">#puma_options_from_env</a>
+    <li ><a href="#method-i-rackup">#rackup</a>
+    <li ><a href="#method-i-run_hooks">#run_hooks</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Puma::Configuration">
+  <h1 id="class-Puma::Configuration" class="class">
+    class Puma::Configuration
+  </h1>
+
+  <section class="description">
+    
+<p>The main configuration class of <a href="../Puma.html"><code>Puma</code></a>.</p>
+
+<p>It can be initialized with a set of “user” options and “default” options. Defaults will be merged with ‘Configuration.puma_default_options`.</p>
+
+<p>This class works together with 2 main other classes the ‘UserFileDefaultOptions` which stores configuration options in order so the precedence is that user set configuration wins over “file” based configuration wins over “default” configuration. These configurations are set via the `DSL` class. This class powers the <a href="../Puma.html"><code>Puma</code></a> config file syntax and does double duty as a configuration <a href="DSL.html"><code>DSL</code></a> used by the `Puma::CLI` and <a href="../Puma.html"><code>Puma</code></a> rack handler.</p>
+
+<p>It also handles loading plugins.</p>
+<dl class="rdoc-list label-list"><dt>Note:
+<dd>
+<p>‘:port` and `:host` are not valid keys. By the time they make it to the configuration options they are expected to be incorporated into a `:binds` key. Under the hood the <a href="DSL.html"><code>DSL</code></a> maps `port` and `host` calls to `:binds`</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span> = <span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">new</span>({}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user_config</span>, <span class="ruby-identifier">file_config</span>, <span class="ruby-identifier">default_config</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">user_config</span>.<span class="ruby-identifier">port</span> <span class="ruby-value">3003</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">clamp</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:port</span>]
+<span class="ruby-comment"># =&gt; 3003</span>
+</pre>
+</dd></dl>
+
+<p>It is expected that ‘load` is called on the configuration instance after setting config. This method expands any values in `config_file` and puts them into the correct configuration option hash.</p>
+
+<p>Once all configuration is complete it is expected that ‘clamp` will be called on the instance. This will expand any procs stored under “default” values. This is done because an environment variable may have been modified while loading configuration files.</p>
+
+<p>The main configuration class of <a href="../Puma.html"><code>Puma</code></a>.</p>
+
+<p>It can be initialized with a set of “user” options and “default” options. Defaults will be merged with ‘Configuration.puma_default_options`.</p>
+
+<p>This class works together with 2 main other classes the ‘UserFileDefaultOptions` which stores configuration options in order so the precedence is that user set configuration wins over “file” based configuration wins over “default” configuration. These configurations are set via the `DSL` class. This class powers the <a href="../Puma.html"><code>Puma</code></a> config file syntax and does double duty as a configuration <a href="DSL.html"><code>DSL</code></a> used by the `Puma::CLI` and <a href="../Puma.html"><code>Puma</code></a> rack handler.</p>
+
+<p>It also handles loading plugins.</p>
+<dl class="rdoc-list label-list"><dt>Note:
+<dd>
+<p>‘:port` and `:host` are not valid keys. By the time they make it to the configuration options they are expected to be incorporated into a `:binds` key. Under the hood the <a href="DSL.html"><code>DSL</code></a> maps `port` and `host` calls to `:binds`</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span> = <span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">new</span>({}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user_config</span>, <span class="ruby-identifier">file_config</span>, <span class="ruby-identifier">default_config</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">user_config</span>.<span class="ruby-identifier">port</span> <span class="ruby-value">3003</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">clamp</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:port</span>]
+<span class="ruby-comment"># =&gt; 3003</span>
+</pre>
+</dd></dl>
+
+<p>It is expected that ‘load` is called on the configuration instance after setting config. This method expands any values in `config_file` and puts them into the correct configuration option hash.</p>
+
+<p>Once all configuration is complete it is expected that ‘clamp` will be called on the instance. This will expand any procs stored under “default” values. This is done because an environment variable may have been modified while loading configuration files.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="DEFAULTS">DEFAULTS
+        <dd>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-events" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">events</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-hooks" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">hooks</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-plugins" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">plugins</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(user_options={}, default_options = {}, env = ENV, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">user_options</span>={}, <span class="ruby-identifier">default_options</span> = {}, <span class="ruby-identifier">env</span> = <span class="ruby-constant">ENV</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">default_options</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">puma_default_options</span>(<span class="ruby-identifier">env</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">default_options</span>)
+
+  <span class="ruby-ivar">@_options</span>    = <span class="ruby-constant">UserFileDefaultOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_options</span>, <span class="ruby-identifier">default_options</span>)
+  <span class="ruby-ivar">@plugins</span>     = <span class="ruby-constant">PluginLoader</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@events</span>      = <span class="ruby-ivar">@_options</span>[<span class="ruby-value">:events</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Events</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@hooks</span>       = {}
+  <span class="ruby-ivar">@user_dsl</span>    = <span class="ruby-constant">DSL</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@_options</span>.<span class="ruby-identifier">user_options</span>, <span class="ruby-keyword">self</span>)
+  <span class="ruby-ivar">@file_dsl</span>    = <span class="ruby-constant">DSL</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@_options</span>.<span class="ruby-identifier">file_options</span>, <span class="ruby-keyword">self</span>)
+  <span class="ruby-ivar">@default_dsl</span> = <span class="ruby-constant">DSL</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@_options</span>.<span class="ruby-identifier">default_options</span>, <span class="ruby-keyword">self</span>)
+
+  <span class="ruby-ivar">@puma_bundler_pruned</span> = <span class="ruby-identifier">env</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;PUMA_BUNDLER_PRUNED&#39;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+    <span class="ruby-identifier">configure</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@loaded</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@clamped</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-random_token" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">random_token</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="random_token-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 371</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">random_token</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;securerandom&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">SecureRandom</span>)
+
+  <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">hex</span>(<span class="ruby-value">16</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-temp_path" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">temp_path</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="temp_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 364</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">temp_path</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;tmpdir&#39;</span>
+
+  <span class="ruby-identifier">t</span> = (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-value">1000</span>).<span class="ruby-identifier">to_i</span>
+  <span class="ruby-node">&quot;#{Dir.tmpdir}/puma-status-#{t}-#{$$}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-app" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">app</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Load the specified rackup file, pull options from the rackup file, and set @app.</p>
+
+          <div class="method-source-code" id="app-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 317</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">app</span>
+  <span class="ruby-identifier">found</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:app</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">load_rackup</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:log_requests</span>]
+    <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&#39;commonlogger&#39;</span>
+    <span class="ruby-identifier">logger</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:custom_logger</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:custom_logger</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:logger</span>]
+    <span class="ruby-identifier">found</span> = <span class="ruby-constant">CommonLogger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">found</span>, <span class="ruby-identifier">logger</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">ConfigMiddleware</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">found</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-app_configured-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">app_configured?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Indicate if there is a properly configured app</p>
+
+          <div class="method-source-code" id="app_configured-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 306</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">app_configured?</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:app</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">rackup</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-clamp" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">clamp</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Call once all configuration (included from rackup files) is loaded to finalize defaults and lock in the configuration.</p>
+
+<p>This also calls load if it hasn’t been called yet.</p>
+
+          <div class="method-source-code" id="clamp-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 282</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clamp</span>
+  <span class="ruby-identifier">load</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@loaded</span>
+  <span class="ruby-identifier">set_conditional_default_options</span>
+  <span class="ruby-ivar">@_options</span>.<span class="ruby-identifier">finalize_values</span>
+  <span class="ruby-ivar">@clamped</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">warn_hooks</span>
+  <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-config_files" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">config_files</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="config_files-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 263</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config_files</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotLoadedError</span>, <span class="ruby-string">&quot;ensure load is called before accessing config_files&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@loaded</span>
+
+  <span class="ruby-identifier">files</span> = <span class="ruby-ivar">@_options</span>.<span class="ruby-identifier">all_of</span>(<span class="ruby-value">:config_files</span>)
+
+  <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-identifier">files</span> <span class="ruby-operator">==</span> [<span class="ruby-string">&#39;-&#39;</span>]
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">files</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">files</span>.<span class="ruby-identifier">any?</span>
+
+  <span class="ruby-identifier">first_default_file</span> = <span class="ruby-node">%W(config/puma/#{@_options[:environment]}.rb config/puma.rb)</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">f</span>)
+  <span class="ruby-keyword">end</span>
+
+  [<span class="ruby-identifier">first_default_file</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-configure" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">configure</span><span
+              class="method-args">() { |user_dsl, file_dsl, default_dsl| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="configure-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 208</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">configure</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@user_dsl</span>, <span class="ruby-ivar">@file_dsl</span>, <span class="ruby-ivar">@default_dsl</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@user_dsl</span>.<span class="ruby-identifier">_offer_plugins</span>
+  <span class="ruby-ivar">@file_dsl</span>.<span class="ruby-identifier">_offer_plugins</span>
+  <span class="ruby-ivar">@default_dsl</span>.<span class="ruby-identifier">_offer_plugins</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-environment" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">environment</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return which environment we’re running in</p>
+
+          <div class="method-source-code" id="environment-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 330</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">environment</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:environment</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-final_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">final_options</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="final_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 360</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">final_options</span>
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">final_options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-flatten" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">flatten</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="flatten-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flatten</span>
+  <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">flatten!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-flatten-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">flatten!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="flatten-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flatten!</span>
+  <span class="ruby-ivar">@_options</span> = <span class="ruby-ivar">@_options</span>.<span class="ruby-identifier">flatten</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-initialize_copy" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">initialize_copy</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="initialize_copy-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 216</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-ivar">@conf</span>        = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@cli_options</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@_options</span>     = <span class="ruby-ivar">@_options</span>.<span class="ruby-identifier">dup</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-load" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="load-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 257</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load</span>
+  <span class="ruby-ivar">@loaded</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">config_files</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">config_file</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@file_dsl</span>.<span class="ruby-identifier">_load_from</span>(<span class="ruby-identifier">config_file</span>) }
+  <span class="ruby-ivar">@_options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-load_plugin" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load_plugin</span><span
+              class="method-args">(name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="load_plugin-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 334</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_plugin</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-ivar">@plugins</span>.<span class="ruby-identifier">create</span> <span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">options</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotClampedError</span>, <span class="ruby-string">&quot;ensure clamp is called before accessing options&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@clamped</span>
+
+  <span class="ruby-ivar">@_options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-puma_default_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">puma_default_options</span><span
+              class="method-args">(env = ENV)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="puma_default_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">puma_default_options</span>(<span class="ruby-identifier">env</span> = <span class="ruby-constant">ENV</span>)
+  <span class="ruby-identifier">defaults</span> = <span class="ruby-constant">DEFAULTS</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">puma_options_from_env</span>(<span class="ruby-identifier">env</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">defaults</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span> }
+  <span class="ruby-identifier">defaults</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-puma_options_from_env" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">puma_options_from_env</span><span
+              class="method-args">(env = ENV)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="puma_options_from_env-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">puma_options_from_env</span>(<span class="ruby-identifier">env</span> = <span class="ruby-constant">ENV</span>)
+  <span class="ruby-identifier">min</span> = <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;PUMA_MIN_THREADS&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;MIN_THREADS&#39;</span>]
+  <span class="ruby-identifier">max</span> = <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;PUMA_MAX_THREADS&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;MAX_THREADS&#39;</span>]
+  <span class="ruby-identifier">persistent_timeout</span> = <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;PUMA_PERSISTENT_TIMEOUT&#39;</span>]
+  <span class="ruby-identifier">workers</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;WEB_CONCURRENCY&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;auto&#39;</span>
+    <span class="ruby-identifier">require_processor_counter</span>
+    <span class="ruby-operator">::</span><span class="ruby-constant">Concurrent</span>.<span class="ruby-identifier">available_processor_count</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;WEB_CONCURRENCY&#39;</span>]
+  <span class="ruby-keyword">end</span>
+
+  {
+    <span class="ruby-value">min_threads:</span> <span class="ruby-identifier">min</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">min</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">min</span>),
+    <span class="ruby-value">max_threads:</span> <span class="ruby-identifier">max</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">max</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">max</span>),
+    <span class="ruby-value">persistent_timeout:</span> <span class="ruby-identifier">persistent_timeout</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">persistent_timeout</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">persistent_timeout</span>),
+    <span class="ruby-value">workers:</span> <span class="ruby-identifier">workers</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">workers</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">workers</span>),
+    <span class="ruby-value">environment:</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;APP_ENV&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;RACK_ENV&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;RAILS_ENV&#39;</span>],
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rackup" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rackup</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="rackup-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 310</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rackup</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:rackup</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-run_hooks" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">run_hooks</span><span
+              class="method-args">(key, arg, log_writer, hook_data = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param key [:Symbol] hook to run @param arg [Launcher, Int] ‘:before_restart` passes <a href="Launcher.html"><code>Launcher</code></a></p>
+
+          <div class="method-source-code" id="run_hooks-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/configuration.rb, line 341</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run_hooks</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">arg</span>, <span class="ruby-identifier">log_writer</span>, <span class="ruby-identifier">hook_data</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">log_writer</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Running #{key} hooks&quot;</span>
+
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">all_of</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hook_options</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">block</span> = <span class="ruby-identifier">hook_options</span>[<span class="ruby-value">:block</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">id</span> = <span class="ruby-identifier">hook_options</span>[<span class="ruby-value">:id</span>]
+        <span class="ruby-identifier">hook_data</span>[<span class="ruby-identifier">id</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">arg</span>, <span class="ruby-identifier">hook_data</span>[<span class="ruby-identifier">id</span>]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">arg</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">log_writer</span>.<span class="ruby-identifier">log</span> <span class="ruby-node">&quot;WARNING hook #{key} failed with exception (#{e.class}) #{e.message}&quot;</span>
+      <span class="ruby-identifier">log_writer</span>.<span class="ruby-identifier">debug</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

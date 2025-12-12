@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Net::IMAP::ESearchResult - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Data.define(:tag, :uid, :data)
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-all">#all</a>
+    <li ><a href="#method-i-count">#count</a>
+    <li ><a href="#method-i-each">#each</a>
+    <li ><a href="#method-i-max">#max</a>
+    <li ><a href="#method-i-min">#min</a>
+    <li ><a href="#method-i-modseq">#modseq</a>
+    <li ><a href="#method-i-partial">#partial</a>
+    <li ><a href="#method-i-to_a">#to_a</a>
+    <li ><a href="#method-i-to_sequence_set">#to_sequence_set</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Net::IMAP::ESearchResult">
+  <h1 id="class-Net::IMAP::ESearchResult" class="class">
+    class Net::IMAP::ESearchResult
+  </h1>
+
+  <section class="description">
+    
+<p>An “extended search” response (<code>ESEARCH</code>).  <a href="ESearchResult.html"><code>ESearchResult</code></a> should be returned (instead of <a href="SearchResult.html"><code>SearchResult</code></a>) by <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a>, <a href="../IMAP.html#method-i-uid_search"><code>IMAP#uid_search</code></a>, <a href="../IMAP.html#method-i-sort"><code>IMAP#sort</code></a>, and <a href="../IMAP.html#method-i-uid_sort"><code>IMAP#uid_sort</code></a> under any of the following conditions:</p>
+<ul><li>
+<p>Return options were specified for <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a> or <a href="../IMAP.html#method-i-uid_search"><code>IMAP#uid_search</code></a>. The server must support a search extension which allows <a href="https://www.rfc-editor.org/rfc/rfc4466.html">RFC4466</a> <code>return</code> options, such as <code>ESEARCH</code>, <code>PARTIAL</code>, or <code>IMAP4rev2</code>.</p>
+</li><li>
+<p>Return options were specified for <a href="../IMAP.html#method-i-sort"><code>IMAP#sort</code></a> or <a href="../IMAP.html#method-i-uid_sort"><code>IMAP#uid_sort</code></a>. The server must support the <code>ESORT</code> extension <a href="https://www.rfc-editor.org/rfc/rfc5267.html#section-3">[RFC5267]</a>.</p>
+
+<p><strong>NOTE:</strong> <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a> and <a href="../IMAP.html#method-i-uid_search"><code>IMAP#uid_search</code></a> do not support <code>ESORT</code> yet.</p>
+</li><li>
+<p>The server supports <code>IMAP4rev2</code> but <em>not</em> <code>IMAP4rev1</code>, or <code>IMAP4rev2</code> has been enabled.  <code>IMAP4rev2</code> requires <code>ESEARCH</code> results.</p>
+</li></ul>
+
+<p>Note that some servers may claim to support a search extension which requires an <code>ESEARCH</code> result, such as <code>PARTIAL</code>, but still only return a <code>SEARCH</code> result when <code>return</code> options are specified.</p>
+
+<p>Some search extensions may result in the server sending <a href="ESearchResult.html"><code>ESearchResult</code></a> responses after the initiating command has completed.  Use <a href="../IMAP.html#method-i-add_response_handler"><code>IMAP#add_response_handler</code></a> to handle these responses.</p>
+
+<p>An “extended search” response (<code>ESEARCH</code>).  <a href="ESearchResult.html"><code>ESearchResult</code></a> should be returned (instead of <a href="SearchResult.html"><code>SearchResult</code></a>) by <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a>, <a href="../IMAP.html#method-i-uid_search"><code>IMAP#uid_search</code></a>, <a href="../IMAP.html#method-i-sort"><code>IMAP#sort</code></a>, and <a href="../IMAP.html#method-i-uid_sort"><code>IMAP#uid_sort</code></a> under any of the following conditions:</p>
+<ul><li>
+<p>Return options were specified for <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a> or <a href="../IMAP.html#method-i-uid_search"><code>IMAP#uid_search</code></a>. The server must support a search extension which allows <a href="https://www.rfc-editor.org/rfc/rfc4466.html">RFC4466</a> <code>return</code> options, such as <code>ESEARCH</code>, <code>PARTIAL</code>, or <code>IMAP4rev2</code>.</p>
+</li><li>
+<p>Return options were specified for <a href="../IMAP.html#method-i-sort"><code>IMAP#sort</code></a> or <a href="../IMAP.html#method-i-uid_sort"><code>IMAP#uid_sort</code></a>. The server must support the <code>ESORT</code> extension <a href="https://www.rfc-editor.org/rfc/rfc5267.html#section-3">[RFC5267]</a>.</p>
+
+<p><strong>NOTE:</strong> <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a> and <a href="../IMAP.html#method-i-uid_search"><code>IMAP#uid_search</code></a> do not support <code>ESORT</code> yet.</p>
+</li><li>
+<p>The server supports <code>IMAP4rev2</code> but <em>not</em> <code>IMAP4rev1</code>, or <code>IMAP4rev2</code> has been enabled.  <code>IMAP4rev2</code> requires <code>ESEARCH</code> results.</p>
+</li></ul>
+
+<p>Note that some servers may claim to support a search extension which requires an <code>ESEARCH</code> result, such as <code>PARTIAL</code>, but still only return a <code>SEARCH</code> result when <code>return</code> options are specified.</p>
+
+<p>Some search extensions may result in the server sending <a href="ESearchResult.html"><code>ESearchResult</code></a> responses after the initiating command has completed.  Use <a href="../IMAP.html#method-i-add_response_handler"><code>IMAP#add_response_handler</code></a> to handle these responses.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-data" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">data</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Search return data, as an array of <code>[name, value]</code> pairs.  Most return data corresponds to a search <code>return</code> option with the same name.</p>
+
+<p>Note that some return data names may be used more than once per result.</p>
+
+<p>This data can be more simply retrieved by <a href="ESearchResult.html#method-i-min"><code>min</code></a>, <a href="ESearchResult.html#method-i-max"><code>max</code></a>, <a href="ESearchResult.html#method-i-all"><code>all</code></a>, <a href="ESearchResult.html#method-i-count"><code>count</code></a>, <a href="ESearchResult.html#method-i-modseq"><code>modseq</code></a>, and other methods.</p>
+        </div>
+      </div>
+      <div id="attribute-i-tag" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tag</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The tag string for the command that caused this response to be returned.</p>
+
+<p>When <code>nil</code>, this response was not caused by a particular command.</p>
+        </div>
+      </div>
+      <div id="attribute-i-uid" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">uid</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Indicates whether <a href="ESearchResult.html#attribute-i-data"><code>data</code></a> in this response refers to UIDs (when <code>true</code>) or to message sequence numbers (when <code>false</code>).</p>
+        </div>
+      </div>
+      <div id="attribute-i-uid-3F" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">uid?</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Indicates whether <a href="ESearchResult.html#attribute-i-data"><code>data</code></a> in this response refers to UIDs (when <code>true</code>) or to message sequence numbers (when <code>false</code>).</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(tag: nil, uid: nil, data: nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">tag:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">uid:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">data:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">tag</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">String</span>       <span class="ruby-operator">|</span> <span class="ruby-keyword">nil</span>; <span class="ruby-identifier">tag</span> = <span class="ruby-operator">-</span><span class="ruby-identifier">tag</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">tag</span>
+  <span class="ruby-identifier">uid</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">|</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">|</span> <span class="ruby-keyword">nil</span>; <span class="ruby-identifier">uid</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">uid</span>
+  <span class="ruby-identifier">data</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Array</span>        <span class="ruby-operator">|</span> <span class="ruby-keyword">nil</span>; <span class="ruby-identifier">data</span> <span class="ruby-operator">||=</span> []; <span class="ruby-identifier">data</span>.<span class="ruby-identifier">freeze</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-all" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              all &rarr; sequence set or nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>A <a href="SequenceSet.html"><code>SequenceSet</code></a> containing all message sequence numbers or UIDs that satisfy the SEARCH criteria.</p>
+
+<p>Returns <code>nil</code> when the associated search command has no results, or when the <code>ALL</code> return option was not specified but other return options were.</p>
+
+<p>Requires <code>ESEARCH</code> <a href="https://www.rfc-editor.org/rfc/rfc4731.html#section-3.1">[RFC4731]</a> or <code>IMAP4rev2</code> <a href="https://www.rfc-editor.org/rfc/rfc9051.html#section-7.3.4">[RFC9051]</a>.</p>
+
+<p>See also: <a href="ESearchResult.html#method-i-to_a"><code>to_a</code></a></p>
+
+          <div class="method-source-code" id="all-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all</span>;        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-string">&quot;ALL&quot;</span>)&amp;.<span class="ruby-identifier">last</span>        <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-count" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              count &rarr; integer or nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the number of messages that satisfy the SEARCH criteria.</p>
+
+<p>Returns <code>nil</code> when the associated search command has no results, or when the <code>COUNT</code> return option wasn’t specified.</p>
+
+<p>Requires <code>ESEARCH</code> <a href="https://www.rfc-editor.org/rfc/rfc4731.html#section-3.1">[RFC4731]</a> or <code>IMAP4rev2</code> <a href="https://www.rfc-editor.org/rfc/rfc9051.html#section-7.3.4">[RFC9051]</a>.</p>
+
+          <div class="method-source-code" id="count-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">count</span>;      <span class="ruby-identifier">data</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-string">&quot;COUNT&quot;</span>)&amp;.<span class="ruby-identifier">last</span>      <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-each" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">each</span><span
+              class="method-args">(&amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>When either <a href="ESearchResult.html#method-i-all"><code>all</code></a> or <a href="ESearchResult.html#method-i-partial"><code>partial</code></a> contains a <a href="SequenceSet.html"><code>SequenceSet</code></a> of message sequence numbers or UIDs, <code>each</code> yields each integer in the set.</p>
+
+<p>When both <a href="ESearchResult.html#method-i-all"><code>all</code></a> and <a href="ESearchResult.html#method-i-partial"><code>partial</code></a> are <code>nil</code>, either because the server returned no results or because <code>ALL</code> and <code>PARTIAL</code> were not included in the <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a> <code>RETURN</code> options, <a href="ESearchResult.html#method-i-each"><code>each</code></a> does not yield.</p>
+
+<p>Note that <a href="SearchResult.html"><code>SearchResult</code></a> also implements <code>#each</code>, so it can be used without checking if the server returned <code>SEARCH</code> or <code>ESEARCH</code> data.</p>
+
+<p>Related: <a href="ESearchResult.html#method-i-to_sequence_set"><code>to_sequence_set</code></a>, <a href="ESearchResult.html#method-i-to_a"><code>to_a</code></a>, <a href="ESearchResult.html#method-i-all"><code>all</code></a>, <a href="ESearchResult.html#method-i-partial"><code>partial</code></a></p>
+
+          <div class="method-source-code" id="each-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__callee__</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">to_sequence_set</span>.<span class="ruby-identifier">each_number</span>(<span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-max" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              max &rarr; integer or nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The highest message number/UID that satisfies the SEARCH criteria.</p>
+
+<p>Returns <code>nil</code> when the associated search command has no results, or when the <code>MAX</code> return option wasn’t specified.</p>
+
+<p>Requires <code>ESEARCH</code> <a href="https://www.rfc-editor.org/rfc/rfc4731.html#section-3.1">[RFC4731]</a> or <code>IMAP4rev2</code> <a href="https://www.rfc-editor.org/rfc/rfc9051.html#section-7.3.4">[RFC9051]</a>.</p>
+
+          <div class="method-source-code" id="max-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max</span>;        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-string">&quot;MAX&quot;</span>)&amp;.<span class="ruby-identifier">last</span>        <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-min" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              min &rarr; integer or nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The lowest message number/UID that satisfies the SEARCH criteria.</p>
+
+<p>Returns <code>nil</code> when the associated search command has no results, or when the <code>MIN</code> return option wasn’t specified.</p>
+
+<p>Requires <code>ESEARCH</code> <a href="https://www.rfc-editor.org/rfc/rfc4731.html#section-3.1">[RFC4731]</a> or <code>IMAP4rev2</code> <a href="https://www.rfc-editor.org/rfc/rfc9051.html#section-7.3.4">[RFC9051]</a>.</p>
+
+          <div class="method-source-code" id="min-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">min</span>;        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-string">&quot;MIN&quot;</span>)&amp;.<span class="ruby-identifier">last</span>        <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-modseq" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              modseq &rarr; integer or nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The highest <code>mod-sequence</code> of all messages being returned.</p>
+
+<p>Returns <code>nil</code> when the associated search command has no results, or when the <code>MODSEQ</code> search criterion wasn’t specified.</p>
+
+<p>Note that there is no search <code>return</code> option for <code>MODSEQ</code>.  It will be returned whenever the <code>CONDSTORE</code> extension has been enabled.  Using the <code>MODSEQ</code> search criteria will implicitly enable <code>CONDSTORE</code>.</p>
+
+<p>Requires <code>CONDSTORE</code> <a href="https://www.rfc-editor.org/rfc/rfc7162.html">[RFC7162]</a> and <code>ESEARCH</code> <a href="https://www.rfc-editor.org/rfc/rfc4731.html#section-3.2">[RFC4731]</a>.</p>
+
+          <div class="method-source-code" id="modseq-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modseq</span>;     <span class="ruby-identifier">data</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-string">&quot;MODSEQ&quot;</span>)&amp;.<span class="ruby-identifier">last</span>     <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-partial" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              partial &rarr; PartialResult or nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>A <a href="ESearchResult/PartialResult.html"><code>PartialResult</code></a> containing a subset of the message sequence numbers or UIDs that satisfy the SEARCH criteria.</p>
+
+<p>Requires <code>PARTIAL</code> <a href="https://www.rfc-editor.org/rfc/rfc9394.html">[RFC9394]</a> or <code>CONTEXT=SEARCH</code>/<code>CONTEXT=SORT</code> <a href="https://www.rfc-editor.org/rfc/rfc5267.html">[RFC5267]</a></p>
+
+<p>See also: <a href="ESearchResult.html#method-i-to_a"><code>to_a</code></a></p>
+
+          <div class="method-source-code" id="partial-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">partial</span>;    <span class="ruby-identifier">data</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-string">&quot;PARTIAL&quot;</span>)&amp;.<span class="ruby-identifier">last</span>    <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_a" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              to_a &rarr; Array of integers
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>When either <a href="ESearchResult.html#method-i-all"><code>all</code></a> or <a href="ESearchResult.html#method-i-partial"><code>partial</code></a> contains a <a href="SequenceSet.html"><code>SequenceSet</code></a> of message sequence numbers or UIDs, <code>to_a</code> returns that set as an array of integers.</p>
+
+<p>When both <a href="ESearchResult.html#method-i-all"><code>all</code></a> and <a href="ESearchResult.html#method-i-partial"><code>partial</code></a> are <code>nil</code>, either because the server returned no results or because neither <code>ALL</code> or <code>PARTIAL</code> were included in the <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a> <code>RETURN</code> options, <a href="ESearchResult.html#method-i-to_a"><code>to_a</code></a> returns an empty array.</p>
+
+<p>Note that <a href="SearchResult.html"><code>SearchResult</code></a> also implements <code>to_a</code>, so it can be used without checking if the server returned <code>SEARCH</code> or <code>ESEARCH</code> data.</p>
+
+<p>Related: <a href="ESearchResult.html#method-i-each"><code>each</code></a>, <a href="ESearchResult.html#method-i-to_sequence_set"><code>to_sequence_set</code></a>, <a href="ESearchResult.html#method-i-all"><code>all</code></a>, <a href="ESearchResult.html#method-i-partial"><code>partial</code></a></p>
+
+          <div class="method-source-code" id="to_a-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>; <span class="ruby-identifier">to_sequence_set</span>.<span class="ruby-identifier">numbers</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_sequence_set" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              to_sequence_set &rarr; SequenceSet or nil
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>When either <a href="ESearchResult.html#method-i-all"><code>all</code></a> or <a href="ESearchResult.html#method-i-partial"><code>partial</code></a> contains a <a href="SequenceSet.html"><code>SequenceSet</code></a> of message sequence numbers or UIDs, <code>to_sequence_set</code> returns that sequence set.</p>
+
+<p>When both <a href="ESearchResult.html#method-i-all"><code>all</code></a> and <a href="ESearchResult.html#method-i-partial"><code>partial</code></a> are <code>nil</code>, either because the server returned no results or because neither <code>ALL</code> or <code>PARTIAL</code> were included in the <a href="../IMAP.html#method-i-search"><code>IMAP#search</code></a> <code>RETURN</code> options, <a href="ESearchResult.html#method-i-to_sequence_set"><code>to_sequence_set</code></a> returns <a href="SequenceSet.html#method-c-empty"><code>SequenceSet.empty</code></a>.</p>
+
+<p>Note that <a href="SearchResult.html"><code>SearchResult</code></a> also implements <code>to_sequence_set</code>, so it can be used without checking if the server returned <code>SEARCH</code> or <code>ESEARCH</code> data.</p>
+
+<p>Related: <a href="ESearchResult.html#method-i-each"><code>each</code></a>, <a href="ESearchResult.html#method-i-to_a"><code>to_a</code></a>, <a href="ESearchResult.html#method-i-all"><code>all</code></a>, <a href="ESearchResult.html#method-i-partial"><code>partial</code></a></p>
+
+          <div class="method-source-code" id="to_sequence_set-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/esearch_result.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_sequence_set</span>
+  <span class="ruby-identifier">all</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">partial</span>&amp;.<span class="ruby-identifier">to_sequence_set</span> <span class="ruby-operator">||</span> <span class="ruby-constant">SequenceSet</span>.<span class="ruby-identifier">empty</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

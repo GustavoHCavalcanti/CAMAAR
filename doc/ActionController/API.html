@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActionController::API - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>
+            <details open>
+              <summary>      <a href="#class-ActionController::API-label-Action+Controller+API">Action Controller API</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActionController::API-label-Renders">Renders</a>
+          <li>      <a href="#class-ActionController::API-label-Redirects">Redirects</a>
+          <li>      <a href="#class-ActionController::API-label-Adding+New+Behavior">Adding New Behavior</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#class-ActionController::API-label-Action+Controller+API">Action Controller API</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActionController::API-label-Renders">Renders</a>
+          <li>      <a href="#class-ActionController::API-label-Redirects">Redirects</a>
+          <li>      <a href="#class-ActionController::API-label-Adding+New+Behavior">Adding New Behavior</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#class-ActionController::API-label-Action+Controller+API">Action Controller API</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActionController::API-label-Renders">Renders</a>
+          <li>      <a href="#class-ActionController::API-label-Redirects">Redirects</a>
+          <li>      <a href="#class-ActionController::API-label-Adding+New+Behavior">Adding New Behavior</a>
+
+              </ul>
+            </details>
+          </li>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Metal
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-without_modules">::without_modules</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActionController::API">
+  <h1 id="class-ActionController::API" class="class">
+    class ActionController::API
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActionController::API-label-Action+Controller+API">Action Controller <a href="API.html"><code>API</code></a><span><a href="#class-ActionController::API-label-Action+Controller+API">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="API.html"><code>API</code></a> Controller is a lightweight version of <a href="Base.html"><code>ActionController::Base</code></a>, created for applications that don’t require all functionalities that a complete <a href="../Rails.html"><code>Rails</code></a> controller provides, allowing you to create controllers with just the features that you need for <a href="API.html"><code>API</code></a> only applications.</p>
+
+<p>An <a href="API.html"><code>API</code></a> Controller is different from a normal controller in the sense that by default it doesn’t include a number of features that are usually required by browser access only: layouts and templates rendering, flash, assets, and so on. This makes the entire controller stack thinner, suitable for <a href="API.html"><code>API</code></a> applications. It doesn’t mean you won’t have such features if you need them: they’re all available for you to include in your application, they’re just not part of the default <a href="API.html"><code>API</code></a> controller stack.</p>
+
+<p>Normally, <code>ApplicationController</code> is the only controller that inherits from <code>ActionController::API</code>. All other controllers in turn inherit from <code>ApplicationController</code>.</p>
+
+<p>A sample controller could look like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">posts</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Request, response, and parameters objects all work the exact same way as <a href="Base.html"><code>ActionController::Base</code></a>.</p>
+
+<h2 id="class-ActionController::API-label-Renders">Renders<span><a href="#class-ActionController::API-label-Renders">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The default <a href="API.html"><code>API</code></a> Controller stack includes all renderers, which means you can use <code>render :json</code> and siblings freely in your controllers. Keep in mind that templates are not going to be rendered, so you need to ensure your controller is calling either <code>render</code> or <code>redirect_to</code> in all actions, otherwise it will return <code>204 No Content</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+  <span class="ruby-identifier">post</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">post</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="class-ActionController::API-label-Redirects">Redirects<span><a href="#class-ActionController::API-label-Redirects">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Redirects are used to move from one action to another. You can use the <code>redirect_to</code> method in your controllers in the same way as in <a href="Base.html"><code>ActionController::Base</code></a>. For example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">not_authorized?</span>
+  <span class="ruby-comment"># do stuff here</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="class-ActionController::API-label-Adding+New+Behavior">Adding New Behavior<span><a href="#class-ActionController::API-label-Adding+New+Behavior">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>In some scenarios you may want to add back some functionality provided by <a href="Base.html"><code>ActionController::Base</code></a> that is not present by default in <code>ActionController::API</code>, for instance <code>MimeResponds</code>. This module gives you the <code>respond_to</code> method. Adding it is quite simple, you just need to include the module in a specific controller or in <code>ApplicationController</code> in case you want it available in your entire application:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">MimeResponds</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">posts</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">xml:</span> <span class="ruby-identifier">posts</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Make sure to check the modules included in <a href="Base.html"><code>ActionController::Base</code></a> if you want to use any other functionality that is not provided by <code>ActionController::API</code> out of the box.</p>
+
+<h1 id="class-ActionController::API-label-Action+Controller+API">Action Controller <a href="API.html"><code>API</code></a><span><a href="#class-ActionController::API-label-Action+Controller+API">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="API.html"><code>API</code></a> Controller is a lightweight version of <a href="Base.html"><code>ActionController::Base</code></a>, created for applications that don’t require all functionalities that a complete <a href="../Rails.html"><code>Rails</code></a> controller provides, allowing you to create controllers with just the features that you need for <a href="API.html"><code>API</code></a> only applications.</p>
+
+<p>An <a href="API.html"><code>API</code></a> Controller is different from a normal controller in the sense that by default it doesn’t include a number of features that are usually required by browser access only: layouts and templates rendering, flash, assets, and so on. This makes the entire controller stack thinner, suitable for <a href="API.html"><code>API</code></a> applications. It doesn’t mean you won’t have such features if you need them: they’re all available for you to include in your application, they’re just not part of the default <a href="API.html"><code>API</code></a> controller stack.</p>
+
+<p>Normally, <code>ApplicationController</code> is the only controller that inherits from <code>ActionController::API</code>. All other controllers in turn inherit from <code>ApplicationController</code>.</p>
+
+<p>A sample controller could look like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">posts</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Request, response, and parameters objects all work the exact same way as <a href="Base.html"><code>ActionController::Base</code></a>.</p>
+
+<h2 id="class-ActionController::API-label-Renders">Renders<span><a href="#class-ActionController::API-label-Renders">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The default <a href="API.html"><code>API</code></a> Controller stack includes all renderers, which means you can use <code>render :json</code> and siblings freely in your controllers. Keep in mind that templates are not going to be rendered, so you need to ensure your controller is calling either <code>render</code> or <code>redirect_to</code> in all actions, otherwise it will return <code>204 No Content</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+  <span class="ruby-identifier">post</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">post</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="class-ActionController::API-label-Redirects">Redirects<span><a href="#class-ActionController::API-label-Redirects">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Redirects are used to move from one action to another. You can use the <code>redirect_to</code> method in your controllers in the same way as in <a href="Base.html"><code>ActionController::Base</code></a>. For example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">not_authorized?</span>
+  <span class="ruby-comment"># do stuff here</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="class-ActionController::API-label-Adding+New+Behavior">Adding New Behavior<span><a href="#class-ActionController::API-label-Adding+New+Behavior">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>In some scenarios you may want to add back some functionality provided by <a href="Base.html"><code>ActionController::Base</code></a> that is not present by default in <code>ActionController::API</code>, for instance <code>MimeResponds</code>. This module gives you the <code>respond_to</code> method. Adding it is quite simple, you just need to include the module in a specific controller or in <code>ApplicationController</code> in case you want it available in your entire application:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">MimeResponds</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">posts</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">xml:</span> <span class="ruby-identifier">posts</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Make sure to check the modules included in <a href="Base.html"><code>ActionController::Base</code></a> if you want to use any other functionality that is not provided by <code>ActionController::API</code> out of the box.</p>
+
+<h1 id="class-ActionController::API-label-Action+Controller+API">Action Controller <a href="API.html"><code>API</code></a><span><a href="#class-ActionController::API-label-Action+Controller+API">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="API.html"><code>API</code></a> Controller is a lightweight version of <a href="Base.html"><code>ActionController::Base</code></a>, created for applications that don’t require all functionalities that a complete <a href="../Rails.html"><code>Rails</code></a> controller provides, allowing you to create controllers with just the features that you need for <a href="API.html"><code>API</code></a> only applications.</p>
+
+<p>An <a href="API.html"><code>API</code></a> Controller is different from a normal controller in the sense that by default it doesn’t include a number of features that are usually required by browser access only: layouts and templates rendering, flash, assets, and so on. This makes the entire controller stack thinner, suitable for <a href="API.html"><code>API</code></a> applications. It doesn’t mean you won’t have such features if you need them: they’re all available for you to include in your application, they’re just not part of the default <a href="API.html"><code>API</code></a> controller stack.</p>
+
+<p>Normally, <code>ApplicationController</code> is the only controller that inherits from <code>ActionController::API</code>. All other controllers in turn inherit from <code>ApplicationController</code>.</p>
+
+<p>A sample controller could look like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">posts</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Request, response, and parameters objects all work the exact same way as <a href="Base.html"><code>ActionController::Base</code></a>.</p>
+
+<h2 id="class-ActionController::API-label-Renders">Renders<span><a href="#class-ActionController::API-label-Renders">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The default <a href="API.html"><code>API</code></a> Controller stack includes all renderers, which means you can use <code>render :json</code> and siblings freely in your controllers. Keep in mind that templates are not going to be rendered, so you need to ensure your controller is calling either <code>render</code> or <code>redirect_to</code> in all actions, otherwise it will return <code>204 No Content</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+  <span class="ruby-identifier">post</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">post</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="class-ActionController::API-label-Redirects">Redirects<span><a href="#class-ActionController::API-label-Redirects">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Redirects are used to move from one action to another. You can use the <code>redirect_to</code> method in your controllers in the same way as in <a href="Base.html"><code>ActionController::Base</code></a>. For example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">not_authorized?</span>
+  <span class="ruby-comment"># do stuff here</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="class-ActionController::API-label-Adding+New+Behavior">Adding New Behavior<span><a href="#class-ActionController::API-label-Adding+New+Behavior">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>In some scenarios you may want to add back some functionality provided by <a href="Base.html"><code>ActionController::Base</code></a> that is not present by default in <code>ActionController::API</code>, for instance <code>MimeResponds</code>. This module gives you the <code>respond_to</code> method. Adding it is quite simple, you just need to include the module in a specific controller or in <code>ApplicationController</code> in case you want it available in your entire application:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">MimeResponds</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">json:</span> <span class="ruby-identifier">posts</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">xml:</span> <span class="ruby-identifier">posts</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Make sure to check the modules included in <a href="Base.html"><code>ActionController::Base</code></a> if you want to use any other functionality that is not provided by <code>ActionController::API</code> out of the box.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="MODULES">MODULES
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-without_modules" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">without_modules</span><span
+              class="method-args">(*modules)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Shortcut helper that returns all the <a href="API.html"><code>ActionController::API</code></a> modules except the ones passed as arguments:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MyAPIBaseController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Metal</span>
+  <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>.<span class="ruby-identifier">without_modules</span>(<span class="ruby-value">:UrlFor</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">left</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">include</span> <span class="ruby-identifier">left</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This gives better control over what you want to exclude and makes it easier to create an <a href="API.html"><code>API</code></a> controller class, instead of listing the modules required manually.</p>
+
+          <div class="method-source-code" id="without_modules-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/api.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">without_modules</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">modules</span>)
+  <span class="ruby-identifier">modules</span> = <span class="ruby-identifier">modules</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">m</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">ActionController</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">m</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">MODULES</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">modules</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

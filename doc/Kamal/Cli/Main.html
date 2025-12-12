@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Kamal::Cli::Main - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="Base.html">Kamal::Cli::Base</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-audit">#audit</a>
+    <li ><a href="#method-i-config">#config</a>
+    <li ><a href="#method-i-deploy">#deploy</a>
+    <li ><a href="#method-i-details">#details</a>
+    <li ><a href="#method-i-docs">#docs</a>
+    <li ><a href="#method-i-init">#init</a>
+    <li ><a href="#method-i-redeploy">#redeploy</a>
+    <li ><a href="#method-i-remove">#remove</a>
+    <li ><a href="#method-i-rollback">#rollback</a>
+    <li ><a href="#method-i-setup">#setup</a>
+    <li ><a href="#method-i-upgrade">#upgrade</a>
+    <li ><a href="#method-i-version">#version</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Kamal::Cli::Main">
+  <h1 id="class-Kamal::Cli::Main" class="class">
+    class Kamal::Cli::Main
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-audit" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">audit</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="audit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">audit</span>
+  <span class="ruby-identifier">quiet</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>]
+  <span class="ruby-identifier">on</span>(<span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">hosts</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">host</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts_by_host</span> <span class="ruby-identifier">host</span>, <span class="ruby-identifier">capture_with_info</span>(<span class="ruby-operator">*</span><span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">auditor</span>.<span class="ruby-identifier">reveal</span>), <span class="ruby-value">quiet:</span> <span class="ruby-identifier">quiet</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-config" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">config</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="config-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config</span>
+  <span class="ruby-identifier">run_locally</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">redacted</span>(<span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">to_yaml</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-deploy" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">deploy</span><span
+              class="method-args">(boot_accessories: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="deploy-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deploy</span>(<span class="ruby-value">boot_accessories:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">runtime</span> = <span class="ruby-identifier">print_runtime</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">invoke_options</span> = <span class="ruby-identifier">deploy_options</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_push</span>]
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Pull app image...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:build:pull&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Build and push app image...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:build:deliver&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">with_lock</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">run_hook</span> <span class="ruby-string">&quot;pre-deploy&quot;</span>, <span class="ruby-value">secrets:</span> <span class="ruby-keyword">true</span>
+
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Ensure kamal-proxy is running...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:proxy:boot&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:accessory:boot&quot;</span>, [ <span class="ruby-string">&quot;all&quot;</span> ], <span class="ruby-identifier">invoke_options</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">boot_accessories</span>
+
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Detect stale containers...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:app:stale_containers&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">stop:</span> <span class="ruby-keyword">true</span>)
+
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:app:boot&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Prune old containers and images...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:prune:all&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">run_hook</span> <span class="ruby-string">&quot;post-deploy&quot;</span>, <span class="ruby-value">secrets:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">runtime:</span> <span class="ruby-identifier">runtime</span>.<span class="ruby-identifier">round</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-details" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">details</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="details-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">details</span>
+  <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:proxy:details&quot;</span>
+  <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:app:details&quot;</span>
+  <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:accessory:details&quot;</span>, [ <span class="ruby-string">&quot;all&quot;</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-docs" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">docs</span><span
+              class="method-args">(section = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="docs-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">docs</span>(<span class="ruby-identifier">section</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">section</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">NilClass</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">validation_doc</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">section</span>.<span class="ruby-identifier">titlecase</span>.<span class="ruby-identifier">to_sym</span>).<span class="ruby-identifier">validation_doc</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;No documentation found for #{section}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-init" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">init</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="init-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;fileutils&quot;</span>
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">deploy_file</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;config/deploy.yml&quot;</span>))).<span class="ruby-identifier">exist?</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Config file already exists in config/deploy.yml (remove first to create a new one)&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">deploy_file</span>.<span class="ruby-identifier">dirname</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">cp_r</span> <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;templates/deploy.yml&quot;</span>, <span class="ruby-identifier">__dir__</span>)), <span class="ruby-identifier">deploy_file</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Created configuration file in config/deploy.yml&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">secrets_file</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;.kamal/secrets&quot;</span>))).<span class="ruby-identifier">exist?</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">secrets_file</span>.<span class="ruby-identifier">dirname</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">cp_r</span> <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;templates/secrets&quot;</span>, <span class="ruby-identifier">__dir__</span>)), <span class="ruby-identifier">secrets_file</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Created .kamal/secrets file&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">hooks_dir</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;.kamal/hooks&quot;</span>))).<span class="ruby-identifier">exist?</span>
+    <span class="ruby-identifier">hooks_dir</span>.<span class="ruby-identifier">mkpath</span>
+    <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;templates/sample_hooks&quot;</span>, <span class="ruby-identifier">__dir__</span>)).<span class="ruby-identifier">each_child</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sample_hook</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">cp</span> <span class="ruby-identifier">sample_hook</span>, <span class="ruby-identifier">hooks_dir</span>, <span class="ruby-value">preserve:</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Created sample hooks in .kamal/hooks&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:bundle</span>]
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">binstub</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;bin/kamal&quot;</span>))).<span class="ruby-identifier">exist?</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Binstub already exists in bin/kamal (remove first to create a new one)&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Adding Kamal to Gemfile and bundle...&quot;</span>
+      <span class="ruby-identifier">run_locally</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">execute</span> <span class="ruby-value">:bundle</span>, <span class="ruby-value">:add</span>, <span class="ruby-value">:kamal</span>
+        <span class="ruby-identifier">execute</span> <span class="ruby-value">:bundle</span>, <span class="ruby-value">:binstubs</span>, <span class="ruby-value">:kamal</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Created binstub file in bin/kamal&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-redeploy" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">redeploy</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="redeploy-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">redeploy</span>
+  <span class="ruby-identifier">runtime</span> = <span class="ruby-identifier">print_runtime</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">invoke_options</span> = <span class="ruby-identifier">deploy_options</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_push</span>]
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Pull app image...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:build:pull&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Build and push app image...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:build:deliver&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">with_lock</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">run_hook</span> <span class="ruby-string">&quot;pre-deploy&quot;</span>, <span class="ruby-value">secrets:</span> <span class="ruby-keyword">true</span>
+
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Detect stale containers...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:app:stale_containers&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">stop:</span> <span class="ruby-keyword">true</span>)
+
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:app:boot&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">run_hook</span> <span class="ruby-string">&quot;post-deploy&quot;</span>, <span class="ruby-value">secrets:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">runtime:</span> <span class="ruby-identifier">runtime</span>.<span class="ruby-identifier">round</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-remove" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">remove</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="remove-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 183</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove</span>
+  <span class="ruby-identifier">confirming</span> <span class="ruby-string">&quot;This will remove all containers and images. Are you sure?&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">with_lock</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:app:remove&quot;</span>, [], <span class="ruby-identifier">options</span>.<span class="ruby-identifier">without</span>(<span class="ruby-value">:confirmed</span>)
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:proxy:remove&quot;</span>, [], <span class="ruby-identifier">options</span>.<span class="ruby-identifier">without</span>(<span class="ruby-value">:confirmed</span>)
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:accessory:remove&quot;</span>, [ <span class="ruby-string">&quot;all&quot;</span> ], <span class="ruby-identifier">options</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:registry:remove&quot;</span>, [], <span class="ruby-identifier">options</span>.<span class="ruby-identifier">without</span>(<span class="ruby-value">:confirmed</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-value">skip_local:</span> <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rollback" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rollback</span><span
+              class="method-args">(version)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="rollback-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rollback</span>(<span class="ruby-identifier">version</span>)
+  <span class="ruby-identifier">rolled_back</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">runtime</span> = <span class="ruby-identifier">print_runtime</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">with_lock</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">invoke_options</span> = <span class="ruby-identifier">deploy_options</span>
+
+      <span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">version</span>
+      <span class="ruby-identifier">old_version</span> = <span class="ruby-keyword">nil</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">container_available?</span>(<span class="ruby-identifier">version</span>)
+        <span class="ruby-identifier">run_hook</span> <span class="ruby-string">&quot;pre-deploy&quot;</span>, <span class="ruby-value">secrets:</span> <span class="ruby-keyword">true</span>
+
+        <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:app:boot&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">version:</span> <span class="ruby-identifier">version</span>)
+        <span class="ruby-identifier">rolled_back</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;The app version &#39;#{version}&#39; is not available as a container (use &#39;kamal app containers&#39; for available versions)&quot;</span>, <span class="ruby-value">:red</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">run_hook</span> <span class="ruby-string">&quot;post-deploy&quot;</span>, <span class="ruby-value">secrets:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">runtime:</span> <span class="ruby-identifier">runtime</span>.<span class="ruby-identifier">round</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">rolled_back</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-setup" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">setup</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="setup-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup</span>
+  <span class="ruby-identifier">print_runtime</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">with_lock</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">invoke_options</span> = <span class="ruby-identifier">deploy_options</span>
+
+      <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Ensure Docker is installed...&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:server:bootstrap&quot;</span>, [], <span class="ruby-identifier">invoke_options</span>
+
+      <span class="ruby-identifier">deploy</span>(<span class="ruby-value">boot_accessories:</span> <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-upgrade" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">upgrade</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="upgrade-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">upgrade</span>
+  <span class="ruby-identifier">confirming</span> <span class="ruby-string">&quot;This will replace Traefik with kamal-proxy and restart all accessories&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">with_lock</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:rolling</span>]
+        <span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">hosts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">host</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">with_specific_hosts</span>(<span class="ruby-identifier">host</span>) <span class="ruby-keyword">do</span>
+            <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;Upgrading #{host}...&quot;</span>, <span class="ruby-value">:magenta</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">app_hosts</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">host</span>)
+              <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:proxy:upgrade&quot;</span>, [], <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">confirmed:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">rolling:</span> <span class="ruby-keyword">false</span>)
+              <span class="ruby-identifier">reset_invocation</span>(<span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Cli</span><span class="ruby-operator">::</span><span class="ruby-constant">Proxy</span>)
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-constant">KAMAL</span>.<span class="ruby-identifier">accessory_hosts</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">host</span>)
+              <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:accessory:upgrade&quot;</span>, [ <span class="ruby-string">&quot;all&quot;</span> ], <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">confirmed:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">rolling:</span> <span class="ruby-keyword">false</span>)
+              <span class="ruby-identifier">reset_invocation</span>(<span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Cli</span><span class="ruby-operator">::</span><span class="ruby-constant">Accessory</span>)
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;Upgraded #{host}&quot;</span>, <span class="ruby-value">:magenta</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Upgrading all hosts...&quot;</span>, <span class="ruby-value">:magenta</span>
+        <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:proxy:upgrade&quot;</span>, [], <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">confirmed:</span> <span class="ruby-keyword">true</span>)
+        <span class="ruby-identifier">invoke</span> <span class="ruby-string">&quot;kamal:cli:accessory:upgrade&quot;</span>, [ <span class="ruby-string">&quot;all&quot;</span> ], <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">confirmed:</span> <span class="ruby-keyword">true</span>)
+        <span class="ruby-identifier">say</span> <span class="ruby-string">&quot;Upgraded all hosts&quot;</span>, <span class="ruby-value">:magenta</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-version" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">version</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="version-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/kamal-2.9.0/lib/kamal/cli/main.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Net::IMAP::SASL - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>
+            <details open>
+              <summary>      <a href="#module-Net::IMAP::SASL-label-Mechanisms">Mechanisms</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#module-Net::IMAP::SASL-label-Deprecated+mechanisms">Deprecated mechanisms</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#module-Net::IMAP::SASL-label-Mechanisms">Mechanisms</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#module-Net::IMAP::SASL-label-Deprecated+mechanisms">Deprecated mechanisms</a>
+
+              </ul>
+            </details>
+          </li>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-add_authenticator">::add_authenticator</a>
+    <li ><a href="#method-c-authenticator">::authenticator</a>
+    <li ><a href="#method-c-authenticators">::authenticators</a>
+    <li ><a href="#method-i-saslprep">#saslprep</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Net::IMAP::SASL">
+  <h1 id="module-Net::IMAP::SASL" class="module">
+    module Net::IMAP::SASL
+  </h1>
+
+  <section class="description">
+    
+<p>Pluggable authentication mechanisms for protocols which support <a href="SASL.html"><code>SASL</code></a> (Simple Authentication and Security Layer), such as IMAP4, <a href="../SMTP.html"><code>SMTP</code></a>, LDAP, and XMPP.  <a href="https://www.rfc-editor.org/rfc/rfc4422">RFC-4422</a> specifies the common SASL framework:</p>
+
+<blockquote>
+<p><a href="SASL.html"><code>SASL</code></a> is conceptually a framework that provides an abstraction layer between protocols and mechanisms as illustrated in the following diagram.</p>
+
+<pre>    SMTP    LDAP    XMPP   Other protocols ...
+       \       |    |      /
+        \      |    |     /
+       SASL abstraction layer
+        /      |    |     \
+       /       |    |      \
+EXTERNAL   GSSAPI  PLAIN   Other mechanisms ...</pre>
+</blockquote>
+
+<p><a href="../IMAP.html"><code>Net::IMAP</code></a> uses <a href="SASL.html"><code>SASL</code></a> via the <a href="../IMAP.html#method-i-authenticate"><code>Net::IMAP#authenticate</code></a> method.</p>
+
+<h2 id="module-Net::IMAP::SASL-label-Mechanisms">Mechanisms<span><a href="#module-Net::IMAP::SASL-label-Mechanisms">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Each mechanism has different properties and requirements.  Please consult the documentation for the specific mechanisms you are using:</p>
+<dl class="rdoc-list note-list"><dt><code>ANONYMOUS</code>
+<dd>
+<p>See <a href="SASL/AnonymousAuthenticator.html"><code>AnonymousAuthenticator</code></a>.</p>
+
+<p>Allows the user to gain access to public services or resources without authenticating or disclosing an identity.</p>
+</dd><dt><code>EXTERNAL</code>
+<dd>
+<p>See <a href="SASL/ExternalAuthenticator.html"><code>ExternalAuthenticator</code></a>.</p>
+
+<p>Authenticates using already established credentials, such as a TLS certificate or IPSec.</p>
+</dd><dt><code>OAUTHBEARER</code>
+<dd>
+<p>See <a href="SASL/OAuthBearerAuthenticator.html"><code>OAuthBearerAuthenticator</code></a>.</p>
+
+<p>Login using an OAuth2 Bearer token.  This is the standard mechanism for using OAuth2 with SASL, but it is not yet deployed as widely as <code>XOAUTH2</code>.</p>
+</dd><dt><code>PLAIN</code>
+<dd>
+<p>See <a href="SASL/PlainAuthenticator.html"><code>PlainAuthenticator</code></a>.</p>
+
+<p>Login using clear-text username and password.</p>
+</dd><dt><code>SCRAM-SHA-1</code>
+<dt><code>SCRAM-SHA-256</code>
+<dd>
+<p>See <a href="SASL/ScramAuthenticator.html"><code>ScramAuthenticator</code></a>.</p>
+
+<p>Login by username and password.  The password is not sent to the server but is used in a salted challenge/response exchange. <code>SCRAM-SHA-1</code> and <code>SCRAM-SHA-256</code> are directly supported by <a href="SASL.html"><code>Net::IMAP::SASL</code></a>.  New authenticators can easily be added for any other <code>SCRAM-*</code> mechanism if the digest algorithm is supported by <a href="../../Digest.html"><code>OpenSSL::Digest</code></a>.</p>
+</dd><dt><code>XOAUTH2</code>
+<dd>
+<p>See <a href="SASL/XOAuth2Authenticator.html"><code>XOAuth2Authenticator</code></a>.</p>
+
+<p>Login using a username and an OAuth2 access token.  Non-standard and obsoleted by <code>OAUTHBEARER</code>, but widely supported.</p>
+</dd></dl>
+
+<p>See the <a href="https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml">SASL mechanism registry</a> for a list of all <a href="SASL.html"><code>SASL</code></a> mechanisms and their specifications.  To register new authenticators, see <a href="SASL/Authenticators.html"><code>Authenticators</code></a>.</p>
+
+<h3 id="module-Net::IMAP::SASL-label-Deprecated+mechanisms">Deprecated mechanisms<span><a href="#module-Net::IMAP::SASL-label-Deprecated+mechanisms">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><em>Obsolete mechanisms should be avoided, but are still available for backwards compatibility.</em></p>
+
+<blockquote>
+<p>For <code>DIGEST-MD5</code> see <a href="SASL/DigestMD5Authenticator.html"><code>DigestMD5Authenticator</code></a>.</p>
+
+<p>For <code>LOGIN</code>, see <a href="SASL/LoginAuthenticator.html"><code>LoginAuthenticator</code></a>.</p>
+
+<p>For <code>CRAM-MD5</code>, see <a href="SASL/CramMD5Authenticator.html"><code>CramMD5Authenticator</code></a>.</p>
+</blockquote>
+
+<p><em>Using a deprecated mechanism will print a warning.</em></p>
+
+<p>Pluggable authentication mechanisms for protocols which support <a href="SASL.html"><code>SASL</code></a> (Simple Authentication and Security Layer), such as IMAP4, <a href="../SMTP.html"><code>SMTP</code></a>, LDAP, and XMPP.  <a href="https://www.rfc-editor.org/rfc/rfc4422">RFC-4422</a> specifies the common SASL framework:</p>
+
+<blockquote>
+<p><a href="SASL.html"><code>SASL</code></a> is conceptually a framework that provides an abstraction layer between protocols and mechanisms as illustrated in the following diagram.</p>
+
+<pre>    SMTP    LDAP    XMPP   Other protocols ...
+       \       |    |      /
+        \      |    |     /
+       SASL abstraction layer
+        /      |    |     \
+       /       |    |      \
+EXTERNAL   GSSAPI  PLAIN   Other mechanisms ...</pre>
+</blockquote>
+
+<p><a href="../IMAP.html"><code>Net::IMAP</code></a> uses <a href="SASL.html"><code>SASL</code></a> via the <a href="../IMAP.html#method-i-authenticate"><code>Net::IMAP#authenticate</code></a> method.</p>
+
+<h2 id="module-Net::IMAP::SASL-label-Mechanisms">Mechanisms<span><a href="#module-Net::IMAP::SASL-label-Mechanisms">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Each mechanism has different properties and requirements.  Please consult the documentation for the specific mechanisms you are using:</p>
+<dl class="rdoc-list note-list"><dt><code>ANONYMOUS</code>
+<dd>
+<p>See <a href="SASL/AnonymousAuthenticator.html"><code>AnonymousAuthenticator</code></a>.</p>
+
+<p>Allows the user to gain access to public services or resources without authenticating or disclosing an identity.</p>
+</dd><dt><code>EXTERNAL</code>
+<dd>
+<p>See <a href="SASL/ExternalAuthenticator.html"><code>ExternalAuthenticator</code></a>.</p>
+
+<p>Authenticates using already established credentials, such as a TLS certificate or IPSec.</p>
+</dd><dt><code>OAUTHBEARER</code>
+<dd>
+<p>See <a href="SASL/OAuthBearerAuthenticator.html"><code>OAuthBearerAuthenticator</code></a>.</p>
+
+<p>Login using an OAuth2 Bearer token.  This is the standard mechanism for using OAuth2 with SASL, but it is not yet deployed as widely as <code>XOAUTH2</code>.</p>
+</dd><dt><code>PLAIN</code>
+<dd>
+<p>See <a href="SASL/PlainAuthenticator.html"><code>PlainAuthenticator</code></a>.</p>
+
+<p>Login using clear-text username and password.</p>
+</dd><dt><code>SCRAM-SHA-1</code>
+<dt><code>SCRAM-SHA-256</code>
+<dd>
+<p>See <a href="SASL/ScramAuthenticator.html"><code>ScramAuthenticator</code></a>.</p>
+
+<p>Login by username and password.  The password is not sent to the server but is used in a salted challenge/response exchange. <code>SCRAM-SHA-1</code> and <code>SCRAM-SHA-256</code> are directly supported by <a href="SASL.html"><code>Net::IMAP::SASL</code></a>.  New authenticators can easily be added for any other <code>SCRAM-*</code> mechanism if the digest algorithm is supported by <a href="../../Digest.html"><code>OpenSSL::Digest</code></a>.</p>
+</dd><dt><code>XOAUTH2</code>
+<dd>
+<p>See <a href="SASL/XOAuth2Authenticator.html"><code>XOAuth2Authenticator</code></a>.</p>
+
+<p>Login using a username and an OAuth2 access token.  Non-standard and obsoleted by <code>OAUTHBEARER</code>, but widely supported.</p>
+</dd></dl>
+
+<p>See the <a href="https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml">SASL mechanism registry</a> for a list of all <a href="SASL.html"><code>SASL</code></a> mechanisms and their specifications.  To register new authenticators, see <a href="SASL/Authenticators.html"><code>Authenticators</code></a>.</p>
+
+<h3 id="module-Net::IMAP::SASL-label-Deprecated+mechanisms">Deprecated mechanisms<span><a href="#module-Net::IMAP::SASL-label-Deprecated+mechanisms">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><em>Obsolete mechanisms should be avoided, but are still available for backwards compatibility.</em></p>
+
+<blockquote>
+<p>For <code>DIGEST-MD5</code> see <a href="SASL/DigestMD5Authenticator.html"><code>DigestMD5Authenticator</code></a>.</p>
+
+<p>For <code>LOGIN</code>, see <a href="SASL/LoginAuthenticator.html"><code>LoginAuthenticator</code></a>.</p>
+
+<p>For <code>CRAM-MD5</code>, see <a href="SASL/CramMD5Authenticator.html"><code>CramMD5Authenticator</code></a>.</p>
+</blockquote>
+
+<p><em>Using a deprecated mechanism will print a warning.</em></p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="AuthenticationCanceled">AuthenticationCanceled
+        <dd><p>Indicates an authentication exchange that will be or has been canceled by the client, not due to any error or failure during processing.</p>
+        <dt id="AuthenticationError">AuthenticationError
+        <dd><p>Indicates an error when processing a server challenge, e.g: an invalid or unparsable challenge.  An underlying exception may be available as the exception’s cause.</p>
+        <dt id="AuthenticationFailed">AuthenticationFailed
+        <dd><p>Indicates that authentication cannot proceed because one of the server’s messages has not passed integrity checks.</p>
+        <dt id="Error">Error
+        <dd><p><a href="../../Exception.html"><code>Exception</code></a> class for any client error detected during the authentication exchange.</p>
+
+<p>When the <em>server</em> reports an authentication failure, it will respond with a protocol specific error instead, e.g: <code>BAD</code> or <code>NO</code> in <a href="../IMAP.html"><code>IMAP</code></a>.</p>
+
+<p>When the client encounters any error, it <strong>must</strong> consider the authentication exchange to be unsuccessful and it might need to drop the connection.  For example, if the server reports that the authentication exchange was successful or the protocol does not allow additional authentication attempts.</p>
+        <dt id="SASLprep">SASLprep
+        <dd><p>Alias for <a href="StringPrep/SASLprep.html"><code>Net::IMAP::StringPrep::SASLprep</code></a>.</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-add_authenticator" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">add_authenticator</span><span
+              class="method-args">(...)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Delegates to <a href="SASL.html#method-c-authenticators"><code>::authenticators</code></a>.  See <a href="SASL/Authenticators.html#method-i-add_authenticator"><code>Authenticators#add_authenticator</code></a>.</p>
+
+          <div class="method-source-code" id="add_authenticator-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">add_authenticator</span>(<span class="ruby-operator">...</span>) <span class="ruby-identifier">authenticators</span>.<span class="ruby-identifier">add_authenticator</span>(<span class="ruby-operator">...</span>) <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-authenticator" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">authenticator</span><span
+              class="method-args">(*args, registry: authenticators, **kwargs, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new <a href="SASL.html"><code>SASL</code></a> authenticator, using <a href="SASL/Authenticators.html#method-i-new"><code>SASL::Authenticators#new</code></a>.</p>
+
+<p><code>registry</code> defaults to <a href="SASL.html#method-c-authenticators"><code>SASL.authenticators</code></a>.  All other arguments are forwarded to to <code>registry.new</code>.</p>
+
+          <div class="method-source-code" id="authenticator-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">authenticator</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-value">registry:</span> <span class="ruby-identifier">authenticators</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">registry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">kwargs</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-authenticators" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">authenticators</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the default global <a href="SASL/Authenticators.html"><code>SASL::Authenticators</code></a> instance.</p>
+
+          <div class="method-source-code" id="authenticators-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">authenticators</span>; <span class="ruby-ivar">@authenticators</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Authenticators</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-saslprep" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">saslprep</span><span
+              class="method-args">(string, **opts)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>See <a href="StringPrep/SASLprep.html#method-i-saslprep"><code>Net::IMAP::StringPrep::SASLprep#saslprep</code></a>.</p>
+
+          <div class="method-source-code" id="saslprep-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-imap-0.5.12/lib/net/imap/sasl.rb, line 176</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">saslprep</span>(<span class="ruby-identifier">string</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">opts</span>)
+  <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">IMAP</span><span class="ruby-operator">::</span><span class="ruby-constant">StringPrep</span><span class="ruby-operator">::</span><span class="ruby-constant">SASLprep</span>.<span class="ruby-identifier">saslprep</span>(<span class="ruby-identifier">string</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">opts</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

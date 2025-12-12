@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class PublicSuffix::Rule::Exception - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="Base.html">PublicSuffix::Rule::Base</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-build">::build</a>
+    <li ><a href="#method-i-decompose">#decompose</a>
+    <li ><a href="#method-i-parts">#parts</a>
+    <li ><a href="#method-i-rule">#rule</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PublicSuffix::Rule::Exception">
+  <h1 id="class-PublicSuffix::Rule::Exception" class="class">
+    class PublicSuffix::Rule::Exception
+  </h1>
+
+  <section class="description">
+    
+<p><a href="Exception.html"><code>Exception</code></a> represents an exception rule (e.g. !parliament.uk).</p>
+
+<p><a href="Exception.html"><code>Exception</code></a> represents an exception rule (e.g. !parliament.uk).</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-build" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">build</span><span
+              class="method-args">(content, private: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initializes a new rule from the content.</p>
+
+<p>@param  content [#to_s] the content of the rule @param  private [Boolean]</p>
+
+          <div class="method-source-code" id="build-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 271</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">build</span>(<span class="ruby-identifier">content</span>, <span class="ruby-value">private:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-value">value:</span> <span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span>], <span class="ruby-value">private:</span> <span class="ruby-identifier">private</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-decompose" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">decompose</span><span
+              class="method-args">(domain)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Decomposes the domain name according to rule properties.</p>
+
+<p>@param  domain [#to_s] The domain name to decompose @return [Array&lt;String&gt;] The array with [trd + sld, tld].</p>
+
+          <div class="method-source-code" id="decompose-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 286</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">decompose</span>(<span class="ruby-identifier">domain</span>)
+  <span class="ruby-identifier">suffix</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;\.&#39;</span>)
+  <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^(.*)\.(#{suffix})$/</span>)
+  <span class="ruby-identifier">matches</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">matches</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>] <span class="ruby-operator">:</span> [<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-parts" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parts</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>dot-split rule value and returns all rule parts in the order they appear in the value. The leftmost label is not considered a label.</p>
+
+<p>See <a href="http://publicsuffix.org/format">publicsuffix.org/format</a>/: If the prevailing rule is a exception rule, modify it by removing the leftmost label.</p>
+
+<p>@return [Array&lt;String&gt;]</p>
+
+          <div class="method-source-code" id="parts-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 301</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parts</span>
+  <span class="ruby-ivar">@value</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">DOT</span>)[<span class="ruby-value">1</span><span class="ruby-operator">..</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rule" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rule</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Gets the original rule definition.</p>
+
+<p>@return [String] The rule definition.</p>
+
+          <div class="method-source-code" id="rule-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rule</span>
+  <span class="ruby-constant">BANG</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

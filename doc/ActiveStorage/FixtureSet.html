@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveStorage::FixtureSet - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>
+            <details open>
+              <summary>      <a href="#class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">Active Storage FixtureSet</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActiveStorage::FixtureSet-label-YAML">YAML</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">Active Storage FixtureSet</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActiveStorage::FixtureSet-label-YAML">YAML</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">Active Storage FixtureSet</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActiveStorage::FixtureSet-label-YAML">YAML</a>
+
+              </ul>
+            </details>
+          </li>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="../ActiveSupport/Testing/FileFixtures.html">ActiveSupport::Testing::FileFixtures</a>
+    <li><a class="include" href="../ActiveRecord/SecureToken.html">ActiveRecord::SecureToken</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-blob">::blob</a>
+    <li ><a href="#method-i-prepare">#prepare</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveStorage::FixtureSet">
+  <h1 id="class-ActiveStorage::FixtureSet" class="class">
+    class ActiveStorage::FixtureSet
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">Active Storage FixtureSet<span><a href="#class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Fixtures are a way of organizing data that you want to test against; in short, sample data.</p>
+
+<p>To learn more about fixtures, read the <a href="../ActiveRecord/FixtureSet.html"><code>ActiveRecord::FixtureSet</code></a> documentation.</p>
+
+<h3 id="class-ActiveStorage::FixtureSet-label-YAML">YAML<span><a href="#class-ActiveStorage::FixtureSet-label-YAML">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Like other Active Record-backed models, <a href="Attachment.html"><code>ActiveStorage::Attachment</code></a> and <a href="Blob.html"><code>ActiveStorage::Blob</code></a> records inherit from <a href="../ActiveRecord/Base.html"><code>ActiveRecord::Base</code></a> instances and therefore can be populated by fixtures.</p>
+
+<p>Consider a hypothetical <code>Article</code> model class, its related fixture data, as well as fixture data for related <a href="Attachment.html"><code>ActiveStorage::Attachment</code></a> and <a href="Blob.html"><code>ActiveStorage::Blob</code></a> records:</p>
+
+<pre class="ruby"><span class="ruby-comment"># app/models/article.rb</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Article</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">has_one_attached</span> <span class="ruby-value">:thumbnail</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p></p>
+
+<pre># fixtures/active_storage/blobs.yml
+first_thumbnail_blob: &lt;%= ActiveStorage::FixtureSet.blob filename: &quot;first.png&quot; %&gt;</pre>
+
+<p></p>
+
+<pre># fixtures/active_storage/attachments.yml
+first_thumbnail_attachment:
+  name: thumbnail
+  record: first (Article)
+  blob: first_thumbnail_blob</pre>
+
+<p>When processed, Active Record will insert database records for each fixture entry and will ensure the Active Storage relationship is intact.</p>
+
+<h1 id="class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">Active Storage FixtureSet<span><a href="#class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Fixtures are a way of organizing data that you want to test against; in short, sample data.</p>
+
+<p>To learn more about fixtures, read the <a href="../ActiveRecord/FixtureSet.html"><code>ActiveRecord::FixtureSet</code></a> documentation.</p>
+
+<h3 id="class-ActiveStorage::FixtureSet-label-YAML">YAML<span><a href="#class-ActiveStorage::FixtureSet-label-YAML">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Like other Active Record-backed models, <a href="Attachment.html"><code>ActiveStorage::Attachment</code></a> and <a href="Blob.html"><code>ActiveStorage::Blob</code></a> records inherit from <a href="../ActiveRecord/Base.html"><code>ActiveRecord::Base</code></a> instances and therefore can be populated by fixtures.</p>
+
+<p>Consider a hypothetical <code>Article</code> model class, its related fixture data, as well as fixture data for related <a href="Attachment.html"><code>ActiveStorage::Attachment</code></a> and <a href="Blob.html"><code>ActiveStorage::Blob</code></a> records:</p>
+
+<pre class="ruby"><span class="ruby-comment"># app/models/article.rb</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Article</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">has_one_attached</span> <span class="ruby-value">:thumbnail</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p></p>
+
+<pre># fixtures/active_storage/blobs.yml
+first_thumbnail_blob: &lt;%= ActiveStorage::FixtureSet.blob filename: &quot;first.png&quot; %&gt;</pre>
+
+<p></p>
+
+<pre># fixtures/active_storage/attachments.yml
+first_thumbnail_attachment:
+  name: thumbnail
+  record: first (Article)
+  blob: first_thumbnail_blob</pre>
+
+<p>When processed, Active Record will insert database records for each fixture entry and will ensure the Active Storage relationship is intact.</p>
+
+<h1 id="class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">Active Storage FixtureSet<span><a href="#class-ActiveStorage::FixtureSet-label-Active+Storage+FixtureSet">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Fixtures are a way of organizing data that you want to test against; in short, sample data.</p>
+
+<p>To learn more about fixtures, read the <a href="../ActiveRecord/FixtureSet.html"><code>ActiveRecord::FixtureSet</code></a> documentation.</p>
+
+<h3 id="class-ActiveStorage::FixtureSet-label-YAML">YAML<span><a href="#class-ActiveStorage::FixtureSet-label-YAML">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Like other Active Record-backed models, <a href="Attachment.html"><code>ActiveStorage::Attachment</code></a> and <a href="Blob.html"><code>ActiveStorage::Blob</code></a> records inherit from <a href="../ActiveRecord/Base.html"><code>ActiveRecord::Base</code></a> instances and therefore can be populated by fixtures.</p>
+
+<p>Consider a hypothetical <code>Article</code> model class, its related fixture data, as well as fixture data for related <a href="Attachment.html"><code>ActiveStorage::Attachment</code></a> and <a href="Blob.html"><code>ActiveStorage::Blob</code></a> records:</p>
+
+<pre class="ruby"><span class="ruby-comment"># app/models/article.rb</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Article</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">has_one_attached</span> <span class="ruby-value">:thumbnail</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p></p>
+
+<pre># fixtures/active_storage/blobs.yml
+first_thumbnail_blob: &lt;%= ActiveStorage::FixtureSet.blob filename: &quot;first.png&quot; %&gt;</pre>
+
+<p></p>
+
+<pre># fixtures/active_storage/attachments.yml
+first_thumbnail_attachment:
+  name: thumbnail
+  record: first (Article)
+  blob: first_thumbnail_blob</pre>
+
+<p>When processed, Active Record will insert database records for each fixture entry and will ensure the Active Storage relationship is intact.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-blob" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">blob</span><span
+              class="method-args">(filename:, **attributes)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Generate a YAML-encoded representation of an <a href="Blob.html"><code>ActiveStorage::Blob</code></a> instance’s attributes, resolve the file relative to the directory mentioned by <a href="../ActiveSupport/Testing/FileFixtures.html#method-i-file_fixture"><code>ActiveSupport::Testing::FileFixtures.file_fixture</code></a>, and upload the file to the <a href="Service.html"><code>Service</code></a></p>
+
+<h4 id="method-c-blob-label-Examples">Examples<span><a href="#method-c-blob-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre># tests/fixtures/active_storage/blobs.yml
+second_thumbnail_blob: &lt;%= ActiveStorage::FixtureSet.blob(
+  filename: &quot;second.svg&quot;,
+) %&gt;
+
+third_thumbnail_blob: &lt;%= ActiveStorage::FixtureSet.blob(
+  filename: &quot;third.svg&quot;,
+  content_type: &quot;image/svg+xml&quot;,
+  service_name: &quot;public&quot;
+) %&gt;</pre>
+
+          <div class="method-source-code" id="blob-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/lib/active_storage/fixture_set.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">blob</span>(<span class="ruby-value">filename:</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">attributes</span>)
+  <span class="ruby-identifier">new</span>.<span class="ruby-identifier">prepare</span> <span class="ruby-constant">Blob</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">filename:</span> <span class="ruby-identifier">filename</span>, <span class="ruby-value">key:</span> <span class="ruby-identifier">generate_unique_secure_token</span>), <span class="ruby-operator">**</span><span class="ruby-identifier">attributes</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-prepare" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">prepare</span><span
+              class="method-args">(instance, **attributes)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="prepare-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activestorage-8.1.1/lib/active_storage/fixture_set.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prepare</span>(<span class="ruby-identifier">instance</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">attributes</span>)
+  <span class="ruby-identifier">io</span> = <span class="ruby-identifier">file_fixture</span>(<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">filename</span>.<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">open</span>
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">unfurl</span>(<span class="ruby-identifier">io</span>)
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">assign_attributes</span>(<span class="ruby-identifier">attributes</span>)
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">upload_without_unfurling</span>(<span class="ruby-identifier">io</span>)
+
+  <span class="ruby-identifier">instance</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">transform_values</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_json</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span> }.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">to_json</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

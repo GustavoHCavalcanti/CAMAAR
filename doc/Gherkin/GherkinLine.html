@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Gherkin::GherkinLine - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-empty-3F">#empty?</a>
+    <li ><a href="#method-i-get_line_text">#get_line_text</a>
+    <li ><a href="#method-i-get_rest_trimmed">#get_rest_trimmed</a>
+    <li ><a href="#method-i-split_table_cells">#split_table_cells</a>
+    <li ><a href="#method-i-start_with-3F">#start_with?</a>
+    <li ><a href="#method-i-start_with_title_keyword-3F">#start_with_title_keyword?</a>
+    <li ><a href="#method-i-table_cells">#table_cells</a>
+    <li ><a href="#method-i-tags">#tags</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Gherkin::GherkinLine">
+  <h1 id="class-Gherkin::GherkinLine" class="class">
+    class Gherkin::GherkinLine
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-indent" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">indent</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-trimmed_line_text" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">trimmed_line_text</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(line_text, line_number)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">line_text</span>, <span class="ruby-identifier">line_number</span>)
+  <span class="ruby-ivar">@line_text</span> = <span class="ruby-identifier">line_text</span>
+  <span class="ruby-ivar">@line_number</span> = <span class="ruby-identifier">line_number</span>
+  <span class="ruby-ivar">@trimmed_line_text</span> = <span class="ruby-ivar">@line_text</span>.<span class="ruby-identifier">lstrip</span>
+  <span class="ruby-ivar">@indent</span> = <span class="ruby-ivar">@line_text</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@trimmed_line_text</span>.<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-empty-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">empty?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="empty-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">empty?</span>
+  <span class="ruby-ivar">@trimmed_line_text</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-get_line_text" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_line_text</span><span
+              class="method-args">(indent_to_remove)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="get_line_text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_line_text</span>(<span class="ruby-identifier">indent_to_remove</span>)
+  <span class="ruby-identifier">indent_to_remove</span> <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">indent_to_remove</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">indent_to_remove</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">indent</span>
+    <span class="ruby-ivar">@trimmed_line_text</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@line_text</span>[<span class="ruby-identifier">indent_to_remove</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-get_rest_trimmed" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">get_rest_trimmed</span><span
+              class="method-args">(length)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="get_rest_trimmed-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_rest_trimmed</span>(<span class="ruby-identifier">length</span>)
+  <span class="ruby-ivar">@trimmed_line_text</span>[<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">strip</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-split_table_cells" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">split_table_cells</span><span
+              class="method-args">(row) { |cell, start_col| ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="split_table_cells-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">split_table_cells</span>(<span class="ruby-identifier">row</span>)
+  <span class="ruby-identifier">col</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">start_col</span> = <span class="ruby-identifier">col</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">cell</span> = <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-identifier">first_cell</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">col</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">char</span> = <span class="ruby-identifier">row</span>[<span class="ruby-identifier">col</span>]
+    <span class="ruby-identifier">col</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">char</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;|&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">first_cell</span>
+        <span class="ruby-comment"># First cell (content before the first |) is skipped</span>
+        <span class="ruby-identifier">first_cell</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">yield</span> <span class="ruby-identifier">cell</span>, <span class="ruby-identifier">start_col</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">cell</span> = <span class="ruby-string">&#39;&#39;</span>
+      <span class="ruby-identifier">start_col</span> = <span class="ruby-identifier">col</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">char</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;\\&#39;</span>
+      <span class="ruby-identifier">char</span> = <span class="ruby-identifier">row</span>[<span class="ruby-identifier">col</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>
+      <span class="ruby-identifier">col</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">char</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;n&#39;</span>
+        <span class="ruby-identifier">cell</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;\n&quot;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">cell</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&#39;\\&#39;</span> <span class="ruby-keyword">unless</span> [<span class="ruby-string">&#39;|&#39;</span>, <span class="ruby-string">&#39;\\&#39;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">char</span>)
+        <span class="ruby-identifier">cell</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">char</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">cell</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">char</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># Last cell (content after the last |) is skipped</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-start_with-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start_with?</span><span
+              class="method-args">(prefix)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="start_with-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_with?</span>(<span class="ruby-identifier">prefix</span>)
+  <span class="ruby-ivar">@trimmed_line_text</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-identifier">prefix</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-start_with_title_keyword-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start_with_title_keyword?</span><span
+              class="method-args">(keyword)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="start_with_title_keyword-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_with_title_keyword?</span>(<span class="ruby-identifier">keyword</span>)
+  <span class="ruby-identifier">start_with?</span>(<span class="ruby-identifier">keyword</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;:&#39;</span>) <span class="ruby-comment"># The C# impl is more complicated. Find out why.</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-table_cells" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">table_cells</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="table_cells-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table_cells</span>
+  <span class="ruby-identifier">cells</span> = []
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">split_table_cells</span>(<span class="ruby-ivar">@trimmed_line_text</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span>, <span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># Keeps new lines</span>
+    <span class="ruby-identifier">txt_trimmed_left</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\A[ \t\v\f\r\u0085\u00A0]*/</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">txt_trimmed</span> = <span class="ruby-identifier">txt_trimmed_left</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/[ \t\v\f\r\u0085\u00A0]*\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">cell_indent</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">txt_trimmed_left</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">span</span> = <span class="ruby-constant">Span</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@indent</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">column</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">cell_indent</span>, <span class="ruby-identifier">txt_trimmed</span>)
+    <span class="ruby-identifier">cells</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">span</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">cells</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-tags" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">tags</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="tags-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/cucumber-gherkin-36.1.0/lib/gherkin/gherkin_line.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tags</span>
+  <span class="ruby-identifier">uncommented_line</span> = <span class="ruby-ivar">@trimmed_line_text</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s#/</span>, <span class="ruby-value">2</span>)[<span class="ruby-value">0</span>]
+  <span class="ruby-identifier">column</span> = <span class="ruby-ivar">@indent</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">items</span> = <span class="ruby-identifier">uncommented_line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;@&#39;</span>)
+
+  <span class="ruby-identifier">tags</span> = []
+  <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">untrimmed</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">item</span> = <span class="ruby-identifier">untrimmed</span>.<span class="ruby-identifier">strip</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">item</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\S+$/</span>
+      <span class="ruby-identifier">location</span> = { <span class="ruby-value">line:</span> <span class="ruby-ivar">@line_number</span>, <span class="ruby-value">column:</span> <span class="ruby-identifier">column</span> }
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ParserException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;A tag may not contain whitespace&#39;</span>, <span class="ruby-identifier">location</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">tags</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Span</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">column</span>, <span class="ruby-string">&#39;@&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">item</span>)
+    <span class="ruby-identifier">column</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">untrimmed</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">tags</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

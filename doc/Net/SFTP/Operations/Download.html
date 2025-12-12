@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Net::SFTP::Operations::Download - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-Net::SFTP::Operations::Download-label-Progress+Monitoring">Progress Monitoring</a>
+          <li>      <a href="#class-Net::SFTP::Operations::Download-label-Progress+Monitoring">Progress Monitoring</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../../Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="../../SSH/Loggable.html">Net::SSH::Loggable</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    <li ><a href="#method-i-5B-5D-3D">#[]=</a>
+    <li ><a href="#method-i-abort-21">#abort!</a>
+    <li ><a href="#method-i-active-3F">#active?</a>
+    <li ><a href="#method-i-recursive-3F">#recursive?</a>
+    <li ><a href="#method-i-wait">#wait</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Net::SFTP::Operations::Download">
+  <h1 id="class-Net::SFTP::Operations::Download" class="class">
+    class Net::SFTP::Operations::Download
+  </h1>
+
+  <section class="description">
+    
+<p>A general purpose downloader module for <a href="../../SFTP.html"><code>Net::SFTP</code></a>. It can download files into <a href="../../../IO.html"><code>IO</code></a> objects, or directly to files on the local file system. It can even download entire directory trees via <a href="../../SFTP.html"><code>SFTP</code></a>, and provides a flexible progress reporting mechanism.</p>
+
+<p>To download a single file from the remote server, simply specify both the remote and local paths:</p>
+
+<pre class="ruby"><span class="ruby-identifier">downloader</span> = <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download</span>(<span class="ruby-string">&quot;/path/to/remote.txt&quot;</span>, <span class="ruby-string">&quot;/path/to/local.txt&quot;</span>)
+</pre>
+
+<p>By default, this operates asynchronously, so if you want to block until the download finishes, you can use the ‘bang’ variant:</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;/path/to/remote.txt&quot;</span>, <span class="ruby-string">&quot;/path/to/local.txt&quot;</span>)
+</pre>
+
+<p>Or, if you have multiple downloads that you want to run in parallel, you can employ the <a href="Download.html#method-i-wait"><code>wait</code></a> method of the returned object:</p>
+
+<pre class="ruby"><span class="ruby-identifier">dls</span> = <span class="ruby-node">%w(file1 file2 file3)</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download</span>(<span class="ruby-node">&quot;remote/#{f}&quot;</span>, <span class="ruby-identifier">f</span>) }
+<span class="ruby-identifier">dls</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">wait</span> }
+</pre>
+
+<p>To download an entire directory tree, recursively, simply specify :recursive =&gt; true:</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;/path/to/remotedir&quot;</span>, <span class="ruby-string">&quot;/path/to/local&quot;</span>, <span class="ruby-value">:recursive</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>)
+</pre>
+
+<p>This will download “/path/to/remotedir”, its contents, its subdirectories, and their contents, recursively, to “/path/to/local” on the local host. (If you specify :recursive =&gt; true and the source is not a directory, you’ll get an error!)</p>
+
+<p>If you want to pull the contents of a file on the remote server, and store the data in memory rather than immediately to disk, you can pass an <a href="../../../IO.html"><code>IO</code></a> object as the destination:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;stringio&#39;</span>
+<span class="ruby-identifier">io</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;/path/to/remote&quot;</span>, <span class="ruby-identifier">io</span>)
+</pre>
+
+<p>This will only work for single-file downloads. Trying to do so with :recursive =&gt; true will cause an error.</p>
+
+<p>The following options are supported:</p>
+<ul><li>
+<p><code>:progress</code> - either a block or an object to act as a progress callback. See the discussion of “progress monitoring” below.</p>
+</li><li>
+<p><code>:requests</code> - the number of pending <a href="../../SFTP.html"><code>SFTP</code></a> requests to allow at any given time. When downloading an entire directory tree recursively, this will default to 16. Setting this higher might improve throughput. Reducing it will reduce throughput.</p>
+</li><li>
+<p><code>:read_size</code> - the maximum number of bytes to read at a time from the source. Increasing this value might improve throughput. It defaults to 32,000 bytes.</p>
+</li></ul>
+
+<h2 id="class-Net::SFTP::Operations::Download-label-Progress+Monitoring">Progress Monitoring<span><a href="#class-Net::SFTP::Operations::Download-label-Progress+Monitoring">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Sometimes it is desirable to track the progress of a download. There are two ways to do this: either using a callback block, or a special custom object.</p>
+
+<p>Using a block it’s pretty straightforward:</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;remote&quot;</span>, <span class="ruby-string">&quot;local&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">event</span>, <span class="ruby-identifier">downloader</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">event</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:open</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : file metadata</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;starting download: #{args[0].remote} -&gt; #{args[0].local} (#{args[0].size} bytes}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:get</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : file metadata</span>
+    <span class="ruby-comment"># args[1] : byte offset in remote file</span>
+    <span class="ruby-comment"># args[2] : data that was received</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;writing #{args[2].length} bytes to #{args[0].local} starting at #{args[1]}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:close</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : file metadata</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;finished with #{args[0].remote}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:mkdir</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : local path name</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;creating directory #{args[0]}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:finish</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;all done!&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>However, for more complex implementations (e.g., GUI interfaces and such) a block can become cumbersome. In those cases, you can create custom handler objects that respond to certain methods, and then pass your handler to the downloader:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">CustomHandler</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_open</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">file</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;starting download: #{file.remote} -&gt; #{file.local} (#{file.size} bytes)&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_get</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">data</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;writing #{data.length} bytes to #{file.local} starting at #{offset}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_close</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">file</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;finished with #{file.remote}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_mkdir</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">path</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;creating directory #{path}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_finish</span>(<span class="ruby-identifier">downloader</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;all done!&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;remote&quot;</span>, <span class="ruby-string">&quot;local&quot;</span>, <span class="ruby-value">:progress</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">CustomHandler</span>.<span class="ruby-identifier">new</span>)
+</pre>
+
+<p>If you omit any of those methods, the progress updates for those missing events will be ignored. You can create a catchall method named “call” for those, instead.</p>
+
+<p>A general purpose downloader module for <a href="../../SFTP.html"><code>Net::SFTP</code></a>. It can download files into <a href="../../../IO.html"><code>IO</code></a> objects, or directly to files on the local file system. It can even download entire directory trees via <a href="../../SFTP.html"><code>SFTP</code></a>, and provides a flexible progress reporting mechanism.</p>
+
+<p>To download a single file from the remote server, simply specify both the remote and local paths:</p>
+
+<pre class="ruby"><span class="ruby-identifier">downloader</span> = <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download</span>(<span class="ruby-string">&quot;/path/to/remote.txt&quot;</span>, <span class="ruby-string">&quot;/path/to/local.txt&quot;</span>)
+</pre>
+
+<p>By default, this operates asynchronously, so if you want to block until the download finishes, you can use the ‘bang’ variant:</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;/path/to/remote.txt&quot;</span>, <span class="ruby-string">&quot;/path/to/local.txt&quot;</span>)
+</pre>
+
+<p>Or, if you have multiple downloads that you want to run in parallel, you can employ the <a href="Download.html#method-i-wait"><code>wait</code></a> method of the returned object:</p>
+
+<pre class="ruby"><span class="ruby-identifier">dls</span> = <span class="ruby-node">%w(file1 file2 file3)</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download</span>(<span class="ruby-node">&quot;remote/#{f}&quot;</span>, <span class="ruby-identifier">f</span>) }
+<span class="ruby-identifier">dls</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">wait</span> }
+</pre>
+
+<p>To download an entire directory tree, recursively, simply specify :recursive =&gt; true:</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;/path/to/remotedir&quot;</span>, <span class="ruby-string">&quot;/path/to/local&quot;</span>, <span class="ruby-value">:recursive</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>)
+</pre>
+
+<p>This will download “/path/to/remotedir”, its contents, its subdirectories, and their contents, recursively, to “/path/to/local” on the local host. (If you specify :recursive =&gt; true and the source is not a directory, you’ll get an error!)</p>
+
+<p>If you want to pull the contents of a file on the remote server, and store the data in memory rather than immediately to disk, you can pass an <a href="../../../IO.html"><code>IO</code></a> object as the destination:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;stringio&#39;</span>
+<span class="ruby-identifier">io</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;/path/to/remote&quot;</span>, <span class="ruby-identifier">io</span>)
+</pre>
+
+<p>This will only work for single-file downloads. Trying to do so with :recursive =&gt; true will cause an error.</p>
+
+<p>The following options are supported:</p>
+<ul><li>
+<p><code>:progress</code> - either a block or an object to act as a progress callback. See the discussion of “progress monitoring” below.</p>
+</li><li>
+<p><code>:requests</code> - the number of pending <a href="../../SFTP.html"><code>SFTP</code></a> requests to allow at any given time. When downloading an entire directory tree recursively, this will default to 16. Setting this higher might improve throughput. Reducing it will reduce throughput.</p>
+</li><li>
+<p><code>:read_size</code> - the maximum number of bytes to read at a time from the source. Increasing this value might improve throughput. It defaults to 32,000 bytes.</p>
+</li></ul>
+
+<h2 id="class-Net::SFTP::Operations::Download-label-Progress+Monitoring">Progress Monitoring<span><a href="#class-Net::SFTP::Operations::Download-label-Progress+Monitoring">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Sometimes it is desirable to track the progress of a download. There are two ways to do this: either using a callback block, or a special custom object.</p>
+
+<p>Using a block it’s pretty straightforward:</p>
+
+<pre class="ruby"><span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;remote&quot;</span>, <span class="ruby-string">&quot;local&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">event</span>, <span class="ruby-identifier">downloader</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">event</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:open</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : file metadata</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;starting download: #{args[0].remote} -&gt; #{args[0].local} (#{args[0].size} bytes}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:get</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : file metadata</span>
+    <span class="ruby-comment"># args[1] : byte offset in remote file</span>
+    <span class="ruby-comment"># args[2] : data that was received</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;writing #{args[2].length} bytes to #{args[0].local} starting at #{args[1]}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:close</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : file metadata</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;finished with #{args[0].remote}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:mkdir</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># args[0] : local path name</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;creating directory #{args[0]}&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:finish</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;all done!&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>However, for more complex implementations (e.g., GUI interfaces and such) a block can become cumbersome. In those cases, you can create custom handler objects that respond to certain methods, and then pass your handler to the downloader:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">CustomHandler</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_open</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">file</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;starting download: #{file.remote} -&gt; #{file.local} (#{file.size} bytes)&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_get</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">offset</span>, <span class="ruby-identifier">data</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;writing #{data.length} bytes to #{file.local} starting at #{offset}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_close</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">file</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;finished with #{file.remote}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_mkdir</span>(<span class="ruby-identifier">downloader</span>, <span class="ruby-identifier">path</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;creating directory #{path}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_finish</span>(<span class="ruby-identifier">downloader</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;all done!&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">download!</span>(<span class="ruby-string">&quot;remote&quot;</span>, <span class="ruby-string">&quot;local&quot;</span>, <span class="ruby-value">:progress</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">CustomHandler</span>.<span class="ruby-identifier">new</span>)
+</pre>
+
+<p>If you omit any of those methods, the progress updates for those missing events will be ignored. You can create a catchall method named “call” for those, instead.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="DEFAULT_READ_SIZE">DEFAULT_READ_SIZE
+        <dd><p>The default read size.</p>
+        <dt id="Entry">Entry
+        <dd><p>A simple struct for encapsulating information about a single remote file or directory that needs to be downloaded.</p>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-local" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">local</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The destination of the download (the name of a file or directory on the local server, or an <a href="../../../IO.html"><code>IO</code></a> object)</p>
+        </div>
+      </div>
+      <div id="attribute-i-options" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">options</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The hash of options that was given to this <a href="Download.html"><code>Download</code></a> instance.</p>
+        </div>
+      </div>
+      <div id="attribute-i-properties" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">properties</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The properties hash for this object</p>
+        </div>
+      </div>
+      <div id="attribute-i-remote" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">remote</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The source of the download (the name of a file or directory on the remote server)</p>
+        </div>
+      </div>
+      <div id="attribute-i-sftp" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">sftp</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The <a href="../../SFTP.html"><code>SFTP</code></a> session instance that drives this download.</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(sftp, local, remote, options={}, &amp;progress)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Instantiates a new downloader process on top of the given <a href="../../SFTP.html"><code>SFTP</code></a> session. <code>local</code> is either an <a href="../../../IO.html"><code>IO</code></a> object that should receive the data, or a string identifying the target file or directory on the local host. <code>remote</code> is a string identifying the location on the remote host that the download should source.</p>
+
+<p>This will return immediately, and requires that the <a href="../../SSH.html"><code>SSH</code></a> event loop be run in order to effect the download. (See <a href="Download.html#method-i-wait"><code>wait</code></a>.)</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/operations/download.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">sftp</span>, <span class="ruby-identifier">local</span>, <span class="ruby-identifier">remote</span>, <span class="ruby-identifier">options</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">progress</span>)
+  <span class="ruby-ivar">@sftp</span> = <span class="ruby-identifier">sftp</span>
+  <span class="ruby-ivar">@local</span> = <span class="ruby-identifier">local</span>
+  <span class="ruby-ivar">@remote</span> = <span class="ruby-identifier">remote</span>
+  <span class="ruby-ivar">@progress</span> = <span class="ruby-identifier">progress</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:progress</span>]
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+  <span class="ruby-ivar">@active</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@properties</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:properties</span>] <span class="ruby-operator">||</span> {}
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">logger</span> = <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">logger</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">recursive?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">local</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:write</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;cannot download a directory tree in-memory&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@stack</span> = [<span class="ruby-constant">Entry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">remote</span>, <span class="ruby-identifier">local</span>, <span class="ruby-identifier">recursive?</span>)]
+  <span class="ruby-identifier">process_next_entry</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-5B-5D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">[]</span><span
+              class="method-args">(name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the property with the given name. This allows <a href="Download.html"><code>Download</code></a> instances to store their own state when used as part of a state machine.</p>
+
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/operations/download.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-5B-5D-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">[]=</span><span
+              class="method-args">(name, value)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Sets the given property to the given name. This allows <a href="Download.html"><code>Download</code></a> instances to store their own state when used as part of a state machine.</p>
+
+          <div class="method-source-code" id="5B-5D-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/operations/download.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@properties</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-abort-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">abort!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Forces the transfer to stop.</p>
+
+          <div class="method-source-code" id="abort-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/operations/download.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">abort!</span>
+  <span class="ruby-ivar">@active</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@stack</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-active-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">active?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns true if there are any active requests or pending files or directories.</p>
+
+          <div class="method-source-code" id="active-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/operations/download.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">active?</span>
+  <span class="ruby-ivar">@active</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">stack</span>.<span class="ruby-identifier">any?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-recursive-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">recursive?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the value of the :recursive key in the options hash that was given when the object was instantiated.</p>
+
+          <div class="method-source-code" id="recursive-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/operations/download.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">recursive?</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:recursive</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-wait" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">wait</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Runs the <a href="../../SSH.html"><code>SSH</code></a> event loop for as long as the downloader is active (see <a href="Download.html#method-i-active-3F"><code>active?</code></a>). This can be used to block until the download completes.</p>
+
+          <div class="method-source-code" id="wait-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/net-sftp-4.0.0/lib/net/sftp/operations/download.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">wait</span>
+  <span class="ruby-identifier">sftp</span>.<span class="ruby-identifier">loop</span> { <span class="ruby-identifier">active?</span> }
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

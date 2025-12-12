@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Mail::Encodings::TransferEncoding - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-can_encode-3F">::can_encode?</a>
+    <li ><a href="#method-c-can_transport-3F">::can_transport?</a>
+    <li ><a href="#method-c-compatible_input-3F">::compatible_input?</a>
+    <li ><a href="#method-c-cost">::cost</a>
+    <li ><a href="#method-c-lowest_cost">::lowest_cost</a>
+    <li ><a href="#method-c-negotiate">::negotiate</a>
+    <li ><a href="#method-c-renegotiate">::renegotiate</a>
+    <li ><a href="#method-c-to_s">::to_s</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Mail::Encodings::TransferEncoding">
+  <h1 id="class-Mail::Encodings::TransferEncoding" class="class">
+    class Mail::Encodings::TransferEncoding
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="NAME">NAME
+        <dd>
+        <dt id="PRIORITY">PRIORITY
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-can_encode-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">can_encode?</span><span
+              class="method-args">(enc)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Override in subclasses to indicate that they can encode text that couldn’t be directly transported, e.g. <a href="Base64.html"><code>Base64</code></a> has 7bit output, but it can encode binary.</p>
+
+          <div class="method-source-code" id="can_encode-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">can_encode?</span>(<span class="ruby-identifier">enc</span>)
+  <span class="ruby-identifier">can_transport?</span> <span class="ruby-identifier">enc</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-can_transport-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">can_transport?</span><span
+              class="method-args">(enc)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>And encoding’s superclass can always transport it since the class hierarchy is arranged e.g. <a href="Base64.html"><code>Base64</code></a> &lt; 7bit &lt; 8bit &lt; <a href="Binary.html"><code>Binary</code></a>.</p>
+
+          <div class="method-source-code" id="can_transport-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">can_transport?</span>(<span class="ruby-identifier">enc</span>)
+  <span class="ruby-identifier">enc</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">enc</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-compatible_input-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">compatible_input?</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="compatible_input-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">compatible_input?</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-cost" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cost</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="cost-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cost</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Unimplemented&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-lowest_cost" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">lowest_cost</span><span
+              class="method-args">(str, encodings)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="lowest_cost-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lowest_cost</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">encodings</span>)
+  <span class="ruby-identifier">best</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">best_cost</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-identifier">encodings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">enc</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># If the current choice cannot be transported safely, give priority</span>
+    <span class="ruby-comment"># to other choices but allow it to be used as a fallback.</span>
+    <span class="ruby-identifier">this_cost</span> = <span class="ruby-identifier">enc</span>.<span class="ruby-identifier">cost</span>(<span class="ruby-identifier">str</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">enc</span>.<span class="ruby-identifier">compatible_input?</span>(<span class="ruby-identifier">str</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">best_cost</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">this_cost</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">this_cost</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">best_cost</span>)
+      <span class="ruby-identifier">best_cost</span> = <span class="ruby-identifier">this_cost</span>
+      <span class="ruby-identifier">best</span> = <span class="ruby-identifier">enc</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">this_cost</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">best_cost</span>
+      <span class="ruby-identifier">best</span> = <span class="ruby-identifier">enc</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">enc</span><span class="ruby-operator">::</span><span class="ruby-constant">PRIORITY</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">best</span><span class="ruby-operator">::</span><span class="ruby-constant">PRIORITY</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">best</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-negotiate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">negotiate</span><span
+              class="method-args">(message_encoding, source_encoding, str, allowed_encodings = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="negotiate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">negotiate</span>(<span class="ruby-identifier">message_encoding</span>, <span class="ruby-identifier">source_encoding</span>, <span class="ruby-identifier">str</span>, <span class="ruby-identifier">allowed_encodings</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">message_encoding</span> = <span class="ruby-constant">Encodings</span>.<span class="ruby-identifier">get_encoding</span>(<span class="ruby-identifier">message_encoding</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">Encodings</span>.<span class="ruby-identifier">get_encoding</span>(<span class="ruby-string">&#39;8bit&#39;</span>)
+  <span class="ruby-identifier">source_encoding</span>  = <span class="ruby-constant">Encodings</span>.<span class="ruby-identifier">get_encoding</span>(<span class="ruby-identifier">source_encoding</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">message_encoding</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">source_encoding</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">message_encoding</span>.<span class="ruby-identifier">can_transport?</span>(<span class="ruby-identifier">source_encoding</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">source_encoding</span>.<span class="ruby-identifier">compatible_input?</span>(<span class="ruby-identifier">str</span>)
+    <span class="ruby-identifier">source_encoding</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">renegotiate</span>(<span class="ruby-identifier">message_encoding</span>, <span class="ruby-identifier">source_encoding</span>, <span class="ruby-identifier">str</span>, <span class="ruby-identifier">allowed_encodings</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-renegotiate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">renegotiate</span><span
+              class="method-args">(message_encoding, source_encoding, str, allowed_encodings = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="renegotiate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">renegotiate</span>(<span class="ruby-identifier">message_encoding</span>, <span class="ruby-identifier">source_encoding</span>, <span class="ruby-identifier">str</span>, <span class="ruby-identifier">allowed_encodings</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">encodings</span> = <span class="ruby-constant">Encodings</span>.<span class="ruby-identifier">get_all</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">enc</span><span class="ruby-operator">|</span>
+    (<span class="ruby-identifier">allowed_encodings</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">allowed_encodings</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">enc</span>)) <span class="ruby-operator">&amp;&amp;</span>
+      <span class="ruby-identifier">message_encoding</span>.<span class="ruby-identifier">can_transport?</span>(<span class="ruby-identifier">enc</span>) <span class="ruby-operator">&amp;&amp;</span>
+      <span class="ruby-identifier">enc</span>.<span class="ruby-identifier">can_encode?</span>(<span class="ruby-identifier">source_encoding</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">lowest_cost</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">encodings</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_s" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_s</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/mail-2.9.0/lib/mail/encodings/transfer_encoding.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_s</span>
+  <span class="ruby-keyword">self</span><span class="ruby-operator">::</span><span class="ruby-constant">NAME</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

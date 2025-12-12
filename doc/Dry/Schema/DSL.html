@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Dry::Schema::DSL - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="extend" href="../Initializer.html">Dry::Initializer</a>
+    <li><a class="extend" href="../Initializer.html">Dry::Initializer</a>
+  </ul>
+</div>
+
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    <li ><a href="#method-i-after">#after</a>
+    <li ><a href="#method-i-array">#array</a>
+    <li ><a href="#method-i-before">#before</a>
+    <li ><a href="#method-i-call">#call</a>
+    <li ><a href="#method-i-compiler">#compiler</a>
+    <li ><a href="#method-i-configure">#configure</a>
+    <li ><a href="#method-i-custom_type-3F">#custom_type?</a>
+    <li ><a href="#method-i-filter_rules-3F">#filter_rules?</a>
+    <li ><a href="#method-i-filter_schema">#filter_schema</a>
+    <li ><a href="#method-i-filter_schema_dsl">#filter_schema_dsl</a>
+    <li ><a href="#method-i-key">#key</a>
+    <li ><a href="#method-i-key_map">#key_map</a>
+    <li ><a href="#method-i-merge">#merge</a>
+    <li ><a href="#method-i-merge_types">#merge_types</a>
+    <li ><a href="#method-i-new">#new</a>
+    <li ><a href="#method-i-optional">#optional</a>
+    <li ><a href="#method-i-parent">#parent</a>
+    <li ><a href="#method-i-predicates">#predicates</a>
+    <li ><a href="#method-i-required">#required</a>
+    <li ><a href="#method-i-resolve_type">#resolve_type</a>
+    <li ><a href="#method-i-rule_applier">#rule_applier</a>
+    <li ><a href="#method-i-rules">#rules</a>
+    <li ><a href="#method-i-set_type">#set_type</a>
+    <li ><a href="#method-i-strict_type_schema">#strict_type_schema</a>
+    <li ><a href="#method-i-to_rule">#to_rule</a>
+    <li ><a href="#method-i-type_schema">#type_schema</a>
+    <li ><a href="#method-i-types">#types</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Dry::Schema::DSL">
+  <h1 id="class-Dry::Schema::DSL" class="class">
+    class Dry::Schema::DSL
+  </h1>
+
+  <section class="description">
+    
+<p>The schema definition <a href="DSL.html"><code>DSL</code></a> class</p>
+
+<p>The <a href="DSL.html"><code>DSL</code></a> is exposed by:</p>
+
+<pre>- `Schema.define`
+- `Schema.Params`
+- `Schema.JSON`
+- `Schema::Params.define` - use with sub-classes
+- `Schema::JSON.define` - use with sub-classes</pre>
+
+<p>@example class-based definition</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">UserSchema</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span><span class="ruby-operator">::</span><span class="ruby-constant">Params</span>
+  <span class="ruby-identifier">define</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">required</span>(<span class="ruby-value">:name</span>).<span class="ruby-identifier">filled</span>
+    <span class="ruby-identifier">required</span>(<span class="ruby-value">:age</span>).<span class="ruby-identifier">filled</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">gt:</span> <span class="ruby-value">18</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">user_schema</span> = <span class="ruby-constant">UserSchema</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">user_schema</span>.(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;Jame&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-value">21</span>)
+</pre>
+
+<p>@example instance-based definition shortcut</p>
+
+<pre class="ruby"><span class="ruby-constant">UserSchema</span> = <span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span>.<span class="ruby-constant">Params</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">required</span>(<span class="ruby-value">:name</span>).<span class="ruby-identifier">filled</span>
+  <span class="ruby-identifier">required</span>(<span class="ruby-value">:age</span>).<span class="ruby-identifier">filled</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">gt:</span> <span class="ruby-value">18</span>)
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">UserSchema</span>.(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;Jame&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-value">21</span>)
+</pre>
+
+<p>@api public</p>
+
+<p>The schema definition <a href="DSL.html"><code>DSL</code></a> class</p>
+
+<p>The <a href="DSL.html"><code>DSL</code></a> is exposed by:</p>
+
+<pre>- `Schema.define`
+- `Schema.Params`
+- `Schema.JSON`
+- `Schema::Params.define` - use with sub-classes
+- `Schema::JSON.define` - use with sub-classes</pre>
+
+<p>@example class-based definition</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">UserSchema</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span><span class="ruby-operator">::</span><span class="ruby-constant">Params</span>
+  <span class="ruby-identifier">define</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">required</span>(<span class="ruby-value">:name</span>).<span class="ruby-identifier">filled</span>
+    <span class="ruby-identifier">required</span>(<span class="ruby-value">:age</span>).<span class="ruby-identifier">filled</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">gt:</span> <span class="ruby-value">18</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">user_schema</span> = <span class="ruby-constant">UserSchema</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">user_schema</span>.(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;Jame&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-value">21</span>)
+</pre>
+
+<p>@example instance-based definition shortcut</p>
+
+<pre class="ruby"><span class="ruby-constant">UserSchema</span> = <span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span>.<span class="ruby-constant">Params</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">required</span>(<span class="ruby-value">:name</span>).<span class="ruby-identifier">filled</span>
+  <span class="ruby-identifier">required</span>(<span class="ruby-value">:age</span>).<span class="ruby-identifier">filled</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">gt:</span> <span class="ruby-value">18</span>)
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">UserSchema</span>.(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;Jame&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-value">21</span>)
+</pre>
+
+<p>@api public</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="Types">Types
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(**options, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Build a new <a href="DSL.html"><code>DSL</code></a> object and evaluate provided block</p>
+
+<p>@param [Hash] options @option options [Class] :processor The processor type</p>
+
+<pre>(`Params`, `JSON` or a custom sub-class)</pre>
+
+<p>@option options [Compiler] :compiler An instance of a rule compiler</p>
+
+<pre>(must be compatible with `Schema::Compiler`) (optional)</pre>
+
+<p>@option options [<a href="DSL">Array</a>] :parent One or more instances of the parent <a href="DSL.html"><code>DSL</code></a> (optional) @option options [Config] :config A configuration object (optional)</p>
+
+<p>@see <a href="../Schema.html#method-c-define"><code>Schema.define</code></a> @see <a href="../Schema.html#method-c-Params"><code>Schema.Params</code></a> @see <a href="../Schema.html#method-c-JSON"><code>Schema.JSON</code></a> @see <a href="Processor.html#method-c-define"><code>Processor.define</code></a></p>
+
+<p>@return [DSL]</p>
+
+<p>@api public</p>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">dsl</span> = <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">dsl</span>.<span class="ruby-identifier">instance_eval</span>(<span class="ruby-operator">&amp;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">dsl</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-string">&quot;@compiler&quot;</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:compiler</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:compiler</span>]
+  <span class="ruby-identifier">dsl</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-5B-5D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">[]</span><span
+              class="method-args">(name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return a macro with the provided name</p>
+
+<p>@param [Symbol] name</p>
+
+<p>@return [Macros::Core]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">macros</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">macro</span><span class="ruby-operator">|</span> <span class="ruby-identifier">macro</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">name</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-after" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">after</span><span
+              class="method-args">(key, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="../../Method.html"><code>Method</code></a> allows steps injection to the processor</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-identifier">after</span>(<span class="ruby-value">:rule_applier</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">input</span>.<span class="ruby-identifier">compact</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>@return [DSL]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="after-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 267</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">after</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">steps</span>.<span class="ruby-identifier">after</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-array" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">array</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>A shortcut for defining an array type with a member</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-identifier">required</span>(<span class="ruby-value">:tags</span>).<span class="ruby-identifier">filled</span>(<span class="ruby-identifier">array</span>[<span class="ruby-value">:string</span>])
+</pre>
+
+<p>@return [Dry::Types::Array::Member]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="array-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 238</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">array</span>
+  <span class="ruby-operator">-&gt;</span> <span class="ruby-identifier">member_type</span> { <span class="ruby-identifier">type_registry</span>[<span class="ruby-string">&quot;array&quot;</span>].<span class="ruby-identifier">of</span>(<span class="ruby-identifier">resolve_type</span>(<span class="ruby-identifier">member_type</span>)) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-before" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">before</span><span
+              class="method-args">(key, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="../../Method.html"><code>Method</code></a> allows steps injection to the processor</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-identifier">before</span>(<span class="ruby-value">:rule_applier</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">input</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">input</span>.<span class="ruby-identifier">compact</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>@return [DSL]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="before-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">before</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">steps</span>.<span class="ruby-identifier">before</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-call" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">call</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Build a processor based on DSL’s definitions</p>
+
+<p>@return [Processor, <a href="Params.html"><code>Params</code></a>, JSON]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="call-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 195</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>
+  <span class="ruby-identifier">all_steps</span> = <span class="ruby-identifier">parents</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:steps</span>) <span class="ruby-operator">+</span> [<span class="ruby-identifier">steps</span>]
+
+  <span class="ruby-identifier">result_steps</span> = <span class="ruby-identifier">all_steps</span>.<span class="ruby-identifier">inject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, <span class="ruby-identifier">steps</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">steps</span>) }
+
+  <span class="ruby-identifier">result_steps</span>[<span class="ruby-value">:key_validator</span>] = <span class="ruby-identifier">key_validator</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">validate_keys</span>
+  <span class="ruby-identifier">result_steps</span>[<span class="ruby-value">:key_coercer</span>] = <span class="ruby-identifier">key_coercer</span>
+  <span class="ruby-identifier">result_steps</span>[<span class="ruby-value">:value_coercer</span>] = <span class="ruby-identifier">value_coercer</span>
+  <span class="ruby-identifier">result_steps</span>[<span class="ruby-value">:rule_applier</span>] = <span class="ruby-identifier">rule_applier</span>
+  <span class="ruby-identifier">result_steps</span>[<span class="ruby-value">:filter_schema</span>] = <span class="ruby-identifier">filter_schema</span>.<span class="ruby-identifier">rule_applier</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter_rules?</span>
+
+  <span class="ruby-identifier">processor_type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">schema_dsl:</span> <span class="ruby-keyword">self</span>, <span class="ruby-value">steps:</span> <span class="ruby-identifier">result_steps</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-compiler" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">compiler</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="compiler-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compiler</span>
+  <span class="ruby-ivar">@compiler</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Compiler</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">predicates</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-configure" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">configure</span><span
+              class="method-args">(&amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Provide customized configuration for your schema</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span>.<span class="ruby-identifier">define</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">config</span>.<span class="ruby-identifier">messages</span>.<span class="ruby-identifier">backend</span> = <span class="ruby-value">:i18n</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>@see <a href="Config.html"><code>Config</code></a></p>
+
+<p>@return [DSL]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="configure-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">configure</span>(<span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-custom_type-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">custom_type?</span><span
+              class="method-args">(name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Check if a custom type was set under provided key name</p>
+
+<p>@return [Bool]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="custom_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 328</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">custom_type?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">types</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">meta</span>[<span class="ruby-value">:default</span>].<span class="ruby-identifier">equal?</span>(<span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-filter_rules-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter_rules?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Check if any filter rules were defined</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="filter_rules-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 365</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_rules?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">instance_variable_defined?</span>(<span class="ruby-string">&quot;@filter_schema_dsl&quot;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">filter_schema_dsl</span>.<span class="ruby-identifier">macros</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">parents</span>.<span class="ruby-identifier">any?</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:filter_rules?</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-filter_schema" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter_schema</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="filter_schema-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 349</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_schema</span>
+  <span class="ruby-identifier">filter_schema_dsl</span>.<span class="ruby-identifier">call</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-filter_schema_dsl" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter_schema_dsl</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Build an input schema <a href="DSL.html"><code>DSL</code></a> used by ‘filter` API</p>
+
+<p>@see Macros::Value#filter</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="filter_schema_dsl-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 358</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_schema_dsl</span>
+  <span class="ruby-ivar">@filter_schema_dsl</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">new</span>(<span class="ruby-value">parent:</span> <span class="ruby-identifier">parent_filter_schemas</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-key" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">key</span><span
+              class="method-args">(name, macro:, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>A generic method for defining keys</p>
+
+<p>@param [Symbol] name The key name @param [Class] macro The macro sub-class (ie ‘Macros::Required` or</p>
+
+<pre>any other `Macros::Key` subclass)</pre>
+
+<p>@return [Macros::Key]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="key-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">key</span>(<span class="ruby-identifier">name</span>, <span class="ruby-value">macro:</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Key +#{name}+ is not a symbol&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Symbol</span>)
+
+  <span class="ruby-identifier">set_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-constant">Types</span><span class="ruby-operator">::</span><span class="ruby-constant">Any</span>.<span class="ruby-identifier">meta</span>(<span class="ruby-value">default:</span> <span class="ruby-keyword">true</span>))
+
+  <span class="ruby-identifier">macro</span> = <span class="ruby-identifier">macro</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>,
+    <span class="ruby-value">compiler:</span> <span class="ruby-identifier">compiler</span>,
+    <span class="ruby-value">schema_dsl:</span> <span class="ruby-keyword">self</span>,
+    <span class="ruby-value">filter_schema_dsl:</span> <span class="ruby-identifier">filter_schema_dsl</span>
+  )
+
+  <span class="ruby-identifier">macro</span>.<span class="ruby-identifier">value</span>(<span class="ruby-operator">&amp;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">macros</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">macro</span>
+  <span class="ruby-identifier">macro</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-merge" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">merge</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Merge with another dsl</p>
+
+<p>@return [DSL]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="merge-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">new</span>(
+    <span class="ruby-value">parent:</span> <span class="ruby-identifier">parents</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">parents</span>,
+    <span class="ruby-value">macros:</span> <span class="ruby-identifier">macros</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">macros</span>,
+    <span class="ruby-value">types:</span> <span class="ruby-identifier">types</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">types</span>),
+    <span class="ruby-value">steps:</span> <span class="ruby-identifier">steps</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">steps</span>)
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-merge_types" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">merge_types</span><span
+              class="method-args">(op_class, lhs, rhs)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="merge_types-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 381</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge_types</span>(<span class="ruby-identifier">op_class</span>, <span class="ruby-identifier">lhs</span>, <span class="ruby-identifier">rhs</span>)
+  <span class="ruby-identifier">types_merger</span>.(<span class="ruby-identifier">op_class</span>, <span class="ruby-identifier">lhs</span>, <span class="ruby-identifier">rhs</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(klass: self.class, **options, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return a new <a href="DSL.html"><code>DSL</code></a> instance using the same processor type</p>
+
+<p>@return [Dry::Types::Safe]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 304</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>(<span class="ruby-value">klass:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-value">processor_type:</span> <span class="ruby-identifier">processor_type</span>, <span class="ruby-value">config:</span> <span class="ruby-identifier">config</span>, <span class="ruby-operator">&amp;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-optional" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">optional</span><span
+              class="method-args">(name, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Define an optional key</p>
+
+<p>This works exactly the same as ‘required` except that if a key is not present rules will not be applied</p>
+
+<p>@see <a href="DSL.html#method-i-required"><code>DSL#required</code></a></p>
+
+<p>@param [Symbol] name The key name</p>
+
+<p>@return [Macros::Optional]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="optional-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">optional</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">key</span>(<span class="ruby-identifier">name</span>, <span class="ruby-value">macro:</span> <span class="ruby-constant">Macros</span><span class="ruby-operator">::</span><span class="ruby-constant">Optional</span>, <span class="ruby-operator">&amp;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-parent" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parent</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>The parent (last from parents) which is used for copying non mergeable configuration</p>
+
+<p>@return <a href="DSL.html"><code>DSL</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="parent-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parent</span>
+  <span class="ruby-ivar">@parent</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">parents</span>.<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-predicates" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">predicates</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="predicates-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">predicates</span>
+  <span class="ruby-ivar">@predicates</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">predicates</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-required" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">required</span><span
+              class="method-args">(name, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Define a required key</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-identifier">required</span>(<span class="ruby-value">:name</span>).<span class="ruby-identifier">filled</span>
+
+<span class="ruby-identifier">required</span>(<span class="ruby-value">:age</span>).<span class="ruby-identifier">value</span>(<span class="ruby-value">:integer</span>)
+
+<span class="ruby-identifier">required</span>(<span class="ruby-value">:user_limit</span>).<span class="ruby-identifier">value</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">gt?:</span> <span class="ruby-value">0</span>)
+
+<span class="ruby-identifier">required</span>(<span class="ruby-value">:tags</span>).<span class="ruby-identifier">filled</span> { <span class="ruby-identifier">array?</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">str?</span> }
+</pre>
+
+<p>@param [Symbol] name The key name</p>
+
+<p>@return [Macros::Required]</p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="required-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">required</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">key</span>(<span class="ruby-identifier">name</span>, <span class="ruby-value">macro:</span> <span class="ruby-constant">Macros</span><span class="ruby-operator">::</span><span class="ruby-constant">Required</span>, <span class="ruby-operator">&amp;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resolve_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resolve_type</span><span
+              class="method-args">(spec)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Resolve type object from the provided spec</p>
+
+<p>@param [Symbol, <a href="../../Array.html"><code>Array</code></a>&lt;Symbol&gt;, <a href="../Types/Type.html"><code>Dry::Types::Type</code></a>] spec</p>
+
+<p>@return [Dry::Types::Type]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="resolve_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 339</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resolve_type</span>(<span class="ruby-identifier">spec</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">spec</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-operator">::</span><span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">spec</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-operator">::</span><span class="ruby-constant">Array</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">resolve_type</span>(<span class="ruby-identifier">s</span>) }.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:|</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">type_registry</span>[<span class="ruby-identifier">spec</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-set_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">set_type</span><span
+              class="method-args">(name, spec)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="../../Set.html"><code>Set</code></a> a type for the given key name</p>
+
+<p>@param [Symbol] name The key name @param [Symbol, <a href="../../Array.html"><code>Array</code></a>&lt;Symbol&gt;, <a href="../Types/Type.html"><code>Dry::Types::Type</code></a>] spec The type spec or a type object</p>
+
+<p>@return [Dry::Types::Safe]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="set_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 316</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">spec</span>)
+  <span class="ruby-identifier">type</span> = <span class="ruby-identifier">resolve_type</span>(<span class="ruby-identifier">spec</span>)
+  <span class="ruby-identifier">meta</span> = {<span class="ruby-value">required:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">maybe:</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">optional?</span>}
+
+  <span class="ruby-ivar">@types</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">meta</span>(<span class="ruby-identifier">meta</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-strict_type_schema" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">strict_type_schema</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return type schema used when composing subschemas</p>
+
+<p>@return [Dry::Types::Schema]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="strict_type_schema-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strict_type_schema</span>
+  <span class="ruby-identifier">type_registry</span>[<span class="ruby-string">&quot;hash&quot;</span>].<span class="ruby-identifier">schema</span>(<span class="ruby-identifier">types</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_rule" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_rule</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Cast this <a href="DSL.html"><code>DSL</code></a> into a rule object</p>
+
+<p>@return [RuleApplier]</p>
+
+          <div class="method-source-code" id="to_rule-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_rule</span>
+  <span class="ruby-identifier">call</span>.<span class="ruby-identifier">to_rule</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-type_schema" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">type_schema</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Return type schema used by the value coercer</p>
+
+<p>@return [Dry::Types::Lax]</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="type_schema-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 286</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type_schema</span>
+  <span class="ruby-identifier">strict_type_schema</span>.<span class="ruby-identifier">lax</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-types" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">types</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>This DSL’s type map merged with any parent type maps</p>
+
+<p>@api private</p>
+
+          <div class="method-source-code" id="types-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 376</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">types</span>
+  [<span class="ruby-operator">*</span><span class="ruby-identifier">parents</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:types</span>), <span class="ruby-ivar">@types</span>].<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:merge</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+      <div id="method-i-key_map" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">key_map</span><span
+              class="method-args">(types = self.types)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Build a key map from defined types</p>
+
+<p>@api protected</p>
+
+          <div class="method-source-code" id="key_map-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 408</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">key_map</span>(<span class="ruby-identifier">types</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">types</span>)
+  <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">types</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">|</span> <span class="ruby-identifier">key_spec</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">type</span>) }
+  <span class="ruby-identifier">km</span> = <span class="ruby-constant">KeyMap</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">keys</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">key_map_type</span>
+    <span class="ruby-identifier">km</span>.<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">key_map_type</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">km</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rule_applier" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rule_applier</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Build a rule applier</p>
+
+<p>@return [RuleApplier]</p>
+
+<p>@api protected</p>
+
+          <div class="method-source-code" id="rule_applier-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 392</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rule_applier</span>
+  <span class="ruby-constant">RuleApplier</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rules</span>, <span class="ruby-value">config:</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">finalize!</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rules" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rules</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Build rules from defined macros</p>
+
+<p>@see <a href="DSL.html#method-i-rule_applier"><code>rule_applier</code></a></p>
+
+<p>@api protected</p>
+
+          <div class="method-source-code" id="rules-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/dsl.rb, line 401</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rules</span>
+  <span class="ruby-identifier">parent_rules</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">macros</span>.<span class="ruby-identifier">to_h</span> { [<span class="ruby-identifier">_1</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">_1</span>.<span class="ruby-identifier">to_rule</span>] }.<span class="ruby-identifier">compact</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

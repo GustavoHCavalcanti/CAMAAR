@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveRecord::ConnectionAdapters::SQLite3Adapter - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>
+            <details open>
+              <summary>      <a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">Active Record SQLite3 Adapter</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">Options</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">Active Record SQLite3 Adapter</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">Options</a>
+
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>      <a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">Active Record SQLite3 Adapter</a>
+</summary>
+              <ul class="link-list" role="directory">
+                          <li>      <a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">Options</a>
+
+              </ul>
+            </details>
+          </li>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="AbstractAdapter.html">ActiveRecord::ConnectionAdapters::AbstractAdapter</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="SQLite3/DatabaseStatements.html">ActiveRecord::ConnectionAdapters::SQLite3::DatabaseStatements</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-dbconsole">::dbconsole</a>
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-new_client">::new_client</a>
+    <li ><a href="#method-c-strict_strings_by_default">::strict_strings_by_default</a>
+    <li ><a href="#method-i-active-3F">#active?</a>
+    <li ><a href="#method-i-add_timestamps">#add_timestamps</a>
+    <li ><a href="#method-i-connected-3F">#connected?</a>
+    <li ><a href="#method-i-create_virtual_table">#create_virtual_table</a>
+    <li ><a href="#method-i-database_exists-3F">#database_exists?</a>
+    <li class="calls-super" ><a href="#method-i-disconnect-21">#disconnect!</a>
+    <li ><a href="#method-i-drop_virtual_table">#drop_virtual_table</a>
+    <li ><a href="#method-i-encoding">#encoding</a>
+    <li ><a href="#method-i-foreign_keys">#foreign_keys</a>
+    <li ><a href="#method-i-rename_table">#rename_table</a>
+    <li ><a href="#method-i-requires_reloading-3F">#requires_reloading?</a>
+    <li ><a href="#method-i-supports_check_constraints-3F">#supports_check_constraints?</a>
+    <li ><a href="#method-i-supports_common_table_expressions-3F">#supports_common_table_expressions?</a>
+    <li ><a href="#method-i-supports_concurrent_connections-3F">#supports_concurrent_connections?</a>
+    <li ><a href="#method-i-supports_datetime_with_precision-3F">#supports_datetime_with_precision?</a>
+    <li ><a href="#method-i-supports_ddl_transactions-3F">#supports_ddl_transactions?</a>
+    <li ><a href="#method-i-supports_deferrable_constraints-3F">#supports_deferrable_constraints?</a>
+    <li ><a href="#method-i-supports_explain-3F">#supports_explain?</a>
+    <li ><a href="#method-i-supports_expression_index-3F">#supports_expression_index?</a>
+    <li ><a href="#method-i-supports_foreign_keys-3F">#supports_foreign_keys?</a>
+    <li ><a href="#method-i-supports_index_sort_order-3F">#supports_index_sort_order?</a>
+    <li ><a href="#method-i-supports_insert_conflict_target-3F">#supports_insert_conflict_target?</a>
+    <li ><a href="#method-i-supports_insert_on_conflict-3F">#supports_insert_on_conflict?</a>
+    <li ><a href="#method-i-supports_insert_on_duplicate_skip-3F">#supports_insert_on_duplicate_skip?</a>
+    <li ><a href="#method-i-supports_insert_on_duplicate_update-3F">#supports_insert_on_duplicate_update?</a>
+    <li ><a href="#method-i-supports_insert_returning-3F">#supports_insert_returning?</a>
+    <li ><a href="#method-i-supports_json-3F">#supports_json?</a>
+    <li ><a href="#method-i-supports_lazy_transactions-3F">#supports_lazy_transactions?</a>
+    <li ><a href="#method-i-supports_partial_index-3F">#supports_partial_index?</a>
+    <li ><a href="#method-i-supports_savepoints-3F">#supports_savepoints?</a>
+    <li ><a href="#method-i-supports_transaction_isolation-3F">#supports_transaction_isolation?</a>
+    <li ><a href="#method-i-supports_views-3F">#supports_views?</a>
+    <li ><a href="#method-i-supports_virtual_columns-3F">#supports_virtual_columns?</a>
+    <li ><a href="#method-i-use_insert_returning-3F">#use_insert_returning?</a>
+    <li ><a href="#method-i-virtual_tables">#virtual_tables</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter">
+  <h1 id="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter" class="class">
+    class ActiveRecord::ConnectionAdapters::SQLite3Adapter
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">Active Record SQLite3 Adapter<span><a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The SQLite3 adapter works with the <a href="https://sparklemotion.github.io/sqlite3-ruby/">sqlite3</a> driver.</p>
+
+<h4 id="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">Options<span><a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:database</code> (<a href="../../String.html"><code>String</code></a>): Filesystem path to the database file.</p>
+</li><li>
+<p><code>:statement_limit</code> (<a href="../../Integer.html"><code>Integer</code></a>): Maximum number of prepared statements to cache per database connection. (default: 1000)</p>
+</li><li>
+<p><code>:timeout</code> (<a href="../../Integer.html"><code>Integer</code></a>): <a href="../../Timeout.html"><code>Timeout</code></a> in milliseconds to use when waiting for a lock. (default: no wait)</p>
+</li><li>
+<p><code>:strict</code> (Boolean): Enable or disable strict mode. When enabled, this will <a href="https://www.sqlite.org/quirks.html#double_quoted_string_literals_are_accepted">disallow double-quoted string literals in SQL statements</a>. (default: see <a href="SQLite3Adapter.html#method-c-strict_strings_by_default"><code>strict_strings_by_default</code></a>)</p>
+</li><li>
+<p><code>:extensions</code> (<a href="../../Array.html"><code>Array</code></a>): (<strong>requires sqlite3 v2.4.0</strong>) Each entry specifies a sqlite extension to load for this database. The entry may be a filesystem path, or the name of a class that responds to <code>.to_path</code> to provide the filesystem path for the extension. See <a href="https://sparklemotion.github.io/sqlite3-ruby/SQLite3/Database.html#class-SQLite3::Database-label-SQLite+Extensions">sqlite3-ruby documentation</a> for more information.</p>
+</li></ul>
+
+<p>There may be other options available specific to the <a href="SQLite3.html"><code>SQLite3</code></a> driver. Please read the documentation for <a href="https://sparklemotion.github.io/sqlite3-ruby/SQLite3/Database.html#method-c-new">SQLite3::Database.new</a></p>
+
+<h1 id="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">Active Record <a href="SQLite3.html"><code>SQLite3</code></a> Adapter<span><a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The <a href="SQLite3.html"><code>SQLite3</code></a> adapter works with the sqlite3-ruby drivers (available as gem from <a href="https://rubygems.org/gems/sqlite3">rubygems.org/gems/sqlite3</a>).</p>
+
+<h4 id="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">Options<span><a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:database</code> - Path to the database file.</p>
+</li></ul>
+
+<h1 id="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">Active Record SQLite3 Adapter<span><a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Active+Record+SQLite3+Adapter">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The SQLite3 adapter works with the <a href="https://sparklemotion.github.io/sqlite3-ruby/">sqlite3</a> driver.</p>
+
+<h4 id="class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">Options<span><a href="#class-ActiveRecord::ConnectionAdapters::SQLite3Adapter-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:database</code> (<a href="../../String.html"><code>String</code></a>): Filesystem path to the database file.</p>
+</li><li>
+<p><code>:statement_limit</code> (<a href="../../Integer.html"><code>Integer</code></a>): Maximum number of prepared statements to cache per database connection. (default: 1000)</p>
+</li><li>
+<p><code>:timeout</code> (<a href="../../Integer.html"><code>Integer</code></a>): <a href="../../Timeout.html"><code>Timeout</code></a> in milliseconds to use when waiting for a lock. (default: no wait)</p>
+</li><li>
+<p><code>:strict</code> (Boolean): Enable or disable strict mode. When enabled, this will <a href="https://www.sqlite.org/quirks.html#double_quoted_string_literals_are_accepted">disallow double-quoted string literals in SQL statements</a>. (default: see <a href="SQLite3Adapter.html#method-c-strict_strings_by_default"><code>strict_strings_by_default</code></a>)</p>
+</li><li>
+<p><code>:extensions</code> (<a href="../../Array.html"><code>Array</code></a>): (<strong>requires sqlite3 v2.4.0</strong>) Each entry specifies a sqlite extension to load for this database. The entry may be a filesystem path, or the name of a class that responds to <code>.to_path</code> to provide the filesystem path for the extension. See <a href="https://sparklemotion.github.io/sqlite3-ruby/SQLite3/Database.html#class-SQLite3::Database-label-SQLite+Extensions">sqlite3-ruby documentation</a> for more information.</p>
+</li></ul>
+
+<p>There may be other options available specific to the <a href="SQLite3.html"><code>SQLite3</code></a> driver. Please read the documentation for <a href="https://sparklemotion.github.io/sqlite3-ruby/SQLite3/Database.html#method-c-new">SQLite3::Database.new</a></p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="ADAPTER_NAME">ADAPTER_NAME
+        <dd>
+        <dt id="COLLATE_REGEX">COLLATE_REGEX
+        <dd>
+        <dt id="DEFAULT_PRAGMAS">DEFAULT_PRAGMAS
+        <dd>
+        <dt id="DEFERRABLE_REGEX">DEFERRABLE_REGEX
+        <dd>
+        <dt id="EXTENDED_TYPE_MAPS">EXTENDED_TYPE_MAPS
+        <dd>
+        <dt id="FINAL_CLOSE_PARENS_REGEX">FINAL_CLOSE_PARENS_REGEX
+        <dd>
+        <dt id="FK_REGEX">FK_REGEX
+        <dd>
+        <dt id="GENERATED_ALWAYS_AS_REGEX">GENERATED_ALWAYS_AS_REGEX
+        <dd>
+        <dt id="NATIVE_DATABASE_TYPES">NATIVE_DATABASE_TYPES
+        <dd>
+        <dt id="PRIMARY_KEY_AUTOINCREMENT_REGEX">PRIMARY_KEY_AUTOINCREMENT_REGEX
+        <dd>
+        <dt id="TYPE_MAP">TYPE_MAP
+        <dd>
+        <dt id="UNQUOTED_OPEN_PARENS_REGEX">UNQUOTED_OPEN_PARENS_REGEX
+        <dd>
+        <dt id="VIRTUAL_TABLE_REGEX">VIRTUAL_TABLE_REGEX
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-dbconsole" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dbconsole</span><span
+              class="method-args">(config, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="dbconsole-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbconsole</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">args</span> = []
+
+  <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;-#{options[:mode]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:mode</span>]
+  <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;-header&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:header</span>]
+  <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">database</span>, <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+
+  <span class="ruby-identifier">find_cmd_and_exec</span>(<span class="ruby-constant">ActiveRecord</span>.<span class="ruby-identifier">database_cli</span>[<span class="ruby-value">:sqlite</span>], <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(...)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="QueryCache.html#method-c-new"><code>ActiveRecord::ConnectionAdapters::QueryCache::new</code></a>
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">...</span>)
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-ivar">@memory_database</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;No database file specified. Missing argument: database&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;:memory:&quot;</span>
+    <span class="ruby-ivar">@memory_database</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\Afile:/</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># Otherwise we have a path relative to Rails.root</span>
+    <span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>], <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>)
+    <span class="ruby-identifier">dirname</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>])
+    <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">dirname</span>)
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dirname</span>)
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">SystemCallError</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">NoDatabaseError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">connection_pool:</span> <span class="ruby-ivar">@pool</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@previous_read_uncommitted</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@config</span>[<span class="ruby-value">:strict</span>] = <span class="ruby-constant">ConnectionAdapters</span><span class="ruby-operator">::</span><span class="ruby-constant">SQLite3Adapter</span>.<span class="ruby-identifier">strict_strings_by_default</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:strict</span>)
+
+  <span class="ruby-identifier">extensions</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:extensions</span>, []).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">extension</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">extension</span>.<span class="ruby-identifier">safe_constantize</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">extension</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@connection_parameters</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">merge</span>(
+    <span class="ruby-value">database:</span> <span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>].<span class="ruby-identifier">to_s</span>,
+    <span class="ruby-value">results_as_hash:</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-value">default_transaction_mode:</span> <span class="ruby-value">:immediate</span>,
+    <span class="ruby-value">extensions:</span> <span class="ruby-identifier">extensions</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new_client" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new_client</span><span
+              class="method-args">(config)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new_client-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_client</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-operator">::</span><span class="ruby-constant">SQLite3</span><span class="ruby-operator">::</span><span class="ruby-constant">Database</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>[<span class="ruby-value">:database</span>].<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">config</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">error</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">error</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;No such file or directory&quot;</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">NoDatabaseError</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-strict_strings_by_default" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">strict_strings_by_default</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Configure the <a href="SQLite3Adapter.html"><code>SQLite3Adapter</code></a> to be used in a “strict strings” mode. When enabled, this will <a href="https://www.sqlite.org/quirks.html#double_quoted_string_literals_are_accepted">disallow double-quoted string literals in SQL statements</a>, which may prevent some typographical errors like creating an index for a non-existent column. The default is <code>false</code>.</p>
+
+<p>If you wish to enable this mode you can add the following line to your application.rb file:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">sqlite3_adapter_strict_strings_by_default</span> = <span class="ruby-keyword">true</span>
+</pre>
+
+<p>This can also be configured on individual databases by setting the <code>strict:</code> option.</p>
+
+          <div class="method-source-code" id="strict_strings_by_default-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 94</span>
+<span class="ruby-identifier">class_attribute</span> <span class="ruby-value">:strict_strings_by_default</span>, <span class="ruby-value">default:</span> <span class="ruby-keyword">false</span>
+</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-active-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">active?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="active-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 242</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">active?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">connected?</span>
+    <span class="ruby-identifier">verified!</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-add_timestamps" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">add_timestamps</span><span
+              class="method-args">(table_name, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="add_timestamps-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 425</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_timestamps</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:null</span>] = <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:null</span>].<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:precision</span>)
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:precision</span>] = <span class="ruby-value">6</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">alter_table</span>(<span class="ruby-identifier">table_name</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">definition</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">column</span> <span class="ruby-value">:created_at</span>, <span class="ruby-value">:datetime</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">column</span> <span class="ruby-value">:updated_at</span>, <span class="ruby-value">:datetime</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-connected-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">connected?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="connected-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 238</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connected?</span>
+  <span class="ruby-operator">!</span>(<span class="ruby-ivar">@raw_connection</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@raw_connection</span>.<span class="ruby-identifier">closed?</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-create_virtual_table" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create_virtual_table</span><span
+              class="method-args">(table_name, module_name, values)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a virtual table</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_virtual_table</span> <span class="ruby-value">:emails</span>, <span class="ruby-value">:fts5</span>, [<span class="ruby-string">&#39;sender&#39;</span>, <span class="ruby-string">&#39;title&#39;</span>, <span class="ruby-string">&#39;body&#39;</span>]
+</pre>
+
+          <div class="method-source-code" id="create_virtual_table-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 341</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_virtual_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">module_name</span>, <span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">exec_query</span> <span class="ruby-node">&quot;CREATE VIRTUAL TABLE IF NOT EXISTS #{table_name} USING #{module_name} (#{values.join(&quot;, &quot;)})&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-database_exists-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">database_exists?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="database_exists-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database_exists?</span>
+  <span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;:memory:&quot;</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>].<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-disconnect-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">disconnect!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Disconnects from the database if already connected. Otherwise, this method does nothing.</p>
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="AbstractAdapter.html#method-i-disconnect-21"><code>ActiveRecord::ConnectionAdapters::AbstractAdapter#disconnect!</code></a>
+            </div>
+
+          <div class="method-source-code" id="disconnect-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disconnect!</span>
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-ivar">@raw_connection</span>&amp;.<span class="ruby-identifier">close</span> <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@raw_connection</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-drop_virtual_table" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">drop_virtual_table</span><span
+              class="method-args">(table_name, module_name, values, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Drops a virtual table</p>
+
+<p>Although this command ignores <code>module_name</code> and <code>values</code>, it can be helpful to provide these in a migration’s <code>change</code> method so it can be reverted. In that case, <code>module_name</code>, <code>values</code> and <code>options</code> will be used by <a href="SQLite3Adapter.html#method-i-create_virtual_table"><code>create_virtual_table</code></a>.</p>
+
+          <div class="method-source-code" id="drop_virtual_table-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 350</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">drop_virtual_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">module_name</span>, <span class="ruby-identifier">values</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">drop_table</span>(<span class="ruby-identifier">table_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-encoding" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">encoding</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the current database encoding format as a string, e.g. ‘UTF-8’</p>
+
+          <div class="method-source-code" id="encoding-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 265</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">encoding</span>
+  <span class="ruby-identifier">any_raw_connection</span>.<span class="ruby-identifier">encoding</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-foreign_keys" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">foreign_keys</span><span
+              class="method-args">(table_name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="foreign_keys-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 445</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">foreign_keys</span>(<span class="ruby-identifier">table_name</span>)
+  <span class="ruby-comment"># SQLite returns 1 row for each column of composite foreign keys.</span>
+  <span class="ruby-identifier">fk_info</span> = <span class="ruby-identifier">internal_exec_query</span>(<span class="ruby-node">&quot;PRAGMA foreign_key_list(#{quote(table_name)})&quot;</span>, <span class="ruby-string">&quot;SCHEMA&quot;</span>)
+  <span class="ruby-comment"># Deferred or immediate foreign keys can only be seen in the CREATE TABLE sql</span>
+  <span class="ruby-identifier">fk_defs</span> = <span class="ruby-identifier">table_structure_sql</span>(<span class="ruby-identifier">table_name</span>)
+              .<span class="ruby-identifier">select</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column_string</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">column_string</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;CONSTRAINT&quot;</span>) <span class="ruby-operator">&amp;&amp;</span>
+                <span class="ruby-identifier">column_string</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;FOREIGN KEY&quot;</span>)
+              <span class="ruby-keyword">end</span>
+              .<span class="ruby-identifier">to_h</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fk_string</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">_</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">table</span>, <span class="ruby-identifier">to</span> = <span class="ruby-identifier">fk_string</span>.<span class="ruby-identifier">match</span>(<span class="ruby-constant">FK_REGEX</span>).<span class="ruby-identifier">to_a</span>
+                <span class="ruby-identifier">_</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-identifier">fk_string</span>.<span class="ruby-identifier">match</span>(<span class="ruby-constant">DEFERRABLE_REGEX</span>).<span class="ruby-identifier">to_a</span>
+                <span class="ruby-identifier">deferred</span> = <span class="ruby-identifier">mode</span>&amp;.<span class="ruby-identifier">downcase</span>&amp;.<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
+                [[<span class="ruby-identifier">table</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>], <span class="ruby-identifier">deferred</span>]
+              <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">grouped_fk</span> = <span class="ruby-identifier">fk_info</span>.<span class="ruby-identifier">group_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;id&quot;</span>] }.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">sort_by!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;seq&quot;</span>] } }
+  <span class="ruby-identifier">grouped_fk</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">row</span> = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">first</span>
+    <span class="ruby-identifier">options</span> = {
+      <span class="ruby-value">on_delete:</span> <span class="ruby-identifier">extract_foreign_key_action</span>(<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;on_delete&quot;</span>]),
+      <span class="ruby-value">on_update:</span> <span class="ruby-identifier">extract_foreign_key_action</span>(<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;on_update&quot;</span>]),
+      <span class="ruby-value">deferrable:</span> <span class="ruby-identifier">fk_defs</span>[[<span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;table&quot;</span>], <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;from&quot;</span>], <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;to&quot;</span>]]]
+    }
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">one?</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:column</span>] = <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;from&quot;</span>]
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:primary_key</span>] = <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;to&quot;</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:column</span>] = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;from&quot;</span>] }
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:primary_key</span>] = <span class="ruby-identifier">group</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;to&quot;</span>] }
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">ForeignKeyDefinition</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">row</span>[<span class="ruby-string">&quot;table&quot;</span>], <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-rename_table" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">rename_table</span><span
+              class="method-args">(table_name, new_name, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Renames a table.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">rename_table</span>(<span class="ruby-string">&#39;octopuses&#39;</span>, <span class="ruby-string">&#39;octopi&#39;</span>)
+</pre>
+
+          <div class="method-source-code" id="rename_table-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 358</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rename_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">new_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">validate_table_length!</span>(<span class="ruby-identifier">new_name</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:_uses_legacy_table_name</span>]
+  <span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">clear_data_source_cache!</span>(<span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">clear_data_source_cache!</span>(<span class="ruby-identifier">new_name</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-identifier">exec_query</span> <span class="ruby-node">&quot;ALTER TABLE #{quote_table_name(table_name)} RENAME TO #{quote_table_name(new_name)}&quot;</span>
+  <span class="ruby-identifier">rename_table_indexes</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">new_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-requires_reloading-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">requires_reloading?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="requires_reloading-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">requires_reloading?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_check_constraints-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_check_constraints?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_check_constraints-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_check_constraints?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_common_table_expressions-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_common_table_expressions?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_common_table_expressions-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_common_table_expressions?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_concurrent_connections-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_concurrent_connections?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_concurrent_connections-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 230</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_concurrent_connections?</span>
+  <span class="ruby-operator">!</span><span class="ruby-ivar">@memory_database</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_datetime_with_precision-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_datetime_with_precision?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_datetime_with_precision-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 207</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_datetime_with_precision?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_ddl_transactions-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_ddl_transactions?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_ddl_transactions-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_ddl_transactions?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_deferrable_constraints-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_deferrable_constraints?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_deferrable_constraints-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_deferrable_constraints?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_explain-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_explain?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_explain-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 269</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_explain?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_expression_index-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_expression_index?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_expression_index-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_expression_index?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_foreign_keys-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_foreign_keys?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_foreign_keys-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 195</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_foreign_keys?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_index_sort_order-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_index_sort_order?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_index_sort_order-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 260</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_index_sort_order?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_insert_conflict_target-3F" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_conflict_target?</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="SQLite3Adapter.html#method-i-supports_insert_on_conflict-3F">supports_insert_on_conflict?</a>
+        </div>
+      </div>
+
+      <div id="method-i-supports_insert_on_conflict-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_on_conflict?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_insert_on_conflict-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 223</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_insert_on_conflict?</span>
+  <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;3.24.0&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="SQLite3Adapter.html#method-i-supports_insert_on_duplicate_skip-3F">supports_insert_on_duplicate_skip?</a>, <a href="SQLite3Adapter.html#method-i-supports_insert_on_duplicate_update-3F">supports_insert_on_duplicate_update?</a>, <a href="SQLite3Adapter.html#method-i-supports_insert_conflict_target-3F">supports_insert_conflict_target?</a>, supports_insert_on_duplicate_skip?, supports_insert_on_duplicate_update?, supports_insert_conflict_target?, supports_insert_on_duplicate_skip?, supports_insert_on_duplicate_update?, supports_insert_conflict_target?
+        </div>
+
+      </div>
+
+      <div id="method-i-supports_insert_on_duplicate_skip-3F" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_on_duplicate_skip?</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="SQLite3Adapter.html#method-i-supports_insert_on_conflict-3F">supports_insert_on_conflict?</a>
+        </div>
+      </div>
+
+      <div id="method-i-supports_insert_on_duplicate_update-3F" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_on_duplicate_update?</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="SQLite3Adapter.html#method-i-supports_insert_on_conflict-3F">supports_insert_on_conflict?</a>
+        </div>
+      </div>
+
+      <div id="method-i-supports_insert_returning-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_insert_returning?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_insert_returning-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_insert_returning?</span>
+  <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;3.35.0&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_json-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_json?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_json-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_json?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_lazy_transactions-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_lazy_transactions?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_lazy_transactions-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 273</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_lazy_transactions?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_partial_index-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_partial_index?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_partial_index-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 183</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_partial_index?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_savepoints-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_savepoints?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_savepoints-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_savepoints?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_transaction_isolation-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_transaction_isolation?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_transaction_isolation-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_transaction_isolation?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_views-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_views?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_views-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_views?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-supports_virtual_columns-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">supports_virtual_columns?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="supports_virtual_columns-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 234</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">supports_virtual_columns?</span>
+  <span class="ruby-identifier">database_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;3.31.0&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-use_insert_returning-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">use_insert_returning?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="use_insert_returning-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-7.2.3/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 436</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">use_insert_returning?</span>
+  <span class="ruby-ivar">@use_insert_returning</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-virtual_tables" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">virtual_tables</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a list of defined virtual tables</p>
+
+          <div class="method-source-code" id="virtual_tables-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/sqlite3_adapter.rb, line 325</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">virtual_tables</span>
+        <span class="ruby-identifier">query</span> = <span class="ruby-identifier">&lt;&lt;~SQL</span>
+<span class="ruby-value">          SELECT name, sql FROM sqlite_master WHERE sql LIKE &#39;CREATE VIRTUAL %&#39;;
+</span><span class="ruby-identifier">        SQL</span>
+
+        <span class="ruby-identifier">exec_query</span>(<span class="ruby-identifier">query</span>, <span class="ruby-string">&quot;SCHEMA&quot;</span>).<span class="ruby-identifier">cast_values</span>.<span class="ruby-identifier">each_with_object</span>({}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span>, <span class="ruby-identifier">memo</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">row</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">row</span>[<span class="ruby-value">1</span>]
+          <span class="ruby-identifier">_</span>, <span class="ruby-identifier">module_name</span>, <span class="ruby-identifier">arguments</span> = <span class="ruby-identifier">sql</span>.<span class="ruby-identifier">match</span>(<span class="ruby-constant">VIRTUAL_TABLE_REGEX</span>).<span class="ruby-identifier">to_a</span>
+          <span class="ruby-identifier">memo</span>[<span class="ruby-identifier">table_name</span>] = [<span class="ruby-identifier">module_name</span>, <span class="ruby-identifier">arguments</span>]
+        <span class="ruby-keyword">end</span>.<span class="ruby-identifier">to_a</span>
+      <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

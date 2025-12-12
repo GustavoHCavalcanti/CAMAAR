@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Dotenv - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-load">#load</a>
+    <li ><a href="#method-i-load-21">#load!</a>
+    <li ><a href="#method-i-modify">#modify</a>
+    <li ><a href="#method-i-overload">#overload</a>
+    <li ><a href="#method-i-overload-21">#overload!</a>
+    <li ><a href="#method-i-overwrite">#overwrite</a>
+    <li ><a href="#method-i-overwrite-21">#overwrite!</a>
+    <li ><a href="#method-i-parse">#parse</a>
+    <li ><a href="#method-i-require_keys">#require_keys</a>
+    <li ><a href="#method-i-restore">#restore</a>
+    <li ><a href="#method-i-save">#save</a>
+    <li ><a href="#method-i-update">#update</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Dotenv">
+  <h1 id="module-Dotenv" class="module">
+    module Dotenv
+  </h1>
+
+  <section class="description">
+    
+<p>Shim to load environment variables from ‘.env files into `ENV`.</p>
+
+<p>Shim to load environment variables from ‘.env files into `ENV`.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="EXPORT_COMMAND">EXPORT_COMMAND
+        <dd>
+        <dt id="Railtie">Railtie
+        <dd>
+        <dt id="VERSION">VERSION
+        <dd>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-instrumenter" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">instrumenter</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-load" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load</span><span
+              class="method-args">(*filenames, overwrite: false, ignore: true)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Loads environment variables from one or more ‘.env` files. See `#parse` for more details.</p>
+
+          <div class="method-source-code" id="load-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>, <span class="ruby-value">overwrite:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">ignore:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">parse</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>, <span class="ruby-value">overwrite:</span> <span class="ruby-identifier">overwrite</span>, <span class="ruby-value">ignore:</span> <span class="ruby-identifier">ignore</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">env</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:load</span>, <span class="ruby-value">env:</span> <span class="ruby-identifier">env</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">update</span>(<span class="ruby-identifier">env</span>, <span class="ruby-value">overwrite:</span> <span class="ruby-identifier">overwrite</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-load-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load!</span><span
+              class="method-args">(*filenames)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Same as ‘#load`, but raises Errno::ENOENT if any files don’t exist</p>
+
+          <div class="method-source-code" id="load-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>)
+  <span class="ruby-identifier">load</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>, <span class="ruby-value">ignore:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-modify" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">modify</span><span
+              class="method-args">(env = {}, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Modify ‘ENV` for the block and restore it to its previous state afterwards.</p>
+
+<p>Note that the block is synchronized to prevent concurrent modifications to ‘ENV`, so multiple threads will be executed serially.</p>
+
+<p>@param env [Hash] <a href="Hash.html"><code>Hash</code></a> of keys and values to set in ‘ENV`</p>
+
+          <div class="method-source-code" id="modify-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modify</span>(<span class="ruby-identifier">env</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">SEMAPHORE</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">diff</span> = <span class="ruby-constant">Dotenv</span><span class="ruby-operator">::</span><span class="ruby-constant">Diff</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">update</span>(<span class="ruby-identifier">env</span>, <span class="ruby-value">overwrite:</span> <span class="ruby-keyword">true</span>)
+    <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-identifier">restore</span>(<span class="ruby-identifier">diff</span>.<span class="ruby-identifier">a</span>, <span class="ruby-value">safe:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-overload" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">overload</span><span
+              class="method-args">(*filenames)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Dotenv.html#method-i-overwrite">overwrite</a>
+        </div>
+      </div>
+
+      <div id="method-i-overload-21" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">overload!</span><span
+              class="method-args">(*filenames)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Dotenv.html#method-i-overwrite-21">overwrite!</a>
+        </div>
+      </div>
+
+      <div id="method-i-overwrite" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">overwrite</span><span
+              class="method-args">(*filenames)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>same as ‘#load`, but will overwrite existing values in `ENV`</p>
+
+          <div class="method-source-code" id="overwrite-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">overwrite</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>)
+  <span class="ruby-identifier">load</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>, <span class="ruby-value">overwrite:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Dotenv.html#method-i-overload">overload</a>, overload
+        </div>
+
+      </div>
+
+      <div id="method-i-overwrite-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">overwrite!</span><span
+              class="method-args">(*filenames)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>same as ‘#overwrite`, but raises Errno::ENOENT if any files don’t exist</p>
+
+          <div class="method-source-code" id="overwrite-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">overwrite!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>)
+  <span class="ruby-identifier">load</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>, <span class="ruby-value">overwrite:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">ignore:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Dotenv.html#method-i-overload-21">overload!</a>, overload!
+        </div>
+
+      </div>
+
+      <div id="method-i-parse" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse</span><span
+              class="method-args">(*filenames, overwrite: false, ignore: true, &amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parses the given files, yielding for each file if a block is given.</p>
+
+<p>@param filenames [String, <a href="Array.html"><code>Array</code></a>&lt;String&gt;] Files to parse @param overwrite [Boolean] Overwrite existing ‘ENV` values @param ignore [Boolean] Ignore non-existent files @param block [Proc] Block to yield for each parsed `Dotenv::Environment` @return [Hash] parsed key/value pairs</p>
+
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filenames</span>, <span class="ruby-value">overwrite:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">ignore:</span> <span class="ruby-keyword">true</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">filenames</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;.env&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">filenames</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">filenames</span> = <span class="ruby-identifier">filenames</span>.<span class="ruby-identifier">reverse</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">overwrite</span>
+
+  <span class="ruby-identifier">filenames</span>.<span class="ruby-identifier">reduce</span>({}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span>, <span class="ruby-identifier">filename</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">env</span> = <span class="ruby-constant">Environment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">filename</span>), <span class="ruby-value">overwrite:</span> <span class="ruby-identifier">overwrite</span>)
+      <span class="ruby-identifier">env</span> = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EISDIR</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ignore</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">merge!</span> <span class="ruby-identifier">env</span> <span class="ruby-operator">||</span> {}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-require_keys" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">require_keys</span><span
+              class="method-args">(*keys)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="require_keys-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_keys</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+  <span class="ruby-identifier">missing_keys</span> = <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">flatten</span> <span class="ruby-operator">-</span> <span class="ruby-operator">::</span><span class="ruby-constant">ENV</span>.<span class="ruby-identifier">keys</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">missing_keys</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingKeys</span>, <span class="ruby-identifier">missing_keys</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-restore" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">restore</span><span
+              class="method-args">(env = @diff&amp;.a, safe: Thread.current == Thread.main)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Restore ‘ENV` to a given state</p>
+
+<p>@param env [Hash] <a href="Hash.html"><code>Hash</code></a> of keys and values to restore, defaults to the last saved state @param safe [Boolean] Is it safe to modify ‘ENV`? Defaults to `true` in the main thread, otherwise raises an error.</p>
+
+          <div class="method-source-code" id="restore-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 77</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">restore</span>(<span class="ruby-identifier">env</span> = <span class="ruby-ivar">@diff</span>&amp;.<span class="ruby-identifier">a</span>, <span class="ruby-value">safe:</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">main</span>)
+    <span class="ruby-comment"># No previously saved or provided state to restore</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">env</span>
+
+    <span class="ruby-identifier">diff</span> = <span class="ruby-constant">Dotenv</span><span class="ruby-operator">::</span><span class="ruby-constant">Diff</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">b:</span> <span class="ruby-identifier">env</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">diff</span>.<span class="ruby-identifier">any?</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">safe</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ThreadError</span>, <span class="ruby-identifier">&lt;&lt;~EOE</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-string">&quot; &quot;</span>)
+<span class="ruby-value">        Dotenv.restore is not thread safe. Use `Dotenv.modify { }` to update ENV for the duration
+        of the block in a thread safe manner, or call `Dotenv.restore(safe: true)` to ignore
+        this error.
+</span><span class="ruby-identifier">      EOE</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:restore</span>, <span class="ruby-value">diff:</span> <span class="ruby-identifier">diff</span>) { <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-identifier">env</span>) }
+  <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-save" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">save</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Save the current ‘ENV` to be restored later</p>
+
+          <div class="method-source-code" id="save-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
+  <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:save</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@diff</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:diff</span>] = <span class="ruby-constant">Dotenv</span><span class="ruby-operator">::</span><span class="ruby-constant">Diff</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-update" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">update</span><span
+              class="method-args">(env = {}, overwrite: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Update ‘ENV` with the given hash of keys and values</p>
+
+<p>@param env [Hash] <a href="Hash.html"><code>Hash</code></a> of keys and values to set in ‘ENV` @param overwrite [Boolean|:warn] Overwrite existing `ENV` values</p>
+
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dotenv-3.2.0/lib/dotenv.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>(<span class="ruby-identifier">env</span> = {}, <span class="ruby-value">overwrite:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:update</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">diff</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:diff</span>] = <span class="ruby-constant">Dotenv</span><span class="ruby-operator">::</span><span class="ruby-constant">Diff</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">env</span>.<span class="ruby-identifier">transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>)) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">old_value</span>, <span class="ruby-identifier">new_value</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment"># This block is called when a key exists. Return the new value if overwrite is true.</span>
+        <span class="ruby-keyword">case</span> <span class="ruby-identifier">overwrite</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-value">:warn</span>
+          <span class="ruby-comment"># not printing the value since that could be a secret</span>
+          <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Warning: dotenv not overwriting ENV[#{key.inspect}]&quot;</span>
+          <span class="ruby-identifier">old_value</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">new_value</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">old_value</span>
+        <span class="ruby-keyword">else</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid value for overwrite: #{overwrite.inspect}&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">diff</span>.<span class="ruby-identifier">env</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

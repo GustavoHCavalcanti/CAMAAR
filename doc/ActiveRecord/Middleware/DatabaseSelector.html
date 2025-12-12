@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveRecord::Middleware::DatabaseSelector - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">Database Selector Middleware</a>
+          <li>      <a href="#class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">Database Selector Middleware</a>
+          <li>      <a href="#class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">Database Selector Middleware</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-call">#call</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveRecord::Middleware::DatabaseSelector">
+  <h1 id="class-ActiveRecord::Middleware::DatabaseSelector" class="class">
+    class ActiveRecord::Middleware::DatabaseSelector
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">Database Selector Middleware<span><a href="#class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The <a href="DatabaseSelector.html"><code>DatabaseSelector</code></a> <a href="../Middleware.html"><code>Middleware</code></a> provides a framework for automatically swapping from the primary to the replica database connection. Rails provides a basic framework to determine when to swap and allows for applications to write custom strategy classes to override the default behavior.</p>
+
+<p>The resolver class defines when the application should switch (i.e. read from the primary if a write occurred less than 2 seconds ago) and a resolver context class that sets a value that helps the resolver class decide when to switch.</p>
+
+<p>Rails default middleware uses the request’s session to set a timestamp that informs the application when to read from a primary or read from a replica.</p>
+
+<p>To use the <a href="DatabaseSelector.html"><code>DatabaseSelector</code></a> in your application with default settings, run the provided generator.</p>
+
+<pre>$ bin/rails g active_record:multi_db</pre>
+
+<p>This will create a file named <code>config/initializers/multi_db.rb</code> with the following contents:</p>
+
+<pre class="ruby"><span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_selector</span> = { <span class="ruby-value">delay:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">seconds</span> }
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseSelector</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver_context</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseSelector</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Alternatively you can set the options in your environment config or any other config file loaded on boot.</p>
+
+<p>The default behavior can be changed by setting the config options to a custom class:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_selector</span> = { <span class="ruby-value">delay:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">seconds</span> }
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver</span> = <span class="ruby-constant">MyResolver</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver_context</span> = <span class="ruby-constant">MyResolver</span><span class="ruby-operator">::</span><span class="ruby-constant">MySession</span>
+</pre>
+
+<p>Note: If you are using <code>rails new my_app --minimal</code> you will need to call <code>require &quot;active_support/core_ext/integer/time&quot;</code> to load the core extension in order to use <code>2.seconds</code></p>
+
+<h1 id="class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">Database Selector Middleware<span><a href="#class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The <a href="DatabaseSelector.html"><code>DatabaseSelector</code></a> <a href="../Middleware.html"><code>Middleware</code></a> provides a framework for automatically swapping from the primary to the replica database connection. Rails provides a basic framework to determine when to swap and allows for applications to write custom strategy classes to override the default behavior.</p>
+
+<p>The resolver class defines when the application should switch (i.e. read from the primary if a write occurred less than 2 seconds ago) and a resolver context class that sets a value that helps the resolver class decide when to switch.</p>
+
+<p>Rails default middleware uses the request’s session to set a timestamp that informs the application when to read from a primary or read from a replica.</p>
+
+<p>To use the <a href="DatabaseSelector.html"><code>DatabaseSelector</code></a> in your application with default settings, run the provided generator.</p>
+
+<pre>$ bin/rails g active_record:multi_db</pre>
+
+<p>This will create a file named <code>config/initializers/multi_db.rb</code> with the following contents:</p>
+
+<pre class="ruby"><span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_selector</span> = { <span class="ruby-value">delay:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">seconds</span> }
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseSelector</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver_context</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseSelector</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Alternatively you can set the options in your environment config or any other config file loaded on boot.</p>
+
+<p>The default behavior can be changed by setting the config options to a custom class:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_selector</span> = { <span class="ruby-value">delay:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">seconds</span> }
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver</span> = <span class="ruby-constant">MyResolver</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver_context</span> = <span class="ruby-constant">MyResolver</span><span class="ruby-operator">::</span><span class="ruby-constant">MySession</span>
+</pre>
+
+<p>Note: If you are using <code>rails new my_app --minimal</code> you will need to call <code>require &quot;active_support/core_ext/integer/time&quot;</code> to load the core extension in order to use <code>2.seconds</code></p>
+
+<h1 id="class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">Database Selector Middleware<span><a href="#class-ActiveRecord::Middleware::DatabaseSelector-label-Database+Selector+Middleware">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>The <a href="DatabaseSelector.html"><code>DatabaseSelector</code></a> <a href="../Middleware.html"><code>Middleware</code></a> provides a framework for automatically swapping from the primary to the replica database connection. Rails provides a basic framework to determine when to swap and allows for applications to write custom strategy classes to override the default behavior.</p>
+
+<p>The resolver class defines when the application should switch (i.e. read from the primary if a write occurred less than 2 seconds ago) and a resolver context class that sets a value that helps the resolver class decide when to switch.</p>
+
+<p>Rails default middleware uses the request’s session to set a timestamp that informs the application when to read from a primary or read from a replica.</p>
+
+<p>To use the <a href="DatabaseSelector.html"><code>DatabaseSelector</code></a> in your application with default settings, run the provided generator.</p>
+
+<pre>$ bin/rails g active_record:multi_db</pre>
+
+<p>This will create a file named <code>config/initializers/multi_db.rb</code> with the following contents:</p>
+
+<pre class="ruby"><span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_selector</span> = { <span class="ruby-value">delay:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">seconds</span> }
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseSelector</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver_context</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseSelector</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Alternatively you can set the options in your environment config or any other config file loaded on boot.</p>
+
+<p>The default behavior can be changed by setting the config options to a custom class:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_selector</span> = { <span class="ruby-value">delay:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">seconds</span> }
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver</span> = <span class="ruby-constant">MyResolver</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_record</span>.<span class="ruby-identifier">database_resolver_context</span> = <span class="ruby-constant">MyResolver</span><span class="ruby-operator">::</span><span class="ruby-constant">MySession</span>
+</pre>
+
+<p>Note: If you are using <code>rails new my_app --minimal</code> you will need to call <code>require &quot;active_support/core_ext/integer/time&quot;</code> to load the core extension in order to use <code>2.seconds</code></p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-context_klass" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">context_klass</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-options" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">options</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-resolver_klass" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">resolver_klass</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(app, resolver_klass = nil, context_klass = nil, options = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/middleware/database_selector.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">resolver_klass</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">context_klass</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
+  <span class="ruby-ivar">@resolver_klass</span> = <span class="ruby-identifier">resolver_klass</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Resolver</span>
+  <span class="ruby-ivar">@context_klass</span> = <span class="ruby-identifier">context_klass</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Resolver</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-call" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">call</span><span
+              class="method-args">(env)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p><a href="../Middleware.html"><code>Middleware</code></a> that determines which database connection to use in a multiple database application.</p>
+
+          <div class="method-source-code" id="call-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/middleware/database_selector.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env</span>)
+
+  <span class="ruby-identifier">select_database</span>(<span class="ruby-identifier">request</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

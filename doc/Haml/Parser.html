@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Haml::Parser - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="Util.html">Haml::Util</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-call">#call</a>
+    <li ><a href="#method-i-compute_tabs">#compute_tabs</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Haml::Parser">
+  <h1 id="class-Haml::Parser" class="class">
+    class Haml::Parser
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="BLOCK_KEYWORD_REGEX">BLOCK_KEYWORD_REGEX
+        <dd>
+        <dt id="BLOCK_WITH_SPACES">BLOCK_WITH_SPACES
+        <dd><p>Regex to check for blocks with spaces around arguments. Not to be confused with multiline script. For example:</p>
+
+<pre>foo.each do | bar |
+  = bar</pre>
+        <dt id="CLASS_KEY">CLASS_KEY
+        <dd>
+        <dt id="COMMENT">COMMENT
+        <dd><p>Designates an XHTML/XML comment.</p>
+        <dt id="DIV_CLASS">DIV_CLASS
+        <dd><p>Designates a ‘&lt;div&gt;` element with the given class.</p>
+        <dt id="DIV_ID">DIV_ID
+        <dd><p>Designates a ‘&lt;div&gt;` element with the given id.</p>
+        <dt id="DOCTYPE">DOCTYPE
+        <dd><p>Designates an XHTML doctype or script that is never HTML-escaped.</p>
+        <dt id="DOCTYPE_REGEX">DOCTYPE_REGEX
+        <dd><p>The Regex that matches a Doctype command.</p>
+        <dt id="DynamicAttributes">DynamicAttributes
+        <dd><p>@param [String] new - <a href="../Hash.html"><code>Hash</code></a> literal including dynamic values. @param [String] old - <a href="../Hash.html"><code>Hash</code></a> literal including dynamic values or Ruby literal of multiple Hashes which MUST be interpreted as method’s last arguments.</p>
+        <dt id="ELEMENT">ELEMENT
+        <dd><p>Designates an XHTML/XML element.</p>
+        <dt id="ESCAPE">ESCAPE
+        <dd><p>Designates a non-parsed line.</p>
+        <dt id="FILTER">FILTER
+        <dd><p>Designates a block of filtered text.</p>
+        <dt id="FLAT_SCRIPT">FLAT_SCRIPT
+        <dd><p>Designates script, the result of which is flattened and output.</p>
+        <dt id="ID_KEY">ID_KEY
+        <dd>
+        <dt id="LITERAL_VALUE_REGEX">LITERAL_VALUE_REGEX
+        <dd><p>The Regex that matches a literal string or symbol value</p>
+        <dt id="Line">Line
+        <dd><p>@private</p>
+        <dt id="METHOD_CALL_PREFIX">METHOD_CALL_PREFIX
+        <dd><p>Used for scanning old attributes, substituting the first ‘{’</p>
+        <dt id="MID_BLOCK_KEYWORDS">MID_BLOCK_KEYWORDS
+        <dd>
+        <dt id="MULTILINE_CHAR_VALUE">MULTILINE_CHAR_VALUE
+        <dd><p>The value of the character that designates that a line is part of a multiline string.</p>
+        <dt id="PLAIN_TEXT">PLAIN_TEXT
+        <dd><p>Designates a non-parsed line. Not actually a character.</p>
+        <dt id="ParseNode">ParseNode
+        <dd><p>@private</p>
+        <dt id="SANITIZE">SANITIZE
+        <dd><p>Designates script that is always HTML-escaped.</p>
+        <dt id="SCRIPT">SCRIPT
+        <dd><p>Designates script, the result of which is output.</p>
+        <dt id="SILENT_COMMENT">SILENT_COMMENT
+        <dd><p>When following <a href="Parser.html#SILENT_SCRIPT"><code>SILENT_SCRIPT</code></a>, designates a comment that is not output.</p>
+        <dt id="SILENT_SCRIPT">SILENT_SCRIPT
+        <dd><p>Designates script which is run but not output.</p>
+        <dt id="SPECIAL_CHARACTERS">SPECIAL_CHARACTERS
+        <dd><p>Keeps track of the ASCII values of the characters that begin a specially-interpreted line.</p>
+        <dt id="START_BLOCK_KEYWORDS">START_BLOCK_KEYWORDS
+        <dd>
+        <dt id="START_BLOCK_KEYWORD_REGEX">START_BLOCK_KEYWORD_REGEX
+        <dd><p>Try to parse assignments to block starters as best as possible</p>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-root" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">root</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/parser.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-ivar">@options</span> = <span class="ruby-constant">ParserOptions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-comment"># Record the indent levels of &quot;if&quot; statements to validate the subsequent</span>
+  <span class="ruby-comment"># elsif and else statements are indented at the appropriate level.</span>
+  <span class="ruby-ivar">@script_level_stack</span> = []
+  <span class="ruby-ivar">@template_index</span>     = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@template_tabs</span>      = <span class="ruby-value">0</span>
+  <span class="ruby-comment"># When used in Haml::Engine, which gives options[:generator] to every filter</span>
+  <span class="ruby-comment"># in the engine, including Haml::Parser, we don&#39;t want to throw exceptions.</span>
+  <span class="ruby-comment"># However, when Haml::Parser is used as a library, we want to throw exceptions.</span>
+  <span class="ruby-ivar">@raise_error</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:generator</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-call" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">call</span><span
+              class="method-args">(template)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="call-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/parser.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">template</span>)
+  <span class="ruby-identifier">template</span> = <span class="ruby-constant">Haml</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">check_haml_encoding</span>(<span class="ruby-identifier">template</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span>, <span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">Haml</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">msg</span>, <span class="ruby-identifier">line</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">match</span> = <span class="ruby-identifier">template</span>.<span class="ruby-identifier">rstrip</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(([ \t]+)?(.*?))(?:\Z|\r\n|\r|\n)/m</span>)
+  <span class="ruby-comment"># discard the last match which is always blank</span>
+  <span class="ruby-identifier">match</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-ivar">@template</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">each_with_index</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">full</span>, <span class="ruby-identifier">whitespace</span>, <span class="ruby-identifier">text</span>), <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">whitespace</span>, <span class="ruby-identifier">text</span>.<span class="ruby-identifier">rstrip</span>, <span class="ruby-identifier">full</span>, <span class="ruby-identifier">index</span>, <span class="ruby-keyword">self</span>, <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># Append special end-of-document marker</span>
+  <span class="ruby-ivar">@template</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Line</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;-#&#39;</span>, <span class="ruby-string">&#39;-#&#39;</span>, <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">size</span>, <span class="ruby-keyword">self</span>, <span class="ruby-keyword">true</span>)
+
+  <span class="ruby-ivar">@root</span> = <span class="ruby-ivar">@parent</span> = <span class="ruby-constant">ParseNode</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:root</span>)
+  <span class="ruby-ivar">@flat</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@filter_buffer</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@indentation</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@line</span> = <span class="ruby-identifier">next_line</span>
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Error</span>.<span class="ruby-identifier">message</span>(<span class="ruby-value">:indenting_at_start</span>), <span class="ruby-ivar">@line</span>.<span class="ruby-identifier">index</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@line</span>.<span class="ruby-identifier">tabs</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">next_line</span>
+
+    <span class="ruby-identifier">process_indent</span>(<span class="ruby-ivar">@line</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@line</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">empty?</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">flat?</span>
+      <span class="ruby-identifier">text</span> = <span class="ruby-ivar">@line</span>.<span class="ruby-identifier">full</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^#{@flat_spaces}/</span>, <span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-ivar">@filter_buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{text}\n&quot;</span>
+      <span class="ruby-ivar">@line</span> = <span class="ruby-ivar">@next_line</span>
+      <span class="ruby-keyword">next</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@tab_up</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">process_line</span>(<span class="ruby-ivar">@line</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@line</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_opened?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@tab_up</span>
+      <span class="ruby-ivar">@template_tabs</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+      <span class="ruby-ivar">@parent</span> = <span class="ruby-ivar">@parent</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">last</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">flat?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@next_line</span>.<span class="ruby-identifier">tabs</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@line</span>.<span class="ruby-identifier">tabs</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Error</span>.<span class="ruby-identifier">message</span>(<span class="ruby-value">:deeper_indenting</span>, <span class="ruby-ivar">@next_line</span>.<span class="ruby-identifier">tabs</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@line</span>.<span class="ruby-identifier">tabs</span>), <span class="ruby-ivar">@next_line</span>.<span class="ruby-identifier">index</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@line</span> = <span class="ruby-ivar">@next_line</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># Close all the open tags</span>
+  <span class="ruby-identifier">close</span> <span class="ruby-keyword">until</span> <span class="ruby-ivar">@parent</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:root</span>
+  <span class="ruby-ivar">@root</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Haml</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-node">&quot;#{@options.filename}:#{(e.line ? e.line + 1 : @line.index + 1) + @options.line - 1}&quot;</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@raise_error</span>
+  <span class="ruby-identifier">error_with_lineno</span>(<span class="ruby-identifier">e</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-compute_tabs" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">compute_tabs</span><span
+              class="method-args">(line)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="compute_tabs-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/brakeman-7.1.1/bundle/ruby/3.1.0/gems/haml-6.4.0/lib/haml/parser.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compute_tabs</span>(<span class="ruby-identifier">line</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">line</span>.<span class="ruby-identifier">whitespace</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@indentation</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@indentation</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">whitespace</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@indentation</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">?\s</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@indentation</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">?\t</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Error</span>.<span class="ruby-identifier">message</span>(<span class="ruby-value">:cant_use_tabs_and_spaces</span>), <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@flat_spaces</span> = <span class="ruby-ivar">@indentation</span> <span class="ruby-operator">*</span> (<span class="ruby-ivar">@template_tabs</span><span class="ruby-value">+1</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">flat?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">tabs</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">whitespace</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@indentation</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">tabs</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">whitespace</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@indentation</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">tabs</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@template_tabs</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">flat?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">whitespace</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^#{@flat_spaces}/</span>
+
+  <span class="ruby-identifier">message</span> = <span class="ruby-constant">Error</span>.<span class="ruby-identifier">message</span>(<span class="ruby-value">:inconsistent_indentation</span>,
+    <span class="ruby-identifier">human_indentation</span>(<span class="ruby-identifier">line</span>.<span class="ruby-identifier">whitespace</span>),
+    <span class="ruby-identifier">human_indentation</span>(<span class="ruby-ivar">@indentation</span>)
+  )
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">SyntaxError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

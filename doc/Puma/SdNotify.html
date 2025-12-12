@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Puma::SdNotify - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-errno">::errno</a>
+    <li ><a href="#method-c-fdstore">::fdstore</a>
+    <li ><a href="#method-c-mainpid">::mainpid</a>
+    <li ><a href="#method-c-notify">::notify</a>
+    <li ><a href="#method-c-ready">::ready</a>
+    <li ><a href="#method-c-reloading">::reloading</a>
+    <li ><a href="#method-c-status">::status</a>
+    <li ><a href="#method-c-stopping">::stopping</a>
+    <li ><a href="#method-c-watchdog">::watchdog</a>
+    <li ><a href="#method-c-watchdog-3F">::watchdog?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Puma::SdNotify">
+  <h1 id="module-Puma::SdNotify" class="module">
+    module Puma::SdNotify
+  </h1>
+
+  <section class="description">
+    
+<p>The MIT <a href="../vendor/bundle/ruby/3_2_0/gems/capybara-3_40_0/License_txt.html">License</a></p>
+
+<p>Copyright © 2017-2022 Agis Anastasopoulos</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE <a href="../vendor/bundle/ruby/3_2_0/gems/brakeman-7_1_1/bundle/ruby/3_1_0/gems/highline-3_1_2/AUTHORS.html">AUTHORS</a> OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
+<p>This is a copy of <a href="https://github.com/agis/ruby-sdnotify">github.com/agis/ruby-sdnotify</a> as of commit cca575c The only changes made was “rehoming” it within the <a href="../Puma.html"><code>Puma</code></a> module to avoid namespace collisions and applying standard’s code formatting style.</p>
+
+<p><a href="SdNotify.html"><code>SdNotify</code></a> is a pure-Ruby implementation of sd_notify(3). It can be used to notify systemd about state changes. Methods of this package are no-op on non-systemd systems (eg. Darwin).</p>
+
+<p>The API maps closely to the original implementation of sd_notify(3), therefore be sure to check the official man pages prior to using <a href="SdNotify.html"><code>SdNotify</code></a>.</p>
+
+<p>@see <a href="https://www.freedesktop.org/software/systemd/man/sd_notify.html">www.freedesktop.org/software/systemd/man/sd_notify.html</a></p>
+
+<p>The MIT <a href="../vendor/bundle/ruby/3_2_0/gems/capybara-3_40_0/License_txt.html">License</a></p>
+
+<p>Copyright © 2017-2022 Agis Anastasopoulos</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE <a href="../vendor/bundle/ruby/3_2_0/gems/brakeman-7_1_1/bundle/ruby/3_1_0/gems/highline-3_1_2/AUTHORS.html">AUTHORS</a> OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
+<p>This is a copy of <a href="https://github.com/agis/ruby-sdnotify">github.com/agis/ruby-sdnotify</a> as of commit cca575c The only changes made was “rehoming” it within the <a href="../Puma.html"><code>Puma</code></a> module to avoid namespace collisions and applying standard’s code formatting style.</p>
+
+<p><a href="SdNotify.html"><code>SdNotify</code></a> is a pure-Ruby implementation of sd_notify(3). It can be used to notify systemd about state changes. Methods of this package are no-op on non-systemd systems (eg. Darwin).</p>
+
+<p>The API maps closely to the original implementation of sd_notify(3), therefore be sure to check the official man pages prior to using <a href="SdNotify.html"><code>SdNotify</code></a>.</p>
+
+<p>@see <a href="https://www.freedesktop.org/software/systemd/man/sd_notify.html">www.freedesktop.org/software/systemd/man/sd_notify.html</a></p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="ERRNO">ERRNO
+        <dd>
+        <dt id="FDSTORE">FDSTORE
+        <dd>
+        <dt id="MAINPID">MAINPID
+        <dd>
+        <dt id="READY">READY
+        <dd>
+        <dt id="RELOADING">RELOADING
+        <dd>
+        <dt id="STATUS">STATUS
+        <dd>
+        <dt id="STOPPING">STOPPING
+        <dd>
+        <dt id="WATCHDOG">WATCHDOG
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-errno" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">errno</span><span
+              class="method-args">(errno, unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param errno [Integer]</p>
+
+          <div class="method-source-code" id="errno-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">errno</span>(<span class="ruby-identifier">errno</span>, <span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-node">&quot;#{ERRNO}#{errno}&quot;</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-fdstore" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fdstore</span><span
+              class="method-args">(unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="fdstore-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fdstore</span>(<span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-constant">FDSTORE</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-mainpid" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">mainpid</span><span
+              class="method-args">(pid, unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param pid [Integer]</p>
+
+          <div class="method-source-code" id="mainpid-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">mainpid</span>(<span class="ruby-identifier">pid</span>, <span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-node">&quot;#{MAINPID}#{pid}&quot;</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-notify" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">notify</span><span
+              class="method-args">(state, unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Notify systemd with the provided state, via the notification socket, if any.</p>
+
+<p>Generally this method will be used indirectly through the other methods of the library.</p>
+
+<p>@param state [String] @param unset_env [Boolean]</p>
+
+<p>@return [Fixnum, nil] the number of bytes written to the notification</p>
+
+<pre>socket or nil if there was no socket to report to (eg. the program wasn&#39;t
+started by systemd)</pre>
+
+<p>@raise [NotifyError] if there was an error communicating with the systemd</p>
+
+<pre class="ruby"><span class="ruby-identifier">socket</span>
+</pre>
+
+<p>@see <a href="https://www.freedesktop.org/software/systemd/man/sd_notify.html">www.freedesktop.org/software/systemd/man/sd_notify.html</a></p>
+
+          <div class="method-source-code" id="notify-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">notify</span>(<span class="ruby-identifier">state</span>, <span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">sock</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;NOTIFY_SOCKET&quot;</span>]
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sock</span>
+
+  <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;NOTIFY_SOCKET&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">unset_env</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-constant">Addrinfo</span>.<span class="ruby-identifier">unix</span>(<span class="ruby-identifier">sock</span>, <span class="ruby-value">:DGRAM</span>).<span class="ruby-identifier">connect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">state</span> }
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotifyError</span>, <span class="ruby-node">&quot;#{e.class}: #{e.message}&quot;</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-ready" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">ready</span><span
+              class="method-args">(unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="ready-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">ready</span>(<span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-constant">READY</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-reloading" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reloading</span><span
+              class="method-args">(unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="reloading-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">reloading</span>(<span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-constant">RELOADING</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-status" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">status</span><span
+              class="method-args">(status, unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param status [String] a custom status string that describes the current</p>
+
+<pre class="ruby"><span class="ruby-identifier">state</span> <span class="ruby-identifier">of</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">service</span>
+</pre>
+
+          <div class="method-source-code" id="status-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">status</span>(<span class="ruby-identifier">status</span>, <span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-node">&quot;#{STATUS}#{status}&quot;</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-stopping" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">stopping</span><span
+              class="method-args">(unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="stopping-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">stopping</span>(<span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-constant">STOPPING</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-watchdog" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">watchdog</span><span
+              class="method-args">(unset_env=false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="watchdog-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">watchdog</span>(<span class="ruby-identifier">unset_env</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">notify</span>(<span class="ruby-constant">WATCHDOG</span>, <span class="ruby-identifier">unset_env</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-watchdog-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">watchdog?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [Boolean] true if the service manager expects watchdog keep-alive</p>
+
+<pre>notification messages to be sent from this process.</pre>
+
+<p>If the $WATCHDOG_USEC environment variable is set, and the $WATCHDOG_PID variable is unset or set to the PID of the current process</p>
+
+<p>@note Unlike sd_watchdog_enabled(3), this method does not mutate the</p>
+
+<pre>environment.</pre>
+
+          <div class="method-source-code" id="watchdog-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/sd_notify.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">watchdog?</span>
+  <span class="ruby-identifier">wd_usec</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;WATCHDOG_USEC&quot;</span>]
+  <span class="ruby-identifier">wd_pid</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;WATCHDOG_PID&quot;</span>]
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">wd_usec</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">wd_usec</span> = <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">wd_usec</span>)
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">wd_usec</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">wd_pid</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">wd_pid</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">$$</span>.<span class="ruby-identifier">to_s</span>
+
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

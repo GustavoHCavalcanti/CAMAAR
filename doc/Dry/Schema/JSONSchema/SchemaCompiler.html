@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Dry::Schema::JSONSchema::SchemaCompiler - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-call">#call</a>
+    <li ><a href="#method-i-fetch_filled_options">#fetch_filled_options</a>
+    <li ><a href="#method-i-fetch_type_opts_for_predicate">#fetch_type_opts_for_predicate</a>
+    <li ><a href="#method-i-loose-3F">#loose?</a>
+    <li ><a href="#method-i-merge_opts-21">#merge_opts!</a>
+    <li ><a href="#method-i-raise_unknown_conversion_error-21">#raise_unknown_conversion_error!</a>
+    <li ><a href="#method-i-root-3F">#root?</a>
+    <li ><a href="#method-i-to_h">#to_h</a>
+    <li ><a href="#method-i-to_hash">#to_hash</a>
+    <li ><a href="#method-i-visit">#visit</a>
+    <li ><a href="#method-i-visit_and">#visit_and</a>
+    <li ><a href="#method-i-visit_each">#visit_each</a>
+    <li ><a href="#method-i-visit_implication">#visit_implication</a>
+    <li ><a href="#method-i-visit_key">#visit_key</a>
+    <li ><a href="#method-i-visit_not">#visit_not</a>
+    <li ><a href="#method-i-visit_or">#visit_or</a>
+    <li ><a href="#method-i-visit_predicate">#visit_predicate</a>
+    <li ><a href="#method-i-visit_set">#visit_set</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Dry::Schema::JSONSchema::SchemaCompiler">
+  <h1 id="class-Dry::Schema::JSONSchema::SchemaCompiler" class="class">
+    class Dry::Schema::JSONSchema::SchemaCompiler
+  </h1>
+
+  <section class="description">
+    
+<p>@api private</p>
+
+<p>@api private</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="IDENTITY">IDENTITY
+        <dd>
+        <dt id="PREDICATE_TO_TYPE">PREDICATE_TO_TYPE
+        <dd>
+        <dt id="TO_INTEGER">TO_INTEGER
+        <dd>
+        <dt id="UnknownConversionError">UnknownConversionError
+        <dd><p>An error raised when a predicate cannot be converted</p>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-keys" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">keys</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@api private</p>
+        </div>
+      </div>
+      <div id="attribute-i-required" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">required</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@api private</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(root: false, loose: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">root:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">loose:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@keys</span> = <span class="ruby-constant">EMPTY_HASH</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-ivar">@required</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@root</span> = <span class="ruby-identifier">root</span>
+  <span class="ruby-ivar">@loose</span> = <span class="ruby-identifier">loose</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-call" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">call</span><span
+              class="method-args">(ast)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="call-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">ast</span>)
+  <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">ast</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fetch_filled_options" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fetch_filled_options</span><span
+              class="method-args">(type, _target)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="fetch_filled_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 194</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_filled_options</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">_target</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;string&quot;</span>
+    {<span class="ruby-value">minLength:</span> <span class="ruby-value">1</span>}
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;array&quot;</span>
+    <span class="ruby-identifier">raise_unknown_conversion_error!</span>(<span class="ruby-value">:type</span>, <span class="ruby-value">:array</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">loose?</span>
+
+    {<span class="ruby-value">not:</span> {<span class="ruby-value">type:</span> <span class="ruby-string">&quot;null&quot;</span>}}
+  <span class="ruby-keyword">else</span>
+    {<span class="ruby-value">not:</span> {<span class="ruby-value">type:</span> <span class="ruby-string">&quot;null&quot;</span>}}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fetch_type_opts_for_predicate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fetch_type_opts_for_predicate</span><span
+              class="method-args">(name, rest, target)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="fetch_type_opts_for_predicate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_type_opts_for_predicate</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rest</span>, <span class="ruby-identifier">target</span>)
+  <span class="ruby-identifier">type_opts</span> = <span class="ruby-constant">PREDICATE_TO_TYPE</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">raise_unknown_conversion_error!</span>(<span class="ruby-value">:predicate</span>, <span class="ruby-identifier">name</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">loose?</span>
+
+    <span class="ruby-constant">EMPTY_HASH</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">type_opts</span>.<span class="ruby-identifier">transform_values!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">rest</span>[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>], <span class="ruby-identifier">target</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">v</span> }
+  <span class="ruby-identifier">type_opts</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">fetch_filled_options</span>(<span class="ruby-identifier">target</span>[<span class="ruby-value">:type</span>], <span class="ruby-identifier">target</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value">:filled?</span>
+  <span class="ruby-identifier">type_opts</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-loose-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">loose?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="loose-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 225</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">loose?</span>
+  <span class="ruby-ivar">@loose</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-merge_opts-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">merge_opts!</span><span
+              class="method-args">(orig_opts, new_opts)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="merge_opts-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 208</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge_opts!</span>(<span class="ruby-identifier">orig_opts</span>, <span class="ruby-identifier">new_opts</span>)
+  <span class="ruby-identifier">new_type</span> = <span class="ruby-identifier">new_opts</span>[<span class="ruby-value">:type</span>]
+  <span class="ruby-identifier">orig_type</span> = <span class="ruby-identifier">orig_opts</span>[<span class="ruby-value">:type</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">orig_type</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">new_type</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">orig_type</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">new_type</span>
+    <span class="ruby-identifier">new_opts</span>[<span class="ruby-value">:type</span>] = [<span class="ruby-identifier">orig_type</span>, <span class="ruby-identifier">new_type</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">orig_opts</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">new_opts</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-raise_unknown_conversion_error-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">raise_unknown_conversion_error!</span><span
+              class="method-args">(type, name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="raise_unknown_conversion_error-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 229</span>
+        <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">raise_unknown_conversion_error!</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">name</span>)
+          <span class="ruby-identifier">message</span> = <span class="ruby-identifier">&lt;&lt;~MSG</span>
+<span class="ruby-value">            Could not find an equivalent conversion for #{type} #{name.inspect}.
+
+            This means that your generated JSON schema may be missing this validation.
+
+            You can ignore this by generating the schema in &quot;loose&quot; mode, i.e.:
+                my_schema.json_schema(loose: true)
+</span><span class="ruby-identifier">          MSG</span>
+
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnknownConversionError</span>, <span class="ruby-identifier">message</span>.<span class="ruby-identifier">chomp</span>
+        <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-root-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">root?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="root-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">root?</span>
+  <span class="ruby-ivar">@root</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_h" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_h</span><span
+              class="method-args">()</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="SchemaCompiler.html#method-i-to_hash">to_hash</a>
+        </div>
+      </div>
+
+      <div id="method-i-to_hash" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_hash</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="to_hash-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
+  <span class="ruby-identifier">result</span> = {}
+  <span class="ruby-identifier">result</span>[<span class="ruby-value">:$schema</span>] = <span class="ruby-string">&quot;http://json-schema.org/draft-06/schema#&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">root?</span>
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-value">type:</span> <span class="ruby-string">&quot;object&quot;</span>, <span class="ruby-value">properties:</span> <span class="ruby-identifier">keys</span>, <span class="ruby-value">required:</span> <span class="ruby-identifier">required</span>.<span class="ruby-identifier">to_a</span>)
+  <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="SchemaCompiler.html#method-i-to_h">to_h</a>, to_h
+        </div>
+
+      </div>
+
+      <div id="method-i-visit" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">meth</span>, <span class="ruby-identifier">rest</span> = <span class="ruby-identifier">node</span>
+  <span class="ruby-identifier">public_send</span>(<span class="ruby-value">:&quot;visit_#{meth}&quot;</span>, <span class="ruby-identifier">rest</span>, <span class="ruby-identifier">opts</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_and" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_and</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_and-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_and</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span> = <span class="ruby-identifier">node</span>
+
+  <span class="ruby-comment"># We need to know the type first to apply filled macro</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">left</span>[<span class="ruby-value">1</span>][<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:filled?</span>
+    <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">right</span>, <span class="ruby-identifier">opts</span>)
+    <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">left</span>, <span class="ruby-identifier">opts</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">left</span>, <span class="ruby-identifier">opts</span>)
+    <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">right</span>, <span class="ruby-identifier">opts</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_each" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_each</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_each-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_each</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">member:</span> <span class="ruby-keyword">true</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_implication" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_implication</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_implication-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_implication</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">node</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">el</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">el</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">opts</span>, <span class="ruby-value">required:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_key" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_key</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_key-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_key</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">name</span>, <span class="ruby-identifier">rest</span> = <span class="ruby-identifier">node</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:required</span>, <span class="ruby-value">:true</span>)
+    <span class="ruby-identifier">required</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:required</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">visit</span>(<span class="ruby-identifier">rest</span>, <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">key:</span> <span class="ruby-identifier">name</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_not" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_not</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_not-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_not</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">_name</span>, <span class="ruby-identifier">rest</span> = <span class="ruby-identifier">node</span>
+
+  <span class="ruby-identifier">visit_predicate</span>(<span class="ruby-identifier">rest</span>, <span class="ruby-identifier">opts</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_or" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_or</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_or-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_or</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">node</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">loose:</span> <span class="ruby-identifier">loose?</span>)
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">update</span>(<span class="ruby-value">subschema:</span> {})
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">visit</span>(<span class="ruby-identifier">child</span>, <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">key:</span> <span class="ruby-value">:subschema</span>))
+
+    <span class="ruby-identifier">any_of</span> = (<span class="ruby-identifier">keys</span>[<span class="ruby-identifier">opts</span>[<span class="ruby-value">:key</span>]][<span class="ruby-value">:anyOf</span>] <span class="ruby-operator">||=</span> [])
+    <span class="ruby-identifier">any_of</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">keys</span>[<span class="ruby-value">:subschema</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_predicate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_predicate</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_predicate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_predicate</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">name</span>, <span class="ruby-identifier">rest</span> = <span class="ruby-identifier">node</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-value">:key?</span>)
+    <span class="ruby-identifier">prop_name</span> = <span class="ruby-identifier">rest</span>[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">keys</span>[<span class="ruby-identifier">prop_name</span>] = {}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">target</span> = <span class="ruby-identifier">keys</span>[<span class="ruby-identifier">opts</span>[<span class="ruby-value">:key</span>]]
+    <span class="ruby-identifier">type_opts</span> = <span class="ruby-identifier">fetch_type_opts_for_predicate</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">rest</span>, <span class="ruby-identifier">target</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">target</span>[<span class="ruby-value">:type</span>]&amp;.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;array&quot;</span>)
+      <span class="ruby-identifier">target</span>[<span class="ruby-value">:items</span>] <span class="ruby-operator">||=</span> {}
+      <span class="ruby-identifier">merge_opts!</span>(<span class="ruby-identifier">target</span>[<span class="ruby-value">:items</span>], <span class="ruby-identifier">type_opts</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">merge_opts!</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">type_opts</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visit_set" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visit_set</span><span
+              class="method-args">(node, opts = EMPTY_HASH)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="visit_set-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/extensions/json_schema/schema_compiler.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit_set</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">opts</span> = <span class="ruby-constant">EMPTY_HASH</span>)
+  <span class="ruby-identifier">target</span> = (<span class="ruby-identifier">key</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-value">:key</span>]) <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">loose:</span> <span class="ruby-identifier">loose?</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>
+
+  <span class="ruby-identifier">node</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">visit</span>(<span class="ruby-identifier">child</span>, <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">except</span>(<span class="ruby-value">:member</span>)) }
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>
+
+  <span class="ruby-identifier">target_info</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-value">:member</span>] <span class="ruby-operator">?</span> {<span class="ruby-value">items:</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">to_h</span>} <span class="ruby-operator">:</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">to_h</span>
+  <span class="ruby-identifier">type</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-value">:member</span>] <span class="ruby-operator">?</span> <span class="ruby-string">&quot;array&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;object&quot;</span>
+
+  <span class="ruby-identifier">merge_opts!</span>(<span class="ruby-identifier">keys</span>[<span class="ruby-identifier">key</span>], {<span class="ruby-value">type:</span> <span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">target_info</span>})
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

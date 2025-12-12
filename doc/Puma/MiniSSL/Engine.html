@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Puma::MiniSSL::Engine - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-client">::client</a>
+    <li ><a href="#method-c-server">::server</a>
+    <li ><a href="#method-i-extract">#extract</a>
+    <li ><a href="#method-i-init-3F">#init?</a>
+    <li ><a href="#method-i-inject">#inject</a>
+    <li ><a href="#method-i-peercert">#peercert</a>
+    <li ><a href="#method-i-read">#read</a>
+    <li ><a href="#method-i-shutdown">#shutdown</a>
+    <li ><a href="#method-i-ssl_vers_st">#ssl_vers_st</a>
+    <li ><a href="#method-i-write">#write</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Puma::MiniSSL::Engine">
+  <h1 id="class-Puma::MiniSSL::Engine" class="class">
+    class Puma::MiniSSL::Engine
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-client" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">client</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="client-source">
+            <pre>VALUE engine_init_client(VALUE klass) {
+  VALUE obj;
+  ms_conn* conn = engine_alloc(klass, &amp;obj);
+#ifdef HAVE_DTLS_METHOD
+  conn-&gt;ctx = SSL_CTX_new(DTLS_method());
+#else
+  conn-&gt;ctx = SSL_CTX_new(DTLSv1_method());
+#endif
+  conn-&gt;ssl = SSL_new(conn-&gt;ctx);
+  SSL_set_app_data(conn-&gt;ssl, NULL);
+  SSL_set_verify(conn-&gt;ssl, SSL_VERIFY_NONE, NULL);
+
+  SSL_set_bio(conn-&gt;ssl, conn-&gt;read, conn-&gt;write);
+
+  SSL_set_connect_state(conn-&gt;ssl);
+  return obj;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-server" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">server</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="server-source">
+            <pre>VALUE engine_init_server(VALUE self, VALUE sslctx) {
+  ms_conn* conn;
+  VALUE obj;
+  SSL_CTX* ctx;
+  SSL* ssl;
+
+  conn = engine_alloc(self, &amp;obj);
+
+  TypedData_Get_Struct(sslctx, SSL_CTX, &amp;sslctx_type, ctx);
+
+  ssl = SSL_new(ctx);
+  conn-&gt;ssl = ssl;
+  SSL_set_app_data(ssl, NULL);
+  SSL_set_bio(ssl, conn-&gt;read, conn-&gt;write);
+  SSL_set_accept_state(ssl);
+  return obj;
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-extract" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">extract</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="extract-source">
+            <pre>VALUE engine_extract(VALUE self) {
+  ms_conn* conn;
+  int bytes;
+  size_t pending;
+  // https://www.openssl.org/docs/manmaster/man3/BIO_f_buffer.html
+  // crypto/bio/bf_buff.c DEFAULT_BUFFER_SIZE
+  char buf[4096];
+
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+
+  pending = BIO_pending(conn-&gt;write);
+  if(pending &gt; 0) {
+    bytes = BIO_read(conn-&gt;write, buf, sizeof(buf));
+    if(bytes &gt; 0) {
+      return rb_str_new(buf, bytes);
+    } else if(!BIO_should_retry(conn-&gt;write)) {
+      raise_error(conn-&gt;ssl, bytes);
+    }
+  }
+
+  return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: extract
+        </div>
+
+      </div>
+
+      <div id="method-i-init-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">init?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="init-3F-source">
+            <pre>VALUE engine_init(VALUE self) {
+  ms_conn* conn;
+
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+
+  return SSL_in_init(conn-&gt;ssl) ? Qtrue : Qfalse;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: init?
+        </div>
+
+      </div>
+
+      <div id="method-i-inject" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">inject</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="inject-source">
+            <pre>VALUE engine_inject(VALUE self, VALUE str) {
+  ms_conn* conn;
+  long used;
+
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+
+  StringValue(str);
+
+  used = BIO_write(conn-&gt;read, RSTRING_PTR(str), (int)RSTRING_LEN(str));
+
+  if(used == 0 || used == -1) {
+    return Qfalse;
+  }
+
+  return INT2FIX(used);
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: inject
+        </div>
+
+      </div>
+
+      <div id="method-i-peercert" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">peercert</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="peercert-source">
+            <pre>VALUE engine_peercert(VALUE self) {
+  ms_conn* conn;
+  X509* cert;
+  int bytes;
+  unsigned char* buf = NULL;
+  ms_cert_buf* cert_buf = NULL;
+  VALUE rb_cert_buf;
+
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+
+#ifdef HAVE_SSL_GET1_PEER_CERTIFICATE
+  cert = SSL_get1_peer_certificate(conn-&gt;ssl);
+#else
+  cert = SSL_get_peer_certificate(conn-&gt;ssl);
+#endif
+  if(!cert) {
+    /*
+     * See if there was a failed certificate associated with this client.
+     */
+    cert_buf = (ms_cert_buf*)SSL_get_app_data(conn-&gt;ssl);
+    if(!cert_buf) {
+      return Qnil;
+    }
+    buf = cert_buf-&gt;buf;
+    bytes = cert_buf-&gt;bytes;
+
+  } else {
+    bytes = i2d_X509(cert, &amp;buf);
+    X509_free(cert);
+
+    if(bytes &lt; 0) {
+      return Qnil;
+    }
+  }
+
+  rb_cert_buf = rb_str_new((const char*)(buf), bytes);
+  if(!cert_buf) {
+    OPENSSL_free(buf);
+  }
+
+  return rb_cert_buf;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: peercert
+        </div>
+
+      </div>
+
+      <div id="method-i-read" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">read</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="read-source">
+            <pre>VALUE engine_read(VALUE self) {
+  ms_conn* conn;
+  char buf[512];
+  int bytes, error;
+
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+
+  ERR_clear_error();
+
+  bytes = SSL_read(conn-&gt;ssl, (void*)buf, sizeof(buf));
+
+  if(bytes &gt; 0) {
+    return rb_str_new(buf, bytes);
+  }
+
+  if(SSL_want_read(conn-&gt;ssl)) return Qnil;
+
+  error = SSL_get_error(conn-&gt;ssl, bytes);
+
+  if(error == SSL_ERROR_ZERO_RETURN) {
+    rb_eof_error();
+  } else {
+    raise_error(conn-&gt;ssl, bytes);
+  }
+
+  return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: read
+        </div>
+
+      </div>
+
+      <div id="method-i-shutdown" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">shutdown</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="shutdown-source">
+            <pre>VALUE engine_shutdown(VALUE self) {
+  ms_conn* conn;
+  int ok;
+
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+
+  if (SSL_in_init(conn-&gt;ssl)) {
+    // Avoid &quot;shutdown while in init&quot; error
+    // See https://github.com/openssl/openssl/blob/openssl-3.5.2/ssl/ssl_lib.c#L2827-L2828
+    return Qtrue;
+  }
+
+  ERR_clear_error();
+
+  ok = SSL_shutdown(conn-&gt;ssl);
+  // See https://github.com/openssl/openssl/blob/openssl-3.5.2/ssl/ssl_lib.c#L2792-L2797
+  // for description of SSL_shutdown return values.
+  switch (ok) {
+    case 0:
+      // &quot;close notify&quot; alert is sent by us.
+      return Qfalse;
+    case 1:
+      // &quot;close notify&quot; alert was received from peer.
+      return Qtrue;
+    default:
+      raise_error(conn-&gt;ssl, ok);
+  }
+
+  return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: shutdown
+        </div>
+
+      </div>
+
+      <div id="method-i-ssl_vers_st" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">ssl_vers_st</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@see <a href="Socket.html#method-i-ssl_version_state"><code>Puma::MiniSSL::Socket#ssl_version_state</code></a> @version 5.0.0</p>
+
+          <div class="method-source-code" id="ssl_vers_st-source">
+            <pre>static VALUE
+engine_ssl_vers_st(VALUE self) {
+  ms_conn* conn;
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+  return rb_ary_new3(2, rb_str_new2(SSL_get_version(conn-&gt;ssl)), rb_str_new2(SSL_state_string(conn-&gt;ssl)));
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: ssl_vers_st
+        </div>
+
+      </div>
+
+      <div id="method-i-write" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write</span><span
+              class="method-args">(p1)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="write-source">
+            <pre>VALUE engine_write(VALUE self, VALUE str) {
+  ms_conn* conn;
+  int bytes;
+
+  TypedData_Get_Struct(self, ms_conn, &amp;engine_data_type, conn);
+
+  StringValue(str);
+
+  ERR_clear_error();
+
+  bytes = SSL_write(conn-&gt;ssl, (void*)RSTRING_PTR(str), (int)RSTRING_LEN(str));
+  if(bytes &gt; 0) {
+    return INT2FIX(bytes);
+  }
+
+  if(SSL_want_write(conn-&gt;ssl)) return Qnil;
+
+  raise_error(conn-&gt;ssl, bytes);
+
+  return Qnil;
+}</pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: write
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

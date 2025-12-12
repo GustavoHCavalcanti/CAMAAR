@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Puma::Runner - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="Const/PipeRequest.html">Puma::Const::PipeRequest</a>
+  </ul>
+</div>
+
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-app">#app</a>
+    <li ><a href="#method-i-close_control_listeners">#close_control_listeners</a>
+    <li ><a href="#method-i-debug">#debug</a>
+    <li ><a href="#method-i-development-3F">#development?</a>
+    <li ><a href="#method-i-error">#error</a>
+    <li ><a href="#method-i-load_and_bind">#load_and_bind</a>
+    <li ><a href="#method-i-log">#log</a>
+    <li ><a href="#method-i-output_header">#output_header</a>
+    <li ><a href="#method-i-redirect_io">#redirect_io</a>
+    <li ><a href="#method-i-redirected_io-3F">#redirected_io?</a>
+    <li ><a href="#method-i-start_control">#start_control</a>
+    <li ><a href="#method-i-start_server">#start_server</a>
+    <li ><a href="#method-i-stop_control">#stop_control</a>
+    <li ><a href="#method-i-test-3F">#test?</a>
+    <li ><a href="#method-i-wakeup-21">#wakeup!</a>
+    <li ><a href="#method-i-warn_ruby_mn_threads">#warn_ruby_mn_threads</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Puma::Runner">
+  <h1 id="class-Puma::Runner" class="class">
+    class Puma::Runner
+  </h1>
+
+  <section class="description">
+    
+<p>Generic class that is used by ‘Puma::Cluster` and `Puma::Single` to serve requests. This class spawns a new instance of `Puma::Server` via a call to `start_server`.</p>
+
+<p>Generic class that is used by ‘Puma::Cluster` and `Puma::Single` to serve requests. This class spawns a new instance of `Puma::Server` via a call to `start_server`.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-options" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">options</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Returns the hash of configuration options. @return [Puma::UserFileDefaultOptions]</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(launcher)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">launcher</span>)
+  <span class="ruby-ivar">@launcher</span> = <span class="ruby-identifier">launcher</span>
+  <span class="ruby-ivar">@log_writer</span> = <span class="ruby-identifier">launcher</span>.<span class="ruby-identifier">log_writer</span>
+  <span class="ruby-ivar">@events</span> = <span class="ruby-identifier">launcher</span>.<span class="ruby-identifier">events</span>
+  <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">launcher</span>.<span class="ruby-identifier">config</span>
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">launcher</span>.<span class="ruby-identifier">options</span>
+  <span class="ruby-ivar">@app</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@control</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@started_at</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-ivar">@wakeup</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-app" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">app</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@!attribute [r] app</p>
+
+          <div class="method-source-code" id="app-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">app</span>
+  <span class="ruby-ivar">@app</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">app</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-close_control_listeners" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">close_control_listeners</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@version 5.0.0</p>
+
+          <div class="method-source-code" id="close_control_listeners-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close_control_listeners</span>
+  <span class="ruby-ivar">@control</span>.<span class="ruby-identifier">binder</span>.<span class="ruby-identifier">close_listeners</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@control</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-debug" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">debug</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="debug-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">debug</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-ivar">@log_writer</span>.<span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- #{str}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:debug</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-development-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">development?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="development-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">development?</span>
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:environment</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;development&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-error" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">error</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="error-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">error</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-ivar">@log_writer</span>.<span class="ruby-identifier">error</span> <span class="ruby-identifier">str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-load_and_bind" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load_and_bind</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="load_and_bind-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_and_bind</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">app_configured?</span>
+    <span class="ruby-identifier">error</span> <span class="ruby-string">&quot;No application configured, nothing to run&quot;</span>
+    <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-ivar">@app</span> = <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">app</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;! Unable to load application: #{e.class}: #{e.message}&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@launcher</span>.<span class="ruby-identifier">binder</span>.<span class="ruby-identifier">parse</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:binds</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-log" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">log</span><span
+              class="method-args">(str)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="log-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-ivar">@log_writer</span>.<span class="ruby-identifier">log</span> <span class="ruby-identifier">str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-output_header" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">output_header</span><span
+              class="method-args">(mode)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="output_header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_header</span>(<span class="ruby-identifier">mode</span>)
+  <span class="ruby-identifier">min_t</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:min_threads</span>]
+  <span class="ruby-identifier">max_t</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:max_threads</span>]
+  <span class="ruby-identifier">environment</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:environment</span>]
+
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;Puma starting in #{mode} mode...&quot;</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;* Puma version: #{Puma::Const::PUMA_VERSION} (\&quot;#{Puma::Const::CODE_NAME}\&quot;)&quot;</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;* Ruby version: #{RUBY_DESCRIPTION}&quot;</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*  Min threads: #{min_t}&quot;</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*  Max threads: #{max_t}&quot;</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*  Environment: #{environment}&quot;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mode</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;cluster&quot;</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*   Master PID: #{Process.pid}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*          PID: #{Process.pid}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-redirect_io" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">redirect_io</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="redirect_io-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">redirect_io</span>
+  <span class="ruby-identifier">stdout</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:redirect_stdout</span>]
+  <span class="ruby-identifier">stderr</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:redirect_stderr</span>]
+  <span class="ruby-identifier">append</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:redirect_append</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">stdout</span>
+    <span class="ruby-identifier">ensure_output_directory_exists</span>(<span class="ruby-identifier">stdout</span>, <span class="ruby-string">&#39;STDOUT&#39;</span>)
+
+    <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">reopen</span> <span class="ruby-identifier">stdout</span>, (<span class="ruby-identifier">append</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;a&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;w&quot;</span>)
+    <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;=== puma startup: #{Time.now} ===&quot;</span>
+    <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">flush</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">sync</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">stderr</span>
+    <span class="ruby-identifier">ensure_output_directory_exists</span>(<span class="ruby-identifier">stderr</span>, <span class="ruby-string">&#39;STDERR&#39;</span>)
+
+    <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">reopen</span> <span class="ruby-identifier">stderr</span>, (<span class="ruby-identifier">append</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;a&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;w&quot;</span>)
+    <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;=== puma startup: #{Time.now} ===&quot;</span>
+    <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">flush</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">sync</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:mutate_stdout_and_stderr_to_sync_on_write</span>]
+    <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-redirected_io-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">redirected_io?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="redirected_io-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">redirected_io?</span>
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:redirect_stdout</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:redirect_stderr</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-start_control" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start_control</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="start_control-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_control</span>
+  <span class="ruby-identifier">str</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:control_url</span>]
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span>
+
+  <span class="ruby-identifier">require_relative</span> <span class="ruby-string">&#39;app/status&#39;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">token</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:control_auth_token</span>]
+    <span class="ruby-identifier">token</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">token</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">token</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;none&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">app</span> = <span class="ruby-constant">Puma</span><span class="ruby-operator">::</span><span class="ruby-constant">App</span><span class="ruby-operator">::</span><span class="ruby-constant">Status</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@launcher</span>, <span class="ruby-identifier">token</span>
+
+  <span class="ruby-comment"># A Reactor is not created and nio4r is not loaded when &#39;queue_requests: false&#39;</span>
+  <span class="ruby-comment"># Use `nil` for events, no hooks in control server</span>
+  <span class="ruby-identifier">control</span> = <span class="ruby-constant">Puma</span><span class="ruby-operator">::</span><span class="ruby-constant">Server</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">app</span>, <span class="ruby-keyword">nil</span>,
+    { <span class="ruby-value">min_threads:</span> <span class="ruby-value">0</span>, <span class="ruby-value">max_threads:</span> <span class="ruby-value">1</span>, <span class="ruby-value">queue_requests:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">log_writer:</span> <span class="ruby-ivar">@log_writer</span> }
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">control</span>.<span class="ruby-identifier">binder</span>.<span class="ruby-identifier">parse</span> [<span class="ruby-identifier">str</span>], <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;Starting control server&#39;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EADDRINUSE</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EACCES</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>, <span class="ruby-node">&quot;Error: Control server address &#39;#{str}&#39; is already in use. Original error: #{e.message}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">control</span>.<span class="ruby-identifier">run</span> <span class="ruby-value">thread_name:</span> <span class="ruby-string">&#39;ctl&#39;</span>
+  <span class="ruby-ivar">@control</span> = <span class="ruby-identifier">control</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-start_server" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start_server</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="start_server-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_server</span>
+  <span class="ruby-identifier">server</span> = <span class="ruby-constant">Puma</span><span class="ruby-operator">::</span><span class="ruby-constant">Server</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">app</span>, <span class="ruby-ivar">@events</span>, <span class="ruby-ivar">@options</span>)
+  <span class="ruby-identifier">server</span>.<span class="ruby-identifier">inherit_binder</span>(<span class="ruby-ivar">@launcher</span>.<span class="ruby-identifier">binder</span>)
+  <span class="ruby-identifier">server</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-stop_control" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">stop_control</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@version 5.0.0</p>
+
+          <div class="method-source-code" id="stop_control-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stop_control</span>
+  <span class="ruby-ivar">@control</span>&amp;.<span class="ruby-identifier">stop</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-test-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">test?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="test-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test?</span>
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:environment</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;test&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-wakeup-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">wakeup!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="wakeup-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">wakeup!</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@wakeup</span>
+
+  <span class="ruby-ivar">@wakeup</span>.<span class="ruby-identifier">write</span> <span class="ruby-constant">PIPE_WAKEUP</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@wakeup</span>.<span class="ruby-identifier">closed?</span>
+
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">SystemCallError</span>, <span class="ruby-constant">IOError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-warn_ruby_mn_threads" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">warn_ruby_mn_threads</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="warn_ruby_mn_threads-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/runner.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">warn_ruby_mn_threads</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">ENV</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;RUBY_MN_THREADS&#39;</span>)
+
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;! WARNING: Detected `RUBY_MN_THREADS=#{ENV[&#39;RUBY_MN_THREADS&#39;]}`&quot;</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;! This setting is known to cause performance regressions with Puma.&quot;</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;! Consider disabling this environment variable: https://github.com/puma/puma/issues/3720&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

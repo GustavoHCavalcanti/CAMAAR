@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Capybara::Node::Actions - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-attach_file">#attach_file</a>
+    <li ><a href="#method-i-check">#check</a>
+    <li ><a href="#method-i-choose">#choose</a>
+    <li ><a href="#method-i-click_button">#click_button</a>
+    <li ><a href="#method-i-click_link">#click_link</a>
+    <li ><a href="#method-i-click_link_or_button">#click_link_or_button</a>
+    <li ><a href="#method-i-click_on">#click_on</a>
+    <li ><a href="#method-i-fill_in">#fill_in</a>
+    <li ><a href="#method-i-select">#select</a>
+    <li ><a href="#method-i-uncheck">#uncheck</a>
+    <li ><a href="#method-i-unselect">#unselect</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Capybara::Node::Actions">
+  <h1 id="module-Capybara::Node::Actions" class="module">
+    module Capybara::Node::Actions
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="CAPTURE_FILE_ELEMENT_SCRIPT">CAPTURE_FILE_ELEMENT_SCRIPT
+        <dd>
+        <dt id="DATALIST_OPTIONS_SCRIPT">DATALIST_OPTIONS_SCRIPT
+        <dd>
+        <dt id="RESET_STYLE_SCRIPT">RESET_STYLE_SCRIPT
+        <dd>
+        <dt id="UPDATE_STYLE_SCRIPT">UPDATE_STYLE_SCRIPT
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-attach_file" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">attach_file</span><span
+              class="method-args">(locator = nil, paths, make_visible: nil, **options) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find a descendant file field on the page and attach a file given its path. There are two ways to use {#attach_file}, in the first method the file field can be found via its name, id, {Capybara.configure test_id} attribute, or label text. In the case of the file field being hidden for styling reasons the ‘make_visible` option can be used to temporarily change the CSS of the file field, attach the file, and then revert the CSS back to original. If no locator is passed this will match self or a descendant. The second method, which is currently in beta and may be changed/removed, involves passing a block which performs whatever actions would trigger the file chooser to appear.</p>
+
+<pre class="ruby"><span class="ruby-comment"># will attach file to a descendant file input element that has a name, id, or label_text matching &#39;My File&#39;</span>
+<span class="ruby-identifier">page</span>.<span class="ruby-identifier">attach_file</span>(<span class="ruby-string">&#39;My File&#39;</span>, <span class="ruby-string">&#39;/path/to/file.png&#39;</span>)
+
+<span class="ruby-comment"># will attach file to el if it&#39;s a file input element</span>
+<span class="ruby-identifier">el</span>.<span class="ruby-identifier">attach_file</span>(<span class="ruby-string">&#39;/path/to/file.png&#39;</span>)
+
+<span class="ruby-comment"># will attach file to whatever file input is triggered by the block</span>
+<span class="ruby-identifier">page</span>.<span class="ruby-identifier">attach_file</span>(<span class="ruby-string">&#39;/path/to/file.png&#39;</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">page</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;#upload_button&#39;</span>).<span class="ruby-identifier">click</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>@overload <a href="locator">attach_file(</a>, paths, **options)</p>
+
+<pre>@macro waiting_behavior
+
+@param [String] locator                  Which field to attach the file to
+@param [String, Array&lt;String&gt;] paths     The path(s) of the file(s) that will be attached
+
+@option options [Symbol] match
+  The matching strategy to use (:one, :first, :prefer_exact, :smart). Defaults to {Capybara.configure match}.
+@option options [Boolean] exact
+  Match the exact label name/contents or accept a partial match. Defaults to {Capybara.configure exact}.
+@option options [Boolean] multiple Match field which allows multiple file selection
+@option options [String, Regexp] id             Match fields that match the id attribute
+@option options [String] name           Match fields that match the name attribute
+@option options [String, Array&lt;String&gt;, Regexp] class    Match fields that match the class(es) provided
+@option options [true, Hash] make_visible
+  A Hash of CSS styles to change before attempting to attach the file, if `true`, `{ opacity: 1, display: &#39;block&#39;, visibility: &#39;visible&#39; }` is used (may not be supported by all drivers).</pre>
+
+<p>@overload <a href="Actions.html#method-i-attach_file"><code>attach_file</code></a>(paths, &amp;blk)</p>
+
+<pre>@param [String, Array&lt;String&gt;] paths     The path(s) of the file(s) that will be attached
+@yield Block whose actions will trigger the system file chooser to be shown</pre>
+
+<p>@return [Capybara::Node::Element]  The file field element</p>
+
+          <div class="method-source-code" id="attach_file-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attach_file</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">paths</span>, <span class="ruby-value">make_visible:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-comment"># rubocop:disable Style/OptionalArguments</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">locator</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;`#attach_file` does not support passing both a locator and a block&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">paths</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">FileNotFound</span>, <span class="ruby-node">&quot;cannot attach file, #{path} does not exist&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:allow_self</span>] = <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">locator</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">execute_script</span> <span class="ruby-constant">CAPTURE_FILE_ELEMENT_SCRIPT</span>
+      <span class="ruby-keyword">yield</span>
+      <span class="ruby-identifier">file_field</span> = <span class="ruby-identifier">evaluate_script</span> <span class="ruby-string">&#39;window._capybara_clicked_file_input&#39;</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Capybara was unable to determine the file input you&#39;re attaching to&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">file_field</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>
+      <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;Block mode of `#attach_file` is not supported by the current driver - ignoring.&#39;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># Allow user to update the CSS style of the file input since they are so often hidden on a page</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">make_visible</span>
+    <span class="ruby-identifier">ff</span> = <span class="ruby-identifier">file_field</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">find</span>(<span class="ruby-value">:file_field</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">visible:</span> <span class="ruby-value">:all</span>))
+    <span class="ruby-identifier">while_visible</span>(<span class="ruby-identifier">ff</span>, <span class="ruby-identifier">make_visible</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">el</span><span class="ruby-operator">|</span> <span class="ruby-identifier">el</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">paths</span>) }
+  <span class="ruby-keyword">else</span>
+    (<span class="ruby-identifier">file_field</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">find</span>(<span class="ruby-value">:file_field</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)).<span class="ruby-identifier">set</span>(<span class="ruby-identifier">paths</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-check" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check</span><span
+              class="method-args">(locator = nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find a descendant check box and mark it as checked. The check box can be found via name, id, {Capybara.configure test_id} attribute, or label text. If no locator is provided this will match against self or a descendant.</p>
+
+<pre class="ruby"><span class="ruby-comment"># will check a descendant checkbox with a name, id, or label text matching &#39;German&#39;</span>
+<span class="ruby-identifier">page</span>.<span class="ruby-identifier">check</span>(<span class="ruby-string">&#39;German&#39;</span>)
+
+<span class="ruby-comment"># will check `el` if it&#39;s a checkbox element</span>
+<span class="ruby-identifier">el</span>.<span class="ruby-identifier">check</span>()
+</pre>
+
+<p>@overload <a href="locator">check(</a>, **options)</p>
+
+<pre>@param [String] locator           Which check box to check
+
+@option options [String] option  Value of the checkbox to select
+@option options [String, Regexp] id       Match fields that match the id attribute
+@option options [String] name     Match fields that match the name attribute
+@option options [String, Array&lt;String&gt;, Regexp] class    Match fields that match the class(es) provided
+@macro label_click
+@macro waiting_behavior</pre>
+
+<p>@return [Capybara::Node::Element]  The element checked or the label clicked</p>
+
+          <div class="method-source-code" id="check-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">_check_with_label</span>(<span class="ruby-value">:checkbox</span>, <span class="ruby-keyword">true</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-choose" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">choose</span><span
+              class="method-args">(locator = nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find a descendant radio button and mark it as checked. The radio button can be found via name, id, {Capybara.configure test_id} attribute or label text. If no locator is provided this will match against self or a descendant.</p>
+
+<pre class="ruby"><span class="ruby-comment"># will choose a descendant radio button with a name, id, or label text matching &#39;Male&#39;</span>
+<span class="ruby-identifier">page</span>.<span class="ruby-identifier">choose</span>(<span class="ruby-string">&#39;Male&#39;</span>)
+
+<span class="ruby-comment"># will choose `el` if it&#39;s a radio button element</span>
+<span class="ruby-identifier">el</span>.<span class="ruby-identifier">choose</span>()
+</pre>
+
+<p>@overload <a href="locator">choose(</a>, **options)</p>
+
+<pre>@param [String] locator           Which radio button to choose
+
+@option options [String] option  Value of the radio_button to choose
+@option options [String, Regexp] id             Match fields that match the id attribute
+@option options [String] name           Match fields that match the name attribute
+@option options [String, Array&lt;String&gt;, Regexp] class    Match fields that match the class(es) provided
+@macro waiting_behavior
+@macro label_click</pre>
+
+<p>@return [Capybara::Node::Element]  The element chosen or the label clicked</p>
+
+          <div class="method-source-code" id="choose-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">choose</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">_check_with_label</span>(<span class="ruby-value">:radio_button</span>, <span class="ruby-keyword">true</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-click_button" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">click_button</span><span
+              class="method-args">(locator = nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Finds a button on the page and clicks it. This can be any ‘&lt;input&gt;` element of type submit, reset, image, button or it can be a `&lt;button&gt;` element. All buttons can be found by their id, name, {Capybara.configure test_id} attribute, value, or title. `&lt;button&gt;` elements can also be found by their text content, and image `&lt;input&gt;` elements by their alt attribute.</p>
+
+<p>@overload <a href="locator">click_button(</a>, **options)</p>
+
+<pre>@macro waiting_behavior
+@param [String] locator      Which button to find
+@param [Hash] options        See {Capybara::Node::Finders#find_button}</pre>
+
+<p>@return [Capybara::Node::Element]  The element clicked</p>
+
+          <div class="method-source-code" id="click_button-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">click_button</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">find</span>(<span class="ruby-value">:button</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">click</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-click_link" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">click_link</span><span
+              class="method-args">(locator = nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Finds a link by id, {Capybara.configure test_id} attribute, text or title and clicks it. Also looks at image alt text inside the link.</p>
+
+<p>@overload <a href="locator">click_link(</a>, **options)</p>
+
+<pre>@macro waiting_behavior
+@param [String] locator         text, id, {Capybara.configure test_id} attribute, title or nested image&#39;s alt attribute
+@param [Hash] options           See {Capybara::Node::Finders#find_link}</pre>
+
+<p>@return [Capybara::Node::Element]  The element clicked</p>
+
+          <div class="method-source-code" id="click_link-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">click_link</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">find</span>(<span class="ruby-value">:link</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">click</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-click_link_or_button" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">click_link_or_button</span><span
+              class="method-args">(locator = nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Finds a button or link and clicks it. See {#click_button} and {#click_link} for what locator will match against for each type of element.</p>
+
+<p>@overload <a href="locator">click_link_or_button(</a>, **options)</p>
+
+<pre>@macro waiting_behavior
+@param [String] locator      See {#click_button} and {#click_link}</pre>
+
+<p>@return [Capybara::Node::Element]  The element clicked</p>
+
+          <div class="method-source-code" id="click_link_or_button-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">click_link_or_button</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">find</span>(<span class="ruby-value">:link_or_button</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">click</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Actions.html#method-i-click_on">click_on</a>, click_on
+        </div>
+
+      </div>
+
+      <div id="method-i-click_on" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">click_on</span><span
+              class="method-args">(locator = nil, **options)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Actions.html#method-i-click_link_or_button">click_link_or_button</a>
+        </div>
+      </div>
+
+      <div id="method-i-fill_in" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fill_in</span><span
+              class="method-args">(locator = nil, with:, currently_with: nil, fill_options: {}, **find_options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Locate a text field or text area and fill it in with the given text. The field can be found via its name, id, {Capybara.configure test_id} attribute, placeholder, or label text. If no locator is provided this will operate on self or a descendant.</p>
+
+<pre class="ruby"><span class="ruby-comment"># will fill in a descendant fillable field with name, id, or label text matching &#39;Name&#39;</span>
+<span class="ruby-identifier">page</span>.<span class="ruby-identifier">fill_in</span> <span class="ruby-string">&#39;Name&#39;</span>, <span class="ruby-value">with:</span> <span class="ruby-string">&#39;Bob&#39;</span>
+
+<span class="ruby-comment"># will fill in `el` if it&#39;s a fillable field</span>
+<span class="ruby-identifier">el</span>.<span class="ruby-identifier">fill_in</span> <span class="ruby-value">with:</span> <span class="ruby-string">&#39;Tom&#39;</span>
+</pre>
+
+<p>@overload <a href="locator">fill_in(</a>, with:, **options)</p>
+
+<pre>@param [String] locator                 Which field to fill in
+@param [Hash] options
+@param with: [String]                  The value to fill in
+@macro waiting_behavior
+@option options [String] currently_with The current value property of the field to fill in
+@option options [Boolean] multiple      Match fields that can have multiple values?
+@option options [String, Regexp] id             Match fields that match the id attribute
+@option options [String] name           Match fields that match the name attribute
+@option options [String] placeholder    Match fields that match the placeholder attribute
+@option options [String, Array&lt;String&gt;, Regexp] class    Match fields that match the class(es) provided
+@option options [Hash] fill_options     Driver specific options regarding how to fill fields (Defaults come from {Capybara.configure default_set_options})</pre>
+
+<p>@return [Capybara::Node::Element]  The element filled in</p>
+
+          <div class="method-source-code" id="fill_in-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fill_in</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">with:</span>, <span class="ruby-value">currently_with:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">fill_options:</span> {}, <span class="ruby-operator">**</span><span class="ruby-identifier">find_options</span>)
+  <span class="ruby-identifier">find_options</span>[<span class="ruby-value">:with</span>] = <span class="ruby-identifier">currently_with</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">currently_with</span>
+  <span class="ruby-identifier">find_options</span>[<span class="ruby-value">:allow_self</span>] = <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">locator</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">find</span>(<span class="ruby-value">:fillable_field</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">find_options</span>).<span class="ruby-identifier">set</span>(<span class="ruby-identifier">with</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">fill_options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-select" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">select</span><span
+              class="method-args">(value = nil, from: nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>If ‘from` option is present, {#select} finds a select box, or text input with associated datalist, on the page and selects a particular option from it. Otherwise it finds an option inside current scope and selects it. If the select box is a multiple select, {#select} can be called multiple times to select more than one option. The select box can be found via its name, id, {Capybara.configure test_id} attribute, or label text. The option can be found by its text.</p>
+
+<pre class="ruby"><span class="ruby-identifier">page</span>.<span class="ruby-identifier">select</span> <span class="ruby-string">&#39;March&#39;</span>, <span class="ruby-value">from:</span> <span class="ruby-string">&#39;Month&#39;</span>
+</pre>
+
+<p>@overload select(value = nil, from: nil, **options)</p>
+
+<pre>@macro waiting_behavior
+
+@param value [String] Which option to select
+@param from [String]  The id, {Capybara.configure test_id} attribute, name or label of the select box</pre>
+
+<p>@return [Capybara::Node::Element]  The option element selected</p>
+
+          <div class="method-source-code" id="select-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 201</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">from:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;The :from option does not take an element&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span><span class="ruby-operator">::</span><span class="ruby-constant">Element</span>
+
+  <span class="ruby-identifier">el</span> = <span class="ruby-identifier">from</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">find_select_or_datalist_input</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">options</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">el</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:tag_name</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">el</span>.<span class="ruby-identifier">tag_name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;input&#39;</span>)
+    <span class="ruby-identifier">select_datalist_option</span>(<span class="ruby-identifier">el</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">el</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:option</span>, <span class="ruby-identifier">value</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">select_option</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-uncheck" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">uncheck</span><span
+              class="method-args">(locator = nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find a descendant check box and uncheck it. The check box can be found via name, id, {Capybara.configure test_id} attribute, or label text. If no locator is provided this will match against self or a descendant.</p>
+
+<pre class="ruby"><span class="ruby-comment"># will uncheck a descendant checkbox with a name, id, or label text matching &#39;German&#39;</span>
+<span class="ruby-identifier">page</span>.<span class="ruby-identifier">uncheck</span>(<span class="ruby-string">&#39;German&#39;</span>)
+
+<span class="ruby-comment"># will uncheck `el` if it&#39;s a checkbox element</span>
+<span class="ruby-identifier">el</span>.<span class="ruby-identifier">uncheck</span>()
+</pre>
+
+<p>@overload <a href="locator">uncheck(</a>, **options)</p>
+
+<pre>@param [String] locator           Which check box to uncheck
+
+@option options [String] option  Value of the checkbox to deselect
+@option options [String, Regexp] id       Match fields that match the id attribute
+@option options [String] name     Match fields that match the name attribute
+@option options [String, Array&lt;String&gt;, Regexp] class    Match fields that match the class(es) provided
+@macro label_click
+@macro waiting_behavior</pre>
+
+<p>@return [Capybara::Node::Element]  The element unchecked or the label clicked</p>
+
+          <div class="method-source-code" id="uncheck-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uncheck</span>(<span class="ruby-identifier">locator</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">_check_with_label</span>(<span class="ruby-value">:checkbox</span>, <span class="ruby-keyword">false</span>, <span class="ruby-identifier">locator</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-unselect" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">unselect</span><span
+              class="method-args">(value = nil, from: nil, **options)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Find a select box on the page and unselect a particular option from it. If the select box is a multiple select, {#unselect} can be called multiple times to unselect more than one option. The select box can be found via its name, id, {Capybara.configure test_id} attribute, or label text.</p>
+
+<pre class="ruby"><span class="ruby-identifier">page</span>.<span class="ruby-identifier">unselect</span> <span class="ruby-string">&#39;March&#39;</span>, <span class="ruby-value">from:</span> <span class="ruby-string">&#39;Month&#39;</span>
+</pre>
+
+<p>@overload unselect(value = nil, from: nil, **options)</p>
+
+<pre>@macro waiting_behavior
+
+@param value [String]     Which option to unselect
+@param from [String]      The id, {Capybara.configure test_id} attribute, name or label of the select box</pre>
+
+<p>@return [Capybara::Node::Element]  The option element unselected</p>
+
+          <div class="method-source-code" id="unselect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/capybara-3.40.0/lib/capybara/node/actions.rb, line 230</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unselect</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">from:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;The :from option does not take an element&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span><span class="ruby-operator">::</span><span class="ruby-constant">Element</span>
+
+  <span class="ruby-identifier">scope</span> = <span class="ruby-identifier">from</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">find</span>(<span class="ruby-value">:select</span>, <span class="ruby-identifier">from</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:option</span>, <span class="ruby-identifier">value</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">unselect_option</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

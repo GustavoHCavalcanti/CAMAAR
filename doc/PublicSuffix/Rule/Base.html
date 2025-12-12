@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class PublicSuffix::Rule::Base - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-PublicSuffix::Rule::Base-label-Abstract+rule+class">Abstract rule class</a>
+          <li>      <a href="#class-PublicSuffix::Rule::Base-label-Abstract+rule+class">Abstract rule class</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-build">::build</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-3D-3D">#==</a>
+    <li ><a href="#method-i-decompose">#decompose</a>
+    <li ><a href="#method-i-eql-3F">#eql?</a>
+    <li ><a href="#method-i-match-3F">#match?</a>
+    <li ><a href="#method-i-parts">#parts</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PublicSuffix::Rule::Base">
+  <h1 id="class-PublicSuffix::Rule::Base" class="class">
+    class PublicSuffix::Rule::Base
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-PublicSuffix::Rule::Base-label-Abstract+rule+class">Abstract rule class<span><a href="#class-PublicSuffix::Rule::Base-label-Abstract+rule+class">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>This represent the base class for a <a href="../Rule.html"><code>Rule</code></a> definition in the <a href="https://publicsuffix.org">Public Suffix List</a>.</p>
+
+<p>This is intended to be an Abstract class and you shouldn’t create a direct instance. The only purpose of this class is to expose a common interface for all the available subclasses.</p>
+<ul><li>
+<p>{PublicSuffix::Rule::Normal}</p>
+</li><li>
+<p>{PublicSuffix::Rule::Exception}</p>
+</li><li>
+<p>{PublicSuffix::Rule::Wildcard}</p>
+</li></ul>
+
+<p>## Properties</p>
+
+<p>A rule is composed by 4 properties:</p>
+
+<p>value   - A normalized version of the rule name.</p>
+
+<pre>The normalization process depends on rule tpe.</pre>
+
+<p>Here’s an example</p>
+
+<pre>PublicSuffix::Rule.factory(&quot;*.google.com&quot;)
+#&lt;PublicSuffix::Rule::Wildcard:0x1015c14b0
+    @value=&quot;google.com&quot;
+&gt;</pre>
+
+<p>## <a href="../Rule.html"><code>Rule</code></a> Creation</p>
+
+<p>The best way to create a new rule is passing the rule name to the <code>PublicSuffix::Rule.factory</code> method.</p>
+
+<pre class="ruby"><span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>)
+<span class="ruby-comment"># =&gt; PublicSuffix::Rule::Normal</span>
+
+<span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;*.com&quot;</span>)
+<span class="ruby-comment"># =&gt; PublicSuffix::Rule::Wildcard</span>
+</pre>
+
+<p>This method will detect the rule type and create an instance from the proper rule class.</p>
+
+<p>## <a href="../Rule.html"><code>Rule</code></a> Usage</p>
+
+<p>A rule describes the composition of a domain name and explains how to tokenize the name into tld, sld and trd.</p>
+
+<p>To use a rule, you first need to be sure the name you want to tokenize can be handled by the current rule. You can use the <code>#match?</code> method.</p>
+
+<pre class="ruby"><span class="ruby-identifier">rule</span> = <span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>)
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-string">&quot;google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-string">&quot;google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p><a href="../Rule.html"><code>Rule</code></a> order is significant. A name can match more than one rule. See the <a href="http://publicsuffix.org/format/">Public Suffix Documentation</a> to learn more about rule priority.</p>
+
+<p>When you have the right rule, you can use it to tokenize the domain name.</p>
+
+<pre class="ruby"><span class="ruby-identifier">rule</span> = <span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>)
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">decompose</span>(<span class="ruby-string">&quot;google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; [&quot;google&quot;, &quot;com&quot;]</span>
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">decompose</span>(<span class="ruby-string">&quot;www.google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; [&quot;www.google&quot;, &quot;com&quot;]</span>
+</pre>
+
+<p>@abstract</p>
+
+<h1 id="class-PublicSuffix::Rule::Base-label-Abstract+rule+class">Abstract rule class<span><a href="#class-PublicSuffix::Rule::Base-label-Abstract+rule+class">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>This represent the base class for a <a href="../Rule.html"><code>Rule</code></a> definition in the <a href="https://publicsuffix.org">Public Suffix List</a>.</p>
+
+<p>This is intended to be an Abstract class and you shouldn’t create a direct instance. The only purpose of this class is to expose a common interface for all the available subclasses.</p>
+<ul><li>
+<p>{PublicSuffix::Rule::Normal}</p>
+</li><li>
+<p>{PublicSuffix::Rule::Exception}</p>
+</li><li>
+<p>{PublicSuffix::Rule::Wildcard}</p>
+</li></ul>
+
+<p>## Properties</p>
+
+<p>A rule is composed by 4 properties:</p>
+
+<p>value   - A normalized version of the rule name.</p>
+
+<pre>The normalization process depends on rule tpe.</pre>
+
+<p>Here’s an example</p>
+
+<pre>PublicSuffix::Rule.factory(&quot;*.google.com&quot;)
+#&lt;PublicSuffix::Rule::Wildcard:0x1015c14b0
+    @value=&quot;google.com&quot;
+&gt;</pre>
+
+<p>## <a href="../Rule.html"><code>Rule</code></a> Creation</p>
+
+<p>The best way to create a new rule is passing the rule name to the <code>PublicSuffix::Rule.factory</code> method.</p>
+
+<pre class="ruby"><span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>)
+<span class="ruby-comment"># =&gt; PublicSuffix::Rule::Normal</span>
+
+<span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;*.com&quot;</span>)
+<span class="ruby-comment"># =&gt; PublicSuffix::Rule::Wildcard</span>
+</pre>
+
+<p>This method will detect the rule type and create an instance from the proper rule class.</p>
+
+<p>## <a href="../Rule.html"><code>Rule</code></a> Usage</p>
+
+<p>A rule describes the composition of a domain name and explains how to tokenize the name into tld, sld and trd.</p>
+
+<p>To use a rule, you first need to be sure the name you want to tokenize can be handled by the current rule. You can use the <code>#match?</code> method.</p>
+
+<pre class="ruby"><span class="ruby-identifier">rule</span> = <span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>)
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-string">&quot;google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-string">&quot;google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p><a href="../Rule.html"><code>Rule</code></a> order is significant. A name can match more than one rule. See the <a href="http://publicsuffix.org/format/">Public Suffix Documentation</a> to learn more about rule priority.</p>
+
+<p>When you have the right rule, you can use it to tokenize the domain name.</p>
+
+<pre class="ruby"><span class="ruby-identifier">rule</span> = <span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>)
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">decompose</span>(<span class="ruby-string">&quot;google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; [&quot;google&quot;, &quot;com&quot;]</span>
+
+<span class="ruby-identifier">rule</span>.<span class="ruby-identifier">decompose</span>(<span class="ruby-string">&quot;www.google.com&quot;</span>)
+<span class="ruby-comment"># =&gt; [&quot;www.google&quot;, &quot;com&quot;]</span>
+</pre>
+
+<p>@abstract</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-length" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">length</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [String] the length of the rule</p>
+        </div>
+      </div>
+      <div id="attribute-i-private" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">private</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [Boolean] true if the rule is a private domain</p>
+        </div>
+      </div>
+      <div id="attribute-i-value" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">value</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>@return [String] the rule definition</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-build" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">build</span><span
+              class="method-args">(content, private: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initializes a new rule from the content.</p>
+
+<p>@param  content [String] the content of the rule @param  private [Boolean]</p>
+
+          <div class="method-source-code" id="build-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">build</span>(<span class="ruby-identifier">content</span>, <span class="ruby-value">private:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-value">value:</span> <span class="ruby-identifier">content</span>, <span class="ruby-value">private:</span> <span class="ruby-identifier">private</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(value:, length: nil, private: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initializes a new rule.</p>
+
+<p>@param  value [String] @param  private [Boolean]</p>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">value:</span>, <span class="ruby-value">length:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">private:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@value</span>    = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-ivar">@length</span>   = <span class="ruby-identifier">length</span> <span class="ruby-operator">||</span> (<span class="ruby-ivar">@value</span>.<span class="ruby-identifier">count</span>(<span class="ruby-constant">DOT</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+  <span class="ruby-ivar">@private</span>  = <span class="ruby-identifier">private</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-3D-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">==</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Checks whether this rule is equal to <code>other</code>.</p>
+
+<p>@param  other [PublicSuffix::Rule::*] The rule to compare @return [Boolean] true if this rule and other are instances of the same class</p>
+
+<pre>and has the same value, false otherwise.</pre>
+
+          <div class="method-source-code" id="3D-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">other</span>) <span class="ruby-operator">||</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Base.html#method-i-eql-3F">eql?</a>, eql?
+        </div>
+
+      </div>
+
+      <div id="method-i-decompose" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">decompose</span><span
+              class="method-args">(*)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@abstract @param  domain [#to_s] The domain name to decompose @return [Array&lt;String, nil&gt;]</p>
+
+          <div class="method-source-code" id="decompose-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 180</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">decompose</span>(<span class="ruby-operator">*</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-eql-3F" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">eql?</span><span
+              class="method-args">(other)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Base.html#method-i-3D-3D">==</a>
+        </div>
+      </div>
+
+      <div id="method-i-match-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">match?</span><span
+              class="method-args">(name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Checks if this rule matches <code>name</code>.</p>
+
+<p>A domain name is said to match a rule if and only if all of the following conditions are met:</p>
+<ul><li>
+<p>When the domain and rule are split into corresponding labels, that the domain contains as many or more labels than the rule.</p>
+</li><li>
+<p>Beginning with the right-most labels of both the domain and the rule, and continuing for all labels in the rule, one finds that for every pair, either they are identical, or that the label from the rule is “*”.</p>
+</li></ul>
+
+<p>@see <a href="https://publicsuffix.org/list">publicsuffix.org/list</a>/</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>).<span class="ruby-identifier">match?</span>(<span class="ruby-string">&quot;example.com&quot;</span>)
+<span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-constant">PublicSuffix</span><span class="ruby-operator">::</span><span class="ruby-constant">Rule</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-string">&quot;com&quot;</span>).<span class="ruby-identifier">match?</span>(<span class="ruby-string">&quot;example.net&quot;</span>)
+<span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p>@param  name [String] the domain name to check @return [Boolean]</p>
+
+          <div class="method-source-code" id="match-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">match?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-comment"># NOTE: it works because of the assumption there are no</span>
+  <span class="ruby-comment"># rules like foo.*.com. If the assumption is incorrect,</span>
+  <span class="ruby-comment"># we need to properly walk the input and skip parts according</span>
+  <span class="ruby-comment"># to wildcard component.</span>
+  <span class="ruby-identifier">diff</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">diff</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">diff</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-constant">DOT</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-parts" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parts</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@abstract</p>
+
+          <div class="method-source-code" id="parts-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/public_suffix-7.0.0/lib/public_suffix/rule.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parts</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

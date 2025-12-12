@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bootsnap::LoadPathCache::Cache - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-find">#find</a>
+    <li ><a href="#method-i-load_dir">#load_dir</a>
+    <li ><a href="#method-i-push_paths">#push_paths</a>
+    <li ><a href="#method-i-reinitialize">#reinitialize</a>
+    <li ><a href="#method-i-unshift_paths">#unshift_paths</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bootsnap::LoadPathCache::Cache">
+  <h1 id="class-Bootsnap::LoadPathCache::Cache" class="class">
+    class Bootsnap::LoadPathCache::Cache
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="AGE_THRESHOLD">AGE_THRESHOLD
+        <dd>
+        <dt id="BUILTIN_FEATURES">BUILTIN_FEATURES
+        <dd><p>{ ‘enumerator’ =&gt; nil, ‘enumerator.so’ =&gt; nil, … }</p>
+        <dt id="TRUFFLERUBY_LIB_DIR_PREFIX">TRUFFLERUBY_LIB_DIR_PREFIX
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(store, path_obj, development_mode: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/cache.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">store</span>, <span class="ruby-identifier">path_obj</span>, <span class="ruby-value">development_mode:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@development_mode</span> = <span class="ruby-identifier">development_mode</span>
+  <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">store</span>
+  <span class="ruby-ivar">@mutex</span> = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@path_obj</span> = <span class="ruby-identifier">path_obj</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-constant">PathScanner</span>.<span class="ruby-identifier">os_path</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">f</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">realpath</span>(<span class="ruby-identifier">f</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">dup</span>) }
+  <span class="ruby-ivar">@has_relative_paths</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">reinitialize</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-find" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find</span><span
+              class="method-args">(feature)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Try to resolve this feature to an absolute path without traversing the loadpath.</p>
+
+          <div class="method-source-code" id="find-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/cache.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find</span>(<span class="ruby-identifier">feature</span>)
+  <span class="ruby-identifier">reinitialize</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@has_relative_paths</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">dir_changed?</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">stale?</span>
+  <span class="ruby-identifier">feature</span> = <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">freeze</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">feature</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">Bootsnap</span>.<span class="ruby-identifier">absolute_path?</span>(<span class="ruby-identifier">feature</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;./&quot;</span>, <span class="ruby-string">&quot;../&quot;</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">feature</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">search_index</span>(<span class="ruby-identifier">feature</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>
+
+    <span class="ruby-comment"># Ruby has some built-in features that require lies about.</span>
+    <span class="ruby-comment"># For example, &#39;enumerator&#39; is built in. If you require it, ruby</span>
+    <span class="ruby-comment"># returns false as if it were already loaded; however, there is no</span>
+    <span class="ruby-comment"># file to find on disk. We&#39;ve pre-built a list of these, and we</span>
+    <span class="ruby-comment"># return false if any of them is loaded.</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">BUILTIN_FEATURES</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">feature</span>)
+
+    <span class="ruby-comment"># The feature wasn&#39;t found on our preliminary search through the index.</span>
+    <span class="ruby-comment"># We resolve this differently depending on what the extension was.</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">feature</span>)
+    <span class="ruby-comment"># If the extension was one of the ones we explicitly cache (.rb and the</span>
+    <span class="ruby-comment"># native dynamic extension, e.g. .bundle or .so), we know it was a</span>
+    <span class="ruby-comment"># failure and there&#39;s nothing more we can do to find the file.</span>
+    <span class="ruby-comment"># no extension, .rb, (.bundle or .so)</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-operator">*</span><span class="ruby-constant">CACHED_EXTENSIONS</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-comment"># Ruby allows specifying native extensions as &#39;.so&#39; even when DLEXT</span>
+    <span class="ruby-comment"># is &#39;.bundle&#39;. This is where we handle that case.</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">DOT_SO</span>
+      <span class="ruby-identifier">x</span> = <span class="ruby-identifier">search_index</span>(<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">-4</span>] <span class="ruby-operator">+</span> <span class="ruby-constant">DLEXT</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">DLEXT2</span>
+        <span class="ruby-identifier">x</span> = <span class="ruby-identifier">search_index</span>(<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">-4</span>] <span class="ruby-operator">+</span> <span class="ruby-constant">DLEXT2</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># other, unknown extension. For example, `.rake`. Since we haven&#39;t</span>
+      <span class="ruby-comment"># cached these, we legitimately need to run the load path search.</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-constant">FALLBACK_SCAN</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># In development mode, we don&#39;t want to confidently return failures for</span>
+  <span class="ruby-comment"># cases where the file doesn&#39;t appear to be on the load path. We should</span>
+  <span class="ruby-comment"># be able to detect newly-created files without rebooting the</span>
+  <span class="ruby-comment"># application.</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">FALLBACK_SCAN</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@development_mode</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-load_dir" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">load_dir</span><span
+              class="method-args">(dir)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>What is the path item that contains the dir as child? e.g. given “/a/b/c/d” exists, and the path is [“/a/b”], <a href="Cache.html#method-i-load_dir"><code>load_dir</code></a>(“c/d”) is “/a/b”.</p>
+
+          <div class="method-source-code" id="load_dir-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/cache.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_dir</span>(<span class="ruby-identifier">dir</span>)
+  <span class="ruby-identifier">reinitialize</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">stale?</span>
+  <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-ivar">@dirs</span>[<span class="ruby-identifier">dir</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-push_paths" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">push_paths</span><span
+              class="method-args">(sender, *paths)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="push_paths-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/cache.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">push_paths</span>(<span class="ruby-identifier">sender</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">paths</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">sender</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@path_obj</span>
+
+  <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-identifier">push_paths_locked</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">paths</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-reinitialize" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reinitialize</span><span
+              class="method-args">(path_obj = @path_obj)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="reinitialize-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/cache.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reinitialize</span>(<span class="ruby-identifier">path_obj</span> = <span class="ruby-ivar">@path_obj</span>)
+  <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@path_obj</span> = <span class="ruby-identifier">path_obj</span>
+    <span class="ruby-constant">ChangeObserver</span>.<span class="ruby-identifier">register</span>(<span class="ruby-ivar">@path_obj</span>, <span class="ruby-keyword">self</span>)
+    <span class="ruby-ivar">@index</span> = {}
+    <span class="ruby-ivar">@dirs</span> = {}
+    <span class="ruby-ivar">@generated_at</span> = <span class="ruby-identifier">now</span>
+    <span class="ruby-identifier">push_paths_locked</span>(<span class="ruby-operator">*</span><span class="ruby-ivar">@path_obj</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-unshift_paths" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">unshift_paths</span><span
+              class="method-args">(sender, *paths)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="unshift_paths-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/cache.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unshift_paths</span>(<span class="ruby-identifier">sender</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">paths</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">sender</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@path_obj</span>
+
+  <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-identifier">unshift_paths_locked</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">paths</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

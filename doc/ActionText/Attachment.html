@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActionText::Attachment - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-ActionText::Attachment-label-Action+Text+Attachment">Action Text Attachment</a>
+          <li>      <a href="#class-ActionText::Attachment-label-Action+Text+Attachment">Action Text Attachment</a>
+          <li>      <a href="#class-ActionText::Attachment-label-Action+Text+Attachment">Action Text Attachment</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-fragment_by_canonicalizing_attachments">::fragment_by_canonicalizing_attachments</a>
+    <li ><a href="#method-c-from_attachable">::from_attachable</a>
+    <li ><a href="#method-c-from_attachables">::from_attachables</a>
+    <li ><a href="#method-c-from_attributes">::from_attributes</a>
+    <li ><a href="#method-c-from_node">::from_node</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-caption">#caption</a>
+    <li ><a href="#method-i-full_attributes">#full_attributes</a>
+    <li ><a href="#method-i-inspect">#inspect</a>
+    <li ><a href="#method-i-to_html">#to_html</a>
+    <li ><a href="#method-i-to_plain_text">#to_plain_text</a>
+    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-with_full_attributes">#with_full_attributes</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActionText::Attachment">
+  <h1 id="class-ActionText::Attachment" class="class">
+    class ActionText::Attachment
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActionText::Attachment-label-Action+Text+Attachment">Action Text <a href="Attachment.html"><code>Attachment</code></a><span><a href="#class-ActionText::Attachment-label-Action+Text+Attachment">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Attachments.html"><code>Attachments</code></a> serialize attachables to HTML or plain text.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachable</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">attachable</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create!</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Javan&quot;</span>
+<span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_html</span> <span class="ruby-comment"># =&gt; &quot;&lt;action-text-attachment sgid=\&quot;BAh7CEk...&quot;</span>
+</pre>
+
+<h1 id="class-ActionText::Attachment-label-Action+Text+Attachment">Action Text <a href="Attachment.html"><code>Attachment</code></a><span><a href="#class-ActionText::Attachment-label-Action+Text+Attachment">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Attachments.html"><code>Attachments</code></a> serialize attachables to HTML or plain text.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachable</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">attachable</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create!</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Javan&quot;</span>
+<span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_html</span> <span class="ruby-comment"># =&gt; &quot;&lt;action-text-attachment sgid=\&quot;BAh7CEk...&quot;</span>
+</pre>
+
+<h1 id="class-ActionText::Attachment-label-Action+Text+Attachment">Action Text <a href="Attachment.html"><code>Attachment</code></a><span><a href="#class-ActionText::Attachment-label-Action+Text+Attachment">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Attachments.html"><code>Attachments</code></a> serialize attachables to HTML or plain text.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachable</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">attachable</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create!</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Javan&quot;</span>
+<span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_html</span> <span class="ruby-comment"># =&gt; &quot;&lt;action-text-attachment sgid=\&quot;BAh7CEk...&quot;</span>
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="ATTRIBUTES">ATTRIBUTES
+        <dd>
+      </dl>
+    </section>
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-attachable" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">attachable</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+      <div id="attribute-i-node" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">node</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-fragment_by_canonicalizing_attachments" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fragment_by_canonicalizing_attachments</span><span
+              class="method-args">(content)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="fragment_by_canonicalizing_attachments-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fragment_by_canonicalizing_attachments</span>(<span class="ruby-identifier">content</span>)
+  <span class="ruby-identifier">fragment_by_minifying_attachments</span>(<span class="ruby-identifier">fragment_by_converting_trix_attachments</span>(<span class="ruby-identifier">content</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-from_attachable" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">from_attachable</span><span
+              class="method-args">(attachable, attributes = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="from_attachable-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_attachable</span>(<span class="ruby-identifier">attachable</span>, <span class="ruby-identifier">attributes</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span> = <span class="ruby-identifier">node_from_attributes</span>(<span class="ruby-identifier">attachable</span>.<span class="ruby-identifier">to_rich_text_attributes</span>(<span class="ruby-identifier">attributes</span>))
+    <span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-from_attachables" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">from_attachables</span><span
+              class="method-args">(attachables)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="from_attachables-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_attachables</span>(<span class="ruby-identifier">attachables</span>)
+  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">attachables</span>).<span class="ruby-identifier">filter_map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attachable</span><span class="ruby-operator">|</span> <span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-from_attributes" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">from_attributes</span><span
+              class="method-args">(attributes, attachable = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="from_attributes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_attributes</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">attachable</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span> = <span class="ruby-identifier">node_from_attributes</span>(<span class="ruby-identifier">attributes</span>)
+    <span class="ruby-identifier">from_node</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-from_node" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">from_node</span><span
+              class="method-args">(node, attachable = nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="from_node-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_node</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachable</span>.<span class="ruby-identifier">from_node</span>(<span class="ruby-identifier">node</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(node, attachable)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span>)
+  <span class="ruby-ivar">@node</span> = <span class="ruby-identifier">node</span>
+  <span class="ruby-ivar">@attachable</span> = <span class="ruby-identifier">attachable</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-caption" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">caption</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="caption-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">caption</span>
+  <span class="ruby-identifier">node_attributes</span>[<span class="ruby-string">&quot;caption&quot;</span>].<span class="ruby-identifier">presence</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-full_attributes" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">full_attributes</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="full_attributes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">full_attributes</span>
+  <span class="ruby-identifier">node_attributes</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">attachable_attributes</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">sgid_attributes</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-inspect" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">inspect</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="inspect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
+  <span class="ruby-node">&quot;#&lt;#{self.class.name} attachable=#{attachable.inspect}&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_html" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_html</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Converts the attachment to HTML.</p>
+
+<pre class="ruby"><span class="ruby-identifier">attachable</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create!</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Javan&quot;</span>
+<span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_html</span> <span class="ruby-comment"># =&gt; &quot;&lt;action-text-attachment sgid=\&quot;BAh7CEk...</span>
+</pre>
+
+          <div class="method-source-code" id="to_html-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_html</span>
+  <span class="ruby-constant">HtmlConversion</span>.<span class="ruby-identifier">node_to_html</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_plain_text" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_plain_text</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Converts the attachment to plain text.</p>
+
+<pre class="ruby"><span class="ruby-identifier">attachable</span> = <span class="ruby-constant">ActiveStorage</span><span class="ruby-operator">::</span><span class="ruby-constant">Blob</span>.<span class="ruby-identifier">find_by</span> <span class="ruby-value">filename:</span> <span class="ruby-string">&quot;racecar.jpg&quot;</span>
+<span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;[racecar.jpg]&quot;</span>
+</pre>
+
+<p>Use the <code>caption</code> when set:</p>
+
+<pre class="ruby"><span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>, <span class="ruby-value">caption:</span> <span class="ruby-string">&quot;Vroom vroom&quot;</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;[Vroom vroom]&quot;</span>
+</pre>
+
+<p>The presentation can be overridden by implementing the <code>attachable_plain_text_representation</code> method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachable</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attachable_plain_text_representation</span>
+    <span class="ruby-node">&quot;[#{name}]&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">attachable</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create!</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Javan&quot;</span>
+<span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_plain_text</span> <span class="ruby-comment"># =&gt; &quot;[Javan]&quot;</span>
+</pre>
+
+          <div class="method-source-code" id="to_plain_text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_plain_text</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:attachable_plain_text_representation</span>)
+    <span class="ruby-identifier">attachable_plain_text_representation</span>(<span class="ruby-identifier">caption</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">caption</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_s" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_s</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+  <span class="ruby-identifier">to_html</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-with_full_attributes" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">with_full_attributes</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="with_full_attributes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_full_attributes</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">from_attributes</span>(<span class="ruby-identifier">full_attributes</span>, <span class="ruby-identifier">attachable</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

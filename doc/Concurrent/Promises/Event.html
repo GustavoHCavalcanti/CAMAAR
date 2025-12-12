@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Concurrent::Promises::Event - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="AbstractEventFuture.html">Concurrent::Promises::AbstractEventFuture</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-26">#&amp;</a>
+    <li ><a href="#method-i-any">#any</a>
+    <li ><a href="#method-i-delay">#delay</a>
+    <li ><a href="#method-i-schedule">#schedule</a>
+    <li ><a href="#method-i-to_event">#to_event</a>
+    <li ><a href="#method-i-to_future">#to_future</a>
+    <li ><a href="#method-i-with_default_executor">#with_default_executor</a>
+    <li ><a href="#method-i-zip">#zip</a>
+    <li ><a href="#method-i-7C">#|</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Concurrent::Promises::Event">
+  <h1 id="class-Concurrent::Promises::Event" class="class">
+    class Concurrent::Promises::Event
+  </h1>
+
+  <section class="description">
+    
+<p>Represents an event which will happen in future (will be resolved). The event is either pending or resolved. It should be always resolved. Use {Future} to communicate rejections and cancellation.</p>
+
+<p>Represents an event which will happen in future (will be resolved). The event is either pending or resolved. It should be always resolved. Use {Future} to communicate rejections and cancellation.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-26" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">&amp;</span><span
+              class="method-args">(other)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Event.html#method-i-zip">zip</a>
+        </div>
+      </div>
+
+      <div id="method-i-any" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">any</span><span
+              class="method-args">(event_or_future)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new event which will be resolved when the first of receiver, ‘event_or_future` resolves.</p>
+
+<p>@return [Event]</p>
+
+          <div class="method-source-code" id="any-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 853</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">any</span>(<span class="ruby-identifier">event_or_future</span>)
+  <span class="ruby-constant">AnyResolvedEventPromise</span>.<span class="ruby-identifier">new_blocked_by2</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">event_or_future</span>, <span class="ruby-ivar">@DefaultExecutor</span>).<span class="ruby-identifier">event</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Event.html#method-i-7C">|</a>, |
+        </div>
+
+      </div>
+
+      <div id="method-i-delay" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">delay</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates new event dependent on receiver which will not evaluate until touched, see {#touch}. In other words, it inserts delay into the chain of Futures making rest of it lazy evaluated.</p>
+
+<p>@return [Event]</p>
+
+          <div class="method-source-code" id="delay-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 863</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delay</span>
+  <span class="ruby-identifier">event</span> = <span class="ruby-constant">DelayPromise</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@DefaultExecutor</span>).<span class="ruby-identifier">event</span>
+  <span class="ruby-constant">ZipEventEventPromise</span>.<span class="ruby-identifier">new_blocked_by2</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">event</span>, <span class="ruby-ivar">@DefaultExecutor</span>).<span class="ruby-identifier">event</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-schedule" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">schedule</span><span
+              class="method-args">(intended_time)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@!macro promise.method.schedule</p>
+
+<pre>Creates new event dependent on receiver scheduled to execute on/in intended_time.
+In time is interpreted from the moment the receiver is resolved, therefore it inserts
+delay into the chain.
+
+@!macro promises.param.intended_time</pre>
+
+<p>@return [Event]</p>
+
+          <div class="method-source-code" id="schedule-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 875</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">schedule</span>(<span class="ruby-identifier">intended_time</span>)
+  <span class="ruby-identifier">chain</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">event</span> = <span class="ruby-constant">ScheduledPromise</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@DefaultExecutor</span>, <span class="ruby-identifier">intended_time</span>).<span class="ruby-identifier">event</span>
+    <span class="ruby-constant">ZipEventEventPromise</span>.<span class="ruby-identifier">new_blocked_by2</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">event</span>, <span class="ruby-ivar">@DefaultExecutor</span>).<span class="ruby-identifier">event</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">flat_event</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_event" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_event</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns self, since this is event @return [Event]</p>
+
+          <div class="method-source-code" id="to_event-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 893</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_event</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_future" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_future</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Converts event to a future. The future is fulfilled when the event is resolved, the future may never fail.</p>
+
+<p>@return [Future]</p>
+
+          <div class="method-source-code" id="to_future-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 885</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_future</span>
+  <span class="ruby-identifier">future</span> = <span class="ruby-constant">Promises</span>.<span class="ruby-identifier">resolvable_future</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">chain_resolvable</span>(<span class="ruby-identifier">future</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-with_default_executor" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">with_default_executor</span><span
+              class="method-args">(executor)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@!macro promises.method.with_default_executor @return [Event]</p>
+
+          <div class="method-source-code" id="with_default_executor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 899</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_default_executor</span>(<span class="ruby-identifier">executor</span>)
+  <span class="ruby-constant">EventWrapperPromise</span>.<span class="ruby-identifier">new_blocked_by1</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">executor</span>).<span class="ruby-identifier">event</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-zip" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">zip</span><span
+              class="method-args">(other)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@!macro promises.method.zip</p>
+
+<pre>Creates a new event or a future which will be resolved when receiver and other are.
+Returns an event if receiver and other are events, otherwise returns a future.
+If just one of the parties is Future then the result
+of the returned future is equal to the result of the supplied future. If both are futures
+then the result is as described in {FactoryMethods#zip_futures_on}.</pre>
+
+<p>@return [Future, Event]</p>
+
+          <div class="method-source-code" id="zip-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 839</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">zip</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Future</span>)
+    <span class="ruby-constant">ZipFutureEventPromise</span>.<span class="ruby-identifier">new_blocked_by2</span>(<span class="ruby-identifier">other</span>, <span class="ruby-keyword">self</span>, <span class="ruby-ivar">@DefaultExecutor</span>).<span class="ruby-identifier">future</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">ZipEventEventPromise</span>.<span class="ruby-identifier">new_blocked_by2</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">other</span>, <span class="ruby-ivar">@DefaultExecutor</span>).<span class="ruby-identifier">event</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+        <div class="aliases">
+          Also aliased as: <a href="Event.html#method-i-26">&amp;</a>, &amp;
+        </div>
+
+      </div>
+
+      <div id="method-i-7C" class="method-detail method-alias">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">|</span><span
+              class="method-args">(event_or_future)</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+        </div>
+
+
+        <div class="aliases">
+          Alias for: <a href="Event.html#method-i-any">any</a>
+        </div>
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

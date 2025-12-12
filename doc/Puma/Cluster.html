@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Puma::Cluster - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Runner
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-all_workers_booted-3F">#all_workers_booted?</a>
+    <li ><a href="#method-i-all_workers_idle_timed_out-3F">#all_workers_idle_timed_out?</a>
+    <li ><a href="#method-i-all_workers_in_phase-3F">#all_workers_in_phase?</a>
+    <li ><a href="#method-i-check_workers">#check_workers</a>
+    <li ><a href="#method-i-cull_start_index">#cull_start_index</a>
+    <li ><a href="#method-i-cull_workers">#cull_workers</a>
+    <li ><a href="#method-i-fork_worker-21">#fork_worker!</a>
+    <li ><a href="#method-i-halt">#halt</a>
+    <li ><a href="#method-i-next_worker_index">#next_worker_index</a>
+    <li ><a href="#method-i-phased_restart">#phased_restart</a>
+    <li ><a href="#method-i-preload-3F">#preload?</a>
+    <li class="calls-super" ><a href="#method-i-redirect_io">#redirect_io</a>
+    <li ><a href="#method-i-reload_worker_directory">#reload_worker_directory</a>
+    <li ><a href="#method-i-restart">#restart</a>
+    <li ><a href="#method-i-run">#run</a>
+    <li ><a href="#method-i-setup_signals">#setup_signals</a>
+    <li ><a href="#method-i-spawn_worker">#spawn_worker</a>
+    <li ><a href="#method-i-spawn_workers">#spawn_workers</a>
+    <li ><a href="#method-i-start_phased_restart">#start_phased_restart</a>
+    <li class="calls-super" ><a href="#method-i-stats">#stats</a>
+    <li ><a href="#method-i-stop">#stop</a>
+    <li ><a href="#method-i-stop_blocked">#stop_blocked</a>
+    <li ><a href="#method-i-stop_workers">#stop_workers</a>
+    <li ><a href="#method-i-worker">#worker</a>
+    <li ><a href="#method-i-worker_at">#worker_at</a>
+    <li ><a href="#method-i-workers_to_cull">#workers_to_cull</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Puma::Cluster">
+  <h1 id="class-Puma::Cluster" class="class">
+    class Puma::Cluster
+  </h1>
+
+  <section class="description">
+    
+<p>This class is instantiated by the ‘Puma::Launcher` and used to boot and serve a Ruby application when puma “workers” are needed i.e. when using multi-processes. For example `$ puma -w 5`</p>
+
+<p>An instance of this class will spawn the number of processes passed in via the ‘spawn_workers` method call. Each worker will have it’s own instance of a ‘Puma::Server`.</p>
+
+<p>This class is instantiated by the ‘Puma::Launcher` and used to boot and serve a Ruby application when puma “workers” are needed i.e. when using multi-processes. For example `$ puma -w 5`</p>
+
+<p>An instance of this class will spawn the number of processes passed in via the ‘spawn_workers` method call. Each worker will have it’s own instance of a ‘Puma::Server`.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-workers" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">workers</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>Returns the list of cluster worker handles. @return [Array&lt;Puma::Cluster::WorkerHandle&gt;]</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(launcher)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">launcher</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">launcher</span>)
+
+  <span class="ruby-ivar">@phase</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@workers</span> = []
+  <span class="ruby-ivar">@next_check</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+
+  <span class="ruby-ivar">@worker_max</span> = [] <span class="ruby-comment"># keeps track of &#39;max&#39; stat values</span>
+  <span class="ruby-ivar">@pending_phased_restart</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-all_workers_booted-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">all_workers_booted?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="all_workers_booted-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_workers_booted?</span>
+  <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">count</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">w</span>.<span class="ruby-identifier">booted?</span> } <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-all_workers_idle_timed_out-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">all_workers_idle_timed_out?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="all_workers_idle_timed_out-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_workers_idle_timed_out?</span>
+  (<span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:pid</span>) <span class="ruby-operator">-</span> <span class="ruby-identifier">idle_timed_out_worker_pids</span>).<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-all_workers_in_phase-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">all_workers_in_phase?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="all_workers_in_phase-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_workers_in_phase?</span>
+  <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">phase</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@phase</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-check_workers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_workers</span><span
+              class="method-args">(refork = false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="check_workers-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_workers</span>(<span class="ruby-identifier">refork</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@next_check</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+
+  <span class="ruby-ivar">@next_check</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:worker_check_interval</span>]
+
+  <span class="ruby-identifier">timeout_workers</span>
+  <span class="ruby-identifier">wait_workers</span>
+  <span class="ruby-identifier">cull_workers</span>
+  <span class="ruby-identifier">spawn_workers</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">all_workers_booted?</span>
+    <span class="ruby-comment"># If we&#39;re running at proper capacity, check to see if</span>
+    <span class="ruby-comment"># we need to phase any workers out (which will restart</span>
+    <span class="ruby-comment"># in the right phase).</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-identifier">w</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">phase</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@phase</span> }
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">refork</span>
+        <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- Stopping #{w.pid} for refork...&quot;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- Stopping #{w.pid} for phased upgrade...&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">term?</span>
+        <span class="ruby-identifier">w</span>.<span class="ruby-identifier">term</span>
+        <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- #{w.signal} sent to #{w.pid}...&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">t</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:term?</span>)
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:ping_timeout</span>)
+
+  <span class="ruby-ivar">@next_check</span> = [<span class="ruby-identifier">t</span>.<span class="ruby-identifier">min</span>, <span class="ruby-ivar">@next_check</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">min</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-cull_start_index" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cull_start_index</span><span
+              class="method-args">(diff)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="cull_start_index-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cull_start_index</span>(<span class="ruby-identifier">diff</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:worker_culling_strategy</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:oldest</span>
+    <span class="ruby-value">0</span>
+  <span class="ruby-keyword">else</span> <span class="ruby-comment"># :youngest</span>
+    <span class="ruby-operator">-</span><span class="ruby-identifier">diff</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-cull_workers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cull_workers</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="cull_workers-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cull_workers</span>
+  <span class="ruby-identifier">diff</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:workers</span>]
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">diff</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Culling #{diff} workers&quot;</span>
+
+  <span class="ruby-identifier">workers</span> = <span class="ruby-identifier">workers_to_cull</span>(<span class="ruby-identifier">diff</span>)
+  <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Workers to cull: #{workers.inspect}&quot;</span>
+
+  <span class="ruby-identifier">workers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">worker</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- Worker #{worker.index} (PID: #{worker.pid}) terminating&quot;</span>
+    <span class="ruby-identifier">worker</span>.<span class="ruby-identifier">term</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fork_worker-21" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fork_worker!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@version 5.0.0</p>
+
+          <div class="method-source-code" id="fork_worker-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 304</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fork_worker!</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">worker</span> = <span class="ruby-identifier">worker_at</span> <span class="ruby-value">0</span>)
+    <span class="ruby-identifier">worker</span>.<span class="ruby-identifier">phase</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">phased_restart</span>(<span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-halt" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">halt</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="halt-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 259</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">halt</span>
+  <span class="ruby-ivar">@status</span> = <span class="ruby-value">:halt</span>
+  <span class="ruby-identifier">wakeup!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-next_worker_index" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">next_worker_index</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@!attribute [r] <a href="Cluster.html#method-i-next_worker_index"><code>next_worker_index</code></a></p>
+
+          <div class="method-source-code" id="next_worker_index-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">next_worker_index</span>
+  <span class="ruby-identifier">occupied_positions</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:index</span>)
+  <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">idx</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">until</span> <span class="ruby-operator">!</span><span class="ruby-identifier">occupied_positions</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">idx</span>)
+  <span class="ruby-identifier">idx</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-phased_restart" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">phased_restart</span><span
+              class="method-args">(refork = false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="phased_restart-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 238</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">phased_restart</span>(<span class="ruby-identifier">refork</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:preload_app</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">refork</span>
+
+  <span class="ruby-ivar">@pending_phased_restart</span> = <span class="ruby-identifier">refork</span> <span class="ruby-operator">?</span> <span class="ruby-value">:refork</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">wakeup!</span>
+
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-preload-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">preload?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="preload-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 299</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">preload?</span>
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:preload_app</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-redirect_io" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">redirect_io</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="redirect_io-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">redirect_io</span>
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">hup</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-reload_worker_directory" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">reload_worker_directory</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="reload_worker_directory-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reload_worker_directory</span>
+  <span class="ruby-identifier">dir</span> = <span class="ruby-ivar">@launcher</span>.<span class="ruby-identifier">restart_dir</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;+ Changing to #{dir}&quot;</span>
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span> <span class="ruby-identifier">dir</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-restart" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">restart</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="restart-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">restart</span>
+  <span class="ruby-ivar">@restart</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">stop</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-run" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">run</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="run-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 364</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>
+  <span class="ruby-ivar">@status</span> = <span class="ruby-value">:run</span>
+
+  <span class="ruby-identifier">output_header</span> <span class="ruby-string">&quot;cluster&quot;</span>
+
+  <span class="ruby-comment"># This is aligned with the output from Runner, see Runner#output_header</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*      Workers: #{@options[:workers]}&quot;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">preload?</span>
+    <span class="ruby-comment"># Threads explicitly marked as fork safe will be ignored. Used in Rails,</span>
+    <span class="ruby-comment"># but may be used by anyone.</span>
+    <span class="ruby-identifier">fork_safe</span> = <span class="ruby-operator">-&gt;</span>(<span class="ruby-identifier">t</span>) { <span class="ruby-identifier">t</span>.<span class="ruby-identifier">thread_variable_get</span>(<span class="ruby-value">:fork_safe</span>) }
+
+    <span class="ruby-identifier">before</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">fork_safe</span>)
+
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*     Restarts: (\u2714) hot (\u2716) phased (#{@options[:fork_worker] ? &quot;\u2714&quot; : &quot;\u2716&quot;}) refork&quot;</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;* Preloading application&quot;</span>
+    <span class="ruby-identifier">load_and_bind</span>
+
+    <span class="ruby-identifier">after</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">fork_safe</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">after</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">before</span>.<span class="ruby-identifier">size</span>
+      <span class="ruby-identifier">threads</span> = (<span class="ruby-identifier">after</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">before</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">threads</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:backtrace</span>
+        <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;! WARNING: Detected #{after.size-before.size} Thread(s) started in app boot:&quot;</span>
+        <span class="ruby-identifier">threads</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;! #{t.inspect} - #{t.backtrace ? t.backtrace.first : &#39;&#39;}&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;! WARNING: Detected #{after.size-before.size} Thread(s) started in app boot&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;*     Restarts: (\u2714) hot (\u2714) phased (#{@options[:fork_worker] ? &quot;\u2714&quot; : &quot;\u2716&quot;}) refork&quot;</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">app_configured?</span>
+      <span class="ruby-identifier">error</span> <span class="ruby-string">&quot;No application configured, nothing to run&quot;</span>
+      <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@launcher</span>.<span class="ruby-identifier">binder</span>.<span class="ruby-identifier">parse</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:binds</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">read</span>, <span class="ruby-ivar">@wakeup</span> = <span class="ruby-constant">Puma</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">pipe</span>
+
+  <span class="ruby-identifier">setup_signals</span>
+
+  <span class="ruby-comment"># Used by the workers to detect if the master process dies.</span>
+  <span class="ruby-comment"># If select says that @check_pipe is ready, it&#39;s because the</span>
+  <span class="ruby-comment"># master has exited and @suicide_pipe has been automatically</span>
+  <span class="ruby-comment"># closed.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-ivar">@check_pipe</span>, <span class="ruby-ivar">@suicide_pipe</span> = <span class="ruby-constant">Puma</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">pipe</span>
+
+  <span class="ruby-comment"># Separate pipe used by worker 0 to receive commands to</span>
+  <span class="ruby-comment"># fork new worker processes.</span>
+  <span class="ruby-ivar">@fork_pipe</span>, <span class="ruby-ivar">@fork_writer</span> = <span class="ruby-constant">Puma</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">pipe</span>
+
+  <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;Use Ctrl-C to stop&quot;</span>
+
+  <span class="ruby-identifier">warn_ruby_mn_threads</span>
+  <span class="ruby-identifier">single_worker_warning</span>
+
+  <span class="ruby-identifier">redirect_io</span>
+
+  <span class="ruby-constant">Plugins</span>.<span class="ruby-identifier">fire_background</span>
+
+  <span class="ruby-ivar">@launcher</span>.<span class="ruby-identifier">write_state</span>
+
+  <span class="ruby-identifier">start_control</span>
+
+  <span class="ruby-ivar">@master_read</span>, <span class="ruby-ivar">@worker_write</span> = <span class="ruby-identifier">read</span>, <span class="ruby-ivar">@wakeup</span>
+
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:worker_write</span>] = <span class="ruby-ivar">@worker_write</span>
+
+  <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">run_hooks</span>(<span class="ruby-value">:before_fork</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-ivar">@log_writer</span>)
+
+  <span class="ruby-identifier">spawn_workers</span>
+
+  <span class="ruby-constant">Signal</span>.<span class="ruby-identifier">trap</span> <span class="ruby-string">&quot;SIGINT&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">stop</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">booted</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">in_phased_restart</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">workers_not_booted</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:workers</span>]
+
+    <span class="ruby-keyword">while</span> <span class="ruby-ivar">@status</span> <span class="ruby-operator">==</span> <span class="ruby-value">:run</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:idle_timeout</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">all_workers_idle_timed_out?</span>
+          <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;- All workers reached idle timeout&quot;</span>
+          <span class="ruby-keyword">break</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@pending_phased_restart</span>
+          <span class="ruby-identifier">start_phased_restart</span>(<span class="ruby-ivar">@pending_phased_restart</span> <span class="ruby-operator">==</span> <span class="ruby-value">:refork</span>)
+
+          <span class="ruby-identifier">in_phased_restart</span> = <span class="ruby-ivar">@pending_phased_restart</span>
+          <span class="ruby-ivar">@pending_phased_restart</span> = <span class="ruby-keyword">false</span>
+
+          <span class="ruby-identifier">workers_not_booted</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:workers</span>]
+          <span class="ruby-comment"># worker 0 is not restarted on refork</span>
+          <span class="ruby-identifier">workers_not_booted</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">in_phased_restart</span> <span class="ruby-operator">==</span> <span class="ruby-value">:refork</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">check_workers</span>(<span class="ruby-identifier">in_phased_restart</span> <span class="ruby-operator">==</span> <span class="ruby-value">:refork</span>)
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">read</span>.<span class="ruby-identifier">wait_readable</span>([<span class="ruby-value">0</span>, <span class="ruby-ivar">@next_check</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>].<span class="ruby-identifier">max</span>)
+          <span class="ruby-identifier">req</span> = <span class="ruby-identifier">read</span>.<span class="ruby-identifier">read_nonblock</span>(<span class="ruby-value">1</span>)
+          <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">req</span>
+
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">req</span> <span class="ruby-operator">==</span> <span class="ruby-constant">PIPE_WAKEUP</span>
+            <span class="ruby-ivar">@next_check</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+            <span class="ruby-keyword">next</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">result</span> = <span class="ruby-identifier">read</span>.<span class="ruby-identifier">gets</span>
+          <span class="ruby-identifier">pid</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">to_i</span>
+
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">req</span> <span class="ruby-operator">==</span> <span class="ruby-constant">PIPE_BOOT</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">req</span> <span class="ruby-operator">==</span> <span class="ruby-constant">PIPE_FORK</span>
+            <span class="ruby-identifier">pid</span>, <span class="ruby-identifier">idx</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_i</span>)
+            <span class="ruby-identifier">w</span> = <span class="ruby-identifier">worker_at</span> <span class="ruby-identifier">idx</span>
+            <span class="ruby-identifier">w</span>.<span class="ruby-identifier">pid</span> = <span class="ruby-identifier">pid</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">pid</span>.<span class="ruby-identifier">nil?</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">pid</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">pid</span> }
+            <span class="ruby-keyword">case</span> <span class="ruby-identifier">req</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-constant">PIPE_BOOT</span>
+              <span class="ruby-identifier">w</span>.<span class="ruby-identifier">boot!</span>
+              <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- Worker #{w.index} (PID: #{pid}) booted in #{w.uptime.round(2)}s, phase: #{w.phase}&quot;</span>
+              <span class="ruby-ivar">@next_check</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+              <span class="ruby-identifier">workers_not_booted</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-constant">PIPE_EXTERNAL_TERM</span>
+              <span class="ruby-comment"># external term, see worker method, Signal.trap &quot;SIGTERM&quot;</span>
+              <span class="ruby-identifier">w</span>.<span class="ruby-identifier">term!</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-constant">PIPE_TERM</span>
+              <span class="ruby-identifier">w</span>.<span class="ruby-identifier">term</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">term?</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-constant">PIPE_PING</span>
+              <span class="ruby-identifier">status</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^\d+/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">chomp</span>
+              <span class="ruby-identifier">w</span>.<span class="ruby-identifier">ping!</span>(<span class="ruby-identifier">status</span>)
+              <span class="ruby-ivar">@events</span>.<span class="ruby-identifier">fire</span>(<span class="ruby-value">:ping!</span>, <span class="ruby-identifier">w</span>)
+
+              <span class="ruby-keyword">if</span> <span class="ruby-identifier">in_phased_restart</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">workers_not_booted</span>.<span class="ruby-identifier">positive?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">w0</span> = <span class="ruby-identifier">worker_at</span>(<span class="ruby-value">0</span>)
+                <span class="ruby-identifier">w0</span>.<span class="ruby-identifier">ping!</span>(<span class="ruby-identifier">status</span>)
+                <span class="ruby-ivar">@events</span>.<span class="ruby-identifier">fire</span>(<span class="ruby-value">:ping!</span>, <span class="ruby-identifier">w0</span>)
+              <span class="ruby-keyword">end</span>
+
+              <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">booted</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">none?</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">worker</span><span class="ruby-operator">|</span> <span class="ruby-identifier">worker</span>.<span class="ruby-identifier">last_status</span>.<span class="ruby-identifier">empty?</span>}
+                <span class="ruby-ivar">@events</span>.<span class="ruby-identifier">fire_after_booted!</span>
+                <span class="ruby-identifier">debug_loaded_extensions</span>(<span class="ruby-string">&quot;Loaded Extensions - master:&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@log_writer</span>.<span class="ruby-identifier">debug?</span>
+                <span class="ruby-identifier">booted</span> = <span class="ruby-keyword">true</span>
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-constant">PIPE_IDLE</span>
+              <span class="ruby-keyword">if</span> <span class="ruby-identifier">idle_workers</span>[<span class="ruby-identifier">pid</span>]
+                <span class="ruby-identifier">idle_workers</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">pid</span>
+              <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">idle_workers</span>[<span class="ruby-identifier">pid</span>] = <span class="ruby-keyword">true</span>
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;! Out-of-sync worker list, no #{pid} worker&quot;</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">in_phased_restart</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">workers_not_booted</span>.<span class="ruby-identifier">zero?</span>
+          <span class="ruby-ivar">@events</span>.<span class="ruby-identifier">fire_after_booted!</span>
+          <span class="ruby-identifier">debug_loaded_extensions</span>(<span class="ruby-string">&quot;Loaded Extensions - master:&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@log_writer</span>.<span class="ruby-identifier">debug?</span>
+          <span class="ruby-identifier">in_phased_restart</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Interrupt</span>
+        <span class="ruby-ivar">@status</span> = <span class="ruby-value">:stop</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">stop_workers</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@status</span> <span class="ruby-operator">==</span> <span class="ruby-value">:halt</span>
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-ivar">@check_pipe</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-ivar">@suicide_pipe</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">read</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-ivar">@wakeup</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-setup_signals" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">setup_signals</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>We do this in a separate method to keep the lambda scope of the signals handlers as small as possible.</p>
+
+          <div class="method-source-code" id="setup_signals-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 313</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup_signals</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>]
+    <span class="ruby-constant">Signal</span>.<span class="ruby-identifier">trap</span> <span class="ruby-string">&quot;SIGURG&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">fork_worker!</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Auto-fork after the specified number of requests.</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">fork_requests</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>].<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@events</span>.<span class="ruby-identifier">register</span>(<span class="ruby-value">:ping!</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">fork_worker!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span>
+          <span class="ruby-identifier">w</span>.<span class="ruby-identifier">phase</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span>
+          <span class="ruby-identifier">w</span>.<span class="ruby-identifier">last_status</span>[<span class="ruby-value">:requests_count</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">fork_requests</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Signal</span>.<span class="ruby-identifier">trap</span> <span class="ruby-string">&quot;SIGCHLD&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">wakeup!</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Signal</span>.<span class="ruby-identifier">trap</span> <span class="ruby-string">&quot;TTIN&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@options</span>[<span class="ruby-value">:workers</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">wakeup!</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Signal</span>.<span class="ruby-identifier">trap</span> <span class="ruby-string">&quot;TTOU&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@options</span>[<span class="ruby-value">:workers</span>] <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:workers</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span>
+    <span class="ruby-identifier">wakeup!</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">master_pid</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
+
+  <span class="ruby-constant">Signal</span>.<span class="ruby-identifier">trap</span> <span class="ruby-string">&quot;SIGTERM&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># The worker installs their own SIGTERM when booted.</span>
+    <span class="ruby-comment"># Until then, this is run by the worker and the worker</span>
+    <span class="ruby-comment"># should just exit if they get it.</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">master_pid</span>
+      <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;Early termination of worker&quot;</span>
+      <span class="ruby-identifier">exit!</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@launcher</span>.<span class="ruby-identifier">close_binder_listeners</span>
+
+      <span class="ruby-identifier">stop_workers</span>
+      <span class="ruby-identifier">stop</span>
+      <span class="ruby-ivar">@events</span>.<span class="ruby-identifier">fire_after_stopped!</span>
+      <span class="ruby-identifier">raise</span>(<span class="ruby-constant">SignalException</span>, <span class="ruby-string">&quot;SIGTERM&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:raise_exception_on_sigterm</span>]
+      <span class="ruby-identifier">exit</span> <span class="ruby-value">0</span> <span class="ruby-comment"># Clean exit, workers were stopped</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-spawn_worker" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">spawn_worker</span><span
+              class="method-args">(idx, master)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@version 5.0.0</p>
+
+          <div class="method-source-code" id="spawn_worker-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spawn_worker</span>(<span class="ruby-identifier">idx</span>, <span class="ruby-identifier">master</span>)
+  <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">run_hooks</span>(<span class="ruby-value">:before_worker_fork</span>, <span class="ruby-identifier">idx</span>, <span class="ruby-ivar">@log_writer</span>)
+
+  <span class="ruby-identifier">pid</span> = <span class="ruby-identifier">fork</span> { <span class="ruby-identifier">worker</span>(<span class="ruby-identifier">idx</span>, <span class="ruby-identifier">master</span>) }
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pid</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;! Complete inability to spawn new workers detected&quot;</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;! Seppuku is the only choice.&quot;</span>
+    <span class="ruby-identifier">exit!</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">run_hooks</span>(<span class="ruby-value">:after_worker_fork</span>, <span class="ruby-identifier">idx</span>, <span class="ruby-ivar">@log_writer</span>)
+  <span class="ruby-identifier">pid</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-spawn_workers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">spawn_workers</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="spawn_workers-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spawn_workers</span>
+  <span class="ruby-identifier">diff</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:workers</span>] <span class="ruby-operator">-</span> <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">diff</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
+
+  <span class="ruby-identifier">master</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>]
+    <span class="ruby-ivar">@fork_writer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;-1\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">diff</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">idx</span> = <span class="ruby-identifier">next_worker_index</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@fork_writer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{idx}\n&quot;</span>
+      <span class="ruby-identifier">pid</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">pid</span> = <span class="ruby-identifier">spawn_worker</span>(<span class="ruby-identifier">idx</span>, <span class="ruby-identifier">master</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Spawned worker: #{pid}&quot;</span>
+    <span class="ruby-ivar">@workers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">WorkerHandle</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">idx</span>, <span class="ruby-identifier">pid</span>, <span class="ruby-ivar">@phase</span>, <span class="ruby-ivar">@options</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">all_workers_in_phase?</span>
+    <span class="ruby-ivar">@fork_writer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;0\n&quot;</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">worker_at</span>(<span class="ruby-value">0</span>).<span class="ruby-identifier">phase</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@fork_writer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;-2\n&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-start_phased_restart" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start_phased_restart</span><span
+              class="method-args">(refork = false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="start_phased_restart-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_phased_restart</span>(<span class="ruby-identifier">refork</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@events</span>.<span class="ruby-identifier">fire_before_restart!</span>
+  <span class="ruby-ivar">@phase</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">refork</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- Starting worker refork, phase: #{@phase}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;- Starting phased worker restart, phase: #{@phase}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Be sure to change the directory again before loading</span>
+  <span class="ruby-comment"># the app. This way we can pick up new code.</span>
+  <span class="ruby-identifier">dir</span> = <span class="ruby-ivar">@launcher</span>.<span class="ruby-identifier">restart_dir</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-node">&quot;+ Changing to #{dir}&quot;</span>
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span> <span class="ruby-identifier">dir</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-stats" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">stats</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Inside of a child process, this will return all zeroes, as @workers is only populated in the master process.  Calling this also resets stat ‘max’ values to zero. @!attribute [r] stats @return [Hash]</p>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="stats-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stats</span>
+  <span class="ruby-identifier">old_worker_count</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">count</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">phase</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@phase</span> }
+  <span class="ruby-identifier">worker_status</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">w</span>.<span class="ruby-identifier">reset_max</span>
+    {
+      <span class="ruby-value">started_at:</span> <span class="ruby-identifier">utc_iso8601</span>(<span class="ruby-identifier">w</span>.<span class="ruby-identifier">started_at</span>),
+      <span class="ruby-value">pid:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">pid</span>,
+      <span class="ruby-value">index:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">index</span>,
+      <span class="ruby-value">phase:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">phase</span>,
+      <span class="ruby-value">booted:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">booted?</span>,
+      <span class="ruby-value">last_checkin:</span> <span class="ruby-identifier">utc_iso8601</span>(<span class="ruby-identifier">w</span>.<span class="ruby-identifier">last_checkin</span>),
+      <span class="ruby-value">last_status:</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">last_status</span>,
+    }
+  <span class="ruby-keyword">end</span>
+  {
+    <span class="ruby-value">started_at:</span> <span class="ruby-identifier">utc_iso8601</span>(<span class="ruby-ivar">@started_at</span>),
+    <span class="ruby-value">workers:</span> <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">size</span>,
+    <span class="ruby-value">phase:</span> <span class="ruby-ivar">@phase</span>,
+    <span class="ruby-value">booted_workers:</span> <span class="ruby-identifier">worker_status</span>.<span class="ruby-identifier">count</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>[<span class="ruby-value">:booted</span>] },
+    <span class="ruby-value">old_workers:</span> <span class="ruby-identifier">old_worker_count</span>,
+    <span class="ruby-value">worker_status:</span> <span class="ruby-identifier">worker_status</span>,
+  }.<span class="ruby-identifier">merge</span>(<span class="ruby-keyword">super</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-stop" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">stop</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="stop-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stop</span>
+  <span class="ruby-ivar">@status</span> = <span class="ruby-value">:stop</span>
+  <span class="ruby-identifier">wakeup!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-stop_blocked" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">stop_blocked</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="stop_blocked-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stop_blocked</span>
+  <span class="ruby-ivar">@status</span> = <span class="ruby-value">:stop</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@status</span> <span class="ruby-operator">==</span> <span class="ruby-value">:run</span>
+  <span class="ruby-identifier">wakeup!</span>
+  <span class="ruby-ivar">@control</span>&amp;.<span class="ruby-identifier">stop</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-constant">Process</span>.<span class="ruby-identifier">waitall</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-stop_workers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">stop_workers</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="stop_workers-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stop_workers</span>
+  <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;- Gracefully shutting down workers...&quot;</span>
+  <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">term</span> }
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">wait_workers</span>
+      <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">reject</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">pid</span>.<span class="ruby-identifier">nil?</span>}.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">sleep</span> <span class="ruby-value">0.2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Interrupt</span>
+    <span class="ruby-identifier">log</span> <span class="ruby-string">&quot;! Cancelled waiting for workers&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-worker" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">worker</span><span
+              class="method-args">(index, master)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="worker-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">worker</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">master</span>)
+  <span class="ruby-ivar">@workers</span> = []
+
+  <span class="ruby-ivar">@master_read</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@suicide_pipe</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@fork_writer</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-identifier">pipes</span> = { <span class="ruby-value">check_pipe:</span> <span class="ruby-ivar">@check_pipe</span>, <span class="ruby-value">worker_write:</span> <span class="ruby-ivar">@worker_write</span> }
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>]
+    <span class="ruby-identifier">pipes</span>[<span class="ruby-value">:fork_pipe</span>] = <span class="ruby-ivar">@fork_pipe</span>
+    <span class="ruby-identifier">pipes</span>[<span class="ruby-value">:wakeup</span>] = <span class="ruby-ivar">@wakeup</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">server</span> = <span class="ruby-identifier">start_server</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">preload?</span>
+  <span class="ruby-identifier">new_worker</span> = <span class="ruby-constant">Worker</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">index:</span> <span class="ruby-identifier">index</span>,
+                          <span class="ruby-value">master:</span> <span class="ruby-identifier">master</span>,
+                          <span class="ruby-value">launcher:</span> <span class="ruby-ivar">@launcher</span>,
+                          <span class="ruby-value">pipes:</span> <span class="ruby-identifier">pipes</span>,
+                          <span class="ruby-value">server:</span> <span class="ruby-identifier">server</span>
+  <span class="ruby-identifier">new_worker</span>.<span class="ruby-identifier">run</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-worker_at" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">worker_at</span><span
+              class="method-args">(idx)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="worker_at-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">worker_at</span>(<span class="ruby-identifier">idx</span>)
+  <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">idx</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-workers_to_cull" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">workers_to_cull</span><span
+              class="method-args">(diff)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="workers_to_cull-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/puma-7.1.0/lib/puma/cluster.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">workers_to_cull</span>(<span class="ruby-identifier">diff</span>)
+  <span class="ruby-identifier">workers</span> = <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">sort_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:started_at</span>)
+
+  <span class="ruby-comment"># In fork_worker mode, worker 0 acts as our master process.</span>
+  <span class="ruby-comment"># We should avoid culling it to preserve copy-on-write memory gains.</span>
+  <span class="ruby-identifier">workers</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> } <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:fork_worker</span>]
+
+  <span class="ruby-identifier">workers</span>[<span class="ruby-identifier">cull_start_index</span>(<span class="ruby-identifier">diff</span>), <span class="ruby-identifier">diff</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

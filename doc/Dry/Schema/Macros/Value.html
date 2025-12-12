@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Dry::Schema::Macros::Value - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="DSL.html">Dry::Schema::Macros::DSL</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-array_type-3F">#array_type?</a>
+    <li ><a href="#method-i-build_array_type">#build_array_type</a>
+    <li ><a href="#method-i-call">#call</a>
+    <li ><a href="#method-i-hash_type-3F">#hash_type?</a>
+    <li ><a href="#method-i-import_steps">#import_steps</a>
+    <li ><a href="#method-i-maybe_type-3F">#maybe_type?</a>
+    <li class="calls-super" ><a href="#method-i-respond_to_missing-3F">#respond_to_missing?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Dry::Schema::Macros::Value">
+  <h1 id="class-Dry::Schema::Macros::Value" class="class">
+    class Dry::Schema::Macros::Value
+  </h1>
+
+  <section class="description">
+    
+<p>A macro used for specifying predicates to be applied to values from a hash</p>
+
+<p>@api private</p>
+
+<p>A macro used for specifying predicates to be applied to values from a hash</p>
+
+<p>@api private</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-array_type-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">array_type?</span><span
+              class="method-args">(type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="array_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/macros/value.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">array_type?</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-identifier">primitive_inferrer</span>[<span class="ruby-identifier">type</span>].<span class="ruby-identifier">eql?</span>([<span class="ruby-operator">::</span><span class="ruby-constant">Array</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-build_array_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">build_array_type</span><span
+              class="method-args">(array_type, member)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="build_array_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/macros/value.rb, line 89</span>
+        <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_array_type</span>(<span class="ruby-identifier">array_type</span>, <span class="ruby-identifier">member</span>)
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">array_type</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:of</span>)
+            <span class="ruby-identifier">array_type</span>.<span class="ruby-identifier">of</span>(<span class="ruby-identifier">member</span>)
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">&lt;&lt;~ERROR</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
+<span class="ruby-value">              Cannot define schema for a nominal array type.
+              Array types must be instances of Dry::Types::Array,
+              usually constructed with Types::Constructor(Array) { ... } or
+              Dry::Types[&#39;array&#39;].constructor { ... }
+</span><span class="ruby-identifier">            ERROR</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-call" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">call</span><span
+              class="method-args">(*args, **opts, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+<p>rubocop:disable Metrics/AbcSize rubocop:disable Metrics/CyclomaticComplexity rubocop:disable Metrics/PerceivedComplexity</p>
+
+          <div class="method-source-code" id="call-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/macros/value.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">opts</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">types</span>, <span class="ruby-identifier">predicates</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">partition</span> { <span class="ruby-identifier">_1</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>) }
+
+  <span class="ruby-identifier">constructor</span> = <span class="ruby-identifier">types</span>.<span class="ruby-identifier">select</span> { <span class="ruby-identifier">_1</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span><span class="ruby-operator">::</span><span class="ruby-constant">Constructor</span>) }.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">:&gt;&gt;</span>)
+  <span class="ruby-identifier">schema</span> = <span class="ruby-identifier">predicates</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-identifier">_1</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Processor</span>) }
+
+  <span class="ruby-identifier">schema_dsl</span>.<span class="ruby-identifier">set_type</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">constructor</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">constructor</span>
+
+  <span class="ruby-identifier">type_spec</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-value">:type_spec</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">schema</span>
+    <span class="ruby-identifier">current_type</span> = <span class="ruby-identifier">schema_dsl</span>.<span class="ruby-identifier">types</span>[<span class="ruby-identifier">name</span>]
+
+    <span class="ruby-identifier">updated_type</span> =
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">array_type?</span>(<span class="ruby-identifier">current_type</span>)
+        <span class="ruby-identifier">build_array_type</span>(<span class="ruby-identifier">current_type</span>, <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">strict_type_schema</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">strict_type_schema</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">import_steps</span>(<span class="ruby-identifier">schema</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">custom_type?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">array_type?</span>(<span class="ruby-identifier">current_type</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">hash_type?</span>(<span class="ruby-identifier">current_type</span>)
+      <span class="ruby-identifier">type</span>(<span class="ruby-identifier">updated_type</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">maybe_type?</span>(<span class="ruby-identifier">current_type</span>)
+      <span class="ruby-identifier">type</span>(<span class="ruby-identifier">updated_type</span>.<span class="ruby-identifier">optional</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">trace_opts</span> = <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">except</span>(<span class="ruby-value">:type_spec</span>, <span class="ruby-value">:type_rule</span>)
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">type_rule</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-value">:type_rule</span>])
+    <span class="ruby-identifier">trace</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">type_rule</span>).<span class="ruby-identifier">evaluate</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">predicates</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">trace_opts</span>)
+    <span class="ruby-identifier">trace</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">new</span>(<span class="ruby-value">chain:</span> <span class="ruby-keyword">false</span>).<span class="ruby-identifier">instance_exec</span>(<span class="ruby-operator">&amp;</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">trace</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">predicates</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">trace_opts</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">type_spec</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-value">:hash</span>)
+      <span class="ruby-identifier">hash</span>(<span class="ruby-operator">&amp;</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">type_spec</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Dry</span><span class="ruby-operator">::</span><span class="ruby-constant">Types</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">hash_type?</span>(<span class="ruby-identifier">type_spec</span>)
+      <span class="ruby-identifier">hash</span>(<span class="ruby-identifier">type_spec</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">trace</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">new</span>(<span class="ruby-value">chain:</span> <span class="ruby-keyword">false</span>).<span class="ruby-identifier">instance_exec</span>(<span class="ruby-operator">&amp;</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">trace</span>.<span class="ruby-identifier">captures</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;wrong number of arguments (given 0, expected at least 1)&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">each</span>(<span class="ruby-identifier">type_spec</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">member</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">type_spec</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:member</span>)
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-hash_type-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">hash_type?</span><span
+              class="method-args">(type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="hash_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/macros/value.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hash_type?</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-identifier">primitive_inferrer</span>[<span class="ruby-identifier">type</span>].<span class="ruby-identifier">eql?</span>([<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-import_steps" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">import_steps</span><span
+              class="method-args">(schema)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="import_steps-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/macros/value.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">import_steps</span>(<span class="ruby-identifier">schema</span>)
+  <span class="ruby-identifier">schema_dsl</span>.<span class="ruby-identifier">steps</span>.<span class="ruby-identifier">import_callbacks</span>(<span class="ruby-constant">Path</span>[[<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>, <span class="ruby-identifier">name</span>]], <span class="ruby-identifier">schema</span>.<span class="ruby-identifier">steps</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-maybe_type-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">maybe_type?</span><span
+              class="method-args">(type)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+
+          <div class="method-source-code" id="maybe_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/macros/value.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">maybe_type?</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-identifier">type</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value">:maybe</span>].<span class="ruby-identifier">equal?</span>(<span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-respond_to_missing-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">respond_to_missing?</span><span
+              class="method-args">(meth, include_private = false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@api private</p>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="respond_to_missing-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-schema-1.14.1/lib/dry/schema/macros/value.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">respond_to_missing?</span>(<span class="ruby-identifier">meth</span>, <span class="ruby-identifier">include_private</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-constant">QUESTION_MARK</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

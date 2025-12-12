@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bootsnap::CLI::WorkerPool - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-cpu_quota">::cpu_quota</a>
+    <li ><a href="#method-c-create">::create</a>
+    <li ><a href="#method-c-default_size">::default_size</a>
+    <li ><a href="#method-c-fork_defunct-3F">::fork_defunct?</a>
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-dispatch_loop">#dispatch_loop</a>
+    <li ><a href="#method-i-free_worker">#free_worker</a>
+    <li ><a href="#method-i-push">#push</a>
+    <li ><a href="#method-i-shutdown">#shutdown</a>
+    <li ><a href="#method-i-spawn">#spawn</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bootsnap::CLI::WorkerPool">
+  <h1 id="class-Bootsnap::CLI::WorkerPool" class="class">
+    class Bootsnap::CLI::WorkerPool
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-cpu_quota" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">cpu_quota</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="cpu_quota-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cpu_quota</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-string">&quot;target_os&quot;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;linux&quot;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;/sys/fs/cgroup/cpu.max&quot;</span>)
+      <span class="ruby-comment"># cgroups v2: https://docs.kernel.org/admin-guide/cgroup-v2.html#cpu-interface-files</span>
+      <span class="ruby-identifier">cpu_max</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;/sys/fs/cgroup/cpu.max&quot;</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cpu_max</span>.<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&quot;max &quot;</span>) <span class="ruby-comment"># no limit</span>
+
+      <span class="ruby-identifier">max</span>, <span class="ruby-identifier">period</span> = <span class="ruby-identifier">cpu_max</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_f</span>)
+      <span class="ruby-identifier">max</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">period</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us&quot;</span>)
+      <span class="ruby-comment"># cgroups v1: https://kernel.googlesource.com/pub/scm/linux/kernel/git/glommer/memcg/+/cpu_stat/Documentation/cgroups/cpu.txt</span>
+      <span class="ruby-identifier">max</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us&quot;</span>).<span class="ruby-identifier">to_i</span>
+      <span class="ruby-comment"># If the cpu.cfs_quota_us is -1, cgroup does not adhere to any CPU time restrictions</span>
+      <span class="ruby-comment"># https://docs.kernel.org/scheduler/sched-bwc.html#management</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">max</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+
+      <span class="ruby-identifier">period</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_period_us&quot;</span>).<span class="ruby-identifier">to_f</span>
+      <span class="ruby-identifier">max</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">period</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-create" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">create</span><span
+              class="method-args">(size:, jobs:)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-value">size:</span>, <span class="ruby-value">jobs:</span>)
+  <span class="ruby-identifier">size</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">default_size</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Process</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:fork</span>)
+    <span class="ruby-identifier">new</span>(<span class="ruby-value">size:</span> <span class="ruby-identifier">size</span>, <span class="ruby-value">jobs:</span> <span class="ruby-identifier">jobs</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Inline</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">jobs:</span> <span class="ruby-identifier">jobs</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-default_size" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">default_size</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="default_size-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default_size</span>
+  <span class="ruby-identifier">nprocessors</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">nprocessors</span>
+  <span class="ruby-identifier">size</span> = [<span class="ruby-identifier">nprocessors</span>, <span class="ruby-identifier">cpu_quota</span>&amp;.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">nprocessors</span>].<span class="ruby-identifier">min</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">0</span>, <span class="ruby-value">1</span>
+    <span class="ruby-value">0</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">fork_defunct?</span>
+      <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;warning: faulty fork(2) detected, probably in cross platform docker builds. &quot;</span> \
+                   <span class="ruby-string">&quot;Disabling parallel compilation.&quot;</span>
+      <span class="ruby-value">0</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">size</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-fork_defunct-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fork_defunct?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="fork_defunct-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fork_defunct?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-operator">::</span><span class="ruby-constant">Process</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:fork</span>)
+
+  <span class="ruby-comment"># Ref: https://github.com/rails/bootsnap/issues/495</span>
+  <span class="ruby-comment"># The second forked process will hang on some QEMU environments</span>
+  <span class="ruby-identifier">r</span>, <span class="ruby-identifier">w</span> = <span class="ruby-constant">IO</span>.<span class="ruby-identifier">pipe</span>
+  <span class="ruby-identifier">pids</span> = <span class="ruby-value">2</span>.<span class="ruby-identifier">times</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-operator">::</span><span class="ruby-constant">Process</span>.<span class="ruby-identifier">fork</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">exit!</span>(<span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">w</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-identifier">r</span>.<span class="ruby-identifier">wait_readable</span>(<span class="ruby-value">1</span>) <span class="ruby-comment"># Wait at most 1s</span>
+
+  <span class="ruby-identifier">defunct</span> = <span class="ruby-keyword">false</span>
+
+  <span class="ruby-identifier">pids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pid</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">_pid</span>, <span class="ruby-identifier">status</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Process</span>.<span class="ruby-identifier">wait2</span>(<span class="ruby-identifier">pid</span>, <span class="ruby-operator">::</span><span class="ruby-constant">Process</span><span class="ruby-operator">::</span><span class="ruby-constant">WNOHANG</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment"># Didn&#39;t exit in 1s</span>
+      <span class="ruby-identifier">defunct</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-value">:KILL</span>, <span class="ruby-identifier">pid</span>)
+      <span class="ruby-operator">::</span><span class="ruby-constant">Process</span>.<span class="ruby-identifier">wait2</span>(<span class="ruby-identifier">pid</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">defunct</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(size:, jobs: {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">size:</span>, <span class="ruby-value">jobs:</span> {})
+  <span class="ruby-ivar">@size</span> = <span class="ruby-identifier">size</span>
+  <span class="ruby-ivar">@jobs</span> = <span class="ruby-identifier">jobs</span>
+  <span class="ruby-ivar">@queue</span> = <span class="ruby-constant">Queue</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@pids</span> = []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-dispatch_loop" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">dispatch_loop</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="dispatch_loop-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dispatch_loop</span>
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">job</span> = <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">pop</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">worker</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">worker</span>.<span class="ruby-identifier">write</span>([<span class="ruby-value">:exit</span>])
+        <span class="ruby-identifier">worker</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">sample</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">job</span>, <span class="ruby-value">block:</span> <span class="ruby-keyword">false</span>)
+        <span class="ruby-identifier">free_worker</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">job</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-free_worker" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">free_worker</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="free_worker-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">free_worker</span>
+  <span class="ruby-constant">IO</span>.<span class="ruby-identifier">select</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-ivar">@workers</span>)[<span class="ruby-value">1</span>].<span class="ruby-identifier">sample</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-push" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">push</span><span
+              class="method-args">(*args)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="push-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-shutdown" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">shutdown</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="shutdown-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shutdown</span>
+  <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@dispatcher_thread</span>.<span class="ruby-identifier">join</span>
+  <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">worker</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">_pid</span>, <span class="ruby-identifier">status</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">wait2</span>(<span class="ruby-identifier">worker</span>.<span class="ruby-identifier">pid</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">status</span>.<span class="ruby-identifier">exitstatus</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">status</span>.<span class="ruby-identifier">success?</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-spawn" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">spawn</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="spawn-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/cli/worker_pool.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spawn</span>
+  <span class="ruby-ivar">@workers</span> = <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">times</span>.<span class="ruby-identifier">map</span> { <span class="ruby-constant">Worker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@jobs</span>) }
+  <span class="ruby-ivar">@workers</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:spawn</span>)
+  <span class="ruby-ivar">@dispatcher_thread</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> { <span class="ruby-identifier">dispatch_loop</span> }
+  <span class="ruby-ivar">@dispatcher_thread</span>.<span class="ruby-identifier">abort_on_exception</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

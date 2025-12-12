@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveSupport::TestCase - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Minitest/Test.html">Minitest::Test</a>
+</div>
+
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="Testing/Assertions.html">ActiveSupport::Testing::Assertions</a>
+    <li><a class="include" href="Testing/ErrorReporterAssertions.html">ActiveSupport::Testing::ErrorReporterAssertions</a>
+    <li><a class="include" href="Testing/EventReporterAssertions.html">ActiveSupport::Testing::EventReporterAssertions</a>
+    <li><a class="include" href="Testing/NotificationAssertions.html">ActiveSupport::Testing::NotificationAssertions</a>
+    <li><a class="include" href="Testing/Deprecation.html">ActiveSupport::Testing::Deprecation</a>
+    <li><a class="include" href="Testing/ConstantStubbing.html">ActiveSupport::Testing::ConstantStubbing</a>
+    <li><a class="include" href="Testing/TimeHelpers.html">ActiveSupport::Testing::TimeHelpers</a>
+    <li><a class="include" href="Testing/FileFixtures.html">ActiveSupport::Testing::FileFixtures</a>
+  </ul>
+</div>
+
+    
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="extend" href="Testing/Declarative.html">ActiveSupport::Testing::Declarative</a>
+    <li><a class="extend" href="Testing/Declarative.html">ActiveSupport::Testing::Declarative</a>
+    <li><a class="extend" href="Testing/Declarative.html">ActiveSupport::Testing::Declarative</a>
+  </ul>
+</div>
+
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-fixture_paths">::fixture_paths</a>
+    <li ><a href="#method-c-fixture_paths-3D">::fixture_paths=</a>
+    <li ><a href="#method-c-parallel_worker_id">::parallel_worker_id</a>
+    <li ><a href="#method-c-parallelize">::parallelize</a>
+    <li ><a href="#method-c-parallelize_before_fork">::parallelize_before_fork</a>
+    <li ><a href="#method-c-parallelize_setup">::parallelize_setup</a>
+    <li ><a href="#method-c-parallelize_teardown">::parallelize_teardown</a>
+    <li ><a href="#method-c-test_order">::test_order</a>
+    <li ><a href="#method-c-test_order-3D">::test_order=</a>
+    <li ><a href="#method-i-assert_no_match">#assert_no_match</a>
+    <li ><a href="#method-i-assert_not_empty">#assert_not_empty</a>
+    <li ><a href="#method-i-assert_not_equal">#assert_not_equal</a>
+    <li ><a href="#method-i-assert_not_in_delta">#assert_not_in_delta</a>
+    <li ><a href="#method-i-assert_not_in_epsilon">#assert_not_in_epsilon</a>
+    <li ><a href="#method-i-assert_not_includes">#assert_not_includes</a>
+    <li ><a href="#method-i-assert_not_instance_of">#assert_not_instance_of</a>
+    <li ><a href="#method-i-assert_not_kind_of">#assert_not_kind_of</a>
+    <li ><a href="#method-i-assert_not_nil">#assert_not_nil</a>
+    <li ><a href="#method-i-assert_not_operator">#assert_not_operator</a>
+    <li ><a href="#method-i-assert_not_predicate">#assert_not_predicate</a>
+    <li ><a href="#method-i-assert_not_respond_to">#assert_not_respond_to</a>
+    <li ><a href="#method-i-assert_not_same">#assert_not_same</a>
+    <li ><a href="#method-i-parallel_worker_id">#parallel_worker_id</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveSupport::TestCase">
+  <h1 id="class-ActiveSupport::TestCase" class="class">
+    class ActiveSupport::TestCase
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="Assertion">Assertion
+        <dd><p>Represents run failures.</p>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-fixture_paths" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fixture_paths</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the <a href="../ActiveRecord/FixtureSet.html"><code>ActiveRecord::FixtureSet</code></a> collection.</p>
+
+<p>In your <code>test_helper.rb</code> you must have <code>require &quot;rails/test_help&quot;</code>.</p>
+
+          <div class="method-source-code" id="fixture_paths-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 170</span>
+      </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-fixture_paths-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              fixture_paths=(fixture_paths)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Sets the given path to the fixture set.</p>
+
+<p>Can also append multiple paths.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span>.<span class="ruby-identifier">fixture_paths</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;component1/test/fixtures&quot;</span>
+</pre>
+
+<p>In your <code>test_helper.rb</code> you must have <code>require &quot;rails/test_help&quot;</code>.</p>
+
+          <div class="method-source-code" id="fixture_paths-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 176</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parallel_worker_id" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parallel_worker_id</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the current parallel worker ID if tests are running in parallel, nil otherwise.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span>.<span class="ruby-identifier">parallel_worker_id</span> <span class="ruby-comment"># =&gt; 2</span>
+</pre>
+
+          <div class="method-source-code" id="parallel_worker_id-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parallel_worker_id</span>
+  <span class="ruby-identifier">@@parallel_worker_id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parallelize" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parallelize</span><span
+              class="method-args">(workers: :number_of_processors, with: :processes, threshold: ActiveSupport.test_parallelization_threshold, parallelize_databases: ActiveSupport.parallelize_test_databases)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Parallelizes the test suite.</p>
+
+<p>Takes a <code>workers</code> argument that controls how many times the process is forked. For each process a new database will be created suffixed with the worker number.</p>
+
+<pre class="ruby"><span class="ruby-identifier">test</span><span class="ruby-operator">-</span><span class="ruby-identifier">database_0</span>
+<span class="ruby-identifier">test</span><span class="ruby-operator">-</span><span class="ruby-identifier">database_1</span>
+</pre>
+
+<p>If <code>ENV[&quot;PARALLEL_WORKERS&quot;]</code> is set the workers argument will be ignored and the environment variable will be used instead. This is useful for <a href="ContinuousIntegration.html"><code>CI</code></a> environments, or other environments where you may need more workers than you do for local testing.</p>
+
+<p>If the number of workers is set to <code>1</code> or fewer, the tests will not be parallelized.</p>
+
+<p>If <code>workers</code> is set to <code>:number_of_processors</code>, the number of workers will be set to the actual core count on the machine you are on.</p>
+
+<p>The default parallelization method is to fork processes. If you’d like to use threads instead you can pass <code>with: :threads</code> to the <code>parallelize</code> method. Note the threaded parallelization does not create multiple databases and will not work with system tests.</p>
+
+<pre class="ruby"><span class="ruby-identifier">parallelize</span>(<span class="ruby-value">workers:</span> <span class="ruby-value">:number_of_processors</span>, <span class="ruby-value">with:</span> <span class="ruby-value">:threads</span>)
+</pre>
+
+<p>The threaded parallelization uses minitest’s parallel executor directly. The processes parallelization uses a Ruby <a href="../DRb.html"><code>DRb</code></a> server.</p>
+
+<p>Because parallelization presents an overhead, it is only enabled when the number of tests to run is above the <code>threshold</code> param. The default value is 50, and it’s configurable via <code>config.active_support.test_parallelization_threshold</code>.</p>
+
+<p>If you want to skip <a href="../Rails.html"><code>Rails</code></a> default creation of one database per process in favor of writing your own implementation, you can set <code>parallelize_databases</code>, or configure it via <code>config.active_support.parallelize_test_databases</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">parallelize</span>(<span class="ruby-value">workers:</span> <span class="ruby-value">:number_of_processors</span>, <span class="ruby-value">parallelize_databases:</span> <span class="ruby-keyword">false</span>)
+</pre>
+
+<p>Note that your test suite may deadlock if you attempt to use only one database with multiple processes.</p>
+
+          <div class="method-source-code" id="parallelize-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parallelize</span>(<span class="ruby-value">workers:</span> <span class="ruby-value">:number_of_processors</span>, <span class="ruby-value">with:</span> <span class="ruby-value">:processes</span>, <span class="ruby-value">threshold:</span> <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">test_parallelization_threshold</span>, <span class="ruby-value">parallelize_databases:</span> <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">parallelize_test_databases</span>)
+  <span class="ruby-keyword">case</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;PARALLEL_WORKERS&quot;</span>]
+    <span class="ruby-identifier">workers</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;PARALLEL_WORKERS&quot;</span>].<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">workers</span> <span class="ruby-operator">==</span> <span class="ruby-value">:number_of_processors</span>
+    <span class="ruby-identifier">workers</span> = (<span class="ruby-constant">Concurrent</span>.<span class="ruby-identifier">available_processor_count</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Concurrent</span>.<span class="ruby-identifier">processor_count</span>).<span class="ruby-identifier">floor</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">with</span> <span class="ruby-operator">==</span> <span class="ruby-value">:processes</span>
+    <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">parallelize_test_databases</span> = <span class="ruby-identifier">parallelize_databases</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Minitest</span>.<span class="ruby-identifier">parallel_executor</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Testing</span><span class="ruby-operator">::</span><span class="ruby-constant">ParallelizeExecutor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">size:</span> <span class="ruby-identifier">workers</span>, <span class="ruby-value">with:</span> <span class="ruby-identifier">with</span>, <span class="ruby-value">threshold:</span> <span class="ruby-identifier">threshold</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parallelize_before_fork" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parallelize_before_fork</span><span
+              class="method-args">(&amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Before fork hook for parallel testing. This can be used to run anything before the processes are forked.</p>
+
+<p>In your <code>test_helper.rb</code> add the following:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span>
+  <span class="ruby-identifier">parallelize_before_fork</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># run this before fork</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+          <div class="method-source-code" id="parallelize_before_fork-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parallelize_before_fork</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Testing</span><span class="ruby-operator">::</span><span class="ruby-constant">Parallelization</span>.<span class="ruby-identifier">before_fork_hook</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parallelize_setup" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parallelize_setup</span><span
+              class="method-args">(&amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Setup hook for parallel testing. This can be used if you have multiple databases or any behavior that needs to be run after the process is forked but before the tests run.</p>
+
+<p>Note: this feature is not available with the threaded parallelization.</p>
+
+<p>In your <code>test_helper.rb</code> add the following:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span>
+  <span class="ruby-identifier">parallelize_setup</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># create databases</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+          <div class="method-source-code" id="parallelize_setup-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parallelize_setup</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Testing</span><span class="ruby-operator">::</span><span class="ruby-constant">Parallelization</span>.<span class="ruby-identifier">after_fork_hook</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parallelize_teardown" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parallelize_teardown</span><span
+              class="method-args">(&amp;block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Clean up hook for parallel testing. This can be used to drop databases if your app uses multiple write/read databases or other clean up before the tests finish. This runs before the forked process is closed.</p>
+
+<p>Note: this feature is not available with the threaded parallelization.</p>
+
+<p>In your <code>test_helper.rb</code> add the following:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span>
+  <span class="ruby-identifier">parallelize_teardown</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># drop databases</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+          <div class="method-source-code" id="parallelize_teardown-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parallelize_teardown</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Testing</span><span class="ruby-operator">::</span><span class="ruby-constant">Parallelization</span>.<span class="ruby-identifier">run_cleanup_hook</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-test_order" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">test_order</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the order in which test cases are run.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span>.<span class="ruby-identifier">test_order</span> <span class="ruby-comment"># =&gt; :random</span>
+</pre>
+
+<p>Possible values are <code>:random</code>, <code>:parallel</code>, <code>:alpha</code>, <code>:sorted</code>. Defaults to <code>:random</code>.</p>
+
+          <div class="method-source-code" id="test_order-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_order</span>
+  <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">test_order</span> <span class="ruby-operator">||=</span> <span class="ruby-value">:random</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-test_order-3D" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">test_order=</span><span
+              class="method-args">(new_order)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Sets the order in which test cases are run.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span>.<span class="ruby-identifier">test_order</span> = <span class="ruby-value">:random</span> <span class="ruby-comment"># =&gt; :random</span>
+</pre>
+
+<p>Valid values are:</p>
+<ul><li>
+<p><code>:random</code>   (to run tests in random order)</p>
+</li><li>
+<p><code>:parallel</code> (to run tests in parallel)</p>
+</li><li>
+<p><code>:sorted</code>   (to run tests alphabetically by method name)</p>
+</li><li>
+<p><code>:alpha</code>    (equivalent to <code>:sorted</code>)</p>
+</li></ul>
+
+          <div class="method-source-code" id="test_order-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_order=</span>(<span class="ruby-identifier">new_order</span>)
+  <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">test_order</span> = <span class="ruby-identifier">new_order</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-assert_no_match" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_no_match(matcher, obj, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_match">refute_match</a></p>
+
+          <div class="method-source-code" id="assert_no_match-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 288</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_empty" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_empty(obj, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_empty">refute_empty</a></p>
+
+          <div class="method-source-code" id="assert_not_empty-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 211</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_equal" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_equal(exp, act, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_equal">refute_equal</a></p>
+
+          <div class="method-source-code" id="assert_not_equal-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 222</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_in_delta" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_in_delta(exp, act, delta = 0.001, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_in_delta">refute_in_delta</a></p>
+
+          <div class="method-source-code" id="assert_not_in_delta-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 233</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_in_epsilon" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_in_epsilon(a, b, epsilon = 0.001, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_in_epsilon">refute_in_epsilon</a></p>
+
+          <div class="method-source-code" id="assert_not_in_epsilon-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 244</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_includes" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_includes(collection, obj, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_includes">refute_includes</a></p>
+
+          <div class="method-source-code" id="assert_not_includes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 255</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_instance_of" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_instance_of(cls, obj, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_instance_of">refute_instance_of</a></p>
+
+          <div class="method-source-code" id="assert_not_instance_of-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 266</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_kind_of" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_kind_of(cls, obj, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_kind_of">refute_kind_of</a></p>
+
+          <div class="method-source-code" id="assert_not_kind_of-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 277</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_nil" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_nil(obj, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_nil">refute_nil</a></p>
+
+          <div class="method-source-code" id="assert_not_nil-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 299</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_operator" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_operator(o1, op, o2 = UNDEFINED, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_operator">refute_operator</a></p>
+
+          <div class="method-source-code" id="assert_not_operator-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 310</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_predicate" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_predicate(o1, op, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_predicate">refute_predicate</a></p>
+
+          <div class="method-source-code" id="assert_not_predicate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 321</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_respond_to" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_respond_to(obj, meth, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_respond_to">refute_respond_to</a></p>
+
+          <div class="method-source-code" id="assert_not_respond_to-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 332</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-assert_not_same" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-callseq">
+              assert_not_same(exp, act, msg = nil)
+            </span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Alias for: <a href="https://docs.seattlerb.org/minitest/Minitest/Assertions.html#method-i-refute_same">refute_same</a></p>
+
+          <div class="method-source-code" id="assert_not_same-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 343</span>
+    </pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-parallel_worker_id" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parallel_worker_id</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the current parallel worker ID if tests are running in parallel</p>
+
+          <div class="method-source-code" id="parallel_worker_id-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/test_case.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parallel_worker_id</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">parallel_worker_id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ActiveSupport::ParameterFilter - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">Active Support Parameter Filter</a>
+          <li>      <a href="#class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">Active Support Parameter Filter</a>
+          <li>      <a href="#class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">Active Support Parameter Filter</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-c-precompile_filters">::precompile_filters</a>
+    <li ><a href="#method-i-filter">#filter</a>
+    <li ><a href="#method-i-filter_param">#filter_param</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveSupport::ParameterFilter">
+  <h1 id="class-ActiveSupport::ParameterFilter" class="class">
+    class ActiveSupport::ParameterFilter
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">Active Support Parameter <a href="../Filter.html"><code>Filter</code></a><span><a href="#class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><code>ParameterFilter</code> replaces values in a <code>Hash</code>-like object if their keys match one of the specified filters.</p>
+
+<p>Matching based on nested keys is possible by using dot notation, e.g. <code>&quot;credit_card.number&quot;</code>.</p>
+
+<p>If a proc is given as a filter, each key and value of the <code>Hash</code>-like and of any nested <code>Hash</code>es will be passed to it. The value or key can then be mutated as desired using methods such as <code>String#replace</code>.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Replaces values with &quot;[FILTERED]&quot; for keys that match /password/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:password</span>])
+
+<span class="ruby-comment"># Replaces values with &quot;[FILTERED]&quot; for keys that match /foo|bar/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:foo</span>, <span class="ruby-string">&quot;bar&quot;</span>])
+
+<span class="ruby-comment"># Replaces values for the exact key &quot;pin&quot; and for keys that begin with</span>
+<span class="ruby-comment"># &quot;pin_&quot;. Does not match keys that otherwise include &quot;pin&quot; as a</span>
+<span class="ruby-comment"># substring, such as &quot;shipping_id&quot;.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-regexp">/\Apin\z/</span>, <span class="ruby-regexp">/\Apin_/</span>])
+
+<span class="ruby-comment"># Replaces the value for :code in `{ credit_card: { code: &quot;xxxx&quot; } }`.</span>
+<span class="ruby-comment"># Does not change `{ file: { code: &quot;xxxx&quot; } }`.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&quot;credit_card.code&quot;</span>])
+
+<span class="ruby-comment"># Reverses values for keys that match /secret/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-operator">-&gt;</span> (<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">v</span>.<span class="ruby-identifier">reverse!</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/secret/i</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">k</span>)
+<span class="ruby-keyword">end</span>])
+</pre>
+
+<h1 id="class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">Active Support Parameter <a href="../Filter.html"><code>Filter</code></a><span><a href="#class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><code>ParameterFilter</code> replaces values in a <code>Hash</code>-like object if their keys match one of the specified filters.</p>
+
+<p>Matching based on nested keys is possible by using dot notation, e.g. <code>&quot;credit_card.number&quot;</code>.</p>
+
+<p>If a proc is given as a filter, each key and value of the <code>Hash</code>-like and of any nested <code>Hash</code>es will be passed to it. The value or key can then be mutated as desired using methods such as <code>String#replace</code>.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Replaces values with &quot;[FILTERED]&quot; for keys that match /password/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:password</span>])
+
+<span class="ruby-comment"># Replaces values with &quot;[FILTERED]&quot; for keys that match /foo|bar/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:foo</span>, <span class="ruby-string">&quot;bar&quot;</span>])
+
+<span class="ruby-comment"># Replaces values for the exact key &quot;pin&quot; and for keys that begin with</span>
+<span class="ruby-comment"># &quot;pin_&quot;. Does not match keys that otherwise include &quot;pin&quot; as a</span>
+<span class="ruby-comment"># substring, such as &quot;shipping_id&quot;.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-regexp">/\Apin\z/</span>, <span class="ruby-regexp">/\Apin_/</span>])
+
+<span class="ruby-comment"># Replaces the value for :code in `{ credit_card: { code: &quot;xxxx&quot; } }`.</span>
+<span class="ruby-comment"># Does not change `{ file: { code: &quot;xxxx&quot; } }`.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&quot;credit_card.code&quot;</span>])
+
+<span class="ruby-comment"># Reverses values for keys that match /secret/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-operator">-&gt;</span> (<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">v</span>.<span class="ruby-identifier">reverse!</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/secret/i</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">k</span>)
+<span class="ruby-keyword">end</span>])
+</pre>
+
+<h1 id="class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">Active Support Parameter <a href="../Filter.html"><code>Filter</code></a><span><a href="#class-ActiveSupport::ParameterFilter-label-Active+Support+Parameter+Filter">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><code>ParameterFilter</code> replaces values in a <code>Hash</code>-like object if their keys match one of the specified filters.</p>
+
+<p>Matching based on nested keys is possible by using dot notation, e.g. <code>&quot;credit_card.number&quot;</code>.</p>
+
+<p>If a proc is given as a filter, each key and value of the <code>Hash</code>-like and of any nested <code>Hash</code>es will be passed to it. The value or key can then be mutated as desired using methods such as <code>String#replace</code>.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Replaces values with &quot;[FILTERED]&quot; for keys that match /password/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:password</span>])
+
+<span class="ruby-comment"># Replaces values with &quot;[FILTERED]&quot; for keys that match /foo|bar/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-value">:foo</span>, <span class="ruby-string">&quot;bar&quot;</span>])
+
+<span class="ruby-comment"># Replaces values for the exact key &quot;pin&quot; and for keys that begin with</span>
+<span class="ruby-comment"># &quot;pin_&quot;. Does not match keys that otherwise include &quot;pin&quot; as a</span>
+<span class="ruby-comment"># substring, such as &quot;shipping_id&quot;.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-regexp">/\Apin\z/</span>, <span class="ruby-regexp">/\Apin_/</span>])
+
+<span class="ruby-comment"># Replaces the value for :code in `{ credit_card: { code: &quot;xxxx&quot; } }`.</span>
+<span class="ruby-comment"># Does not change `{ file: { code: &quot;xxxx&quot; } }`.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-string">&quot;credit_card.code&quot;</span>])
+
+<span class="ruby-comment"># Reverses values for keys that match /secret/i.</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>([<span class="ruby-operator">-&gt;</span> (<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">v</span>.<span class="ruby-identifier">reverse!</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/secret/i</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">k</span>)
+<span class="ruby-keyword">end</span>])
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(filters = [], mask: FILTERED)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Create instance with given filters. Supported type of filters are <code>String</code>, <code>Regexp</code>, and <code>Proc</code>. Other types of filters are treated as <code>String</code> using <code>to_s</code>. For <code>Proc</code> filters, key, value, and optional original hash is passed to block arguments.</p>
+
+<h4 id="method-c-new-label-Options">Options<span><a href="#method-c-new-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:mask</code> - A replaced object when filtered. Defaults to <code>&quot;[FILTERED]&quot;</code>.</p>
+</li></ul>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/parameter_filter.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">filters</span> = [], <span class="ruby-value">mask:</span> <span class="ruby-constant">FILTERED</span>)
+  <span class="ruby-ivar">@mask</span> = <span class="ruby-identifier">mask</span>
+  <span class="ruby-identifier">compile_filters!</span>(<span class="ruby-identifier">filters</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-precompile_filters" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">precompile_filters</span><span
+              class="method-args">(filters)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Precompiles an array of filters that otherwise would be passed directly to initialize. Depending on the quantity and types of filters, precompilation can improve filtering performance, especially in the case where the <a href="ParameterFilter.html"><code>ParameterFilter</code></a> instance itself cannot be retained (but the precompiled filters can be retained).</p>
+
+<pre class="ruby"><span class="ruby-identifier">filters</span> = [<span class="ruby-regexp">/foo/</span>, <span class="ruby-value">:bar</span>, <span class="ruby-string">&quot;nested.baz&quot;</span>, <span class="ruby-regexp">/nested\.qux/</span>]
+
+<span class="ruby-identifier">precompiled</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">precompile_filters</span>(<span class="ruby-identifier">filters</span>)
+<span class="ruby-comment"># =&gt; [/(?-mix:foo)|(?i:bar)/, /(?i:nested\.baz)|(?-mix:nested\.qux)/]</span>
+
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">precompiled</span>)
+</pre>
+
+          <div class="method-source-code" id="precompile_filters-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/parameter_filter.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">precompile_filters</span>(<span class="ruby-identifier">filters</span>)
+  <span class="ruby-identifier">filters</span>, <span class="ruby-identifier">patterns</span> = <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">partition</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Proc</span>) }
+
+  <span class="ruby-identifier">patterns</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pattern</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">pattern</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;(?i:#{Regexp.escape pattern.to_s})&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">deep_patterns</span> = <span class="ruby-identifier">patterns</span>.<span class="ruby-identifier">extract!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pattern</span><span class="ruby-operator">|</span> <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;\\.&quot;</span>) }
+
+  <span class="ruby-identifier">filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">patterns</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;|&quot;</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">patterns</span>.<span class="ruby-identifier">any?</span>
+  <span class="ruby-identifier">filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">deep_patterns</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;|&quot;</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">deep_patterns</span>.<span class="ruby-identifier">any?</span>
+
+  <span class="ruby-identifier">filters</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-filter" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter</span><span
+              class="method-args">(params)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Mask value of <code>params</code> if key matches one of filters.</p>
+
+          <div class="method-source-code" id="filter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/parameter_filter.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-ivar">@no_filters</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">dup</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">params</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-filter_param" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filter_param</span><span
+              class="method-args">(key, value)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Returns filtered value for given key. For <code>Proc</code> filters, third block argument is not populated.</p>
+
+          <div class="method-source-code" id="filter_param-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activesupport-8.1.1/lib/active_support/parameter_filter.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_param</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@no_filters</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value_for_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

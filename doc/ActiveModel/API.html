@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module ActiveModel::API - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#module-ActiveModel::API-label-Active+Model+API">Active Model API</a>
+          <li>      <a href="#module-ActiveModel::API-label-Active+Model+API">Active Model API</a>
+          <li>      <a href="#module-ActiveModel::API-label-Active+Model+API">Active Model API</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+    
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="AttributeAssignment.html">ActiveModel::AttributeAssignment</a>
+    <li><a class="include" href="Validations.html">ActiveModel::Validations</a>
+    <li><a class="include" href="Conversion.html">ActiveModel::Conversion</a>
+  </ul>
+</div>
+
+    
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="extend" href="../ActiveSupport/Concern.html">ActiveSupport::Concern</a>
+    <li><a class="extend" href="Naming.html">ActiveModel::Naming</a>
+    <li><a class="extend" href="Translation.html">ActiveModel::Translation</a>
+    <li><a class="extend" href="../ActiveSupport/Concern.html">ActiveSupport::Concern</a>
+    <li><a class="extend" href="Naming.html">ActiveModel::Naming</a>
+    <li><a class="extend" href="Translation.html">ActiveModel::Translation</a>
+    <li><a class="extend" href="../ActiveSupport/Concern.html">ActiveSupport::Concern</a>
+    <li><a class="extend" href="Naming.html">ActiveModel::Naming</a>
+    <li><a class="extend" href="Translation.html">ActiveModel::Translation</a>
+  </ul>
+</div>
+
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-persisted-3F">#persisted?</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-ActiveModel::API">
+  <h1 id="module-ActiveModel::API" class="module">
+    module ActiveModel::API
+  </h1>
+
+  <section class="description">
+    
+<h1 id="module-ActiveModel::API-label-Active+Model+API">Active Model API<span><a href="#module-ActiveModel::API-label-Active+Model+API">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Includes the required interface for an object to interact with Action Pack and Action View, using different Active Model modules. It includes model name introspections, conversions, translations, and validations. Besides that, it allows you to initialize the object with a hash of attributes, pretty much like Active Record does.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:name</span>, <span class="ruby-value">:age</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-string">&#39;18&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;bob&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">age</span>  <span class="ruby-comment"># =&gt; &quot;18&quot;</span>
+</pre>
+
+<p>Note that, by default, <code>ActiveModel::API</code> implements <a href="API.html#method-i-persisted-3F"><code>persisted?</code></a> to return <code>false</code>, which is the most common case. You may want to override it in your class to simulate a different scenario:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">persisted?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">present?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>Also, if for some reason you need to run code on initialize ( <a href="API.html#method-c-new"><code>::new</code></a> ), make sure you call <code>super</code> if you want the attributes hash initialization to happen.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">:omg</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">attributes</span>={})
+    <span class="ruby-keyword">super</span>
+    <span class="ruby-ivar">@omg</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">omg</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>For more detailed information on other functionalities available, please refer to the specific modules included in <code>ActiveModel::API</code> (see below).</p>
+
+<h1 id="module-ActiveModel::API-label-Active+Model+API">Active Model API<span><a href="#module-ActiveModel::API-label-Active+Model+API">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Includes the required interface for an object to interact with Action Pack and Action View, using different Active Model modules. It includes model name introspections, conversions, translations, and validations. Besides that, it allows you to initialize the object with a hash of attributes, pretty much like Active Record does.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:name</span>, <span class="ruby-value">:age</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-string">&#39;18&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;bob&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">age</span>  <span class="ruby-comment"># =&gt; &quot;18&quot;</span>
+</pre>
+
+<p>Note that, by default, <code>ActiveModel::API</code> implements <a href="API.html#method-i-persisted-3F"><code>persisted?</code></a> to return <code>false</code>, which is the most common case. You may want to override it in your class to simulate a different scenario:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">persisted?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">present?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>Also, if for some reason you need to run code on initialize ( <a href="API.html#method-c-new"><code>::new</code></a> ), make sure you call <code>super</code> if you want the attributes hash initialization to happen.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">:omg</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">attributes</span>={})
+    <span class="ruby-keyword">super</span>
+    <span class="ruby-ivar">@omg</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">omg</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>For more detailed information on other functionalities available, please refer to the specific modules included in <code>ActiveModel::API</code> (see below).</p>
+
+<h1 id="module-ActiveModel::API-label-Active+Model+API">Active Model API<span><a href="#module-ActiveModel::API-label-Active+Model+API">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Includes the required interface for an object to interact with Action Pack and Action View, using different Active Model modules. It includes model name introspections, conversions, translations, and validations. Besides that, it allows you to initialize the object with a hash of attributes, pretty much like Active Record does.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:name</span>, <span class="ruby-value">:age</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-string">&#39;18&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;bob&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">age</span>  <span class="ruby-comment"># =&gt; &quot;18&quot;</span>
+</pre>
+
+<p>Note that, by default, <code>ActiveModel::API</code> implements <a href="API.html#method-i-persisted-3F"><code>persisted?</code></a> to return <code>false</code>, which is the most common case. You may want to override it in your class to simulate a different scenario:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">persisted?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">present?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>Also, if for some reason you need to run code on initialize ( <a href="API.html#method-c-new"><code>::new</code></a> ), make sure you call <code>super</code> if you want the attributes hash initialization to happen.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">:omg</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">attributes</span>={})
+    <span class="ruby-keyword">super</span>
+    <span class="ruby-ivar">@omg</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">omg</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>For more detailed information on other functionalities available, please refer to the specific modules included in <code>ActiveModel::API</code> (see below).</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(attributes = {})</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Initializes a new model with the given <code>params</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:name</span>, <span class="ruby-value">:age</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>, <span class="ruby-value">age:</span> <span class="ruby-string">&#39;18&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;bob&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">age</span>  <span class="ruby-comment"># =&gt; &quot;18&quot;</span>
+</pre>
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/api.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">attributes</span> = {})
+  <span class="ruby-identifier">assign_attributes</span>(<span class="ruby-identifier">attributes</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">attributes</span>
+
+  <span class="ruby-keyword">super</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-persisted-3F" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">persisted?</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Indicates if the model is persisted. Default is <code>false</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&#39;bob&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">persisted?</span> <span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+          <div class="method-source-code" id="persisted-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/api.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">persisted?</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

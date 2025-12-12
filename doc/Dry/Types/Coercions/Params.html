@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Dry::Types::Coercions::Params - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="extend" href="../Coercions.html">Dry::Types::Coercions</a>
+    <li><a class="extend" href="../Coercions.html">Dry::Types::Coercions</a>
+  </ul>
+</div>
+
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-to_ary">::to_ary</a>
+    <li ><a href="#method-c-to_decimal">::to_decimal</a>
+    <li ><a href="#method-c-to_false">::to_false</a>
+    <li ><a href="#method-c-to_float">::to_float</a>
+    <li ><a href="#method-c-to_hash">::to_hash</a>
+    <li ><a href="#method-c-to_int">::to_int</a>
+    <li ><a href="#method-c-to_nil">::to_nil</a>
+    <li ><a href="#method-c-to_true">::to_true</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Dry::Types::Coercions::Params">
+  <h1 id="module-Dry::Types::Coercions::Params" class="module">
+    module Dry::Types::Coercions::Params
+  </h1>
+
+  <section class="description">
+    
+<p>Params-specific coercions</p>
+
+<p>@api public</p>
+
+<p>Params-specific coercions</p>
+
+<p>@api public</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="BOOLEAN_MAP">BOOLEAN_MAP
+        <dd>
+        <dt id="FALSE_VALUES">FALSE_VALUES
+        <dd>
+        <dt id="TRUE_VALUES">TRUE_VALUES
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-to_ary" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_ary</span><span
+              class="method-args">(input, &amp;) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [Array, <a href="../../../String.html"><code>String</code></a>, Object] input</p>
+
+<p>@return [Array, Object]</p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_ary-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_ary</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">empty_str?</span>(<span class="ruby-identifier">input</span>)
+    []
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">input</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">CoercionError</span>, <span class="ruby-node">&quot;#{input.inspect} cannot be coerced to array&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_decimal" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_decimal</span><span
+              class="method-args">(input, &amp;) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [#to_d, Object] input</p>
+
+<p>@return [BigDecimal, nil, Object]</p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_decimal-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_decimal</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-identifier">to_float</span>(<span class="ruby-identifier">input</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">CoercionError</span>, <span class="ruby-node">&quot;#{input.inspect} cannot be coerced to decimal&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">input</span>.<span class="ruby-identifier">to_d</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_false" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_false</span><span
+              class="method-args">(input, &amp;) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [String, Object] input</p>
+
+<p>@return [Boolean,Object]</p>
+
+<p>@see <a href="Params.html#TRUE_VALUES"><code>TRUE_VALUES</code></a> @see <a href="Params.html#FALSE_VALUES"><code>FALSE_VALUES</code></a></p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_false-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_false</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-constant">BOOLEAN_MAP</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">input</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-keyword">yield</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">CoercionError</span>, <span class="ruby-node">&quot;#{input} cannot be coerced to false&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_float" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_float</span><span
+              class="method-args">(input, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [#to_f, Object] input</p>
+
+<p>@return [Float, nil, Object]</p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_float-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_float</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-constant">Float</span>(<span class="ruby-identifier">input</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-operator">::</span><span class="ruby-constant">TypeError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-constant">CoercionError</span>.<span class="ruby-identifier">handle</span>(<span class="ruby-identifier">e</span>, <span class="ruby-operator">&amp;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_hash" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_hash</span><span
+              class="method-args">(input, &amp;) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [Hash, <a href="../../../String.html"><code>String</code></a>, Object] input</p>
+
+<p>@return [Hash, Object]</p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_hash-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_hash</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">empty_str?</span>(<span class="ruby-identifier">input</span>)
+    {}
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>)
+    <span class="ruby-identifier">input</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">CoercionError</span>, <span class="ruby-node">&quot;#{input.inspect} cannot be coerced to hash&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_int" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_int</span><span
+              class="method-args">(input, &amp;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [#to_int, to_i, Object] input</p>
+
+<p>@return [Integer, nil, Object]</p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_int-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_int</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">String</span>)
+    <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">input</span>, <span class="ruby-value">10</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">input</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>, <span class="ruby-operator">::</span><span class="ruby-constant">TypeError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-constant">CoercionError</span>.<span class="ruby-identifier">handle</span>(<span class="ruby-identifier">e</span>, <span class="ruby-operator">&amp;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_nil" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_nil</span><span
+              class="method-args">(input, &amp;) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [Object] input</p>
+
+<p>@return [nil] if the input is an empty string or nil</p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_nil-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_nil</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">empty_str?</span>(<span class="ruby-identifier">input</span>)
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">CoercionError</span>, <span class="ruby-node">&quot;#{input.inspect} is not nil&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-to_true" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">to_true</span><span
+              class="method-args">(input, &amp;) { || ... }</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@param [String, Object] input</p>
+
+<p>@return [Boolean,Object]</p>
+
+<p>@see <a href="Params.html#TRUE_VALUES"><code>TRUE_VALUES</code></a> @see <a href="Params.html#FALSE_VALUES"><code>FALSE_VALUES</code></a></p>
+
+<p>@raise <a href="../CoercionError.html"><code>CoercionError</code></a></p>
+
+<p>@api public</p>
+
+          <div class="method-source-code" id="to_true-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/dry-types-1.8.3/lib/dry/types/coercions/params.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_true</span>(<span class="ruby-identifier">input</span>, <span class="ruby-operator">&amp;</span>)
+  <span class="ruby-constant">BOOLEAN_MAP</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">input</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-keyword">yield</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">CoercionError</span>, <span class="ruby-node">&quot;#{input} cannot be coerced to true&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

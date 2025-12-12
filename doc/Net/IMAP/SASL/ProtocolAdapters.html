@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Net::IMAP::SASL::ProtocolAdapters - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+  <ul class="link-list" role="directory">
+              <li>      <a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Interface">Interface</a>
+          <li>      <a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Included+protocol+adapters">Included protocol adapters</a>
+          <li>      <a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Interface">Interface</a>
+          <li>      <a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Included+protocol+adapters">Included protocol adapters</a>
+
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Net::IMAP::SASL::ProtocolAdapters">
+  <h1 id="module-Net::IMAP::SASL::ProtocolAdapters" class="module">
+    module Net::IMAP::SASL::ProtocolAdapters
+  </h1>
+
+  <section class="description">
+    
+<p><a href="ProtocolAdapters.html"><code>SASL::ProtocolAdapters</code></a> modules are meant to be used as mixins for <a href="ClientAdapter.html"><code>SASL::ClientAdapter</code></a> and its subclasses.  Where the client adapter must be customized for each client library, the protocol adapter mixin handles SASL requirements that are part of the protocol specification, but not specific to any particular client library.  In particular, see <a href="https://www.rfc-editor.org/rfc/rfc4422.html#section-4">RFC4422 §4</a></p>
+
+<h3 id="module-Net::IMAP::SASL::ProtocolAdapters-label-Interface">Interface<span><a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Interface">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<blockquote>
+<p>NOTE: This API is experimental, and may change.</p>
+</blockquote>
+<ul><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-command_name">#command_name</a> – The name of the command used to to initiate an authentication exchange.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-service">#service</a> – The GSSAPI service name.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-encode_ir">#encode_ir</a>–Encodes an initial response.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-decode">#decode</a> – Decodes a server challenge.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-encode">#encode</a> – Encodes a client response.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-cancel_response">#cancel_response</a> – The encoded client response used to cancel an authentication exchange.</p>
+</li></ul>
+
+<p>Other protocol requirements of the SASL authentication exchange are handled by <a href="ClientAdapter.html"><code>SASL::ClientAdapter</code></a>.</p>
+
+<h3 id="module-Net::IMAP::SASL::ProtocolAdapters-label-Included+protocol+adapters">Included protocol adapters<span><a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Included+protocol+adapters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a href="ProtocolAdapters/Generic.html"><code>Generic</code></a> – a basic implementation of all of the methods listed above.</p>
+</li><li>
+<p><a href="ProtocolAdapters/IMAP.html"><code>IMAP</code></a> – An adapter for the IMAP4 protocol.</p>
+</li><li>
+<p><a href="ProtocolAdapters/SMTP.html"><code>SMTP</code></a> – An adapter for the SMTP protocol with the <code>AUTH</code> capability.</p>
+</li><li>
+<p><a href="ProtocolAdapters/POP.html"><code>POP</code></a>  – An adapter for the <a href="../../POP3.html"><code>POP3</code></a>  protocol with the <code>SASL</code> capability.</p>
+</li></ul>
+
+<p><a href="ProtocolAdapters.html"><code>SASL::ProtocolAdapters</code></a> modules are meant to be used as mixins for <a href="ClientAdapter.html"><code>SASL::ClientAdapter</code></a> and its subclasses.  Where the client adapter must be customized for each client library, the protocol adapter mixin handles SASL requirements that are part of the protocol specification, but not specific to any particular client library.  In particular, see <a href="https://www.rfc-editor.org/rfc/rfc4422.html#section-4">RFC4422 §4</a></p>
+
+<h3 id="module-Net::IMAP::SASL::ProtocolAdapters-label-Interface">Interface<span><a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Interface">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<blockquote>
+<p>NOTE: This API is experimental, and may change.</p>
+</blockquote>
+<ul><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-command_name">#command_name</a> – The name of the command used to to initiate an authentication exchange.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-service">#service</a> – The GSSAPI service name.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-encode_ir">#encode_ir</a>–Encodes an initial response.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-decode">#decode</a> – Decodes a server challenge.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-encode">#encode</a> – Encodes a client response.</p>
+</li><li>
+<p><a href="ProtocolAdapters/Generic.html#method-i-cancel_response">#cancel_response</a> – The encoded client response used to cancel an authentication exchange.</p>
+</li></ul>
+
+<p>Other protocol requirements of the SASL authentication exchange are handled by <a href="ClientAdapter.html"><code>SASL::ClientAdapter</code></a>.</p>
+
+<h3 id="module-Net::IMAP::SASL::ProtocolAdapters-label-Included+protocol+adapters">Included protocol adapters<span><a href="#module-Net::IMAP::SASL::ProtocolAdapters-label-Included+protocol+adapters">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a href="ProtocolAdapters/Generic.html"><code>Generic</code></a> – a basic implementation of all of the methods listed above.</p>
+</li><li>
+<p><a href="ProtocolAdapters/IMAP.html"><code>IMAP</code></a> – An adapter for the IMAP4 protocol.</p>
+</li><li>
+<p><a href="ProtocolAdapters/SMTP.html"><code>SMTP</code></a> – An adapter for the SMTP protocol with the <code>AUTH</code> capability.</p>
+</li><li>
+<p><a href="ProtocolAdapters/POP.html"><code>POP</code></a>  – An adapter for the <a href="../../POP3.html"><code>POP3</code></a>  protocol with the <code>SASL</code> capability.</p>
+</li></ul>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

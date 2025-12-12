@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module ActionController::ParameterEncoding::ClassMethods - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-param_encoding">#param_encoding</a>
+    <li ><a href="#method-i-skip_parameter_encoding">#skip_parameter_encoding</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-ActionController::ParameterEncoding::ClassMethods">
+  <h1 id="module-ActionController::ParameterEncoding::ClassMethods" class="module">
+    module ActionController::ParameterEncoding::ClassMethods
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-param_encoding" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">param_encoding</span><span
+              class="method-args">(action, param, encoding)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Specify the encoding for a parameter on an action. If not specified the default is UTF-8.</p>
+
+<p>You can specify a binary (ASCII_8BIT) parameter with:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">RepositoryController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># This specifies that file_path is not UTF-8 and is instead ASCII_8BIT</span>
+  <span class="ruby-identifier">param_encoding</span> <span class="ruby-value">:show</span>, <span class="ruby-value">:file_path</span>, <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">ASCII_8BIT</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+    <span class="ruby-ivar">@repo</span> = <span class="ruby-constant">Repository</span>.<span class="ruby-identifier">find_by_filesystem_path</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file_path</span>]
+
+    <span class="ruby-comment"># params[:repo_name] remains UTF-8 encoded</span>
+    <span class="ruby-ivar">@repo_name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:repo_name</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-ivar">@repositories</span> = <span class="ruby-constant">Repository</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The file_path parameter on the show action would be encoded as ASCII-8BIT, but all other arguments will remain UTF-8 encoded. This is useful in the case where an application must handle data but encoding of the data is unknown, like file system data.</p>
+
+          <div class="method-source-code" id="param_encoding-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/parameter_encoding.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">param_encoding</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">param</span>, <span class="ruby-identifier">encoding</span>)
+  <span class="ruby-ivar">@_parameter_encodings</span>[<span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_s</span>][<span class="ruby-identifier">param</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">encoding</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-skip_parameter_encoding" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">skip_parameter_encoding</span><span
+              class="method-args">(action)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Specify that a given action’s parameters should all be encoded as ASCII-8BIT (it “skips” the encoding default of UTF-8).</p>
+
+<p>For example, a controller would use it like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">RepositoryController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">skip_parameter_encoding</span> <span class="ruby-value">:show</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+    <span class="ruby-ivar">@repo</span> = <span class="ruby-constant">Repository</span>.<span class="ruby-identifier">find_by_filesystem_path</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:file_path</span>]
+
+    <span class="ruby-comment"># `repo_name` is guaranteed to be UTF-8, but was ASCII-8BIT, so</span>
+    <span class="ruby-comment"># tag it as such</span>
+    <span class="ruby-ivar">@repo_name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:repo_name</span>].<span class="ruby-identifier">force_encoding</span> <span class="ruby-string">&#39;UTF-8&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-ivar">@repositories</span> = <span class="ruby-constant">Repository</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The show action in the above controller would have all parameter values encoded as ASCII-8BIT. This is useful in the case where an application must handle data but encoding of the data is unknown, like file system data.</p>
+
+          <div class="method-source-code" id="skip_parameter_encoding-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/parameter_encoding.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_parameter_encoding</span>(<span class="ruby-identifier">action</span>)
+  <span class="ruby-ivar">@_parameter_encodings</span>[<span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">ASCII_8BIT</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
