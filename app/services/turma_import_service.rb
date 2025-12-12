@@ -40,11 +40,8 @@ class TurmaImportService
   def call
     return failure("Arquivo não enviado.") if @file.nil?
 
-    csv_text = @file.read
-    return failure("Arquivo CSV vazio.") if csv_text.strip.empty?
-
-    col_sep = csv_text.include?(";") ? ";" : ","
-    table = CSV.parse(csv_text, headers: true, col_sep: col_sep)
+    table = parse_table(@file.read)
+    return failure("Arquivo CSV vazio.") if table.nil?
     return failure("Arquivo CSV sem linhas de dados.") if table.empty?
 
     created_turmas = 0
@@ -54,58 +51,11 @@ class TurmaImportService
     turma_cache = {}
 
     table.each_with_index do |row, idx|
-      data = normalize_row(row)
-      missing = REQUIRED_FIELDS.select { |field| data[field].blank? }
-      if missing.any?
-        errors << "Linha #{idx + 2}: campos obrigatórios ausentes: #{missing.join(', ')}"
-        next
-      end
-
-      turma = turma_cache[data["codigo"]] ||= Turma.find_or_initialize_by(codigo: data["codigo"])
-      if turma.new_record?
-        turma.departamento = data["departamento"]
-        turma.semestre = data["semestre"]
-        turma.professor = data["professor"]
-        unless turma.save
-          errors << "Linha #{idx + 2}: turma #{data['codigo']} - #{turma.errors.full_messages.to_sentence}"
-          turma_cache.delete(data["codigo"])
-          next
-        end
-        created_turmas += 1
-      else
-        # Atualiza informações básicas se vierem no CSV
-        turma.update(
-          departamento: data["departamento"] || turma.departamento,
-          semestre: data["semestre"] || turma.semestre,
-          professor: data["professor"] || turma.professor
-        )
-      end
-
-      user = User.find_or_initialize_by(matricula: data["matricula"])
-      if user.new_record?
-        user.nome = data["nome"]
-        user.email = data["email"]
-        user.role = "participante"
-        password = data["senha"].presence || data["matricula"].presence || SecureRandom.alphanumeric(10)
-        user.password = password
-        user.password_confirmation = password
-        unless user.save
-          errors << "Linha #{idx + 2}: usuário #{data['matricula']} - #{user.errors.full_messages.to_sentence}"
-          next
-        end
-        created_users += 1
-      else
-        user.nome ||= data["nome"]
-        user.email ||= data["email"]
-        user.role ||= "participante"
-        unless user.save
-          errors << "Linha #{idx + 2}: usuário #{data['matricula']} - #{user.errors.full_messages.to_sentence}"
-          next
-        end
-        existing_users += 1
-      end
-
-      turma.turma_users.find_or_create_by(user: user)
+      outcome = process_row(row, idx, turma_cache)
+      created_turmas += outcome[:created_turmas]
+      created_users += outcome[:created_users]
+      existing_users += outcome[:existing_users]
+      errors.concat(outcome[:errors]) if outcome[:errors].any?
     end
 
     message = "Importação concluída"
@@ -120,6 +70,80 @@ class TurmaImportService
   end
 
   private
+
+  def parse_table(csv_text)
+    return nil if csv_text.to_s.strip.empty?
+    col_sep = csv_text.include?(";") ? ";" : ","
+    CSV.parse(csv_text, headers: true, col_sep: col_sep)
+  rescue CSV::MalformedCSVError
+    raise
+  end
+
+  def process_row(row, idx, turma_cache)
+    data = normalize_row(row)
+    missing = missing_required_fields(data)
+    return row_error(idx, "campos obrigatórios ausentes: #{missing.join(', ')}") if missing.any?
+
+    errors = []
+    created_turmas = 0
+    created_users = 0
+    existing_users = 0
+
+    turma, created_turma_inc = find_or_create_turma(data, turma_cache, idx, errors)
+    return { created_turmas: 0, created_users: 0, existing_users: 0, errors: errors } if turma.nil?
+    created_turmas += created_turma_inc
+
+    user_outcome = Users::UpsertFromCsv.new(data: data, idx: idx).call
+    errors.concat(user_outcome.errors)
+    created_users += user_outcome.created_users
+    existing_users += user_outcome.existing_users
+    return { created_turmas: created_turmas, created_users: created_users, existing_users: existing_users, errors: errors } if user_outcome.user.nil?
+
+    link_user_to_turma(turma, user_outcome.user)
+
+    { created_turmas: created_turmas, created_users: created_users, existing_users: existing_users, errors: errors }
+  end
+  def missing_required_fields(data)
+    REQUIRED_FIELDS.select { |field| data[field].blank? }
+  end
+
+  def row_error(idx, msg)
+    { created_turmas: 0, created_users: 0, existing_users: 0, errors: ["Linha #{idx + 2}: #{msg}"] }
+  end
+
+  def format_errors(record, idx, label)
+    "Linha #{idx + 2}: #{label} #{record} - #{yield}"
+  end
+
+  def find_or_create_turma(data, turma_cache, idx, errors)
+    turma = turma_cache[data["codigo"]] ||= Turma.find_or_initialize_by(codigo: data["codigo"])
+    created_inc = 0
+    if turma.new_record?
+      turma.departamento = data["departamento"]
+      turma.semestre = data["semestre"]
+      turma.professor = data["professor"]
+      unless turma.save
+        errors << format_errors(data['codigo'], idx, 'turma') { turma.errors.full_messages.to_sentence }
+        turma_cache.delete(data["codigo"]) 
+        return nil
+      end
+      created_inc = 1
+    else
+      # Atualiza somente se há novos valores
+      updates = {}
+      updates[:departamento] = data["departamento"] if data["departamento"].present? && data["departamento"] != turma.departamento
+      updates[:semestre] = data["semestre"] if data["semestre"].present? && data["semestre"] != turma.semestre
+      updates[:professor] = data["professor"] if data["professor"].present? && data["professor"] != turma.professor
+      turma.update(updates) if updates.any?
+    end
+    [turma, created_inc]
+  end
+
+  # user upsert moved to Users::UpsertFromCsv service
+
+  def link_user_to_turma(turma, user)
+    turma.turma_users.find_or_create_by(user: user)
+  end
 
   def normalize_row(row)
     normalized = {

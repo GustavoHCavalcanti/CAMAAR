@@ -11115,3 +11115,191 @@ Migrating to AddStatusAndDescricaoToImportLogs (20251212024532)
 [dotenv] Set [36mDATABASE_URL[0m
 [dotenv] Loaded [33m.env[0m
   [1m[36mActiveRecord::SchemaMigration Load (339.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+[dotenv] Set [36mDATABASE_URL[0m
+[dotenv] Loaded [33m.env[0m
+Started GET "/" for ::1 at 2025-12-12 17:09:33 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (329.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Camaar'*/[0m
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 151.1ms | GC: 41.2ms)
+Completed 200 OK in 168ms (Views: 157.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 41.2ms)
+
+
+Started GET "/favicon.ico" for ::1 at 2025-12-12 17:09:40 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/login" for ::1 at 2025-12-12 17:10:00 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "login"=>"aluno@teste.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (362.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email = 'aluno@teste.com' OR matricula = 'aluno@teste.com') LIMIT 1 /*action='create',application='Camaar',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:31:in `localizar_usuario'
+Redirected to http://[::1]:3000/respondente/formularios
+↳ app/controllers/sessions_controller.rb:17:in `create'
+Completed 302 Found in 8103ms (ActiveRecord: 4723.8ms (1 query, 0 cached) | GC: 19.2ms)
+
+
+Started GET "/respondente/formularios" for ::1 at 2025-12-12 17:10:08 -0300
+Processing by Respondente::FormulariosController#index as HTML
+  [1m[36mUser Load (358.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 227 LIMIT 1 /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mFormulario Load (367.2ms)[0m  [1m[34mSELECT "formularios".* FROM "formularios" /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/controllers/respondente/formularios_controller.rb:12:in `index'
+  Rendering layout layouts/respondente.html.erb
+  Rendering respondente/formularios/index.html.erb within layouts/respondente
+  Rendered respondente/formularios/index.html.erb within layouts/respondente (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/respondente.html.erb (Duration: 19.9ms | GC: 0.3ms)
+Completed 200 OK in 773ms (Views: 23.6ms | ActiveRecord: 725.3ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/respondente/perfil" for ::1 at 2025-12-12 17:10:14 -0300
+Processing by Respondente::PerfilController#show as HTML
+  [1m[36mUser Load (360.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 227 LIMIT 1 /*action='show',application='Camaar',controller='perfil'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/respondente.html.erb
+  Rendering respondente/perfil/show.html.erb within layouts/respondente
+  [1m[36mTurma Exists? (360.3ms)[0m  [1m[34mSELECT 1 AS one FROM "turmas" INNER JOIN "turma_users" ON "turmas"."id" = "turma_users"."turma_id" WHERE "turma_users"."user_id" = 227 LIMIT 1 /*action='show',application='Camaar',controller='perfil'*/[0m
+  ↳ app/views/respondente/perfil/show.html.erb:40
+  Rendered respondente/perfil/show.html.erb within layouts/respondente (Duration: 1472.2ms | GC: 2.2ms)
+  Rendered layout layouts/respondente.html.erb (Duration: 1477.8ms | GC: 2.2ms)
+Completed 200 OK in 1846ms (Views: 32.7ms | ActiveRecord: 1806.2ms (2 queries, 0 cached) | GC: 3.0ms)
+
+
+Started GET "/respondente/formularios" for ::1 at 2025-12-12 17:10:17 -0300
+Processing by Respondente::FormulariosController#index as HTML
+  [1m[36mUser Load (358.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 227 LIMIT 1 /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mFormulario Load (360.7ms)[0m  [1m[34mSELECT "formularios".* FROM "formularios" /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/controllers/respondente/formularios_controller.rb:12:in `index'
+  Rendering layout layouts/respondente.html.erb
+  Rendering respondente/formularios/index.html.erb within layouts/respondente
+  Rendered respondente/formularios/index.html.erb within layouts/respondente (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/respondente.html.erb (Duration: 5.6ms | GC: 0.0ms)
+Completed 200 OK in 728ms (Views: 6.0ms | ActiveRecord: 719.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/logout" for ::1 at 2025-12-12 17:10:26 -0300
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+Redirected to http://[::1]:3000/login
+↳ app/controllers/sessions_controller.rb:25:in `destroy'
+Completed 302 Found in 3ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2025-12-12 17:10:26 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 7.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-12-12 17:10:37 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "login"=>"admin@teste.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (719.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email = 'admin@teste.com' OR matricula = 'admin@teste.com') LIMIT 1 /*action='create',application='Camaar',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:31:in `localizar_usuario'
+Redirected to http://[::1]:3000/admin/formularios
+↳ app/controllers/sessions_controller.rb:17:in `create'
+Completed 302 Found in 971ms (ActiveRecord: 719.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/formularios" for ::1 at 2025-12-12 17:10:38 -0300
+Processing by Admin::FormulariosController#index as HTML
+  [1m[36mUser Load (361.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/formularios/index.html.erb within layouts/admin
+  [1m[36mFormulario Load (364.3ms)[0m  [1m[34mSELECT "formularios".* FROM "formularios" /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/views/admin/formularios/index.html.erb:13
+  Rendered admin/formularios/index.html.erb within layouts/admin (Duration: 367.7ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 373.8ms | GC: 0.0ms)
+Completed 200 OK in 739ms (Views: 11.0ms | ActiveRecord: 725.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/gerenciamento" for ::1 at 2025-12-12 17:10:45 -0300
+Processing by Admin::GerenciamentoController#index as HTML
+  [1m[36mUser Load (363.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='index',application='Camaar',controller='gerenciamento'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/gerenciamento/index.html.erb within layouts/admin
+  Rendered admin/gerenciamento/index.html.erb within layouts/admin (Duration: 1.2ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 24.1ms | GC: 16.1ms)
+Completed 200 OK in 393ms (Views: 24.8ms | ActiveRecord: 363.5ms (1 query, 0 cached) | GC: 16.1ms)
+
+
+Started GET "/admin/turmas/import_form" for ::1 at 2025-12-12 17:10:47 -0300
+Processing by Admin::TurmasController#import_form as HTML
+  [1m[36mUser Load (359.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='import_form',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/import_form.html.erb within layouts/admin
+  Rendered admin/turmas/import_form.html.erb within layouts/admin (Duration: 7.1ms | GC: 0.7ms)
+  Rendered layout layouts/admin.html.erb (Duration: 16.5ms | GC: 1.3ms)
+Completed 200 OK in 379ms (Views: 17.2ms | ActiveRecord: 359.7ms (1 query, 0 cached) | GC: 1.3ms)
+
+
+Started GET "/admin/turmas" for ::1 at 2025-12-12 17:10:49 -0300
+Processing by Admin::TurmasController#index as HTML
+  [1m[36mUser Load (359.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/turmas/index.html.erb within layouts/admin
+  [1m[36mTurma Load (360.3ms)[0m  [1m[34mSELECT "turmas".* FROM "turmas" /*action='index',application='Camaar',controller='turmas'*/[0m
+  ↳ app/views/admin/turmas/index.html.erb:25
+  Rendered admin/turmas/index.html.erb within layouts/admin (Duration: 362.2ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 369.7ms | GC: 1.0ms)
+Completed 200 OK in 734ms (Views: 10.1ms | ActiveRecord: 720.1ms (2 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/admin/gerenciamento" for ::1 at 2025-12-12 17:10:54 -0300
+Processing by Admin::GerenciamentoController#index as HTML
+  [1m[36mUser Load (358.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='index',application='Camaar',controller='gerenciamento'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/gerenciamento/index.html.erb within layouts/admin
+  Rendered admin/gerenciamento/index.html.erb within layouts/admin (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 4.3ms | GC: 0.5ms)
+Completed 200 OK in 365ms (Views: 4.7ms | ActiveRecord: 358.1ms (1 query, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/admin/formularios" for ::1 at 2025-12-12 17:10:56 -0300
+Processing by Admin::FormulariosController#index as HTML
+  [1m[36mUser Load (362.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/formularios/index.html.erb within layouts/admin
+  [1m[36mFormulario Load (366.3ms)[0m  [1m[34mSELECT "formularios".* FROM "formularios" /*action='index',application='Camaar',controller='formularios'*/[0m
+  ↳ app/views/admin/formularios/index.html.erb:13
+  Rendered admin/formularios/index.html.erb within layouts/admin (Duration: 369.1ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 377.8ms | GC: 1.6ms)
+Completed 200 OK in 747ms (Views: 12.2ms | ActiveRecord: 728.7ms (2 queries, 0 cached) | GC: 3.4ms)
+
+
+Started GET "/admin/gerenciamento" for ::1 at 2025-12-12 17:10:59 -0300
+Processing by Admin::GerenciamentoController#index as HTML
+  [1m[36mUser Load (365.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='index',application='Camaar',controller='gerenciamento'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/gerenciamento/index.html.erb within layouts/admin
+  Rendered admin/gerenciamento/index.html.erb within layouts/admin (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 9.3ms | GC: 0.8ms)
+Completed 200 OK in 380ms (Views: 9.8ms | ActiveRecord: 365.3ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/admin/templates" for ::1 at 2025-12-12 17:11:00 -0300
+Processing by Admin::TemplatesController#index as HTML
+  [1m[36mUser Load (360.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 228 LIMIT 1 /*action='index',application='Camaar',controller='templates'*/[0m
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/admin.html.erb
+  Rendering admin/templates/index.html.erb within layouts/admin
+  [1m[36mTemplate Load (358.8ms)[0m  [1m[34mSELECT "templates".* FROM "templates" /*action='index',application='Camaar',controller='templates'*/[0m
+  ↳ app/views/admin/templates/index.html.erb:15
+  Rendered admin/templates/index.html.erb within layouts/admin (Duration: 362.9ms | GC: 0.0ms)
+  Rendered layout layouts/admin.html.erb (Duration: 368.6ms | GC: 0.0ms)
+Completed 200 OK in 743ms (Views: 10.4ms | ActiveRecord: 719.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

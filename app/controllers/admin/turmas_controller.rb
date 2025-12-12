@@ -4,6 +4,8 @@ module Admin
     layout "admin"
     before_action :require_login
     before_action :require_admin
+    before_action :load_turma, only: [:show, :edit, :update, :destroy]
+    before_action :prepare_lists, only: [:new, :edit]
 
     # Lista turmas cadastradas.
     # @return [void]
@@ -13,16 +15,12 @@ module Admin
 
     # Exibe detalhes de uma turma.
     # @return [void]
-    def show
-      @turma = ::Turma.find(params[:id])
-    end
+    def show; end
 
     # Inicializa formulário de criação de turma com listas de alunos e professores.
     # @return [void]
     def new
       @turma = ::Turma.new
-      @alunos_disponiveis = ::User.where(role: "participante")
-      @professores = ::User.where(role: "administrador")
     end
 
     # Cria turma e associa alunos selecionados.
@@ -44,17 +42,12 @@ module Admin
     # Carrega turma para edição e popula alunos atuais e disponíveis.
     # @return [void]
     def edit
-      @turma = ::Turma.find(params[:id])
-      @alunos_disponiveis = ::User.where(role: "participante")
-      @alunos_da_turma = @turma.users
-      @professores = ::User.where(role: "administrador")
     end
 
     # Atualiza turma e redefine associações de alunos conforme seleção.
     # @return [void]
     # @side_effect Limpa e recria TurmaUsers; redireciona ou renderiza :edit com status 422
     def update
-      @turma = ::Turma.find(params[:id])
       if @turma.update(turma_params)
         # Atualizar alunos da turma
         redefinir_associacoes_alunos(@turma, params[:turma][:aluno_ids])
@@ -71,7 +64,6 @@ module Admin
     # @return [void]
     # @side_effect Destroi Turma e associações; redireciona
     def destroy
-      @turma = ::Turma.find(params[:id])
       @turma.destroy
       redirect_to admin_turmas_path, notice: "Turma removida."
     end
@@ -93,6 +85,14 @@ module Admin
     end
 
     private
+
+    def load_turma
+      @turma = ::Turma.find(params[:id])
+    end
+
+    def prepare_lists
+      preparar_listas_turma(@turma)
+    end
 
     # Strong params da turma.
     # @return [ActionController::Parameters]
