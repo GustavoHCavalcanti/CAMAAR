@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,ReportGenerator">
 
 
-    <meta name="description" content="Documentation for the ReportGenerator class">
+    <meta name="description" content="class ReportGenerator: Gera relatórios CSV a partir de respostas coletadas, com filtros por turma.">
 
 
 
@@ -127,6 +127,8 @@
 
   <section class="description">
     
+<p>Gera relatórios CSV a partir de respostas coletadas, com filtros por turma.</p>
+
   </section>
 
 
@@ -170,7 +172,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/report_generator.rb, line 9</span>
+            <pre><span class="ruby-comment"># File lib/report_generator.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">responses</span>)
   <span class="ruby-ivar">@responses</span> = <span class="ruby-identifier">responses</span> <span class="ruby-operator">||</span> []
 <span class="ruby-keyword">end</span></pre>
@@ -224,7 +226,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="export_csv-source">
-            <pre><span class="ruby-comment"># File lib/report_generator.rb, line 14</span>
+            <pre><span class="ruby-comment"># File lib/report_generator.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">export_csv</span>(<span class="ruby-value">classroom:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">filtered</span> = <span class="ruby-identifier">classroom</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">filter_by_classroom</span>(<span class="ruby-identifier">classroom</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@responses</span>
 
@@ -236,7 +238,7 @@
 
 
 
-          <p>classroom é opcional (turma)</p>
+          <p>classroom é opcional (turma) @param classroom [String, nil] código da turma para filtrar @return [String] CSV gerado @raise [NoDataToExportError] quando não há dados para exportar</p>
 
 
         </div>

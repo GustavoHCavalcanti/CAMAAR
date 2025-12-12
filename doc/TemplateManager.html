@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,TemplateManager">
 
 
-    <meta name="description" content="class TemplateManager: template_manager.">
+    <meta name="description" content="class TemplateManager: deleção por administrador.">
 
 
 
@@ -131,7 +131,7 @@
 
   <section class="description">
     
-<p><a href="lib/template_manager_rb.html">lib/template_manager.rb</a></p>
+<p>Gerencia templates e permissões de edição/deleção por administrador.</p>
 
   </section>
 
@@ -176,7 +176,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 4</span>
+            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">templates</span>)
   <span class="ruby-comment"># templates é um array de hashes, ex:</span>
   <span class="ruby-comment"># { id: 1, nome: &quot;Template A&quot;, owner_id: 1 }</span>
@@ -186,7 +186,7 @@
 
 
 
-          
+          <p>Mantém uma lista de templates em memória para operações simples. @param templates [Array&lt;Hash&gt;] lista com chaves :id, :nome, :owner_id @return [TemplateManager]</p>
 
 
         </div>
@@ -230,7 +230,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="empty_state_for-source">
-            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">empty_state_for</span>(<span class="ruby-identifier">admin_id</span>)
   <span class="ruby-identifier">meus_templates</span> = <span class="ruby-ivar">@templates</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>[<span class="ruby-value">:owner_id</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">admin_id</span> }
 
@@ -253,6 +253,8 @@
 </li><li>
 <p>Se tiver pelo menos um template, retorna nil</p>
 </li></ul>
+
+<p>@param admin_id [Integer] @return [Hash, nil] estado vazio ou nil quando existe pelo menos um template</p>
 
 
         </div>
@@ -288,7 +290,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="list_for-source">
-            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 11</span>
+            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_for</span>(<span class="ruby-identifier">admin_id</span>)
   <span class="ruby-ivar">@templates</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">t</span>.<span class="ruby-identifier">merge</span>(
@@ -301,7 +303,7 @@
 
 
 
-          <p>Lista templates marcando se o admin pode editar/deletar</p>
+          <p>Lista templates marcando se o admin pode editar/deletar @param admin_id [Integer] @return [Array&lt;Hash&gt;] cada template com flags :can_edit e :can_delete</p>
 
 
         </div>
@@ -337,7 +339,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="open_editor-source">
-            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 23</span>
+            <pre><span class="ruby-comment"># File lib/template_manager.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_editor</span>(<span class="ruby-identifier">template_name</span>, <span class="ruby-identifier">admin_id</span>)
   <span class="ruby-identifier">template</span> = <span class="ruby-ivar">@templates</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>[<span class="ruby-value">:nome</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">template_name</span> }
 
@@ -350,7 +352,7 @@
 
 
 
-          <p>Simula abertura de editor de template Retorna :editor_opened se o admin for dono do template Retorna :forbidden caso contrário</p>
+          <p>Simula abertura de editor de template Retorna :editor_opened se o admin for dono do template Retorna :forbidden caso contrário @param template_name [String] @param admin_id [Integer] @return [Symbol] :editor_opened ou :forbidden</p>
 
 
         </div>

@@ -1,3 +1,4 @@
+# Associação entre `User` e `Turma`, representando matrícula do usuário na turma.
 class TurmaUser < ApplicationRecord
   belongs_to :user
   belongs_to :turma

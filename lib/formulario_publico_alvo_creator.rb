@@ -1,5 +1,6 @@
 # lib/criacao_formulario_publico_alvo.rb
 
+# Serviço para criação de formulário direcionado ao público alvo (discentes/docentes) de uma turma.
 class FormularioPublicoAlvoCreator
   # Estruturas esperadas:
   #
@@ -58,6 +59,9 @@ class FormularioPublicoAlvoCreator
 
   private
 
+  # Normaliza o público alvo recebido da UI para símbolo.
+  # @param publico_alvo [String]
+  # @return [Symbol, nil] :discentes, :docentes ou nil quando inválido
   def normalizar_publico(publico_alvo)
     case publico_alvo.to_s.strip.downcase
     when 'discentes'
@@ -69,12 +73,20 @@ class FormularioPublicoAlvoCreator
     end
   end
 
+  # Calcula o próximo id sequencial de formulário.
+  # @return [Integer] 1 quando vazio; maior id + 1 quando houver registros
   def proximo_id
     return 1 if @formularios.empty?
 
     @formularios.map { |f| f[:id] }.max + 1
   end
 
+  # Registra notificação gerada para a turma/público informado.
+  # @param codigo_turma [String]
+  # @param tipo_publico [Symbol]
+  # @param formulario_id [Integer]
+  # @return [void]
+  # @side_effect Insere hash em @notificacoes
   def registrar_notificacao(codigo_turma, tipo_publico, formulario_id)
     @notificacoes << {
       turma_codigo: codigo_turma,

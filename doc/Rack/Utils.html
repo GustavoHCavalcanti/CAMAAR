@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>module Rack::Utils - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,module,Rack::Utils">
+
+
+    <meta name="description" content="module Rack::Utils: Utils contains a grab-bag of useful methods for writing web applications adopted from all kinds of Ruby libraries.">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-forwarded_values">forwarded_values</a></li>
+
+      <li ><a href="#method-c-param_depth_limit">param_depth_limit</a></li>
+
+      <li ><a href="#method-c-param_depth_limit-3D">param_depth_limit=</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-best_q_match">best_q_match</a></li>
+
+      <li ><a href="#method-i-build_nested_query">build_nested_query</a></li>
+
+      <li ><a href="#method-i-build_query">build_query</a></li>
+
+      <li ><a href="#method-i-byte_ranges">byte_ranges</a></li>
+
+      <li ><a href="#method-i-clean_path_info">clean_path_info</a></li>
+
+      <li ><a href="#method-i-clock_time">clock_time</a></li>
+
+      <li ><a href="#method-i-delete_cookie_header-21">delete_cookie_header!</a></li>
+
+      <li ><a href="#method-i-delete_set_cookie_header">delete_set_cookie_header</a></li>
+
+      <li ><a href="#method-i-delete_set_cookie_header-21">delete_set_cookie_header!</a></li>
+
+      <li ><a href="#method-i-escape">escape</a></li>
+
+      <li ><a href="#method-i-escape_html">escape_html</a></li>
+
+      <li ><a href="#method-i-escape_path">escape_path</a></li>
+
+      <li ><a href="#method-i-get_byte_ranges">get_byte_ranges</a></li>
+
+      <li ><a href="#method-i-parse_cookies">parse_cookies</a></li>
+
+      <li ><a href="#method-i-parse_cookies_header">parse_cookies_header</a></li>
+
+      <li ><a href="#method-i-parse_nested_query">parse_nested_query</a></li>
+
+      <li ><a href="#method-i-parse_query">parse_query</a></li>
+
+      <li ><a href="#method-i-q_values">q_values</a></li>
+
+      <li ><a href="#method-i-rfc2822">rfc2822</a></li>
+
+      <li ><a href="#method-i-secure_compare">secure_compare</a></li>
+
+      <li ><a href="#method-i-select_best_encoding">select_best_encoding</a></li>
+
+      <li ><a href="#method-i-set_cookie_header">set_cookie_header</a></li>
+
+      <li ><a href="#method-i-set_cookie_header-21">set_cookie_header!</a></li>
+
+      <li ><a href="#method-i-status_code">status_code</a></li>
+
+      <li ><a href="#method-i-unescape">unescape</a></li>
+
+      <li ><a href="#method-i-unescape_path">unescape_path</a></li>
+
+      <li ><a href="#method-i-valid_path-3F">valid_path?</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="module-Rack::Utils">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../Rack.html">Rack</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>Utils</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="module-Rack::Utils" class="anchor-link module">
+    module Rack::Utils
+  </h1>
+
+  <section class="description">
+    
+<p><a href="Utils.html"><code>Rack::Utils</code></a> contains a grab-bag of useful methods for writing web applications adopted from all kinds of Ruby libraries.</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+
+        <dt id="COMMON_SEP">COMMON_SEP</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="DEFAULT_SEP">DEFAULT_SEP</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="HTTP_STATUS_CODES">HTTP_STATUS_CODES</dt>
+
+        <dd>
+
+          <p>Every standard HTTP code mapped to the appropriate message. Generated with:</p>
+
+<pre>curl -s https://www.iana.org/assignments/http-status-codes/http-status-codes-1.csv \
+  | ruby -rcsv -e &quot;puts CSV.parse(STDIN, headers: true) \
+  .reject {|v| v[&#39;Description&#39;] == &#39;Unassigned&#39; or v[&#39;Description&#39;].include? &#39;(&#39; } \
+  .map {|v| %Q/#{v[&#39;Value&#39;]} =&gt; &#39;#{v[&#39;Description&#39;]}&#39;/ }.join(&#39;,&#39;+?\n)&quot;</pre>
+        </dd>
+
+
+        <dt id="InvalidParameterError">InvalidParameterError</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="KeySpaceConstrainedParams">KeySpaceConstrainedParams</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="NULL_BYTE">NULL_BYTE</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="PATH_SEPS">PATH_SEPS</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="ParameterTypeError">ParameterTypeError</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="ParamsTooDeepError">ParamsTooDeepError</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="STATUS_WITH_NO_ENTITY_BODY">STATUS_WITH_NO_ENTITY_BODY</dt>
+
+        <dd>
+
+          <p>Responses with HTTP status codes that should not have an entity body</p>
+        </dd>
+
+
+        <dt id="SYMBOL_TO_STATUS_CODE">SYMBOL_TO_STATUS_CODE</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="URI_PARSER">URI_PARSER</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+      </dl>
+    </section>
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-c-default_query_parser" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-c-default_query_parser" title="Link to this attribute">
+            <span class="method-name">default_query_parser</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-c-multipart_file_limit" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-c-multipart_file_limit" title="Link to this attribute">
+            <span class="method-name">multipart_file_limit</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-c-multipart_part_limit" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-c-multipart_part_limit" title="Link to this attribute">
+            <span class="method-name">multipart_part_limit</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-c-multipart_part_limit-3D" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-c-multipart_part_limit-3D" title="Link to this attribute">
+            <span class="method-name">multipart_part_limit=</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-c-multipart_total_part_limit" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-c-multipart_total_part_limit" title="Link to this attribute">
+            <span class="method-name">multipart_total_part_limit</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-forwarded_values" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-forwarded_values" title="Link to this method">
+                <span class="method-name">forwarded_values</span>
+                <span class="method-args">(forwarded_header)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="forwarded_values-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forwarded_values</span>(<span class="ruby-identifier">forwarded_header</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">forwarded_header</span>
+  <span class="ruby-identifier">forwarded_header</span> = <span class="ruby-identifier">forwarded_header</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-string">&quot;;&quot;</span>)
+
+  <span class="ruby-identifier">forwarded_header</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;;&#39;</span>).<span class="ruby-identifier">each_with_object</span>({}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span>, <span class="ruby-identifier">values</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">field</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pair</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">pair</span> = <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;=&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;=&#39;</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pair</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A(by|for|host|proto)=&quot;?([^&quot;]+)&quot;?\Z/i</span>
+      (<span class="ruby-identifier">values</span>[<span class="ruby-node">$1</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">to_sym</span>] <span class="ruby-operator">||=</span> []) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">$2</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-param_depth_limit" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-param_depth_limit" title="Link to this method">
+                <span class="method-name">param_depth_limit</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="param_depth_limit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">param_depth_limit</span>
+  <span class="ruby-identifier">default_query_parser</span>.<span class="ruby-identifier">param_depth_limit</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-param_depth_limit-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-param_depth_limit-3D" title="Link to this method">
+                <span class="method-name">param_depth_limit=</span>
+                <span class="method-args">(v)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="param_depth_limit-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">param_depth_limit=</span>(<span class="ruby-identifier">v</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_query_parser</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_query_parser</span>.<span class="ruby-identifier">new_depth_limit</span>(<span class="ruby-identifier">v</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-best_q_match" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-best_q_match" title="Link to this method">
+                <span class="method-name">best_q_match</span>
+                <span class="method-args">(q_value_header, available_mimes)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="best_q_match-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">best_q_match</span>(<span class="ruby-identifier">q_value_header</span>, <span class="ruby-identifier">available_mimes</span>)
+  <span class="ruby-identifier">values</span> = <span class="ruby-identifier">q_values</span>(<span class="ruby-identifier">q_value_header</span>)
+
+  <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">req_mime</span>, <span class="ruby-identifier">quality</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">match</span> = <span class="ruby-identifier">available_mimes</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">am</span><span class="ruby-operator">|</span> <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Mime</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">am</span>, <span class="ruby-identifier">req_mime</span>) }
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">match</span>
+    [<span class="ruby-identifier">match</span>, <span class="ruby-identifier">quality</span>]
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">sort_by</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span>, <span class="ruby-identifier">quality</span><span class="ruby-operator">|</span>
+    (<span class="ruby-identifier">match</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>, <span class="ruby-value">2</span>).<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;*&#39;</span>) <span class="ruby-operator">*</span> <span class="ruby-value">-10</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">quality</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-identifier">matches</span>&amp;.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Return best accept value to use, based on the algorithm in RFC 2616 Section 14.  If there are multiple best matches (same specificity and quality), the value returned is arbitrary.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-build_nested_query" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-build_nested_query" title="Link to this method">
+                <span class="method-name">build_nested_query</span>
+                <span class="method-args">(value, prefix = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="build_nested_query-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_nested_query</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-identifier">value</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">build_nested_query</span>(<span class="ruby-identifier">v</span>, <span class="ruby-node">&quot;#{prefix}[]&quot;</span>)
+    }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;&amp;&quot;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">value</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">build_nested_query</span>(<span class="ruby-identifier">v</span>, <span class="ruby-identifier">prefix</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{prefix}[#{k}]&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">k</span>)
+    }.<span class="ruby-identifier">delete_if</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:empty?</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&amp;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">escape</span>(<span class="ruby-identifier">prefix</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;value must be a Hash&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-node">&quot;#{escape(prefix)}=#{escape(value)}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-build_query" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-build_query" title="Link to this method">
+                <span class="method-name">build_query</span>
+                <span class="method-args">(params)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="build_query-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_query</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>
+      <span class="ruby-identifier">build_query</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">x</span>] })
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">escape</span>(<span class="ruby-identifier">k</span>) <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{escape(k)}=#{escape(v)}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;&amp;&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-byte_ranges" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-byte_ranges" title="Link to this method">
+                <span class="method-name">byte_ranges</span>
+                <span class="method-args">(env, size)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="byte_ranges-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 401</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">byte_ranges</span>(<span class="ruby-identifier">env</span>, <span class="ruby-identifier">size</span>)
+  <span class="ruby-identifier">get_byte_ranges</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;HTTP_RANGE&#39;</span>], <span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Parses the “Range:” header, if present, into an array of <a href="../Range.html"><code>Range</code></a> objects. Returns nil if the header is missing or syntactically invalid. Returns an empty array if none of the ranges are satisfiable.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-clean_path_info" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-clean_path_info" title="Link to this method">
+                <span class="method-name">clean_path_info</span>
+                <span class="method-args">(path_info)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="clean_path_info-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 599</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clean_path_info</span>(<span class="ruby-identifier">path_info</span>)
+  <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">path_info</span>.<span class="ruby-identifier">split</span> <span class="ruby-constant">PATH_SEPS</span>
+
+  <span class="ruby-identifier">clean</span> = []
+
+  <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">part</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">part</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">part</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;.&#39;</span>
+    <span class="ruby-identifier">part</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;..&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">clean</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">clean</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">part</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">clean_path</span> = <span class="ruby-identifier">clean</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">::</span><span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>)
+  <span class="ruby-identifier">clean_path</span>.<span class="ruby-identifier">prepend</span>(<span class="ruby-string">&quot;/&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">clean_path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-clock_time" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-clock_time" title="Link to this method">
+                <span class="method-name">clock_time</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="clock_time-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clock_time</span>
+  <span class="ruby-constant">Process</span>.<span class="ruby-identifier">clock_gettime</span>(<span class="ruby-constant">Process</span><span class="ruby-operator">::</span><span class="ruby-constant">CLOCK_MONOTONIC</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-delete_cookie_header-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-delete_cookie_header-21" title="Link to this method">
+                <span class="method-name">delete_cookie_header!</span>
+                <span class="method-args">(headers, key, value = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="delete_cookie_header-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 359</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_cookie_header!</span>(<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> = {})
+  <span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>] = <span class="ruby-identifier">delete_set_cookie_header!</span>(<span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>], <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-delete_set_cookie_header" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-delete_set_cookie_header" title="Link to this method">
+                  <span class="method-callseq">
+                    delete_set_cookie_header(key, value = {}) &rarr; encoded string
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="delete_set_cookie_header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 355</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> = {})
+  <span class="ruby-identifier">set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">max_age:</span> <span class="ruby-string">&#39;0&#39;</span>, <span class="ruby-value">expires:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-value">0</span>), <span class="ruby-value">value:</span> <span class="ruby-string">&#39;&#39;</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Generate an encoded string based on the given <code>key</code> and <code>value</code> using <a href="Utils.html#method-i-set_cookie_header"><code>set_cookie_header</code></a> for the purpose of causing the specified cookie to be deleted. The <code>value</code> may be an instance of <a href="../Hash.html"><code>Hash</code></a> and can include attributes as outlined by set_cookie_header. The encoded cookie will have a <code>max_age</code> of 0 seconds, an <code>expires</code> date in the past and an empty <code>value</code>. When used with the <code>set-cookie</code> header, it will cause the client to <strong>remove</strong> any matching cookie.</p>
+
+<pre class="ruby"><span class="ruby-identifier">delete_set_cookie_header</span>(<span class="ruby-string">&quot;myname&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;myname=; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT&quot;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-delete_set_cookie_header-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-delete_set_cookie_header-21" title="Link to this method">
+                  <span class="method-callseq">
+                    delete_set_cookie_header!(header, key, value = {}) &rarr; header value
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="delete_set_cookie_header-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 383</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_set_cookie_header!</span>(<span class="ruby-identifier">header</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span>
+    <span class="ruby-identifier">header</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">header</span>)
+    <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">delete_set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">header</span> = <span class="ruby-identifier">delete_set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">header</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p><a href="../Set.html"><code>Set</code></a> an expired cookie in the specified headers with the given cookie <code>key</code> and <code>value</code> using delete_set_cookie_header. This causes the client to immediately delete the specified cookie.</p>
+
+<pre class="ruby"><span class="ruby-identifier">delete_set_cookie_header!</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&quot;mycookie&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;mycookie=; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT&quot;</span>
+</pre>
+
+<p>If the header is non-nil, it will be modified in place.</p>
+
+<pre class="ruby"><span class="ruby-identifier">header</span> = []
+<span class="ruby-identifier">delete_set_cookie_header!</span>(<span class="ruby-identifier">header</span>, <span class="ruby-string">&quot;mycookie&quot;</span>)
+<span class="ruby-comment"># =&gt; [&quot;mycookie=; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT&quot;]</span>
+<span class="ruby-identifier">header</span>
+<span class="ruby-comment"># =&gt; [&quot;mycookie=; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT&quot;]</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-escape" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-escape" title="Link to this method">
+                <span class="method-name">escape</span>
+                <span class="method-args">(s)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="escape-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">escape</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">encode_www_form_component</span>(<span class="ruby-identifier">s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p><a href="../URI.html"><code>URI</code></a> escapes. (<a href="../CGI.html"><code>CGI</code></a> style space to +)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-escape_html" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-escape_html" title="Link to this method">
+                <span class="method-name">escape_html</span>
+                <span class="method-args">(string)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="escape_html-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">escape_html</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-constant">CGI</span>.<span class="ruby-identifier">escapeHTML</span>(<span class="ruby-identifier">string</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Escape ampersands, brackets and quotes to their HTML/XML entities.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-escape_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-escape_path" title="Link to this method">
+                <span class="method-name">escape_path</span>
+                <span class="method-args">(s)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="escape_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">escape_path</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-constant">URI_PARSER</span>.<span class="ruby-identifier">escape</span> <span class="ruby-identifier">s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Like <a href="../URI.html"><code>URI</code></a> escaping, but with %20 instead of +. Strictly speaking this is true <a href="../URI.html"><code>URI</code></a> escaping.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-get_byte_ranges" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-get_byte_ranges" title="Link to this method">
+                <span class="method-name">get_byte_ranges</span>
+                <span class="method-args">(http_range, size)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="get_byte_ranges-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 405</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_byte_ranges</span>(<span class="ruby-identifier">http_range</span>, <span class="ruby-identifier">size</span>)
+  <span class="ruby-comment"># See &lt;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35&gt;</span>
+  <span class="ruby-comment"># Ignore Range when file size is 0 to avoid a 416 error.</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span>.<span class="ruby-identifier">zero?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">http_range</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">http_range</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/bytes=([^;]+)/</span>
+  <span class="ruby-identifier">ranges</span> = []
+  <span class="ruby-node">$1</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/,[ \t]*/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">range_spec</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">range_spec</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;-&#39;</span>)
+    <span class="ruby-identifier">range</span> = <span class="ruby-identifier">range_spec</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>)
+    <span class="ruby-identifier">r0</span>, <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">range</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">range</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">r0</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">r0</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r1</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-comment"># suffix-byte-range-spec, represents trailing suffix of file</span>
+      <span class="ruby-identifier">r0</span> = <span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">r1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-identifier">r0</span> = <span class="ruby-value">0</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">r0</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">r0</span> = <span class="ruby-identifier">r0</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">r1</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">r1</span>.<span class="ruby-identifier">to_i</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">r0</span>  <span class="ruby-comment"># backwards range is syntactically invalid</span>
+        <span class="ruby-identifier">r1</span> = <span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">r1</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">size</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">ranges</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">r0</span><span class="ruby-operator">..</span><span class="ruby-identifier">r1</span>)  <span class="ruby-keyword">if</span> <span class="ruby-identifier">r0</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">r1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-identifier">ranges</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:size</span>).<span class="ruby-identifier">sum</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">size</span>
+
+  <span class="ruby-identifier">ranges</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parse_cookies" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-parse_cookies" title="Link to this method">
+                  <span class="method-callseq">
+                    parse_cookies(env) &rarr; hash
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parse_cookies-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 256</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_cookies</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">parse_cookies_header</span> <span class="ruby-identifier">env</span>[<span class="ruby-constant">HTTP_COOKIE</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Parse cookies from the provided request environment using parse_cookies_header. Returns a map of cookie <code>key</code> to cookie <code>value</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">parse_cookies</span>({<span class="ruby-string">&#39;HTTP_COOKIE&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;myname=myvalue&#39;</span>})
+<span class="ruby-comment"># =&gt; {&#39;myname&#39; =&gt; &#39;myvalue&#39;}</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parse_cookies_header" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-parse_cookies_header" title="Link to this method">
+                  <span class="method-callseq">
+                    parse_cookies_header(value) &rarr; hash
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parse_cookies_header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_cookies_header</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>
+
+  <span class="ruby-identifier">value</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/; */n</span>).<span class="ruby-identifier">each_with_object</span>({}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cookie</span>, <span class="ruby-identifier">cookies</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cookie</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">cookie</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;=&#39;</span>, <span class="ruby-value">2</span>)
+    <span class="ruby-identifier">cookies</span>[<span class="ruby-identifier">key</span>] = (<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">value</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Parse cookies from the provided header <code>value</code> according to RFC6265. The syntax for cookie headers only supports semicolons. Returns a map of cookie <code>key</code> to cookie <code>value</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">parse_cookies_header</span>(<span class="ruby-string">&#39;myname=myvalue; max-age=0&#39;</span>)
+<span class="ruby-comment"># =&gt; {&quot;myname&quot;=&gt;&quot;myvalue&quot;, &quot;max-age&quot;=&gt;&quot;0&quot;}</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parse_nested_query" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parse_nested_query" title="Link to this method">
+                <span class="method-name">parse_nested_query</span>
+                <span class="method-args">(qs, d = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parse_nested_query-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_nested_query</span>(<span class="ruby-identifier">qs</span>, <span class="ruby-identifier">d</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">default_query_parser</span>.<span class="ruby-identifier">parse_nested_query</span>(<span class="ruby-identifier">qs</span>, <span class="ruby-identifier">d</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parse_query" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parse_query" title="Link to this method">
+                <span class="method-name">parse_query</span>
+                <span class="method-args">(qs, d = nil, &amp;unescaper)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parse_query-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_query</span>(<span class="ruby-identifier">qs</span>, <span class="ruby-identifier">d</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">unescaper</span>)
+  <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">default_query_parser</span>.<span class="ruby-identifier">parse_query</span>(<span class="ruby-identifier">qs</span>, <span class="ruby-identifier">d</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">unescaper</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-q_values" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-q_values" title="Link to this method">
+                <span class="method-name">q_values</span>
+                <span class="method-args">(q_value_header)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="q_values-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">q_values</span>(<span class="ruby-identifier">q_value_header</span>)
+  <span class="ruby-identifier">q_value_header</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">part</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">value</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-identifier">part</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;;&#39;</span>, <span class="ruby-value">2</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:strip</span>)
+    <span class="ruby-identifier">quality</span> = <span class="ruby-value">1.0</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">parameters</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">md</span> = <span class="ruby-regexp">/\Aq=([\d.]+)/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">parameters</span>))
+      <span class="ruby-identifier">quality</span> = <span class="ruby-identifier">md</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span>
+    <span class="ruby-keyword">end</span>
+    [<span class="ruby-identifier">value</span>, <span class="ruby-identifier">quality</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rfc2822" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rfc2822" title="Link to this method">
+                <span class="method-name">rfc2822</span>
+                <span class="method-args">(time)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rfc2822-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 394</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rfc2822</span>(<span class="ruby-identifier">time</span>)
+  <span class="ruby-identifier">time</span>.<span class="ruby-identifier">rfc2822</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-secure_compare" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-secure_compare" title="Link to this method">
+                <span class="method-name">secure_compare</span>
+                <span class="method-args">(a, b)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="secure_compare-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 447</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">secure_compare</span>(<span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">bytesize</span>
+
+  <span class="ruby-constant">OpenSSL</span>.<span class="ruby-identifier">fixed_length_secure_compare</span>(<span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Constant time string comparison.</p>
+
+<p>NOTE: the values compared should be of fixed length, such as strings that have already been processed by HMAC. This should not be used on variable length plaintext strings because it could leak length info via timing attacks.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-select_best_encoding" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-select_best_encoding" title="Link to this method">
+                <span class="method-name">select_best_encoding</span>
+                <span class="method-args">(available_encodings, accept_encoding)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="select_best_encoding-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 195</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_best_encoding</span>(<span class="ruby-identifier">available_encodings</span>, <span class="ruby-identifier">accept_encoding</span>)
+  <span class="ruby-comment"># http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html</span>
+
+  <span class="ruby-identifier">expanded_accept_encoding</span> = []
+
+  <span class="ruby-identifier">accept_encoding</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span>, <span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">preference</span> = <span class="ruby-identifier">available_encodings</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">available_encodings</span>.<span class="ruby-identifier">size</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;*&quot;</span>
+      (<span class="ruby-identifier">available_encodings</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">accept_encoding</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:first</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m2</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">expanded_accept_encoding</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">m2</span>, <span class="ruby-identifier">q</span>, <span class="ruby-identifier">preference</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">expanded_accept_encoding</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">m</span>, <span class="ruby-identifier">q</span>, <span class="ruby-identifier">preference</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">encoding_candidates</span> = <span class="ruby-identifier">expanded_accept_encoding</span>
+    .<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">q</span>, <span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-operator">-</span><span class="ruby-identifier">q</span>, <span class="ruby-identifier">p</span>] }
+    .<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:first</span>)
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">encoding_candidates</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;identity&quot;</span>)
+    <span class="ruby-identifier">encoding_candidates</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&quot;identity&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">expanded_accept_encoding</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span>, <span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">encoding_candidates</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">m</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">q</span> <span class="ruby-operator">==</span> <span class="ruby-value">0.0</span>
+  <span class="ruby-keyword">end</span>
+
+  (<span class="ruby-identifier">encoding_candidates</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">available_encodings</span>)[<span class="ruby-value">0</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-set_cookie_header" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-set_cookie_header" title="Link to this method">
+                  <span class="method-callseq">
+                    set_cookie_header(key, value) &rarr; encoded string
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="set_cookie_header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 285</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">VALID_COOKIE_KEY</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;invalid cookie key: #{key.inspect}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">domain</span>  = <span class="ruby-node">&quot;; domain=#{value[:domain]}&quot;</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:domain</span>]
+    <span class="ruby-identifier">path</span>    = <span class="ruby-node">&quot;; path=#{value[:path]}&quot;</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:path</span>]
+    <span class="ruby-identifier">max_age</span> = <span class="ruby-node">&quot;; max-age=#{value[:max_age]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:max_age</span>]
+    <span class="ruby-identifier">expires</span> = <span class="ruby-node">&quot;; expires=#{value[:expires].httpdate}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:expires</span>]
+    <span class="ruby-identifier">secure</span> = <span class="ruby-string">&quot;; secure&quot;</span>  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:secure</span>]
+    <span class="ruby-identifier">httponly</span> = <span class="ruby-string">&quot;; httponly&quot;</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:httponly</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:httponly</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:http_only</span>])
+    <span class="ruby-identifier">same_site</span> =
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:same_site</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-keyword">false</span>, <span class="ruby-keyword">nil</span>
+        <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-value">:none</span>, <span class="ruby-string">&#39;None&#39;</span>, <span class="ruby-value">:None</span>
+        <span class="ruby-string">&#39;; samesite=none&#39;</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-value">:lax</span>, <span class="ruby-string">&#39;Lax&#39;</span>, <span class="ruby-value">:Lax</span>
+        <span class="ruby-string">&#39;; samesite=lax&#39;</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:strict</span>, <span class="ruby-string">&#39;Strict&#39;</span>, <span class="ruby-value">:Strict</span>
+        <span class="ruby-string">&#39;; samesite=strict&#39;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid :same_site value: #{value[:same_site].inspect}&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">partitioned</span> = <span class="ruby-string">&quot;; partitioned&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">:partitioned</span>]
+    <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>[<span class="ruby-value">:value</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">value</span> = [<span class="ruby-identifier">value</span>] <span class="ruby-keyword">unless</span> <span class="ruby-constant">Array</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">value</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{key}=#{value.map { |v| escape v }.join(&#39;&amp;&#39;)}#{domain}&quot;</span> \
+    <span class="ruby-node">&quot;#{path}#{max_age}#{expires}#{secure}#{httponly}#{same_site}#{partitioned}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Generate an encoded string using the provided <code>key</code> and <code>value</code> suitable for the <code>set-cookie</code> header according to RFC6265. The <code>value</code> may be an instance of either <a href="../String.html"><code>String</code></a> or <a href="../Hash.html"><code>Hash</code></a>. If the cookie key is invalid (as defined by RFC6265), an <code>ArgumentError</code> will be raised.</p>
+
+<p>If the cookie <code>value</code> is an instance of <a href="../Hash.html"><code>Hash</code></a>, it considers the following cookie attribute keys: <code>domain</code>, <code>max_age</code>, <code>expires</code> (must be instance of <a href="../Time.html"><code>Time</code></a>), <code>secure</code>, <code>http_only</code>, <code>same_site</code> and <code>value</code>. For more details about the interpretation of these fields, consult [RFC6265 Section 5.2](<a href="https://datatracker.ietf.org/doc/html/rfc6265#section-5.2">datatracker.ietf.org/doc/html/rfc6265#section-5.2</a>).</p>
+
+<pre class="ruby"><span class="ruby-identifier">set_cookie_header</span>(<span class="ruby-string">&quot;myname&quot;</span>, <span class="ruby-string">&quot;myvalue&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;myname=myvalue&quot;</span>
+
+<span class="ruby-identifier">set_cookie_header</span>(<span class="ruby-string">&quot;myname&quot;</span>, {<span class="ruby-value">value:</span> <span class="ruby-string">&quot;myvalue&quot;</span>, <span class="ruby-value">max_age:</span> <span class="ruby-value">10</span>})
+<span class="ruby-comment"># =&gt; &quot;myname=myvalue; max-age=10&quot;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-set_cookie_header-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-set_cookie_header-21" title="Link to this method">
+                  <span class="method-callseq">
+                    set_cookie_header!(headers, key, value) &rarr; header value
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="set_cookie_header-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_cookie_header!</span>(<span class="ruby-identifier">headers</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span> = <span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+      <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>] = [<span class="ruby-identifier">header</span>, <span class="ruby-identifier">set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">headers</span>[<span class="ruby-constant">SET_COOKIE</span>] = <span class="ruby-identifier">set_cookie_header</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Append a cookie in the specified headers with the given cookie <code>key</code> and <code>value</code> using set_cookie_header.</p>
+
+<p>If the headers already contains a <code>set-cookie</code> key, it will be converted to an <a href="../Array.html"><code>Array</code></a> if not already, and appended to.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-status_code" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-status_code" title="Link to this method">
+                <span class="method-name">status_code</span>
+                <span class="method-args">(status)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="status_code-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 581</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">status_code</span>(<span class="ruby-identifier">status</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+    <span class="ruby-constant">SYMBOL_TO_STATUS_CODE</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">status</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">fallback_code</span> = <span class="ruby-constant">OBSOLETE_SYMBOLS_TO_STATUS_CODES</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">status</span>) { <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Unrecognized status code #{status.inspect}&quot;</span> }
+      <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;Status code #{status.inspect} is deprecated and will be removed in a future version of Rack.&quot;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">canonical_symbol</span> = <span class="ruby-constant">OBSOLETE_SYMBOL_MAPPINGS</span>[<span class="ruby-identifier">status</span>]
+        <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;#{message} Please use #{canonical_symbol.inspect} instead.&quot;</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>, <span class="ruby-value">uplevel:</span> <span class="ruby-value">3</span>
+      <span class="ruby-identifier">fallback_code</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">status</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-unescape" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-unescape" title="Link to this method">
+                <span class="method-name">unescape</span>
+                <span class="method-args">(s, encoding = Encoding::UTF_8)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="unescape-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unescape</span>(<span class="ruby-identifier">s</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UTF_8</span>)
+  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">decode_www_form_component</span>(<span class="ruby-identifier">s</span>, <span class="ruby-identifier">encoding</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Unescapes a <a href="../URI.html"><code>URI</code></a> escaped string with <code>encoding</code>. <code>encoding</code> will be the target encoding of the string returned, and it defaults to UTF-8</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-unescape_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-unescape_path" title="Link to this method">
+                <span class="method-name">unescape_path</span>
+                <span class="method-args">(s)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="unescape_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unescape_path</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-constant">URI_PARSER</span>.<span class="ruby-identifier">unescape</span> <span class="ruby-identifier">s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Unescapes the <strong>path</strong> component of a <a href="../URI.html"><code>URI</code></a>.  See <a href="Utils.html#method-i-unescape"><code>Rack::Utils.unescape</code></a> for unescaping query parameters or form components.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-valid_path-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-valid_path-3F" title="Link to this method">
+                <span class="method-name">valid_path?</span>
+                <span class="method-args">(path)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="valid_path-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rack-3.2.4/lib/rack/utils.rb, line 616</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">valid_path?</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">path</span>.<span class="ruby-identifier">valid_encoding?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">path</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">NULL_BYTE</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

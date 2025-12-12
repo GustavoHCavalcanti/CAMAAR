@@ -9,6 +9,10 @@ class TurmaManager
   #
   # admin = { id: 1, nome: "Admin", departamento: "Computação" }
 
+  # Inicializa com coleção de turmas e o administrador corrente.
+  # @param turmas [Array<Hash>]
+  # @param admin [Hash]
+  # @return [TurmaManager]
   def initialize(turmas, admin)
     @turmas = turmas || []
     @admin  = admin

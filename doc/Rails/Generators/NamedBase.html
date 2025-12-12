@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class Rails::Generators::NamedBase - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,Rails::Generators::NamedBase">
+
+
+    <meta name="description" content="Documentation for the Rails::Generators::NamedBase class">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="Base.html">Rails::Generators::Base</a><ul><li><a href="../../Thor/Group.html">Thor::Group</a><ul><li><a href="../../Object.html">Object</a><ul><li><a href="../../BasicObject.html">BasicObject</a></li></ul></li></ul></li></ul></li></ul>
+</div>
+
+
+  
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-check_class_collision">check_class_collision</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-application_name">application_name</a></li>
+
+      <li ><a href="#method-i-attributes_names">attributes_names</a></li>
+
+      <li ><a href="#method-i-class_name">class_name</a></li>
+
+      <li ><a href="#method-i-class_path">class_path</a></li>
+
+      <li ><a href="#method-i-edit_helper">edit_helper</a></li>
+
+      <li ><a href="#method-i-file_path">file_path</a></li>
+
+      <li ><a href="#method-i-fixture_file_name">fixture_file_name</a></li>
+
+      <li ><a href="#method-i-human_name">human_name</a></li>
+
+      <li ><a href="#method-i-i18n_scope">i18n_scope</a></li>
+
+      <li ><a href="#method-i-index_helper">index_helper</a></li>
+
+      <li ><a href="#method-i-inside_template">inside_template</a></li>
+
+      <li ><a href="#method-i-inside_template-3F">inside_template?</a></li>
+
+      <li ><a href="#method-i-js_template">js_template</a></li>
+
+      <li ><a href="#method-i-model_resource_name">model_resource_name</a></li>
+
+      <li ><a href="#method-i-mountable_engine-3F">mountable_engine?</a></li>
+
+      <li ><a href="#method-i-namespaced_class_path">namespaced_class_path</a></li>
+
+      <li ><a href="#method-i-new_helper">new_helper</a></li>
+
+      <li ><a href="#method-i-plural_file_name">plural_file_name</a></li>
+
+      <li ><a href="#method-i-plural_name">plural_name</a></li>
+
+      <li ><a href="#method-i-plural_route_name">plural_route_name</a></li>
+
+      <li ><a href="#method-i-plural_table_name">plural_table_name</a></li>
+
+      <li ><a href="#method-i-pluralize_table_names-3F">pluralize_table_names?</a></li>
+
+      <li ><a href="#method-i-redirect_resource_name">redirect_resource_name</a></li>
+
+      <li ><a href="#method-i-regular_class_path">regular_class_path</a></li>
+
+      <li ><a href="#method-i-route_url">route_url</a></li>
+
+      <li ><a href="#method-i-show_helper">show_helper</a></li>
+
+      <li ><a href="#method-i-singular_name">singular_name</a></li>
+
+      <li ><a href="#method-i-singular_route_name">singular_route_name</a></li>
+
+      <li ><a href="#method-i-singular_table_name">singular_table_name</a></li>
+
+      <li ><a href="#method-i-table_name">table_name</a></li>
+
+      <li class="calls-super" ><a href="#method-i-template">template</a></li>
+
+      <li ><a href="#method-i-uncountable-3F">uncountable?</a></li>
+
+      <li ><a href="#method-i-url_helper_prefix">url_helper_prefix</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-Rails::Generators::NamedBase">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../Rails.html">Rails</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../Rails/Generators.html">Generators</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>NamedBase</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-Rails::Generators::NamedBase" class="anchor-link class">
+    class Rails::Generators::NamedBase
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-check_class_collision" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-check_class_collision" title="Link to this method">
+                <span class="method-name">check_class_collision</span>
+                <span class="method-args">(options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="check_class_collision-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_class_collision</span>(<span class="ruby-identifier">options</span> = {}) <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">define_method</span> <span class="ruby-value">:check_class_collision</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">name</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:controller_class_name</span>, <span class="ruby-keyword">true</span>) <span class="ruby-comment"># for ResourceHelpers</span>
+      <span class="ruby-identifier">controller_class_name</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">class_name</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">class_collisions</span> <span class="ruby-node">&quot;#{options[:prefix]}#{name}#{options[:suffix]}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Add a class collisions name to be checked on class initialization. You can supply a hash with a <code>:prefix</code> or <code>:suffix</code> to be tested.</p>
+
+<h4 id="method-c-check_class_collision-label-Examples"><a href="#method-c-check_class_collision-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">check_class_collision</span> <span class="ruby-value">suffix:</span> <span class="ruby-string">&quot;Decorator&quot;</span>
+</pre>
+
+<p>If the generator is invoked with class name <a href="../../Admin.html"><code>Admin</code></a>, it will check for the presence of “AdminDecorator”.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-js_template" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-js_template" title="Link to this method">
+                <span class="method-name">js_template</span>
+                <span class="method-args">(source, destination)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="js_template-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">js_template</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">destination</span>)
+  <span class="ruby-identifier">template</span>(<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;.js&quot;</span>, <span class="ruby-identifier">destination</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;.js&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-template" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-template" title="Link to this method">
+                <span class="method-name">template</span>
+                <span class="method-args">(source, *args, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="template-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">template</span>(<span class="ruby-identifier">source</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">inside_template</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Generators</span>.<span class="ruby-identifier">add_generated_file</span>(<span class="ruby-keyword">super</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="../../Thor/Actions.html#method-i-template"><code>Thor::Actions#template</code></a>
+            </div>
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-application_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-application_name" title="Link to this method">
+                <span class="method-name">application_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="application_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">application_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">Rails</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>
+    <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;::&quot;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">underscore</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&quot;application&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Tries to retrieve the application name or simply return application.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-attributes_names" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-attributes_names" title="Link to this method">
+                <span class="method-name">attributes_names</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="attributes_names-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes_names</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@attributes_names</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each_with_object</span>([]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">names</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">names</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">column_name</span>
+    <span class="ruby-identifier">names</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;password_confirmation&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">password_digest?</span>
+    <span class="ruby-identifier">names</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{a.name}_type&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">polymorphic?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-class_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-class_name" title="Link to this method">
+                <span class="method-name">class_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="class_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">class_name</span> <span class="ruby-comment"># :doc:</span>
+  (<span class="ruby-identifier">class_path</span> <span class="ruby-operator">+</span> [<span class="ruby-identifier">file_name</span>]).<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:camelize</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;::&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-class_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-class_path" title="Link to this method">
+                <span class="method-name">class_path</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="class_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">class_path</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">inside_template?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">namespaced?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">regular_class_path</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">namespaced_class_path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-edit_helper" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-edit_helper" title="Link to this method">
+                <span class="method-name">edit_helper</span>
+                <span class="method-args">(...)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="edit_helper-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edit_helper</span>(<span class="ruby-operator">...</span>) <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-node">&quot;edit_#{show_helper(...)}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-file_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-file_path" title="Link to this method">
+                <span class="method-name">file_path</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="file_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">file_path</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@file_path</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">class_path</span> <span class="ruby-operator">+</span> [<span class="ruby-identifier">file_name</span>]).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;/&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-fixture_file_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-fixture_file_name" title="Link to this method">
+                <span class="method-name">fixture_file_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="fixture_file_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fixture_file_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@fixture_file_name</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">pluralize_table_names?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">plural_file_name</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">file_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-human_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-human_name" title="Link to this method">
+                <span class="method-name">human_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="human_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">human_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@human_name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">singular_name</span>.<span class="ruby-identifier">humanize</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-i18n_scope" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-i18n_scope" title="Link to this method">
+                <span class="method-name">i18n_scope</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="i18n_scope-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">i18n_scope</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@i18n_scope</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">file_path</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot;/&quot;</span>, <span class="ruby-string">&quot;.&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-index_helper" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-index_helper" title="Link to this method">
+                <span class="method-name">index_helper</span>
+                <span class="method-args">(type: nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="index_helper-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index_helper</span>(<span class="ruby-value">type:</span> <span class="ruby-keyword">nil</span>) <span class="ruby-comment"># :doc:</span>
+  [<span class="ruby-identifier">plural_route_name</span>, (<span class="ruby-string">&quot;index&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">uncountable?</span>), <span class="ruby-identifier">type</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;_&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-inside_template" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-inside_template" title="Link to this method">
+                <span class="method-name">inside_template</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="inside_template-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inside_template</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@inside_template</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@inside_template</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-inside_template-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-inside_template-3F" title="Link to this method">
+                <span class="method-name">inside_template?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="inside_template-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inside_template?</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@inside_template</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-model_resource_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-model_resource_name" title="Link to this method">
+                <span class="method-name">model_resource_name</span>
+                <span class="method-args">(base_name = singular_table_name, prefix: &quot;&quot;)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="model_resource_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">model_resource_name</span>(<span class="ruby-identifier">base_name</span> = <span class="ruby-identifier">singular_table_name</span>, <span class="ruby-value">prefix:</span> <span class="ruby-string">&quot;&quot;</span>) <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">resource_name</span> = <span class="ruby-node">&quot;#{prefix}#{base_name}&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:model_name</span>]
+    <span class="ruby-node">&quot;[#{controller_class_path.map { |name| &quot;:&quot; + name }.join(&quot;, &quot;)}, #{resource_name}]&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">resource_name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-mountable_engine-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-mountable_engine-3F" title="Link to this method">
+                <span class="method-name">mountable_engine?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="mountable_engine-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mountable_engine?</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">ENGINE_ROOT</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">namespaced?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-namespaced_class_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-namespaced_class_path" title="Link to this method">
+                <span class="method-name">namespaced_class_path</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="namespaced_class_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">namespaced_class_path</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@namespaced_class_path</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">namespace_dirs</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@class_path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-new_helper" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-new_helper" title="Link to this method">
+                <span class="method-name">new_helper</span>
+                <span class="method-args">(type: :url)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new_helper-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_helper</span>(<span class="ruby-value">type:</span> <span class="ruby-value">:url</span>) <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-node">&quot;new_#{singular_route_name}_#{type}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-plural_file_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-plural_file_name" title="Link to this method">
+                <span class="method-name">plural_file_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="plural_file_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">plural_file_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@plural_file_name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">file_name</span>.<span class="ruby-identifier">pluralize</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-plural_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-plural_name" title="Link to this method">
+                <span class="method-name">plural_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="plural_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">plural_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@plural_name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">singular_name</span>.<span class="ruby-identifier">pluralize</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-plural_route_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-plural_route_name" title="Link to this method">
+                <span class="method-name">plural_route_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="plural_route_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">plural_route_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:model_name</span>]
+    <span class="ruby-node">&quot;#{controller_class_path.join(&#39;_&#39;)}_#{plural_table_name}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">plural_table_name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-plural_table_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-plural_table_name" title="Link to this method">
+                <span class="method-name">plural_table_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="plural_table_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">plural_table_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@plural_table_name</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">pluralize_table_names?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">table_name</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">pluralize</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pluralize_table_names-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pluralize_table_names-3F" title="Link to this method">
+                <span class="method-name">pluralize_table_names?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pluralize_table_names-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pluralize_table_names?</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">pluralize_table_names</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-redirect_resource_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-redirect_resource_name" title="Link to this method">
+                <span class="method-name">redirect_resource_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="redirect_resource_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">redirect_resource_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">model_resource_name</span>(<span class="ruby-value">prefix:</span> <span class="ruby-string">&quot;@&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-regular_class_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-regular_class_path" title="Link to this method">
+                <span class="method-name">regular_class_path</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="regular_class_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">regular_class_path</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@class_path</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-route_url" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-route_url" title="Link to this method">
+                <span class="method-name">route_url</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="route_url-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">route_url</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@route_url</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">controller_class_path</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dname</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dname</span> }.<span class="ruby-identifier">join</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">plural_file_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-show_helper" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-show_helper" title="Link to this method">
+                <span class="method-name">show_helper</span>
+                <span class="method-args">(arg = &quot;@</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="show_helper-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_helper</span>(<span class="ruby-identifier">arg</span> = <span class="ruby-node">&quot;@#{singular_table_name}&quot;</span>, <span class="ruby-value">type:</span> <span class="ruby-value">:url</span>) <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-node">&quot;#{singular_route_name}_#{type}(#{arg})&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-singular_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-singular_name" title="Link to this method">
+                <span class="method-name">singular_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="singular_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">singular_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">file_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>FIXME: We are avoiding to use alias because a bug on thor that make this method public and add it to the task list.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-singular_route_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-singular_route_name" title="Link to this method">
+                <span class="method-name">singular_route_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="singular_route_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">singular_route_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:model_name</span>]
+    <span class="ruby-node">&quot;#{controller_class_path.join(&#39;_&#39;)}_#{singular_table_name}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">singular_table_name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-singular_table_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-singular_table_name" title="Link to this method">
+                <span class="method-name">singular_table_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="singular_table_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">singular_table_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@singular_table_name</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">pluralize_table_names?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">singularize</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">table_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-table_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-table_name" title="Link to this method">
+                <span class="method-name">table_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="table_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">table_name</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@table_name</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">base</span> = <span class="ruby-identifier">pluralize_table_names?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">plural_name</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">singular_name</span>
+    (<span class="ruby-identifier">class_path</span> <span class="ruby-operator">+</span> [<span class="ruby-identifier">base</span>]).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;_&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-uncountable-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-uncountable-3F" title="Link to this method">
+                <span class="method-name">uncountable?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="uncountable-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uncountable?</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">singular_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">plural_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-url_helper_prefix" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-url_helper_prefix" title="Link to this method">
+                <span class="method-name">url_helper_prefix</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="url_helper_prefix-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/named_base.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">url_helper_prefix</span> <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-ivar">@url_helper_prefix</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">class_path</span> <span class="ruby-operator">+</span> [<span class="ruby-identifier">file_name</span>]).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;_&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

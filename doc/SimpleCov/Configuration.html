@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>module SimpleCov::Configuration - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,module,SimpleCov::Configuration">
+
+
+    <meta name="description" content="module SimpleCov::Configuration: Bundles the configuration options used for SimpleCov. All methods defined here are usable from SimpleCov directly.">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-adapters">adapters</a></li>
+
+      <li ><a href="#method-i-add_filter">add_filter</a></li>
+
+      <li ><a href="#method-i-add_group">add_group</a></li>
+
+      <li ><a href="#method-i-at_exit">at_exit</a></li>
+
+      <li ><a href="#method-i-at_fork">at_fork</a></li>
+
+      <li ><a href="#method-i-branch_coverage-3F">branch_coverage?</a></li>
+
+      <li ><a href="#method-i-branch_coverage_supported-3F">branch_coverage_supported?</a></li>
+
+      <li ><a href="#method-i-clear_coverage_criteria">clear_coverage_criteria</a></li>
+
+      <li ><a href="#method-i-command_name">command_name</a></li>
+
+      <li ><a href="#method-i-configure">configure</a></li>
+
+      <li ><a href="#method-i-coverage_criteria">coverage_criteria</a></li>
+
+      <li ><a href="#method-i-coverage_criterion">coverage_criterion</a></li>
+
+      <li ><a href="#method-i-coverage_criterion_enabled-3F">coverage_criterion_enabled?</a></li>
+
+      <li ><a href="#method-i-coverage_dir">coverage_dir</a></li>
+
+      <li ><a href="#method-i-coverage_for_eval_enabled-3F">coverage_for_eval_enabled?</a></li>
+
+      <li ><a href="#method-i-coverage_for_eval_supported-3F">coverage_for_eval_supported?</a></li>
+
+      <li ><a href="#method-i-coverage_path">coverage_path</a></li>
+
+      <li ><a href="#method-i-coverage_start_arguments_supported-3F">coverage_start_arguments_supported?</a></li>
+
+      <li ><a href="#method-i-enable_coverage">enable_coverage</a></li>
+
+      <li ><a href="#method-i-enable_coverage_for_eval">enable_coverage_for_eval</a></li>
+
+      <li ><a href="#method-i-enable_for_subprocesses">enable_for_subprocesses</a></li>
+
+      <li ><a href="#method-i-enabled_for_subprocesses-3F">enabled_for_subprocesses?</a></li>
+
+      <li ><a href="#method-i-filters">filters</a></li>
+
+      <li ><a href="#method-i-formatter">formatter</a></li>
+
+      <li ><a href="#method-i-formatters">formatters</a></li>
+
+      <li ><a href="#method-i-formatters-3D">formatters=</a></li>
+
+      <li ><a href="#method-i-groups">groups</a></li>
+
+      <li ><a href="#method-i-maximum_coverage_drop">maximum_coverage_drop</a></li>
+
+      <li ><a href="#method-i-merge_timeout">merge_timeout</a></li>
+
+      <li ><a href="#method-i-minimum_coverage">minimum_coverage</a></li>
+
+      <li ><a href="#method-i-minimum_coverage_by_file">minimum_coverage_by_file</a></li>
+
+      <li ><a href="#method-i-nocov_token">nocov_token</a></li>
+
+      <li ><a href="#method-i-primary_coverage">primary_coverage</a></li>
+
+      <li ><a href="#method-i-print_error_status">print_error_status</a></li>
+
+      <li ><a href="#method-i-profiles">profiles</a></li>
+
+      <li ><a href="#method-i-project_name">project_name</a></li>
+
+      <li ><a href="#method-i-raise_on_invalid_coverage">raise_on_invalid_coverage</a></li>
+
+      <li ><a href="#method-i-refuse_coverage_drop">refuse_coverage_drop</a></li>
+
+      <li ><a href="#method-i-root">root</a></li>
+
+      <li ><a href="#method-i-skip_token">skip_token</a></li>
+
+      <li ><a href="#method-i-track_files">track_files</a></li>
+
+      <li ><a href="#method-i-tracked_files">tracked_files</a></li>
+
+      <li ><a href="#method-i-use_merging">use_merging</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="module-SimpleCov::Configuration">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../SimpleCov.html">SimpleCov</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>Configuration</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="module-SimpleCov::Configuration" class="anchor-link module">
+    module SimpleCov::Configuration
+  </h1>
+
+  <section class="description">
+    
+<p>Bundles the configuration options used for <a href="../SimpleCov.html"><code>SimpleCov</code></a>. All methods defined here are usable from <a href="../SimpleCov.html"><code>SimpleCov</code></a> directly. Please check out <a href="../SimpleCov.html"><code>SimpleCov</code></a> documentation for further info.</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+
+        <dt id="DEFAULT_COVERAGE_CRITERION">DEFAULT_COVERAGE_CRITERION</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="SUPPORTED_COVERAGE_CRITERIA">SUPPORTED_COVERAGE_CRITERIA</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+      </dl>
+    </section>
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-i-filters" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-filters" title="Link to this attribute">
+            <span class="method-name">filters</span>
+            <span class="attribute-access-type">[W]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-formatter" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-formatter" title="Link to this attribute">
+            <span class="method-name">formatter</span>
+            <span class="attribute-access-type">[W]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-groups" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-groups" title="Link to this attribute">
+            <span class="method-name">groups</span>
+            <span class="attribute-access-type">[W]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-print_error_status" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-print_error_status" title="Link to this attribute">
+            <span class="method-name">print_error_status</span>
+            <span class="attribute-access-type">[W]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-adapters" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-adapters" title="Link to this method">
+                <span class="method-name">adapters</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="adapters-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">adapters</span>
+  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{Kernel.caller.first}: [DEPRECATION] #adapters is deprecated. Use #profiles instead.&quot;</span>
+  <span class="ruby-identifier">profiles</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-add_filter" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-add_filter" title="Link to this method">
+                <span class="method-name">add_filter</span>
+                <span class="method-args">(filter_argument = nil, &amp;filter_proc)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="add_filter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 367</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_filter</span>(<span class="ruby-identifier">filter_argument</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">filter_proc</span>)
+  <span class="ruby-identifier">filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parse_filter</span>(<span class="ruby-identifier">filter_argument</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">filter_proc</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Add a filter to the processing chain. There are four ways to define a filter:</p>
+<ul><li>
+<p>as a <a href="../String.html"><code>String</code></a> that will then be matched against all source files’ file paths,</p>
+
+<pre class="ruby"><span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">add_filter</span> <span class="ruby-string">&#39;app/models&#39;</span> <span class="ruby-comment"># will reject all your models</span>
+</pre>
+</li><li>
+<p>as a block which will be passed the source file in question and should either return a true or false value, depending on whether the file should be removed</p>
+
+<pre class="ruby"><span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">add_filter</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">src_file</span><span class="ruby-operator">|</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">src_file</span>.<span class="ruby-identifier">filename</span>) <span class="ruby-operator">==</span> <span class="ruby-string">&#39;environment.rb&#39;</span>
+<span class="ruby-keyword">end</span> <span class="ruby-comment"># Will exclude environment.rb files from the results</span>
+</pre>
+</li><li>
+<p>as an array of strings that are matched against all sorce files’ file paths and then ignored (basically string filter multiple times)</p>
+
+<pre class="ruby"><span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">add_filter</span> [<span class="ruby-string">&#39;app/models&#39;</span>, <span class="ruby-string">&#39;app/helpers&#39;</span>] <span class="ruby-comment"># ignores both dirs</span>
+</pre>
+</li><li>
+<p>as an instance of a subclass of <a href="Filter.html"><code>SimpleCov::Filter</code></a>. See the documentation there on how to define your own filter classes</p>
+</li></ul>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-add_group" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-add_group" title="Link to this method">
+                <span class="method-name">add_group</span>
+                <span class="method-args">(group_name, filter_argument = nil, &amp;filter_proc)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="add_group-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 376</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_group</span>(<span class="ruby-identifier">group_name</span>, <span class="ruby-identifier">filter_argument</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">filter_proc</span>)
+  <span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group_name</span>] = <span class="ruby-identifier">parse_filter</span>(<span class="ruby-identifier">filter_argument</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">filter_proc</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Define a group for files. Works similar to <a href="Configuration.html#method-i-add_filter"><code>add_filter</code></a>, only that the first argument is the desired group name and files PASSING the filter end up in the group (while filters exclude when the filter is applicable).</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-at_exit" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-at_exit" title="Link to this method">
+                <span class="method-name">at_exit</span>
+                <span class="method-args">(&amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="at_exit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">at_exit</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">running</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-ivar">@at_exit</span> = <span class="ruby-identifier">block</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-ivar">@at_exit</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">proc</span> { <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">format!</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Gets or sets the behavior to process coverage results.</p>
+
+<p>By default, it will call <a href="../SimpleCov.html#method-c-result"><code>SimpleCov.result</code></a>.format!</p>
+
+<p>Configure with:</p>
+
+<pre class="ruby"><span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">at_exit</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Coverage done&quot;</span>
+  <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">result</span>.<span class="ruby-identifier">format!</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-at_fork" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-at_fork" title="Link to this method">
+                <span class="method-name">at_fork</span>
+                <span class="method-args">(&amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="at_fork-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">at_fork</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@at_fork</span> = <span class="ruby-identifier">block</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-ivar">@at_fork</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pid</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># This needs a unique name so it won&#39;t be ovewritten</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">command_name</span> <span class="ruby-node">&quot;#{SimpleCov.command_name} (subprocess: #{pid})&quot;</span>
+    <span class="ruby-comment"># be quiet, the parent process will be in charge of using the regular formatter and checking coverage totals</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">print_error_status</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">formatter</span> <span class="ruby-constant">SimpleCov</span><span class="ruby-operator">::</span><span class="ruby-constant">Formatter</span><span class="ruby-operator">::</span><span class="ruby-constant">SimpleFormatter</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">minimum_coverage</span> <span class="ruby-value">0</span>
+    <span class="ruby-comment"># start</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">start</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Gets or sets the behavior to start a new forked Process.</p>
+
+<p>By default, it will add “ (Process #{pid})” to the <a href="Configuration.html#method-i-command_name"><code>command_name</code></a>, and start <a href="../SimpleCov.html"><code>SimpleCov</code></a> in quiet mode</p>
+
+<p>Configure with:</p>
+
+<pre class="ruby"><span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">at_fork</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pid</span><span class="ruby-operator">|</span>
+  <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># This needs a unique name so it won&#39;t be ovewritten</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">command_name</span> <span class="ruby-node">&quot;#{SimpleCov.command_name} (subprocess: #{pid})&quot;</span>
+    <span class="ruby-comment"># be quiet, the parent process will be in charge of using the regular formatter and checking coverage totals</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">print_error_status</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">formatter</span> <span class="ruby-constant">SimpleCov</span><span class="ruby-operator">::</span><span class="ruby-constant">Formatter</span><span class="ruby-operator">::</span><span class="ruby-constant">SimpleFormatter</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">minimum_coverage</span> <span class="ruby-value">0</span>
+    <span class="ruby-comment"># start</span>
+    <span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">start</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-branch_coverage-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-branch_coverage-3F" title="Link to this method">
+                <span class="method-name">branch_coverage?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="branch_coverage-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 428</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">branch_coverage?</span>
+  <span class="ruby-identifier">branch_coverage_supported?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">coverage_criterion_enabled?</span>(<span class="ruby-value">:branch</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-branch_coverage_supported-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-branch_coverage_supported-3F" title="Link to this method">
+                <span class="method-name">branch_coverage_supported?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="branch_coverage_supported-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 443</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">branch_coverage_supported?</span>
+  <span class="ruby-identifier">coverage_start_arguments_supported?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">RUBY_ENGINE</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;jruby&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-clear_coverage_criteria" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-clear_coverage_criteria" title="Link to this method">
+                <span class="method-name">clear_coverage_criteria</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="clear_coverage_criteria-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 424</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear_coverage_criteria</span>
+  <span class="ruby-ivar">@coverage_criteria</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-command_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-command_name" title="Link to this method">
+                <span class="method-name">command_name</span>
+                <span class="method-args">(name = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="command_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">command_name</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@name</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">SimpleCov</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandGuesser</span>.<span class="ruby-identifier">guess</span>
+  <span class="ruby-ivar">@name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The name of the command (a.k.a. Test Suite) currently running. Used for result merging and caching. It first tries to make a guess based upon the command line arguments the current test suite is running on and should automatically detect unit tests, functional tests, integration tests, rpsec and cucumber and label them properly. If it fails to recognize the current command, the command name is set to the shell command that the current suite is running on.</p>
+
+<p>You can specify it manually with SimpleCov.command_name(“test:units”) - please also check out the corresponding section in <a href="../vendor/bundle/ruby/3_3_0/gems/actionmailer-8_1_1/README_rdoc.html">README.rdoc</a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-configure" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-configure" title="Link to this method">
+                <span class="method-name">configure</span>
+                <span class="method-args">(&amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="configure-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">configure</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Docile</span>.<span class="ruby-identifier">dsl_eval</span>(<span class="ruby-keyword">self</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Allows you to configure simplecov in a block instead of prepending <a href="../SimpleCov.html"><code>SimpleCov</code></a> to all config methods you’re calling.</p>
+
+<pre class="ruby"><span class="ruby-constant">SimpleCov</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">add_filter</span> <span class="ruby-string">&#39;foobar&#39;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This is equivalent to SimpleCov.add_filter ‘foobar’ and thus makes it easier to set a bunch of configure options at once.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_criteria" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_criteria" title="Link to this method">
+                <span class="method-name">coverage_criteria</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_criteria-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 416</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_criteria</span>
+  <span class="ruby-ivar">@coverage_criteria</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>[<span class="ruby-identifier">primary_coverage</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_criterion" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_criterion" title="Link to this method">
+                <span class="method-name">coverage_criterion</span>
+                <span class="method-args">(criterion = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_criterion-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 393</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_criterion</span>(<span class="ruby-identifier">criterion</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@coverage_criterion</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">primary_coverage</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">criterion</span>
+
+  <span class="ruby-identifier">raise_if_criterion_unsupported</span>(<span class="ruby-identifier">criterion</span>)
+
+  <span class="ruby-ivar">@coverage_criterion</span> = <span class="ruby-identifier">criterion</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Define which coverage criterion should be evaluated.</p>
+
+<p>Possible coverage criteria:</p>
+<ul><li>
+<p>:line - coverage based on lines aka has this line been executed?</p>
+</li><li>
+<p>:branch - coverage based on branches aka has this branch (think conditions) been executed?</p>
+</li></ul>
+
+<p>If not set the default is ‘:line`</p>
+
+<p>@param [Symbol] criterion</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_criterion_enabled-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_criterion_enabled-3F" title="Link to this method">
+                <span class="method-name">coverage_criterion_enabled?</span>
+                <span class="method-args">(criterion)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_criterion_enabled-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 420</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_criterion_enabled?</span>(<span class="ruby-identifier">criterion</span>)
+  <span class="ruby-identifier">coverage_criteria</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">criterion</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_dir" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_dir" title="Link to this method">
+                <span class="method-name">coverage_dir</span>
+                <span class="method-args">(dir = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_dir-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_dir</span>(<span class="ruby-identifier">dir</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@coverage_dir</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@coverage_dir</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-ivar">@coverage_path</span> = <span class="ruby-keyword">nil</span> <span class="ruby-comment"># invalidate cache</span>
+  <span class="ruby-ivar">@coverage_dir</span> = (<span class="ruby-identifier">dir</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;coverage&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The name of the output and cache directory. Defaults to ‘coverage’</p>
+
+<p>Configure with SimpleCov.coverage_dir(‘cov’)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_for_eval_enabled-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_for_eval_enabled-3F" title="Link to this method">
+                <span class="method-name">coverage_for_eval_enabled?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_for_eval_enabled-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 452</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_for_eval_enabled?</span>
+  <span class="ruby-ivar">@coverage_for_eval_enabled</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_for_eval_supported-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_for_eval_supported-3F" title="Link to this method">
+                <span class="method-name">coverage_for_eval_supported?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_for_eval_supported-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 447</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_for_eval_supported?</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;coverage&quot;</span>
+  <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">Coverage</span>.<span class="ruby-identifier">supported?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Coverage</span>.<span class="ruby-identifier">supported?</span>(<span class="ruby-value">:eval</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_path" title="Link to this method">
+                <span class="method-name">coverage_path</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_path</span>
+  <span class="ruby-ivar">@coverage_path</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">coverage_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">coverage_dir</span>, <span class="ruby-identifier">root</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">coverage_path</span>
+    <span class="ruby-identifier">coverage_path</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the full path to the output directory using SimpleCov.root and SimpleCov.coverage_dir, so you can adjust this by configuring those values. Will create the directory if it’s missing</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-coverage_start_arguments_supported-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-coverage_start_arguments_supported-3F" title="Link to this method">
+                <span class="method-name">coverage_start_arguments_supported?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="coverage_start_arguments_supported-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 432</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">coverage_start_arguments_supported?</span>
+  <span class="ruby-comment"># safe to cache as within one process this value should never</span>
+  <span class="ruby-comment"># change</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@coverage_start_arguments_supported</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@coverage_start_arguments_supported</span>)
+
+  <span class="ruby-ivar">@coverage_start_arguments_supported</span> = <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;coverage&quot;</span>
+    <span class="ruby-operator">!</span><span class="ruby-constant">Coverage</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:start</span>).<span class="ruby-identifier">arity</span>.<span class="ruby-identifier">zero?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enable_coverage" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enable_coverage" title="Link to this method">
+                <span class="method-name">enable_coverage</span>
+                <span class="method-args">(criterion)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enable_coverage-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 401</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enable_coverage</span>(<span class="ruby-identifier">criterion</span>)
+  <span class="ruby-identifier">raise_if_criterion_unsupported</span>(<span class="ruby-identifier">criterion</span>)
+
+  <span class="ruby-identifier">coverage_criteria</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">criterion</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enable_coverage_for_eval" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enable_coverage_for_eval" title="Link to this method">
+                <span class="method-name">enable_coverage_for_eval</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enable_coverage_for_eval-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 456</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enable_coverage_for_eval</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">coverage_for_eval_supported?</span>
+    <span class="ruby-ivar">@coverage_for_eval_enabled</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Coverage for eval is not available; Use Ruby 3.2.0 or later&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enable_for_subprocesses" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enable_for_subprocesses" title="Link to this method">
+                <span class="method-name">enable_for_subprocesses</span>
+                <span class="method-args">(value = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enable_for_subprocesses-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enable_for_subprocesses</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@enable_for_subprocesses</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@enable_for_subprocesses</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-ivar">@enable_for_subprocesses</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>gets or sets the enabled_for_subprocess configuration when true, this will inject <a href="../SimpleCov.html"><code>SimpleCov</code></a> code into <a href="../Process.html#method-c-fork"><code>Process.fork</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enabled_for_subprocesses-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enabled_for_subprocesses-3F" title="Link to this method">
+                <span class="method-name">enabled_for_subprocesses?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enabled_for_subprocesses-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 209</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enabled_for_subprocesses?</span>
+  <span class="ruby-identifier">enable_for_subprocesses</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>gets the enabled_for_subprocess configuration</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-filters" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-filters" title="Link to this method">
+                <span class="method-name">filters</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="filters-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filters</span>
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">||=</span> []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the list of configured filters. Add filters using SimpleCov.add_filter.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-formatter" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-formatter" title="Link to this method">
+                <span class="method-name">formatter</span>
+                <span class="method-args">(formatter = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="formatter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">formatter</span>(<span class="ruby-identifier">formatter</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@formatter</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@formatter</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-ivar">@formatter</span> = <span class="ruby-identifier">formatter</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;No formatter configured. Please specify a formatter using SimpleCov.formatter = SimpleCov::Formatter::SimpleFormatter&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@formatter</span>
+
+  <span class="ruby-ivar">@formatter</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Gets or sets the configured formatter.</p>
+
+<p>Configure with: SimpleCov.formatter(<a href="Formatter/SimpleFormatter.html"><code>SimpleCov::Formatter::SimpleFormatter</code></a>)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-formatters" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-formatters" title="Link to this method">
+                <span class="method-name">formatters</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="formatters-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">formatters</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@formatter</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">SimpleCov</span><span class="ruby-operator">::</span><span class="ruby-constant">Formatter</span><span class="ruby-operator">::</span><span class="ruby-constant">MultiFormatter</span>)
+    <span class="ruby-ivar">@formatter</span>.<span class="ruby-identifier">formatters</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Array</span>(<span class="ruby-identifier">formatter</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Gets the configured formatters.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-formatters-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-formatters-3D" title="Link to this method">
+                <span class="method-name">formatters=</span>
+                <span class="method-args">(formatters)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="formatters-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">formatters=</span>(<span class="ruby-identifier">formatters</span>)
+  <span class="ruby-ivar">@formatter</span> = <span class="ruby-constant">SimpleCov</span><span class="ruby-operator">::</span><span class="ruby-constant">Formatter</span><span class="ruby-operator">::</span><span class="ruby-constant">MultiFormatter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">formatters</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Sets the configured formatters.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-groups" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-groups" title="Link to this method">
+                <span class="method-name">groups</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="groups-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">groups</span>
+  <span class="ruby-ivar">@groups</span> <span class="ruby-operator">||=</span> {}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the configured groups. Add groups using SimpleCov.add_group</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-maximum_coverage_drop" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-maximum_coverage_drop" title="Link to this method">
+                <span class="method-name">maximum_coverage_drop</span>
+                <span class="method-args">(coverage_drop = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="maximum_coverage_drop-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 313</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">maximum_coverage_drop</span>(<span class="ruby-identifier">coverage_drop</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@maximum_coverage_drop</span> <span class="ruby-operator">||=</span> {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">coverage_drop</span>
+
+  <span class="ruby-identifier">coverage_drop</span> = {<span class="ruby-identifier">primary_coverage</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">coverage_drop</span>} <span class="ruby-keyword">if</span> <span class="ruby-identifier">coverage_drop</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Numeric</span>)
+
+  <span class="ruby-identifier">raise_on_invalid_coverage</span>(<span class="ruby-identifier">coverage_drop</span>, <span class="ruby-string">&quot;maximum_coverage_drop&quot;</span>)
+
+  <span class="ruby-ivar">@maximum_coverage_drop</span> = <span class="ruby-identifier">coverage_drop</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Defines the maximum coverage drop at once allowed for the testsuite to pass. <a href="../SimpleCov.html"><code>SimpleCov</code></a> will return non-zero if the coverage decreases by more than this threshold.</p>
+
+<p>Default is 100% (disabled)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-merge_timeout" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-merge_timeout" title="Link to this method">
+                <span class="method-name">merge_timeout</span>
+                <span class="method-args">(seconds = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="merge_timeout-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge_timeout</span>(<span class="ruby-identifier">seconds</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@merge_timeout</span> = <span class="ruby-identifier">seconds</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seconds</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>)
+  <span class="ruby-ivar">@merge_timeout</span> <span class="ruby-operator">||=</span> <span class="ruby-value">600</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Defines the maximum age (in seconds) of a resultset to still be included in merged results. i.e. If you run cucumber features, then later rake test, if the stored cucumber resultset is more seconds ago than specified here, it won’t be taken into account when merging (and is also purged from the resultset cache)</p>
+
+<p>Of course, this only applies when merging is active (e.g. SimpleCov.use_merging is not false!)</p>
+
+<p>Default is 600 seconds (10 minutes)</p>
+
+<p>Configure with SimpleCov.merge_timeout(3600) # 1hr</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-minimum_coverage" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-minimum_coverage" title="Link to this method">
+                <span class="method-name">minimum_coverage</span>
+                <span class="method-args">(coverage = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="minimum_coverage-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 290</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">minimum_coverage</span>(<span class="ruby-identifier">coverage</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@minimum_coverage</span> <span class="ruby-operator">||=</span> {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">coverage</span>
+
+  <span class="ruby-identifier">coverage</span> = {<span class="ruby-identifier">primary_coverage</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">coverage</span>} <span class="ruby-keyword">if</span> <span class="ruby-identifier">coverage</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Numeric</span>)
+
+  <span class="ruby-identifier">raise_on_invalid_coverage</span>(<span class="ruby-identifier">coverage</span>, <span class="ruby-string">&quot;minimum_coverage&quot;</span>)
+
+  <span class="ruby-ivar">@minimum_coverage</span> = <span class="ruby-identifier">coverage</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Defines the minimum overall coverage required for the testsuite to pass. <a href="../SimpleCov.html"><code>SimpleCov</code></a> will return non-zero if the current coverage is below this threshold.</p>
+
+<p>Default is 0% (disabled)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-minimum_coverage_by_file" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-minimum_coverage_by_file" title="Link to this method">
+                <span class="method-name">minimum_coverage_by_file</span>
+                <span class="method-args">(coverage = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="minimum_coverage_by_file-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 330</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">minimum_coverage_by_file</span>(<span class="ruby-identifier">coverage</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@minimum_coverage_by_file</span> <span class="ruby-operator">||=</span> {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">coverage</span>
+
+  <span class="ruby-identifier">coverage</span> = {<span class="ruby-identifier">primary_coverage</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">coverage</span>} <span class="ruby-keyword">if</span> <span class="ruby-identifier">coverage</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Numeric</span>)
+
+  <span class="ruby-identifier">raise_on_invalid_coverage</span>(<span class="ruby-identifier">coverage</span>, <span class="ruby-string">&quot;minimum_coverage_by_file&quot;</span>)
+
+  <span class="ruby-ivar">@minimum_coverage_by_file</span> = <span class="ruby-identifier">coverage</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Defines the minimum coverage per file required for the testsuite to pass. <a href="../SimpleCov.html"><code>SimpleCov</code></a> will return non-zero if the current coverage of the least covered file is below this threshold.</p>
+
+<p>Default is 0% (disabled)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-nocov_token" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-nocov_token" title="Link to this method">
+                <span class="method-name">nocov_token</span>
+                <span class="method-args">(nocov_token = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="nocov_token-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nocov_token</span>(<span class="ruby-identifier">nocov_token</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@nocov_token</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@nocov_token</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">nocov_token</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-ivar">@nocov_token</span> = (<span class="ruby-identifier">nocov_token</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;nocov&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Certain code blocks (i.e. Ruby-implementation specific code) can be excluded from the coverage metrics by wrapping it inside # :nocov: comment blocks. The nocov token can be configured to be any other string using this.</p>
+
+<p>Configure with SimpleCov.nocov_token(‘skip’) or it’s alias SimpleCov.skip_token(‘skip’)</p>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="Configuration.html#method-i-skip_token">skip_token</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-primary_coverage" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-primary_coverage" title="Link to this method">
+                <span class="method-name">primary_coverage</span>
+                <span class="method-args">(criterion = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="primary_coverage-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 407</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">primary_coverage</span>(<span class="ruby-identifier">criterion</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">criterion</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@primary_coverage</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_COVERAGE_CRITERION</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise_if_criterion_disabled</span>(<span class="ruby-identifier">criterion</span>)
+    <span class="ruby-ivar">@primary_coverage</span> = <span class="ruby-identifier">criterion</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-print_error_status" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-print_error_status" title="Link to this method">
+                <span class="method-name">print_error_status</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="print_error_status-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_error_status</span>
+  <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@print_error_status</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@print_error_status</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Whether we should print non-success status codes. This can be configured with the <a href="Configuration.html#attribute-i-print_error_status"><code>print_error_status=</code></a> method.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-profiles" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-profiles" title="Link to this method">
+                <span class="method-name">profiles</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="profiles-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">profiles</span>
+  <span class="ruby-ivar">@profiles</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">SimpleCov</span><span class="ruby-operator">::</span><span class="ruby-constant">Profiles</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the hash of available profiles</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-project_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-project_name" title="Link to this method">
+                <span class="method-name">project_name</span>
+                <span class="method-args">(new_name = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="project_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">project_name</span>(<span class="ruby-identifier">new_name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@project_name</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@project_name</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@project_name</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">new_name</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-ivar">@project_name</span> = <span class="ruby-identifier">new_name</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+  <span class="ruby-ivar">@project_name</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">root</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;/&quot;</span>).<span class="ruby-identifier">last</span>).<span class="ruby-identifier">capitalize</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot;_&quot;</span>, <span class="ruby-string">&quot; &quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the project name - currently assuming the last dirname in the SimpleCov.root is this.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-raise_on_invalid_coverage" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-raise_on_invalid_coverage" title="Link to this method">
+                <span class="method-name">raise_on_invalid_coverage</span>
+                <span class="method-args">(coverage, coverage_setting)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="raise_on_invalid_coverage-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 300</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">raise_on_invalid_coverage</span>(<span class="ruby-identifier">coverage</span>, <span class="ruby-identifier">coverage_setting</span>)
+  <span class="ruby-identifier">coverage</span>.<span class="ruby-identifier">each_key</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">criterion</span><span class="ruby-operator">|</span> <span class="ruby-identifier">raise_if_criterion_disabled</span>(<span class="ruby-identifier">criterion</span>) }
+  <span class="ruby-identifier">coverage</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">percent</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">minimum_possible_coverage_exceeded</span>(<span class="ruby-identifier">coverage_setting</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">percent</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">percent</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">100</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-refuse_coverage_drop" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-refuse_coverage_drop" title="Link to this method">
+                <span class="method-name">refuse_coverage_drop</span>
+                <span class="method-args">(*criteria)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="refuse_coverage_drop-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 344</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">refuse_coverage_drop</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">criteria</span>)
+  <span class="ruby-identifier">criteria</span> = <span class="ruby-identifier">coverage_criteria</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">maximum_coverage_drop</span>(<span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>, <span class="ruby-value">0</span>] }.<span class="ruby-identifier">to_h</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Refuses any coverage drop. That is, coverage is only allowed to increase. <a href="../SimpleCov.html"><code>SimpleCov</code></a> will return non-zero if the coverage decreases.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-root" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-root" title="Link to this method">
+                <span class="method-name">root</span>
+                <span class="method-args">(root = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="root-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">root</span>(<span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@root</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@root</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">root</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-ivar">@coverage_path</span> = <span class="ruby-keyword">nil</span> <span class="ruby-comment"># invalidate cache</span>
+  <span class="ruby-ivar">@root</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">root</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">getwd</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The root for the project. This defaults to the current working directory.</p>
+
+<p>Configure with SimpleCov.root(‘/my/project/path’)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-skip_token" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-skip_token" title="Link to this method">
+                <span class="method-name">skip_token</span>
+                <span class="method-args">(nocov_token = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="Configuration.html#method-i-nocov_token">nocov_token</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-track_files" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-track_files" title="Link to this method">
+                <span class="method-name">track_files</span>
+                <span class="method-args">(glob)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="track_files-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">track_files</span>(<span class="ruby-identifier">glob</span>)
+  <span class="ruby-ivar">@tracked_files</span> = <span class="ruby-identifier">glob</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Coverage results will always include files matched by this glob, whether or not they were explicitly required. Without this, un-required files will not be present in the final report.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-tracked_files" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-tracked_files" title="Link to this method">
+                <span class="method-name">tracked_files</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="tracked_files-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tracked_files</span>
+  <span class="ruby-ivar">@tracked_files</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@tracked_files</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the glob that will be used to include files that were not explicitly required.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-use_merging" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-use_merging" title="Link to this method">
+                <span class="method-name">use_merging</span>
+                <span class="method-args">(use = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="use_merging-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/simplecov-0.22.0/lib/simplecov/configuration.rb, line 262</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">use_merging</span>(<span class="ruby-identifier">use</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@use_merging</span> = <span class="ruby-identifier">use</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">use</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@use_merging</span> = <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@use_merging</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@use_merging</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Defines whether to use result merging so all your test suites (test:units, test:functionals, cucumber, …) are joined and combined into a single coverage report</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

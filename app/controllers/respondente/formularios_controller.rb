@@ -1,7 +1,10 @@
+# Namespace `Respondente` para ações do participante/usuário comum.
 class Respondente::FormulariosController < ApplicationController
   before_action :require_login
   layout "respondente"
 
+  # Lista formulários disponíveis e marca quais já foram respondidos pelo usuário atual.
+  # @return [void]
   def index
     @formularios = Formulario.all
     # Para cada formulário, verificar se o usuário já respondeu
@@ -11,6 +14,8 @@ class Respondente::FormulariosController < ApplicationController
     end
   end
 
+  # Exibe um formulário para resposta e carrega respostas existentes do usuário, se houver.
+  # @return [void]
   def show
     @formulario = ::Formulario.find(params[:id])
     @perguntas = @formulario.template&.questions || []
@@ -24,6 +29,9 @@ class Respondente::FormulariosController < ApplicationController
     end
   end
 
+  # Recebe e persiste respostas do usuário para um formulário.
+  # @return [void]
+  # @side_effect Cria registros de Resposta; redireciona com aviso em caso de duplicidade ou erro
   def submit
     @formulario = ::Formulario.find(params[:id])
     @perguntas = @formulario.template&.questions || []

@@ -1,5 +1,6 @@
 # lib/form_responder.rb
 
+# Serviço para validar e registrar respostas de um formulário por um usuário.
 class FormResponder
   # formulario: objeto que representa o formulário
   # usuario: participante que está respondendo

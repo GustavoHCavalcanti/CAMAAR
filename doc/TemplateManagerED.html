@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>class TemplateManagerED - RDoc Documentation</title>
+<title>class TemplateManagerEd - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,TemplateManagerED">
+  <meta name="keywords" content="ruby,class,TemplateManagerEd">
 
 
-    <meta name="description" content="class TemplateManagerED: edicao_delecao_templates.">
+    <meta name="description" content="class TemplateManagerEd: Regras de edição e deleção de templates, respeitando dependências com formulários.">
 
 
 
@@ -119,17 +119,17 @@
 
 </nav>
 
-<main role="main" aria-labelledby="class-TemplateManagerED">
+<main role="main" aria-labelledby="class-TemplateManagerEd">
   
   
 
-  <h1 id="class-TemplateManagerED" class="anchor-link class">
-    class TemplateManagerED
+  <h1 id="class-TemplateManagerEd" class="anchor-link class">
+    class TemplateManagerEd
   </h1>
 
   <section class="description">
     
-<p><a href="lib/edicao_delecao_templates_rb.html">lib/edicao_delecao_templates.rb</a></p>
+<p>Regras de edição e deleção de templates, respeitando dependências com formulários.</p>
 
   </section>
 
@@ -174,7 +174,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/edicao_delecao_templates.rb, line 15</span>
+            <pre><span class="ruby-comment"># File lib/template_manager_ed.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">templates</span>, <span class="ruby-identifier">forms</span>)
   <span class="ruby-ivar">@templates</span> = <span class="ruby-identifier">templates</span> <span class="ruby-operator">||</span> []
   <span class="ruby-ivar">@forms</span> = <span class="ruby-identifier">forms</span> <span class="ruby-operator">||</span> []
@@ -198,6 +198,8 @@
 </pre>
 
 <p>]</p>
+
+<p>@param templates [Array&lt;Hash&gt;] templates existentes @param forms [Array&lt;Hash&gt;] formulários associados @return [TemplateManagerEd]</p>
 
 
         </div>
@@ -241,7 +243,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deletar_template-source">
-            <pre><span class="ruby-comment"># File lib/edicao_delecao_templates.rb, line 48</span>
+            <pre><span class="ruby-comment"># File lib/template_manager_ed.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deletar_template</span>(<span class="ruby-identifier">template_nome</span>, <span class="ruby-value">confirm:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">template</span> = <span class="ruby-ivar">@templates</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>[<span class="ruby-value">:nome</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">template_nome</span> }
   <span class="ruby-keyword">return</span> <span class="ruby-value">:not_found</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">template</span>
@@ -269,6 +271,8 @@
 <pre>:deleted                   → deletado com sucesso
 :confirm_required          → há formulários dependentes, confirmação necessária
 :not_found                 → template não existe</pre>
+
+<p>@param template_nome [String] @param confirm [Boolean] confirma deleção mesmo com dependências @return [Symbol] :deleted, :confirm_required ou :not_found</p>
 
 
         </div>
@@ -304,7 +308,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="editar_template-source">
-            <pre><span class="ruby-comment"># File lib/edicao_delecao_templates.rb, line 29</span>
+            <pre><span class="ruby-comment"># File lib/template_manager_ed.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">editar_template</span>(<span class="ruby-identifier">template_nome_atual</span>, <span class="ruby-identifier">novo_nome</span>)
   <span class="ruby-identifier">template</span> = <span class="ruby-ivar">@templates</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>[<span class="ruby-value">:nome</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">template_nome_atual</span> }
   <span class="ruby-keyword">return</span> <span class="ruby-value">:not_found</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">template</span>
@@ -322,6 +326,8 @@
 
 <pre>:edited             → edição bem sucedida
 :not_found          → template não existe</pre>
+
+<p>@param template_nome_atual [String] @param novo_nome [String] @return [Symbol] :edited ou :not_found</p>
 
 
         </div>

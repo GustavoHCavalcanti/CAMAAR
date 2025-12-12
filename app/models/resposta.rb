@@ -1,3 +1,4 @@
+# Armazena a resposta de um `User` para uma `Question` em um `Formulario`.
 class Resposta < ApplicationRecord
   self.table_name = "respostas"
 

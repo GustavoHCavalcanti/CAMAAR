@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>class BaseAtualizadorSIGAA - RDoc Documentation</title>
+<title>class BaseAtualizadorSigaa - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,BaseAtualizadorSIGAA">
+  <meta name="keywords" content="ruby,class,BaseAtualizadorSigaa">
 
 
-    <meta name="description" content="Documentation for the BaseAtualizadorSIGAA class">
+    <meta name="description" content="class BaseAtualizadorSigaa: Serviço de atualização da base local a partir de dados do SIGAA, com validações e tratamento de erros.">
 
 
 
@@ -117,16 +117,18 @@
 
 </nav>
 
-<main role="main" aria-labelledby="class-BaseAtualizadorSIGAA">
+<main role="main" aria-labelledby="class-BaseAtualizadorSigaa">
   
   
 
-  <h1 id="class-BaseAtualizadorSIGAA" class="anchor-link class">
-    class BaseAtualizadorSIGAA
+  <h1 id="class-BaseAtualizadorSigaa" class="anchor-link class">
+    class BaseAtualizadorSigaa
   </h1>
 
   <section class="description">
     
+<p>Serviço de atualização da base local a partir de dados do SIGAA, com validações e tratamento de erros.</p>
+
   </section>
 
 
@@ -170,7 +172,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/atualizacao_base_sigaa.rb, line 21</span>
+            <pre><span class="ruby-comment"># File lib/base_atualizador_sigaa.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">base_local</span>, <span class="ruby-identifier">sigaa_service</span>)
   <span class="ruby-ivar">@base_local</span> = <span class="ruby-identifier">base_local</span>
   <span class="ruby-ivar">@sigaa_service</span> = <span class="ruby-identifier">sigaa_service</span>
@@ -179,24 +181,7 @@
 
 
 
-          <p>Estrutura esperada:</p>
-
-<p>base_local = {</p>
-
-<pre>turmas: [...],
-usuarios: [...],
-materias: [...],</pre>
-
-<p>}</p>
-
-<p>mock_sigaa_service = objeto com método fetch_data que</p>
-<ul><li>
-<p>retorna dados válidos</p>
-</li><li>
-<p>lança <a href="SigaaCommunicationError.html"><code>SigaaCommunicationError</code></a> se o SIGAA estiver fora</p>
-</li><li>
-<p>lança <a href="SigaaInconsistentDataError.html"><code>SigaaInconsistentDataError</code></a> se os dados forem inválidos</p>
-</li></ul>
+          <p>Recebe a base local e o serviço de integração SIGAA. @param base_local [Hash] armazenamento mutável usado como fonte de dados @param sigaa_service [Object] objeto com método fetch_data @return [BaseAtualizadorSigaa]</p>
 
 
         </div>
@@ -240,7 +225,7 @@ materias: [...],</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="atualizar-source">
-            <pre><span class="ruby-comment"># File lib/atualizacao_base_sigaa.rb, line 37</span>
+            <pre><span class="ruby-comment"># File lib/base_atualizador_sigaa.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">atualizar</span>(<span class="ruby-identifier">admin</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-value">:acesso_negado</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">admin</span>[<span class="ruby-value">:tipo</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:admin</span>
 
@@ -250,13 +235,13 @@ materias: [...],</pre>
     <span class="ruby-identifier">validar_dados!</span>(<span class="ruby-identifier">novos_dados</span>)
 
     <span class="ruby-identifier">substituir_base</span>(<span class="ruby-identifier">novos_dados</span>)
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:sucesso</span>
+    <span class="ruby-value">:sucesso</span>
 
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">SigaaCommunicationError</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:falha_comunicacao</span>
+    <span class="ruby-value">:falha_comunicacao</span>
 
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">SigaaInconsistentDataError</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">:dados_inconsistentes</span>
+    <span class="ruby-value">:dados_inconsistentes</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

@@ -1,5 +1,6 @@
 # lib/edicao_delecao_templates.rb
 
+# Regras de edição e deleção de templates, respeitando dependências com formulários.
 class TemplateManagerEd
   # Estruturas esperadas:
   #
@@ -12,6 +13,9 @@ class TemplateManagerEd
   #   { id: 1, nome: "Formulário X", template_id: 1 }
   # ]
   #
+  # @param templates [Array<Hash>] templates existentes
+  # @param forms [Array<Hash>] formulários associados
+  # @return [TemplateManagerEd]
   def initialize(templates, forms)
     @templates = templates || []
     @forms = forms || []
@@ -26,6 +30,9 @@ class TemplateManagerEd
   # Retorna:
   #   :edited             → edição bem sucedida
   #   :not_found          → template não existe
+  # @param template_nome_atual [String]
+  # @param novo_nome [String]
+  # @return [Symbol] :edited ou :not_found
   def editar_template(template_nome_atual, novo_nome)
     template = @templates.find { |t| t[:nome] == template_nome_atual }
     return :not_found unless template
@@ -45,6 +52,9 @@ class TemplateManagerEd
   #   :confirm_required          → há formulários dependentes, confirmação necessária
   #   :not_found                 → template não existe
   #
+  # @param template_nome [String]
+  # @param confirm [Boolean] confirma deleção mesmo com dependências
+  # @return [Symbol] :deleted, :confirm_required ou :not_found
   def deletar_template(template_nome, confirm: false)
     template = @templates.find { |t| t[:nome] == template_nome }
     return :not_found unless template

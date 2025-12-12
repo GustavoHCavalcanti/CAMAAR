@@ -1,5 +1,6 @@
 # lib/criar_formulario_avaliacao.rb
 
+# Serviço para criação de formulários de avaliação para múltiplas turmas com base em um template.
 class FormularioAvaliacaoCreator
   # Estruturas esperadas:
   #
@@ -56,6 +57,8 @@ class FormularioAvaliacaoCreator
 
   private
 
+  # Calcula o próximo id sequencial para novo formulário.
+  # @return [Integer] 1 quando lista está vazia; maior id + 1 caso contrário
   def proximo_id
     return 1 if @formularios.empty?
 

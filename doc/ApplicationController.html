@@ -89,6 +89,21 @@
   
 
 
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-current_user">current_user</a></li>
+
+      <li ><a href="#method-i-logged_in-3F">logged_in?</a></li>
+
+      <li ><a href="#method-i-require_login">require_login</a></li>
+
+      <li ><a href="#method-i-respondente_layout">respondente_layout</a></li>
+
+    </ul>
+  </div>
+
 
 
   <footer id="validator-badges" role="contentinfo">
@@ -121,6 +136,190 @@
 
 
 
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-current_user" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-current_user" title="Link to this method">
+                <span class="method-name">current_user</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="current_user-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current_user</span>
+  <span class="ruby-ivar">@current_user</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Resolve o usuário autenticado a partir da sessão e memoriza para evitar consultas repetidas. @return [User, nil] usuário autenticado ou nil quando não há sessão ativa</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-logged_in-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-logged_in-3F" title="Link to this method">
+                <span class="method-name">logged_in?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="logged_in-3F-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">logged_in?</span>
+  <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Verifica se há usuário autenticado disponível. @return [Boolean] true quando existe usuário atual, false caso contrário</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-require_login" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-require_login" title="Link to this method">
+                <span class="method-name">require_login</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="require_login-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_login</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">login_path</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">logged_in?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Garante que apenas usuários autenticados acessem a rota. @side_effect Redireciona para login_path quando não autenticado</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-respondente_layout" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-respondente_layout" title="Link to this method">
+                <span class="method-name">respondente_layout</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="respondente_layout-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">respondente_layout</span>
+  <span class="ruby-string">&quot;respondente&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Define o layout padrão para telas de respondente. @return [String] nome do layout utilizado para respondentes</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
 
   </section>
 

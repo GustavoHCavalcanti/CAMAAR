@@ -129,7 +129,7 @@
 
   <section class="description">
     
-<p><a href="lib/gerenciamento_turmas_departamento_rb.html">lib/gerenciamento_turmas_departamento.rb</a></p>
+<p>lib/gerenciamento_turmas_departamento.rb</p>
 
   </section>
 
@@ -174,7 +174,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/gerenciamento_turmas_departamento.rb, line 12</span>
+            <pre><span class="ruby-comment"># File lib/turma_manager.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">turmas</span>, <span class="ruby-identifier">admin</span>)
   <span class="ruby-ivar">@turmas</span> = <span class="ruby-identifier">turmas</span> <span class="ruby-operator">||</span> []
   <span class="ruby-ivar">@admin</span>  = <span class="ruby-identifier">admin</span>
@@ -183,14 +183,7 @@
 
 
 
-          <p>Estrutura esperada: turmas = [</p>
-
-<pre>{ codigo: &quot;CIC101 - Turma A&quot;, departamento: &quot;Computação&quot;, desempenho: {...} },
-{ codigo: &quot;MAT001 - Turma B&quot;, departamento: &quot;Matemática&quot;, desempenho: {...} }</pre>
-
-<p>]</p>
-
-<p>admin = { id: 1, nome: “Admin”, departamento: “Computação” }</p>
+          <p>Inicializa com coleção de turmas e o administrador corrente. @param turmas [Array&lt;Hash&gt;] @param admin [Hash] @return [TurmaManager]</p>
 
 
         </div>
@@ -234,7 +227,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="acesso_turma-source">
-            <pre><span class="ruby-comment"># File lib/gerenciamento_turmas_departamento.rb, line 28</span>
+            <pre><span class="ruby-comment"># File lib/turma_manager.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acesso_turma</span>(<span class="ruby-identifier">codigo_turma</span>)
   <span class="ruby-identifier">turma</span> = <span class="ruby-ivar">@turmas</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>[<span class="ruby-value">:codigo</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">codigo_turma</span> }
   <span class="ruby-keyword">return</span> { <span class="ruby-value">status:</span> <span class="ruby-value">:not_found</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">turma</span>
@@ -299,7 +292,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="list_for_admin-source">
-            <pre><span class="ruby-comment"># File lib/gerenciamento_turmas_departamento.rb, line 18</span>
+            <pre><span class="ruby-comment"># File lib/turma_manager.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_for_admin</span>
   <span class="ruby-ivar">@turmas</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>[<span class="ruby-value">:departamento</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@admin</span>[<span class="ruby-value">:departamento</span>] }
 <span class="ruby-keyword">end</span></pre>

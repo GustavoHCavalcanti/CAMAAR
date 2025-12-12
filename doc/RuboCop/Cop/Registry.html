@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class RuboCop::Cop::Registry - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,RuboCop::Cop::Registry">
+
+
+    <meta name="description" content="class RuboCop::Cop::Registry: Registry that tracks all cops by their badge and department.">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../../Object.html">Object</a><ul><li><a href="../../BasicObject.html">BasicObject</a></li></ul></li></ul>
+</div>
+
+
+  
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="include" href="../../Enumerable.html">Enumerable</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-all">all</a></li>
+
+      <li ><a href="#method-c-new">new</a></li>
+
+      <li ><a href="#method-c-qualified_cop-3F">qualified_cop?</a></li>
+
+      <li ><a href="#method-c-qualified_cop_name">qualified_cop_name</a></li>
+
+      <li ><a href="#method-c-reset-21">reset!</a></li>
+
+      <li ><a href="#method-c-with_temporary_global">with_temporary_global</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-3D-3D">==</a></li>
+
+      <li ><a href="#method-i-contains_cop_matching-3F">contains_cop_matching?</a></li>
+
+      <li ><a href="#method-i-cops">cops</a></li>
+
+      <li ><a href="#method-i-cops_for_department">cops_for_department</a></li>
+
+      <li ><a href="#method-i-department-3F">department?</a></li>
+
+      <li ><a href="#method-i-department_missing-3F">department_missing?</a></li>
+
+      <li ><a href="#method-i-departments">departments</a></li>
+
+      <li ><a href="#method-i-disabled">disabled</a></li>
+
+      <li ><a href="#method-i-dismiss">dismiss</a></li>
+
+      <li ><a href="#method-i-each">each</a></li>
+
+      <li ><a href="#method-i-enabled">enabled</a></li>
+
+      <li ><a href="#method-i-enabled-3F">enabled?</a></li>
+
+      <li ><a href="#method-i-enabled_pending_cop-3F">enabled_pending_cop?</a></li>
+
+      <li ><a href="#method-i-enlist">enlist</a></li>
+
+      <li ><a href="#method-i-find_by_cop_name">find_by_cop_name</a></li>
+
+      <li ><a href="#method-i-find_cops_by_directive">find_cops_by_directive</a></li>
+
+      <li class="calls-super" ><a href="#method-i-freeze">freeze</a></li>
+
+      <li ><a href="#method-i-length">length</a></li>
+
+      <li ><a href="#method-i-names">names</a></li>
+
+      <li ><a href="#method-i-names_for_department">names_for_department</a></li>
+
+      <li ><a href="#method-i-print_warning">print_warning</a></li>
+
+      <li ><a href="#method-i-qualified_cop_name">qualified_cop_name</a></li>
+
+      <li ><a href="#method-i-qualify_badge">qualify_badge</a></li>
+
+      <li ><a href="#method-i-select">select</a></li>
+
+      <li ><a href="#method-i-sort-21">sort!</a></li>
+
+      <li ><a href="#method-i-to_h">to_h</a></li>
+
+      <li ><a href="#method-i-unqualified_cop_names">unqualified_cop_names</a></li>
+
+      <li ><a href="#method-i-with_department">with_department</a></li>
+
+      <li ><a href="#method-i-without_department">without_department</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-RuboCop::Cop::Registry">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../RuboCop.html">RuboCop</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../RuboCop/Cop.html">Cop</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>Registry</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-RuboCop::Cop::Registry" class="anchor-link class">
+    class RuboCop::Cop::Registry
+  </h1>
+
+  <section class="description">
+    
+<p><a href="Registry.html"><code>Registry</code></a> that tracks all cops by their badge and department.</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-c-global" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-c-global" title="Link to this attribute">
+            <span class="method-name">global</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-options" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-options" title="Link to this attribute">
+            <span class="method-name">options</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-all" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-all" title="Link to this method">
+                <span class="method-name">all</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="all-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">all</span>
+  <span class="ruby-identifier">global</span>.<span class="ruby-identifier">without_department</span>(<span class="ruby-value">:Test</span>).<span class="ruby-identifier">cops</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-new" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-new" title="Link to this method">
+                <span class="method-name">new</span>
+                <span class="method-args">(cops = [], options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">cops</span> = [], <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-ivar">@registry</span> = {}
+  <span class="ruby-ivar">@departments</span> = {}
+  <span class="ruby-ivar">@cops_by_cop_name</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>] = [] }
+
+  <span class="ruby-ivar">@enrollment_queue</span> = <span class="ruby-identifier">cops</span>
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+
+  <span class="ruby-ivar">@enabled_cache</span> = {}.<span class="ruby-identifier">compare_by_identity</span>
+  <span class="ruby-ivar">@disabled_cache</span> = {}.<span class="ruby-identifier">compare_by_identity</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-qualified_cop-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-qualified_cop-3F" title="Link to this method">
+                <span class="method-name">qualified_cop?</span>
+                <span class="method-args">(name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="qualified_cop-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">qualified_cop?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">badge</span> = <span class="ruby-constant">Badge</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">global</span>.<span class="ruby-identifier">qualify_badge</span>(<span class="ruby-identifier">badge</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">badge</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-qualified_cop_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-qualified_cop_name" title="Link to this method">
+                <span class="method-name">qualified_cop_name</span>
+                <span class="method-args">(name, origin, warn: true)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="qualified_cop_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">qualified_cop_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">origin</span>, <span class="ruby-value">warn:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">global</span>.<span class="ruby-identifier">qualified_cop_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">origin</span>, <span class="ruby-value">warn:</span> <span class="ruby-identifier">warn</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-reset-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-reset-21" title="Link to this method">
+                <span class="method-name">reset!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="reset-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">reset!</span>
+  <span class="ruby-ivar">@global</span> = <span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-with_temporary_global" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-with_temporary_global" title="Link to this method">
+                <span class="method-name">with_temporary_global</span>
+                <span class="method-args">(temp_global = global.dup) { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="with_temporary_global-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">with_temporary_global</span>(<span class="ruby-identifier">temp_global</span> = <span class="ruby-identifier">global</span>.<span class="ruby-identifier">dup</span>)
+  <span class="ruby-identifier">previous</span> = <span class="ruby-ivar">@global</span>
+  <span class="ruby-ivar">@global</span> = <span class="ruby-identifier">temp_global</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@global</span> = <span class="ruby-identifier">previous</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p><a href="../../vendor/bundle/ruby/3_3_0/gems/connection_pool-3_0_2/Changes_md.html">Changes</a> momentarily the global registry Intended for testing purposes</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-3D-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-3D-3D" title="Link to this method">
+                <span class="method-name">==</span>
+                <span class="method-args">(other)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="3D-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 232</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">cops</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">cops</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-contains_cop_matching-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-contains_cop_matching-3F" title="Link to this method">
+                <span class="method-name">contains_cop_matching?</span>
+                <span class="method-args">(names)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="contains_cop_matching-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">contains_cop_matching?</span>(<span class="ruby-identifier">names</span>)
+  <span class="ruby-identifier">cops</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cop</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cop</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">names</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-cops" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-cops" title="Link to this method">
+                <span class="method-name">cops</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="cops-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cops</span>
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-ivar">@registry</span>.<span class="ruby-identifier">values</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-cops_for_department" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-cops_for_department" title="Link to this method">
+                <span class="method-name">cops_for_department</span>
+                <span class="method-args">(department)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="cops_for_department-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cops_for_department</span>(<span class="ruby-identifier">department</span>)
+  <span class="ruby-identifier">cops</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cop</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cop</span>.<span class="ruby-identifier">department</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">department</span>.<span class="ruby-identifier">to_sym</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-department-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-department-3F" title="Link to this method">
+                <span class="method-name">department?</span>
+                <span class="method-args">(name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="department-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">department?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">departments</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [Boolean] Checks if given name is department</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-department_missing-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-department_missing-3F" title="Link to this method">
+                <span class="method-name">department_missing?</span>
+                <span class="method-args">(badge, name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="department_missing-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">department_missing?</span>(<span class="ruby-identifier">badge</span>, <span class="ruby-identifier">name</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">badge</span>.<span class="ruby-identifier">qualified?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">unqualified_cop_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-departments" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-departments" title="Link to this method">
+                <span class="method-name">departments</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="departments-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">departments</span>
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-ivar">@departments</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [Array&lt;Symbol&gt;] list of departments for current cops.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-disabled" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-disabled" title="Link to this method">
+                <span class="method-name">disabled</span>
+                <span class="method-args">(config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="disabled-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disabled</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-ivar">@disabled_cache</span>[<span class="ruby-identifier">config</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cop</span><span class="ruby-operator">|</span> <span class="ruby-identifier">enabled?</span>(<span class="ruby-identifier">cop</span>, <span class="ruby-identifier">config</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-dismiss" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-dismiss" title="Link to this method">
+                <span class="method-name">dismiss</span>
+                <span class="method-args">(cop)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="dismiss-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dismiss</span>(<span class="ruby-identifier">cop</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Cop #{cop} could not be dismissed&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@enrollment_queue</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">cop</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-each" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-each" title="Link to this method">
+                <span class="method-name">each</span>
+                <span class="method-args">(&amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="each-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">cops</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enabled" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enabled" title="Link to this method">
+                <span class="method-name">enabled</span>
+                <span class="method-args">(config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enabled-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enabled</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-ivar">@enabled_cache</span>[<span class="ruby-identifier">config</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cop</span><span class="ruby-operator">|</span> <span class="ruby-identifier">enabled?</span>(<span class="ruby-identifier">cop</span>, <span class="ruby-identifier">config</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enabled-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enabled-3F" title="Link to this method">
+                <span class="method-name">enabled?</span>
+                <span class="method-args">(cop, config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enabled-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enabled?</span>(<span class="ruby-identifier">cop</span>, <span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:only</span>]&amp;.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cop</span>.<span class="ruby-identifier">cop_name</span>)
+
+  <span class="ruby-comment"># We need to use `cop_name` in this case, because `for_cop` uses caching</span>
+  <span class="ruby-comment"># which expects cop names or cop classes as keys.</span>
+  <span class="ruby-identifier">cfg</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">for_cop</span>(<span class="ruby-identifier">cop</span>.<span class="ruby-identifier">cop_name</span>)
+
+  <span class="ruby-identifier">cop_enabled</span> = <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;Enabled&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">enabled_pending_cop?</span>(<span class="ruby-identifier">cfg</span>, <span class="ruby-identifier">config</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:safe</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-identifier">cop_enabled</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;Safe&#39;</span>, <span class="ruby-keyword">true</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">cop_enabled</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enabled_pending_cop-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enabled_pending_cop-3F" title="Link to this method">
+                <span class="method-name">enabled_pending_cop?</span>
+                <span class="method-args">(cop_cfg, config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enabled_pending_cop-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enabled_pending_cop?</span>(<span class="ruby-identifier">cop_cfg</span>, <span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:disable_pending_cops</span>]
+
+  <span class="ruby-identifier">cop_cfg</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;Enabled&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-string">&#39;pending&#39;</span> <span class="ruby-operator">&amp;&amp;</span>
+    (<span class="ruby-ivar">@options</span>[<span class="ruby-value">:enable_pending_cops</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">enabled_new_cops?</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enlist" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enlist" title="Link to this method">
+                <span class="method-name">enlist</span>
+                <span class="method-args">(cop)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enlist-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enlist</span>(<span class="ruby-identifier">cop</span>)
+  <span class="ruby-ivar">@enrollment_queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">cop</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-find_by_cop_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-find_by_cop_name" title="Link to this method">
+                <span class="method-name">find_by_cop_name</span>
+                <span class="method-args">(cop_name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="find_by_cop_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_by_cop_name</span>(<span class="ruby-identifier">cop_name</span>)
+  <span class="ruby-identifier">to_h</span>[<span class="ruby-identifier">cop_name</span>].<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@param [String] cop_name @return [Class, nil]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-find_cops_by_directive" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-find_cops_by_directive" title="Link to this method">
+                <span class="method-name">find_cops_by_directive</span>
+                <span class="method-args">(directive)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="find_cops_by_directive-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 260</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_cops_by_directive</span>(<span class="ruby-identifier">directive</span>)
+  <span class="ruby-identifier">cop</span> = <span class="ruby-identifier">find_by_cop_name</span>(<span class="ruby-identifier">directive</span>)
+  <span class="ruby-identifier">cop</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">cop</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">cops_for_department</span>(<span class="ruby-identifier">directive</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>When a cop name is given returns a single-element array with the cop class. When a department name is given returns an array with all the cop classes for that department.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-freeze" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-freeze" title="Link to this method">
+                <span class="method-name">freeze</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="freeze-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 265</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">freeze</span>
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-identifier">unqualified_cop_names</span> <span class="ruby-comment"># build cache</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-length" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-length" title="Link to this method">
+                <span class="method-name">length</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="length-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 184</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-ivar">@registry</span>.<span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-names" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-names" title="Link to this method">
+                <span class="method-name">names</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="names-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names</span>
+  <span class="ruby-identifier">cops</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:cop_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-names_for_department" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-names_for_department" title="Link to this method">
+                <span class="method-name">names_for_department</span>
+                <span class="method-args">(department)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="names_for_department-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names_for_department</span>(<span class="ruby-identifier">department</span>)
+  <span class="ruby-identifier">cops_for_department</span>(<span class="ruby-identifier">department</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:cop_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-print_warning" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-print_warning" title="Link to this method">
+                <span class="method-name">print_warning</span>
+                <span class="method-args">(name, path)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="print_warning-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_warning</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;#{path}: Warning: no department given for #{name}.&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;.rb&#39;</span>)
+    <span class="ruby-identifier">message</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&#39; Run `rubocop -a --only Migration/DepartmentName` to fix.&#39;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-qualified_cop_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-qualified_cop_name" title="Link to this method">
+                <span class="method-name">qualified_cop_name</span>
+                <span class="method-args">(name, path, warn: true)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="qualified_cop_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">qualified_cop_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>, <span class="ruby-value">warn:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">badge</span> = <span class="ruby-constant">Badge</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">print_warning</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">warn</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">department_missing?</span>(<span class="ruby-identifier">badge</span>, <span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">name</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">registered?</span>(<span class="ruby-identifier">badge</span>)
+
+  <span class="ruby-identifier">potential_badges</span> = <span class="ruby-identifier">qualify_badge</span>(<span class="ruby-identifier">badge</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">potential_badges</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">name</span> <span class="ruby-comment"># No namespace found. Deal with it later in caller.</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">resolve_badge</span>(<span class="ruby-identifier">badge</span>, <span class="ruby-identifier">potential_badges</span>.<span class="ruby-identifier">first</span>, <span class="ruby-identifier">path</span>, <span class="ruby-value">warn:</span> <span class="ruby-identifier">warn</span>)
+  <span class="ruby-keyword">else</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">AmbiguousCopName</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">badge</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">potential_badges</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Convert a user provided cop name into a properly namespaced name</p>
+
+<p>@example gives back a correctly qualified cop name</p>
+
+<pre class="ruby"><span class="ruby-identifier">registry</span> = <span class="ruby-constant">RuboCop</span><span class="ruby-operator">::</span><span class="ruby-constant">Cop</span><span class="ruby-operator">::</span><span class="ruby-constant">Registry</span>
+<span class="ruby-identifier">registry</span>.<span class="ruby-identifier">qualified_cop_name</span>(<span class="ruby-string">&#39;Layout/EndOfLine&#39;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># =&gt; &#39;Layout/EndOfLine&#39;</span>
+</pre>
+
+<p>@example fixes incorrect namespaces</p>
+
+<pre class="ruby"><span class="ruby-identifier">registry</span> = <span class="ruby-constant">RuboCop</span><span class="ruby-operator">::</span><span class="ruby-constant">Cop</span><span class="ruby-operator">::</span><span class="ruby-constant">Registry</span>
+<span class="ruby-identifier">registry</span>.<span class="ruby-identifier">qualified_cop_name</span>(<span class="ruby-string">&#39;Lint/EndOfLine&#39;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># =&gt; &#39;Layout/EndOfLine&#39;</span>
+</pre>
+
+<p>@example namespaces bare cop identifiers</p>
+
+<pre class="ruby"><span class="ruby-identifier">registry</span> = <span class="ruby-constant">RuboCop</span><span class="ruby-operator">::</span><span class="ruby-constant">Cop</span><span class="ruby-operator">::</span><span class="ruby-constant">Registry</span>
+<span class="ruby-identifier">registry</span>.<span class="ruby-identifier">qualified_cop_name</span>(<span class="ruby-string">&#39;EndOfLine&#39;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># =&gt; &#39;Layout/EndOfLine&#39;</span>
+</pre>
+
+<p>@example passes back unrecognized cop names</p>
+
+<pre class="ruby"><span class="ruby-identifier">registry</span> = <span class="ruby-constant">RuboCop</span><span class="ruby-operator">::</span><span class="ruby-constant">Cop</span><span class="ruby-operator">::</span><span class="ruby-constant">Registry</span>
+<span class="ruby-identifier">registry</span>.<span class="ruby-identifier">qualified_cop_name</span>(<span class="ruby-string">&#39;NotACop&#39;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># =&gt; &#39;NotACop&#39;</span>
+</pre>
+
+<p>@param name [String] <a href="Cop.html"><code>Cop</code></a> name extracted from config @param path [String, nil] Path of file that ‘name` was extracted from @param warn [Boolean] Print a warning if no department given for `name`</p>
+
+<p>@raise [AmbiguousCopName]</p>
+
+<pre>if a bare identifier with two possible namespaces is provided</pre>
+
+<p>@note Emits a warning if the provided name has an incorrect namespace</p>
+
+<p>@return [String] Qualified cop name</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-qualify_badge" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-qualify_badge" title="Link to this method">
+                <span class="method-name">qualify_badge</span>
+                <span class="method-args">(badge)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="qualify_badge-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">qualify_badge</span>(<span class="ruby-identifier">badge</span>)
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-ivar">@departments</span>
+    .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">department</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-identifier">badge</span>.<span class="ruby-identifier">with_department</span>(<span class="ruby-identifier">department</span>) }
+    .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">potential_badge</span><span class="ruby-operator">|</span> <span class="ruby-identifier">registered?</span>(<span class="ruby-identifier">potential_badge</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-select" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-select" title="Link to this method">
+                <span class="method-name">select</span>
+                <span class="method-args">(&amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="select-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 243</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">cops</span>.<span class="ruby-identifier">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-sort-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-sort-21" title="Link to this method">
+                <span class="method-name">sort!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="sort-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 236</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort!</span>
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-ivar">@registry</span> = <span class="ruby-ivar">@registry</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">badge</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-identifier">badge</span>.<span class="ruby-identifier">cop_name</span> }.<span class="ruby-identifier">to_h</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-to_h" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-to_h" title="Link to this method">
+                <span class="method-name">to_h</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="to_h-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-ivar">@cops_by_cop_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [Hash{String =&gt; <a href="../../Array.html"><code>Array</code></a>&lt;Class&gt;}]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-unqualified_cop_names" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-unqualified_cop_names" title="Link to this method">
+                <span class="method-name">unqualified_cop_names</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="unqualified_cop_names-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unqualified_cop_names</span>
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-ivar">@unqualified_cop_names</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@cops_by_cop_name</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">qn</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">qn</span>) }) <span class="ruby-operator">&lt;&lt;</span>
+    <span class="ruby-string">&#39;RedundantCopDisableDirective&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-with_department" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-with_department" title="Link to this method">
+                <span class="method-name">with_department</span>
+                <span class="method-args">(department)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="with_department-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_department</span>(<span class="ruby-identifier">department</span>)
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-identifier">with</span>(<span class="ruby-ivar">@departments</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">department</span>, []))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [Registry] Cops for that specific department.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-without_department" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-without_department" title="Link to this method">
+                <span class="method-name">without_department</span>
+                <span class="method-args">(department)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="without_department-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/registry.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">without_department</span>(<span class="ruby-identifier">department</span>)
+  <span class="ruby-identifier">clear_enrollment_queue</span>
+  <span class="ruby-identifier">without_department</span> = <span class="ruby-ivar">@departments</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">without_department</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">department</span>)
+
+  <span class="ruby-identifier">with</span>(<span class="ruby-identifier">without_department</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">flatten</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [Registry] Cops not for a specific department.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

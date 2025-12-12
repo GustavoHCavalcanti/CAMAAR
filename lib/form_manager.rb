@@ -1,4 +1,7 @@
+# Serviço para listar e gerenciar estados de formulários (pendentes, filtros e abertura de relatório).
 class FormManager
+  # Armazena formulários e oferece utilidades de listagem e pendência.
+  # @param forms [Array<Hash>] coleção de formulários
   def initialize(forms = [])
     @forms = forms || []
   end

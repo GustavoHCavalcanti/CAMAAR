@@ -4,6 +4,7 @@ class SigaaCommunicationError < StandardError; end
 class SigaaInconsistentDataError < StandardError; end
 class AccessDeniedError < StandardError; end
 
+# Serviço de atualização da base local a partir de dados do SIGAA, com validações e tratamento de erros.
 class BaseAtualizadorSigaa
   # Estrutura esperada:
   #
@@ -18,6 +19,10 @@ class BaseAtualizadorSigaa
   # - lança SigaaCommunicationError se o SIGAA estiver fora
   # - lança SigaaInconsistentDataError se os dados forem inválidos
 
+  # Recebe a base local e o serviço de integração SIGAA.
+  # @param base_local [Hash] armazenamento mutável usado como fonte de dados
+  # @param sigaa_service [Object] objeto com método fetch_data
+  # @return [BaseAtualizadorSigaa]
   def initialize(base_local, sigaa_service)
     @base_local = base_local
     @sigaa_service = sigaa_service
@@ -55,6 +60,10 @@ class BaseAtualizadorSigaa
 
   private
 
+  # Valida estrutura mínima dos dados retornados pelo SIGAA.
+  # @param dados [Hash] dados retornados pelo serviço externo
+  # @return [void]
+  # @raise [SigaaInconsistentDataError] quando dados são nulos, não-hash ou faltam chaves essenciais
   def validar_dados!(dados)
     raise SigaaInconsistentDataError if dados.nil? || !dados.is_a?(Hash)
 
@@ -65,6 +74,10 @@ class BaseAtualizadorSigaa
     raise SigaaInconsistentDataError if missing
   end
 
+  # Substitui a base local pela nova carga de dados.
+  # @param novos_dados [Hash]
+  # @return [void]
+  # @side_effect Limpa base_local e grava novos valores
   def substituir_base(novos_dados)
     @base_local.clear
     novos_dados.each { |k, v| @base_local[k] = v }

@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class RuboCop::Cop::Lint::UselessAssignment - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,RuboCop::Cop::Lint::UselessAssignment">
+
+
+    <meta name="description" content="class RuboCop::Cop::Lint::UselessAssignment: Checks for every useless assignment to local variable in every scope. source,console] ---- assigned but unused variable - foo ---- Currently this cop">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+  var index_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../Base.html">RuboCop::Cop::Base</a><ul><li><a href="../../../Object.html">Object</a><ul><li><a href="../../../BasicObject.html">BasicObject</a></li></ul></li></ul></li></ul>
+</div>
+
+
+  
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="include" href="../RangeHelp.html">RuboCop::Cop::RangeHelp</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="extend" href="../AutoCorrector.html">RuboCop::Cop::AutoCorrector</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-joining_forces">joining_forces</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-after_leaving_scope">after_leaving_scope</a></li>
+
+      <li ><a href="#method-i-autocorrect">autocorrect</a></li>
+
+      <li ><a href="#method-i-chained_assignment-3F">chained_assignment?</a></li>
+
+      <li ><a href="#method-i-check_for_unused_assignments">check_for_unused_assignments</a></li>
+
+      <li ><a href="#method-i-collect_variable_like_names">collect_variable_like_names</a></li>
+
+      <li ><a href="#method-i-message_for_useless_assignment">message_for_useless_assignment</a></li>
+
+      <li ><a href="#method-i-message_specification">message_specification</a></li>
+
+      <li ><a href="#method-i-multiple_assignment_message">multiple_assignment_message</a></li>
+
+      <li ><a href="#method-i-offense_range">offense_range</a></li>
+
+      <li ><a href="#method-i-operator_assignment_message">operator_assignment_message</a></li>
+
+      <li ><a href="#method-i-remove_exception_assignment_part">remove_exception_assignment_part</a></li>
+
+      <li ><a href="#method-i-remove_local_variable_assignment_part">remove_local_variable_assignment_part</a></li>
+
+      <li ><a href="#method-i-remove_trailing_character_from_operator">remove_trailing_character_from_operator</a></li>
+
+      <li ><a href="#method-i-rename_variable_with_underscore">rename_variable_with_underscore</a></li>
+
+      <li ><a href="#method-i-replace_named_capture_group_with_non_capturing_group">replace_named_capture_group_with_non_capturing_group</a></li>
+
+      <li ><a href="#method-i-return_value_node_of_scope">return_value_node_of_scope</a></li>
+
+      <li ><a href="#method-i-sequential_assignment-3F">sequential_assignment?</a></li>
+
+      <li ><a href="#method-i-similar_name_message">similar_name_message</a></li>
+
+      <li ><a href="#method-i-variable_like_method_invocation-3F">variable_like_method_invocation?</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-RuboCop::Cop::Lint::UselessAssignment">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../../RuboCop.html">RuboCop</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../../RuboCop/Cop.html">Cop</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../../RuboCop/Cop/Lint.html">Lint</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>UselessAssignment</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-RuboCop::Cop::Lint::UselessAssignment" class="anchor-link class">
+    class RuboCop::Cop::Lint::UselessAssignment
+  </h1>
+
+  <section class="description">
+    
+<p>Checks for every useless assignment to local variable in every scope. The basic idea for this cop was from the warning of ‘ruby -cw`:</p>
+<dl class="rdoc-list label-list"><dt>source,console</dt>
+<dd><hr>
+
+<p>assigned but unused variable - foo</p>
+<hr>
+
+<p>Currently this cop has advanced logic that detects unreferenced reassignments and properly handles varied cases such as branch, loop, rescue, ensure, etc.</p>
+
+<p>This cop’s autocorrection avoids cases like ‘a ||= 1` because removing assignment from operator assignment can cause `NameError` if this assignment has been used to declare a local variable. For example, replacing `a ||= 1` with `a || 1` may cause “undefined local variable or method `a’ for main:Object (<a href="../../../NameError.html"><code>NameError</code></a>)”.</p>
+
+<p>NOTE: Given the assignment ‘foo = 1, bar = 2`, removing unused variables can lead to a syntax error, so this case is not autocorrected.</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-comment"># bad</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">some_method</span>
+  <span class="ruby-identifier">some_var</span> = <span class="ruby-value">1</span>
+  <span class="ruby-identifier">do_something</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># good</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">some_method</span>
+  <span class="ruby-identifier">some_var</span> = <span class="ruby-value">1</span>
+  <span class="ruby-identifier">do_something</span>(<span class="ruby-identifier">some_var</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+</dd></dl>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+
+        <dt id="MSG">MSG</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+      </dl>
+    </section>
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-joining_forces" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-joining_forces" title="Link to this method">
+                <span class="method-name">joining_forces</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="joining_forces-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">joining_forces</span>
+  <span class="ruby-constant">VariableForce</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-after_leaving_scope" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-after_leaving_scope" title="Link to this method">
+                <span class="method-name">after_leaving_scope</span>
+                <span class="method-args">(scope, _variable_table)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="after_leaving_scope-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">after_leaving_scope</span>(<span class="ruby-identifier">scope</span>, <span class="ruby-identifier">_variable_table</span>)
+  <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">variables</span>.<span class="ruby-identifier">each_value</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">variable</span><span class="ruby-operator">|</span> <span class="ruby-identifier">check_for_unused_assignments</span>(<span class="ruby-identifier">variable</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-autocorrect" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-autocorrect" title="Link to this method">
+                <span class="method-name">autocorrect</span>
+                <span class="method-args">(corrector, assignment)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="autocorrect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autocorrect</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">assignment</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">exception_assignment?</span>
+    <span class="ruby-identifier">remove_exception_assignment_part</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">multiple_assignment?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">rest_assignment?</span> <span class="ruby-operator">||</span>
+        <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">for_assignment?</span>
+    <span class="ruby-identifier">rename_variable_with_underscore</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">operator_assignment?</span>
+    <span class="ruby-identifier">remove_trailing_character_from_operator</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">regexp_named_capture?</span>
+    <span class="ruby-identifier">replace_named_capture_group_with_non_capturing_group</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>,
+                                                         <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">variable</span>.<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">remove_local_variable_assignment_part</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>rubocop:disable Metrics/AbcSize</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-chained_assignment-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-chained_assignment-3F" title="Link to this method">
+                <span class="method-name">chained_assignment?</span>
+                <span class="method-args">(node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="chained_assignment-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chained_assignment?</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">lvasgn_type?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">expression</span>&amp;.<span class="ruby-identifier">send_type?</span>
+
+  <span class="ruby-identifier">node</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:expression</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">expression</span>&amp;.<span class="ruby-identifier">lvasgn_type?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-check_for_unused_assignments" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-check_for_unused_assignments" title="Link to this method">
+                <span class="method-name">check_for_unused_assignments</span>
+                <span class="method-args">(variable)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="check_for_unused_assignments-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_for_unused_assignments</span>(<span class="ruby-identifier">variable</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">variable</span>.<span class="ruby-identifier">should_be_unused?</span>
+
+  <span class="ruby-identifier">variable</span>.<span class="ruby-identifier">assignments</span>.<span class="ruby-identifier">reverse_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">assignment</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">assignment_node</span> = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">used?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">part_of_ignored_node?</span>(<span class="ruby-identifier">assignment_node</span>)
+
+    <span class="ruby-identifier">message</span> = <span class="ruby-identifier">message_for_useless_assignment</span>(<span class="ruby-identifier">assignment</span>)
+    <span class="ruby-identifier">range</span> = <span class="ruby-identifier">offense_range</span>(<span class="ruby-identifier">assignment</span>)
+
+    <span class="ruby-identifier">add_offense</span>(<span class="ruby-identifier">range</span>, <span class="ruby-value">message:</span> <span class="ruby-identifier">message</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">corrector</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># In cases like `x = 1, y = 2`, where removing a variable would cause a syntax error,</span>
+      <span class="ruby-comment"># and where changing `x ||= 1` to `x = 1` would cause `NameError`,</span>
+      <span class="ruby-comment"># the autocorrect will be skipped, even if the variable is unused.</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">sequential_assignment?</span>(<span class="ruby-identifier">assignment_node</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">assignment_node</span>.<span class="ruby-identifier">parent</span>&amp;.<span class="ruby-identifier">or_asgn_type?</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">autocorrect</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">assignment</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">ignore_node</span>(<span class="ruby-identifier">assignment_node</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">chained_assignment?</span>(<span class="ruby-identifier">assignment_node</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-collect_variable_like_names" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-collect_variable_like_names" title="Link to this method">
+                <span class="method-name">collect_variable_like_names</span>
+                <span class="method-args">(scope)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="collect_variable_like_names-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collect_variable_like_names</span>(<span class="ruby-identifier">scope</span>)
+  <span class="ruby-identifier">names</span> = <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">each_node</span>.<span class="ruby-identifier">with_object</span>(<span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span>, <span class="ruby-identifier">set</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">set</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">method_name</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">variable_like_method_invocation?</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">variable_names</span> = <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">variables</span>.<span class="ruby-identifier">each_value</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>)
+  <span class="ruby-identifier">names</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">variable_names</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-message_for_useless_assignment" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-message_for_useless_assignment" title="Link to this method">
+                <span class="method-name">message_for_useless_assignment</span>
+                <span class="method-args">(assignment)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="message_for_useless_assignment-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message_for_useless_assignment</span>(<span class="ruby-identifier">assignment</span>)
+  <span class="ruby-identifier">variable</span> = <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">variable</span>
+
+  <span class="ruby-identifier">format</span>(<span class="ruby-constant">MSG</span>, <span class="ruby-value">variable:</span> <span class="ruby-identifier">variable</span>.<span class="ruby-identifier">name</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">message_specification</span>(<span class="ruby-identifier">assignment</span>, <span class="ruby-identifier">variable</span>).<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-message_specification" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-message_specification" title="Link to this method">
+                <span class="method-name">message_specification</span>
+                <span class="method-args">(assignment, variable)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="message_specification-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message_specification</span>(<span class="ruby-identifier">assignment</span>, <span class="ruby-identifier">variable</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">multiple_assignment?</span>
+    <span class="ruby-identifier">multiple_assignment_message</span>(<span class="ruby-identifier">variable</span>.<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">operator_assignment?</span>
+    <span class="ruby-identifier">operator_assignment_message</span>(<span class="ruby-identifier">variable</span>.<span class="ruby-identifier">scope</span>, <span class="ruby-identifier">assignment</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">similar_name_message</span>(<span class="ruby-identifier">variable</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-multiple_assignment_message" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-multiple_assignment_message" title="Link to this method">
+                <span class="method-name">multiple_assignment_message</span>
+                <span class="method-args">(variable_name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="multiple_assignment_message-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">multiple_assignment_message</span>(<span class="ruby-identifier">variable_name</span>)
+  <span class="ruby-node">&quot; Use `_` or `_#{variable_name}` as a variable name to indicate &quot;</span> \
+    <span class="ruby-string">&quot;that it won&#39;t be used.&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-offense_range" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-offense_range" title="Link to this method">
+                <span class="method-name">offense_range</span>
+                <span class="method-args">(assignment)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="offense_range-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">offense_range</span>(<span class="ruby-identifier">assignment</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">regexp_named_capture?</span>
+    <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">source_range</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">node</span>.<span class="ruby-identifier">loc</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-operator_assignment_message" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-operator_assignment_message" title="Link to this method">
+                <span class="method-name">operator_assignment_message</span>
+                <span class="method-args">(scope, assignment)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="operator_assignment_message-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">operator_assignment_message</span>(<span class="ruby-identifier">scope</span>, <span class="ruby-identifier">assignment</span>)
+  <span class="ruby-identifier">return_value_node</span> = <span class="ruby-identifier">return_value_node_of_scope</span>(<span class="ruby-identifier">scope</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">assignment</span>.<span class="ruby-identifier">meta_assignment_node</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">return_value_node</span>)
+
+  <span class="ruby-node">&quot; Use `#{assignment.operator.delete_suffix(&#39;=&#39;)}` instead of `#{assignment.operator}`.&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-remove_exception_assignment_part" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-remove_exception_assignment_part" title="Link to this method">
+                <span class="method-name">remove_exception_assignment_part</span>
+                <span class="method-args">(corrector, node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="remove_exception_assignment_part-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 184</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_exception_assignment_part</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">node</span>)
+  <span class="ruby-identifier">corrector</span>.<span class="ruby-identifier">remove</span>(
+    <span class="ruby-identifier">range_between</span>(
+      (<span class="ruby-identifier">node</span>.<span class="ruby-identifier">parent</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">first</span>&amp;.<span class="ruby-identifier">source_range</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">parent</span>.<span class="ruby-identifier">location</span>.<span class="ruby-identifier">keyword</span>).<span class="ruby-identifier">end_pos</span>,
+      <span class="ruby-identifier">node</span>.<span class="ruby-identifier">source_range</span>.<span class="ruby-identifier">end_pos</span>
+    )
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>rubocop:enable Metrics/AbcSize</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-remove_local_variable_assignment_part" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-remove_local_variable_assignment_part" title="Link to this method">
+                <span class="method-name">remove_local_variable_assignment_part</span>
+                <span class="method-args">(corrector, node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="remove_local_variable_assignment_part-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 208</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_local_variable_assignment_part</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">node</span>)
+  <span class="ruby-identifier">corrector</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">node</span>.<span class="ruby-identifier">expression</span>.<span class="ruby-identifier">source</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-remove_trailing_character_from_operator" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-remove_trailing_character_from_operator" title="Link to this method">
+                <span class="method-name">remove_trailing_character_from_operator</span>
+                <span class="method-args">(corrector, node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="remove_trailing_character_from_operator-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_trailing_character_from_operator</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">node</span>)
+  <span class="ruby-identifier">corrector</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">node</span>.<span class="ruby-identifier">parent</span>.<span class="ruby-identifier">location</span>.<span class="ruby-identifier">operator</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">adjust</span>(<span class="ruby-value">begin_pos:</span> <span class="ruby-value">-1</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rename_variable_with_underscore" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rename_variable_with_underscore" title="Link to this method">
+                <span class="method-name">rename_variable_with_underscore</span>
+                <span class="method-args">(corrector, node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rename_variable_with_underscore-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rename_variable_with_underscore</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">node</span>)
+  <span class="ruby-identifier">corrector</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-identifier">node</span>, <span class="ruby-string">&#39;_&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-replace_named_capture_group_with_non_capturing_group" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-replace_named_capture_group_with_non_capturing_group" title="Link to this method">
+                <span class="method-name">replace_named_capture_group_with_non_capturing_group</span>
+                <span class="method-args">(corrector, node, variable_name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="replace_named_capture_group_with_non_capturing_group-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 201</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_named_capture_group_with_non_capturing_group</span>(<span class="ruby-identifier">corrector</span>, <span class="ruby-identifier">node</span>, <span class="ruby-identifier">variable_name</span>)
+  <span class="ruby-identifier">corrector</span>.<span class="ruby-identifier">replace</span>(
+    <span class="ruby-identifier">node</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">first</span>,
+    <span class="ruby-identifier">node</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">source</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\(\?&lt;#{variable_name}&gt;/</span>, <span class="ruby-string">&#39;(?:&#39;</span>)
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-return_value_node_of_scope" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-return_value_node_of_scope" title="Link to this method">
+                <span class="method-name">return_value_node_of_scope</span>
+                <span class="method-args">(scope)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="return_value_node_of_scope-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">return_value_node_of_scope</span>(<span class="ruby-identifier">scope</span>)
+  <span class="ruby-identifier">body_node</span> = <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">body_node</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">body_node</span>.<span class="ruby-identifier">begin_type?</span>
+    <span class="ruby-identifier">body_node</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">body_node</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>TODO: More precise handling (rescue, ensure, nested begin, etc.)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-sequential_assignment-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-sequential_assignment-3F" title="Link to this method">
+                <span class="method-name">sequential_assignment?</span>
+                <span class="method-args">(node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="sequential_assignment-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequential_assignment?</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">lvasgn_type?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">expression</span>&amp;.<span class="ruby-identifier">array_type?</span> <span class="ruby-operator">&amp;&amp;</span>
+     <span class="ruby-identifier">node</span>.<span class="ruby-identifier">each_descendant</span>.<span class="ruby-identifier">any?</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:assignment?</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">parent</span>
+
+  <span class="ruby-identifier">sequential_assignment?</span>(<span class="ruby-identifier">node</span>.<span class="ruby-identifier">parent</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-similar_name_message" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-similar_name_message" title="Link to this method">
+                <span class="method-name">similar_name_message</span>
+                <span class="method-args">(variable)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="similar_name_message-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">similar_name_message</span>(<span class="ruby-identifier">variable</span>)
+  <span class="ruby-identifier">variable_like_names</span> = <span class="ruby-identifier">collect_variable_like_names</span>(<span class="ruby-identifier">variable</span>.<span class="ruby-identifier">scope</span>)
+  <span class="ruby-identifier">similar_name</span> = <span class="ruby-constant">NameSimilarity</span>.<span class="ruby-identifier">find_similar_name</span>(<span class="ruby-identifier">variable</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">variable_like_names</span>)
+  <span class="ruby-node">&quot; Did you mean `#{similar_name}`?&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">similar_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-variable_like_method_invocation-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-variable_like_method_invocation-3F" title="Link to this method">
+                <span class="method-name">variable_like_method_invocation?</span>
+                <span class="method-args">(node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="variable_like_method_invocation-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-1.81.7/lib/rubocop/cop/lint/useless_assignment.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">variable_like_method_invocation?</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">send_type?</span>
+
+  <span class="ruby-identifier">node</span>.<span class="ruby-identifier">receiver</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">node</span>.<span class="ruby-identifier">arguments?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

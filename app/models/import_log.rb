@@ -1,3 +1,4 @@
+# Registro de eventos de importação (sucesso, inconsistências, falhas).
 class ImportLog < ApplicationRecord
   enum :status, { sucesso: 0, inconsistente: 1, falha: 2 }
 

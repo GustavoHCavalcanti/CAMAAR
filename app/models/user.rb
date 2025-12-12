@@ -1,3 +1,4 @@
+# Usuário do sistema (participante ou administrador), com autenticação via senha.
 class User < ApplicationRecord
   has_secure_password
 

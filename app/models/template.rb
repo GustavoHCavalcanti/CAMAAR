@@ -1,3 +1,4 @@
+# Define a estrutura de perguntas reutilizável para criação de `Formularios`.
 class Template < ApplicationRecord
   belongs_to :criador, class_name: "User", optional: true
 

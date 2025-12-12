@@ -3,6 +3,12 @@
 class AuthUser
   attr_reader :email, :matricula, :senha, :role
 
+  # Cria um usuário simples para autenticação estática.
+  # @param email [String] email cadastrado
+  # @param matricula [String] matrícula institucional
+  # @param senha [String] senha em texto simples (mock)
+  # @param role [Symbol] :respondente ou :admin
+  # @return [AuthUser]
   def initialize(email:, matricula:, senha:, role:)
     @email = email
     @matricula = matricula
@@ -14,6 +20,8 @@ end
 class Authenticator
   class InvalidCredentials < StandardError; end
 
+  # Inicializa o autenticador com usuários estáticos (mock).
+  # @return [Authenticator]
   def initialize
     # Por enquanto vamos deixar os usuários "hardcoded",
     # exatamente como no BDD da issue-104
@@ -34,6 +42,10 @@ class Authenticator
   end
 
   # identificador = email OU matrícula
+  # @param identificador [String] email ou matrícula
+  # @param senha [String] senha informada
+  # @return [AuthUser] usuário autenticado
+  # @raise [InvalidCredentials] quando não encontra usuário ou senha diverge
   def login(identificador:, senha:)
     user = @users.find do |u|
       u.email == identificador || u.matricula == identificador

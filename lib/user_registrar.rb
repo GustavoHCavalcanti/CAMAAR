@@ -46,10 +46,15 @@ class UserRegistrar
 
   private
 
+  # Verifica se já existe usuário com a matrícula informada.
+  # @param matricula [String]
+  # @return [Boolean] true se existir, false caso contrário
   def usuario_ja_existe?(matricula)
     @users.any? { |u| u[:matricula] == matricula }
   end
 
+  # Calcula o próximo id sequencial baseado na coleção atual.
+  # @return [Integer] id subsequente; 1 quando lista está vazia
   def proximo_id
     return 1 if @users.empty?
 

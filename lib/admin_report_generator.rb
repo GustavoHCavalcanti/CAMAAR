@@ -3,6 +3,7 @@ require "csv"
 
 class NoDataToExportError < StandardError; end
 
+# Gera relatórios CSV para visão administrativa, opcionalmente filtrando por turma.
 class AdminReportGenerator
   # responses: array de hashes, por exemplo:
   # [
@@ -29,10 +30,16 @@ class AdminReportGenerator
 
   private
 
+  # Seleciona respostas de uma turma específica.
+  # @param turma [String]
+  # @return [Array<Hash>] respostas filtradas
   def filtrar_por_turma(turma)
     @responses.select { |r| r[:turma] == turma }
   end
 
+  # Constrói CSV a partir da lista de respostas.
+  # @param responses [Array<Hash>]
+  # @return [String] CSV com cabeçalho
   def gerar_csv(responses)
     CSV.generate(headers: true) do |csv|
       headers = responses.first.keys

@@ -1,3 +1,5 @@
+# Representa um formulário de avaliação associado a um `Template` e a uma `Turma`.
+# Responsável por agrupar perguntas e armazenar respostas dos participantes.
 class Formulario < ApplicationRecord
   belongs_to :template
   belongs_to :turma

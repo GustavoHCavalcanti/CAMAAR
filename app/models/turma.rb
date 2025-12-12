@@ -1,3 +1,4 @@
+# Representa uma turma acadêmica, agregando usuários e formulários associados.
 class Turma < ApplicationRecord
   has_many :turma_users, dependent: :destroy
   has_many :users, through: :turma_users

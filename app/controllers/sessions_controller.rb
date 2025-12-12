@@ -1,7 +1,13 @@
 class SessionsController < ApplicationController
+  # Renderiza o formulário de login.
+  # @return [void]
   def new
   end
 
+  # Autentica o usuário usando email ou matrícula e inicia a sessão.
+  # @param [ActionController::Parameters] params credenciais :login (email ou matrícula) e :password
+  # @return [void]
+  # @side_effect Define session[:user_id] e redireciona conforme o role; renderiza :new com 422 em falha
   def create
     # Aceita email OU matrícula como identificador
     login_param = params[:login]
@@ -19,6 +25,9 @@ class SessionsController < ApplicationController
     end
   end
 
+  # Encerra a sessão do usuário autenticado.
+  # @return [void]
+  # @side_effect Remove session[:user_id] e redireciona para a tela de login
   def destroy
     session.delete(:user_id)
     redirect_to login_path, notice: "Você saiu da sessão."

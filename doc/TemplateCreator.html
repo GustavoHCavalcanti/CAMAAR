@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,TemplateCreator">
 
 
-    <meta name="description" content="class TemplateCreator: criar_template_formulario.">
+    <meta name="description" content="class TemplateCreator: Serviço para criar templates a partir de nomes e listas de questões.">
 
 
 
@@ -127,7 +127,7 @@
 
   <section class="description">
     
-<p><a href="lib/criar_template_formulario_rb.html">lib/criar_template_formulario.rb</a></p>
+<p>Serviço para criar templates a partir de nomes e listas de questões.</p>
 
   </section>
 
@@ -172,7 +172,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/criar_template_formulario.rb, line 8</span>
+            <pre><span class="ruby-comment"># File lib/template_creator.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">templates</span>)
   <span class="ruby-ivar">@templates</span> = <span class="ruby-identifier">templates</span> <span class="ruby-operator">||</span> []
 <span class="ruby-keyword">end</span></pre>
@@ -185,7 +185,7 @@
 <pre class="ruby">{ <span class="ruby-value">id:</span> <span class="ruby-value">1</span>, <span class="ruby-value">nome:</span> <span class="ruby-string">&quot;Template A&quot;</span>, <span class="ruby-value">questoes:</span> [<span class="ruby-string">&quot;Q1&quot;</span>, <span class="ruby-string">&quot;Q2&quot;</span>] }
 </pre>
 
-<p>]</p>
+<p>] @param templates [Array&lt;Hash&gt;] coleção existente @return [TemplateCreator]</p>
 
 
         </div>
@@ -229,7 +229,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File lib/criar_template_formulario.rb, line 16</span>
+            <pre><span class="ruby-comment"># File lib/template_creator.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">nome</span>, <span class="ruby-identifier">questoes</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-value">:no_questions</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">questoes</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">questoes</span>.<span class="ruby-identifier">empty?</span>
 
@@ -255,6 +255,8 @@
 <pre>:created          → criado com sucesso
 :no_questions     → lista de questões vazia
 :duplicate_name   → já existe template com esse nome</pre>
+
+<p>@param nome [String] @param questoes [Array&lt;String&gt;] @return [Symbol] :created, :no_questions ou :duplicate_name</p>
 
 
         </div>

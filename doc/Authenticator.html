@@ -170,18 +170,18 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/authenticator.rb, line 17</span>
+            <pre><span class="ruby-comment"># File lib/authenticator.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
   <span class="ruby-comment"># Por enquanto vamos deixar os usuários &quot;hardcoded&quot;,</span>
   <span class="ruby-comment"># exatamente como no BDD da issue-104</span>
   <span class="ruby-ivar">@users</span> = [
-    <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-constant">AuthUser</span>.<span class="ruby-identifier">new</span>(
       <span class="ruby-value">email:</span> <span class="ruby-string">&quot;usuario@unb.br&quot;</span>,
       <span class="ruby-value">matricula:</span> <span class="ruby-string">&quot;202300000&quot;</span>,
       <span class="ruby-value">senha:</span> <span class="ruby-string">&quot;SenhaValida123&quot;</span>,
       <span class="ruby-value">role:</span> <span class="ruby-value">:respondente</span>
     ),
-    <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-constant">AuthUser</span>.<span class="ruby-identifier">new</span>(
       <span class="ruby-value">email:</span> <span class="ruby-string">&quot;admin@unb.br&quot;</span>,
       <span class="ruby-value">matricula:</span> <span class="ruby-string">&quot;ADM0001&quot;</span>,
       <span class="ruby-value">senha:</span> <span class="ruby-string">&quot;SenhaAdmin123&quot;</span>,
@@ -193,7 +193,7 @@
 
 
 
-          
+          <p>Inicializa o autenticador com usuários estáticos (mock). @return [Authenticator]</p>
 
 
         </div>
@@ -237,7 +237,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="login-source">
-            <pre><span class="ruby-comment"># File lib/authenticator.rb, line 37</span>
+            <pre><span class="ruby-comment"># File lib/authenticator.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">login</span>(<span class="ruby-value">identificador:</span>, <span class="ruby-value">senha:</span>)
   <span class="ruby-identifier">user</span> = <span class="ruby-ivar">@users</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">u</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">identificador</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">matricula</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">identificador</span>
@@ -254,7 +254,7 @@
 
 
 
-          <p>identificador = email OU matrícula</p>
+          <p>identificador = email OU matrícula @param identificador [String] email ou matrícula @param senha [String] senha informada @return [AuthUser] usuário autenticado @raise [InvalidCredentials] quando não encontra usuário ou senha diverge</p>
 
 
         </div>

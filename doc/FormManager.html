@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,class,FormManager">
 
 
-    <meta name="description" content="Documentation for the FormManager class">
+    <meta name="description" content="class FormManager: Serviço para listar e gerenciar estados de formulários (pendentes, filtros e abertura de relatório).">
 
 
 
@@ -131,6 +131,8 @@
 
   <section class="description">
     
+<p>Serviço para listar e gerenciar estados de formulários (pendentes, filtros e abertura de relatório).</p>
+
   </section>
 
 
@@ -174,7 +176,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 2</span>
+            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">forms</span> = [])
   <span class="ruby-ivar">@forms</span> = <span class="ruby-identifier">forms</span> <span class="ruby-operator">||</span> []
 <span class="ruby-keyword">end</span></pre>
@@ -182,7 +184,7 @@
 
 
 
-          
+          <p>Armazena formulários e oferece utilidades de listagem e pendência. @param forms [Array&lt;Hash&gt;] coleção de formulários</p>
 
 
         </div>
@@ -226,7 +228,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="formularios_pendentes-source">
-            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 9</span>
+            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">formularios_pendentes</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">turmas_ids_usuario</span>, <span class="ruby-identifier">formularios</span>)
   <span class="ruby-identifier">formularios</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">form</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">turmas_ids_usuario</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">form</span>.<span class="ruby-identifier">turma_id</span>) <span class="ruby-operator">&amp;&amp;</span>
@@ -276,7 +278,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="list_for-source">
-            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 19</span>
+            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_for</span>(<span class="ruby-identifier">_admin_id</span>, <span class="ruby-value">turma:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">status:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">resultado</span> = <span class="ruby-ivar">@forms</span>
 
@@ -345,7 +347,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="open_report-source">
-            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 48</span>
+            <pre><span class="ruby-comment"># File lib/form_manager.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_report</span>(<span class="ruby-identifier">form_code</span>)
   <span class="ruby-identifier">form</span> = <span class="ruby-ivar">@forms</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[<span class="ruby-value">:codigo</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">form_code</span> }
   <span class="ruby-keyword">return</span> <span class="ruby-value">:not_found</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">form</span>
