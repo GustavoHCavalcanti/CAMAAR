@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       end
     end
     get "perfil", to: "perfil#show"
+    get "perfil/editar_senha", to: "perfil#edit_password", as: :edit_password
+    patch "perfil/editar_senha", to: "perfil#update_password"
   end
 
   # Respondente: página de formulários disponíveis
@@ -34,6 +36,8 @@ Rails.application.routes.draw do
       end
     end
     get "perfil", to: "perfil#show"
+    get "perfil/editar_senha", to: "perfil#edit_password", as: :edit_password
+    patch "perfil/editar_senha", to: "perfil#update_password"
   end
 
   get "admin/templates/new_question/:index",
