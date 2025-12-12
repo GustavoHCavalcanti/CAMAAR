@@ -10,7 +10,7 @@ module Admin
     # Lista turmas cadastradas.
     # @return [void]
     def index
-      @turmas = ::Turma.all
+      @turmas = ::Turma.includes(:users).all
     end
 
     # Exibe detalhes de uma turma.
@@ -87,7 +87,7 @@ module Admin
     private
 
     def load_turma
-      @turma = ::Turma.find(params[:id])
+      @turma = ::Turma.includes(:users, :turma_users).find(params[:id])
     end
 
     def prepare_lists
@@ -116,9 +116,15 @@ module Admin
     end
 
     def preparar_listas_turma(turma = nil)
-      @alunos_disponiveis = ::User.where(role: "participante")
-      @professores = ::User.where(role: "administrador")
+      @alunos_disponiveis = ::User.where(role: "participante").select(:id, :nome, :matricula, :email).order(:nome)
+      @professores = ::User.where(role: "administrador").select(:id, :nome, :email).order(:nome)
       @alunos_da_turma = turma&.users if turma
+      
+      # Pré-calcular contagem de turmas para evitar N+1 na view
+      aluno_ids = @alunos_disponiveis.pluck(:id)
+      @turmas_por_aluno = TurmaUser.where(user_id: aluno_ids)
+                                    .group(:user_id)
+                                    .count
     end
 
     def redefinir_associacoes_alunos(turma, aluno_ids)
