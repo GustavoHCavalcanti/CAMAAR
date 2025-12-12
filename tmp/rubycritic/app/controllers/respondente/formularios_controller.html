@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 17:01:54 -0300'>2025-12-12 17:01:54 -0300</time>
         
       </span>
     </div>
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">73</span><small> lines of codes</small></div>
-              <div><span class="metric">3</span><small> methods</small></div>
+              <div><span class="metric">67</span><small> lines of codes</small></div>
+              <div><span class="metric">5</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">23.1</span><small> complexity/method</small></div>
-              <div><span class="metric">5</span><small> churn</small></div>
+              <div><span class="metric">14.6</span><small> complexity/method</small></div>
+              <div><span class="metric">6</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">69.42</span><small> complexity</small></div>
+              <div><span class="metric">73.21</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                14
+                12
                 smells
               </a>
             </li>
@@ -105,7 +105,10 @@ class Respondente::FormulariosController &lt; ApplicationController<ol class="no
   # Lista formulários disponíveis e marca quais já foram respondidos pelo usuário atual.
   # @return [void]
   def index
-    @formularios = Formulario.all
+    # Buscar apenas formulários das turmas em que o usuário está matriculado
+    turma_ids = current_user.turmas.pluck(:id)
+    @formularios = Formulario.where(turma_id: turma_ids)
+    
     # Para cada formulário, verificar se o usuário já respondeu
     @respondeu_hash = {}
     @formularios.each do |form|
@@ -120,54 +123,45 @@ class Respondente::FormulariosController &lt; ApplicationController<ol class="no
     @perguntas = @formulario.template&amp;.questions || []
 
     # Verificar se o usuário já respondeu
-    @ja_respondeu = @formulario.respostas.exists?(user_id: current_user.id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L24" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L28" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls 'current_user.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L24" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L28" class="js-smell-location">1</a>                  </div>  </li></ol>
+    @ja_respondeu = @formulario.respostas.exists?(user_id: current_user.id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L27" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L31" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls 'current_user.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L27" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L31" class="js-smell-location">1</a>                  </div>  </li></ol>
 
     # Se já respondeu, carregar as respostas existentes
     if @ja_respondeu
-      @respostas_user = @formulario.respostas.where(user_id: current_user.id).index_by(&amp;:question_id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L24" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L28" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls 'current_user.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L24" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L28" class="js-smell-location">1</a>                  </div>  </li></ol>
+      @respostas_user = @formulario.respostas.where(user_id: current_user.id).index_by(&amp;:question_id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L27" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L31" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#show calls 'current_user.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L27" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L31" class="js-smell-location">1</a>                  </div>  </li></ol>
     end
   end
 
   # Recebe e persiste respostas do usuário para um formulário.
   # @return [void]
   # @side_effect Cria registros de Resposta; redireciona com aviso em caso de duplicidade ou erro
-  def submit<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit has a flog score of 41</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit has approx 14 statements</span>          </div>  </li></ol>
+  def submit<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit has approx 6 statements</span>          </div>  </li></ol>
     @formulario = ::Formulario.find(params[:id])
     @perguntas = @formulario.template&amp;.questions || []
 
-    # Verificar se o usuário já respondeu
-    if @formulario.respostas.exists?(user_id: current_user.id)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L40" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L55" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'current_user.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L40" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L56" class="js-smell-location">1</a>                  </div>  </li></ol>
-      redirect_to respondente_formulario_path(@formulario), alert: &quot;Você já respondeu este formulário.&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'respondente_formulario_path(@formulario)' 3 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L41" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L46" class="js-smell-location">1</a>                  <a href="formularios_controller.html#L70" class="js-smell-location">2</a>                  </div>  </li></ol>
-      return
-    end
+    return redirect_to(respondente_formulario_path(@formulario), alert: &quot;Você já respondeu este formulário.&quot;) if ja_respondeu?(@formulario)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'respondente_formulario_path(@formulario)' 3 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L42" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L43" class="js-smell-location">1</a>                  <a href="formularios_controller.html#L48" class="js-smell-location">2</a>                  </div>  </li></ol>
+    return redirect_to(respondente_formulario_path(@formulario), alert: &quot;Formulário sem perguntas.&quot;) if @perguntas.empty?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'respondente_formulario_path(@formulario)' 3 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L42" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L43" class="js-smell-location">1</a>                  <a href="formularios_controller.html#L48" class="js-smell-location">2</a>                  </div>  </li></ol>
 
-    if @perguntas.empty?
-      redirect_to respondente_formulario_path(@formulario), alert: &quot;Formulário sem perguntas.&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'respondente_formulario_path(@formulario)' 3 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L41" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L46" class="js-smell-location">1</a>                  <a href="formularios_controller.html#L70" class="js-smell-location">2</a>                  </div>  </li></ol>
-      return
-    end
-
-    # Processar respostas
-    success = true
-    @perguntas.each do |pergunta|
-      resposta_valor = params[&quot;question_#{pergunta.id}&quot;].presence<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'pergunta.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L53" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L57" class="js-smell-location">1</a>                  </div>  </li></ol>
-      if resposta_valor.present?
-        resposta = @formulario.respostas.build(<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls '@formulario.respostas' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L40" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L55" class="js-smell-location">1</a>                  </div>  </li></ol>
-          user_id: current_user.id,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'current_user.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L40" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L56" class="js-smell-location">1</a>                  </div>  </li></ol>
-          question_id: pergunta.id,<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'pergunta.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L53" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L57" class="js-smell-location">1</a>                  </div>  </li></ol>
-          valor: resposta_valor
-        )
-        unless resposta.save
-          success = false
-          break
-        end
-      end
-    end
-
-    if success
+    if salvar_respostas(@formulario, @perguntas)
       redirect_to respondente_formularios_path, notice: &quot;Respostas enviadas com sucesso!&quot;
     else
-      redirect_to respondente_formulario_path(@formulario), alert: &quot;Erro ao salvar respostas.&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'respondente_formulario_path(@formulario)' 3 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L41" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L46" class="js-smell-location">1</a>                  <a href="formularios_controller.html#L70" class="js-smell-location">2</a>                  </div>  </li></ol>
+      redirect_to respondente_formulario_path(@formulario), alert: &quot;Erro ao salvar respostas.&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#submit calls 'respondente_formulario_path(@formulario)' 3 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L42" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L43" class="js-smell-location">1</a>                  <a href="formularios_controller.html#L48" class="js-smell-location">2</a>                  </div>  </li></ol>
     end
+  end
+
+  private
+
+  def ja_respondeu?(formulario)
+    formulario.respostas.exists?(user_id: current_user.id)
+  end
+
+  def salvar_respostas(formulario, perguntas)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Respondente::FormulariosController#salvar_respostas has approx 6 statements</span>          </div>  </li></ol>
+    perguntas.each do |pergunta|
+      valor = params[&quot;question_#{pergunta.id}&quot;].presence<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#salvar_respostas calls 'pergunta.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L60" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L62" class="js-smell-location">1</a>                  </div>  </li></ol>
+      next unless valor.present?
+      resposta = formulario.respostas.build(user_id: current_user.id, question_id: pergunta.id, valor: valor)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::FormulariosController#salvar_respostas calls 'pergunta.id' 2 times</span>              <span>Locations:</span>                  <a href="formularios_controller.html#L60" class="js-smell-location">0</a>                  <a href="formularios_controller.html#L62" class="js-smell-location">1</a>                  </div>  </li></ol>
+      return false unless resposta.save
+    end
+    true
   end
 end
 </code>

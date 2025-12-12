@@ -15,12 +15,15 @@ RSpec.describe Respondente::FormulariosController, type: :controller do
   end
 
   let(:turma) do
-    Turma.create!(
+    t = Turma.create!(
       codigo: "TURMA_RESP",
       departamento: "DEP",
       semestre: "2025.1",
       professor: "Prof Responder"
     )
+    # Associar o usuário à turma
+    TurmaUser.create!(turma: t, user: user)
+    t
   end
 
   # Template com uma pergunta (branch normal com perguntas)

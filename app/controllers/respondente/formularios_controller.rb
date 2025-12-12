@@ -6,7 +6,10 @@ class Respondente::FormulariosController < ApplicationController
   # Lista formulários disponíveis e marca quais já foram respondidos pelo usuário atual.
   # @return [void]
   def index
-    @formularios = Formulario.all
+    # Buscar apenas formulários das turmas em que o usuário está matriculado
+    turma_ids = current_user.turmas.pluck(:id)
+    @formularios = Formulario.where(turma_id: turma_ids)
+    
     # Para cada formulário, verificar se o usuário já respondeu
     @respondeu_hash = {}
     @formularios.each do |form|

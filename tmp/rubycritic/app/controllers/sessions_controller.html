@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 17:01:54 -0300'>2025-12-12 17:01:54 -0300</time>
         
       </span>
     </div>
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">35</span><small> lines of codes</small></div>
-              <div><span class="metric">3</span><small> methods</small></div>
+              <div><span class="metric">42</span><small> lines of codes</small></div>
+              <div><span class="metric">6</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">7.8</span><small> complexity/method</small></div>
-              <div><span class="metric">6</span><small> churn</small></div>
+              <div><span class="metric">4.1</span><small> complexity/method</small></div>
+              <div><span class="metric">7</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">23.38</span><small> complexity</small></div>
+              <div><span class="metric">24.61</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -107,21 +107,13 @@
   # @param [ActionController::Parameters] params credenciais :login (email ou matrícula) e :password
   # @return [void]
   # @side_effect Define session[:user_id] e redireciona conforme o role; renderiza :new com 422 em falha
-  def create<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>SessionsController#create has approx 8 statements</span>          </div>  </li></ol>
-    # Aceita email OU matrícula como identificador
+  def create
     login_param = params[:login]
-    user = User.find_by(&quot;email = ? OR matricula = ?&quot;, login_param, login_param)
+    user = localizar_usuario(login_param)
+    return falha_login unless user&amp;.authenticate(params[:password])
 
-    if user&amp;.authenticate(params[:password])
-      session[:user_id] = user.id
-
-      # Redirecionar baseado no role do usuário
-      redirect_path = user.role_administrador? ? admin_formularios_path : respondente_formularios_path
-      redirect_to redirect_path, notice: &quot;Login realizado com sucesso!&quot;
-    else
-      flash.now[:alert] = &quot;Email, matrícula ou senha inválidos.&quot;
-      render :new, status: :unprocessable_entity
-    end
+    session[:user_id] = user.id
+    redirect_to caminho_pos_login(user), notice: &quot;Login realizado com sucesso!&quot;
   end
 
   # Encerra a sessão do usuário autenticado.
@@ -130,6 +122,21 @@
   def destroy
     session.delete(:user_id)
     redirect_to login_path, notice: &quot;Você saiu da sessão.&quot;
+  end
+
+  private
+
+  def localizar_usuario(identificador)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>SessionsController#localizar_usuario doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
+    User.find_by(&quot;email = ? OR matricula = ?&quot;, identificador, identificador)
+  end
+
+  def falha_login
+    flash.now[:alert] = &quot;Email, matrícula ou senha inválidos.&quot;
+    render :new, status: :unprocessable_entity
+  end
+
+  def caminho_pos_login(user)
+    user.role_administrador? ? admin_formularios_path : respondente_formularios_path
   end
 end
 </code>
