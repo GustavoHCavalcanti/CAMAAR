@@ -207,6 +207,25 @@ bundle exec rails c
 User.create!(email: "user@example.com", password: "123456", role: "participante")
 ```
 
+### Credenciais de Teste
+
+Para acessar o sistema após rodar `rails db:seed`, utilize:
+
+#### Administrador
+- **Email:** admin@camaar.com
+- **Senha:** 123456
+
+#### Alunos (Participantes)
+Após importar dados via CSV ou criar manualmente, alguns exemplos de usuários:
+- **Matrícula:** 2025001
+- **Matrícula:** 2025102
+- **Matrícula:** 2025201
+- **Matrícula:** 2025405
+
+**Senha padrão:** A própria matrícula (ex: usuário com matrícula `20230001` tem senha `20230001`)
+
+> 💡 **Dica:** Ao importar alunos via CSV sem especificar senha, o sistema automaticamente usa a matrícula como senha padrão.
+
 ### Jobs Assíncronos (Solid Queue)
 ```bash
 # Iniciar o processador de filas
