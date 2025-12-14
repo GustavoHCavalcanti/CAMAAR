@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Naming-label-Active+Model+Naming">Active Model Naming</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Naming-label-Active+Model+Naming">Active Model Naming</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -167,6 +196,25 @@
 
 <p>Providing the functionality that <a href="Naming.html"><code>ActiveModel::Naming</code></a> provides in your object is required to pass the Active Model <a href="Lint.html"><code>Lint</code></a> test. So either extending the provided method below, or rolling your own is required.</p>
 
+<h1 id="module-ActiveModel::Naming-label-Active+Model+Naming"><a href="#module-ActiveModel::Naming-label-Active+Model+Naming">Active Model Naming</a></h1>
+
+<p>Creates a <a href="Naming.html#method-i-model_name"><code>model_name</code></a> method on your object.</p>
+
+<p>To implement, just extend <a href="Naming.html"><code>ActiveModel::Naming</code></a> in your object:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BookCover</span>
+  <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">name</span>   <span class="ruby-comment"># =&gt; &quot;BookCover&quot;</span>
+<span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>  <span class="ruby-comment"># =&gt; &quot;Book cover&quot;</span>
+
+<span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">i18n_key</span>              <span class="ruby-comment"># =&gt; :book_cover</span>
+<span class="ruby-constant">BookModule</span><span class="ruby-operator">::</span><span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">i18n_key</span>  <span class="ruby-comment"># =&gt; :&quot;book_module/book_cover&quot;</span>
+</pre>
+
+<p>Providing the functionality that <a href="Naming.html"><code>ActiveModel::Naming</code></a> provides in your object is required to pass the Active Model <a href="Lint.html"><code>Lint</code></a> test. So either extending the provided method below, or rolling your own is required.</p>
+
   </section>
 
 
@@ -210,7 +258,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="param_key-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 337</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 337</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">param_key</span>(<span class="ruby-identifier">record_or_class</span>)
   <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">param_key</span>
 <span class="ruby-keyword">end</span></pre>
@@ -261,7 +309,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="plural-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 282</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 282</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">plural</span>(<span class="ruby-identifier">record_or_class</span>)
   <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">plural</span>
 <span class="ruby-keyword">end</span></pre>
@@ -309,7 +357,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="route_key-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 325</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 325</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">route_key</span>(<span class="ruby-identifier">record_or_class</span>)
   <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">route_key</span>
 <span class="ruby-keyword">end</span></pre>
@@ -362,7 +410,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="singular-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 290</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 290</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">singular</span>(<span class="ruby-identifier">record_or_class</span>)
   <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">singular</span>
 <span class="ruby-keyword">end</span></pre>
@@ -410,7 +458,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="singular_route_key-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 310</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 310</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">singular_route_key</span>(<span class="ruby-identifier">record_or_class</span>)
   <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">singular_route_key</span>
 <span class="ruby-keyword">end</span></pre>
@@ -461,7 +509,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="uncountable-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 298</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 298</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">uncountable?</span>(<span class="ruby-identifier">record_or_class</span>)
   <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">uncountable?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -517,7 +565,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="model_name-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 269</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/naming.rb, line 269</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">model_name</span>
   <span class="ruby-ivar">@_model_name</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">namespace</span> = <span class="ruby-identifier">module_parents</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>

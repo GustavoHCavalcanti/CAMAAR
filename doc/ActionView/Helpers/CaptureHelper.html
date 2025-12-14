@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionView::Helpers::CaptureHelper-label-Action+View+Capture+Helpers">Action View Capture Helpers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionView::Helpers::CaptureHelper-label-Action+View+Capture+Helpers">Action View Capture Helpers</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -149,6 +178,14 @@
 
 <p>As well as provides a method when using streaming responses through <a href="CaptureHelper.html#method-i-provide"><code>provide</code></a>. See <a href="../../ActionController/Streaming.html"><code>ActionController::Streaming</code></a> for more information.</p>
 
+<h1 id="module-ActionView::Helpers::CaptureHelper-label-Action+View+Capture+Helpers"><a href="#module-ActionView::Helpers::CaptureHelper-label-Action+View+Capture+Helpers">Action View Capture Helpers</a></h1>
+
+<p>CaptureHelper exposes methods to let you extract generated markup which can be used in other parts of a template or layout file.</p>
+
+<p>It provides a method to capture blocks into variables through <a href="CaptureHelper.html#method-i-capture"><code>capture</code></a> and a way to capture a block of markup for use in a layout through <a href="CaptureHelper.html#method-i-content_for"><code>content_for</code></a>.</p>
+
+<p>As well as provides a method when using streaming responses through <a href="CaptureHelper.html#method-i-provide"><code>provide</code></a>. See <a href="../../ActionController/Streaming.html"><code>ActionController::Streaming</code></a> for more information.</p>
+
   </section>
 
 
@@ -192,7 +229,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="capture-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 47</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">capture</span>(<span class="ruby-operator">*</span>, <span class="ruby-operator">**</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@output_buffer</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">OutputBuffer</span>.<span class="ruby-identifier">new</span>
@@ -281,7 +318,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="content_for-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 172</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">content_for</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">content</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block_given?</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
@@ -433,7 +470,7 @@ Please login!
         <div class="method-description">
 
           <div class="method-source-code" id="content_for-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 215</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">content_for?</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-ivar">@view_flow</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -491,7 +528,7 @@ Please login!
         <div class="method-description">
 
           <div class="method-source-code" id="provide-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 194</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/capture_helper.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">provide</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">content</span> = <span class="ruby-identifier">capture</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@view_flow</span>.<span class="ruby-identifier">append!</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">content</span>

@@ -108,6 +108,30 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActionCable::Connection::Callbacks-label-Action+Cable+Connection+Callbacks">Action Cable Connection Callbacks</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#module-ActionCable::Connection::Callbacks-label-Example">Example</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -189,6 +213,28 @@
 
   <section class="description">
     
+<h1 id="module-ActionCable::Connection::Callbacks-label-Action+Cable+Connection+Callbacks"><a href="#module-ActionCable::Connection::Callbacks-label-Action+Cable+Connection+Callbacks">Action Cable <a href="../Connection.html"><code>Connection</code></a> <a href="Callbacks.html"><code>Callbacks</code></a></a></h1>
+
+<p>The <a href="Callbacks/ClassMethods.html#method-i-before_command">before_command</a>, <a href="Callbacks/ClassMethods.html#method-i-after_command">after_command</a>, and <a href="Callbacks/ClassMethods.html#method-i-around_command">around_command</a> callbacks are invoked when sending commands to the client, such as when subscribing, unsubscribing, or performing an action.</p>
+
+<h4 id="module-ActionCable::Connection::Callbacks-label-Example"><a href="#module-ActionCable::Connection::Callbacks-label-Example">Example</a></h4>
+
+<pre class="ruby"><span class="ruby-keyword">module</span> <span class="ruby-constant">ApplicationCable</span>
+  <span class="ruby-keyword">class</span> <span class="ruby-constant">Connection</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionCable</span><span class="ruby-operator">::</span><span class="ruby-constant">Connection</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+    <span class="ruby-identifier">identified_by</span> <span class="ruby-value">:user</span>
+
+    <span class="ruby-identifier">around_command</span> <span class="ruby-value">:set_current_account</span>
+
+    <span class="ruby-identifier">private</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_current_account</span>
+      <span class="ruby-comment"># Now all channels could use Current.account</span>
+      <span class="ruby-constant">Current</span>.<span class="ruby-identifier">set</span>(<span class="ruby-value">account:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">account</span>) { <span class="ruby-keyword">yield</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
 <h1 id="module-ActionCable::Connection::Callbacks-label-Action+Cable+Connection+Callbacks"><a href="#module-ActionCable::Connection::Callbacks-label-Action+Cable+Connection+Callbacks">Action Cable <a href="../Connection.html"><code>Connection</code></a> <a href="Callbacks.html"><code>Callbacks</code></a></a></h1>
 
 <p>The <a href="Callbacks/ClassMethods.html#method-i-before_command">before_command</a>, <a href="Callbacks/ClassMethods.html#method-i-after_command">after_command</a>, and <a href="Callbacks/ClassMethods.html#method-i-around_command">around_command</a> callbacks are invoked when sending commands to the client, such as when subscribing, unsubscribing, or performing an action.</p>

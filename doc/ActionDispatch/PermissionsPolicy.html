@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::PermissionsPolicy-label-Action+Dispatch+PermissionsPolicy">Action Dispatch PermissionsPolicy</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::PermissionsPolicy-label-Action+Dispatch+PermissionsPolicy">Action Dispatch PermissionsPolicy</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -163,6 +192,24 @@
 
 <p>The Feature-Policy header has been renamed to Permissions-Policy. The Permissions-Policy requires a different implementation and isn’t yet supported by all browsers. To avoid having to rename this middleware in the future we use the new name for the middleware but keep the old header name and implementation for now.</p>
 
+<h1 id="class-ActionDispatch::PermissionsPolicy-label-Action+Dispatch+PermissionsPolicy"><a href="#class-ActionDispatch::PermissionsPolicy-label-Action+Dispatch+PermissionsPolicy">Action Dispatch <a href="PermissionsPolicy.html"><code>PermissionsPolicy</code></a></a></h1>
+
+<p>Configures the HTTP <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy">Feature-Policy</a> response header to specify which browser features the current document and its iframes can use.</p>
+
+<p>Example global policy:</p>
+
+<pre class="ruby"><span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">permissions_policy</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">policy</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">camera</span>      <span class="ruby-value">:none</span>
+  <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">gyroscope</span>   <span class="ruby-value">:none</span>
+  <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">microphone</span>  <span class="ruby-value">:none</span>
+  <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">usb</span>         <span class="ruby-value">:none</span>
+  <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">fullscreen</span>  <span class="ruby-value">:self</span>
+  <span class="ruby-identifier">policy</span>.<span class="ruby-identifier">payment</span>     <span class="ruby-value">:self</span>, <span class="ruby-string">&quot;https://secure.example.com&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The Feature-Policy header has been renamed to Permissions-Policy. The Permissions-Policy requires a different implementation and isn’t yet supported by all browsers. To avoid having to rename this middleware in the future we use the new name for the middleware but keep the old header name and implementation for now.</p>
+
   </section>
 
 
@@ -230,7 +277,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/permissions_policy.rb, line 113</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/permissions_policy.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
   <span class="ruby-ivar">@directives</span> = {}
   <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
@@ -283,7 +330,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="build-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/permissions_policy.rb, line 132</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/permissions_policy.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build</span>(<span class="ruby-identifier">context</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">build_directives</span>(<span class="ruby-identifier">context</span>).<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;; &quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -327,7 +374,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="initialize_copy-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/permissions_policy.rb, line 118</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/permissions_policy.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-ivar">@directives</span> = <span class="ruby-identifier">other</span>.<span class="ruby-identifier">directives</span>.<span class="ruby-identifier">deep_dup</span>
 <span class="ruby-keyword">end</span></pre>

@@ -132,6 +132,13 @@
 <span class="ruby-comment"># =&gt; ActionController::UnpermittedParameters: found unpermitted parameters: :a, :b</span>
 </pre>
 
+<p>Raised when a supplied parameter is not expected and ActionController::Parameters.action_on_unpermitted_parameters is set to <code>:raise</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">a:</span> <span class="ruby-string">&quot;123&quot;</span>, <span class="ruby-value">b:</span> <span class="ruby-string">&quot;456&quot;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit</span>(<span class="ruby-value">:c</span>)
+<span class="ruby-comment"># =&gt; ActionController::UnpermittedParameters: found unpermitted parameters: :a, :b</span>
+</pre>
+
   </section>
 
 

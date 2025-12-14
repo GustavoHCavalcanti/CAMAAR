@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionText::Attachment-label-Action+Text+Attachment">Action Text Attachment</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionText::Attachment-label-Action+Text+Attachment">Action Text Attachment</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -165,6 +194,19 @@
 
   <section class="description">
     
+<h1 id="class-ActionText::Attachment-label-Action+Text+Attachment"><a href="#class-ActionText::Attachment-label-Action+Text+Attachment">Action Text <a href="Attachment.html"><code>Attachment</code></a></a></h1>
+
+<p><a href="Attachments.html"><code>Attachments</code></a> serialize attachables to HTML or plain text.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationRecord</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachable</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">attachable</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create!</span> <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Javan&quot;</span>
+<span class="ruby-identifier">attachment</span> = <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>)
+<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">to_html</span> <span class="ruby-comment"># =&gt; &quot;&lt;action-text-attachment sgid=\&quot;BAh7CEk...&quot;</span>
+</pre>
+
 <h1 id="class-ActionText::Attachment-label-Action+Text+Attachment"><a href="#class-ActionText::Attachment-label-Action+Text+Attachment">Action Text <a href="Attachment.html"><code>Attachment</code></a></a></h1>
 
 <p><a href="Attachments.html"><code>Attachments</code></a> serialize attachables to HTML or plain text.</p>
@@ -278,7 +320,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fragment_by_canonicalizing_attachments-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 27</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fragment_by_canonicalizing_attachments</span>(<span class="ruby-identifier">content</span>)
   <span class="ruby-identifier">fragment_by_minifying_attachments</span>(<span class="ruby-identifier">fragment_by_converting_trix_attachments</span>(<span class="ruby-identifier">content</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -322,7 +364,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="from_attachable-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 39</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_attachable</span>(<span class="ruby-identifier">attachable</span>, <span class="ruby-identifier">attributes</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span> = <span class="ruby-identifier">node_from_attributes</span>(<span class="ruby-identifier">attachable</span>.<span class="ruby-identifier">to_rich_text_attributes</span>(<span class="ruby-identifier">attributes</span>))
     <span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span>)
@@ -368,7 +410,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="from_attachables-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 35</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_attachables</span>(<span class="ruby-identifier">attachables</span>)
   <span class="ruby-constant">Array</span>(<span class="ruby-identifier">attachables</span>).<span class="ruby-identifier">filter_map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attachable</span><span class="ruby-operator">|</span> <span class="ruby-identifier">from_attachable</span>(<span class="ruby-identifier">attachable</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -412,7 +454,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="from_attributes-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 45</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_attributes</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">attachable</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span> = <span class="ruby-identifier">node_from_attributes</span>(<span class="ruby-identifier">attributes</span>)
     <span class="ruby-identifier">from_node</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span>)
@@ -458,7 +500,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="from_node-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 31</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">from_node</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ActionText</span><span class="ruby-operator">::</span><span class="ruby-constant">Attachable</span>.<span class="ruby-identifier">from_node</span>(<span class="ruby-identifier">node</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -502,7 +544,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 68</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">attachable</span>)
   <span class="ruby-ivar">@node</span> = <span class="ruby-identifier">node</span>
   <span class="ruby-ivar">@attachable</span> = <span class="ruby-identifier">attachable</span>
@@ -555,7 +597,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="caption-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 73</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">caption</span>
   <span class="ruby-identifier">node_attributes</span>[<span class="ruby-string">&quot;caption&quot;</span>].<span class="ruby-identifier">presence</span>
 <span class="ruby-keyword">end</span></pre>
@@ -599,7 +641,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="full_attributes-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 77</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">full_attributes</span>
   <span class="ruby-identifier">node_attributes</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">attachable_attributes</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">sgid_attributes</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -643,7 +685,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 131</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-node">&quot;#&lt;#{self.class.name} attachable=#{attachable.inspect}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -687,7 +729,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_html-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 123</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_html</span>
   <span class="ruby-constant">HtmlConversion</span>.<span class="ruby-identifier">node_to_html</span>(<span class="ruby-identifier">node</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -736,7 +778,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_plain_text-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 110</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_plain_text</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:attachable_plain_text_representation</span>)
     <span class="ruby-identifier">attachable_plain_text_representation</span>(<span class="ruby-identifier">caption</span>)
@@ -810,7 +852,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 127</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-identifier">to_html</span>
 <span class="ruby-keyword">end</span></pre>
@@ -854,7 +896,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="with_full_attributes-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 81</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/lib/action_text/attachment.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_full_attributes</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">from_attributes</span>(<span class="ruby-identifier">full_attributes</span>, <span class="ruby-identifier">attachable</span>)
 <span class="ruby-keyword">end</span></pre>

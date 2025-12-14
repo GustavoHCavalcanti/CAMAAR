@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::PublicExceptions-label-Action+Dispatch+PublicExceptions">Action Dispatch PublicExceptions</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::PublicExceptions-label-Action+Dispatch+PublicExceptions">Action Dispatch PublicExceptions</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -149,6 +178,12 @@
 
 <p>When a request with a content type other than HTML is made, this middleware will attempt to convert error information into the appropriate response type.</p>
 
+<h1 id="class-ActionDispatch::PublicExceptions-label-Action+Dispatch+PublicExceptions"><a href="#class-ActionDispatch::PublicExceptions-label-Action+Dispatch+PublicExceptions">Action Dispatch <a href="PublicExceptions.html"><code>PublicExceptions</code></a></a></h1>
+
+<p>When called, this middleware renders an error page. By default if an HTML response is expected it will render static error pages from the <code>/public</code> directory. For example when this middleware receives a 500 response it will render the template found in <code>/public/500.html</code>. If an internationalized locale is set, this middleware will attempt to render the template in <code>/public/500.&lt;locale&gt;.html</code>. If an internationalized template is not found it will fall back on <code>/public/500.html</code>.</p>
+
+<p>When a request with a content type other than HTML is made, this middleware will attempt to convert error information into the appropriate response type.</p>
+
   </section>
 
 
@@ -216,7 +251,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/public_exceptions.rb, line 21</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/public_exceptions.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">public_path</span>)
   <span class="ruby-ivar">@public_path</span> = <span class="ruby-identifier">public_path</span>
 <span class="ruby-keyword">end</span></pre>
@@ -268,7 +303,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/public_exceptions.rb, line 25</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/public_exceptions.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-identifier">request</span>      = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-identifier">status</span>       = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">path_info</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">to_i</span>

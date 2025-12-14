@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionController::StrongParameters-label-Strong+Parameters">Strong Parameters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionController::StrongParameters-label-Strong+Parameters">Strong Parameters</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -194,6 +223,69 @@
 
 <p>See <a href="Parameters.html#method-i-expect"><code>ActionController::Parameters.expect</code></a>, See <a href="Parameters.html#method-i-require"><code>ActionController::Parameters.require</code></a>, and <a href="Parameters.html#method-i-permit"><code>ActionController::Parameters.permit</code></a> for more information.</p>
 
+<h1 id="module-ActionController::StrongParameters-label-Strong+Parameters"><a href="#module-ActionController::StrongParameters-label-Strong+Parameters">Strong <a href="Parameters.html"><code>Parameters</code></a></a></h1>
+
+<p>It provides an interface for protecting attributes from end-user assignment. This makes Action Controller parameters forbidden to be used in Active Model mass assignment until they have been explicitly enumerated.</p>
+
+<p>In addition, parameters can be marked as required and flow through a predefined raise/rescue flow to end up as a <code>400 Bad Request</code> with no effort.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PeopleController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># Using &quot;Person.create(params[:person])&quot; would raise an</span>
+  <span class="ruby-comment"># ActiveModel::ForbiddenAttributesError exception because it&#39;d</span>
+  <span class="ruby-comment"># be using mass assignment without an explicit permit step.</span>
+  <span class="ruby-comment"># This is the recommended form:</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+    <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">person_params</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># This will pass with flying colors as long as there&#39;s a person key in the</span>
+  <span class="ruby-comment"># parameters, otherwise it&#39;ll raise an ActionController::ParameterMissing</span>
+  <span class="ruby-comment"># exception, which will get caught by ActionController::Base and turned</span>
+  <span class="ruby-comment"># into a 400 Bad Request reply.</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">current_account</span>.<span class="ruby-identifier">people</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">person</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">person</span>.<span class="ruby-identifier">update!</span>(<span class="ruby-identifier">person_params</span>)
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-comment"># Using a private method to encapsulate the permissible parameters is</span>
+    <span class="ruby-comment"># a good pattern since you&#39;ll be able to reuse the same permit</span>
+    <span class="ruby-comment"># list between create and update. Also, you can specialize this method</span>
+    <span class="ruby-comment"># with per-user checking of permissible attributes.</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">person_params</span>
+      <span class="ruby-identifier">params</span>.<span class="ruby-identifier">expect</span>(<span class="ruby-value">person:</span> [<span class="ruby-value">:name</span>, <span class="ruby-value">:age</span>])
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In order to use <code>accepts_nested_attributes_for</code> with Strong <a href="Parameters.html"><code>Parameters</code></a>, you will need to specify which nested attributes should be permitted. You might want to allow <code>:id</code> and <code>:_destroy</code>, see <a href="../ActiveRecord/NestedAttributes.html"><code>ActiveRecord::NestedAttributes</code></a> for more information.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">has_many</span> <span class="ruby-value">:pets</span>
+  <span class="ruby-identifier">accepts_nested_attributes_for</span> <span class="ruby-value">:pets</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PeopleController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+    <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">person_params</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-operator">...</span>
+
+  <span class="ruby-identifier">private</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">person_params</span>
+      <span class="ruby-comment"># It&#39;s mandatory to specify the nested attributes that should be permitted.</span>
+      <span class="ruby-comment"># If you use `permit` with just the key that points to the nested attributes hash,</span>
+      <span class="ruby-comment"># it will return an empty hash.</span>
+      <span class="ruby-identifier">params</span>.<span class="ruby-identifier">expect</span>(<span class="ruby-value">person:</span> [ <span class="ruby-value">:name</span>, <span class="ruby-value">:age</span>, <span class="ruby-value">pets_attributes:</span> [ <span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">:category</span> ] ])
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>See <a href="Parameters.html#method-i-expect"><code>ActionController::Parameters.expect</code></a>, See <a href="Parameters.html#method-i-require"><code>ActionController::Parameters.require</code></a>, and <a href="Parameters.html#method-i-permit"><code>ActionController::Parameters.permit</code></a> for more information.</p>
+
   </section>
 
 
@@ -237,7 +329,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="params-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1511</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1511</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">params</span>
   <span class="ruby-ivar">@_params</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">context</span> = {
@@ -289,7 +381,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="params-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1526</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1526</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">params=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@_params</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>

@@ -11,7 +11,7 @@
   <meta name="keywords" content="ruby,module,ActionDispatch::Routing::Mapper::Concerns">
 
 
-    <meta name="description" content="module ActionDispatch::Routing::Mapper::Concerns: Routing Concerns allow you to declare common routes that can be reused inside others resources and routes.">
+    <meta name="description" content="module ActionDispatch::Routing::Mapper::Concerns: Routing Concerns allow you to declare common routes that can be reused inside others resources and routes. commentable end --- Routing Concerns al">
 
 
 
@@ -166,6 +166,29 @@
 <span class="ruby-keyword">end</span>
 </pre>
 
+<p><a href="../../Routing.html"><code>Routing</code></a> <a href="Concerns.html"><code>Concerns</code></a> allow you to declare common routes that can be reused inside others resources and routes.</p>
+
+<pre class="ruby"><span class="ruby-identifier">concern</span> <span class="ruby-value">:commentable</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">resources</span> <span class="ruby-value">:comments</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">concern</span> <span class="ruby-value">:image_attachable</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">resources</span> <span class="ruby-value">:images</span>, <span class="ruby-value">only:</span> <span class="ruby-value">:index</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>These concerns are used in <a href="Resources.html"><code>Resources</code></a> routing:</p>
+
+<pre class="ruby"><span class="ruby-identifier">resources</span> <span class="ruby-value">:messages</span>, <span class="ruby-value">concerns:</span> [<span class="ruby-value">:commentable</span>, <span class="ruby-value">:image_attachable</span>]
+</pre>
+
+<p>or in a scope or namespace:</p>
+
+<pre class="ruby"><span class="ruby-identifier">namespace</span> <span class="ruby-value">:posts</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">concerns</span> <span class="ruby-value">:commentable</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
   </section>
 
 
@@ -209,7 +232,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="concern-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/mapper.rb, line 2297</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/mapper.rb, line 2297</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concern</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">callable</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">callable</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mapper</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapper</span>.<span class="ruby-identifier">instance_exec</span>(<span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) }
   <span class="ruby-ivar">@concerns</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">callable</span>
@@ -302,7 +325,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="concerns-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/mapper.rb, line 2313</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/mapper.rb, line 2313</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concerns</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">concern</span> = <span class="ruby-ivar">@concerns</span>[<span class="ruby-identifier">name</span>]

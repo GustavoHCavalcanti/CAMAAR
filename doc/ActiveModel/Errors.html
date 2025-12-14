@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Errors-label-Active+Model+Errors">Active Model Errors</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Errors-label-Active+Model+Errors">Active Model Errors</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -254,6 +283,53 @@
 <span class="ruby-comment"># etc..</span>
 </pre>
 
+<h1 id="class-ActiveModel::Errors-label-Active+Model+Errors"><a href="#class-ActiveModel::Errors-label-Active+Model+Errors">Active Model Errors</a></h1>
+
+<p>Provides error related functionalities you can include in your object for handling error messages and interacting with Action View helpers.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-comment"># Required dependency for ActiveModel::Errors</span>
+  <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
+    <span class="ruby-ivar">@errors</span> = <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Errors</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:name</span>
+  <span class="ruby-identifier">attr_reader</span>   <span class="ruby-value">:errors</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate!</span>
+    <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:name</span>, <span class="ruby-value">:blank</span>, <span class="ruby-value">message:</span> <span class="ruby-string">&quot;cannot be nil&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># The following methods are needed to be minimally implemented</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read_attribute_for_validation</span>(<span class="ruby-identifier">attr</span>)
+    <span class="ruby-identifier">send</span>(<span class="ruby-identifier">attr</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">human_attribute_name</span>(<span class="ruby-identifier">attr</span>, <span class="ruby-identifier">options</span> = {})
+    <span class="ruby-identifier">attr</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lookup_ancestors</span>
+    [<span class="ruby-keyword">self</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The last three methods are required in your object for <a href="Errors.html"><code>Errors</code></a> to be able to generate error messages correctly and also handle multiple languages. Of course, if you extend your object with <a href="Translation.html"><code>ActiveModel::Translation</code></a> you will not need to implement the last two. Likewise, using <a href="Validations.html"><code>ActiveModel::Validations</code></a> will handle the validation related methods for you.</p>
+
+<p>The above allows you to do:</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">validate!</span>            <span class="ruby-comment"># =&gt; [&quot;cannot be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span> <span class="ruby-comment"># =&gt; [&quot;name cannot be nil&quot;]</span>
+<span class="ruby-comment"># etc..</span>
+</pre>
+
   </section>
 
 
@@ -337,7 +413,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 114</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">base</span>)
   <span class="ruby-ivar">@base</span> = <span class="ruby-identifier">base</span>
   <span class="ruby-ivar">@errors</span> = []
@@ -397,7 +473,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 226</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">attribute</span>)
   <span class="ruby-identifier">messages_for</span>(<span class="ruby-identifier">attribute</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -445,7 +521,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 339</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 339</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:invalid</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">normalize_arguments</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">error</span> = <span class="ruby-constant">Error</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@base</span>, <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -544,7 +620,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="added-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 369</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 369</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">added?</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:invalid</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">normalize_arguments</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 
@@ -611,7 +687,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="as_json-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 244</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">as_json</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">options</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:full_messages</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -659,7 +735,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attribute_names-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 234</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 234</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attribute_names</span>
   <span class="ruby-ivar">@errors</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:attribute</span>).<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">freeze</span>
 <span class="ruby-keyword">end</span></pre>
@@ -710,7 +786,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="clear-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 77</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 77</span>
     </pre>
           </div>
 
@@ -752,7 +828,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 212</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">normalize_arguments</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">where</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
@@ -806,7 +882,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="details-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 273</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">details</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">group_by_attribute</span>.<span class="ruby-identifier">transform_values</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">errors</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:details</span>)
@@ -858,7 +934,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 64</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 64</span>
     </pre>
           </div>
 
@@ -909,7 +985,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="empty-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 87</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 87</span>
     </pre>
           </div>
 
@@ -951,7 +1027,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="full_message-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 448</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 448</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">full_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>)
   <span class="ruby-constant">Error</span>.<span class="ruby-identifier">full_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>, <span class="ruby-ivar">@base</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -998,7 +1074,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="full_messages-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 412</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 412</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">full_messages</span>
   <span class="ruby-ivar">@errors</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:full_message</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1024,7 +1100,7 @@ end</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Errors.html#method-i-to_a">to_a</a>
+          Also aliased as: <a href="Errors.html#method-i-to_a">to_a</a>, to_a
         </div>
 
 
@@ -1056,7 +1132,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="full_messages_for-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 427</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 427</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">full_messages_for</span>(<span class="ruby-identifier">attribute</span>)
   <span class="ruby-identifier">where</span>(<span class="ruby-identifier">attribute</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:full_message</span>).<span class="ruby-identifier">freeze</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1110,7 +1186,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="generate_message-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 476</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 476</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:invalid</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-constant">Error</span>.<span class="ruby-identifier">generate_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-ivar">@base</span>, <span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1175,7 +1251,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="group_by_attribute-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 286</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 286</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">group_by_attribute</span>
   <span class="ruby-ivar">@errors</span>.<span class="ruby-identifier">group_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:attribute</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1258,7 +1334,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="import-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 151</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">import</span>(<span class="ruby-identifier">error</span>, <span class="ruby-identifier">override_options</span> = {})
   [<span class="ruby-value">:attribute</span>, <span class="ruby-value">:type</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">override_options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
@@ -1314,7 +1390,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 199</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">attribute</span>)
   <span class="ruby-ivar">@errors</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">error</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">error</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_sym</span>)
@@ -1337,7 +1413,7 @@ end</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Errors.html#method-i-has_key-3F">has_key?</a>, <a href="Errors.html#method-i-key-3F">key?</a>
+          Also aliased as: <a href="Errors.html#method-i-has_key-3F">has_key?</a>, <a href="Errors.html#method-i-key-3F">key?</a>, has_key?, key?
         </div>
 
 
@@ -1404,7 +1480,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="merge-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 171</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge!</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">errors</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">other</span>)
 
@@ -1462,7 +1538,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="messages-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 265</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 265</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">messages</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">to_hash</span>
   <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">default</span> = <span class="ruby-constant">EMPTY_ARRAY</span>
@@ -1509,7 +1585,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="messages_for-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 441</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 441</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">messages_for</span>(<span class="ruby-identifier">attribute</span>)
   <span class="ruby-identifier">where</span>(<span class="ruby-identifier">attribute</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:message</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1563,7 +1639,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="of_kind-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 392</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 392</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">of_kind?</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:invalid</span>)
   <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-identifier">normalize_arguments</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>)
 
@@ -1626,7 +1702,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 100</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 100</span>
 <span class="ruby-identifier">delegate</span> <span class="ruby-value">:each</span>, <span class="ruby-value">:clear</span>, <span class="ruby-value">:empty?</span>, <span class="ruby-value">:size</span>, <span class="ruby-value">:uniq!</span>, <span class="ruby-value">to:</span> <span class="ruby-value">:@errors</span>
 </pre>
           </div>
@@ -1704,7 +1780,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="to_hash-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 253</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>(<span class="ruby-identifier">full_messages</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">message_method</span> = <span class="ruby-identifier">full_messages</span> <span class="ruby-operator">?</span> <span class="ruby-value">:full_message</span> <span class="ruby-operator">:</span> <span class="ruby-value">:message</span>
   <span class="ruby-identifier">group_by_attribute</span>.<span class="ruby-identifier">transform_values</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">errors</span><span class="ruby-operator">|</span>
@@ -1755,7 +1831,7 @@ end</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="where-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 186</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">where</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">normalize_arguments</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-ivar">@errors</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">error</span><span class="ruby-operator">|</span>

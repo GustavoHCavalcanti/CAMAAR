@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionController::EtagWithTemplateDigest-label-Action+Controller+Etag+With+Template+Digest">Action Controller Etag With Template Digest</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionController::EtagWithTemplateDigest-label-Action+Controller+Etag+With+Template+Digest">Action Controller Etag With Template Digest</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -144,6 +173,24 @@
 
   <section class="description">
     
+<h1 id="module-ActionController::EtagWithTemplateDigest-label-Action+Controller+Etag+With+Template+Digest"><a href="#module-ActionController::EtagWithTemplateDigest-label-Action+Controller+Etag+With+Template+Digest">Action Controller Etag With <a href="../Template.html"><code>Template</code></a> <a href="../Digest.html"><code>Digest</code></a></a></h1>
+
+<p>When our views change, they should bubble up into HTTP cache freshness and bust browser caches. So the template digest for the current action is automatically included in the ETag.</p>
+
+<p>Enabled by default for apps that use Action View. Disable by setting</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">etag_with_template_digest</span> = <span class="ruby-keyword">false</span>
+</pre>
+
+<p>Override the template to digest by passing <code>:template</code> to <code>fresh_when</code> and <code>stale?</code> calls. For example:</p>
+
+<pre class="ruby"><span class="ruby-comment"># We&#39;re going to render widgets/show, not posts/show</span>
+<span class="ruby-identifier">fresh_when</span> <span class="ruby-ivar">@post</span>, <span class="ruby-value">template:</span> <span class="ruby-string">&#39;widgets/show&#39;</span>
+
+<span class="ruby-comment"># We&#39;re not going to render a template, so omit it from the ETag.</span>
+<span class="ruby-identifier">fresh_when</span> <span class="ruby-ivar">@post</span>, <span class="ruby-value">template:</span> <span class="ruby-keyword">false</span>
+</pre>
+
 <h1 id="module-ActionController::EtagWithTemplateDigest-label-Action+Controller+Etag+With+Template+Digest"><a href="#module-ActionController::EtagWithTemplateDigest-label-Action+Controller+Etag+With+Template+Digest">Action Controller Etag With <a href="../Template.html"><code>Template</code></a> <a href="../Digest.html"><code>Digest</code></a></a></h1>
 
 <p>When our views change, they should bubble up into HTTP cache freshness and bust browser caches. So the template digest for the current action is automatically included in the ETag.</p>

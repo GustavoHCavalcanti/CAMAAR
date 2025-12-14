@@ -115,6 +115,37 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-ActionCable::Channel::Base-label-Action+Cable+Channel+Base">Action Cable Channel Base</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-ActionCable::Channel::Base-label-Action+processing">Action processing</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionCable::Channel::Base-label-Rejecting+subscription+requests">Rejecting subscription requests</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -324,6 +355,77 @@
 
 <p>In this example, the subscription will be rejected if the <code>current_user</code> does not have access to the chat room. On the client-side, the <code>Channel#rejected</code> callback will get invoked when the server rejects the subscription request.</p>
 
+<h1 id="class-ActionCable::Channel::Base-label-Action+Cable+Channel+Base"><a href="#class-ActionCable::Channel::Base-label-Action+Cable+Channel+Base">Action Cable <a href="../Channel.html"><code>Channel</code></a> <a href="Base.html"><code>Base</code></a></a></h1>
+
+<p>The channel provides the basic structure of grouping behavior into logical units when communicating over the <a href="../../WebSocket.html"><code>WebSocket</code></a> connection. You can think of a channel like a form of controller, but one that’s capable of pushing content to the subscriber in addition to simply responding to the subscriber’s direct requests.</p>
+
+<p><a href="../Channel.html"><code>Channel</code></a> instances are long-lived. A channel object will be instantiated when the cable consumer becomes a subscriber, and then lives until the consumer disconnects. This may be seconds, minutes, hours, or even days. That means you have to take special care not to do anything silly in a channel that would balloon its memory footprint or whatever. The references are forever, so they won’t be released as is normally the case with a controller instance that gets thrown away after every request.</p>
+
+<p>Long-lived channels (and connections) also mean you’re responsible for ensuring that the data is fresh. If you hold a reference to a user record, but the name is changed while that reference is held, you may be sending stale data if you don’t take precautions to avoid it.</p>
+
+<p>The upside of long-lived channel instances is that you can use instance variables to keep reference to objects that future subscriber requests can interact with. Here’s a quick example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ChatChannel</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationCable</span><span class="ruby-operator">::</span><span class="ruby-constant">Channel</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscribed</span>
+    <span class="ruby-ivar">@room</span> = <span class="ruby-constant">Chat</span><span class="ruby-operator">::</span><span class="ruby-constant">Room</span>[<span class="ruby-identifier">params</span>[<span class="ruby-value">:room_number</span>]]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">speak</span>(<span class="ruby-identifier">data</span>)
+    <span class="ruby-ivar">@room</span>.<span class="ruby-identifier">speak</span> <span class="ruby-identifier">data</span>, <span class="ruby-value">user:</span> <span class="ruby-identifier">current_user</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The speak action simply uses the Chat::Room object that was created when the channel was first subscribed to by the consumer when that subscriber wants to say something in the room.</p>
+
+<h2 id="class-ActionCable::Channel::Base-label-Action+processing"><a href="#class-ActionCable::Channel::Base-label-Action+processing">Action processing</a></h2>
+
+<p>Unlike subclasses of <a href="../../ActionController/Base.html"><code>ActionController::Base</code></a>, channels do not follow a RESTful constraint form for their actions. Instead, Action Cable operates through a remote-procedure call model. You can declare any public method on the channel (optionally taking a <code>data</code> argument), and this method is automatically exposed as callable to the client.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">AppearanceChannel</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationCable</span><span class="ruby-operator">::</span><span class="ruby-constant">Channel</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscribed</span>
+    <span class="ruby-ivar">@connection_token</span> = <span class="ruby-identifier">generate_connection_token</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unsubscribed</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">disappear</span> <span class="ruby-ivar">@connection_token</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">appear</span>(<span class="ruby-identifier">data</span>)
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">appear</span> <span class="ruby-ivar">@connection_token</span>, <span class="ruby-value">on:</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;appearing_on&#39;</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">away</span>
+    <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">away</span> <span class="ruby-ivar">@connection_token</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_connection_token</span>
+      <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">hex</span>(<span class="ruby-value">36</span>)
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In this example, the subscribed and unsubscribed methods are not callable methods, as they were already declared in <a href="Base.html"><code>ActionCable::Channel::Base</code></a>, but appear and away are. generate_connection_token is also not callable, since it’s a private method. You’ll see that appear accepts a data parameter, which it then uses as part of its model call. away does not, since it’s simply a trigger action.</p>
+
+<p>Also note that in this example, <code>current_user</code> is available because it was marked as an identifying attribute on the connection. All such identifiers will automatically create a delegation method of the same name on the channel instance.</p>
+
+<h2 id="class-ActionCable::Channel::Base-label-Rejecting+subscription+requests"><a href="#class-ActionCable::Channel::Base-label-Rejecting+subscription+requests">Rejecting subscription requests</a></h2>
+
+<p>A channel can reject a subscription request in the <a href="Base.html#method-i-subscribed"><code>subscribed</code></a> callback by invoking the <a href="Base.html#method-i-reject"><code>reject</code></a> method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ChatChannel</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationCable</span><span class="ruby-operator">::</span><span class="ruby-constant">Channel</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscribed</span>
+    <span class="ruby-ivar">@room</span> = <span class="ruby-constant">Chat</span><span class="ruby-operator">::</span><span class="ruby-constant">Room</span>[<span class="ruby-identifier">params</span>[<span class="ruby-value">:room_number</span>]]
+    <span class="ruby-identifier">reject</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">can_access?</span>(<span class="ruby-ivar">@room</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In this example, the subscription will be rejected if the <code>current_user</code> does not have access to the chat room. On the client-side, the <code>Channel#rejected</code> callback will get invoked when the server rejects the subscription request.</p>
+
   </section>
 
 
@@ -423,7 +525,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="action_methods-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 128</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">action_methods</span>
   <span class="ruby-ivar">@action_methods</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
     <span class="ruby-comment"># All public instance methods of this class, including ancestors</span>
@@ -484,7 +586,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 163</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">connection</span>, <span class="ruby-identifier">identifier</span>, <span class="ruby-identifier">params</span> = {})
   <span class="ruby-ivar">@connection</span> = <span class="ruby-identifier">connection</span>
   <span class="ruby-ivar">@identifier</span> = <span class="ruby-identifier">identifier</span>
@@ -550,7 +652,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="clear_action_methods-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 148</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear_action_methods!</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-ivar">@action_methods</span> = <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -594,7 +696,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="method_added-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 153</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_added</span>(<span class="ruby-identifier">name</span>) <span class="ruby-comment"># :doc:</span>
   <span class="ruby-keyword">super</span>
   <span class="ruby-identifier">clear_action_methods!</span>
@@ -652,7 +754,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="perform_action-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 184</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">perform_action</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-identifier">action</span> = <span class="ruby-identifier">extract_action</span>(<span class="ruby-identifier">data</span>)
 
@@ -705,7 +807,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="subscribe_to_channel-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 199</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscribe_to_channel</span>
   <span class="ruby-identifier">run_callbacks</span> <span class="ruby-value">:subscribe</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">subscribed</span>
@@ -762,7 +864,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="defer_subscription_confirmation-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 258</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">defer_subscription_confirmation!</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-ivar">@defer_subscription_confirmation_counter</span>.<span class="ruby-identifier">increment</span>
 <span class="ruby-keyword">end</span></pre>
@@ -806,7 +908,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="defer_subscription_confirmation-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 262</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 262</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">defer_subscription_confirmation?</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-ivar">@defer_subscription_confirmation_counter</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -850,7 +952,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="ensure_confirmation_sent-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 252</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 252</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ensure_confirmation_sent</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">subscription_rejected?</span>
   <span class="ruby-ivar">@defer_subscription_confirmation_counter</span>.<span class="ruby-identifier">decrement</span>
@@ -896,7 +998,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="reject-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 270</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reject</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-ivar">@reject_subscription</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
@@ -940,7 +1042,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="subscribed-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 226</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscribed</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-comment"># Override in subclasses</span>
 <span class="ruby-keyword">end</span></pre>
@@ -984,7 +1086,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="subscription_confirmation_sent-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 266</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscription_confirmation_sent?</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-ivar">@subscription_confirmation_sent</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1028,7 +1130,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="subscription_rejected-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 274</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 274</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscription_rejected?</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-ivar">@reject_subscription</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1072,7 +1174,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="transmit-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 239</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 239</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">transmit</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">via:</span> <span class="ruby-keyword">nil</span>) <span class="ruby-comment"># :doc:</span>
   <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">status</span> = <span class="ruby-node">&quot;#{self.class.name} transmitting #{data.inspect.truncate(300)}&quot;</span>
@@ -1125,7 +1227,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="unsubscribed-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 232</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/channel/base.rb, line 232</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unsubscribed</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-comment"># Override in subclasses</span>
 <span class="ruby-keyword">end</span></pre>

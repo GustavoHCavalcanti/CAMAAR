@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::Http::Headers-label-Action+Dispatch+HTTP+Headers">Action Dispatch HTTP Headers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::Http::Headers-label-Action+Dispatch+HTTP+Headers">Action Dispatch HTTP Headers</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -200,6 +229,27 @@
 <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;X-Custom-Header&quot;</span>] <span class="ruby-comment"># =&gt; &quot;token&quot;</span>
 </pre>
 
+<h1 id="class-ActionDispatch::Http::Headers-label-Action+Dispatch+HTTP+Headers"><a href="#class-ActionDispatch::Http::Headers-label-Action+Dispatch+HTTP+Headers">Action Dispatch HTTP <a href="Headers.html"><code>Headers</code></a></a></h1>
+
+<p>Provides access to the request’s HTTP headers from the environment.</p>
+
+<pre class="ruby"><span class="ruby-identifier">env</span>     = { <span class="ruby-string">&quot;CONTENT_TYPE&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;text/plain&quot;</span>, <span class="ruby-string">&quot;HTTP_USER_AGENT&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;curl/7.43.0&quot;</span> }
+<span class="ruby-identifier">headers</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">Headers</span>.<span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">env</span>)
+<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Content-Type&quot;</span>] <span class="ruby-comment"># =&gt; &quot;text/plain&quot;</span>
+<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;User-Agent&quot;</span>] <span class="ruby-comment"># =&gt; &quot;curl/7.43.0&quot;</span>
+</pre>
+
+<p>Also note that when headers are mapped to CGI-like variables by the <a href="../../Rack.html"><code>Rack</code></a> server, both dashes and underscores are converted to underscores. This ambiguity cannot be resolved at this stage anymore. Both underscores and dashes have to be interpreted as if they were originally sent as dashes.</p>
+
+<pre class="ruby"><span class="ruby-comment"># GET / HTTP/1.1</span>
+<span class="ruby-comment"># ...</span>
+<span class="ruby-comment"># User-Agent: curl/7.43.0</span>
+<span class="ruby-comment"># X_Custom_Header: token</span>
+
+<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;X_Custom_Header&quot;</span>] <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;X-Custom-Header&quot;</span>] <span class="ruby-comment"># =&gt; &quot;token&quot;</span>
+</pre>
+
   </section>
 
 
@@ -268,7 +318,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="from_hash-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 54</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">from_hash</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">new</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">hash</span>
 <span class="ruby-keyword">end</span></pre>
@@ -320,7 +370,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 63</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">get_header</span> <span class="ruby-identifier">env_name</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -364,7 +414,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 68</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">set_header</span> <span class="ruby-identifier">env_name</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -408,7 +458,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 73</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">add_header</span> <span class="ruby-identifier">env_name</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -452,7 +502,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 98</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">each_header</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -496,7 +546,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="env-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 118</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">env</span>; <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">env</span>.<span class="ruby-identifier">dup</span>; <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -538,7 +588,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fetch-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 90</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-constant">DEFAULT</span>)
   <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">fetch_header</span>(<span class="ruby-identifier">env_name</span>(<span class="ruby-identifier">key</span>)) <span class="ruby-keyword">do</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">default</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">default</span> <span class="ruby-operator">==</span> <span class="ruby-constant">DEFAULT</span>
@@ -625,7 +675,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="key-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 77</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">key?</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">has_header?</span> <span class="ruby-identifier">env_name</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -641,7 +691,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Headers.html#method-i-include-3F">include?</a>
+          Also aliased as: <a href="Headers.html#method-i-include-3F">include?</a>, include?
         </div>
 
 
@@ -673,7 +723,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="merge-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 104</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge</span>(<span class="ruby-identifier">headers_or_env</span>)
   <span class="ruby-identifier">headers</span> = <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">headers</span>
   <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">headers_or_env</span>)
@@ -719,7 +769,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="merge-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 112</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/headers.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge!</span>(<span class="ruby-identifier">headers_or_env</span>)
   <span class="ruby-identifier">headers_or_env</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">set_header</span> <span class="ruby-identifier">env_name</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">value</span>

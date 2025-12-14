@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionCable::Server::Base-label-Action+Cable+Server+Base">Action Cable Server Base</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionCable::Server::Base-label-Action+Cable+Server+Base">Action Cable Server Base</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -183,6 +212,12 @@
 
 <p>Also, this is the server instance used for broadcasting. See <a href="Broadcasting.html"><code>Broadcasting</code></a> for more information.</p>
 
+<h1 id="class-ActionCable::Server::Base-label-Action+Cable+Server+Base"><a href="#class-ActionCable::Server::Base-label-Action+Cable+Server+Base">Action Cable <a href="../Server.html"><code>Server</code></a> <a href="Base.html"><code>Base</code></a></a></h1>
+
+<p>A singleton <a href="../Server.html"><code>ActionCable::Server</code></a> instance is available via <a href="../../ActionCable.html#method-i-server"><code>ActionCable.server</code></a>. It’s used by the <a href="../../Rack.html"><code>Rack</code></a> process that starts the Action Cable server, but is also used by the user to reach the <a href="../RemoteConnections.html"><code>RemoteConnections</code></a> object, which is used for finding and disconnecting connections across all servers.</p>
+
+<p>Also, this is the server instance used for broadcasting. See <a href="Broadcasting.html"><code>Broadcasting</code></a> for more information.</p>
+
   </section>
 
 
@@ -266,7 +301,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="logger-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 26</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">logger</span>; <span class="ruby-identifier">config</span>.<span class="ruby-identifier">logger</span>; <span class="ruby-keyword">end</span></pre>
           </div>
 
@@ -308,7 +343,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 31</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">config:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">config</span>)
   <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
   <span class="ruby-ivar">@mutex</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">new</span>
@@ -362,7 +397,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 38</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">health_check_application</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;PATH_INFO&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">health_check_path</span>
   <span class="ruby-identifier">setup_heartbeat_timer</span>
@@ -408,7 +443,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="connection_identifiers-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 102</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connection_identifiers</span>
   <span class="ruby-identifier">config</span>.<span class="ruby-identifier">connection_class</span>.<span class="ruby-identifier">call</span>.<span class="ruby-identifier">identifiers</span>
 <span class="ruby-keyword">end</span></pre>
@@ -452,7 +487,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="disconnect-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 46</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disconnect</span>(<span class="ruby-identifier">identifiers</span>)
   <span class="ruby-identifier">remote_connections</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">identifiers</span>).<span class="ruby-identifier">disconnect</span>
 <span class="ruby-keyword">end</span></pre>
@@ -496,7 +531,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="event_loop-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 71</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">event_loop</span>
   <span class="ruby-ivar">@event_loop</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-ivar">@event_loop</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionCable</span><span class="ruby-operator">::</span><span class="ruby-constant">Connection</span><span class="ruby-operator">::</span><span class="ruby-constant">StreamEventLoop</span>.<span class="ruby-identifier">new</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -540,7 +575,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="pubsub-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 96</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pubsub</span>
   <span class="ruby-ivar">@pubsub</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-ivar">@pubsub</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">pubsub_adapter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -584,7 +619,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="remote_connections-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 67</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remote_connections</span>
   <span class="ruby-ivar">@remote_connections</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-ivar">@remote_connections</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">RemoteConnections</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -628,7 +663,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="restart-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 50</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">restart</span>
   <span class="ruby-identifier">connections</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">connection</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">close</span>(<span class="ruby-value">reason:</span> <span class="ruby-constant">ActionCable</span><span class="ruby-operator">::</span><span class="ruby-constant">INTERNAL</span>[<span class="ruby-value">:disconnect_reasons</span>][<span class="ruby-value">:server_restart</span>])
@@ -684,7 +719,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="worker_pool-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 91</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/base.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">worker_pool</span>
   <span class="ruby-ivar">@worker_pool</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-ivar">@worker_pool</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionCable</span><span class="ruby-operator">::</span><span class="ruby-constant">Server</span><span class="ruby-operator">::</span><span class="ruby-constant">Worker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">max_size:</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">worker_pool_size</span>) }
 <span class="ruby-keyword">end</span></pre>

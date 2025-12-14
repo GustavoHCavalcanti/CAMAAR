@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::MiddlewareStack-label-Action+Dispatch+MiddlewareStack">Action Dispatch MiddlewareStack</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::MiddlewareStack-label-Action+Dispatch+MiddlewareStack">Action Dispatch MiddlewareStack</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -191,6 +220,10 @@
 
 <p>Read more about <a href="https://guides.rubyonrails.org/rails_on_rack.html#action-dispatcher-middleware-stack">Rails middleware stack</a> in the guides.</p>
 
+<h1 id="class-ActionDispatch::MiddlewareStack-label-Action+Dispatch+MiddlewareStack"><a href="#class-ActionDispatch::MiddlewareStack-label-Action+Dispatch+MiddlewareStack">Action Dispatch <a href="MiddlewareStack.html"><code>MiddlewareStack</code></a></a></h1>
+
+<p>Read more about <a href="https://guides.rubyonrails.org/rails_on_rack.html#action-dispatcher-middleware-stack">Rails middleware stack</a> in the guides.</p>
+
   </section>
 
 
@@ -258,7 +291,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 76</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-ivar">@middlewares</span> = []
   <span class="ruby-keyword">yield</span>(<span class="ruby-keyword">self</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
@@ -311,7 +344,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 93</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">i</span>)
   <span class="ruby-identifier">middlewares</span>[<span class="ruby-identifier">i</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -355,7 +388,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="build-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 166</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build</span>(<span class="ruby-identifier">app</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">instrumenting</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">notifier</span>.<span class="ruby-identifier">listening?</span>(<span class="ruby-constant">InstrumentationProxy</span><span class="ruby-operator">::</span><span class="ruby-constant">EVENT_NAME</span>)
   <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">freeze</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-identifier">app</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
@@ -406,7 +439,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 131</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">target</span>)
   <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">name</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -452,7 +485,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="delete-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 139</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete!</span>(<span class="ruby-identifier">target</span>)
   <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">target</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;No such middleware to remove: #{target.inspect}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -498,7 +531,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 81</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@middlewares</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -542,7 +575,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="initialize_copy-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 102</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">middlewares</span> = <span class="ruby-identifier">other</span>.<span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">dup</span>
 <span class="ruby-keyword">end</span></pre>
@@ -586,7 +619,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="insert-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 106</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">klass</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">index</span> = <span class="ruby-identifier">assert_index</span>(<span class="ruby-identifier">index</span>, <span class="ruby-value">:before</span>)
   <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">build_middleware</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>))
@@ -603,7 +636,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="MiddlewareStack.html#method-i-insert_before">insert_before</a>
+          Also aliased as: <a href="MiddlewareStack.html#method-i-insert_before">insert_before</a>, insert_before
         </div>
 
 
@@ -635,7 +668,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="insert_after-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 114</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">insert_after</span>(<span class="ruby-identifier">index</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">index</span> = <span class="ruby-identifier">assert_index</span>(<span class="ruby-identifier">index</span>, <span class="ruby-value">:after</span>)
   <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -715,7 +748,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="last-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 89</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last</span>
   <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">last</span>
 <span class="ruby-keyword">end</span></pre>
@@ -759,7 +792,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="move-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 143</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">move</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">source</span>)
   <span class="ruby-identifier">source_index</span> = <span class="ruby-identifier">assert_index</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">:before</span>)
   <span class="ruby-identifier">source_middleware</span> = <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">source_index</span>)
@@ -779,7 +812,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="MiddlewareStack.html#method-i-move_before">move_before</a>
+          Also aliased as: <a href="MiddlewareStack.html#method-i-move_before">move_before</a>, move_before
         </div>
 
 
@@ -811,7 +844,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="move_after-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 153</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">move_after</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">source</span>)
   <span class="ruby-identifier">source_index</span> = <span class="ruby-identifier">assert_index</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">:after</span>)
   <span class="ruby-identifier">source_middleware</span> = <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">source_index</span>)
@@ -894,7 +927,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 85</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
   <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
@@ -938,7 +971,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="swap-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 120</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">swap</span>(<span class="ruby-identifier">target</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">index</span> = <span class="ruby-identifier">assert_index</span>(<span class="ruby-identifier">target</span>, <span class="ruby-value">:before</span>)
   <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">index</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -984,7 +1017,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="unshift-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 97</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unshift</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">build_middleware</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1028,7 +1061,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="use-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 161</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/stack.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">use</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">middlewares</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">build_middleware</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>))
 <span class="ruby-keyword">end</span></pre>

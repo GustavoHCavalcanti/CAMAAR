@@ -153,6 +153,10 @@
 
 <p>By default, all newly created <a href="../InboundEmail.html"><code>InboundEmail</code></a> records that have the status of <code>pending</code>, which is the default, will be scheduled for automatic, deferred routing.</p>
 
+<p>A newly received <a href="../InboundEmail.html"><code>InboundEmail</code></a> will not be routed synchronously as part of ingress controller’s receival. Instead, the routing will be done asynchronously, using a <a href="../RoutingJob.html"><code>RoutingJob</code></a>, to ensure maximum parallel capacity.</p>
+
+<p>By default, all newly created <a href="../InboundEmail.html"><code>InboundEmail</code></a> records that have the status of <code>pending</code>, which is the default, will be scheduled for automatic, deferred routing.</p>
+
   </section>
 
 
@@ -196,7 +200,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="route-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/routable.rb, line 21</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/routable.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">route</span>
   <span class="ruby-constant">ApplicationMailbox</span>.<span class="ruby-identifier">route</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -240,7 +244,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="route_later-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/routable.rb, line 16</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/routable.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">route_later</span>
   <span class="ruby-constant">ActionMailbox</span><span class="ruby-operator">::</span><span class="ruby-constant">RoutingJob</span>.<span class="ruby-identifier">perform_later</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>

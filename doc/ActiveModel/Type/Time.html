@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Time-label-Active+Model+Time+Type">Active Model Time Type</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Time-label-Active+Model+Time+Type">Active Model Time Type</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -193,6 +222,41 @@
 <span class="ruby-keyword">end</span>
 </pre>
 
+<h1 id="class-ActiveModel::Type::Time-label-Active+Model+Time+Type"><a href="#class-ActiveModel::Type::Time-label-Active+Model+Time+Type">Active <a href="../Model.html"><code>Model</code></a> Time Type</a></h1>
+
+<p>Attribute type for time of day representation. It is registered under the <code>:time</code> key.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Event</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:start</span>, <span class="ruby-value">:time</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a href="String.html"><code>String</code></a> values are parsed using the ISO 8601 datetime format, but are normalized to have a date of 2000-01-01 and be in the UTC time zone.</p>
+
+<pre class="ruby"><span class="ruby-identifier">event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span> = <span class="ruby-string">&quot;2004-10-25T01:23:45-06:00&quot;</span>
+
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">class</span> <span class="ruby-comment"># =&gt; Time</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>       <span class="ruby-comment"># =&gt; 2000-01-01 07:23:45 UTC</span>
+</pre>
+
+<p>Partial time-only formats are also accepted.</p>
+
+<pre class="ruby"><span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span> = <span class="ruby-string">&quot;00:01:02+03:00&quot;</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span> <span class="ruby-comment"># =&gt; 1999-12-31 21:01:02 UTC</span>
+</pre>
+
+<p>The degree of sub-second precision can be customized when declaring an attribute:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Event</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:start</span>, <span class="ruby-value">:time</span>, <span class="ruby-value">precision:</span> <span class="ruby-value">4</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
   </section>
 
 
@@ -236,7 +300,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/time.rb, line 45</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/time.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type</span>
   <span class="ruby-value">:time</span>
 <span class="ruby-keyword">end</span></pre>
@@ -280,7 +344,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="user_input_in_time_zone-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/time.rb, line 49</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/time.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">user_input_in_time_zone</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">present?</span>
 

@@ -108,6 +108,30 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActiveModel::Attributes-label-Active+Model+Attributes">Active Model Attributes</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Attributes-label-Examples">Examples</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -220,6 +244,28 @@
 <span class="ruby-identifier">person</span>.<span class="ruby-identifier">active</span> <span class="ruby-comment"># =&gt; true</span>
 </pre>
 
+<h1 id="module-ActiveModel::Attributes-label-Active+Model+Attributes"><a href="#module-ActiveModel::Attributes-label-Active+Model+Attributes">Active Model Attributes</a></h1>
+
+<p>The <a href="Attributes.html"><code>Attributes</code></a> module allows models to define attributes beyond simple Ruby readers and writers. Similar to Active Record attributes, which are typically inferred from the database schema, Active <a href="Model.html"><code>Model</code></a> <a href="Attributes.html"><code>Attributes</code></a> are aware of data types, can have default values, and can handle casting and serialization.</p>
+
+<p>To use <a href="Attributes.html"><code>Attributes</code></a>, include the module in your model class and define your attributes using the <code>attribute</code> macro. It accepts a name, a type, a default value, and any other options supported by the attribute type.</p>
+
+<h4 id="module-ActiveModel::Attributes-label-Examples"><a href="#module-ActiveModel::Attributes-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:name</span>, <span class="ruby-value">:string</span>
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:active</span>, <span class="ruby-value">:boolean</span>, <span class="ruby-value">default:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;Volmer&quot;</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;Volmer&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">active</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
   </section>
 
 
@@ -263,7 +309,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attribute_names-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/attributes.rb, line 146</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/attributes.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attribute_names</span>
   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">keys</span>
 <span class="ruby-keyword">end</span></pre>
@@ -318,7 +364,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attributes-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/attributes.rb, line 131</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/attributes.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes</span>
   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">to_hash</span>
 <span class="ruby-keyword">end</span></pre>

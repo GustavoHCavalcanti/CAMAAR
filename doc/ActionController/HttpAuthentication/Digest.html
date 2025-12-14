@@ -115,6 +115,37 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActionController::HttpAuthentication::Digest-label-HTTP+Digest+authentication">HTTP Digest authentication</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#module-ActionController::HttpAuthentication::Digest-label-Simple+Digest+example">Simple Digest example</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionController::HttpAuthentication::Digest-label-Notes">Notes</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -242,6 +273,43 @@
 
 <p>In rare instances, web servers or front proxies strip authorization headers before they reach your application. You can debug this situation by logging all environment variables, and check for HTTP_AUTHORIZATION, amongst others.</p>
 
+<h1 id="module-ActionController::HttpAuthentication::Digest-label-HTTP+Digest+authentication"><a href="#module-ActionController::HttpAuthentication::Digest-label-HTTP+Digest+authentication">HTTP <a href="Digest.html"><code>Digest</code></a> authentication</a></h1>
+
+<h3 id="module-ActionController::HttpAuthentication::Digest-label-Simple+Digest+example"><a href="#module-ActionController::HttpAuthentication::Digest-label-Simple+Digest+example">Simple <a href="Digest.html"><code>Digest</code></a> example</a></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;openssl&quot;</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-constant">REALM</span> = <span class="ruby-string">&quot;SuperSecret&quot;</span>
+  <span class="ruby-constant">USERS</span> = {<span class="ruby-string">&quot;dhh&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;secret&quot;</span>, <span class="ruby-comment">#plain text password</span>
+           <span class="ruby-string">&quot;dap&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>([<span class="ruby-string">&quot;dap&quot;</span>,<span class="ruby-constant">REALM</span>,<span class="ruby-string">&quot;secret&quot;</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;:&quot;</span>))}  <span class="ruby-comment">#ha1 digest password</span>
+
+  <span class="ruby-identifier">before_action</span> <span class="ruby-value">:authenticate</span>, <span class="ruby-value">except:</span> [<span class="ruby-value">:index</span>]
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">plain:</span> <span class="ruby-string">&quot;Everyone can see me!&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edit</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">plain:</span> <span class="ruby-string">&quot;I&#39;m only accessible if you know the password&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">authenticate</span>
+      <span class="ruby-identifier">authenticate_or_request_with_http_digest</span>(<span class="ruby-constant">REALM</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">username</span><span class="ruby-operator">|</span>
+        <span class="ruby-constant">USERS</span>[<span class="ruby-identifier">username</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h3 id="module-ActionController::HttpAuthentication::Digest-label-Notes"><a href="#module-ActionController::HttpAuthentication::Digest-label-Notes">Notes</a></h3>
+
+<p>The <code>authenticate_or_request_with_http_digest</code> block must return the user’s password or the ha1 digest hash so the framework can appropriately hash to check the user’s credentials. Returning <code>nil</code> will cause authentication to fail.</p>
+
+<p>Storing the ha1 hash: MD5(username:realm:password), is better than storing a plain password. If the password file or database is compromised, the attacker would be able to use the ha1 hash to authenticate as the user at this <code>realm</code>, but would not have the user’s password to try using at other sites.</p>
+
+<p>In rare instances, web servers or front proxies strip authorization headers before they reach your application. You can debug this situation by logging all environment variables, and check for HTTP_AUTHORIZATION, amongst others.</p>
+
   </section>
 
 
@@ -285,7 +353,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="authenticate-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 215</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">authenticate</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">realm</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">password_procedure</span>)
   <span class="ruby-identifier">request</span>.<span class="ruby-identifier">authorization</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">validate_digest_response</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">realm</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">password_procedure</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -329,7 +397,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="authentication_header-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 274</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 274</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">authentication_header</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">realm</span>)
   <span class="ruby-identifier">secret_key</span> = <span class="ruby-identifier">secret_token</span>(<span class="ruby-identifier">controller</span>.<span class="ruby-identifier">request</span>)
   <span class="ruby-identifier">nonce</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-identifier">secret_key</span>)
@@ -376,7 +444,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="authentication_request-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 281</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">authentication_request</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">realm</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;HTTP Digest: Access denied.\n&quot;</span>
   <span class="ruby-identifier">authentication_header</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">realm</span>)
@@ -423,7 +491,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="decode_credentials-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 267</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 267</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">decode_credentials</span>(<span class="ruby-identifier">header</span>)
   <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>[<span class="ruby-identifier">header</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^Digest\s+/</span>, <span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pair</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">pair</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;=&quot;</span>, <span class="ruby-value">2</span>)
@@ -470,7 +538,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="decode_credentials_header-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 263</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 263</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">decode_credentials_header</span>(<span class="ruby-identifier">request</span>)
   <span class="ruby-identifier">decode_credentials</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">authorization</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -514,7 +582,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="encode_credentials-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 258</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">encode_credentials</span>(<span class="ruby-identifier">http_method</span>, <span class="ruby-identifier">credentials</span>, <span class="ruby-identifier">password</span>, <span class="ruby-identifier">password_is_ha1</span>)
   <span class="ruby-identifier">credentials</span>[<span class="ruby-value">:response</span>] = <span class="ruby-identifier">expected_response</span>(<span class="ruby-identifier">http_method</span>, <span class="ruby-identifier">credentials</span>[<span class="ruby-value">:uri</span>], <span class="ruby-identifier">credentials</span>, <span class="ruby-identifier">password</span>, <span class="ruby-identifier">password_is_ha1</span>)
   <span class="ruby-string">&quot;Digest &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">credentials</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{v[0]}=&#39;#{v[1]}&#39;&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>)
@@ -559,7 +627,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="expected_response-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 248</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 248</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expected_response</span>(<span class="ruby-identifier">http_method</span>, <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">credentials</span>, <span class="ruby-identifier">password</span>, <span class="ruby-identifier">password_is_ha1</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">ha1</span> = <span class="ruby-identifier">password_is_ha1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">password</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">ha1</span>(<span class="ruby-identifier">credentials</span>, <span class="ruby-identifier">password</span>)
   <span class="ruby-identifier">ha2</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>([<span class="ruby-identifier">http_method</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>, <span class="ruby-identifier">uri</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;:&quot;</span>))
@@ -605,7 +673,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="ha1-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 254</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 254</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ha1</span>(<span class="ruby-identifier">credentials</span>, <span class="ruby-identifier">password</span>)
   <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>([<span class="ruby-identifier">credentials</span>[<span class="ruby-value">:username</span>], <span class="ruby-identifier">credentials</span>[<span class="ruby-value">:realm</span>], <span class="ruby-identifier">password</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;:&quot;</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -649,7 +717,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="nonce-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 330</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 330</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nonce</span>(<span class="ruby-identifier">secret_key</span>, <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
   <span class="ruby-identifier">t</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-identifier">hashed</span> = [<span class="ruby-identifier">t</span>, <span class="ruby-identifier">secret_key</span>]
@@ -708,7 +776,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="opaque-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 348</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">opaque</span>(<span class="ruby-identifier">secret_key</span>)
   <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">secret_key</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -752,7 +820,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="secret_token-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 288</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 288</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">secret_token</span>(<span class="ruby-identifier">request</span>)
   <span class="ruby-identifier">key_generator</span>  = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">key_generator</span>
   <span class="ruby-identifier">http_auth_salt</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">http_auth_salt</span>
@@ -798,7 +866,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="validate_digest_response-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 222</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_digest_response</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">realm</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">password_procedure</span>)
   <span class="ruby-identifier">secret_key</span>  = <span class="ruby-identifier">secret_token</span>(<span class="ruby-identifier">request</span>)
   <span class="ruby-identifier">credentials</span> = <span class="ruby-identifier">decode_credentials_header</span>(<span class="ruby-identifier">request</span>)
@@ -860,7 +928,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="validate_nonce-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 341</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/http_authentication.rb, line 341</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_nonce</span>(<span class="ruby-identifier">secret_key</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">seconds_to_timeout</span> = <span class="ruby-value">5</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">t</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">value</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;:&quot;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_i</span>

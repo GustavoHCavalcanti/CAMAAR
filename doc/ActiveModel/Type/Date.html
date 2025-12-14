@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Date-label-Active+Model+Date+Type">Active Model Date Type</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Date-label-Active+Model+Date+Type">Active Model Date Type</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -179,6 +208,27 @@
 
 <p><a href="String.html"><code>String</code></a> values are parsed using the ISO 8601 date format. Any other values are cast using their <code>to_date</code> method, if it exists.</p>
 
+<h1 id="class-ActiveModel::Type::Date-label-Active+Model+Date+Type"><a href="#class-ActiveModel::Type::Date-label-Active+Model+Date+Type">Active <a href="../Model.html"><code>Model</code></a> Date Type</a></h1>
+
+<p>Attribute type for date representation. It is registered under the <code>:date</code> key.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:birthday</span>, <span class="ruby-value">:date</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">birthday</span> = <span class="ruby-string">&quot;1989-07-13&quot;</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">birthday</span>.<span class="ruby-identifier">class</span> <span class="ruby-comment"># =&gt; Date</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">birthday</span>.<span class="ruby-identifier">year</span>  <span class="ruby-comment"># =&gt; 1989</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">birthday</span>.<span class="ruby-identifier">month</span> <span class="ruby-comment"># =&gt; 7</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">birthday</span>.<span class="ruby-identifier">day</span>   <span class="ruby-comment"># =&gt; 13</span>
+</pre>
+
+<p><a href="String.html"><code>String</code></a> values are parsed using the ISO 8601 date format. Any other values are cast using their <code>to_date</code> method, if it exists.</p>
+
   </section>
 
 
@@ -239,7 +289,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/date.rb, line 31</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/date.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type</span>
   <span class="ruby-value">:date</span>
 <span class="ruby-keyword">end</span></pre>
@@ -283,7 +333,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type_cast_for_schema-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/date.rb, line 35</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/date.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type_cast_for_schema</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_fs</span>(<span class="ruby-value">:db</span>).<span class="ruby-identifier">inspect</span>
 <span class="ruby-keyword">end</span></pre>

@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionView::RecordIdentifier-label-Action+View+Record+Identifier">Action View Record Identifier</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionView::RecordIdentifier-label-Action+View+Record+Identifier">Action View Record Identifier</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -194,6 +223,53 @@
 <span class="ruby-keyword">end</span>
 </pre>
 
+<h1 id="module-ActionView::RecordIdentifier-label-Action+View+Record+Identifier"><a href="#module-ActionView::RecordIdentifier-label-Action+View+Record+Identifier">Action View Record Identifier</a></h1>
+
+<p><a href="RecordIdentifier.html"><code>RecordIdentifier</code></a> encapsulates methods used by various <a href="../ActionView.html"><code>ActionView</code></a> helpers to associate records with DOM elements.</p>
+
+<p>Consider for example the following code that form of post:</p>
+
+<pre>&lt;%= form_with(model: post) do |f| %&gt;
+  &lt;%= f.text_field :body %&gt;
+&lt;% end %&gt;</pre>
+
+<p>When <code>post</code> is a new, unsaved <a href="../ActiveRecord/Base.html"><code>ActiveRecord::Base</code></a> instance, the resulting HTML is:</p>
+
+<pre>&lt;form class=&quot;new_post&quot; id=&quot;new_post&quot; action=&quot;/posts&quot; accept-charset=&quot;UTF-8&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;post[body]&quot; id=&quot;post_body&quot; /&gt;
+&lt;/form&gt;</pre>
+
+<p>When <code>post</code> is a persisted <a href="../ActiveRecord/Base.html"><code>ActiveRecord::Base</code></a> instance, the resulting HTML is:</p>
+
+<pre>&lt;form class=&quot;edit_post&quot; id=&quot;edit_post_42&quot; action=&quot;/posts/42&quot; accept-charset=&quot;UTF-8&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; value=&quot;What a wonderful world!&quot; name=&quot;post[body]&quot; id=&quot;post_body&quot; /&gt;
+&lt;/form&gt;</pre>
+
+<p>In both cases, the <code>id</code> and <code>class</code> of the wrapping DOM element are automatically generated, following naming conventions encapsulated by the <a href="RecordIdentifier.html"><code>RecordIdentifier</code></a> methods <a href="RecordIdentifier.html#method-i-dom_id"><code>dom_id</code></a> and <a href="RecordIdentifier.html#method-i-dom_class"><code>dom_class</code></a>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">dom_id</span>(<span class="ruby-constant">Post</span>)             <span class="ruby-comment"># =&gt; &quot;new_post&quot;</span>
+<span class="ruby-identifier">dom_class</span>(<span class="ruby-constant">Post</span>)          <span class="ruby-comment"># =&gt; &quot;post&quot;</span>
+<span class="ruby-identifier">dom_id</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>)         <span class="ruby-comment"># =&gt; &quot;new_post&quot;</span>
+<span class="ruby-identifier">dom_class</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>)      <span class="ruby-comment"># =&gt; &quot;post&quot;</span>
+<span class="ruby-identifier">dom_id</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span> <span class="ruby-value">42</span>)     <span class="ruby-comment"># =&gt; &quot;post_42&quot;</span>
+<span class="ruby-identifier">dom_class</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span> <span class="ruby-value">42</span>)  <span class="ruby-comment"># =&gt; &quot;post&quot;</span>
+</pre>
+
+<p>Note that these methods do not strictly require <code>Post</code> to be a subclass of <a href="../ActiveRecord/Base.html"><code>ActiveRecord::Base</code></a>. Any <code>Post</code> class will work as long as its instances respond to <code>to_key</code> and <code>model_name</code>, given that <code>model_name</code> responds to <code>param_key</code>. For instance:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:to_key</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">model_name</span>
+    <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">param_key:</span> <span class="ruby-string">&#39;post&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">find</span>(<span class="ruby-identifier">id</span>)
+    <span class="ruby-identifier">new</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">to_key</span> = [<span class="ruby-identifier">id</span>] }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
   </section>
 
 
@@ -262,7 +338,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="dom_class-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 78</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dom_class</span>(<span class="ruby-identifier">record_or_class</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">singular</span> = <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">param_key</span>
   <span class="ruby-identifier">prefix</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{prefix}#{JOIN}#{singular}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">singular</span>
@@ -317,7 +393,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="dom_id-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 93</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dom_id</span>(<span class="ruby-identifier">record_or_class</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;dom_id must be passed a record_or_class as the first argument, you passed #{record_or_class.inspect}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">record_or_class</span>
 
@@ -378,7 +454,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="dom_target-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 111</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dom_target</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">objects</span>)
   <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">object</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">case</span> <span class="ruby-identifier">object</span>
@@ -446,7 +522,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="record_key_for_dom_id-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 134</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/record_identifier.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">record_key_for_dom_id</span>(<span class="ruby-identifier">record</span>) <span class="ruby-comment"># :doc:</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">convert_to_model</span>(<span class="ruby-identifier">record</span>).<span class="ruby-identifier">to_key</span>
   <span class="ruby-identifier">key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">all?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">JOIN</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>

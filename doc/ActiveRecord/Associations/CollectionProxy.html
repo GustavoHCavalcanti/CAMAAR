@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveRecord::Associations::CollectionProxy-label-Active+Record+Collection+Proxy">Active Record Collection Proxy</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveRecord::Associations::CollectionProxy-label-Active+Record+Collection+Proxy">Active Record Collection Proxy</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -252,6 +281,30 @@
 
 <p>is computed directly through SQL and does not trigger by itself the instantiation of the actual post records.</p>
 
+<h1 id="class-ActiveRecord::Associations::CollectionProxy-label-Active+Record+Collection+Proxy"><a href="#class-ActiveRecord::Associations::CollectionProxy-label-Active+Record+Collection+Proxy">Active Record Collection Proxy</a></h1>
+
+<p>Collection proxies in Active Record are middlemen between an <code>association</code>, and its <code>target</code> result set.</p>
+
+<p>For example, given</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Blog</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> <span class="ruby-value">:posts</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">blog</span> = <span class="ruby-constant">Blog</span>.<span class="ruby-identifier">first</span>
+</pre>
+
+<p>The collection proxy returned by <code>blog.posts</code> is built from a <code>:has_many</code> <code>association</code>, and delegates to a collection of posts as the <code>target</code>.</p>
+
+<p>This class delegates unknown methods to the <code>association</code>‘s relation class via a delegate cache.</p>
+
+<p>The <code>target</code> result set is not loaded until needed. For example,</p>
+
+<pre class="ruby"><span class="ruby-identifier">blog</span>.<span class="ruby-identifier">posts</span>.<span class="ruby-identifier">count</span>
+</pre>
+
+<p>is computed directly through SQL and does not trigger by itself the instantiation of the actual post records.</p>
+
   </section>
 
 
@@ -295,7 +348,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1049</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1049</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">records</span>)
   <span class="ruby-identifier">proxy_association</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">records</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -329,7 +382,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="CollectionProxy.html#method-i-push">push</a>, <a href="CollectionProxy.html#method-i-append">append</a>, <a href="CollectionProxy.html#method-i-concat">concat</a>
+          Also aliased as: <a href="CollectionProxy.html#method-i-push">push</a>, <a href="CollectionProxy.html#method-i-append">append</a>, <a href="CollectionProxy.html#method-i-concat">concat</a>, push, append, concat
         </div>
 
 
@@ -361,7 +414,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 980</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 980</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-identifier">load_target</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
 <span class="ruby-keyword">end</span></pre>
@@ -432,7 +485,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="any-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 836</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 836</span>
       </pre>
           </div>
 
@@ -539,7 +592,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="build-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 318</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 318</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build</span>(<span class="ruby-identifier">attributes</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -576,7 +629,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="CollectionProxy.html#method-i-new">new</a>
+          Also aliased as: <a href="CollectionProxy.html#method-i-new">new</a>, new
         </div>
 
 
@@ -608,7 +661,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="calculate-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 724</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 724</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">calculate</span>(<span class="ruby-identifier">operation</span>, <span class="ruby-identifier">column_name</span>)
   <span class="ruby-identifier">null_scope?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">calculate</span>(<span class="ruby-identifier">operation</span>, <span class="ruby-identifier">column_name</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -657,7 +710,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="clear-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1066</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1066</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear</span>
   <span class="ruby-identifier">delete_all</span>
   <span class="ruby-keyword">self</span>
@@ -740,7 +793,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="count-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 733</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 733</span>
       </pre>
           </div>
 
@@ -801,7 +854,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 349</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 349</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">attributes</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -869,7 +922,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 365</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 365</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create!</span>(<span class="ruby-identifier">attributes</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -925,7 +978,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 620</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 620</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">records</span>)
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">records</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">reset_scope</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -937,7 +990,7 @@
 
 <p>For <code>has_many :through</code> associations, the default deletion strategy is <code>:delete_all</code>.</p>
 
-<p>For <a href="../../vendor/bundle/ruby/3_3_0/gems/activerecord-8_1_1/lib/active_record/associations/builder/has_many_rb.html">has_many</a> associations, the default deletion strategy is <code>:nullify</code>. This sets the foreign keys to <code>NULL</code>.</p>
+<p>For <a href="../../vendor/bundle/ruby/3_2_0/gems/activerecord-8_1_1/lib/active_record/associations/builder/has_many_rb.html">has_many</a> associations, the default deletion strategy is <code>:nullify</code>. This sets the foreign keys to <code>NULL</code>.</p>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
   <span class="ruby-identifier">has_many</span> <span class="ruby-value">:pets</span> <span class="ruby-comment"># dependent: :nullify option by default</span>
@@ -1079,7 +1132,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="delete_all-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 474</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 474</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_all</span>(<span class="ruby-identifier">dependent</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">delete_all</span>(<span class="ruby-identifier">dependent</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">reset_scope</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -1091,7 +1144,7 @@
 
 <p>For <code>has_many :through</code> associations, the default deletion strategy is <code>:delete_all</code>.</p>
 
-<p>For <a href="../../vendor/bundle/ruby/3_3_0/gems/activerecord-8_1_1/lib/active_record/associations/builder/has_many_rb.html">has_many</a> associations, the default deletion strategy is <code>:nullify</code>. This sets the foreign keys to <code>NULL</code>.</p>
+<p>For <a href="../../vendor/bundle/ruby/3_2_0/gems/activerecord-8_1_1/lib/active_record/associations/builder/has_many_rb.html">has_many</a> associations, the default deletion strategy is <code>:nullify</code>. This sets the foreign keys to <code>NULL</code>.</p>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
   <span class="ruby-identifier">has_many</span> <span class="ruby-value">:pets</span> <span class="ruby-comment"># dependent: :nullify option by default</span>
@@ -1123,7 +1176,7 @@
 <span class="ruby-comment">#    ]</span>
 </pre>
 
-<p>Both <a href="../../vendor/bundle/ruby/3_3_0/gems/activerecord-8_1_1/lib/active_record/associations/builder/has_many_rb.html">has_many</a> and <code>has_many :through</code> dependencies default to the <code>:delete_all</code> strategy if the <code>:dependent</code> option is set to <code>:destroy</code>. Records are not instantiated and callbacks will not be fired.</p>
+<p>Both <a href="../../vendor/bundle/ruby/3_2_0/gems/activerecord-8_1_1/lib/active_record/associations/builder/has_many_rb.html">has_many</a> and <code>has_many :through</code> dependencies default to the <code>:delete_all</code> strategy if the <code>:dependent</code> option is set to <code>:destroy</code>. Records are not instantiated and callbacks will not be fired.</p>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
   <span class="ruby-identifier">has_many</span> <span class="ruby-value">:pets</span>, <span class="ruby-value">dependent:</span> <span class="ruby-value">:destroy</span>
@@ -1197,7 +1250,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 692</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 692</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">records</span>)
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">destroy</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">records</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">reset_scope</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -1307,7 +1360,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="destroy_all-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 501</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 501</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy_all</span>
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">destroy_all</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">reset_scope</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -1374,7 +1427,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="distinct-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 697</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 697</span>
       </pre>
           </div>
 
@@ -1436,7 +1489,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="empty-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 831</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 831</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">empty?</span>
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1496,7 +1549,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fifth-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 201</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 201</span>
       </pre>
           </div>
 
@@ -1538,7 +1591,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="find-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 138</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">find</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
@@ -1615,7 +1668,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="first-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 144</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 144</span>
       </pre>
           </div>
 
@@ -1684,7 +1737,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="forty_two-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 209</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 209</span>
       </pre>
           </div>
 
@@ -1729,7 +1782,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fourth-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 193</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 193</span>
       </pre>
           </div>
 
@@ -1771,7 +1824,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 927</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 927</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">record</span>)
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@association</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">record</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1825,7 +1878,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="last-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 259</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last</span>(<span class="ruby-identifier">limit</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">load_target</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">find_from_target?</span>
   <span class="ruby-keyword">super</span>
@@ -1902,7 +1955,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="length-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 787</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 787</span>
       </pre>
           </div>
 
@@ -1961,7 +2014,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="load_target-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 44</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_target</span>
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">load_target</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2040,7 +2093,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="loaded-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 53</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">loaded?</span>
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">loaded?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2061,7 +2114,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="CollectionProxy.html#method-i-loaded">loaded</a>
+          Also aliased as: <a href="CollectionProxy.html#method-i-loaded">loaded</a>, loaded
         </div>
 
 
@@ -2096,7 +2149,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="many-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 877</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 877</span>
       </pre>
           </div>
 
@@ -2205,7 +2258,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="pluck-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 728</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 728</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pluck</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">column_names</span>)
   <span class="ruby-identifier">null_scope?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">scope</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">column_names</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2254,7 +2307,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="proxy_association-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 944</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 944</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">proxy_association</span>
   <span class="ruby-ivar">@association</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2345,7 +2398,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="reload-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1085</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1085</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reload</span>
   <span class="ruby-identifier">proxy_association</span>.<span class="ruby-identifier">reload</span>(<span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">reset_scope</span>
@@ -2404,7 +2457,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="replace-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 391</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 391</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace</span>(<span class="ruby-identifier">other_array</span>)
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-identifier">other_array</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2469,7 +2522,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1106</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 1106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>
   <span class="ruby-identifier">proxy_association</span>.<span class="ruby-identifier">reset</span>
   <span class="ruby-identifier">proxy_association</span>.<span class="ruby-identifier">reset_scope</span>
@@ -2531,7 +2584,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="scope-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 949</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 949</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scope</span>
   <span class="ruby-ivar">@scope</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">scope</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2578,7 +2631,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="second-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 177</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 177</span>
       </pre>
           </div>
 
@@ -2623,7 +2676,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="second_to_last-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 226</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 226</span>
       </pre>
           </div>
 
@@ -2668,7 +2721,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 59</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 59</span>
       </pre>
           </div>
 
@@ -2753,7 +2806,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 782</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 782</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2818,7 +2871,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="take-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 289</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 289</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">take</span>(<span class="ruby-identifier">limit</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">load_target</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">find_from_target?</span>
   <span class="ruby-keyword">super</span>
@@ -2892,7 +2945,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="target-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 40</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target</span>
   <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">target</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2939,7 +2992,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="third-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 185</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 185</span>
       </pre>
           </div>
 
@@ -2984,7 +3037,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="third_to_last-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 218</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/associations/collection_proxy.rb, line 218</span>
       </pre>
           </div>
 

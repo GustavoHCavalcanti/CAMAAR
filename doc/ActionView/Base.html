@@ -146,6 +146,68 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-ActionView::Base-label-Action+View+Base">Action View Base</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-ActionView::Base-label-ERB">ERB</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-ActionView::Base-label-Using+sub+templates">Using sub templates</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionView::Base-label-Passing+local+variables+to+sub+templates">Passing local variables to sub templates</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionView::Base-label-Template+caching">Template caching</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+      <a href="#class-ActionView::Base-label-Builder">Builder</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -228,6 +290,139 @@
 
   <section class="description">
     
+<h1 id="class-ActionView::Base-label-Action+View+Base"><a href="#class-ActionView::Base-label-Action+View+Base">Action View Base</a></h1>
+
+<p>Action View templates can be written in several ways. If the template file has a <code>.erb</code> extension, then it uses the <a href="https://rubygems.org/gems/erubi">erubi</a> template system which can embed Ruby into an HTML document. If the template file has a <code>.builder</code> extension, then Jim Weirich’s <a href="../Builder/XmlMarkup.html"><code>Builder::XmlMarkup</code></a> library is used.</p>
+
+<h2 id="class-ActionView::Base-label-ERB"><a href="#class-ActionView::Base-label-ERB"><a href="../ERB.html"><code>ERB</code></a></a></h2>
+
+<p>You trigger <a href="../ERB.html"><code>ERB</code></a> by using embeddings such as <code>&lt;% %&gt;</code>, <code>&lt;% -%&gt;</code>, and <code>&lt;%= %&gt;</code>. The <code>&lt;%= %&gt;</code> tag set is used when you want output. Consider the following loop for names:</p>
+
+<pre>&lt;b&gt;Names of all the people&lt;/b&gt;
+&lt;% @people.each do |person| %&gt;
+  Name: &lt;%= person.name %&gt;&lt;br/&gt;
+&lt;% end %&gt;</pre>
+
+<p>The loop is set up in regular embedding tags <code>&lt;% %&gt;</code>, and the name is written using the output embedding tag <code>&lt;%= %&gt;</code>. Note that this is not just a usage suggestion. Regular output functions like print or puts won’t work with <a href="../ERB.html"><code>ERB</code></a> templates. So this would be wrong:</p>
+
+<pre>&lt;%# WRONG %&gt;
+Hi, Mr. &lt;% puts &quot;Frodo&quot; %&gt;</pre>
+
+<p>If you absolutely must write from within a function use <code>concat</code>.</p>
+
+<p>When on a line that only contains whitespaces except for the tag, <code>&lt;% %&gt;</code> suppresses leading and trailing whitespace, including the trailing newline. <code>&lt;% %&gt;</code> and <code>&lt;%- -%&gt;</code> are the same. Note however that <code>&lt;%= %&gt;</code> and <code>&lt;%= -%&gt;</code> are different: only the latter removes trailing whitespaces.</p>
+
+<h3 id="class-ActionView::Base-label-Using+sub+templates"><a href="#class-ActionView::Base-label-Using+sub+templates">Using sub templates</a></h3>
+
+<p>Using sub templates allows you to sidestep tedious replication and extract common display structures in shared templates. The classic example is the use of a header and footer (even though the Action Pack-way would be to use Layouts):</p>
+
+<pre>&lt;%= render &quot;application/header&quot; %&gt;
+Something really specific and terrific
+&lt;%= render &quot;application/footer&quot; %&gt;</pre>
+
+<p>As you see, we use the output embeddings for the render methods. The render call itself will just return a string holding the result of the rendering. The output embedding writes it to the current template.</p>
+
+<p>But you don’t have to restrict yourself to static includes. Templates can share variables amongst themselves by using instance variables defined using the regular embedding tags. Like this:</p>
+
+<pre>&lt;% @page_title = &quot;A Wonderful Hello&quot; %&gt;
+&lt;%= render &quot;application/header&quot; %&gt;</pre>
+
+<p>Now the header can pick up on the <code>@page_title</code> variable and use it for outputting a title tag:</p>
+
+<pre>&lt;title&gt;&lt;%= @page_title %&gt;&lt;/title&gt;</pre>
+
+<h3 id="class-ActionView::Base-label-Passing+local+variables+to+sub+templates"><a href="#class-ActionView::Base-label-Passing+local+variables+to+sub+templates">Passing local variables to sub templates</a></h3>
+
+<p>You can pass local variables to sub templates by using a hash with the variable names as keys and the objects as values:</p>
+
+<pre>&lt;%= render &quot;application/header&quot;, { headline: &quot;Welcome&quot;, person: person } %&gt;</pre>
+
+<p>These can now be accessed in <code>application/header</code> with:</p>
+
+<pre>Headline: &lt;%= headline %&gt;
+First name: &lt;%= person.first_name %&gt;</pre>
+
+<p>The local variables passed to sub templates can be accessed as a hash using the <code>local_assigns</code> hash. This lets you access the variables as:</p>
+
+<pre>Headline: &lt;%= local_assigns[:headline] %&gt;</pre>
+
+<p>This is useful in cases where you aren’t sure if the local variable has been assigned. Alternatively, you could also use <code>defined? headline</code> to first check if the variable has been assigned before using it.</p>
+
+<p>By default, templates will accept any <code>locals</code> as keyword arguments. To restrict what <code>locals</code> a template accepts, add a <code>locals:</code> magic comment:</p>
+
+<pre>&lt;%# locals: (headline:) %&gt;
+
+Headline: &lt;%= headline %&gt;</pre>
+
+<p>In cases where the local variables are optional, declare the keyword argument with a default value:</p>
+
+<pre>&lt;%# locals: (headline: nil) %&gt;
+
+&lt;% unless headline.nil? %&gt;
+Headline: &lt;%= headline %&gt;
+&lt;% end %&gt;</pre>
+
+<p>Read more about strict locals in <a href="https://guides.rubyonrails.org/action_view_overview.html#strict-locals">Action View Overview</a> in the guides.</p>
+
+<h3 id="class-ActionView::Base-label-Template+caching"><a href="#class-ActionView::Base-label-Template+caching"><a href="../Template.html"><code>Template</code></a> caching</a></h3>
+
+<p>By default, Rails will compile each template to a method in order to render it. When you alter a template, Rails will check the file’s modification time and recompile it in development mode.</p>
+
+<h2 id="class-ActionView::Base-label-Builder"><a href="#class-ActionView::Base-label-Builder"><a href="../Builder.html"><code>Builder</code></a></a></h2>
+
+<p><a href="../Builder.html"><code>Builder</code></a> templates are a more programmatic alternative to <a href="../ERB.html"><code>ERB</code></a>. They are especially useful for generating XML content. An XmlMarkup object named <code>xml</code> is automatically made available to templates with a <code>.builder</code> extension.</p>
+
+<p>Here are some basic examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">xml</span>.<span class="ruby-identifier">em</span>(<span class="ruby-string">&quot;emphasized&quot;</span>)                                 <span class="ruby-comment"># =&gt; &lt;em&gt;emphasized&lt;/em&gt;</span>
+<span class="ruby-identifier">xml</span>.<span class="ruby-identifier">em</span> { <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">b</span>(<span class="ruby-string">&quot;emph &amp; bold&quot;</span>) }                      <span class="ruby-comment"># =&gt; &lt;em&gt;&lt;b&gt;emph &amp;amp; bold&lt;/b&gt;&lt;/em&gt;</span>
+<span class="ruby-identifier">xml</span>.<span class="ruby-identifier">a</span>(<span class="ruby-string">&quot;A Link&quot;</span>, <span class="ruby-string">&quot;href&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;http://onestepback.org&quot;</span>)  <span class="ruby-comment"># =&gt; &lt;a href=&quot;http://onestepback.org&quot;&gt;A Link&lt;/a&gt;</span>
+<span class="ruby-identifier">xml</span>.<span class="ruby-identifier">target</span>(<span class="ruby-string">&quot;name&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;compile&quot;</span>, <span class="ruby-string">&quot;option&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;fast&quot;</span>)  <span class="ruby-comment"># =&gt; &lt;target option=&quot;fast&quot; name=&quot;compile&quot;\&gt;</span>
+                                                     <span class="ruby-comment"># NOTE: order of attributes is not specified.</span>
+</pre>
+
+<p>Any method with a block will be treated as an XML markup tag with nested markup in the block. For example, the following:</p>
+
+<pre class="ruby"><span class="ruby-identifier">xml</span>.<span class="ruby-identifier">div</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">h1</span>(<span class="ruby-ivar">@person</span>.<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">p</span>(<span class="ruby-ivar">@person</span>.<span class="ruby-identifier">bio</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>would produce something like:</p>
+
+<pre>&lt;div&gt;
+  &lt;h1&gt;David Heinemeier Hansson&lt;/h1&gt;
+  &lt;p&gt;A product of Danish Design during the Winter of &#39;79...&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+<p>Here is a full-length RSS example actually used on Basecamp:</p>
+
+<pre class="ruby"><span class="ruby-identifier">xml</span>.<span class="ruby-identifier">rss</span>(<span class="ruby-string">&quot;version&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;2.0&quot;</span>, <span class="ruby-string">&quot;xmlns:dc&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;http://purl.org/dc/elements/1.1/&quot;</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">channel</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">title</span>(<span class="ruby-ivar">@feed_title</span>)
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-ivar">@url</span>)
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">description</span> <span class="ruby-string">&quot;Basecamp: Recent items&quot;</span>
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">language</span> <span class="ruby-string">&quot;en-us&quot;</span>
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">ttl</span> <span class="ruby-string">&quot;40&quot;</span>
+
+    <span class="ruby-ivar">@recent_items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">item</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">item_title</span>(<span class="ruby-identifier">item</span>))
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">description</span>(<span class="ruby-identifier">item_description</span>(<span class="ruby-identifier">item</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">item_description</span>(<span class="ruby-identifier">item</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">pubDate</span>(<span class="ruby-identifier">item_pubDate</span>(<span class="ruby-identifier">item</span>))
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">guid</span>(<span class="ruby-ivar">@person</span>.<span class="ruby-identifier">firm</span>.<span class="ruby-identifier">account</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@recent_items</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">item</span>))
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-ivar">@person</span>.<span class="ruby-identifier">firm</span>.<span class="ruby-identifier">account</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@recent_items</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">item</span>))
+
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">tag!</span>(<span class="ruby-string">&quot;dc:creator&quot;</span>, <span class="ruby-identifier">item</span>.<span class="ruby-identifier">author_name</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">item_has_creator?</span>(<span class="ruby-identifier">item</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>For more information on <a href="../Builder.html"><code>Builder</code></a> please consult the <a href="https://github.com/rails/builder">source code</a>.</p>
+
 <h1 id="class-ActionView::Base-label-Action+View+Base"><a href="#class-ActionView::Base-label-Action+View+Base">Action View Base</a></h1>
 
 <p>Action View templates can be written in several ways. If the template file has a <code>.erb</code> extension, then it uses the <a href="https://rubygems.org/gems/erubi">erubi</a> template system which can embed Ruby into an HTML document. If the template file has a <code>.builder</code> extension, then Jim Weirich’s <a href="../Builder/XmlMarkup.html"><code>Builder::XmlMarkup</code></a> library is used.</p>
@@ -444,7 +639,7 @@ Headline: &lt;%= headline %&gt;
         <div class="method-description">
 
           <div class="method-source-code" id="cache_template_loading-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 192</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 192</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cache_template_loading</span>
   <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span>.<span class="ruby-identifier">caching?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -488,7 +683,7 @@ Headline: &lt;%= headline %&gt;
         <div class="method-description">
 
           <div class="method-source-code" id="cache_template_loading-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 196</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cache_template_loading=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span>.<span class="ruby-identifier">caching</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -532,7 +727,7 @@ Headline: &lt;%= headline %&gt;
         <div class="method-description">
 
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 212</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-node">&quot;#&lt;ActionView::Base:#{&#39;%#016x&#39; % (object_id &lt;&lt; 1)}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -584,7 +779,7 @@ Headline: &lt;%= headline %&gt;
         <div class="method-description">
 
           <div class="method-source-code" id="_run-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 264</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 264</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">_run</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">template</span>, <span class="ruby-identifier">locals</span>, <span class="ruby-identifier">buffer</span>, <span class="ruby-value">add_to_stack:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">has_strict_locals:</span> <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">_old_output_buffer</span>, <span class="ruby-identifier">_old_virtual_path</span>, <span class="ruby-identifier">_old_template</span> = <span class="ruby-ivar">@output_buffer</span>, <span class="ruby-ivar">@virtual_path</span>, <span class="ruby-ivar">@current_template</span>
   <span class="ruby-ivar">@current_template</span> = <span class="ruby-identifier">template</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">add_to_stack</span>
@@ -647,7 +842,7 @@ Headline: &lt;%= headline %&gt;
         <div class="method-description">
 
           <div class="method-source-code" id="compiled_method_container-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 287</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 287</span>
     <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compiled_method_container</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-identifier">&lt;&lt;~msg</span>.<span class="ruby-identifier">squish</span>
 <span class="ruby-value">        Subclasses of ActionView::Base must implement `compiled_method_container`
@@ -695,7 +890,7 @@ Headline: &lt;%= headline %&gt;
         <div class="method-description">
 
           <div class="method-source-code" id="in_rendering_context-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 295</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/base.rb, line 295</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">in_rendering_context</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">old_view_renderer</span>  = <span class="ruby-ivar">@view_renderer</span>
   <span class="ruby-identifier">old_lookup_context</span> = <span class="ruby-ivar">@lookup_context</span>

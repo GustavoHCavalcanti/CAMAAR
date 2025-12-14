@@ -108,6 +108,30 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-ActionDispatch::Session::CacheStore-label-Action+Dispatch+Session+CacheStore">Action Dispatch Session CacheStore</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::Session::CacheStore-label-Options">Options</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -205,6 +229,19 @@
 <p><code>check_collisions</code> - Check if newly generated session ids aren’t already in use. If for some reason 128 bits of randomness aren’t considered secure enough to avoid collisions, this option can be enabled to ensure newly generated ids aren’t in use. By default, it is set to <code>false</code> to avoid additional cache write operations.</p>
 </li></ul>
 
+<h1 id="class-ActionDispatch::Session::CacheStore-label-Action+Dispatch+Session+CacheStore"><a href="#class-ActionDispatch::Session::CacheStore-label-Action+Dispatch+Session+CacheStore">Action Dispatch <a href="../Session.html"><code>Session</code></a> <a href="CacheStore.html"><code>CacheStore</code></a></a></h1>
+
+<p>A session store that uses an <a href="../../ActiveSupport/Cache/Store.html"><code>ActiveSupport::Cache::Store</code></a> to store the sessions. This store is most useful if you don’t store critical data in your sessions and you don’t need them to live for extended periods of time.</p>
+
+<h4 id="class-ActionDispatch::Session::CacheStore-label-Options"><a href="#class-ActionDispatch::Session::CacheStore-label-Options">Options</a></h4>
+<ul><li>
+<p><code>cache</code> - The cache to use. If it is not specified, <a href="../../Rails.html#attribute-c-cache"><code>Rails.cache</code></a> will be used.</p>
+</li><li>
+<p><code>expire_after</code> - The length of time a session will be stored before automatically expiring. By default, the <code>:expires_in</code> option of the cache is used.</p>
+</li><li>
+<p><code>check_collisions</code> - Check if newly generated session ids aren’t already in use. If for some reason 128 bits of randomness aren’t considered secure enough to avoid collisions, this option can be enabled to ensure newly generated ids aren’t in use. By default, it is set to <code>false</code> to avoid additional cache write operations.</p>
+</li></ul>
+
   </section>
 
 
@@ -248,7 +285,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 27</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-ivar">@cache</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:cache</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:expire_after</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:expires_in</span>]
@@ -308,7 +345,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="delete_session-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 54</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_session</span>(<span class="ruby-identifier">env</span>, <span class="ruby-identifier">sid</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">cache_key</span>(<span class="ruby-identifier">sid</span>.<span class="ruby-identifier">private_id</span>))
   <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">cache_key</span>(<span class="ruby-identifier">sid</span>.<span class="ruby-identifier">public_id</span>))
@@ -354,7 +391,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="find_session-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 35</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_session</span>(<span class="ruby-identifier">env</span>, <span class="ruby-identifier">sid</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">sid</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">session</span> = <span class="ruby-identifier">get_session_with_fallback</span>(<span class="ruby-identifier">sid</span>))
     <span class="ruby-identifier">sid</span>, <span class="ruby-identifier">session</span> = <span class="ruby-identifier">generate_sid</span>, {}
@@ -401,7 +438,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="write_session-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 43</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/session/cache_store.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write_session</span>(<span class="ruby-identifier">env</span>, <span class="ruby-identifier">sid</span>, <span class="ruby-identifier">session</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">cache_key</span>(<span class="ruby-identifier">sid</span>.<span class="ruby-identifier">private_id</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>

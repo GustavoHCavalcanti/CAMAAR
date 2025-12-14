@@ -108,6 +108,30 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActionView::Helpers::AssetUrlHelper-label-Action+View+Asset+URL+Helpers">Action View Asset URL Helpers</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#module-ActionView::Helpers::AssetUrlHelper-label-Using+asset+hosts">Using asset hosts</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -304,7 +328,93 @@
 <span class="ruby-comment"># =&gt; &lt;link href=&quot;http://stylesheets.example.com/assets/application.css&quot; rel=&quot;stylesheet&quot; /&gt;</span>
 </pre>
 
-<p>Alternatively you may ask for a second parameter <code>request</code>. That one is particularly useful for serving assets from an SSL-protected page. The example proc below disables asset hosting for HTTPS connections, while still sending assets for plain HTTP requests from asset hosts. If you don’t have SSL certificates for each of the asset hosts this technique allows you to avoid warnings in the client about mixed media. Note that the <code>request</code> parameter might not be supplied, e.g. when the assets are precompiled with the command <code>bin/rails assets:precompile</code>. Make sure to use a <code>Proc</code> instead of a lambda, since a <code>Proc</code> allows missing parameters and sets them to <code>nil</code>.</p>
+<p>Alternatively you may ask for a second parameter <code>request</code>. That one is particularly useful for serving assets from an SSL-protected page. The example proc below disables asset hosting for HTTPS connections, while still sending assets for plain HTTP requests from asset hosts. If you don’t have SSL certificates for each of the asset hosts this technique allows you to avoid warnings in the client about mixed media. Note that the <code>request</code> parameter might not be supplied, e.g. when the assets are precompiled with the command <code>bin/rails assets:precompile</code>. Make sure to use a <a href="../../Proc.html"><code>Proc</code></a> instead of a lambda, since a <a href="../../Proc.html"><code>Proc</code></a> allows missing parameters and sets them to <code>nil</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">asset_host</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">source</span>, <span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">ssl?</span>
+    <span class="ruby-node">&quot;#{request.protocol}#{request.host_with_port}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-node">&quot;#{request.protocol}assets.example.com&quot;</span>
+  <span class="ruby-keyword">end</span>
+}
+</pre>
+
+<p>You can also implement a custom asset host object that responds to <code>call</code> and takes either one or two parameters just like the proc.</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">asset_host</span> = <span class="ruby-constant">AssetHostingWithMinimumSsl</span>.<span class="ruby-identifier">new</span>(
+  <span class="ruby-string">&quot;http://asset%d.example.com&quot;</span>, <span class="ruby-string">&quot;https://asset1.example.com&quot;</span>
+)
+</pre>
+
+<h1 id="module-ActionView::Helpers::AssetUrlHelper-label-Action+View+Asset+URL+Helpers"><a href="#module-ActionView::Helpers::AssetUrlHelper-label-Action+View+Asset+URL+Helpers">Action View Asset URL Helpers</a></h1>
+
+<p>This module provides methods for generating asset paths and URLs.</p>
+
+<pre class="ruby"><span class="ruby-identifier">image_path</span>(<span class="ruby-string">&quot;rails.png&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;/assets/rails.png&quot;</span>
+
+<span class="ruby-identifier">image_url</span>(<span class="ruby-string">&quot;rails.png&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;http://www.example.com/assets/rails.png&quot;</span>
+</pre>
+
+<h3 id="module-ActionView::Helpers::AssetUrlHelper-label-Using+asset+hosts"><a href="#module-ActionView::Helpers::AssetUrlHelper-label-Using+asset+hosts">Using asset hosts</a></h3>
+
+<p>By default, Rails links to these assets on the current host in the public folder, but you can direct Rails to link to assets from a dedicated asset server by setting <code>ActionController::Base.asset_host</code> in the application configuration, typically in <a href="../../config/environments/production_rb.html">config/environments/production.rb</a>. For example, you’d define <code>assets.example.com</code> to be your asset host this way, inside the <code>configure</code> block of your environment-specific configuration files or <a href="../../config/application_rb.html">config/application.rb</a>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">asset_host</span> = <span class="ruby-string">&quot;assets.example.com&quot;</span>
+</pre>
+
+<p><a href="../Helpers.html"><code>Helpers</code></a> take that into account:</p>
+
+<pre class="ruby"><span class="ruby-identifier">image_tag</span>(<span class="ruby-string">&quot;rails.png&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;img src=&quot;http://assets.example.com/assets/rails.png&quot; /&gt;</span>
+<span class="ruby-identifier">stylesheet_link_tag</span>(<span class="ruby-string">&quot;application&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;link href=&quot;http://assets.example.com/assets/application.css&quot; rel=&quot;stylesheet&quot; /&gt;</span>
+</pre>
+
+<p>Browsers open a limited number of simultaneous connections to a single host. The exact number varies by browser and version. This limit may cause some asset downloads to wait for previous assets to finish before they can begin. You can use the <code>%d</code> wildcard in the <code>asset_host</code> to distribute the requests over four hosts. For example, <code>assets%d.example.com</code> will spread the asset requests over “assets0.example.com”, …, “assets3.example.com”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">image_tag</span>(<span class="ruby-string">&quot;rails.png&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;img src=&quot;http://assets0.example.com/assets/rails.png&quot; /&gt;</span>
+<span class="ruby-identifier">stylesheet_link_tag</span>(<span class="ruby-string">&quot;application&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;link href=&quot;http://assets2.example.com/assets/application.css&quot; rel=&quot;stylesheet&quot; /&gt;</span>
+</pre>
+
+<p>This may improve the asset loading performance of your application. It is also possible the combination of additional connection overhead (DNS, SSL) and the overall browser connection limits may result in this solution being slower. You should be sure to measure your actual performance across targeted browsers both before and after this change.</p>
+
+<p>To implement the corresponding hosts you can either set up four actual hosts or use wildcard DNS to CNAME the wildcard to a single asset host. You can read more about setting up your DNS CNAME records from your ISP.</p>
+
+<p>Note: This is purely a browser performance optimization and is not meant for server load balancing. See <a href="https://www.die.net/musings/page_load_time">www.die.net/musings/page_load_time</a>/ for background and <a href="https://www.browserscope.org/?category=network">www.browserscope.org/?category=network</a> for connection limit data.</p>
+
+<p>Alternatively, you can exert more control over the asset host by setting <code>asset_host</code> to a proc like this:</p>
+
+<pre class="ruby"><span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">asset_host</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">source</span><span class="ruby-operator">|</span>
+  <span class="ruby-node">&quot;http://assets#{OpenSSL::Digest::SHA256.hexdigest(source).to_i(16) % 2 + 1}.example.com&quot;</span>
+}
+<span class="ruby-identifier">image_tag</span>(<span class="ruby-string">&quot;rails.png&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;img src=&quot;http://assets1.example.com/assets/rails.png&quot; /&gt;</span>
+<span class="ruby-identifier">stylesheet_link_tag</span>(<span class="ruby-string">&quot;application&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;link href=&quot;http://assets2.example.com/assets/application.css&quot; rel=&quot;stylesheet&quot; /&gt;</span>
+</pre>
+
+<p>The example above generates “<a href="http://assets1.example.com">assets1.example.com</a>” and “<a href="http://assets2.example.com">assets2.example.com</a>”. This option is useful for example if you need fewer/more than four hosts, custom host names, etc.</p>
+
+<p>As you see the proc takes a <code>source</code> parameter. That’s a string with the absolute path of the asset, for example “/assets/rails.png”.</p>
+
+<pre class="ruby"> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">asset_host</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">source</span><span class="ruby-operator">|</span>
+   <span class="ruby-keyword">if</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">end_with?</span>(<span class="ruby-string">&#39;.css&#39;</span>)
+     <span class="ruby-string">&quot;http://stylesheets.example.com&quot;</span>
+   <span class="ruby-keyword">else</span>
+     <span class="ruby-string">&quot;http://assets.example.com&quot;</span>
+   <span class="ruby-keyword">end</span>
+ }
+<span class="ruby-identifier">image_tag</span>(<span class="ruby-string">&quot;rails.png&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;img src=&quot;http://assets.example.com/assets/rails.png&quot; /&gt;</span>
+<span class="ruby-identifier">stylesheet_link_tag</span>(<span class="ruby-string">&quot;application&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;link href=&quot;http://stylesheets.example.com/assets/application.css&quot; rel=&quot;stylesheet&quot; /&gt;</span>
+</pre>
+
+<p>Alternatively you may ask for a second parameter <code>request</code>. That one is particularly useful for serving assets from an SSL-protected page. The example proc below disables asset hosting for HTTPS connections, while still sending assets for plain HTTP requests from asset hosts. If you don’t have SSL certificates for each of the asset hosts this technique allows you to avoid warnings in the client about mixed media. Note that the <code>request</code> parameter might not be supplied, e.g. when the assets are precompiled with the command <code>bin/rails assets:precompile</code>. Make sure to use a <a href="../../Proc.html"><code>Proc</code></a> instead of a lambda, since a <a href="../../Proc.html"><code>Proc</code></a> allows missing parameters and sets them to <code>nil</code>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">asset_host</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">source</span>, <span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">ssl?</span>
@@ -398,7 +508,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="asset_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 187</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">asset_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;nil is not a valid asset source&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">nil?</span>
 
@@ -502,7 +612,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_asset">path_to_asset</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_asset">path_to_asset</a>, path_to_asset
         </div>
 
 
@@ -534,7 +644,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="asset_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 231</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">asset_url</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">path_to_asset</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">protocol:</span> <span class="ruby-value">:request</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -556,7 +666,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_asset">url_to_asset</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_asset">url_to_asset</a>, url_to_asset
         </div>
 
 
@@ -588,7 +698,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="audio_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 430</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 430</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">audio_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">path_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:audio</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -611,7 +721,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_audio">path_to_audio</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_audio">path_to_audio</a>, path_to_audio
         </div>
 
 
@@ -643,7 +753,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="audio_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 442</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 442</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">audio_url</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">url_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:audio</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -662,7 +772,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_audio">url_to_audio</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_audio">url_to_audio</a>, url_to_audio
         </div>
 
 
@@ -694,7 +804,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="compute_asset_extname-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 243</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compute_asset_extname</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:extname</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">extname</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:extname</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">ASSET_EXTENSIONS</span>[<span class="ruby-identifier">options</span>[<span class="ruby-value">:type</span>]]
@@ -744,7 +854,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="compute_asset_host-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 277</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 277</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compute_asset_host</span>(<span class="ruby-identifier">source</span> = <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">request</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">request</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:request</span>)
   <span class="ruby-identifier">host</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:host</span>]
@@ -818,7 +928,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="compute_asset_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 266</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compute_asset_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">dir</span> = <span class="ruby-constant">ASSET_PUBLIC_DIRECTORIES</span>[<span class="ruby-identifier">options</span>[<span class="ruby-value">:type</span>]] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">source</span>)
@@ -835,7 +945,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-public_compute_asset_path">public_compute_asset_path</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-public_compute_asset_path">public_compute_asset_path</a>, public_compute_asset_path
         </div>
 
 
@@ -867,7 +977,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="font_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 455</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 455</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">font_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">path_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:font</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -890,7 +1000,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_font">path_to_font</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_font">path_to_font</a>, path_to_font
         </div>
 
 
@@ -922,7 +1032,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="font_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 467</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 467</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">font_url</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">url_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:font</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -941,7 +1051,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_font">url_to_font</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_font">url_to_font</a>, url_to_font
         </div>
 
 
@@ -973,7 +1083,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="image_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 378</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 378</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">image_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">path_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:image</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -998,7 +1108,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_image">path_to_image</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_image">path_to_image</a>, path_to_image
         </div>
 
 
@@ -1030,7 +1140,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="image_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 390</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 390</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">image_url</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">url_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:image</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1049,7 +1159,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_image">url_to_image</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_image">url_to_image</a>, url_to_image
         </div>
 
 
@@ -1081,7 +1191,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="javascript_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 321</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 321</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">path_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:javascript</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1104,7 +1214,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_javascript">path_to_javascript</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_javascript">path_to_javascript</a>, path_to_javascript
         </div>
 
 
@@ -1136,7 +1246,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="javascript_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 333</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 333</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">javascript_url</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">url_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:javascript</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1155,7 +1265,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_javascript">url_to_javascript</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_javascript">url_to_javascript</a>, url_to_javascript
         </div>
 
 
@@ -1467,7 +1577,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="stylesheet_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 348</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stylesheet_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">path_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:stylesheet</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1490,7 +1600,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_stylesheet">path_to_stylesheet</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_stylesheet">path_to_stylesheet</a>, path_to_stylesheet
         </div>
 
 
@@ -1522,7 +1632,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="stylesheet_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 360</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 360</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stylesheet_url</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">url_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:stylesheet</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1541,7 +1651,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_stylesheet">url_to_stylesheet</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_stylesheet">url_to_stylesheet</a>, url_to_stylesheet
         </div>
 
 
@@ -1818,7 +1928,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="video_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 404</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 404</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">video_path</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">path_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:video</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1841,7 +1951,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_video">path_to_video</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-path_to_video">path_to_video</a>, path_to_video
         </div>
 
 
@@ -1873,7 +1983,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="video_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 416</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/asset_url_helper.rb, line 416</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">video_url</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">url_to_asset</span>(<span class="ruby-identifier">source</span>, { <span class="ruby-value">type:</span> <span class="ruby-value">:video</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1892,7 +2002,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_video">url_to_video</a>
+          Also aliased as: <a href="AssetUrlHelper.html#method-i-url_to_video">url_to_video</a>, url_to_video
         </div>
 
 

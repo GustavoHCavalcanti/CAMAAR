@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionCable::Server::Broadcasting-label-Action+Cable+Server+Broadcasting">Action Cable Server Broadcasting</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionCable::Server::Broadcasting-label-Action+Cable+Server+Broadcasting">Action Cable Server Broadcasting</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -159,6 +188,28 @@
 })
 </pre>
 
+<h1 id="module-ActionCable::Server::Broadcasting-label-Action+Cable+Server+Broadcasting"><a href="#module-ActionCable::Server::Broadcasting-label-Action+Cable+Server+Broadcasting">Action Cable <a href="../Server.html"><code>Server</code></a> <a href="Broadcasting.html"><code>Broadcasting</code></a></a></h1>
+
+<p><a href="Broadcasting.html"><code>Broadcasting</code></a> is how other parts of your application can send messages to a channel’s subscribers. As explained in <a href="../Channel.html"><code>Channel</code></a>, most of the time, these broadcastings are streamed directly to the clients subscribed to the named broadcasting. Let’s explain with a full-stack example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">WebNotificationsChannel</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationCable</span><span class="ruby-operator">::</span><span class="ruby-constant">Channel</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subscribed</span>
+    <span class="ruby-identifier">stream_from</span> <span class="ruby-node">&quot;web_notifications_#{current_user.id}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Somewhere in your app this is called, perhaps from a NewCommentJob:</span>
+<span class="ruby-constant">ActionCable</span>.<span class="ruby-identifier">server</span>.<span class="ruby-identifier">broadcast</span> \
+  <span class="ruby-string">&quot;web_notifications_1&quot;</span>, { <span class="ruby-value">title:</span> <span class="ruby-string">&quot;New things!&quot;</span>, <span class="ruby-value">body:</span> <span class="ruby-string">&quot;All that&#39;s fit for print&quot;</span> }
+
+<span class="ruby-comment"># Client-side JavaScript, which assumes you&#39;ve already requested the right to send web notifications:</span>
+<span class="ruby-constant">App</span>.<span class="ruby-identifier">cable</span>.<span class="ruby-identifier">subscriptions</span>.<span class="ruby-identifier">create</span>(<span class="ruby-string">&quot;WebNotificationsChannel&quot;</span>, {
+  <span class="ruby-value">received:</span> <span class="ruby-identifier">function</span>(<span class="ruby-identifier">data</span>) {
+    <span class="ruby-identifier">new</span> <span class="ruby-constant">Notification</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>], { <span class="ruby-value">body:</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;body&#39;</span>] })
+  }
+})
+</pre>
+
   </section>
 
 
@@ -202,7 +253,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="broadcast-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/broadcasting.rb, line 33</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/broadcasting.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">broadcast</span>(<span class="ruby-identifier">broadcasting</span>, <span class="ruby-identifier">message</span>, <span class="ruby-value">coder:</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>)
   <span class="ruby-identifier">broadcaster_for</span>(<span class="ruby-identifier">broadcasting</span>, <span class="ruby-value">coder:</span> <span class="ruby-identifier">coder</span>).<span class="ruby-identifier">broadcast</span>(<span class="ruby-identifier">message</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -246,7 +297,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="broadcaster_for-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/server/broadcasting.rb, line 40</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/server/broadcasting.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">broadcaster_for</span>(<span class="ruby-identifier">broadcasting</span>, <span class="ruby-value">coder:</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>)
   <span class="ruby-constant">Broadcaster</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">String</span>(<span class="ruby-identifier">broadcasting</span>), <span class="ruby-value">coder:</span> <span class="ruby-identifier">coder</span>)
 <span class="ruby-keyword">end</span></pre>

@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>class ActiveRecord::UnknownAttributeError - RDoc Documentation</title>
+<title>class ActiveModel::UnknownAttributeError - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,ActiveRecord::UnknownAttributeError">
+  <meta name="keywords" content="ruby,class,ActiveModel::UnknownAttributeError">
 
 
-    <meta name="description" content="class ActiveRecord::UnknownAttributeError: Active \Model \UnknownAttributeError Raised when unknown attributes are supplied via mass assignment. Validations end person = Person.">
+    <meta name="description" content="class ActiveModel::UnknownAttributeError: Active \Model \UnknownAttributeError Raised when unknown attributes are supplied via mass assignment. Validations end person = Person.">
 
 
 
@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::UnknownAttributeError-label-Active+Model+UnknownAttributeError">Active Model UnknownAttributeError</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::UnknownAttributeError-label-Active+Model+UnknownAttributeError">Active Model UnknownAttributeError</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -108,14 +137,14 @@
 
 </nav>
 
-<main role="main" aria-labelledby="class-ActiveRecord::UnknownAttributeError">
+<main role="main" aria-labelledby="class-ActiveModel::UnknownAttributeError">
   
   
     <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
       
       <li>
         
-        <a href="../ActiveRecord.html">ActiveRecord</a><span>::</span>
+        <a href="../ActiveModel.html">ActiveModel</a><span>::</span>
         
       </li>
       
@@ -128,13 +157,27 @@
     </ol>
   
 
-  <h1 id="class-ActiveRecord::UnknownAttributeError" class="anchor-link class">
-    class ActiveRecord::UnknownAttributeError
+  <h1 id="class-ActiveModel::UnknownAttributeError" class="anchor-link class">
+    class ActiveModel::UnknownAttributeError
   </h1>
 
   <section class="description">
     
-<h1 id="class-ActiveRecord::UnknownAttributeError-label-Active+Model+UnknownAttributeError"><a href="#class-ActiveRecord::UnknownAttributeError-label-Active+Model+UnknownAttributeError">Active Model UnknownAttributeError</a></h1>
+<h1 id="class-ActiveModel::UnknownAttributeError-label-Active+Model+UnknownAttributeError"><a href="#class-ActiveModel::UnknownAttributeError-label-Active+Model+UnknownAttributeError">Active Model UnknownAttributeError</a></h1>
+
+<p>Raised when unknown attributes are supplied via mass assignment.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">AttributeAssignment</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">assign_attributes</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&#39;Gorby&#39;</span>)
+<span class="ruby-comment"># =&gt; ActiveModel::UnknownAttributeError: unknown attribute &#39;name&#39; for Person.</span>
+</pre>
+
+<h1 id="class-ActiveModel::UnknownAttributeError-label-Active+Model+UnknownAttributeError"><a href="#class-ActiveModel::UnknownAttributeError-label-Active+Model+UnknownAttributeError">Active Model UnknownAttributeError</a></h1>
 
 <p>Raised when unknown attributes are supplied via mass assignment.</p>
 
@@ -231,7 +274,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 538</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/errors.rb, line 538</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">attribute</span>)
   <span class="ruby-ivar">@record</span> = <span class="ruby-identifier">record</span>
   <span class="ruby-ivar">@attribute</span> = <span class="ruby-identifier">attribute</span>

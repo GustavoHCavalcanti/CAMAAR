@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionMailer::MessageDelivery-label-Action+Mailer+MessageDelivery">Action Mailer MessageDelivery</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionMailer::MessageDelivery-label-Action+Mailer+MessageDelivery">Action Mailer MessageDelivery</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -154,6 +183,16 @@
 <span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">welcome</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">message</span>       <span class="ruby-comment"># a Mail::Message object</span>
 </pre>
 
+<h1 id="class-ActionMailer::MessageDelivery-label-Action+Mailer+MessageDelivery"><a href="#class-ActionMailer::MessageDelivery-label-Action+Mailer+MessageDelivery">Action Mailer MessageDelivery</a></h1>
+
+<p>The <a href="MessageDelivery.html"><code>ActionMailer::MessageDelivery</code></a> class is used by <a href="Base.html"><code>ActionMailer::Base</code></a> when creating a new mailer. <a href="MessageDelivery.html"><code>MessageDelivery</code></a> is a wrapper (<a href="../Delegator.html"><code>Delegator</code></a> subclass) around a lazy created <a href="../Mail/Message.html"><code>Mail::Message</code></a>. You can get direct access to the <a href="../Mail/Message.html"><code>Mail::Message</code></a>, deliver the email or schedule the email to be sent through Active Job.</p>
+
+<pre class="ruby"><span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">welcome</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>)               <span class="ruby-comment"># an ActionMailer::MessageDelivery object</span>
+<span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">welcome</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">deliver_now</span>   <span class="ruby-comment"># sends the email</span>
+<span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">welcome</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">deliver_later</span> <span class="ruby-comment"># enqueue email delivery as a job through Active Job</span>
+<span class="ruby-constant">Notifier</span>.<span class="ruby-identifier">welcome</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">first</span>).<span class="ruby-identifier">message</span>       <span class="ruby-comment"># a Mail::Message object</span>
+</pre>
+
   </section>
 
 
@@ -197,7 +236,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deliver_later-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 136</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deliver_later</span>(<span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">enqueue_delivery</span> <span class="ruby-value">:deliver_now</span>, <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
@@ -265,7 +304,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deliver_later-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 109</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deliver_later!</span>(<span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">enqueue_delivery</span> <span class="ruby-value">:deliver_now!</span>, <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
@@ -333,7 +372,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deliver_now-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 157</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deliver_now</span>
   <span class="ruby-identifier">processed_mailer</span>.<span class="ruby-identifier">handle_exceptions</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">processed_mailer</span>.<span class="ruby-identifier">run_callbacks</span>(<span class="ruby-value">:deliver</span>) <span class="ruby-keyword">do</span>
@@ -384,7 +423,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deliver_now-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 145</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deliver_now!</span>
   <span class="ruby-identifier">processed_mailer</span>.<span class="ruby-identifier">handle_exceptions</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">processed_mailer</span>.<span class="ruby-identifier">run_callbacks</span>(<span class="ruby-value">:deliver</span>) <span class="ruby-keyword">do</span>
@@ -435,7 +474,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="message-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 75</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message</span>
   <span class="ruby-identifier">__getobj__</span>
 <span class="ruby-keyword">end</span></pre>
@@ -479,7 +518,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="processed-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 80</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailer-8.1.1/lib/action_mailer/message_delivery.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">processed?</span>
   <span class="ruby-ivar">@processed_mailer</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@mail_message</span>
 <span class="ruby-keyword">end</span></pre>

@@ -206,7 +206,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="normalize_attribute-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/attributes/normalization.rb, line 70</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/attributes/normalization.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">normalize_attribute</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-comment"># Treat the value as a new, unnormalized value.</span>
   <span class="ruby-identifier">send</span>(<span class="ruby-value">:&quot;#{name}=&quot;</span>, <span class="ruby-identifier">send</span>(<span class="ruby-identifier">name</span>))
@@ -237,7 +237,7 @@ legacy_user.email # =&gt; &quot;cruise-control@example.com&quot;</pre>
 
 <p>To prevent confusion, normalization will not be applied when the attribute is fetched from the database. This means that if a record was persisted before the normalization was declared, the record’s attribute will not be normalized until either it is assigned a new value, or it is explicitly migrated via <a href="Normalization.html#method-i-normalize_attribute"><code>Normalization#normalize_attribute</code></a>.</p>
 
-<p>Be aware that if your app was created before <a href="../../Rails.html"><code>Rails</code></a> 7.1, and your app marshals instances of the targeted model (for example, when caching), then you should set <a href="../../ActiveRecord.html#method-c-marshalling_format_version"><code>ActiveRecord.marshalling_format_version</code></a> to <code>7.1</code> or higher via either <code>config.load_defaults 7.1</code> or <code>config.active_record.marshalling_format_version = 7.1</code>. Otherwise, <code>Marshal</code> may attempt to serialize the normalization <code>Proc</code> and raise <code>TypeError</code>.</p>
+<p>Be aware that if your app was created before <a href="../../Rails.html"><code>Rails</code></a> 7.1, and your app marshals instances of the targeted model (for example, when caching), then you should set <a href="../../ActiveRecord.html#method-c-marshalling_format_version"><code>ActiveRecord.marshalling_format_version</code></a> to <code>7.1</code> or higher via either <code>config.load_defaults 7.1</code> or <code>config.active_record.marshalling_format_version = 7.1</code>. Otherwise, <code>Marshal</code> may attempt to serialize the normalization <a href="../../Proc.html"><code>Proc</code></a> and raise <code>TypeError</code>.</p>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
   <span class="ruby-identifier">normalizes</span> <span class="ruby-value">:email</span>, <span class="ruby-value">with:</span> <span class="ruby-operator">-&gt;</span> <span class="ruby-identifier">email</span> { <span class="ruby-identifier">email</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">downcase</span> }

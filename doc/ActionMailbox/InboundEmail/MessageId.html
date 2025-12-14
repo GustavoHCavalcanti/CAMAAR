@@ -157,6 +157,10 @@
 
 <p>If an inbound email does not, against the rfc822 mandate, specify a Message-ID, one will be generated using the approach from <code>Mail::MessageIdField</code>.</p>
 
+<p>The <code>Message-ID</code> as specified by rfc822 is supposed to be a unique identifier for that individual email. That makes it an ideal tracking token for debugging and forensics, just like <code>X-Request-Id</code> does for web request.</p>
+
+<p>If an inbound email does not, against the rfc822 mandate, specify a Message-ID, one will be generated using the approach from <code>Mail::MessageIdField</code>.</p>
+
   </section>
 
 
@@ -200,7 +204,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create_and_extract_message_id-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 16</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_and_extract_message_id!</span>(<span class="ruby-identifier">source</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">message_checksum</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">source</span>)
   <span class="ruby-identifier">message_id</span> = <span class="ruby-identifier">extract_message_id</span>(<span class="ruby-identifier">source</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">generate_missing_message_id</span>(<span class="ruby-identifier">message_checksum</span>)
@@ -250,7 +254,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create_and_upload_raw_email-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 37</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_and_upload_raw_email!</span>(<span class="ruby-identifier">source</span>)
   <span class="ruby-constant">ActiveStorage</span><span class="ruby-operator">::</span><span class="ruby-constant">Blob</span>.<span class="ruby-identifier">create_and_upload!</span> <span class="ruby-value">io:</span> <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>), <span class="ruby-value">filename:</span> <span class="ruby-string">&quot;message.eml&quot;</span>, <span class="ruby-value">content_type:</span> <span class="ruby-string">&quot;message/rfc822&quot;</span>,
                                          <span class="ruby-value">service_name:</span> <span class="ruby-constant">ActionMailbox</span>.<span class="ruby-identifier">storage_service</span>
@@ -295,7 +299,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="extract_message_id-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 27</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extract_message_id</span>(<span class="ruby-identifier">source</span>)
   <span class="ruby-constant">Mail</span>.<span class="ruby-identifier">from_source</span>(<span class="ruby-identifier">source</span>).<span class="ruby-identifier">message_id</span> <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -339,7 +343,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="generate_missing_message_id-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 31</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email/message_id.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_missing_message_id</span>(<span class="ruby-identifier">message_checksum</span>)
   <span class="ruby-constant">Mail</span><span class="ruby-operator">::</span><span class="ruby-constant">MessageIdField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;&lt;#{message_checksum}@#{::Socket.gethostname}.mail&gt;&quot;</span>).<span class="ruby-identifier">message_id</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">message_id</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Message-ID couldn&#39;t be parsed or is missing. Generated a new Message-ID: #{message_id}&quot;</span>

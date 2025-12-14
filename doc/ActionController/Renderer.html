@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller Renderer</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller Renderer</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -151,6 +180,28 @@
 
   <section class="description">
     
+<h1 id="class-ActionController::Renderer-label-Action+Controller+Renderer"><a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller <a href="Renderer.html"><code>Renderer</code></a></a></h1>
+
+<p><a href="Renderer.html"><code>ActionController::Renderer</code></a> allows you to render arbitrary templates without being inside a controller action.</p>
+
+<p>You can get a renderer instance by calling <code>renderer</code> on a controller class:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>
+</pre>
+
+<p>and render a template by calling the <a href="Renderer.html#method-i-render"><code>render</code></a> method:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
+<p>As a shortcut, you can also call <code>render</code> directly on the controller class itself:</p>
+
+<pre class="ruby"><span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;posts/show&quot;</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+<span class="ruby-constant">PostsController</span>.<span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-value">assigns:</span> { <span class="ruby-value">post:</span> <span class="ruby-constant">Post</span>.<span class="ruby-identifier">first</span> }
+</pre>
+
 <h1 id="class-ActionController::Renderer-label-Action+Controller+Renderer"><a href="#class-ActionController::Renderer-label-Action+Controller+Renderer">Action Controller <a href="Renderer.html"><code>Renderer</code></a></a></h1>
 
 <p><a href="Renderer.html"><code>ActionController::Renderer</code></a> allows you to render arbitrary templates without being inside a controller action.</p>
@@ -265,7 +316,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="for-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 64</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-keyword">for</span>(<span class="ruby-identifier ruby-title">controller</span>, <span class="ruby-identifier">env</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">defaults</span> = <span class="ruby-constant">DEFAULTS</span>)
   <span class="ruby-identifier">new</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">env</span>, <span class="ruby-identifier">defaults</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -309,7 +360,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 110</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">env</span>, <span class="ruby-identifier">defaults</span>)
   <span class="ruby-ivar">@controller</span> = <span class="ruby-identifier">controller</span>
   <span class="ruby-ivar">@defaults</span> = <span class="ruby-identifier">defaults</span>
@@ -390,7 +441,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="defaults-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 121</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">defaults</span>
   <span class="ruby-ivar">@defaults</span> = <span class="ruby-ivar">@defaults</span>.<span class="ruby-identifier">dup</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@defaults</span>.<span class="ruby-identifier">frozen?</span>
   <span class="ruby-ivar">@defaults</span>
@@ -435,7 +486,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 72</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>(<span class="ruby-identifier">env</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">env</span>, <span class="ruby-ivar">@defaults</span>
 <span class="ruby-keyword">end</span></pre>
@@ -482,7 +533,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 128</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">request</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env_for_request</span>)
   <span class="ruby-identifier">request</span>.<span class="ruby-identifier">routes</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">_routes</span>
@@ -532,7 +583,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="with_defaults-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 78</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/renderer.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_defaults</span>(<span class="ruby-identifier">defaults</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">controller</span>, <span class="ruby-ivar">@env</span>, <span class="ruby-ivar">@defaults</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">defaults</span>)
 <span class="ruby-keyword">end</span></pre>

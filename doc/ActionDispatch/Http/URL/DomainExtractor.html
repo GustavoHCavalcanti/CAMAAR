@@ -149,6 +149,12 @@
 
 <p>For example, in “api.staging.example.co.uk”: - Subdomains: [“api”, “staging”] - Domain: “example.co.uk” (with tld_length=2) - TLD: “co.uk”</p>
 
+<p><a href="DomainExtractor.html"><code>DomainExtractor</code></a> provides utility methods for extracting domain and subdomain information from host strings. This module is used internally by Action Dispatch to parse host names and separate the domain from subdomains based on the top-level domain (TLD) length.</p>
+
+<p>The module assumes a standard domain structure where domains consist of: - Subdomains (optional, can be multiple levels) - Domain name - Top-level domain (TLD, can be multiple levels like .co.uk)</p>
+
+<p>For example, in “api.staging.example.co.uk”: - Subdomains: [“api”, “staging”] - Domain: “example.co.uk” (with tld_length=2) - TLD: “co.uk”</p>
+
   </section>
 
 
@@ -192,7 +198,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="domain_from-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/url.rb, line 64</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/url.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">domain_from</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span>)
   <span class="ruby-identifier">host</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;.&quot;</span>).<span class="ruby-identifier">last</span>(<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tld_length</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;.&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -254,7 +260,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="subdomains_from-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/url.rb, line 104</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/url.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subdomains_from</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span>)
   <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">host</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;.&quot;</span>)
   <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-identifier">tld_length</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>)]

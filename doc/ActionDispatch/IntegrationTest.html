@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::IntegrationTest-label-Changing+the+request+encoding">Changing the request encoding</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::IntegrationTest-label-Changing+the+request+encoding">Changing the request encoding</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -316,7 +345,186 @@ end</pre>
   <span class="ruby-value">response_parser:</span> <span class="ruby-operator">-&gt;</span> <span class="ruby-identifier">body</span> { <span class="ruby-identifier">body</span> }
 </pre>
 
-<p>Where <code>param_encoder</code> defines how the params should be encoded and <a href="../vendor/bundle/ruby/3_3_0/gems/net-imap-0_5_12/lib/net/imap/response_parser_rb.html">response_parser</a> defines how the response body should be parsed through <a href="TestResponse.html#method-i-parsed_body"><code>TestResponse#parsed_body</code></a>.</p>
+<p>Where <code>param_encoder</code> defines how the params should be encoded and <a href="../vendor/bundle/ruby/3_2_0/gems/net-imap-0_5_12/lib/net/imap/response_parser_rb.html">response_parser</a> defines how the response body should be parsed through <a href="TestResponse.html#method-i-parsed_body"><code>TestResponse#parsed_body</code></a>.</p>
+
+<p>Consult the <a href="https://guides.rubyonrails.org/testing.html">Rails Testing Guide</a> for more.</p>
+
+<p>An integration test spans multiple controllers and actions, tying them all together to ensure they work together as expected. It tests more completely than either unit or functional tests do, exercising the entire stack, from the dispatcher to the database.</p>
+
+<p>At its simplest, you simply extend <a href="IntegrationTest.html"><code>IntegrationTest</code></a> and write your tests using the <a href="Integration/RequestHelpers.html#method-i-get"><code>Integration::RequestHelpers#get</code></a> and/or <a href="Integration/RequestHelpers.html#method-i-post"><code>Integration::RequestHelpers#post</code></a> methods:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;test_helper&quot;</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">ExampleTest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">IntegrationTest</span>
+  <span class="ruby-identifier">fixtures</span> <span class="ruby-value">:people</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_login</span>
+    <span class="ruby-comment"># get the login page</span>
+    <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/login&quot;</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">status</span>
+
+    <span class="ruby-comment"># post the login and follow through to the home page</span>
+    <span class="ruby-identifier">post</span> <span class="ruby-string">&quot;/login&quot;</span>, <span class="ruby-value">params:</span> { <span class="ruby-value">username:</span> <span class="ruby-identifier">people</span>(<span class="ruby-value">:jamis</span>).<span class="ruby-identifier">username</span>,
+      <span class="ruby-value">password:</span> <span class="ruby-identifier">people</span>(<span class="ruby-value">:jamis</span>).<span class="ruby-identifier">password</span> }
+    <span class="ruby-identifier">follow_redirect!</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">status</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&quot;/home&quot;</span>, <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>However, you can also have multiple session instances open per test, and even extend those instances with assertions and methods to create a very powerful testing DSL that is specific for your application. You can even reference any named routes you happen to have defined.</p>
+
+<pre>require &quot;test_helper&quot;
+
+class AdvancedTest &lt; ActionDispatch::IntegrationTest
+  fixtures :people, :rooms
+
+  def test_login_and_speak
+    jamis, david = login(:jamis), login(:david)
+    room = rooms(:office)
+
+    jamis.enter(room)
+    jamis.speak(room, &quot;anybody home?&quot;)
+
+    david.enter(room)
+    david.speak(room, &quot;hello!&quot;)
+  end
+
+  private
+
+    module CustomAssertions
+      def enter(room)
+        # reference a named route, for maximum internal consistency!
+        get(room_url(id: room.id))
+        assert(...)
+        ...
+      end
+
+      def speak(room, message)
+        post &quot;/say/#{room.id}&quot;, xhr: true, params: { message: message }
+        assert(...)
+        ...
+      end
+    end
+
+    def login(who)
+      open_session do |sess|
+        sess.extend(CustomAssertions)
+        who = people(who)
+        sess.post &quot;/login&quot;, params: { username: who.username,
+          password: who.password }
+        assert(...)
+      end
+    end
+end</pre>
+
+<p>Another longer example would be:</p>
+
+<p>A simple integration test that exercises multiple controllers:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;test_helper&quot;</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">UserFlowsTest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">IntegrationTest</span>
+  <span class="ruby-identifier">test</span> <span class="ruby-string">&quot;login and browse site&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># login via https</span>
+    <span class="ruby-identifier">https!</span>
+    <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/login&quot;</span>
+    <span class="ruby-identifier">assert_response</span> <span class="ruby-value">:success</span>
+
+    <span class="ruby-identifier">post</span> <span class="ruby-string">&quot;/login&quot;</span>, <span class="ruby-value">params:</span> { <span class="ruby-value">username:</span> <span class="ruby-identifier">users</span>(<span class="ruby-value">:david</span>).<span class="ruby-identifier">username</span>, <span class="ruby-value">password:</span> <span class="ruby-identifier">users</span>(<span class="ruby-value">:david</span>).<span class="ruby-identifier">password</span> }
+    <span class="ruby-identifier">follow_redirect!</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&#39;/welcome&#39;</span>, <span class="ruby-identifier">path</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&#39;Welcome david!&#39;</span>, <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>]
+
+    <span class="ruby-identifier">https!</span>(<span class="ruby-keyword">false</span>)
+    <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/articles/all&quot;</span>
+    <span class="ruby-identifier">assert_response</span> <span class="ruby-value">:success</span>
+    <span class="ruby-identifier">assert_dom</span> <span class="ruby-string">&#39;h1&#39;</span>, <span class="ruby-string">&#39;Articles&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>As you can see the integration test involves multiple controllers and exercises the entire stack from database to dispatcher. In addition you can have multiple session instances open simultaneously in a test and extend those instances with assertion methods to create a very powerful testing DSL (domain-specific language) just for your application.</p>
+
+<p>Here’s an example of multiple sessions and custom DSL in an integration test</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;test_helper&quot;</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">UserFlowsTest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">IntegrationTest</span>
+  <span class="ruby-identifier">test</span> <span class="ruby-string">&quot;login and browse site&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># User david logs in</span>
+    <span class="ruby-identifier">david</span> = <span class="ruby-identifier">login</span>(<span class="ruby-value">:david</span>)
+    <span class="ruby-comment"># User guest logs in</span>
+    <span class="ruby-identifier">guest</span> = <span class="ruby-identifier">login</span>(<span class="ruby-value">:guest</span>)
+
+    <span class="ruby-comment"># Both are now available in different sessions</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&#39;Welcome david!&#39;</span>, <span class="ruby-identifier">david</span>.<span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>]
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&#39;Welcome guest!&#39;</span>, <span class="ruby-identifier">guest</span>.<span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>]
+
+    <span class="ruby-comment"># User david can browse site</span>
+    <span class="ruby-identifier">david</span>.<span class="ruby-identifier">browses_site</span>
+    <span class="ruby-comment"># User guest can browse site as well</span>
+    <span class="ruby-identifier">guest</span>.<span class="ruby-identifier">browses_site</span>
+
+    <span class="ruby-comment"># Continue with other assertions</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+
+    <span class="ruby-keyword">module</span> <span class="ruby-constant">CustomDsl</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">browses_site</span>
+        <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/products/all&quot;</span>
+        <span class="ruby-identifier">assert_response</span> <span class="ruby-value">:success</span>
+        <span class="ruby-identifier">assert_dom</span> <span class="ruby-string">&#39;h1&#39;</span>, <span class="ruby-string">&#39;Products&#39;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">login</span>(<span class="ruby-identifier">user</span>)
+      <span class="ruby-identifier">open_session</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sess</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">CustomDsl</span>)
+        <span class="ruby-identifier">u</span> = <span class="ruby-identifier">users</span>(<span class="ruby-identifier">user</span>)
+        <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">https!</span>
+        <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">post</span> <span class="ruby-string">&quot;/login&quot;</span>, <span class="ruby-value">params:</span> { <span class="ruby-value">username:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">username</span>, <span class="ruby-value">password:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">password</span> }
+        <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&#39;/welcome&#39;</span>, <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">path</span>
+        <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">https!</span>(<span class="ruby-keyword">false</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>See the <a href="Integration/RequestHelpers.html">request helpers documentation</a> for help on how to use <code>get</code>, etc.</p>
+
+<h3 id="class-ActionDispatch::IntegrationTest-label-Changing+the+request+encoding"><a href="#class-ActionDispatch::IntegrationTest-label-Changing+the+request+encoding">Changing the request encoding</a></h3>
+
+<p>You can also test your <a href="../JSON.html"><code>JSON</code></a> API easily by setting what the request should be encoded as:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;test_helper&quot;</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">ApiTest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">IntegrationTest</span>
+  <span class="ruby-identifier">test</span> <span class="ruby-string">&quot;creates articles&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">assert_difference</span> <span class="ruby-operator">-&gt;</span> { <span class="ruby-constant">Article</span>.<span class="ruby-identifier">count</span> } <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">post</span> <span class="ruby-identifier">articles_path</span>, <span class="ruby-value">params:</span> { <span class="ruby-value">article:</span> { <span class="ruby-value">title:</span> <span class="ruby-string">&quot;Ahoy!&quot;</span> } }, <span class="ruby-value">as:</span> <span class="ruby-value">:json</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">assert_response</span> <span class="ruby-value">:success</span>
+    <span class="ruby-identifier">assert_equal</span>({ <span class="ruby-string">&quot;id&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Article</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">id</span>, <span class="ruby-string">&quot;title&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;Ahoy!&quot;</span> }, <span class="ruby-identifier">response</span>.<span class="ruby-identifier">parsed_body</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The <code>as</code> option passes an “application/json” Accept header (thereby setting the request format to <a href="../JSON.html"><code>JSON</code></a> unless overridden), sets the content type to “application/json” and encodes the parameters as <a href="../JSON.html"><code>JSON</code></a>.</p>
+
+<p>Calling <a href="TestResponse.html#method-i-parsed_body"><code>TestResponse#parsed_body</code></a> on the response parses the response body based on the last response MIME type.</p>
+
+<p>Out of the box, only <code>:json</code> is supported. But for any custom MIME types you’ve registered, you can add your own encoders with:</p>
+
+<pre class="ruby"><span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">IntegrationTest</span>.<span class="ruby-identifier">register_encoder</span> <span class="ruby-value">:wibble</span>,
+  <span class="ruby-value">param_encoder:</span> <span class="ruby-operator">-&gt;</span> <span class="ruby-identifier">params</span> { <span class="ruby-identifier">params</span>.<span class="ruby-identifier">to_wibble</span> },
+  <span class="ruby-value">response_parser:</span> <span class="ruby-operator">-&gt;</span> <span class="ruby-identifier">body</span> { <span class="ruby-identifier">body</span> }
+</pre>
+
+<p>Where <code>param_encoder</code> defines how the params should be encoded and <a href="../vendor/bundle/ruby/3_2_0/gems/net-imap-0_5_12/lib/net/imap/response_parser_rb.html">response_parser</a> defines how the response body should be parsed through <a href="TestResponse.html#method-i-parsed_body"><code>TestResponse#parsed_body</code></a>.</p>
 
 <p>Consult the <a href="https://guides.rubyonrails.org/testing.html">Rails Testing Guide</a> for more.</p>
 

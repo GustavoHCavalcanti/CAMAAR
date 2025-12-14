@@ -154,6 +154,29 @@
 <span class="ruby-identifier">p</span> <span class="ruby-identifier">acl</span>.<span class="ruby-identifier">allow_addr?</span>(<span class="ruby-identifier">addr</span>) <span class="ruby-comment"># =&gt; true</span>
 </pre>
 
+<p>Simple Access Control Lists.</p>
+
+<p>Access control lists are composed of “allow” and “deny” halves to control access.  Use “all” or “*” to match any address.  To match a specific address use any address or address mask that IPAddr can understand.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">list</span> = <span class="ruby-node">%w[
+  deny all
+  allow 192.168.1.1
+  allow ::ffff:192.168.1.2
+  allow 192.168.1.3
+]</span>
+
+<span class="ruby-comment"># From Socket#peeraddr, see also ACL#allow_socket?</span>
+<span class="ruby-identifier">addr</span> = [<span class="ruby-string">&quot;AF_INET&quot;</span>, <span class="ruby-value">10</span>, <span class="ruby-string">&quot;lc630&quot;</span>, <span class="ruby-string">&quot;192.168.1.3&quot;</span>]
+
+<span class="ruby-identifier">acl</span> = <span class="ruby-constant">ACL</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">p</span> <span class="ruby-identifier">acl</span>.<span class="ruby-identifier">allow_addr?</span>(<span class="ruby-identifier">addr</span>) <span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-identifier">acl</span> = <span class="ruby-constant">ACL</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">list</span>, <span class="ruby-constant">ACL</span><span class="ruby-operator">::</span><span class="ruby-constant">DENY_ALLOW</span>)
+<span class="ruby-identifier">p</span> <span class="ruby-identifier">acl</span>.<span class="ruby-identifier">allow_addr?</span>(<span class="ruby-identifier">addr</span>) <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
   </section>
 
 
@@ -230,7 +253,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/drb-2.2.3/lib/drb/acl.rb, line 179</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/drb-2.2.3/lib/drb/acl.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">list</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">order</span> = <span class="ruby-constant">DENY_ALLOW</span>)
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">order</span>
   <span class="ruby-ivar">@deny</span> = <span class="ruby-constant">ACLList</span>.<span class="ruby-identifier">new</span>
@@ -294,7 +317,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="allow_addr-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/drb-2.2.3/lib/drb/acl.rb, line 203</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/drb-2.2.3/lib/drb/acl.rb, line 203</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allow_addr?</span>(<span class="ruby-identifier">addr</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-ivar">@order</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">DENY_ALLOW</span>
@@ -352,7 +375,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="allow_socket-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/drb-2.2.3/lib/drb/acl.rb, line 191</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/drb-2.2.3/lib/drb/acl.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">allow_socket?</span>(<span class="ruby-identifier">soc</span>)
   <span class="ruby-identifier">allow_addr?</span>(<span class="ruby-identifier">soc</span>.<span class="ruby-identifier">peeraddr</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -396,7 +419,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="install_list-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/drb-2.2.3/lib/drb/acl.rb, line 223</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/drb-2.2.3/lib/drb/acl.rb, line 223</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">install_list</span>(<span class="ruby-identifier">list</span>)
   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
   <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">size</span>

@@ -232,6 +232,95 @@ domain: proc { |req| &quot;.sub.#{req.host}&quot; }     # Set cookie domain dyna
 <p><code>:same_site</code> - The value of the <code>SameSite</code> cookie attribute, which determines how this cookie should be restricted in cross-site contexts. Possible values are <code>nil</code>, <code>:none</code>, <code>:lax</code>, and <code>:strict</code>. Defaults to <code>:lax</code>.</p>
 </li></ul>
 
+<p>Read and write data to cookies through <a href="../ActionController/Cookies.html#method-i-cookies"><code>ActionController::Cookies#cookies</code></a>.</p>
+
+<p>When reading cookie data, the data is read from the HTTP request header, Cookie. When writing cookie data, the data is sent out in the HTTP response header, <code>Set-Cookie</code>.</p>
+
+<p>Examples of writing:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Sets a simple session cookie.</span>
+<span class="ruby-comment"># This cookie will be deleted when the user&#39;s browser is closed.</span>
+<span class="ruby-identifier">cookies</span>[<span class="ruby-value">:user_name</span>] = <span class="ruby-string">&quot;david&quot;</span>
+
+<span class="ruby-comment"># Cookie values are String-based. Other data types need to be serialized.</span>
+<span class="ruby-identifier">cookies</span>[<span class="ruby-value">:lat_lon</span>] = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>([<span class="ruby-value">47.68</span>, <span class="ruby-value">-122.37</span>])
+
+<span class="ruby-comment"># Sets a cookie that expires in 1 hour.</span>
+<span class="ruby-identifier">cookies</span>[<span class="ruby-value">:login</span>] = { <span class="ruby-value">value:</span> <span class="ruby-string">&quot;XJ-122&quot;</span>, <span class="ruby-value">expires:</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">hour</span> }
+
+<span class="ruby-comment"># Sets a cookie that expires at a specific time.</span>
+<span class="ruby-identifier">cookies</span>[<span class="ruby-value">:login</span>] = { <span class="ruby-value">value:</span> <span class="ruby-string">&quot;XJ-122&quot;</span>, <span class="ruby-value">expires:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc</span>(<span class="ruby-value">2020</span>, <span class="ruby-value">10</span>, <span class="ruby-value">15</span>, <span class="ruby-value">5</span>) }
+
+<span class="ruby-comment"># Sets a signed cookie, which prevents users from tampering with its value.</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">signed</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
+<span class="ruby-comment"># It can be read using the signed method.</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">signed</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-comment"># =&gt; 123</span>
+
+<span class="ruby-comment"># Sets an encrypted cookie value before sending it to the client which</span>
+<span class="ruby-comment"># prevent users from reading and tampering with its value.</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">encrypted</span>[<span class="ruby-value">:discount</span>] = <span class="ruby-value">45</span>
+<span class="ruby-comment"># It can be read using the encrypted method.</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">encrypted</span>[<span class="ruby-value">:discount</span>] <span class="ruby-comment"># =&gt; 45</span>
+
+<span class="ruby-comment"># Sets a &quot;permanent&quot; cookie (which expires in 20 years from now).</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">permanent</span>[<span class="ruby-value">:login</span>] = <span class="ruby-string">&quot;XJ-122&quot;</span>
+
+<span class="ruby-comment"># You can also chain these methods:</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">signed</span>.<span class="ruby-identifier">permanent</span>[<span class="ruby-value">:login</span>] = <span class="ruby-string">&quot;XJ-122&quot;</span>
+</pre>
+
+<p>Examples of reading:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cookies</span>[<span class="ruby-value">:user_name</span>]           <span class="ruby-comment"># =&gt; &quot;david&quot;</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">size</span>                  <span class="ruby-comment"># =&gt; 2</span>
+<span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">cookies</span>[<span class="ruby-value">:lat_lon</span>]) <span class="ruby-comment"># =&gt; [47.68, -122.37]</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">signed</span>[<span class="ruby-value">:login</span>]        <span class="ruby-comment"># =&gt; &quot;XJ-122&quot;</span>
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">encrypted</span>[<span class="ruby-value">:discount</span>]  <span class="ruby-comment"># =&gt; 45</span>
+</pre>
+
+<p>Example for deleting:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value">:user_name</span>
+</pre>
+
+<p>Please note that if you specify a <code>:domain</code> when setting a cookie, you must also specify the domain when deleting the cookie:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cookies</span>[<span class="ruby-value">:name</span>] = {
+  <span class="ruby-value">value:</span> <span class="ruby-string">&#39;a yummy cookie&#39;</span>,
+  <span class="ruby-value">expires:</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">year</span>,
+  <span class="ruby-value">domain:</span> <span class="ruby-string">&#39;domain.com&#39;</span>
+}
+
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:name</span>, <span class="ruby-value">domain:</span> <span class="ruby-string">&#39;domain.com&#39;</span>)
+</pre>
+
+<p>The option symbols for setting cookies are:</p>
+<ul><li>
+<p><code>:value</code> - The cookie’s value.</p>
+</li><li>
+<p><code>:path</code> - The path for which this cookie applies. Defaults to the root of the application.</p>
+</li><li>
+<p><code>:domain</code> - The domain for which this cookie applies so you can restrict to the domain level. If you use a schema like <a href="www.example.com">www.example.com</a> and want to share session with user.example.com set <code>:domain</code> to <code>:all</code>. To support multiple domains, provide an array, and the first domain matching <code>request.host</code> will be used. Make sure to specify the <code>:domain</code> option with <code>:all</code> or <a href="../Array.html"><code>Array</code></a> again when deleting cookies. For more flexibility you can set the domain on a per-request basis by specifying <code>:domain</code> with a proc.</p>
+
+<pre>domain: nil  # Does not set cookie domain. (default)
+domain: :all # Allow the cookie for the top most level
+             # domain and subdomains.
+domain: %w(.example.com .example.org) # Allow the cookie
+                                      # for concrete domain names.
+domain: proc { Tenant.current.cookie_domain } # Set cookie domain dynamically
+domain: proc { |req| &quot;.sub.#{req.host}&quot; }     # Set cookie domain dynamically based on request</pre>
+</li><li>
+<p><code>:tld_length</code> - When using <code>:domain =&gt; :all</code>, this option can be used to explicitly set the TLD length when using a short (&lt;= 3 character) domain that is being interpreted as part of a TLD. For example, to share cookies between user1.lvh.me and user2.lvh.me, set <code>:tld_length</code> to 2.</p>
+</li><li>
+<p><code>:expires</code> - The time at which this cookie expires, as a <a href="../Time.html"><code>Time</code></a> or <a href="../ActiveSupport/Duration.html"><code>ActiveSupport::Duration</code></a> object.</p>
+</li><li>
+<p><code>:secure</code> - Whether this cookie is only transmitted to HTTPS servers. Default is <code>false</code>.</p>
+</li><li>
+<p><code>:httponly</code> - Whether this cookie is accessible via scripting or only HTTP. Defaults to <code>false</code>.</p>
+</li><li>
+<p><code>:same_site</code> - The value of the <code>SameSite</code> cookie attribute, which determines how this cookie should be restricted in cross-site contexts. Possible values are <code>nil</code>, <code>:none</code>, <code>:lax</code>, and <code>:strict</code>. Defaults to <code>:lax</code>.</p>
+</li></ul>
+
   </section>
 
 
@@ -420,7 +509,7 @@ domain: proc { |req| &quot;.sub.#{req.host}&quot; }     # Set cookie domain dyna
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/cookies.rb, line 702</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/cookies.rb, line 702</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">app</span>)
   <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
 <span class="ruby-keyword">end</span></pre>
@@ -472,7 +561,7 @@ domain: proc { |req| &quot;.sub.#{req.host}&quot; }     # Set cookie domain dyna
         <div class="method-description">
 
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/cookies.rb, line 706</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/cookies.rb, line 706</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-identifier">request</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)

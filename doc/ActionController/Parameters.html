@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionController::Parameters-label-Action+Controller+Parameters">Action Controller Parameters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionController::Parameters-label-Action+Controller+Parameters">Action Controller Parameters</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -363,6 +392,80 @@
 <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;key&quot;</span>] <span class="ruby-comment"># =&gt; &quot;value&quot;</span>
 </pre>
 
+<h1 id="class-ActionController::Parameters-label-Action+Controller+Parameters"><a href="#class-ActionController::Parameters-label-Action+Controller+Parameters">Action Controller <a href="Parameters.html"><code>Parameters</code></a></a></h1>
+
+<p>Allows you to choose which attributes should be permitted for mass updating and thus prevent accidentally exposing that which shouldn’t be exposed.</p>
+
+<p>Provides methods for filtering and requiring params:</p>
+<ul><li>
+<p><code>expect</code> to safely permit and require parameters in one step.</p>
+</li><li>
+<p><code>permit</code> to filter params for mass assignment.</p>
+</li><li>
+<p><code>require</code> to require a parameter or raise an error.</p>
+</li></ul>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>({
+  <span class="ruby-value">person:</span> {
+    <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Francesco&quot;</span>,
+    <span class="ruby-value">age:</span>  <span class="ruby-value">22</span>,
+    <span class="ruby-value">role:</span> <span class="ruby-string">&quot;admin&quot;</span>
+  }
+})
+
+<span class="ruby-identifier">permitted</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">expect</span>(<span class="ruby-value">person:</span> [<span class="ruby-value">:name</span>, <span class="ruby-value">:age</span>])
+<span class="ruby-identifier">permitted</span> <span class="ruby-comment"># =&gt; #&lt;ActionController::Parameters {&quot;name&quot;=&gt;&quot;Francesco&quot;, &quot;age&quot;=&gt;22} permitted: true&gt;</span>
+
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">update!</span>(<span class="ruby-identifier">permitted</span>)
+<span class="ruby-comment"># =&gt; #&lt;Person id: 1, name: &quot;Francesco&quot;, age: 22, role: &quot;user&quot;&gt;</span>
+</pre>
+
+<p><a href="Parameters.html"><code>Parameters</code></a> provides two options that control the top-level behavior of new instances:</p>
+<ul><li>
+<p><code>permit_all_parameters</code> - If it’s <code>true</code>, all the parameters will be permitted by default. The default is <code>false</code>.</p>
+</li><li>
+<p><code>action_on_unpermitted_parameters</code> - Controls behavior when parameters that are not explicitly permitted are found. The default value is <code>:log</code> in test and development environments, <code>false</code> otherwise. The values can be:</p>
+<ul><li>
+<p><code>false</code> to take no action.</p>
+</li><li>
+<p><code>:log</code> to emit an <a href="../ActiveSupport/Notifications.html#method-c-instrument"><code>ActiveSupport::Notifications.instrument</code></a> event on the <code>unpermitted_parameters.action_controller</code> topic and log at the DEBUG level.</p>
+</li><li>
+<p><code>:raise</code> to raise an <a href="UnpermittedParameters.html"><code>ActionController::UnpermittedParameters</code></a> exception.</p>
+</li></ul>
+</li></ul>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-comment"># =&gt; false</span>
+
+<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">permit_all_parameters</span> = <span class="ruby-keyword">true</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">a:</span> <span class="ruby-string">&quot;123&quot;</span>, <span class="ruby-value">b:</span> <span class="ruby-string">&quot;456&quot;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit</span>(<span class="ruby-value">:c</span>)
+<span class="ruby-comment"># =&gt; #&lt;ActionController::Parameters {} permitted: true&gt;</span>
+
+<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">action_on_unpermitted_parameters</span> = <span class="ruby-value">:raise</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">a:</span> <span class="ruby-string">&quot;123&quot;</span>, <span class="ruby-value">b:</span> <span class="ruby-string">&quot;456&quot;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit</span>(<span class="ruby-value">:c</span>)
+<span class="ruby-comment"># =&gt; ActionController::UnpermittedParameters: found unpermitted keys: a, b</span>
+</pre>
+
+<p>Please note that these options <em>are not thread-safe</em>. In a multi-threaded environment they should only be set once at boot-time and never mutated at runtime.</p>
+
+<p>You can fetch values of <a href="Parameters.html"><code>ActionController::Parameters</code></a> using either <code>:key</code> or <code>&quot;key&quot;</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">key:</span> <span class="ruby-string">&quot;value&quot;</span>)
+<span class="ruby-identifier">params</span>[<span class="ruby-value">:key</span>]  <span class="ruby-comment"># =&gt; &quot;value&quot;</span>
+<span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;key&quot;</span>] <span class="ruby-comment"># =&gt; &quot;value&quot;</span>
+</pre>
+
   </section>
 
 
@@ -467,7 +570,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 287</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 287</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">parameters</span> = {}, <span class="ruby-identifier">logging_context</span> = {})
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
@@ -541,7 +644,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 301</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 301</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:permitted?</span>)
     <span class="ruby-identifier">permitted?</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">parameters</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">parameters</span>
@@ -594,7 +697,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 797</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 797</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-identifier">convert_hashes_to_parameters</span>(<span class="ruby-identifier">key</span>, <span class="ruby-ivar">@parameters</span>[<span class="ruby-identifier">key</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -643,7 +746,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 803</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 803</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@parameters</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -690,7 +793,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="as_json-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 194</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 194</span>
     </pre>
           </div>
 
@@ -732,7 +835,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="compact-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 974</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 974</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact</span>
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">compact</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -776,7 +879,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="compact-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 980</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 980</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact!</span>
   <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">compact!</span>
 <span class="ruby-keyword">end</span></pre>
@@ -820,7 +923,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="compact_blank-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 986</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 986</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact_blank</span>
   <span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">blank?</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -864,7 +967,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="compact_blank-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 992</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 992</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact_blank!</span>
   <span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">blank?</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -908,7 +1011,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="converted_arrays-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 435</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 435</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converted_arrays</span>
   <span class="ruby-ivar">@converted_arrays</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -954,7 +1057,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deep_dup-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1092</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1092</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deep_dup</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">deep_dup</span>, <span class="ruby-ivar">@logging_context</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">duplicate</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">duplicate</span>.<span class="ruby-identifier">permitted</span> = <span class="ruby-ivar">@permitted</span>
@@ -1003,7 +1106,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deep_merge-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 168</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 168</span>
     </pre>
           </div>
 
@@ -1050,7 +1153,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deep_merge-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 183</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 183</span>
     </pre>
           </div>
 
@@ -1092,7 +1195,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deep_transform_keys-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 924</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 924</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deep_transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(
     <span class="ruby-identifier">_deep_transform_keys_in_object</span>(<span class="ruby-ivar">@parameters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">to_unsafe_h</span>
@@ -1138,7 +1241,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deep_transform_keys-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 933</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 933</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deep_transform_keys!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@parameters</span> = <span class="ruby-identifier">_deep_transform_keys_in_object</span>(<span class="ruby-ivar">@parameters</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">to_unsafe_h</span>
   <span class="ruby-keyword">self</span>
@@ -1183,7 +1286,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 942</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 942</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">convert_value_to_parameters</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1262,7 +1365,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="dig-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 841</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 841</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dig</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-identifier">convert_hashes_to_parameters</span>(<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>, <span class="ruby-ivar">@parameters</span>[<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>])
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
@@ -1353,7 +1456,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="each_key-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 202</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 202</span>
     </pre>
           </div>
 
@@ -1395,7 +1498,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="each_pair-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 402</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 402</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_pair</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__callee__</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
@@ -1416,7 +1519,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-each">each</a>
+          Also aliased as: <a href="Parameters.html#method-i-each">each</a>, each
         </div>
 
 
@@ -1448,7 +1551,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="each_value-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 414</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 414</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_value</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-value">:each_value</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
@@ -1500,7 +1603,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="empty-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 211</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 211</span>
     </pre>
           </div>
 
@@ -1542,7 +1645,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="eql-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 309</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 309</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eql?</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">&amp;&amp;</span>
     <span class="ruby-identifier">permitted?</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-operator">&amp;&amp;</span>
@@ -1588,7 +1691,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="except-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 869</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 869</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">except</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">except</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1609,7 +1712,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-without">without</a>
+          Also aliased as: <a href="Parameters.html#method-i-without">without</a>, without
         </div>
 
 
@@ -1644,7 +1747,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="exclude-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 219</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 219</span>
     </pre>
           </div>
 
@@ -1686,7 +1789,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="expect-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 772</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 772</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expect</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>)
   <span class="ruby-identifier">params</span> = <span class="ruby-identifier">permit_filters</span>(<span class="ruby-identifier">filters</span>)
   <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">flat_map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">f</span> }
@@ -1829,7 +1932,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="expect-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 786</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 786</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expect!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>)
   <span class="ruby-identifier">expect</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>)
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ParameterMissing</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
@@ -1875,7 +1978,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="extract-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 879</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 879</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extract!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">extract!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1924,7 +2027,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="extract_value-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1110</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extract_value</span>(<span class="ruby-identifier">key</span>, <span class="ruby-value">delimiter:</span> <span class="ruby-string">&quot;_&quot;</span>)
   <span class="ruby-ivar">@parameters</span>[<span class="ruby-identifier">key</span>]&amp;.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">delimiter</span>, <span class="ruby-value">-1</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1980,7 +2083,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fetch-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 820</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 820</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">convert_value_to_parameters</span>(
     <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>) {
@@ -2065,7 +2168,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="has_value-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 997</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 997</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_value?</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">each_value</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">convert_value_to_parameters</span>(<span class="ruby-identifier">value</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -2081,7 +2184,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-value-3F">value?</a>
+          Also aliased as: <a href="Parameters.html#method-i-value-3F">value?</a>, value?
         </div>
 
 
@@ -2113,7 +2216,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="hash-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 315</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 315</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hash</span>
   [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>, <span class="ruby-ivar">@parameters</span>, <span class="ruby-ivar">@permitted</span>].<span class="ruby-identifier">hash</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2160,7 +2263,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 227</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 227</span>
     </pre>
           </div>
 
@@ -2174,7 +2277,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-has_key-3F">has_key?</a>, <a href="Parameters.html#method-i-key-3F">key?</a>, <a href="Parameters.html#method-i-member-3F">member?</a>
+          Also aliased as: <a href="Parameters.html#method-i-has_key-3F">has_key?</a>, <a href="Parameters.html#method-i-key-3F">key?</a>, <a href="Parameters.html#method-i-member-3F">member?</a>, has_key?, key?, member?
         </div>
 
 
@@ -2206,7 +2309,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1055</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1055</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-node">&quot;#&lt;#{self.class} #{@parameters} permitted: #{@permitted}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2313,7 +2416,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="keys-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 235</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 235</span>
     </pre>
           </div>
 
@@ -2380,7 +2483,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="merge-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1011</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1011</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge</span>(<span class="ruby-identifier">other_hash</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(
     <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">to_h</span>)
@@ -2429,7 +2532,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="merge-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1022</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1022</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge!</span>(<span class="ruby-identifier">other_hash</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">to_h</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">self</span>
@@ -2474,7 +2577,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="permit-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 668</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 668</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">permit</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filters</span>)
   <span class="ruby-identifier">permit_filters</span>(<span class="ruby-identifier">filters</span>, <span class="ruby-value">on_unpermitted:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">action_on_unpermitted_parameters</span>, <span class="ruby-value">explicit_arrays:</span> <span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2644,7 +2747,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="permit-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 461</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 461</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">permit!</span>
   <span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">value</span>).<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
@@ -2706,7 +2809,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="permitted-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 445</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 445</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">permitted?</span>
   <span class="ruby-ivar">@permitted</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2756,7 +2859,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="reject-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 961</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 961</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -2800,7 +2903,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="reject-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 966</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 966</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reject!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">reject!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">self</span>
@@ -2817,7 +2920,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-delete_if">delete_if</a>
+          Also aliased as: <a href="Parameters.html#method-i-delete_if">delete_if</a>, delete_if
         </div>
 
 
@@ -2849,7 +2952,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="require-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 519</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 519</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">require</span>(<span class="ruby-identifier">k</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
   <span class="ruby-identifier">value</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>]
@@ -2918,7 +3021,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-required">required</a>
+          Also aliased as: <a href="Parameters.html#method-i-required">required</a>, required
         </div>
 
 
@@ -2985,7 +3088,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="reverse_merge-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1033</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1033</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_merge</span>(<span class="ruby-identifier">other_hash</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(
     <span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-ivar">@parameters</span>)
@@ -3003,7 +3106,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-with_defaults">with_defaults</a>
+          Also aliased as: <a href="Parameters.html#method-i-with_defaults">with_defaults</a>, with_defaults
         </div>
 
 
@@ -3035,7 +3138,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="reverse_merge-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1042</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1042</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_merge!</span>(<span class="ruby-identifier">other_hash</span>)
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">to_h</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span><span class="ruby-operator">|</span> <span class="ruby-identifier">left</span> }
   <span class="ruby-keyword">self</span>
@@ -3052,7 +3155,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-with_defaults-21">with_defaults!</a>
+          Also aliased as: <a href="Parameters.html#method-i-with_defaults-21">with_defaults!</a>, with_defaults!
         </div>
 
 
@@ -3084,7 +3187,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 948</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 948</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">select</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -3128,7 +3231,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="select-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 953</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 953</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">select!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">self</span>
@@ -3145,7 +3248,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-keep_if">keep_if</a>
+          Also aliased as: <a href="Parameters.html#method-i-keep_if">keep_if</a>, keep_if
         </div>
 
 
@@ -3177,7 +3280,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="slice-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 852</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 852</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -3226,7 +3329,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="slice-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 858</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 858</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">slice!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">slice!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-keyword">self</span>
@@ -3271,7 +3374,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="to_h-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 331</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 331</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">permitted?</span>
     <span class="ruby-identifier">convert_parameters_to_hashes</span>(<span class="ruby-ivar">@parameters</span>, <span class="ruby-value">:to_h</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -3330,7 +3433,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="to_hash-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 351</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 351</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
   <span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">to_hash</span>
 <span class="ruby-keyword">end</span></pre>
@@ -3420,7 +3523,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="to_query-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 381</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 381</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">to_query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -3461,7 +3564,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-to_param">to_param</a>
+          Also aliased as: <a href="Parameters.html#method-i-to_param">to_param</a>, to_param
         </div>
 
 
@@ -3496,7 +3599,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 250</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 250</span>
 <span class="ruby-identifier">delegate</span> <span class="ruby-value">:keys</span>, <span class="ruby-value">:empty?</span>, <span class="ruby-value">:exclude?</span>, <span class="ruby-value">:include?</span>,
   <span class="ruby-value">:as_json</span>, <span class="ruby-value">:to_s</span>, <span class="ruby-value">:each_key</span>, <span class="ruby-value">to:</span> <span class="ruby-value">:@parameters</span>
 </pre>
@@ -3540,7 +3643,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="to_unsafe_h-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 395</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 395</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_unsafe_h</span>
   <span class="ruby-identifier">convert_parameters_to_hashes</span>(<span class="ruby-ivar">@parameters</span>, <span class="ruby-value">:to_unsafe_h</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -3564,7 +3667,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
 
 
         <div class="aliases">
-          Also aliased as: <a href="Parameters.html#method-i-to_unsafe_hash">to_unsafe_hash</a>
+          Also aliased as: <a href="Parameters.html#method-i-to_unsafe_hash">to_unsafe_hash</a>, to_unsafe_hash
         </div>
 
 
@@ -3631,7 +3734,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="transform_keys-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 906</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 906</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-value">:transform_keys</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(
@@ -3678,7 +3781,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="transform_keys-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 915</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 915</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">transform_keys!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-value">:transform_keys!</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">transform_keys!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -3724,7 +3827,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="transform_values-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 889</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 889</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">transform_values</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-value">:transform_values</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-identifier">new_instance_with_inherited_permitted_status</span>(
@@ -3776,7 +3879,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="transform_values-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 898</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 898</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">transform_values!</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-value">:transform_values!</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">transform_values!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">convert_value_to_parameters</span>(<span class="ruby-identifier">v</span>) }
@@ -3857,7 +3960,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="values-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 424</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 424</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">values</span>
   <span class="ruby-identifier">to_enum</span>(<span class="ruby-value">:each_value</span>).<span class="ruby-identifier">to_a</span>
 <span class="ruby-keyword">end</span></pre>
@@ -3901,7 +4004,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="values_at-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1005</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1005</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">values_at</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
   <span class="ruby-identifier">convert_value_to_parameters</span>(<span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -4058,7 +4161,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="each_nested_attribute-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1123</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_nested_attribute</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">v</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">nested_attribute?</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>) }
@@ -4104,7 +4207,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="nested_attributes-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1119</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nested_attributes?</span>
   <span class="ruby-ivar">@parameters</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">nested_attribute?</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -4148,7 +4251,7 @@ user_params, profile_params = params.require([:user, :profile])</pre>
         <div class="method-description">
 
           <div class="method-source-code" id="permit_filters-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1130</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/strong_parameters.rb, line 1130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">permit_filters</span>(<span class="ruby-identifier">filters</span>, <span class="ruby-value">on_unpermitted:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">explicit_arrays:</span> <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">params</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
 

@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActiveRecord::AttributeMethods::Dirty-label-Active+Record+Attribute+Methods+Dirty">Active Record Attribute Methods Dirty</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveRecord::AttributeMethods::Dirty-label-Active+Record+Attribute+Methods+Dirty">Active Record Attribute Methods Dirty</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -216,6 +245,39 @@
 
 <p>Similar to <a href="../../ActiveModel/Dirty.html"><code>ActiveModel::Dirty</code></a>, methods can be invoked as <code>saved_change_to_name?</code> or by passing an argument to the generic method <code>saved_change_to_attribute?(&quot;name&quot;)</code>.</p>
 
+<h1 id="module-ActiveRecord::AttributeMethods::Dirty-label-Active+Record+Attribute+Methods+Dirty"><a href="#module-ActiveRecord::AttributeMethods::Dirty-label-Active+Record+Attribute+Methods+Dirty">Active Record Attribute Methods Dirty</a></h1>
+
+<p>Provides a way to track changes in your Active Record models. It adds all methods from <a href="../../ActiveModel/Dirty.html"><code>ActiveModel::Dirty</code></a> and adds database-specific methods.</p>
+
+<p>A newly created <a href="../../Person.html"><code>Person</code></a> object is unchanged:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">name:</span> <span class="ruby-string">&quot;Allison&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">changed?</span> <span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p>Change the name:</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;Alice&#39;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name_in_database</span>          <span class="ruby-comment"># =&gt; &quot;Allison&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">will_save_change_to_name?</span> <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name_change_to_be_saved</span>   <span class="ruby-comment"># =&gt; [&quot;Allison&quot;, &quot;Alice&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">changes_to_save</span>           <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;[&quot;Allison&quot;, &quot;Alice&quot;]}</span>
+</pre>
+
+<p>Save the changes:</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">save</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name_in_database</span>        <span class="ruby-comment"># =&gt; &quot;Alice&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">saved_change_to_name?</span>   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">saved_change_to_name</span>    <span class="ruby-comment"># =&gt; [&quot;Allison&quot;, &quot;Alice&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name_before_last_save</span>   <span class="ruby-comment"># =&gt; &quot;Allison&quot;</span>
+</pre>
+
+<p>Similar to <a href="../../ActiveModel/Dirty.html"><code>ActiveModel::Dirty</code></a>, methods can be invoked as <code>saved_change_to_name?</code> or by passing an argument to the generic method <code>saved_change_to_attribute?(&quot;name&quot;)</code>.</p>
+
   </section>
 
 
@@ -259,7 +321,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attribute_before_last_save-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 108</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attribute_before_last_save</span>(<span class="ruby-identifier">attr_name</span>)
   <span class="ruby-identifier">mutations_before_last_save</span>.<span class="ruby-identifier">original_value</span>(<span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -305,7 +367,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attribute_change_to_be_saved-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 152</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attribute_change_to_be_saved</span>(<span class="ruby-identifier">attr_name</span>)
   <span class="ruby-identifier">mutations_from_database</span>.<span class="ruby-identifier">change_to_attribute</span>(<span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -353,7 +415,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attribute_in_database-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 164</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attribute_in_database</span>(<span class="ruby-identifier">attr_name</span>)
   <span class="ruby-identifier">mutations_from_database</span>.<span class="ruby-identifier">original_value</span>(<span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -399,7 +461,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attributes_in_database-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 191</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes_in_database</span>
   <span class="ruby-identifier">mutations_from_database</span>.<span class="ruby-identifier">changed_values</span>
 <span class="ruby-keyword">end</span></pre>
@@ -445,7 +507,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="changed_attribute_names_to_save-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 181</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">changed_attribute_names_to_save</span>
   <span class="ruby-identifier">mutations_from_database</span>.<span class="ruby-identifier">changed_attribute_names</span>
 <span class="ruby-keyword">end</span></pre>
@@ -489,7 +551,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="changes_to_save-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 175</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 175</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">changes_to_save</span>
   <span class="ruby-identifier">mutations_from_database</span>.<span class="ruby-identifier">changes</span>
 <span class="ruby-keyword">end</span></pre>
@@ -533,7 +595,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="has_changes_to_save-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 169</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 169</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_changes_to_save?</span>
   <span class="ruby-identifier">mutations_from_database</span>.<span class="ruby-identifier">any_changes?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -577,7 +639,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="reload-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 63</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reload</span>(<span class="ruby-operator">*</span>)
   <span class="ruby-keyword">super</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span>
     <span class="ruby-ivar">@mutations_before_last_save</span> = <span class="ruby-keyword">nil</span>
@@ -629,7 +691,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="saved_change_to_attribute-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 98</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">saved_change_to_attribute</span>(<span class="ruby-identifier">attr_name</span>)
   <span class="ruby-identifier">mutations_before_last_save</span>.<span class="ruby-identifier">change_to_attribute</span>(<span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -675,7 +737,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="saved_change_to_attribute-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 86</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">saved_change_to_attribute?</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">mutations_before_last_save</span>.<span class="ruby-identifier">changed?</span>(<span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -730,7 +792,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="saved_changes-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 118</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">saved_changes</span>
   <span class="ruby-identifier">mutations_before_last_save</span>.<span class="ruby-identifier">changes</span>
 <span class="ruby-keyword">end</span></pre>
@@ -774,7 +836,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="saved_changes-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 113</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">saved_changes?</span>
   <span class="ruby-identifier">mutations_before_last_save</span>.<span class="ruby-identifier">any_changes?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -818,7 +880,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="will_save_change_to_attribute-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 138</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/dirty.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">will_save_change_to_attribute?</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">mutations_from_database</span>.<span class="ruby-identifier">changed?</span>(<span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>

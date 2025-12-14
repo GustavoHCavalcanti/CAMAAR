@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Lint::Tests-label-Active+Model+Lint+Tests">Active Model Lint Tests</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Lint::Tests-label-Active+Model+Lint+Tests">Active Model Lint Tests</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -155,6 +184,16 @@
 
 <p>Objects you pass in are expected to return a compliant object from a call to <code>to_model</code>. It is perfectly fine for <code>to_model</code> to return <code>self</code>.</p>
 
+<h2 id="module-ActiveModel::Lint::Tests-label-Active+Model+Lint+Tests"><a href="#module-ActiveModel::Lint::Tests-label-Active+Model+Lint+Tests">Active Model Lint Tests</a></h2>
+
+<p>You can test whether an object is compliant with the Active Model <a href="../API.html"><code>API</code></a> by including <a href="Tests.html"><code>ActiveModel::Lint::Tests</code></a> in your TestCase. It will include tests that tell you whether your object is fully compliant, or if not, which aspects of the <a href="../API.html"><code>API</code></a> are not implemented.</p>
+
+<p>Note an object is not required to implement all APIs in order to work with Action Pack. This module only intends to provide guidance in case you want all features out of the box.</p>
+
+<p>These tests do not attempt to determine the semantic correctness of the returned values. For instance, you could implement <code>valid?</code> to always return <code>true</code>, and the tests would pass. It is up to you to ensure that the values are semantically meaningful.</p>
+
+<p>Objects you pass in are expected to return a compliant object from a call to <code>to_model</code>. It is perfectly fine for <code>to_model</code> to return <code>self</code>.</p>
+
   </section>
 
 
@@ -198,7 +237,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="test_errors_aref-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 102</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_errors_aref</span>
   <span class="ruby-identifier">assert_respond_to</span> <span class="ruby-identifier">model</span>, <span class="ruby-value">:errors</span>
   <span class="ruby-identifier">assert_equal</span> [], <span class="ruby-identifier">model</span>.<span class="ruby-identifier">errors</span>[<span class="ruby-value">:hello</span>], <span class="ruby-string">&quot;errors#[] should return an empty Array&quot;</span>
@@ -245,7 +284,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="test_model_naming-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 81</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_model_naming</span>
   <span class="ruby-identifier">assert_respond_to</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">class</span>, <span class="ruby-value">:model_name</span>
   <span class="ruby-identifier">model_name</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">model_name</span>
@@ -299,7 +338,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="test_persisted-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 70</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_persisted?</span>
   <span class="ruby-identifier">assert_respond_to</span> <span class="ruby-identifier">model</span>, <span class="ruby-value">:persisted?</span>
   <span class="ruby-identifier">assert_boolean</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">persisted?</span>, <span class="ruby-string">&quot;persisted?&quot;</span>
@@ -346,7 +385,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="test_to_key-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 31</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_to_key</span>
   <span class="ruby-identifier">assert_respond_to</span> <span class="ruby-identifier">model</span>, <span class="ruby-value">:to_key</span>
   <span class="ruby-identifier">def_method</span>(<span class="ruby-identifier">model</span>, <span class="ruby-value">:persisted?</span>) { <span class="ruby-keyword">false</span> }
@@ -394,7 +433,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="test_to_param-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 46</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_to_param</span>
   <span class="ruby-identifier">assert_respond_to</span> <span class="ruby-identifier">model</span>, <span class="ruby-value">:to_param</span>
   <span class="ruby-identifier">def_method</span>(<span class="ruby-identifier">model</span>, <span class="ruby-value">:to_key</span>) { [<span class="ruby-value">1</span>] }
@@ -405,9 +444,9 @@
 
 
 
-          <p>Passes if the object’s model responds to <a href="../../vendor/bundle/ruby/3_3_0/gems/activesupport-8_1_1/lib/active_support/core_ext/object/to_param_rb.html">to_param</a> and if calling this method returns <code>nil</code> when the object is not persisted. Fails otherwise.</p>
+          <p>Passes if the object’s model responds to <a href="../../vendor/bundle/ruby/3_2_0/gems/activesupport-8_1_1/lib/active_support/core_ext/object/to_param_rb.html">to_param</a> and if calling this method returns <code>nil</code> when the object is not persisted. Fails otherwise.</p>
 
-<p><a href="../../vendor/bundle/ruby/3_3_0/gems/activesupport-8_1_1/lib/active_support/core_ext/object/to_param_rb.html">to_param</a> is used to represent the object’s key in URLs. Implementers can decide to either raise an exception or provide a default in case the record uses a composite primary key. There are no tests for this behavior in lint because it doesn’t make sense to force any of the possible implementation strategies on the implementer.</p>
+<p><a href="../../vendor/bundle/ruby/3_2_0/gems/activesupport-8_1_1/lib/active_support/core_ext/object/to_param_rb.html">to_param</a> is used to represent the object’s key in URLs. Implementers can decide to either raise an exception or provide a default in case the record uses a composite primary key. There are no tests for this behavior in lint because it doesn’t make sense to force any of the possible implementation strategies on the implementer.</p>
 
 
         </div>
@@ -443,7 +482,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="test_to_partial_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 58</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/lint.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test_to_partial_path</span>
   <span class="ruby-identifier">assert_respond_to</span> <span class="ruby-identifier">model</span>, <span class="ruby-value">:to_partial_path</span>
   <span class="ruby-identifier">assert_kind_of</span> <span class="ruby-constant">String</span>, <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_partial_path</span>

@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::HostAuthorization-label-Action+Dispatch+HostAuthorization">Action Dispatch HostAuthorization</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::HostAuthorization-label-Action+Dispatch+HostAuthorization">Action Dispatch HostAuthorization</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -154,6 +183,17 @@
 
 <p>When a request comes to an unauthorized host, the <code>response_app</code> application will be executed and rendered. If no <code>response_app</code> is given, a default one will run. The default response app logs blocked host info with level ‘error’ and responds with <code>403 Forbidden</code>. The body of the response contains debug info if <code>config.consider_all_requests_local</code> is set to true, otherwise the body is empty.</p>
 
+<h1 id="class-ActionDispatch::HostAuthorization-label-Action+Dispatch+HostAuthorization"><a href="#class-ActionDispatch::HostAuthorization-label-Action+Dispatch+HostAuthorization">Action Dispatch <a href="HostAuthorization.html"><code>HostAuthorization</code></a></a></h1>
+
+<p>This middleware guards from DNS rebinding attacks by explicitly permitting the hosts a request can be sent to, and is passed the options set in <code>config.host_authorization</code>.</p>
+
+<p>Requests can opt-out of Host Authorization with <code>exclude</code>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">host_authorization</span> = { <span class="ruby-value">exclude:</span> <span class="ruby-operator">-&gt;</span>(<span class="ruby-identifier">request</span>) { <span class="ruby-identifier">request</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/healthcheck/</span> } }
+</pre>
+
+<p>When a request comes to an unauthorized host, the <code>response_app</code> application will be executed and rendered. If no <code>response_app</code> is given, a default one will run. The default response app logs blocked host info with level ‘error’ and responds with <code>403 Forbidden</code>. The body of the response contains debug info if <code>config.consider_all_requests_local</code> is set to true, otherwise the body is empty.</p>
+
   </section>
 
 
@@ -214,7 +254,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/host_authorization.rb, line 127</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/host_authorization.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">hosts</span>, <span class="ruby-value">exclude:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">response_app:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
   <span class="ruby-ivar">@permissions</span> = <span class="ruby-constant">Permissions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hosts</span>)
@@ -270,7 +310,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/host_authorization.rb, line 135</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/host_authorization.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@permissions</span>.<span class="ruby-identifier">empty?</span>
 

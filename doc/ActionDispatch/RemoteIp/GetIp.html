@@ -159,6 +159,8 @@
     
 <p>The <a href="GetIp.html"><code>GetIp</code></a> class exists as a way to defer processing of the request data into an actual IP address. If the <a href="../Request.html#method-i-remote_ip"><code>ActionDispatch::Request#remote_ip</code></a> method is called, this class will calculate the value and then memoize it.</p>
 
+<p>The <a href="GetIp.html"><code>GetIp</code></a> class exists as a way to defer processing of the request data into an actual IP address. If the <a href="../Request.html#method-i-remote_ip"><code>ActionDispatch::Request#remote_ip</code></a> method is called, this class will calculate the value and then memoize it.</p>
+
   </section>
 
 
@@ -202,7 +204,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 105</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">req</span>, <span class="ruby-identifier">check_ip</span>, <span class="ruby-identifier">proxies</span>)
   <span class="ruby-ivar">@req</span>      = <span class="ruby-identifier">req</span>
   <span class="ruby-ivar">@check_ip</span> = <span class="ruby-identifier">check_ip</span>
@@ -256,7 +258,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="calculate_ip-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 129</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">calculate_ip</span>
   <span class="ruby-comment"># Set by the Rack web server, this is a single value.</span>
   <span class="ruby-identifier">remote_addr</span> = <span class="ruby-identifier">sanitize_ips</span>(<span class="ruby-identifier">ips_from</span>(<span class="ruby-ivar">@req</span>.<span class="ruby-identifier">remote_addr</span>)).<span class="ruby-identifier">last</span>
@@ -344,7 +346,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 173</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-ivar">@ip</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">calculate_ip</span>
 <span class="ruby-keyword">end</span></pre>
@@ -396,7 +398,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="filter_proxies-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 196</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter_proxies</span>(<span class="ruby-identifier">ips</span>) <span class="ruby-comment"># :doc:</span>
   <span class="ruby-identifier">ips</span>.<span class="ruby-identifier">reject</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ip</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@proxies</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">proxy</span><span class="ruby-operator">|</span> <span class="ruby-identifier">proxy</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">ip</span> }
@@ -442,7 +444,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="ips_from-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 178</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ips_from</span>(<span class="ruby-identifier">header</span>) <span class="ruby-comment"># :doc:</span>
   <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">header</span>
   <span class="ruby-comment"># Split the comma-separated list into an array of strings.</span>
@@ -488,7 +490,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="sanitize_ips-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 184</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/remote_ip.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sanitize_ips</span>(<span class="ruby-identifier">ips</span>) <span class="ruby-comment"># :doc:</span>
   <span class="ruby-identifier">ips</span>.<span class="ruby-identifier">select!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ip</span><span class="ruby-operator">|</span>
     <span class="ruby-comment"># Only return IPs that are valid according to the IPAddr#new method.</span>

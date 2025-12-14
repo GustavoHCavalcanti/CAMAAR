@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>class ActiveRecord::Type::Decimal - RDoc Documentation</title>
+<title>class ActiveModel::Type::Decimal - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,ActiveRecord::Type::Decimal">
+  <meta name="keywords" content="ruby,class,ActiveModel::Type::Decimal">
 
 
-    <meta name="description" content="class ActiveRecord::Type::Decimal: Active Model \Decimal \Type Attribute type for decimal, high-precision floating point numeric representation. decimal+ key.">
+    <meta name="description" content="class ActiveModel::Type::Decimal: Active Model \Decimal \Type Attribute type for decimal, high-precision floating point numeric representation. decimal+ key.">
 
 
 
@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Decimal-label-Active+Model+Decimal+Type">Active Model Decimal Type</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Decimal-label-Active+Model+Decimal+Type">Active Model Decimal Type</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -126,20 +155,20 @@
 
 </nav>
 
-<main role="main" aria-labelledby="class-ActiveRecord::Type::Decimal">
+<main role="main" aria-labelledby="class-ActiveModel::Type::Decimal">
   
   
     <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
       
       <li>
         
-        <a href="../../ActiveRecord.html">ActiveRecord</a><span>::</span>
+        <a href="../../ActiveModel.html">ActiveModel</a><span>::</span>
         
       </li>
       
       <li>
         
-        <a href="../../ActiveRecord/Type.html">Type</a><span>::</span>
+        <a href="../../ActiveModel/Type.html">Type</a><span>::</span>
         
       </li>
       
@@ -152,13 +181,50 @@
     </ol>
   
 
-  <h1 id="class-ActiveRecord::Type::Decimal" class="anchor-link class">
-    class ActiveRecord::Type::Decimal
+  <h1 id="class-ActiveModel::Type::Decimal" class="anchor-link class">
+    class ActiveModel::Type::Decimal
   </h1>
 
   <section class="description">
     
-<h1 id="class-ActiveRecord::Type::Decimal-label-Active+Model+Decimal+Type"><a href="#class-ActiveRecord::Type::Decimal-label-Active+Model+Decimal+Type">Active Model Decimal Type</a></h1>
+<h1 id="class-ActiveModel::Type::Decimal-label-Active+Model+Decimal+Type"><a href="#class-ActiveModel::Type::Decimal-label-Active+Model+Decimal+Type">Active <a href="../Model.html"><code>Model</code></a> Decimal Type</a></h1>
+
+<p>Attribute type for decimal, high-precision floating point numeric representation. It is registered under the <code>:decimal</code> key.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BagOfCoffee</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:weight</span>, <span class="ruby-value">:decimal</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a href="../../Numeric.html"><code>Numeric</code></a> instances are converted to <a href="../../BigDecimal.html"><code>BigDecimal</code></a> instances. Any other objects are cast using their <code>to_d</code> method, except for blank strings, which are cast to <code>nil</code>. If a <code>to_d</code> method is not defined, the object is converted to a string using <code>to_s</code>, which is then cast using <code>to_d</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">bag</span> = <span class="ruby-constant">BagOfCoffee</span>.<span class="ruby-identifier">new</span>
+
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> = <span class="ruby-value">0.01</span>
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> <span class="ruby-comment"># =&gt; 0.1e-1</span>
+
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> = <span class="ruby-string">&quot;0.01&quot;</span>
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> <span class="ruby-comment"># =&gt; 0.1e-1</span>
+
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> = <span class="ruby-string">&quot;&quot;</span>
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> <span class="ruby-comment"># =&gt; nil</span>
+
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> = <span class="ruby-value">:arbitrary</span>
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> <span class="ruby-comment"># =&gt; nil (the result of `.to_s.to_d`)</span>
+</pre>
+
+<p><a href="Decimal.html"><code>Decimal</code></a> precision defaults to 18, and can be customized when declaring an attribute:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BagOfCoffee</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:weight</span>, <span class="ruby-value">:decimal</span>, <span class="ruby-value">precision:</span> <span class="ruby-value">24</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h1 id="class-ActiveModel::Type::Decimal-label-Active+Model+Decimal+Type"><a href="#class-ActiveModel::Type::Decimal-label-Active+Model+Decimal+Type">Active <a href="../Model.html"><code>Model</code></a> Decimal Type</a></h1>
 
 <p>Attribute type for decimal, high-precision floating point numeric representation. It is registered under the <code>:decimal</code> key.</p>
 
@@ -255,7 +321,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/decimal.rb, line 50</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/decimal.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type</span>
   <span class="ruby-value">:decimal</span>
 <span class="ruby-keyword">end</span></pre>
@@ -299,7 +365,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type_cast_for_schema-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/decimal.rb, line 54</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/decimal.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type_cast_for_schema</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">inspect</span>
 <span class="ruby-keyword">end</span></pre>

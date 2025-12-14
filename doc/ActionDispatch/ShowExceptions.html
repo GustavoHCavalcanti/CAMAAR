@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::ShowExceptions-label-Action+Dispatch+ShowExceptions">Action Dispatch ShowExceptions</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::ShowExceptions-label-Action+Dispatch+ShowExceptions">Action Dispatch ShowExceptions</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -153,6 +182,16 @@
 
 <p>If the application returns a response with the <code>X-Cascade</code> header set to <code>&quot;pass&quot;</code>, this middleware will send an empty response as a result with the correct status code. If any exception happens inside the exceptions app, this middleware catches the exceptions and returns a failsafe response.</p>
 
+<h1 id="class-ActionDispatch::ShowExceptions-label-Action+Dispatch+ShowExceptions"><a href="#class-ActionDispatch::ShowExceptions-label-Action+Dispatch+ShowExceptions">Action Dispatch <a href="ShowExceptions.html"><code>ShowExceptions</code></a></a></h1>
+
+<p>This middleware rescues any exception returned by the application and calls an exceptions app that will wrap it in a format for the end user.</p>
+
+<p>The exceptions app should be passed as a parameter on initialization of <a href="ShowExceptions.html"><code>ShowExceptions</code></a>. Every time there is an exception, <a href="ShowExceptions.html"><code>ShowExceptions</code></a> will store the exception in <code>env[&quot;action_dispatch.exception&quot;]</code>, rewrite the <code>PATH_INFO</code> to the exception status code, and call the <a href="../Rack.html"><code>Rack</code></a> app.</p>
+
+<p>In <a href="../Rails.html"><code>Rails</code></a> applications, the exceptions app can be configured with <code>config.exceptions_app</code>, which defaults to <a href="PublicExceptions.html"><code>ActionDispatch::PublicExceptions</code></a>.</p>
+
+<p>If the application returns a response with the <code>X-Cascade</code> header set to <code>&quot;pass&quot;</code>, this middleware will send an empty response as a result with the correct status code. If any exception happens inside the exceptions app, this middleware catches the exceptions and returns a failsafe response.</p>
+
   </section>
 
 
@@ -196,7 +235,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/show_exceptions.rb, line 26</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/show_exceptions.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">exceptions_app</span>)
   <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
   <span class="ruby-ivar">@exceptions_app</span> = <span class="ruby-identifier">exceptions_app</span>
@@ -249,7 +288,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/show_exceptions.rb, line 31</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/show_exceptions.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">exception</span>

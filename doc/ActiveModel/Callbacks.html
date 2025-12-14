@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Callbacks-label-Active+Model+Callbacks">Active Model Callbacks</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Callbacks-label-Active+Model+Callbacks">Active Model Callbacks</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -197,6 +226,62 @@
 
 <p>NOTE: Defining the same callback multiple times will overwrite previous callback definitions.</p>
 
+<h1 id="module-ActiveModel::Callbacks-label-Active+Model+Callbacks"><a href="#module-ActiveModel::Callbacks-label-Active+Model+Callbacks">Active Model Callbacks</a></h1>
+
+<p>Provides an interface for any class to have Active Record like callbacks.</p>
+
+<p>Like the Active Record methods, the callback chain is aborted as soon as one of the methods throws <code>:abort</code>.</p>
+
+<p>First, extend <a href="Callbacks.html"><code>ActiveModel::Callbacks</code></a> from the class you are creating:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MyModel</span>
+  <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Callbacks</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Then define a list of methods that you want callbacks attached to:</p>
+
+<pre class="ruby"><span class="ruby-identifier">define_model_callbacks</span> <span class="ruby-value">:create</span>, <span class="ruby-value">:update</span>
+</pre>
+
+<p>This will provide all three standard callbacks (before, around and after) for both the <code>:create</code> and <code>:update</code> methods. To implement, you need to wrap the methods you want callbacks on in a block so that the callbacks get a chance to fire:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-identifier">run_callbacks</span> <span class="ruby-value">:create</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-comment"># Your create action methods here</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Then in your class, you can use the <code>before_create</code>, <code>after_create</code>, and <code>around_create</code> methods, just as you would in an Active Record model.</p>
+
+<pre class="ruby"><span class="ruby-identifier">before_create</span> <span class="ruby-value">:action_before_create</span>
+
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">action_before_create</span>
+  <span class="ruby-comment"># Your code here</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>When defining an around callback remember to yield to the block, otherwise it won’t be executed:</p>
+
+<pre class="ruby"><span class="ruby-identifier">around_create</span> <span class="ruby-value">:log_status</span>
+
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log_status</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;going to call the block...&#39;</span>
+  <span class="ruby-keyword">yield</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;block successfully called.&#39;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>You can choose to have only specific callbacks by passing a hash to the <a href="Callbacks.html#method-i-define_model_callbacks"><code>define_model_callbacks</code></a> method.</p>
+
+<pre class="ruby"><span class="ruby-identifier">define_model_callbacks</span> <span class="ruby-value">:create</span>, <span class="ruby-value">only:</span> [<span class="ruby-value">:after</span>, <span class="ruby-value">:before</span>]
+</pre>
+
+<p>Would only create the <code>after_create</code> and <code>before_create</code> callback methods in your class.</p>
+
+<p>NOTE: Defining the same callback multiple times will overwrite previous callback definitions.</p>
+
   </section>
 
 
@@ -240,7 +325,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="define_model_callbacks-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/callbacks.rb, line 109</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/callbacks.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">define_model_callbacks</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">callbacks</span>)
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">callbacks</span>.<span class="ruby-identifier">extract_options!</span>
   <span class="ruby-identifier">options</span> = {
@@ -293,7 +378,7 @@
 <span class="ruby-keyword">end</span>
 </pre>
 
-<p>NOTE: <a href="../vendor/bundle/ruby/3_3_0/gems/rubocop-1_81_7/lib/rubocop/cop/naming/method_name_rb.html">method_name</a> passed to <a href="Callbacks.html#method-i-define_model_callbacks"><code>define_model_callbacks</code></a> must not end with <code>!</code>, <code>?</code> or <code>=</code>.</p>
+<p>NOTE: <a href="../vendor/bundle/ruby/3_2_0/gems/rubocop-1_81_7/lib/rubocop/cop/naming/method_name_rb.html">method_name</a> passed to <a href="Callbacks.html#method-i-define_model_callbacks"><code>define_model_callbacks</code></a> must not end with <code>!</code>, <code>?</code> or <code>=</code>.</p>
 
 
         </div>

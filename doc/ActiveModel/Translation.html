@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Translation-label-Active+Model+Translation">Active Model Translation</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Translation-label-Active+Model+Translation">Active Model Translation</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -161,6 +190,22 @@
 
 <p>This also provides the required class methods for hooking into the Rails internationalization <a href="API.html"><code>API</code></a>, including being able to define a class-based <a href="Translation.html#method-i-i18n_scope"><code>i18n_scope</code></a> and <a href="Translation.html#method-i-lookup_ancestors"><code>lookup_ancestors</code></a> to find translations in parent classes.</p>
 
+<h1 id="module-ActiveModel::Translation-label-Active+Model+Translation"><a href="#module-ActiveModel::Translation-label-Active+Model+Translation">Active Model Translation</a></h1>
+
+<p>Provides integration between your object and the Rails internationalization (i18n) framework.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">TranslatedPerson</span>
+  <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Translation</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">TranslatedPerson</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-string">&#39;my_attribute&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;My attribute&quot;</span>
+</pre>
+
+<p>This also provides the required class methods for hooking into the Rails internationalization <a href="API.html"><code>API</code></a>, including being able to define a class-based <a href="Translation.html#method-i-i18n_scope"><code>i18n_scope</code></a> and <a href="Translation.html#method-i-lookup_ancestors"><code>lookup_ancestors</code></a> to find translations in parent classes.</p>
+
   </section>
 
 
@@ -228,7 +273,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="human_attribute_name-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/translation.rb, line 48</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/translation.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">human_attribute_name</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">attribute</span> = <span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_s</span>
 
@@ -312,7 +357,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="i18n_scope-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/translation.rb, line 28</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/translation.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">i18n_scope</span>
   <span class="ruby-value">:activemodel</span>
 <span class="ruby-keyword">end</span></pre>
@@ -356,7 +401,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="lookup_ancestors-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/translation.rb, line 36</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/translation.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lookup_ancestors</span>
   <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:model_name</span>) }
 <span class="ruby-keyword">end</span></pre>

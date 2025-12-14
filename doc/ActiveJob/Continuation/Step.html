@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveJob::Continuation::Step-label-Active+Job+Continuation+Step">Active Job Continuation Step</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveJob::Continuation::Step-label-Active+Job+Continuation+Step">Active Job Continuation Step</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -171,6 +200,16 @@
 
 <p>It is the responsibility of the code in the step to use the cursor correctly to resume from where it left off.</p>
 
+<h1 id="class-ActiveJob::Continuation::Step-label-Active+Job+Continuation+Step"><a href="#class-ActiveJob::Continuation::Step-label-Active+Job+Continuation+Step">Active Job <a href="../Continuation.html"><code>Continuation</code></a> <a href="Step.html"><code>Step</code></a></a></h1>
+
+<p>Represents a step within a continuable job.</p>
+
+<p>When a step is completed, it is recorded in the job’s continuation state. If the job is interrupted, it will be resumed from after the last completed step.</p>
+
+<p>Steps also have an optional cursor that can be used to track progress within the step. If a job is interrupted during a step, the cursor will be saved and passed back when the job is resumed.</p>
+
+<p>It is the responsibility of the code in the step to use the cursor correctly to resume from where it left off.</p>
+
   </section>
 
 
@@ -254,7 +293,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 25</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">cursor</span>, <span class="ruby-value">job:</span>, <span class="ruby-value">resumed:</span>)
   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
   <span class="ruby-ivar">@initial_cursor</span> = <span class="ruby-identifier">cursor</span>
@@ -310,7 +349,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="advance-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 49</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">advance!</span>(<span class="ruby-value">from:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">from</span> = <span class="ruby-identifier">cursor</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">nil?</span>
 
@@ -364,7 +403,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="advanced-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 67</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">advanced?</span>
   <span class="ruby-identifier">initial_cursor</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">cursor</span>
 <span class="ruby-keyword">end</span></pre>
@@ -408,7 +447,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="checkpoint-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 35</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">checkpoint!</span>
   <span class="ruby-identifier">job</span>.<span class="ruby-identifier">checkpoint!</span>
 <span class="ruby-keyword">end</span></pre>
@@ -452,7 +491,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 75</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">description</span>
   <span class="ruby-node">&quot;at &#39;#{name}&#39;, cursor &#39;#{cursor.inspect}&#39;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -496,7 +535,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="resumed-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 62</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resumed?</span>
   <span class="ruby-ivar">@resumed</span>
 <span class="ruby-keyword">end</span></pre>
@@ -540,7 +579,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="set-21-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 40</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set!</span>(<span class="ruby-identifier">cursor</span>)
   <span class="ruby-ivar">@cursor</span> = <span class="ruby-identifier">cursor</span>
   <span class="ruby-identifier">checkpoint!</span>
@@ -585,7 +624,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 71</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/continuation/step.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
   [ <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">cursor</span> ]
 <span class="ruby-keyword">end</span></pre>

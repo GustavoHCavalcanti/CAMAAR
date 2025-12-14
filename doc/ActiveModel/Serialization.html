@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Serialization-label-Active+Model+Serialization">Active Model Serialization</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveModel::Serialization-label-Active+Model+Serialization">Active Model Serialization</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -191,6 +220,68 @@
 <span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>(<span class="ruby-value">include:</span> { <span class="ruby-value">address:</span> { <span class="ruby-value">only:</span> <span class="ruby-string">&#39;city&#39;</span> }})
 </pre>
 
+<h1 id="module-ActiveModel::Serialization-label-Active+Model+Serialization"><a href="#module-ActiveModel::Serialization-label-Active+Model+Serialization">Active Model Serialization</a></h1>
+
+<p>Provides a basic serialization to a <a href="Serialization.html#method-i-serializable_hash"><code>serializable_hash</code></a> for your objects.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Serialization</span>
+
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:name</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes</span>
+    {<span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Which would provide you with:</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>   <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;nil}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;Bob&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>   <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;&quot;Bob&quot;}</span>
+</pre>
+
+<p>An <code>attributes</code> hash must be defined and should contain any attributes you need to be serialized. <a href="Attributes.html"><code>Attributes</code></a> must be strings, not symbols. When called, serializable hash will use instance methods that match the name of the attributes hash’s keys. In order to override this behavior, override the <code>read_attribute_for_serialization</code> method.</p>
+
+<p><a href="Serializers/JSON.html"><code>ActiveModel::Serializers::JSON</code></a> module automatically includes the <a href="Serialization.html"><code>ActiveModel::Serialization</code></a> module, so there is no need to explicitly include <a href="Serialization.html"><code>ActiveModel::Serialization</code></a>.</p>
+
+<p>A minimal implementation including <a href="../JSON.html"><code>JSON</code></a> would be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Serializers</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>
+
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:name</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes</span>
+    {<span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Which would provide you with:</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>   <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;nil}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">as_json</span>             <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;nil}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_json</span>             <span class="ruby-comment"># =&gt; &quot;{\&quot;name\&quot;:null}&quot;</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;Bob&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>   <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;&quot;Bob&quot;}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">as_json</span>             <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;&quot;Bob&quot;}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_json</span>             <span class="ruby-comment"># =&gt; &quot;{\&quot;name\&quot;:\&quot;Bob\&quot;}&quot;</span>
+</pre>
+
+<p>Valid options are <code>:only</code>, <code>:except</code>, <code>:methods</code> and <code>:include</code>. The following are all valid examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>(<span class="ruby-value">only:</span> <span class="ruby-string">&#39;name&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>(<span class="ruby-value">include:</span> <span class="ruby-value">:address</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">serializable_hash</span>(<span class="ruby-value">include:</span> { <span class="ruby-value">address:</span> { <span class="ruby-value">only:</span> <span class="ruby-string">&#39;city&#39;</span> }})
+</pre>
+
   </section>
 
 
@@ -234,7 +325,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="serializable_hash-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/serialization.rb, line 125</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/serialization.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">serializable_hash</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">attribute_names</span> = <span class="ruby-identifier">attribute_names_for_serialization</span>
 

@@ -160,6 +160,82 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActiveJob::QueueAdapters-label-Active+Job+adapters">Active Job adapters</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActiveJob::QueueAdapters-label-Backends+Features">Backends Features</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#module-ActiveJob::QueueAdapters-label-Async">Async</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveJob::QueueAdapters-label-Queues">Queues</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveJob::QueueAdapters-label-Delayed">Delayed</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveJob::QueueAdapters-label-Priorities">Priorities</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveJob::QueueAdapters-label-Timeout">Timeout</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveJob::QueueAdapters-label-Retries">Retries</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -339,6 +415,113 @@
 
 <p>N/A: The adapter does not run in a separate process, and therefore doesn’t support retries.</p>
 
+<h1 id="module-ActiveJob::QueueAdapters-label-Active+Job+adapters"><a href="#module-ActiveJob::QueueAdapters-label-Active+Job+adapters">Active Job adapters</a></h1>
+
+<p>Active Job has adapters for the following queuing backends:</p>
+<ul><li>
+<p><a href="https://github.com/nesquena/backburner">Backburner</a></p>
+</li><li>
+<p><a href="https://github.com/collectiveidea/delayed_job">Delayed Job</a></p>
+</li><li>
+<p><a href="https://github.com/chanks/que">Que</a></p>
+</li><li>
+<p><a href="https://github.com/QueueClassic/queue_classic">queue_classic</a></p>
+</li><li>
+<p><a href="https://github.com/resque/resque">Resque</a></p>
+</li><li>
+<p><a href="https://sidekiq.org">Sidekiq</a></p>
+</li><li>
+<p><a href="https://github.com/jondot/sneakers">Sneakers</a></p>
+</li><li>
+<p>Please Note: We are not accepting pull requests for new adapters. See the <a href="../files/activejob/README_md.html">README</a> for more details.</p>
+</li></ul>
+
+<p>For testing and development Active Job has three built-in adapters:</p>
+<ul><li>
+<p><a href="https://api.rubyonrails.org/classes/ActiveJob/QueueAdapters/AsyncAdapter.html">Active Job Async</a></p>
+</li><li>
+<p><a href="https://api.rubyonrails.org/classes/ActiveJob/QueueAdapters/InlineAdapter.html">Active Job Inline</a></p>
+</li><li>
+<p><a href="https://api.rubyonrails.org/classes/ActiveJob/QueueAdapters/TestAdapter.html">Active Job Test</a></p>
+</li></ul>
+
+<h3 id="module-ActiveJob::QueueAdapters-label-Backends+Features"><a href="#module-ActiveJob::QueueAdapters-label-Backends+Features">Backends Features</a></h3>
+
+<pre>|                   | Async | Queues | Delayed    | Priorities | Timeout | Retries |
+|-------------------|-------|--------|------------|------------|---------|---------|
+| Backburner        | Yes   | Yes    | Yes        | Yes        | Job     | Global  |
+| Delayed Job       | Yes   | Yes    | Yes        | Job        | Global  | Global  |
+| Que               | Yes   | Yes    | Yes        | Job        | No      | Job     |
+| queue_classic     | Yes   | Yes    | Yes*       | No         | No      | No      |
+| Resque            | Yes   | Yes    | Yes (Gem)  | Queue      | Global  | Yes     |
+| Sidekiq           | Yes   | Yes    | Yes        | Queue      | No      | Job     |
+| Sneakers          | Yes   | Yes    | No         | Queue      | Queue   | No      |
+| Active Job Async  | Yes   | Yes    | Yes        | No         | No      | No      |
+| Active Job Inline | No    | Yes    | N/A        | N/A        | N/A     | N/A     |
+| Active Job Test   | No    | Yes    | N/A        | N/A        | N/A     | N/A     |</pre>
+
+<h4 id="module-ActiveJob::QueueAdapters-label-Async"><a href="#module-ActiveJob::QueueAdapters-label-Async">Async</a></h4>
+
+<p>Yes: The Queue Adapter has the ability to run the job in a non-blocking manner. It either runs on a separate or forked process, or on a different thread.</p>
+
+<p>No: The job is run in the same process.</p>
+
+<h4 id="module-ActiveJob::QueueAdapters-label-Queues"><a href="#module-ActiveJob::QueueAdapters-label-Queues">Queues</a></h4>
+
+<p>Yes: Jobs may set which queue they are run in with queue_as or by using the set method.</p>
+
+<h4 id="module-ActiveJob::QueueAdapters-label-Delayed"><a href="#module-ActiveJob::QueueAdapters-label-Delayed">Delayed</a></h4>
+
+<p>Yes: The adapter will run the job in the future through perform_later.</p>
+
+<p>(Gem): An additional gem is required to use perform_later with this adapter.</p>
+
+<p>No: The adapter will run jobs at the next opportunity and cannot use perform_later.</p>
+
+<p>N/A: The adapter does not support queuing.</p>
+
+<p>NOTE: queue_classic supports job scheduling since version 3.1. For older versions you can use the queue_classic-later gem.</p>
+
+<h4 id="module-ActiveJob::QueueAdapters-label-Priorities"><a href="#module-ActiveJob::QueueAdapters-label-Priorities">Priorities</a></h4>
+
+<p>The order in which jobs are processed can be configured differently depending on the adapter.</p>
+
+<p>Job: Any class inheriting from the adapter may set the priority on the job object relative to other jobs.</p>
+
+<p>Queue: The adapter can set the priority for job queues, when setting a queue with Active Job this will be respected.</p>
+
+<p>Yes: Allows the priority to be set on the job object, at the queue level or as default configuration option.</p>
+
+<p>No: The adapter does not allow the priority of jobs to be configured.</p>
+
+<p>N/A: The adapter does not support queuing, and therefore sorting them.</p>
+
+<h4 id="module-ActiveJob::QueueAdapters-label-Timeout"><a href="#module-ActiveJob::QueueAdapters-label-Timeout"><a href="../Timeout.html"><code>Timeout</code></a></a></h4>
+
+<p>When a job will stop after the allotted time.</p>
+
+<p>Job: The timeout can be set for each instance of the job class.</p>
+
+<p>Queue: The timeout is set for all jobs on the queue.</p>
+
+<p>Global: The adapter is configured that all jobs have a maximum run time.</p>
+
+<p>No: The adapter does not allow the timeout of jobs to be configured.</p>
+
+<p>N/A: This adapter does not run in a separate process, and therefore timeout is unsupported.</p>
+
+<h4 id="module-ActiveJob::QueueAdapters-label-Retries"><a href="#module-ActiveJob::QueueAdapters-label-Retries">Retries</a></h4>
+
+<p>Job: The number of retries can be set per instance of the job class.</p>
+
+<p>Yes: The Number of retries can be configured globally, for each instance or on the queue. This adapter may also present failed instances of the job class that can be restarted.</p>
+
+<p>Global: The adapter has a global number of retries.</p>
+
+<p>No: The adapter does not allow the number of retries to be configured.</p>
+
+<p>N/A: The adapter does not run in a separate process, and therefore doesn’t support retries.</p>
+
   </section>
 
 
@@ -382,7 +565,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="lookup-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/queue_adapters.rb, line 135</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/queue_adapters.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lookup</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelize</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ADAPTER</span>)
 <span class="ruby-keyword">end</span></pre>

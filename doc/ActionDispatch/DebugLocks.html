@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::DebugLocks-label-Action+Dispatch+DebugLocks">Action Dispatch DebugLocks</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::DebugLocks-label-Action+Dispatch+DebugLocks">Action Dispatch DebugLocks</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -160,6 +189,23 @@
 
 <p>This middleware exposes operational details of the server, with no access control. It should only be enabled when in use, and removed thereafter.</p>
 
+<h1 id="class-ActionDispatch::DebugLocks-label-Action+Dispatch+DebugLocks"><a href="#class-ActionDispatch::DebugLocks-label-Action+Dispatch+DebugLocks">Action Dispatch <a href="DebugLocks.html"><code>DebugLocks</code></a></a></h1>
+
+<p>This middleware can be used to diagnose deadlocks in the autoload interlock.</p>
+
+<p>To use it, insert it near the top of the middleware stack, using <a href="../config/application_rb.html">config/application.rb</a>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">middleware</span>.<span class="ruby-identifier">insert_before</span> <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Sendfile</span>, <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">DebugLocks</span>
+</pre>
+
+<p>After restarting the application and re-triggering the deadlock condition, the route <code>/rails/locks</code> will show a summary of all threads currently known to the interlock, which lock level they are holding or awaiting, and their current backtrace.</p>
+
+<p>Generally a deadlock will be caused by the interlock conflicting with some other external lock or blocking I/O call. These cannot be automatically identified, but should be visible in the displayed backtraces.</p>
+
+<p>NOTE: The formatting and content of this middleware’s output is intended for human consumption, and should be expected to change between releases.</p>
+
+<p>This middleware exposes operational details of the server, with no access control. It should only be enabled when in use, and removed thereafter.</p>
+
   </section>
 
 
@@ -203,7 +249,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/debug_locks.rb, line 30</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/debug_locks.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">path</span> = <span class="ruby-string">&quot;/rails/locks&quot;</span>)
   <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
   <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
@@ -256,7 +302,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/debug_locks.rb, line 35</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/debug_locks.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-identifier">req</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">env</span>
 

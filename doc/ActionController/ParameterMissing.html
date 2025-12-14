@@ -136,6 +136,17 @@
 <span class="ruby-comment"># =&gt; ActionController::ParameterMissing: param is missing or the value is empty or invalid: a</span>
 </pre>
 
+<p>Raised when a required parameter is missing.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">a:</span> {})
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:b</span>)
+<span class="ruby-comment"># =&gt; ActionController::ParameterMissing: param is missing or the value is empty or invalid: b</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:a</span>)
+<span class="ruby-comment"># =&gt; ActionController::ParameterMissing: param is missing or the value is empty or invalid: a</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">expect</span>(<span class="ruby-value">a:</span> [])
+<span class="ruby-comment"># =&gt; ActionController::ParameterMissing: param is missing or the value is empty or invalid: a</span>
+</pre>
+
   </section>
 
 

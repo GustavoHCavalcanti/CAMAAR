@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveJob::QueueAdapters::AsyncAdapter-label-Active+Job+Async+adapter">Active Job Async adapter</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveJob::QueueAdapters::AsyncAdapter-label-Active+Job+Async+adapter">Active Job Async adapter</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -161,6 +190,27 @@
 
 <p>The adapter uses a <a href="https://github.com/ruby-concurrency/concurrent-ruby">Concurrent Ruby</a> thread pool to schedule and execute jobs. Since jobs share a single thread pool, long-running jobs will block short-lived jobs. Fine for dev/test; bad for production.</p>
 
+<h1 id="class-ActiveJob::QueueAdapters::AsyncAdapter-label-Active+Job+Async+adapter"><a href="#class-ActiveJob::QueueAdapters::AsyncAdapter-label-Active+Job+Async+adapter">Active Job Async adapter</a></h1>
+
+<p>The Async adapter runs jobs with an in-process thread pool.</p>
+
+<p>This is the default queue adapter. It’s well-suited for dev/test since it doesn’t need an external infrastructure, but it’s a poor fit for production since it drops pending jobs on restart.</p>
+
+<p>To use this adapter, set queue adapter to <code>:async</code>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_job</span>.<span class="ruby-identifier">queue_adapter</span> = <span class="ruby-value">:async</span>
+</pre>
+
+<p>To configure the adapter’s thread pool, instantiate the adapter and pass your own config:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">active_job</span>.<span class="ruby-identifier">queue_adapter</span> = <span class="ruby-constant">ActiveJob</span><span class="ruby-operator">::</span><span class="ruby-constant">QueueAdapters</span><span class="ruby-operator">::</span><span class="ruby-constant">AsyncAdapter</span>.<span class="ruby-identifier">new</span> \
+  <span class="ruby-value">min_threads:</span> <span class="ruby-value">1</span>,
+  <span class="ruby-value">max_threads:</span> <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Concurrent</span>.<span class="ruby-identifier">processor_count</span>,
+  <span class="ruby-value">idletime:</span> <span class="ruby-value">600</span>.<span class="ruby-identifier">seconds</span>
+</pre>
+
+<p>The adapter uses a <a href="https://github.com/ruby-concurrency/concurrent-ruby">Concurrent Ruby</a> thread pool to schedule and execute jobs. Since jobs share a single thread pool, long-running jobs will block short-lived jobs. Fine for dev/test; bad for production.</p>
+
   </section>
 
 
@@ -204,7 +254,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/queue_adapters/async_adapter.rb, line 35</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/queue_adapters/async_adapter.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">executor_options</span>)
   <span class="ruby-ivar">@scheduler</span> = <span class="ruby-constant">Scheduler</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">executor_options</span>)
 <span class="ruby-keyword">end</span></pre>

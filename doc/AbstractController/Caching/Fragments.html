@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-AbstractController::Caching::Fragments-label-Abstract+Controller+Caching+Fragments">Abstract Controller Caching Fragments</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-AbstractController::Caching::Fragments-label-Abstract+Controller+Caching+Fragments">Abstract Controller Caching Fragments</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -164,6 +193,15 @@
 <pre class="ruby"><span class="ruby-identifier">expire_fragment</span>(<span class="ruby-string">&#39;name_of_cache&#39;</span>)
 </pre>
 
+<h1 id="module-AbstractController::Caching::Fragments-label-Abstract+Controller+Caching+Fragments"><a href="#module-AbstractController::Caching::Fragments-label-Abstract+Controller+Caching+Fragments">Abstract Controller <a href="../Caching.html"><code>Caching</code></a> <a href="Fragments.html"><code>Fragments</code></a></a></h1>
+
+<p>Fragment caching is used for caching various blocks within views without caching the entire action as a whole. This is useful when certain elements of an action change frequently or depend on complicated state while other parts rarely change or can be shared amongst multiple parties. The caching is done using the <code>cache</code> helper available in the Action View. See <a href="../../ActionView/Helpers/CacheHelper.html"><code>ActionView::Helpers::CacheHelper</code></a> for more information.</p>
+
+<p>While it’s strongly recommended that you use key-based cache expiration (see links in CacheHelper for more information), it is also possible to manually expire caches. For example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">expire_fragment</span>(<span class="ruby-string">&#39;name_of_cache&#39;</span>)
+</pre>
+
   </section>
 
 
@@ -207,7 +245,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="combined_fragment_cache_key-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 68</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">combined_fragment_cache_key</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-identifier">head</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">fragment_cache_keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">instance_exec</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">k</span>) }
   <span class="ruby-identifier">tail</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;://&quot;</span>).<span class="ruby-identifier">last</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>
@@ -257,7 +295,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="expire_fragment-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 131</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expire_fragment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cache_configured?</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">combined_fragment_cache_key</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
@@ -280,7 +318,7 @@
 <ul><li>
 <p><a href="../../String.html"><code>String</code></a> - This would normally take the form of a path, like <code>pages/45/notes</code>.</p>
 </li><li>
-<p><a href="../../Hash.html"><code>Hash</code></a> - Treated as an implicit call to <a href="../../vendor/bundle/ruby/3_3_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>, like <code>{ controller: &#39;pages&#39;, action: &#39;notes&#39;, id: 45}</code></p>
+<p><a href="../../Hash.html"><code>Hash</code></a> - Treated as an implicit call to <a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>, like <code>{ controller: &#39;pages&#39;, action: &#39;notes&#39;, id: 45}</code></p>
 </li><li>
 <p>Regexp - Will remove any fragment that matches, so <code>%r{pages/\d*/notes}</code> might remove all notes. Make sure you don’t use anchors in the regex (<code>^</code> or <code>$</code>) because the actual filename matched looks like <code>./cache/filename/path.cache</code>. Note: Regexp expiration is only supported on caches that can iterate over all keys (unlike memcached).</p>
 </li></ul>
@@ -321,7 +359,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fragment_exist-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 105</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fragment_exist?</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cache_configured?</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-identifier">combined_fragment_cache_key</span>(<span class="ruby-identifier">key</span>)
@@ -370,7 +408,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="read_fragment-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 93</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read_fragment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cache_configured?</span>
 
@@ -420,7 +458,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="write_fragment-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 80</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/abstract_controller/caching/fragments.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write_fragment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">content</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">content</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cache_configured?</span>
 

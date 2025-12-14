@@ -122,6 +122,44 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Action+Dispatch+Routing+PolymorphicRoutes">Action Dispatch Routing PolymorphicRoutes</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Usage+within+the+framework">Usage within the framework</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Prefixed+polymorphic+helpers">Prefixed polymorphic helpers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Usage+with+mounted+engines">Usage with mounted engines</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -210,11 +248,63 @@
 
 <p>Polymorphic URL helpers are used in a number of places throughout the <a href="../../Rails.html"><code>Rails</code></a> framework:</p>
 <ul><li>
-<p><a href="../../vendor/bundle/ruby/3_3_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>, so you can use it with a record as the argument, e.g. <code>url_for(@article)</code>;</p>
+<p><a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>, so you can use it with a record as the argument, e.g. <code>url_for(@article)</code>;</p>
 </li><li>
 <p><a href="../../ActionView/Helpers/FormHelper.html"><code>ActionView::Helpers::FormHelper</code></a> uses <a href="PolymorphicRoutes.html#method-i-polymorphic_path"><code>polymorphic_path</code></a>, so you can write <code>form_with(model: @article)</code> without having to specify <code>:url</code> parameter for the form action;</p>
 </li><li>
-<p><a href="../../vendor/bundle/ruby/3_3_0/gems/rspec-rails-8_0_2/lib/rspec/rails/matchers/redirect_to_rb.html">redirect_to</a> (which, in fact, uses <a href="../../vendor/bundle/ruby/3_3_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>) so you can write <code>redirect_to(post)</code> in your controllers;</p>
+<p><a href="../../vendor/bundle/ruby/3_2_0/gems/rspec-rails-8_0_2/lib/rspec/rails/matchers/redirect_to_rb.html">redirect_to</a> (which, in fact, uses <a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>) so you can write <code>redirect_to(post)</code> in your controllers;</p>
+</li><li>
+<p><a href="../../ActionView/Helpers/AtomFeedHelper.html"><code>ActionView::Helpers::AtomFeedHelper</code></a>, so you don’t have to explicitly specify URLs for feed entries.</p>
+</li></ul>
+
+<h2 id="module-ActionDispatch::Routing::PolymorphicRoutes-label-Prefixed+polymorphic+helpers"><a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Prefixed+polymorphic+helpers">Prefixed polymorphic helpers</a></h2>
+
+<p>In addition to <a href="PolymorphicRoutes.html#method-i-polymorphic_url"><code>polymorphic_url</code></a> and <a href="PolymorphicRoutes.html#method-i-polymorphic_path"><code>polymorphic_path</code></a> methods, a number of prefixed helpers are available as a shorthand to <code>action: &quot;...&quot;</code> in options. Those are:</p>
+<ul><li>
+<p><code>edit_polymorphic_url</code>, <code>edit_polymorphic_path</code></p>
+</li><li>
+<p><code>new_polymorphic_url</code>, <code>new_polymorphic_path</code></p>
+</li></ul>
+
+<p>Example usage:</p>
+
+<pre class="ruby"><span class="ruby-identifier">edit_polymorphic_path</span>(<span class="ruby-ivar">@post</span>)           <span class="ruby-comment"># =&gt; &quot;/posts/1/edit&quot;</span>
+<span class="ruby-identifier">polymorphic_path</span>(<span class="ruby-ivar">@post</span>, <span class="ruby-value">format:</span> <span class="ruby-value">:pdf</span>)  <span class="ruby-comment"># =&gt; &quot;/posts/1.pdf&quot;</span>
+</pre>
+
+<h2 id="module-ActionDispatch::Routing::PolymorphicRoutes-label-Usage+with+mounted+engines"><a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Usage+with+mounted+engines">Usage with mounted engines</a></h2>
+
+<p>If you are using a mounted engine and you need to use a <a href="PolymorphicRoutes.html#method-i-polymorphic_url"><code>polymorphic_url</code></a> pointing at the engine’s routes, pass in the engine’s route proxy as the first argument to the method. For example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">polymorphic_url</span>([<span class="ruby-identifier">blog</span>, <span class="ruby-ivar">@post</span>])  <span class="ruby-comment"># calls blog.post_path(@post)</span>
+<span class="ruby-identifier">form_with</span>(<span class="ruby-value">model:</span> [<span class="ruby-identifier">blog</span>, <span class="ruby-ivar">@post</span>]) <span class="ruby-comment"># =&gt; &quot;/blog/posts/1&quot;</span>
+</pre>
+
+<h1 id="module-ActionDispatch::Routing::PolymorphicRoutes-label-Action+Dispatch+Routing+PolymorphicRoutes"><a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Action+Dispatch+Routing+PolymorphicRoutes">Action Dispatch <a href="../Routing.html"><code>Routing</code></a> <a href="PolymorphicRoutes.html"><code>PolymorphicRoutes</code></a></a></h1>
+
+<p>Polymorphic URL helpers are methods for smart resolution to a named route call when given an Active Record model instance. They are to be used in combination with ActionController::Resources.</p>
+
+<p>These methods are useful when you want to generate the correct URL or path to a RESTful resource without having to know the exact type of the record in question.</p>
+
+<p>Nested resources and/or namespaces are also supported, as illustrated in the example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">polymorphic_url</span>([<span class="ruby-value">:admin</span>, <span class="ruby-ivar">@article</span>, <span class="ruby-ivar">@comment</span>])
+</pre>
+
+<p>results in:</p>
+
+<pre class="ruby"><span class="ruby-identifier">admin_article_comment_url</span>(<span class="ruby-ivar">@article</span>, <span class="ruby-ivar">@comment</span>)
+</pre>
+
+<h2 id="module-ActionDispatch::Routing::PolymorphicRoutes-label-Usage+within+the+framework"><a href="#module-ActionDispatch::Routing::PolymorphicRoutes-label-Usage+within+the+framework">Usage within the framework</a></h2>
+
+<p>Polymorphic URL helpers are used in a number of places throughout the <a href="../../Rails.html"><code>Rails</code></a> framework:</p>
+<ul><li>
+<p><a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>, so you can use it with a record as the argument, e.g. <code>url_for(@article)</code>;</p>
+</li><li>
+<p><a href="../../ActionView/Helpers/FormHelper.html"><code>ActionView::Helpers::FormHelper</code></a> uses <a href="PolymorphicRoutes.html#method-i-polymorphic_path"><code>polymorphic_path</code></a>, so you can write <code>form_with(model: @article)</code> without having to specify <code>:url</code> parameter for the form action;</p>
+</li><li>
+<p><a href="../../vendor/bundle/ruby/3_2_0/gems/rspec-rails-8_0_2/lib/rspec/rails/matchers/redirect_to_rb.html">redirect_to</a> (which, in fact, uses <a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>) so you can write <code>redirect_to(post)</code> in your controllers;</p>
 </li><li>
 <p><a href="../../ActionView/Helpers/AtomFeedHelper.html"><code>ActionView::Helpers::AtomFeedHelper</code></a>, so you don’t have to explicitly specify URLs for feed entries.</p>
 </li></ul>
@@ -285,7 +375,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="polymorphic_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/polymorphic_routes.rb, line 133</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/polymorphic_routes.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">polymorphic_path</span>(<span class="ruby-identifier">record_or_hash_or_array</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Hash</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">record_or_hash_or_array</span>
     <span class="ruby-identifier">options</span> = <span class="ruby-identifier">record_or_hash_or_array</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
@@ -347,7 +437,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="polymorphic_url-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/polymorphic_routes.rb, line 110</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/routing/polymorphic_routes.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">polymorphic_url</span>(<span class="ruby-identifier">record_or_hash_or_array</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Hash</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">record_or_hash_or_array</span>
     <span class="ruby-identifier">options</span> = <span class="ruby-identifier">record_or_hash_or_array</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
@@ -390,7 +480,7 @@
 <p><code>:routing_type</code> - Allowed values are <code>:path</code> or <code>:url</code>. Default is <code>:url</code>.</p>
 </li></ul>
 
-<p>Also includes all the options from <a href="../../vendor/bundle/ruby/3_3_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>. These include such things as <code>:anchor</code> or <code>:trailing_slash</code>. Example usage is given below:</p>
+<p>Also includes all the options from <a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a>. These include such things as <code>:anchor</code> or <code>:trailing_slash</code>. Example usage is given below:</p>
 
 <pre class="ruby"><span class="ruby-identifier">polymorphic_url</span>([<span class="ruby-identifier">blog</span>, <span class="ruby-identifier">post</span>], <span class="ruby-value">anchor:</span> <span class="ruby-string">&#39;my_anchor&#39;</span>)
   <span class="ruby-comment"># =&gt; &quot;http://example.com/blogs/1/posts/1#my_anchor&quot;</span>

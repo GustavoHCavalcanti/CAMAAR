@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>class ActiveRecord::Type::Float - RDoc Documentation</title>
+<title>class ActiveModel::Type::Float - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,ActiveRecord::Type::Float">
+  <meta name="keywords" content="ruby,class,ActiveModel::Type::Float">
 
 
-    <meta name="description" content="class ActiveRecord::Type::Float: Active Model \Float \Type Attribute type for floating point numeric values. float+ key.">
+    <meta name="description" content="class ActiveModel::Type::Float: Active Model \Float \Type Attribute type for floating point numeric values. float+ key.">
 
 
 
@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Float-label-Active+Model+Float+Type">Active Model Float Type</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::Float-label-Active+Model+Float+Type">Active Model Float Type</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -126,20 +155,20 @@
 
 </nav>
 
-<main role="main" aria-labelledby="class-ActiveRecord::Type::Float">
+<main role="main" aria-labelledby="class-ActiveModel::Type::Float">
   
   
     <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
       
       <li>
         
-        <a href="../../ActiveRecord.html">ActiveRecord</a><span>::</span>
+        <a href="../../ActiveModel.html">ActiveModel</a><span>::</span>
         
       </li>
       
       <li>
         
-        <a href="../../ActiveRecord/Type.html">Type</a><span>::</span>
+        <a href="../../ActiveModel/Type.html">Type</a><span>::</span>
         
       </li>
       
@@ -152,13 +181,46 @@
     </ol>
   
 
-  <h1 id="class-ActiveRecord::Type::Float" class="anchor-link class">
-    class ActiveRecord::Type::Float
+  <h1 id="class-ActiveModel::Type::Float" class="anchor-link class">
+    class ActiveModel::Type::Float
   </h1>
 
   <section class="description">
     
-<h1 id="class-ActiveRecord::Type::Float-label-Active+Model+Float+Type"><a href="#class-ActiveRecord::Type::Float-label-Active+Model+Float+Type">Active Model Float Type</a></h1>
+<h1 id="class-ActiveModel::Type::Float-label-Active+Model+Float+Type"><a href="#class-ActiveModel::Type::Float-label-Active+Model+Float+Type">Active <a href="../Model.html"><code>Model</code></a> Float Type</a></h1>
+
+<p>Attribute type for floating point numeric values. It is registered under the <code>:float</code> key.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BagOfCoffee</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:weight</span>, <span class="ruby-value">:float</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">bag</span> = <span class="ruby-constant">BagOfCoffee</span>.<span class="ruby-identifier">new</span>
+
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> = <span class="ruby-string">&quot;0.25&quot;</span>
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> <span class="ruby-comment"># =&gt; 0.25</span>
+
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> = <span class="ruby-string">&quot;&quot;</span>
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> <span class="ruby-comment"># =&gt; nil</span>
+
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> = <span class="ruby-string">&quot;NaN&quot;</span>
+<span class="ruby-identifier">bag</span>.<span class="ruby-identifier">weight</span> <span class="ruby-comment"># =&gt; Float::NAN</span>
+</pre>
+
+<p>Values are cast using their <code>to_f</code> method, except for the following strings:</p>
+<ul><li>
+<p>Blank strings are cast to <code>nil</code>.</p>
+</li><li>
+<p><code>&quot;Infinity&quot;</code> is cast to <code>Float::INFINITY</code>.</p>
+</li><li>
+<p><code>&quot;-Infinity&quot;</code> is cast to <code>-Float::INFINITY</code>.</p>
+</li><li>
+<p><code>&quot;NaN&quot;</code> is cast to <code>Float::NAN</code>.</p>
+</li></ul>
+
+<h1 id="class-ActiveModel::Type::Float-label-Active+Model+Float+Type"><a href="#class-ActiveModel::Type::Float-label-Active+Model+Float+Type">Active <a href="../Model.html"><code>Model</code></a> Float Type</a></h1>
 
 <p>Attribute type for floating point numeric values. It is registered under the <code>:float</code> key.</p>
 
@@ -234,7 +296,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/float.rb, line 40</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/float.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type</span>
   <span class="ruby-value">:float</span>
 <span class="ruby-keyword">end</span></pre>
@@ -278,7 +340,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type_cast_for_schema-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/float.rb, line 44</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/float.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type_cast_for_schema</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-string">&quot;::Float::NAN&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:nan?</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>

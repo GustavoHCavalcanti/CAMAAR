@@ -108,6 +108,30 @@
 
 
 
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#module-ActionController::Caching-label-Action+Controller+Caching">Action Controller Caching</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#module-ActionController::Caching-label-Caching+stores">Caching stores</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
   </ul>
 </div>
 
@@ -183,6 +207,28 @@
 
   <section class="description">
     
+<h1 id="module-ActionController::Caching-label-Action+Controller+Caching"><a href="#module-ActionController::Caching-label-Action+Controller+Caching">Action Controller <a href="Caching.html"><code>Caching</code></a></a></h1>
+
+<p><a href="Caching.html"><code>Caching</code></a> is a cheap way of speeding up slow applications by keeping the result of calculations, renderings, and database calls around for subsequent requests.</p>
+
+<p>Note: To turn off all caching provided by Action Controller, set</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">perform_caching</span> = <span class="ruby-keyword">false</span>
+</pre>
+
+<h2 id="module-ActionController::Caching-label-Caching+stores"><a href="#module-ActionController::Caching-label-Caching+stores"><a href="Caching.html"><code>Caching</code></a> stores</a></h2>
+
+<p>All the caching stores from <a href="../ActiveSupport/Cache.html"><code>ActiveSupport::Cache</code></a> are available to be used as backends for Action Controller caching.</p>
+
+<p>Configuration examples (FileStore is the default):</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">cache_store</span> = <span class="ruby-value">:memory_store</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">cache_store</span> = <span class="ruby-value">:file_store</span>, <span class="ruby-string">&#39;/path/to/cache/directory&#39;</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">cache_store</span> = <span class="ruby-value">:mem_cache_store</span>, <span class="ruby-string">&#39;localhost&#39;</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">cache_store</span> = <span class="ruby-value">:mem_cache_store</span>, <span class="ruby-constant">Memcached</span><span class="ruby-operator">::</span><span class="ruby-constant">Rails</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;localhost:11211&#39;</span>)
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_controller</span>.<span class="ruby-identifier">cache_store</span> = <span class="ruby-constant">MyOwnStore</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;parameter&#39;</span>)
+</pre>
+
 <h1 id="module-ActionController::Caching-label-Action+Controller+Caching"><a href="#module-ActionController::Caching-label-Action+Controller+Caching">Action Controller <a href="Caching.html"><code>Caching</code></a></a></h1>
 
 <p><a href="Caching.html"><code>Caching</code></a> is a cheap way of speeding up slow applications by keeping the result of calculations, renderings, and database calls around for subsequent requests.</p>

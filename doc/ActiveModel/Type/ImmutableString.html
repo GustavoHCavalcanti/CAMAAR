@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>class ActiveRecord::Type::ImmutableString - RDoc Documentation</title>
+<title>class ActiveModel::Type::ImmutableString - RDoc Documentation</title>
 
 
-  <meta name="keywords" content="ruby,class,ActiveRecord::Type::ImmutableString">
+  <meta name="keywords" content="ruby,class,ActiveModel::Type::ImmutableString">
 
 
-    <meta name="description" content="class ActiveRecord::Type::ImmutableString: Active Model \ImmutableString \Type Attribute type to represent immutable strings. It casts incoming values to frozen strings.">
+    <meta name="description" content="class ActiveModel::Type::ImmutableString: Active Model \ImmutableString \Type Attribute type to represent immutable strings. It casts incoming values to frozen strings.">
 
 
 
@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::ImmutableString-label-Active+Model+ImmutableString+Type">Active Model ImmutableString Type</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::ImmutableString-label-Active+Model+ImmutableString+Type">Active Model ImmutableString Type</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -131,20 +160,20 @@
 
 </nav>
 
-<main role="main" aria-labelledby="class-ActiveRecord::Type::ImmutableString">
+<main role="main" aria-labelledby="class-ActiveModel::Type::ImmutableString">
   
   
     <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
       
       <li>
         
-        <a href="../../ActiveRecord.html">ActiveRecord</a><span>::</span>
+        <a href="../../ActiveModel.html">ActiveModel</a><span>::</span>
         
       </li>
       
       <li>
         
-        <a href="../../ActiveRecord/Type.html">Type</a><span>::</span>
+        <a href="../../ActiveModel/Type.html">Type</a><span>::</span>
         
       </li>
       
@@ -157,13 +186,44 @@
     </ol>
   
 
-  <h1 id="class-ActiveRecord::Type::ImmutableString" class="anchor-link class">
-    class ActiveRecord::Type::ImmutableString
+  <h1 id="class-ActiveModel::Type::ImmutableString" class="anchor-link class">
+    class ActiveModel::Type::ImmutableString
   </h1>
 
   <section class="description">
     
-<h1 id="class-ActiveRecord::Type::ImmutableString-label-Active+Model+ImmutableString+Type"><a href="#class-ActiveRecord::Type::ImmutableString-label-Active+Model+ImmutableString+Type">Active Model ImmutableString Type</a></h1>
+<h1 id="class-ActiveModel::Type::ImmutableString-label-Active+Model+ImmutableString+Type"><a href="#class-ActiveModel::Type::ImmutableString-label-Active+Model+ImmutableString+Type">Active <a href="../Model.html"><code>Model</code></a> ImmutableString Type</a></h1>
+
+<p>Attribute type to represent immutable strings. It casts incoming values to frozen strings.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:name</span>, <span class="ruby-value">:immutable_string</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-value">1</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;1&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">frozen?</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>Values are coerced to strings using their <code>to_s</code> method. <a href="Boolean.html"><code>Boolean</code></a> values are treated differently, however: <code>true</code> will be cast to <code>&quot;t&quot;</code> and <code>false</code> will be cast to <code>&quot;f&quot;</code>. These strings can be customized when declaring an attribute:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:active</span>, <span class="ruby-value">:immutable_string</span>, <span class="ruby-value">true:</span> <span class="ruby-string">&quot;aye&quot;</span>, <span class="ruby-value">false:</span> <span class="ruby-string">&quot;nay&quot;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">active</span> = <span class="ruby-keyword">true</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">active</span> <span class="ruby-comment"># =&gt; &quot;aye&quot;</span>
+</pre>
+
+<h1 id="class-ActiveModel::Type::ImmutableString-label-Active+Model+ImmutableString+Type"><a href="#class-ActiveModel::Type::ImmutableString-label-Active+Model+ImmutableString+Type">Active <a href="../Model.html"><code>Model</code></a> ImmutableString Type</a></h1>
 
 <p>Attribute type to represent immutable strings. It casts incoming values to frozen strings.</p>
 
@@ -237,7 +297,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/immutable_string.rb, line 40</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/immutable_string.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">args</span>)
   <span class="ruby-ivar">@true</span>  = <span class="ruby-operator">-</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:true</span>)&amp;.<span class="ruby-identifier">to_s</span>  <span class="ruby-operator">||</span> <span class="ruby-string">&quot;t&quot;</span>)
   <span class="ruby-ivar">@false</span> = <span class="ruby-operator">-</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:false</span>)&amp;.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;f&quot;</span>)
@@ -296,7 +356,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="serialize-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/immutable_string.rb, line 50</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/immutable_string.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">serialize</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>
   <span class="ruby-keyword">when</span> <span class="ruby-operator">::</span><span class="ruby-constant">Numeric</span>, <span class="ruby-operator">::</span><span class="ruby-constant">Symbol</span>, <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
@@ -350,7 +410,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/immutable_string.rb, line 46</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/immutable_string.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type</span>
   <span class="ruby-value">:string</span>
 <span class="ruby-keyword">end</span></pre>

@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionDispatch::Http::FilterParameters-label-Action+Dispatch+HTTP+Filter+Parameters">Action Dispatch HTTP Filter Parameters</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionDispatch::Http::FilterParameters-label-Action+Dispatch+HTTP+Filter+Parameters">Action Dispatch HTTP Filter Parameters</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -166,6 +195,16 @@
 
 <p>For more information about filter behavior, see <a href="../../ActiveSupport/ParameterFilter.html"><code>ActiveSupport::ParameterFilter</code></a>.</p>
 
+<h1 id="module-ActionDispatch::Http::FilterParameters-label-Action+Dispatch+HTTP+Filter+Parameters"><a href="#module-ActionDispatch::Http::FilterParameters-label-Action+Dispatch+HTTP+Filter+Parameters">Action Dispatch HTTP Filter <a href="Parameters.html"><code>Parameters</code></a></a></h1>
+
+<p>Allows you to specify sensitive query string and POST parameters to filter from the request log.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Replaces values with &quot;[FILTERED]&quot; for keys that match /foo|bar/i.</span>
+<span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;action_dispatch.parameter_filter&quot;</span>] = [<span class="ruby-value">:foo</span>, <span class="ruby-string">&quot;bar&quot;</span>]
+</pre>
+
+<p>For more information about filter behavior, see <a href="../../ActiveSupport/ParameterFilter.html"><code>ActiveSupport::ParameterFilter</code></a>.</p>
+
   </section>
 
 
@@ -209,7 +248,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 26</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@filtered_parameters</span> = <span class="ruby-keyword">nil</span>
@@ -270,7 +309,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="filtered_env-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 42</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filtered_env</span>
   <span class="ruby-ivar">@filtered_env</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">env_filter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-ivar">@env</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -314,7 +353,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="filtered_parameters-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 35</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filtered_parameters</span>
   <span class="ruby-ivar">@filtered_parameters</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">parameter_filter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">parameters</span>)
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span><span class="ruby-operator">::</span><span class="ruby-constant">ParseError</span>
@@ -360,7 +399,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="filtered_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 47</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filtered_path</span>
   <span class="ruby-ivar">@filtered_path</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">query_string</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{path}?#{filtered_query_string}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -404,7 +443,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="parameter_filter-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 53</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parameter_filter</span>
   <span class="ruby-ivar">@parameter_filter</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_header?</span>(<span class="ruby-string">&quot;action_dispatch.parameter_filter&quot;</span>)
     <span class="ruby-identifier">parameter_filter_for</span> <span class="ruby-identifier">get_header</span>(<span class="ruby-string">&quot;action_dispatch.parameter_filter&quot;</span>)
@@ -460,7 +499,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="env_filter-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 62</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">env_filter</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-identifier">user_key</span> = <span class="ruby-identifier">fetch_header</span>(<span class="ruby-string">&quot;action_dispatch.parameter_filter&quot;</span>) {
     <span class="ruby-keyword">return</span> <span class="ruby-constant">NULL_ENV_FILTER</span>
@@ -507,7 +546,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="filtered_query_string-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 73</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filtered_query_string</span> <span class="ruby-comment"># :doc:</span>
   <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">query_string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/([&amp;;])/</span>)
   <span class="ruby-identifier">filtered_parts</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">part</span><span class="ruby-operator">|</span>
@@ -560,7 +599,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="parameter_filter_for-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 69</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/http/filter_parameters.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parameter_filter_for</span>(<span class="ruby-identifier">filters</span>) <span class="ruby-comment"># :doc:</span>
   <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterFilter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">filters</span>)
 <span class="ruby-keyword">end</span></pre>

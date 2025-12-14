@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionMailer::Parameterized-label-Action+Mailer+Parameterized">Action Mailer Parameterized</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionMailer::Parameterized-label-Action+Mailer+Parameterized">Action Mailer Parameterized</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -228,6 +257,93 @@
 <span class="ruby-constant">InvitationsMailer</span>.<span class="ruby-identifier">with</span>(<span class="ruby-value">inviter:</span> <span class="ruby-identifier">person_a</span>, <span class="ruby-value">invitee:</span> <span class="ruby-identifier">person_b</span>).<span class="ruby-identifier">account_invitation</span>.<span class="ruby-identifier">deliver_later</span>
 </pre>
 
+<h1 id="module-ActionMailer::Parameterized-label-Action+Mailer+Parameterized"><a href="#module-ActionMailer::Parameterized-label-Action+Mailer+Parameterized">Action Mailer Parameterized</a></h1>
+
+<p>Provides the option to parameterize mailers in order to share instance variable setup, processing, and common headers.</p>
+
+<p>Consider this example that does not use parameterization:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">InvitationsMailer</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationMailer</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">account_invitation</span>(<span class="ruby-identifier">inviter</span>, <span class="ruby-identifier">invitee</span>)
+    <span class="ruby-ivar">@account</span> = <span class="ruby-identifier">inviter</span>.<span class="ruby-identifier">account</span>
+    <span class="ruby-ivar">@inviter</span> = <span class="ruby-identifier">inviter</span>
+    <span class="ruby-ivar">@invitee</span> = <span class="ruby-identifier">invitee</span>
+
+    <span class="ruby-identifier">subject</span> = <span class="ruby-node">&quot;#{@inviter.name} invited you to their Basecamp (#{@account.name})&quot;</span>
+
+    <span class="ruby-identifier">mail</span> \
+      <span class="ruby-value">subject:</span>   <span class="ruby-identifier">subject</span>,
+      <span class="ruby-value">to:</span>        <span class="ruby-identifier">invitee</span>.<span class="ruby-identifier">email_address</span>,
+      <span class="ruby-value">from:</span>      <span class="ruby-identifier">common_address</span>(<span class="ruby-identifier">inviter</span>),
+      <span class="ruby-value">reply_to:</span>  <span class="ruby-identifier">inviter</span>.<span class="ruby-identifier">email_address_with_name</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">project_invitation</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">inviter</span>, <span class="ruby-identifier">invitee</span>)
+    <span class="ruby-ivar">@account</span> = <span class="ruby-identifier">inviter</span>.<span class="ruby-identifier">account</span>
+    <span class="ruby-ivar">@project</span> = <span class="ruby-identifier">project</span>
+    <span class="ruby-ivar">@inviter</span> = <span class="ruby-identifier">inviter</span>
+    <span class="ruby-ivar">@invitee</span> = <span class="ruby-identifier">invitee</span>
+    <span class="ruby-ivar">@summarizer</span> = <span class="ruby-constant">ProjectInvitationSummarizer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@project</span>.<span class="ruby-identifier">bucket</span>)
+
+    <span class="ruby-identifier">subject</span> = <span class="ruby-node">&quot;#{@inviter.name.familiar} added you to a project in Basecamp (#{@account.name})&quot;</span>
+
+    <span class="ruby-identifier">mail</span> \
+      <span class="ruby-value">subject:</span>   <span class="ruby-identifier">subject</span>,
+      <span class="ruby-value">to:</span>        <span class="ruby-identifier">invitee</span>.<span class="ruby-identifier">email_address</span>,
+      <span class="ruby-value">from:</span>      <span class="ruby-identifier">common_address</span>(<span class="ruby-identifier">inviter</span>),
+      <span class="ruby-value">reply_to:</span>  <span class="ruby-identifier">inviter</span>.<span class="ruby-identifier">email_address_with_name</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bulk_project_invitation</span>(<span class="ruby-identifier">projects</span>, <span class="ruby-identifier">inviter</span>, <span class="ruby-identifier">invitee</span>)
+    <span class="ruby-ivar">@account</span>  = <span class="ruby-identifier">inviter</span>.<span class="ruby-identifier">account</span>
+    <span class="ruby-ivar">@projects</span> = <span class="ruby-identifier">projects</span>.<span class="ruby-identifier">sort_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>)
+    <span class="ruby-ivar">@inviter</span>  = <span class="ruby-identifier">inviter</span>
+    <span class="ruby-ivar">@invitee</span>  = <span class="ruby-identifier">invitee</span>
+
+    <span class="ruby-identifier">subject</span> = <span class="ruby-node">&quot;#{@inviter.name.familiar} added you to some new stuff in Basecamp (#{@account.name})&quot;</span>
+
+    <span class="ruby-identifier">mail</span> \
+      <span class="ruby-value">subject:</span>   <span class="ruby-identifier">subject</span>,
+      <span class="ruby-value">to:</span>        <span class="ruby-identifier">invitee</span>.<span class="ruby-identifier">email_address</span>,
+      <span class="ruby-value">from:</span>      <span class="ruby-identifier">common_address</span>(<span class="ruby-identifier">inviter</span>),
+      <span class="ruby-value">reply_to:</span>  <span class="ruby-identifier">inviter</span>.<span class="ruby-identifier">email_address_with_name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">InvitationsMailer</span>.<span class="ruby-identifier">account_invitation</span>(<span class="ruby-identifier">person_a</span>, <span class="ruby-identifier">person_b</span>).<span class="ruby-identifier">deliver_later</span>
+</pre>
+
+<p>Using parameterized mailers, this can be rewritten as:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">InvitationsMailer</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationMailer</span>
+  <span class="ruby-identifier">before_action</span> { <span class="ruby-ivar">@inviter</span>, <span class="ruby-ivar">@invitee</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:inviter</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:invitee</span>] }
+  <span class="ruby-identifier">before_action</span> { <span class="ruby-ivar">@account</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:inviter</span>].<span class="ruby-identifier">account</span> }
+
+  <span class="ruby-identifier">default</span> <span class="ruby-value">to:</span>       <span class="ruby-operator">-&gt;</span> { <span class="ruby-ivar">@invitee</span>.<span class="ruby-identifier">email_address</span> },
+          <span class="ruby-value">from:</span>     <span class="ruby-operator">-&gt;</span> { <span class="ruby-identifier">common_address</span>(<span class="ruby-ivar">@inviter</span>) },
+          <span class="ruby-value">reply_to:</span> <span class="ruby-operator">-&gt;</span> { <span class="ruby-ivar">@inviter</span>.<span class="ruby-identifier">email_address_with_name</span> }
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">account_invitation</span>
+    <span class="ruby-identifier">mail</span> <span class="ruby-value">subject:</span> <span class="ruby-node">&quot;#{@inviter.name} invited you to their Basecamp (#{@account.name})&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">project_invitation</span>
+    <span class="ruby-ivar">@project</span>    = <span class="ruby-identifier">params</span>[<span class="ruby-value">:project</span>]
+    <span class="ruby-ivar">@summarizer</span> = <span class="ruby-constant">ProjectInvitationSummarizer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@project</span>.<span class="ruby-identifier">bucket</span>)
+
+    <span class="ruby-identifier">mail</span> <span class="ruby-value">subject:</span> <span class="ruby-node">&quot;#{@inviter.name.familiar} added you to a project in Basecamp (#{@account.name})&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bulk_project_invitation</span>
+    <span class="ruby-ivar">@projects</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:projects</span>].<span class="ruby-identifier">sort_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:name</span>)
+
+    <span class="ruby-identifier">mail</span> <span class="ruby-value">subject:</span> <span class="ruby-node">&quot;#{@inviter.name.familiar} added you to some new stuff in Basecamp (#{@account.name})&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">InvitationsMailer</span>.<span class="ruby-identifier">with</span>(<span class="ruby-value">inviter:</span> <span class="ruby-identifier">person_a</span>, <span class="ruby-value">invitee:</span> <span class="ruby-identifier">person_b</span>).<span class="ruby-identifier">account_invitation</span>.<span class="ruby-identifier">deliver_later</span>
+</pre>
+
   </section>
 
 
@@ -295,7 +411,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="params-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailer-8.1.1/lib/action_mailer/parameterized.rb, line 95</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailer-8.1.1/lib/action_mailer/parameterized.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">params</span>
   <span class="ruby-ivar">@params</span> <span class="ruby-operator">||=</span> {}
 <span class="ruby-keyword">end</span></pre>

@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionController::UrlFor-label-Action+Controller+UrlFor">Action Controller UrlFor</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionController::UrlFor-label-Action+Controller+UrlFor">Action Controller UrlFor</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -164,7 +193,26 @@
     
 <h1 id="module-ActionController::UrlFor-label-Action+Controller+UrlFor"><a href="#module-ActionController::UrlFor-label-Action+Controller+UrlFor">Action Controller <a href="UrlFor.html"><code>UrlFor</code></a></a></h1>
 
-<p>Includes <a href="../vendor/bundle/ruby/3_3_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a> into the host class. The class has to provide a <code>RouteSet</code> by implementing the <code>_routes</code> method. Otherwise, an exception will be raised.</p>
+<p>Includes <a href="../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a> into the host class. The class has to provide a <code>RouteSet</code> by implementing the <code>_routes</code> method. Otherwise, an exception will be raised.</p>
+
+<p>In addition to <a href="../AbstractController/UrlFor.html"><code>AbstractController::UrlFor</code></a>, this module accesses the HTTP layer to define URL options like the <code>host</code>. In order to do so, this module requires the host class to implement <code>env</code> which needs to be Rack-compatible, and <code>request</code> which returns an <a href="../ActionDispatch/Request.html"><code>ActionDispatch::Request</code></a> instance.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">RootUrl</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">UrlFor</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">url_helpers</span>
+
+  <span class="ruby-identifier">delegate</span> <span class="ruby-value">:env</span>, <span class="ruby-value">:request</span>, <span class="ruby-value">to:</span> <span class="ruby-value">:controller</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">controller</span>)
+    <span class="ruby-ivar">@controller</span> = <span class="ruby-identifier">controller</span>
+    <span class="ruby-ivar">@url</span>        = <span class="ruby-identifier">root_path</span> <span class="ruby-comment"># named route from the application.</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h1 id="module-ActionController::UrlFor-label-Action+Controller+UrlFor"><a href="#module-ActionController::UrlFor-label-Action+Controller+UrlFor">Action Controller <a href="UrlFor.html"><code>UrlFor</code></a></a></h1>
+
+<p>Includes <a href="../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a> into the host class. The class has to provide a <code>RouteSet</code> by implementing the <code>_routes</code> method. Otherwise, an exception will be raised.</p>
 
 <p>In addition to <a href="../AbstractController/UrlFor.html"><code>AbstractController::UrlFor</code></a>, this module accesses the HTTP layer to define URL options like the <code>host</code>. In order to do so, this module requires the host class to implement <code>env</code> which needs to be Rack-compatible, and <code>request</code> which returns an <a href="../ActionDispatch/Request.html"><code>ActionDispatch::Request</code></a> instance.</p>
 
@@ -224,7 +272,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/url_for.rb, line 32</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/url_for.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">...</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@_url_options</span> = <span class="ruby-keyword">nil</span>
@@ -282,7 +330,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="url_options-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/url_for.rb, line 37</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/url_for.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">url_options</span>
   <span class="ruby-ivar">@_url_options</span> <span class="ruby-operator">||=</span> {
     <span class="ruby-value">host:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host</span>,

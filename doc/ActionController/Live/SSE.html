@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionController::Live::SSE-label-Action+Controller+Live+Server+Sent+Events">Action Controller Live Server Sent Events</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionController::Live::SSE-label-Action+Controller+Live+Server+Sent+Events">Action Controller Live Server Sent Events</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -189,6 +218,44 @@
 
 <p>Note: SSEs are not currently supported by IE. However, they are supported by Chrome, Firefox, Opera, and Safari.</p>
 
+<h1 id="class-ActionController::Live::SSE-label-Action+Controller+Live+Server+Sent+Events"><a href="#class-ActionController::Live::SSE-label-Action+Controller+Live+Server+Sent+Events">Action Controller <a href="../Live.html"><code>Live</code></a> Server Sent Events</a></h1>
+
+<p>This class provides the ability to write an <a href="SSE.html"><code>SSE</code></a> (Server Sent Event) to an <a href="../../IO.html"><code>IO</code></a> stream. The class is initialized with a stream and can be used to either write a <a href="../../JSON.html"><code>JSON</code></a> string or an object which can be converted to <a href="../../JSON.html"><code>JSON</code></a>.</p>
+
+<p>Writing an object will convert it into standard <a href="SSE.html"><code>SSE</code></a> format with whatever options you have configured. You may choose to set the following options:</p>
+<dl class="rdoc-list note-list"><dt><code>:event</code></dt>
+<dd>
+<p>If specified, an event with this name will be dispatched on the browser.</p>
+</dd><dt><code>:retry</code></dt>
+<dd>
+<p>The reconnection time in milliseconds used when attempting to send the event.</p>
+</dd><dt><code>:id</code></dt>
+<dd>
+<p>If the connection dies while sending an <a href="SSE.html"><code>SSE</code></a> to the browser, then the server will receive a <code>Last-Event-ID</code> header with value equal to <code>id</code>.</p>
+</dd></dl>
+
+<p>After setting an option in the constructor of the <a href="SSE.html"><code>SSE</code></a> object, all future SSEs sent across the stream will use those options unless overridden.</p>
+
+<p>Example Usage:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MyController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Live</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
+    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;Content-Type&#39;</span>] = <span class="ruby-string">&#39;text/event-stream&#39;</span>
+    <span class="ruby-identifier">sse</span> = <span class="ruby-constant">SSE</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">stream</span>, <span class="ruby-value">retry:</span> <span class="ruby-value">300</span>, <span class="ruby-value">event:</span> <span class="ruby-string">&quot;event-name&quot;</span>)
+    <span class="ruby-identifier">sse</span>.<span class="ruby-identifier">write</span>({ <span class="ruby-value">name:</span> <span class="ruby-string">&#39;John&#39;</span>})
+    <span class="ruby-identifier">sse</span>.<span class="ruby-identifier">write</span>({ <span class="ruby-value">name:</span> <span class="ruby-string">&#39;John&#39;</span>}, <span class="ruby-value">id:</span> <span class="ruby-value">10</span>)
+    <span class="ruby-identifier">sse</span>.<span class="ruby-identifier">write</span>({ <span class="ruby-value">name:</span> <span class="ruby-string">&#39;John&#39;</span>}, <span class="ruby-value">id:</span> <span class="ruby-value">10</span>, <span class="ruby-value">event:</span> <span class="ruby-string">&quot;other-event&quot;</span>)
+    <span class="ruby-identifier">sse</span>.<span class="ruby-identifier">write</span>({ <span class="ruby-value">name:</span> <span class="ruby-string">&#39;John&#39;</span>}, <span class="ruby-value">id:</span> <span class="ruby-value">10</span>, <span class="ruby-value">event:</span> <span class="ruby-string">&quot;other-event&quot;</span>, <span class="ruby-value">retry:</span> <span class="ruby-value">500</span>)
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-identifier">sse</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Note: SSEs are not currently supported by IE. However, they are supported by Chrome, Firefox, Opera, and Safari.</p>
+
   </section>
 
 
@@ -249,7 +316,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/live.rb, line 115</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/live.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">stream</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-ivar">@stream</span> = <span class="ruby-identifier">stream</span>
   <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
@@ -302,7 +369,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/live.rb, line 120</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/live.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">close</span>
 <span class="ruby-keyword">end</span></pre>
@@ -346,7 +413,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="write-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_controller/metal/live.rb, line 124</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_controller/metal/live.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">object</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>

@@ -139,6 +139,20 @@
 <span class="ruby-ivar">@ticket</span>.<span class="ruby-identifier">patches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;Please attach tests to your patch.&quot;</span>)
 </pre>
 
+<p>Raised when an object assigned to an association has an incorrect type.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Ticket</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> <span class="ruby-value">:patches</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Patch</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">belongs_to</span> <span class="ruby-value">:ticket</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Comments are not patches, this assignment raises AssociationTypeMismatch.</span>
+<span class="ruby-ivar">@ticket</span>.<span class="ruby-identifier">patches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">content:</span> <span class="ruby-string">&quot;Please attach tests to your patch.&quot;</span>)
+</pre>
+
   </section>
 
 

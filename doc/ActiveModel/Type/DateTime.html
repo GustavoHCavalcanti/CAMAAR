@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::DateTime-label-Active+Model+DateTime+Type">Active Model DateTime Type</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveModel::Type::DateTime-label-Active+Model+DateTime+Type">Active Model DateTime Type</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -194,6 +223,44 @@
 <span class="ruby-keyword">end</span>
 </pre>
 
+<h1 id="class-ActiveModel::Type::DateTime-label-Active+Model+DateTime+Type"><a href="#class-ActiveModel::Type::DateTime-label-Active+Model+DateTime+Type">Active <a href="../Model.html"><code>Model</code></a> DateTime Type</a></h1>
+
+<p>Attribute type to represent dates and times. It is registered under the <code>:datetime</code> key.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Event</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:start</span>, <span class="ruby-value">:datetime</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span> = <span class="ruby-string">&quot;Wed, 04 Sep 2013 03:00:00 EAT&quot;</span>
+
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">class</span> <span class="ruby-comment"># =&gt; Time</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">year</span>  <span class="ruby-comment"># =&gt; 2013</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">month</span> <span class="ruby-comment"># =&gt; 9</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">day</span>   <span class="ruby-comment"># =&gt; 4</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">hour</span>  <span class="ruby-comment"># =&gt; 3</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">min</span>   <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">sec</span>   <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">zone</span>  <span class="ruby-comment"># =&gt; &quot;EAT&quot;</span>
+</pre>
+
+<p><a href="String.html"><code>String</code></a> values are parsed using the ISO 8601 datetime format. Partial time-only formats are also accepted.</p>
+
+<pre class="ruby"><span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span> = <span class="ruby-string">&quot;06:07:08+09:00&quot;</span>
+<span class="ruby-identifier">event</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">utc</span> <span class="ruby-comment"># =&gt; 1999-12-31 21:07:08 UTC</span>
+</pre>
+
+<p>The degree of sub-second precision can be customized when declaring an attribute:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Event</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Attributes</span>
+
+  <span class="ruby-identifier">attribute</span> <span class="ruby-value">:start</span>, <span class="ruby-value">:datetime</span>, <span class="ruby-value">precision:</span> <span class="ruby-value">4</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
   </section>
 
 
@@ -237,7 +304,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="type-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activemodel-8.1.1/lib/active_model/type/date_time.rb, line 49</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activemodel-8.1.1/lib/active_model/type/date_time.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type</span>
   <span class="ruby-value">:datetime</span>
 <span class="ruby-keyword">end</span></pre>

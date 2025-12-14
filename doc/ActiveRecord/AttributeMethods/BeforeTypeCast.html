@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActiveRecord::AttributeMethods::BeforeTypeCast-label-Active+Record+Attribute+Methods+Before+Type+Cast">Active Record Attribute Methods Before Type Cast</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActiveRecord::AttributeMethods::BeforeTypeCast-label-Active+Record+Attribute+Methods+Before+Type+Cast">Active Record Attribute Methods Before Type Cast</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -176,6 +205,29 @@
 <span class="ruby-identifier">task</span>.<span class="ruby-identifier">completed_on_before_type_cast</span> <span class="ruby-comment"># =&gt; &quot;2012-10-21&quot;</span>
 </pre>
 
+<h1 id="module-ActiveRecord::AttributeMethods::BeforeTypeCast-label-Active+Record+Attribute+Methods+Before+Type+Cast"><a href="#module-ActiveRecord::AttributeMethods::BeforeTypeCast-label-Active+Record+Attribute+Methods+Before+Type+Cast">Active Record Attribute Methods Before Type Cast</a></h1>
+
+<p><a href="BeforeTypeCast.html"><code>ActiveRecord::AttributeMethods::BeforeTypeCast</code></a> provides a way to read the value of the attributes before typecasting and deserialization.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Task</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">task</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">id:</span> <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-value">completed_on:</span> <span class="ruby-string">&#39;2012-10-21&#39;</span>)
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>           <span class="ruby-comment"># =&gt; 1</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">completed_on</span> <span class="ruby-comment"># =&gt; Sun, 21 Oct 2012</span>
+
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">attributes_before_type_cast</span>
+<span class="ruby-comment"># =&gt; {&quot;id&quot;=&gt;&quot;1&quot;, &quot;completed_on&quot;=&gt;&quot;2012-10-21&quot;, ... }</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute_before_type_cast</span>(<span class="ruby-string">&#39;id&#39;</span>)           <span class="ruby-comment"># =&gt; &quot;1&quot;</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute_before_type_cast</span>(<span class="ruby-string">&#39;completed_on&#39;</span>) <span class="ruby-comment"># =&gt; &quot;2012-10-21&quot;</span>
+</pre>
+
+<p>In addition to <a href="BeforeTypeCast.html#method-i-read_attribute_before_type_cast"><code>read_attribute_before_type_cast</code></a> and <a href="BeforeTypeCast.html#method-i-attributes_before_type_cast"><code>attributes_before_type_cast</code></a>, it declares a method for all attributes with the <code>*_before_type_cast</code> suffix.</p>
+
+<pre class="ruby"><span class="ruby-identifier">task</span>.<span class="ruby-identifier">id_before_type_cast</span>           <span class="ruby-comment"># =&gt; &quot;1&quot;</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">completed_on_before_type_cast</span> <span class="ruby-comment"># =&gt; &quot;2012-10-21&quot;</span>
+</pre>
+
   </section>
 
 
@@ -219,7 +271,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attributes_before_type_cast-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 82</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes_before_type_cast</span>
   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">values_before_type_cast</span>
 <span class="ruby-keyword">end</span></pre>
@@ -273,7 +325,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="attributes_for_database-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 87</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes_for_database</span>
   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">values_for_database</span>
 <span class="ruby-keyword">end</span></pre>
@@ -317,7 +369,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="read_attribute_before_type_cast-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 48</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read_attribute_before_type_cast</span>(<span class="ruby-identifier">attr_name</span>)
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">attribute_aliases</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>
@@ -375,7 +427,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="read_attribute_for_database-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 65</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/attribute_methods/before_type_cast.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read_attribute_for_database</span>(<span class="ruby-identifier">attr_name</span>)
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">attribute_aliases</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>

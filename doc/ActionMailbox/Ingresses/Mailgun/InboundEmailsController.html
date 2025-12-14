@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionMailbox::Ingresses::Mailgun::InboundEmailsController-label-Usage">Usage</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionMailbox::Ingresses::Mailgun::InboundEmailsController-label-Usage">Usage</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -174,7 +203,55 @@
 
 <h2 id="class-ActionMailbox::Ingresses::Mailgun::InboundEmailsController-label-Usage"><a href="#class-ActionMailbox::Ingresses::Mailgun::InboundEmailsController-label-Usage">Usage</a></h2>
 <ol><li>
-<p>Give Action Mailbox your Mailgun Signing key (which you can find under Settings -&gt; Security &amp; Users -&gt; API security in Mailgun) so it can authenticate requests to the Mailgun ingress.</p>
+<p>Give Action Mailbox your Mailgun Signing key (which you can find under Settings -&gt; Security &amp; <a href="../../../Users.html"><code>Users</code></a> -&gt; API security in Mailgun) so it can authenticate requests to the Mailgun ingress.</p>
+
+<p>Use <code>bin/rails credentials:edit</code> to add your Signing key to your application’s encrypted credentials under <code>action_mailbox.mailgun_signing_key</code>, where Action Mailbox will automatically find it:</p>
+
+<pre>action_mailbox:
+  mailgun_signing_key: ...</pre>
+
+<p>Alternatively, provide your Signing key in the <code>MAILGUN_INGRESS_SIGNING_KEY</code> environment variable.</p>
+</li><li>
+<p>Tell Action Mailbox to accept emails from Mailgun:</p>
+
+<pre class="ruby"><span class="ruby-comment"># config/environments/production.rb</span>
+<span class="ruby-identifier">config</span>.<span class="ruby-identifier">action_mailbox</span>.<span class="ruby-identifier">ingress</span> = <span class="ruby-value">:mailgun</span>
+</pre>
+</li><li>
+<p><a href="https://documentation.mailgun.com/en/latest/user_manual.html#receiving-forwarding-and-storing-messages">Configure Mailgun</a> to forward inbound emails to <code>/rails/action_mailbox/mailgun/inbound_emails/mime</code>.</p>
+
+<p>If your application lived at <code>https://example.com</code>, you would specify the fully-qualified URL <code>https://example.com/rails/action_mailbox/mailgun/inbound_emails/mime</code>.</p>
+</li></ol>
+
+<p>Ingests inbound emails from Mailgun. Requires the following parameters:</p>
+<ul><li>
+<p><code>body-mime</code>: The full RFC 822 message</p>
+</li><li>
+<p><code>timestamp</code>: The current time according to Mailgun as the number of seconds passed since the UNIX epoch</p>
+</li><li>
+<p><code>token</code>: A randomly-generated, 50-character string</p>
+</li><li>
+<p><code>signature</code>: A hexadecimal HMAC-SHA256 of the timestamp concatenated with the token, generated using the Mailgun Signing key</p>
+</li></ul>
+
+<p>Authenticates requests by validating their signatures.</p>
+
+<p>Returns:</p>
+<ul><li>
+<p><code>204 No Content</code> if an inbound email is successfully recorded and enqueued for routing to the appropriate mailbox</p>
+</li><li>
+<p><code>401 Unauthorized</code> if the request’s signature could not be validated, or if its timestamp is more than 2 minutes old</p>
+</li><li>
+<p><code>404 Not Found</code> if Action Mailbox is not configured to accept inbound emails from Mailgun</p>
+</li><li>
+<p><code>422 Unprocessable Entity</code> if the request is missing required parameters</p>
+</li><li>
+<p><code>500 Server Error</code> if the Mailgun Signing key is missing, or one of the Active Record database, the Active Storage service, or the Active Job backend is misconfigured or unavailable</p>
+</li></ul>
+
+<h2 id="class-ActionMailbox::Ingresses::Mailgun::InboundEmailsController-label-Usage"><a href="#class-ActionMailbox::Ingresses::Mailgun::InboundEmailsController-label-Usage">Usage</a></h2>
+<ol><li>
+<p>Give Action Mailbox your Mailgun Signing key (which you can find under Settings -&gt; Security &amp; <a href="../../../Users.html"><code>Users</code></a> -&gt; API security in Mailgun) so it can authenticate requests to the Mailgun ingress.</p>
 
 <p>Use <code>bin/rails credentials:edit</code> to add your Signing key to your application’s encrypted credentials under <code>action_mailbox.mailgun_signing_key</code>, where Action Mailbox will automatically find it:</p>
 
@@ -237,7 +314,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/controllers/action_mailbox/ingresses/mailgun/inbound_emails_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/controllers/action_mailbox/ingresses/mailgun/inbound_emails_controller.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
   <span class="ruby-constant">ActionMailbox</span><span class="ruby-operator">::</span><span class="ruby-constant">InboundEmail</span>.<span class="ruby-identifier">create_and_extract_message_id!</span> <span class="ruby-identifier">mail</span>
 <span class="ruby-keyword">end</span></pre>

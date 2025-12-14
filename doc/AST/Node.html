@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-AST::Node-label-"></a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-AST::Node-label-"></a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -126,8 +155,6 @@
 
       <li ><a href="#method-i-inspect">inspect</a></li>
 
-      <li ><a href="#method-i-original_dup">original_dup</a></li>
-
       <li ><a href="#method-i-to_ast">to_ast</a></li>
 
       <li ><a href="#method-i-to_s">to_s</a></li>
@@ -177,6 +204,20 @@
 
   <section class="description">
     
+<p><a href="Node.html"><code>Node</code></a> is an immutable class, instances of which represent abstract syntax tree nodes. It combines semantic information (i.e. anything that affects the algorithmic properties of a program) with meta-information (line numbers or compiler intermediates).</p>
+
+<p>Notes on inheritance</p>
+
+<h6 id="class-AST::Node-label-"><a href="#class-AST::Node-label-"></a></h6>
+
+<p>The distinction between semantics and metadata is important. Complete semantic information should be contained within just the {#type} and {#children} of a <a href="Node.html"><code>Node</code></a> instance; in other words, if an <a href="../AST.html"><code>AST</code></a> was to be stripped of all meta-information, it should remain a valid <a href="../AST.html"><code>AST</code></a> which could be successfully processed to yield a result with the same algorithmic properties.</p>
+
+<p>Thus, <a href="Node.html"><code>Node</code></a> should never be inherited in order to define methods which affect or return semantic information, such as getters for ‘class_name`, `superclass` and `body` in the case of a hypothetical `ClassNode`. The correct solution is to use a generic <a href="Node.html"><code>Node</code></a> with a {#type} of `:class` and three children. See also {Processor} for tips on working with such ASTs.</p>
+
+<p>On the other hand, <a href="Node.html"><code>Node</code></a> can and should be inherited to define application-specific metadata (see also {#initialize}) or customize the printing format. It is expected that an application would have one or two such classes and use them across the entire codebase.</p>
+
+<p>The rationale for this pattern is extensibility and maintainability. Unlike static ones, dynamic languages do not require the presence of a predefined, rigid structure, nor does it improve dispatch efficiency, and while such a structure can certainly be defined, it does not add any value but incurs a maintaining cost. For example, extending the <a href="../AST.html"><code>AST</code></a> even with a transformation-local temporary node type requires making globally visible changes to the codebase.</p>
+
 <p><a href="Node.html"><code>Node</code></a> is an immutable class, instances of which represent abstract syntax tree nodes. It combines semantic information (i.e. anything that affects the algorithmic properties of a program) with meta-information (line numbers or compiler intermediates).</p>
 
 <p>Notes on inheritance</p>
@@ -322,7 +363,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 72</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">children</span>=[], <span class="ruby-identifier">properties</span>={})
   <span class="ruby-ivar">@type</span>, <span class="ruby-ivar">@children</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">children</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">freeze</span>
 
@@ -454,7 +495,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 153</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">other</span>)
     <span class="ruby-keyword">true</span>
@@ -508,7 +549,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="append-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 177</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">append</span>(<span class="ruby-identifier">element</span>)
   <span class="ruby-identifier">updated</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-ivar">@children</span> <span class="ruby-operator">+</span> [<span class="ruby-identifier">element</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -526,7 +567,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Node.html#method-i-3C-3C">&lt;&lt;</a>
+          Also aliased as: <a href="Node.html#method-i-3C-3C">&lt;&lt;</a>, &lt;&lt;
         </div>
 
 
@@ -593,7 +634,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="concat-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 168</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-identifier">array</span>)
   <span class="ruby-identifier">updated</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-ivar">@children</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">to_a</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -611,7 +652,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Node.html#method-i-2B">+</a>
+          Also aliased as: <a href="Node.html#method-i-2B">+</a>, +
         </div>
 
 
@@ -643,7 +684,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deconstruct-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 253</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deconstruct</span>
   [<span class="ruby-identifier">type</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">children</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -689,7 +730,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="dup-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 115</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dup</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -707,7 +748,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Node.html#method-i-original_dup">original_dup</a>, <a href="Node.html#method-i-clone">clone</a>
+          Also aliased as: <a href="Node.html#method-i-original_dup">original_dup</a>, <a href="Node.html#method-i-clone">clone</a>, original_dup, clone
         </div>
 
 
@@ -739,7 +780,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="eql-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 85</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eql?</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span>)   <span class="ruby-operator">&amp;&amp;</span>
   <span class="ruby-ivar">@type</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">type</span>)         <span class="ruby-operator">&amp;&amp;</span>
@@ -785,7 +826,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 211</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>(<span class="ruby-identifier">indent</span>=<span class="ruby-value">0</span>)
   <span class="ruby-identifier">indented</span> = <span class="ruby-string">&quot;  &quot;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">indent</span>
   <span class="ruby-identifier">sexp</span> = <span class="ruby-node">&quot;#{indented}s(:#{@type}&quot;</span>
@@ -820,41 +861,6 @@
       </div>
 
 
-      <div id="method-i-original_dup" class="method-detail anchor-link method-alias">
-        <div class="method-header">
-
-            <div class="method-heading">
-              <a href="#method-i-original_dup" title="Link to this method">
-                <span class="method-name">original_dup</span>
-                <span class="method-args">()</span>
-              </a>
-            </div>
-
-        </div>
-
-
-
-
-        <div class="method-description">
-
-
-
-          
-
-
-        </div>
-
-
-
-
-
-        <div class="aliases">
-          Alias for: <a href="Node.html#method-i-dup">dup</a>
-        </div>
-
-      </div>
-
-
       <div id="method-i-to_ast" class="method-detail anchor-link ">
         <div class="method-header">
 
@@ -879,7 +885,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_ast-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 229</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 229</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_ast</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -958,7 +964,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_sexp-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 187</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_sexp</span>(<span class="ruby-identifier">indent</span>=<span class="ruby-value">0</span>)
   <span class="ruby-identifier">indented</span> = <span class="ruby-string">&quot;  &quot;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">indent</span>
   <span class="ruby-identifier">sexp</span> = <span class="ruby-node">&quot;#{indented}(#{fancy_type}&quot;</span>
@@ -989,7 +995,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="Node.html#method-i-to_s">to_s</a>
+          Also aliased as: <a href="Node.html#method-i-to_s">to_s</a>, to_s
         </div>
 
 
@@ -1021,7 +1027,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_sexp_array-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 237</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 237</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_sexp_array</span>
   <span class="ruby-identifier">children_sexp_arrs</span> = <span class="ruby-identifier">children</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">child</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Node</span>)
@@ -1075,7 +1081,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="updated-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 133</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">updated</span>(<span class="ruby-identifier">type</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">children</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">properties</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">new_type</span>       = <span class="ruby-identifier">type</span>       <span class="ruby-operator">||</span> <span class="ruby-ivar">@type</span>
   <span class="ruby-identifier">new_children</span>   = <span class="ruby-identifier">children</span>   <span class="ruby-operator">||</span> <span class="ruby-ivar">@children</span>
@@ -1145,7 +1151,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="assign_properties-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 98</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assign_properties</span>(<span class="ruby-identifier">properties</span>)
   <span class="ruby-identifier">properties</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">instance_variable_set</span> <span class="ruby-value">:&quot;@#{name}&quot;</span>, <span class="ruby-identifier">value</span>
@@ -1195,7 +1201,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fancy_type-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/node.rb, line 264</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/node.rb, line 264</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fancy_type</span>
   <span class="ruby-ivar">@type</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;-&#39;</span>)
 <span class="ruby-keyword">end</span></pre>

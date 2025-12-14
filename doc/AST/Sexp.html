@@ -147,6 +147,24 @@
 
 <p>This way the amount of boilerplate code is greatly reduced.</p>
 
+<p>This simple module is very useful in the cases where one needs to define deeply nested ASTs from Ruby code, for example, in tests. It should be used like this:</p>
+
+<pre class="ruby"><span class="ruby-identifier">describe</span> <span class="ruby-constant">YourLanguage</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-operator">::</span><span class="ruby-constant">AST</span><span class="ruby-operator">::</span><span class="ruby-constant">Sexp</span>
+
+  <span class="ruby-identifier">it</span> <span class="ruby-string">&quot;should correctly parse expressions&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">YourLanguage</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;1 + 2 * 3&quot;</span>).<span class="ruby-identifier">should</span> <span class="ruby-operator">==</span>
+        <span class="ruby-identifier">s</span>(<span class="ruby-value">:add</span>,
+          <span class="ruby-identifier">s</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">1</span>),
+          <span class="ruby-identifier">s</span>(<span class="ruby-value">:multiply</span>,
+            <span class="ruby-identifier">s</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">2</span>),
+            <span class="ruby-identifier">s</span>(<span class="ruby-value">:integer</span>, <span class="ruby-value">3</span>)))
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This way the amount of boilerplate code is greatly reduced.</p>
+
   </section>
 
 
@@ -190,7 +208,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="s-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/ast-2.4.3/lib/ast/sexp.rb, line 26</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/ast-2.4.3/lib/ast/sexp.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">s</span>(<span class="ruby-identifier">type</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">children</span>)
   <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">children</span>)
 <span class="ruby-keyword">end</span></pre>

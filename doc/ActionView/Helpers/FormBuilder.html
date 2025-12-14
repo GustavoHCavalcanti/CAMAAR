@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionView::Helpers::FormBuilder-label-Action+View+Form+Builder">Action View Form Builder</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionView::Helpers::FormBuilder-label-Action+View+Form+Builder">Action View Form Builder</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -280,6 +309,43 @@
 
 <p>The standard set of helper methods for form building are located in the <code>field_helpers</code> class attribute.</p>
 
+<h1 id="class-ActionView::Helpers::FormBuilder-label-Action+View+Form+Builder"><a href="#class-ActionView::Helpers::FormBuilder-label-Action+View+Form+Builder">Action View Form <a href="../../Builder.html"><code>Builder</code></a></a></h1>
+
+<p>A <a href="FormBuilder.html"><code>FormBuilder</code></a> object is associated with a particular model object and allows you to generate fields associated with the model object. The <a href="FormBuilder.html"><code>FormBuilder</code></a> object is yielded when using <a href="rdof-ref:ActionView::Helpers::FormHelper#form_with">form_with</a> or <a href="FormBuilder.html#method-i-fields_for"><code>fields_for</code></a>. For example:</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  Name: &lt;%= person_form.text_field :name %&gt;
+  Admin: &lt;%= person_form.checkbox :admin %&gt;
+&lt;% end %&gt;</pre>
+
+<p>In the above block, a <a href="FormBuilder.html"><code>FormBuilder</code></a> object is yielded as the <code>person_form</code> variable. This allows you to generate the <a href="FormBuilder.html#method-i-text_field"><code>text_field</code></a> and <code>checkbox</code> fields by specifying their eponymous methods, which modify the underlying template and associates the <code>@person</code> model object with the form.</p>
+
+<p>The <a href="FormBuilder.html"><code>FormBuilder</code></a> object can be thought of as serving as a proxy for the methods in the <a href="FormHelper.html"><code>FormHelper</code></a> module. This class, however, allows you to call methods with the model object you are building the form for.</p>
+
+<p>You can create your own custom <a href="FormBuilder.html"><code>FormBuilder</code></a> templates by subclassing this class. For example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MyFormBuilder</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Helpers</span><span class="ruby-operator">::</span><span class="ruby-constant">FormBuilder</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">div_radio_button</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">tag_value</span>, <span class="ruby-identifier">options</span> = {})
+    <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:div</span>,
+      <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">radio_button</span>(
+        <span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">tag_value</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>)
+      )
+    )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The above code creates a new method <code>div_radio_button</code> which wraps a div around the new radio button. Note that when options are passed in, you must call <code>objectify_options</code> in order for the model object to get correctly passed to the method. If <code>objectify_options</code> is not called, then the newly created helper will not be linked back to the model.</p>
+
+<p>The <code>div_radio_button</code> code from above can now be used as follows:</p>
+
+<pre>&lt;%= form_with model: @person, :builder =&gt; MyFormBuilder do |f| %&gt;
+  I am a child: &lt;%= f.div_radio_button(:admin, &quot;child&quot;) %&gt;
+  I am an adult: &lt;%= f.div_radio_button(:admin, &quot;adult&quot;) %&gt;
+&lt;% end -%&gt;</pre>
+
+<p>The standard set of helper methods for form building are located in the <code>field_helpers</code> class attribute.</p>
+
   </section>
 
 
@@ -427,7 +493,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="_to_partial_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1708</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1708</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">_to_partial_path</span>
   <span class="ruby-ivar">@_to_partial_path</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">demodulize</span>.<span class="ruby-identifier">underscore</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/_builder$/</span>, <span class="ruby-string">&quot;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -471,7 +537,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1720</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1720</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">template</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-ivar">@nested_child_index</span> = {}
   <span class="ruby-ivar">@object_name</span>, <span class="ruby-ivar">@object</span>, <span class="ruby-ivar">@template</span>, <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">template</span>, <span class="ruby-identifier">options</span>
@@ -539,7 +605,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="button-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2649</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2649</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">button</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
@@ -687,7 +753,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="checkbox-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2473</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2473</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">checkbox</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">checked_value</span> = <span class="ruby-string">&quot;1&quot;</span>, <span class="ruby-identifier">unchecked_value</span> = <span class="ruby-string">&quot;0&quot;</span>)
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">checkbox</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">checked_value</span>, <span class="ruby-identifier">unchecked_value</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -754,7 +820,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="FormBuilder.html#method-i-check_box">check_box</a>
+          Also aliased as: <a href="FormBuilder.html#method-i-check_box">check_box</a>, check_box
         </div>
 
 
@@ -821,7 +887,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="collection_checkboxes-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 911</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 911</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collection_checkboxes</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">collection_checkboxes</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-ivar">@default_html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">html_options</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -844,7 +910,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="FormBuilder.html#method-i-collection_check_boxes">collection_check_boxes</a>
+          Also aliased as: <a href="FormBuilder.html#method-i-collection_check_boxes">collection_check_boxes</a>, collection_check_boxes
         </div>
 
 
@@ -876,7 +942,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="collection_radio_buttons-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 924</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 924</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collection_radio_buttons</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">collection_radio_buttons</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-ivar">@default_html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">html_options</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -927,7 +993,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="collection_select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 863</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 863</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collection_select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">collection_select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-ivar">@default_html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">html_options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -981,7 +1047,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="color_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1843</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1843</span>
       </pre>
           </div>
 
@@ -1032,7 +1098,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="date_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1895</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1895</span>
       </pre>
           </div>
 
@@ -1080,7 +1146,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="date_select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/date_helper.rb, line 1261</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/date_helper.rb, line 1261</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">date_select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">date_select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">html_options</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1134,7 +1200,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="datetime_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1921</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1921</span>
       </pre>
           </div>
 
@@ -1185,7 +1251,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="datetime_local_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1934</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1934</span>
       </pre>
           </div>
 
@@ -1233,7 +1299,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="datetime_select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/date_helper.rb, line 1285</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/date_helper.rb, line 1285</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">datetime_select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">datetime_select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">html_options</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1287,7 +1353,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="email_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1986</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1986</span>
       </pre>
           </div>
 
@@ -1335,7 +1401,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="field_id-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1777</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1777</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_id</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">suffixes</span>, <span class="ruby-value">namespace:</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:namespace</span>], <span class="ruby-value">index:</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:index</span>])
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">field_id</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">suffixes</span>, <span class="ruby-value">namespace:</span> <span class="ruby-identifier">namespace</span>, <span class="ruby-value">index:</span> <span class="ruby-identifier">index</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1389,7 +1455,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="field_name-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1797</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1797</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">field_name</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">methods</span>, <span class="ruby-value">multiple:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">index:</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:index</span>])
   <span class="ruby-identifier">object_name</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:as</span>) { <span class="ruby-ivar">@object_name</span> }
 
@@ -1447,7 +1513,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fields-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2327</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2327</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fields</span>(<span class="ruby-identifier">scope</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">model:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:allow_method_names_outside_object</span>] = <span class="ruby-keyword">true</span>
   <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_default_ids</span>] = <span class="ruby-operator">!</span><span class="ruby-constant">FormHelper</span>.<span class="ruby-identifier">form_with_generates_ids</span>
@@ -1496,7 +1562,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="fields_for-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2289</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2289</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fields_for</span>(<span class="ruby-identifier">record_name</span>, <span class="ruby-identifier">record_object</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">fields_options</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">fields_options</span>, <span class="ruby-identifier">record_object</span> = <span class="ruby-identifier">record_object</span>, <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">fields_options</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">record_object</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">record_object</span>.<span class="ruby-identifier">extractable_options?</span>
   <span class="ruby-identifier">fields_options</span> <span class="ruby-operator">||=</span> {}
@@ -1769,7 +1835,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="file_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2557</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2557</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">file_field</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">multipart</span> = <span class="ruby-keyword">true</span>
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">file_field</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>))
@@ -1852,7 +1918,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="grouped_collection_select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 875</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 875</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">grouped_collection_select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">group_method</span>, <span class="ruby-identifier">group_label_method</span>, <span class="ruby-identifier">option_key_method</span>, <span class="ruby-identifier">option_value_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">grouped_collection_select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">group_method</span>, <span class="ruby-identifier">group_label_method</span>, <span class="ruby-identifier">option_key_method</span>, <span class="ruby-identifier">option_value_method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-ivar">@default_html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">html_options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1903,7 +1969,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="hidden_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2518</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2518</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hidden_field</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-ivar">@emitted_hidden_id</span> = <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:id</span>
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">hidden_field</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>))
@@ -1963,7 +2029,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="id-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1757</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1757</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id</span>
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-value">:html</span>, <span class="ruby-value">:id</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:id</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -2019,7 +2085,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2404</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2404</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">label</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">text</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">label</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2130,7 +2196,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="month_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1947</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1947</span>
       </pre>
           </div>
 
@@ -2178,7 +2244,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="multipart-3D-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1700</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1700</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">multipart=</span>(<span class="ruby-identifier">multipart</span>)
   <span class="ruby-ivar">@multipart</span> = <span class="ruby-identifier">multipart</span>
 
@@ -2229,7 +2295,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="number_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1999</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1999</span>
       </pre>
           </div>
 
@@ -2280,7 +2346,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="password_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1817</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1817</span>
       </pre>
           </div>
 
@@ -2331,7 +2397,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="phone_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1882</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1882</span>
       </pre>
           </div>
 
@@ -2379,7 +2445,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="radio_button-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2496</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2496</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">radio_button</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">tag_value</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">radio_button</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">tag_value</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -2441,7 +2507,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="range_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2012</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2012</span>
       </pre>
           </div>
 
@@ -2524,7 +2590,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="rich_textarea-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actiontext-8.1.1/app/helpers/action_text/tag_helper.rb, line 114</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/app/helpers/action_text/tag_helper.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rich_textarea</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">rich_textarea</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2546,7 +2612,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="FormBuilder.html#method-i-rich_text_area">rich_text_area</a>
+          Also aliased as: <a href="FormBuilder.html#method-i-rich_text_area">rich_text_area</a>, rich_text_area
         </div>
 
 
@@ -2581,7 +2647,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="search_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1856</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1856</span>
       </pre>
           </div>
 
@@ -2629,7 +2695,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 851</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 851</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">choices</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">choices</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-ivar">@default_html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">html_options</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2680,7 +2746,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="submit-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2589</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 2589</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">submit</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
   <span class="ruby-identifier">value</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">submit_default_value</span>
@@ -2751,7 +2817,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="telephone_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1869</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1869</span>
       </pre>
           </div>
 
@@ -2827,7 +2893,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="text_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1804</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1804</span>
       </pre>
           </div>
 
@@ -2878,7 +2944,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="textarea-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1830</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1830</span>
       </pre>
           </div>
 
@@ -2898,7 +2964,7 @@
 
 
         <div class="aliases">
-          Also aliased as: <a href="FormBuilder.html#method-i-text_area">text_area</a>
+          Also aliased as: <a href="FormBuilder.html#method-i-text_area">text_area</a>, text_area
         </div>
 
 
@@ -2933,7 +2999,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="time_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1908</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1908</span>
       </pre>
           </div>
 
@@ -2981,7 +3047,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="time_select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/date_helper.rb, line 1273</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/date_helper.rb, line 1273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">time_select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">time_select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">html_options</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -3032,7 +3098,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="time_zone_select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 887</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 887</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">time_zone_select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">priority_zones</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">time_zone_select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">priority_zones</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-ivar">@default_html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">html_options</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -3083,7 +3149,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_model-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1716</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1716</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_model</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -3127,7 +3193,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="to_partial_path-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1712</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1712</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_partial_path</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">_to_partial_path</span>
 <span class="ruby-keyword">end</span></pre>
@@ -3174,7 +3240,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="url_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1973</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1973</span>
       </pre>
           </div>
 
@@ -3225,7 +3291,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="week_field-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1960</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1960</span>
       </pre>
           </div>
 
@@ -3273,7 +3339,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="weekday_select-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 899</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_options_helper.rb, line 899</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">weekday_select</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">weekday_select</span>(<span class="ruby-ivar">@object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">objectify_options</span>(<span class="ruby-identifier">options</span>), <span class="ruby-ivar">@default_html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">html_options</span>))
 <span class="ruby-keyword">end</span></pre>

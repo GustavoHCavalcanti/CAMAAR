@@ -161,6 +161,29 @@
 <span class="ruby-identifier">inbound_email</span>.<span class="ruby-identifier">source</span> <span class="ruby-comment"># Returns the full rfc822 source of the email as text</span>
 </pre>
 
+<p>The <a href="InboundEmail.html"><code>InboundEmail</code></a> is an Active Record that keeps a reference to the raw email stored in Active Storage and tracks the status of processing. By default, incoming emails will go through the following lifecycle:</p>
+<ul><li>
+<p>Pending: Just received by one of the ingress controllers and scheduled for routing.</p>
+</li><li>
+<p>Processing: During active processing, while a specific mailbox is running its process method.</p>
+</li><li>
+<p>Delivered: Successfully processed by the specific mailbox.</p>
+</li><li>
+<p>Failed: An exception was raised during the specific mailbox’s execution of the process method.</p>
+</li><li>
+<p>Bounced: Rejected processing by the specific mailbox and bounced to sender.</p>
+</li></ul>
+
+<p>Once the <a href="InboundEmail.html"><code>InboundEmail</code></a> has reached the status of being either <code>delivered</code>, <code>failed</code>, or <code>bounced</code>, it’ll count as having been <a href="InboundEmail.html#method-i-processed-3F"><code>processed?</code></a>. Once processed, the <a href="InboundEmail.html"><code>InboundEmail</code></a> will be scheduled for automatic incineration at a later point.</p>
+
+<p>When working with an <a href="InboundEmail.html"><code>InboundEmail</code></a>, you’ll usually interact with the parsed version of the source, which is available as a <a href="../Mail.html"><code>Mail</code></a> object from <a href="InboundEmail.html#method-i-mail"><code>mail</code></a>. But you can also access the raw source directly using the <a href="InboundEmail.html#method-i-source"><code>source</code></a> method.</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">inbound_email</span>.<span class="ruby-identifier">mail</span>.<span class="ruby-identifier">from</span> <span class="ruby-comment"># =&gt; &#39;david@loudthinking.com&#39;</span>
+<span class="ruby-identifier">inbound_email</span>.<span class="ruby-identifier">source</span> <span class="ruby-comment"># Returns the full rfc822 source of the email as text</span>
+</pre>
+
   </section>
 
 
@@ -204,7 +227,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="mail-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email.rb, line 33</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mail</span>
   <span class="ruby-ivar">@mail</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Mail</span>.<span class="ruby-identifier">from_source</span>(<span class="ruby-identifier">source</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -248,7 +271,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="processed-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email.rb, line 41</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">processed?</span>
   <span class="ruby-identifier">delivered?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">failed?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bounced?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -292,7 +315,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="source-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email.rb, line 37</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionmailbox-8.1.1/app/models/action_mailbox/inbound_email.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source</span>
   <span class="ruby-ivar">@source</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">raw_email</span>.<span class="ruby-identifier">download</span>
 <span class="ruby-keyword">end</span></pre>

@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionCable::RemoteConnections-label-Action+Cable+Remote+Connections">Action Cable Remote Connections</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionCable::RemoteConnections-label-Action+Cable+Remote+Connections">Action Cable Remote Connections</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -163,6 +192,26 @@ ActionCable.server.remote_connections.where(current_user: User.find(1)).disconne
 <pre class="ruby"><span class="ruby-constant">ActionCable</span>.<span class="ruby-identifier">server</span>.<span class="ruby-identifier">remote_connections</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">current_user:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">1</span>)).<span class="ruby-identifier">disconnect</span>(<span class="ruby-value">reconnect:</span> <span class="ruby-keyword">false</span>)
 </pre>
 
+<h1 id="class-ActionCable::RemoteConnections-label-Action+Cable+Remote+Connections"><a href="#class-ActionCable::RemoteConnections-label-Action+Cable+Remote+Connections">Action Cable Remote Connections</a></h1>
+
+<p>If you need to disconnect a given connection, you can go through the <a href="RemoteConnections.html"><code>RemoteConnections</code></a>. You can find the connections you’re looking for by searching for the identifier declared on the connection. For example:</p>
+
+<pre>module ApplicationCable
+  class Connection &lt; ActionCable::Connection::Base
+    identified_by :current_user
+    ....
+  end
+end
+
+ActionCable.server.remote_connections.where(current_user: User.find(1)).disconnect</pre>
+
+<p>This will disconnect all the connections established for <code>User.find(1)</code>, across all servers running on all machines, because it uses the internal channel that all of these servers are subscribed to.</p>
+
+<p>By default, server sends a “disconnect” message with “reconnect” flag set to true. You can override it by specifying the <code>reconnect</code> option:</p>
+
+<pre class="ruby"><span class="ruby-constant">ActionCable</span>.<span class="ruby-identifier">server</span>.<span class="ruby-identifier">remote_connections</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">current_user:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">1</span>)).<span class="ruby-identifier">disconnect</span>(<span class="ruby-value">reconnect:</span> <span class="ruby-keyword">false</span>)
+</pre>
+
   </section>
 
 
@@ -230,7 +279,7 @@ ActionCable.server.remote_connections.where(current_user: User.find(1)).disconne
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/remote_connections.rb, line 34</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/remote_connections.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">server</span>)
   <span class="ruby-ivar">@server</span> = <span class="ruby-identifier">server</span>
 <span class="ruby-keyword">end</span></pre>
@@ -282,7 +331,7 @@ ActionCable.server.remote_connections.where(current_user: User.find(1)).disconne
         <div class="method-description">
 
           <div class="method-source-code" id="where-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actioncable-8.1.1/lib/action_cable/remote_connections.rb, line 38</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actioncable-8.1.1/lib/action_cable/remote_connections.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">where</span>(<span class="ruby-identifier">identifier</span>)
   <span class="ruby-constant">RemoteConnection</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">server</span>, <span class="ruby-identifier">identifier</span>)
 <span class="ruby-keyword">end</span></pre>

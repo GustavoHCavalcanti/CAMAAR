@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::Static-label-Action+Dispatch+Static">Action Dispatch Static</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::Static-label-Action+Dispatch+Static">Action Dispatch Static</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -153,6 +182,16 @@
 
 <p>Only files in the root directory are served; path traversal is denied.</p>
 
+<h1 id="class-ActionDispatch::Static-label-Action+Dispatch+Static"><a href="#class-ActionDispatch::Static-label-Action+Dispatch+Static">Action Dispatch <a href="Static.html"><code>Static</code></a></a></h1>
+
+<p>This middleware serves static files from disk, if available. If no file is found, it hands off to the main app.</p>
+
+<p>In <a href="../Rails.html"><code>Rails</code></a> apps, this middleware is configured to serve assets from the <code>public/</code> directory.</p>
+
+<p>Only GET and HEAD requests are served. POST and other HTTP methods are handed off to the main app.</p>
+
+<p>Only files in the root directory are served; path traversal is denied.</p>
+
   </section>
 
 
@@ -196,7 +235,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/static.rb, line 21</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/static.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">path</span>, <span class="ruby-value">index:</span> <span class="ruby-string">&quot;index&quot;</span>, <span class="ruby-value">headers:</span> {})
   <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
   <span class="ruby-ivar">@file_handler</span> = <span class="ruby-constant">FileHandler</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">index:</span> <span class="ruby-identifier">index</span>, <span class="ruby-value">headers:</span> <span class="ruby-identifier">headers</span>)
@@ -249,7 +288,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/static.rb, line 26</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/static.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-ivar">@file_handler</span>.<span class="ruby-identifier">attempt</span>(<span class="ruby-identifier">env</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
 <span class="ruby-keyword">end</span></pre>

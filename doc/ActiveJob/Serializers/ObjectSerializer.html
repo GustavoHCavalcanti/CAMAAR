@@ -184,6 +184,25 @@
 <span class="ruby-keyword">end</span>
 </pre>
 
+<p><a href="../Base.html"><code>Base</code></a> class for serializing and deserializing custom objects.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MoneySerializer</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveJob</span><span class="ruby-operator">::</span><span class="ruby-constant">Serializers</span><span class="ruby-operator">::</span><span class="ruby-constant">ObjectSerializer</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">serialize</span>(<span class="ruby-identifier">money</span>)
+    <span class="ruby-keyword">super</span>(<span class="ruby-string">&quot;amount&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">money</span>.<span class="ruby-identifier">amount</span>, <span class="ruby-string">&quot;currency&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">money</span>.<span class="ruby-identifier">currency</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deserialize</span>(<span class="ruby-identifier">hash</span>)
+    <span class="ruby-constant">Money</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&quot;amount&quot;</span>], <span class="ruby-identifier">hash</span>[<span class="ruby-string">&quot;currency&quot;</span>])
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">klass</span>
+    <span class="ruby-constant">Money</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
   </section>
 
 
@@ -227,7 +246,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 31</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@template</span> = { <span class="ruby-constant">Arguments</span><span class="ruby-operator">::</span><span class="ruby-constant">OBJECT_SERIALIZER_KEY</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span> }.<span class="ruby-identifier">freeze</span>
@@ -285,7 +304,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="deserialize-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 47</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">deserialize</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-node">&quot;#{self.class.name} should implement a public #deserialize(hash) method&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -329,7 +348,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="serialize-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 42</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">serialize</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">hash</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -373,7 +392,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="serialize-3F-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 37</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activejob-8.1.1/lib/active_job/serializers/object_serializer.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">serialize?</span>(<span class="ruby-identifier">argument</span>)
   <span class="ruby-identifier">argument</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-identifier">klass</span>)
 <span class="ruby-keyword">end</span></pre>

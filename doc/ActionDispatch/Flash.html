@@ -72,6 +72,35 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::Flash-label-Action+Dispatch+Flash">Action Dispatch Flash</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActionDispatch::Flash-label-Action+Dispatch+Flash">Action Dispatch Flash</a>
+</li>
+
+
+
+  </ul>
+</div>
+
 
   
 
@@ -169,6 +198,41 @@
 
 <p>See docs on the <a href="Flash/FlashHash.html"><code>FlashHash</code></a> class for more details about the flash.</p>
 
+<h1 id="class-ActionDispatch::Flash-label-Action+Dispatch+Flash"><a href="#class-ActionDispatch::Flash-label-Action+Dispatch+Flash">Action Dispatch <a href="Flash.html"><code>Flash</code></a></a></h1>
+
+<p>The flash provides a way to pass temporary primitive-types (<a href="../String.html"><code>String</code></a>, <a href="../Array.html"><code>Array</code></a>, <a href="../Hash.html"><code>Hash</code></a>) between actions. Anything you place in the flash will be exposed to the very next action and then cleared out. This is a great way of doing notices and alerts, such as a create action that sets <code>flash[:notice] = &quot;Post successfully created&quot;</code> before redirecting to a display action that can then expose the flash to its template. Actually, that exposure is automatically done.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+    <span class="ruby-comment"># save post</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Post successfully created&quot;</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@post</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
+    <span class="ruby-comment"># doesn&#39;t need to assign the flash notice to the template, that&#39;s done automatically</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Then in <code>show.html.erb</code>:</p>
+
+<pre>&lt;% if flash[:notice] %&gt;
+  &lt;div class=&quot;notice&quot;&gt;&lt;%= flash[:notice] %&gt;&lt;/div&gt;
+&lt;% end %&gt;</pre>
+
+<p>Since the <code>notice</code> and <code>alert</code> keys are a common idiom, convenience accessors are available:</p>
+
+<pre class="ruby"><span class="ruby-identifier">flash</span>.<span class="ruby-identifier">alert</span> = <span class="ruby-string">&quot;You must be logged in&quot;</span>
+<span class="ruby-identifier">flash</span>.<span class="ruby-identifier">notice</span> = <span class="ruby-string">&quot;Post successfully created&quot;</span>
+</pre>
+
+<p>This example places a string in the flash. And of course, you can put as many as you like at a time too. If you want to pass non-primitive types, you will have to handle that in your application. Example: To show messages with links, you will have to use sanitize helper.</p>
+
+<p>Just remember: They’ll be gone by the time the next action has been performed.</p>
+
+<p>See docs on the <a href="Flash/FlashHash.html"><code>FlashHash</code></a> class for more details about the flash.</p>
+
   </section>
 
 
@@ -229,7 +293,7 @@
         <div class="method-description">
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/flash.rb, line 312</span>
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/flash.rb, line 312</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new</span>(<span class="ruby-identifier">app</span>) <span class="ruby-identifier">app</span>; <span class="ruby-keyword">end</span></pre>
           </div>
 
