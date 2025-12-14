@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.rubygems_version = "3.6.7".freeze
   s.summary = "Arbitrary-precision decimal floating-point number library.".freeze
 
-  s.installed_by_version = "3.7.2".freeze
+  s.installed_by_version = "3.5.16".freeze if s.respond_to? :installed_by_version
 end

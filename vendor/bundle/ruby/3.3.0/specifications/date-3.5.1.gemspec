@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.rubygems_version = "3.5.22".freeze
   s.summary = "The official date library for Ruby.".freeze
 
-  s.installed_by_version = "3.7.2".freeze
+  s.installed_by_version = "3.5.16".freeze if s.respond_to? :installed_by_version
 end

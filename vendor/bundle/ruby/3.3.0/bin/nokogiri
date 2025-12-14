@@ -21,8 +21,9 @@ if str
   end
 end
 
-if Gem.respond_to?(:activate_and_load_bin_path)
-  Gem.activate_and_load_bin_path('nokogiri', 'nokogiri', version)
+if Gem.respond_to?(:activate_bin_path)
+load Gem.activate_bin_path('nokogiri', 'nokogiri', version)
 else
-  load Gem.activate_bin_path('nokogiri', 'nokogiri', version)
+gem "nokogiri", version
+load Gem.bin_path("nokogiri", "nokogiri", version)
 end
