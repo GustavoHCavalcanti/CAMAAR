@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-12 16:37:21 -0300'>2025-12-12 16:37:21 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 18:28:50 -0300'>2025-12-12 18:28:50 -0300</time>
         
       </span>
     </div>
@@ -62,22 +62,22 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating a big">
-              A
+            <div class="rating c big">
+              C
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">11</span><small> lines of codes</small></div>
-              <div><span class="metric">1</span><small> methods</small></div>
+              <div><span class="metric">43</span><small> lines of codes</small></div>
+              <div><span class="metric">3</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">1.4</span><small> complexity/method</small></div>
-              <div><span class="metric">2</span><small> churn</small></div>
+              <div><span class="metric">12.8</span><small> complexity/method</small></div>
+              <div><span class="metric">3</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">1.41</span><small> complexity</small></div>
-              <div><span class="metric">0</span><small> duplications</small></div>
+              <div><span class="metric">38.26</span><small> complexity</small></div>
+              <div><span class="metric">73</span><small> duplications</small></div>
             </div>
           </div>
         </div>
@@ -88,8 +88,8 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                0
-                smell
+                8
+                smells
               </a>
             </li>
           </ul>
@@ -98,7 +98,7 @@
     </div>
 
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># Namespace `Respondente` para exibição de informações de perfil do participante.
-class Respondente::PerfilController &lt; ApplicationController
+class Respondente::PerfilController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Respondente::PerfilController assumes too much for instance variable '@user'</span>          </div>  </li></ol>
   before_action :require_login
   layout &quot;respondente&quot;
 
@@ -106,6 +106,38 @@ class Respondente::PerfilController &lt; ApplicationController
   # @return [void]
   def show
     @user = current_user
+  end
+
+  # Exibe formulário para alterar senha.
+  # @return [void]
+  def edit_password
+    @user = current_user
+  end
+
+  # Atualiza a senha do usuário.
+  # @return [void]
+  # @side_effect Atualiza senha do usuário; redireciona com mensagem de sucesso ou erro
+  def update_password<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="../admin/perfil_controller.html#L23" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L21" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password has a flog score of 35</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password has approx 10 statements</span>          </div>  </li></ol>
+    @user = current_user
+
+    unless @user.authenticate(params[:current_password])
+      flash.now[:alert] = &quot;Senha atual incorreta.&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'flash.now' 3 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L25" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L31" class="js-smell-location">1</a>                  <a href="perfil_controller.html#L39" class="js-smell-location">2</a>                  </div>  </li></ol>
+      render :edit_password, status: :unprocessable_entity<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'render :edit_password, status: :unprocessable_entity' 3 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L26" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L32" class="js-smell-location">1</a>                  <a href="perfil_controller.html#L40" class="js-smell-location">2</a>                  </div>  </li></ol>
+      return
+    end
+
+    if params[:new_password] != params[:password_confirmation]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'params[:new_password]' 2 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L30" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'params[:password_confirmation]' 2 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L30" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li></ol>
+      flash.now[:alert] = &quot;A nova senha e a confirmação não coincidem.&quot;<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'flash.now' 3 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L25" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L31" class="js-smell-location">1</a>                  <a href="perfil_controller.html#L39" class="js-smell-location">2</a>                  </div>  </li></ol>
+      render :edit_password, status: :unprocessable_entity<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'render :edit_password, status: :unprocessable_entity' 3 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L26" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L32" class="js-smell-location">1</a>                  <a href="perfil_controller.html#L40" class="js-smell-location">2</a>                  </div>  </li></ol>
+      return
+    end
+
+    if @user.update(password: params[:new_password], password_confirmation: params[:password_confirmation])<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'params[:new_password]' 2 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L30" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'params[:password_confirmation]' 2 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L30" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L36" class="js-smell-location">1</a>                  </div>  </li></ol>
+      redirect_to respondente_perfil_path, notice: &quot;Senha alterada com sucesso!&quot;
+    else
+      flash.now[:alert] = @user.errors.full_messages.to_sentence<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'flash.now' 3 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L25" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L31" class="js-smell-location">1</a>                  <a href="perfil_controller.html#L39" class="js-smell-location">2</a>                  </div>  </li></ol>
+      render :edit_password, status: :unprocessable_entity<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Respondente::PerfilController#update_password calls 'render :edit_password, status: :unprocessable_entity' 3 times</span>              <span>Locations:</span>                  <a href="perfil_controller.html#L26" class="js-smell-location">0</a>                  <a href="perfil_controller.html#L32" class="js-smell-location">1</a>                  <a href="perfil_controller.html#L40" class="js-smell-location">2</a>                  </div>  </li></ol>
+    end
   end
 end
 </code>

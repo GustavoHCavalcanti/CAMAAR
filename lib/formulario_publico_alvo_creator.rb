@@ -64,9 +64,9 @@ class FormularioPublicoAlvoCreator
   # @return [Symbol, nil] :discentes, :docentes ou nil quando inválido
   def normalizar_publico(publico_alvo)
     case publico_alvo.to_s.strip.downcase
-    when 'discentes'
+    when "discentes"
       :discentes
-    when 'docentes'
+    when "docentes"
       :docentes
     else
       nil

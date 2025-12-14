@@ -80,9 +80,9 @@ RSpec.describe SigaaImporter do
         ]
       }
 
-      expect(database[:turmas]).to eq([{ codigo: 'T1', nome: 'Turma 1' }])
-      expect(database[:materias]).to eq([{ codigo: 'M1', nome: 'Matemática I' }])
-      expect(database[:participantes]).to eq([{ matricula: '111', nome: 'João' }])
+      expect(database[:turmas]).to eq([ { codigo: 'T1', nome: 'Turma 1' } ])
+      expect(database[:materias]).to eq([ { codigo: 'M1', nome: 'Matemática I' } ])
+      expect(database[:participantes]).to eq([ { matricula: '111', nome: 'João' } ])
     end
   end
 end

@@ -34,13 +34,13 @@ class TurmaManager
     return { status: :not_found } unless turma
 
     if turma[:departamento] == @admin[:departamento]
-      return {
+      {
         status: :success,
         turma: turma,
         pode_editar: true
       }
     else
-      return {
+      {
         status: :forbidden,
         message: "A turma pertence a outro departamento",
         redirect: :lista

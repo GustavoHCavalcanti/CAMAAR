@@ -1,5 +1,5 @@
 # lib/report_generator.rb
-require 'csv'
+require "csv"
 
 class NoDataToExportError < StandardError; end
 

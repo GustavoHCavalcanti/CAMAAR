@@ -156,7 +156,6 @@ RSpec.describe Respondente::PerfilController, type: :controller do
       expect { get :show }.not_to raise_error
     end
   end
-
 end
 
 # ==== TESTES EXTRA PARA AUMENTAR COBERTURA DE MODELS ====

@@ -12,7 +12,7 @@ CAMAAR – Sistema de Avaliação de Turmas da UnB
 A Sprint 3 teve como objetivo materializar a aplicação Rails completa com:
 
 - Interface web funcional com Bootstrap 5.3  
-- Sistema de autenticação robusto com login/logout e reset de senha  
+- Sistema de autenticação com login/logout e troca de senha (reset via token ainda pendente)  
 - CRUD completo de formulários, templates e turmas  
 - Geração e coleta de respostas de formulários  
 - Relatórios em CSV  
@@ -30,7 +30,7 @@ https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-3
 
 ### Stack Tecnológico Implementado
 - **Rails 8.1.1** – Framework web MVC  
-- **Ruby 3.3.5** – Linguagem de programação  
+- **Ruby 3.2.2** – Linguagem de programação  
 - **PostgreSQL** – Banco de dados relacional  
 - **Bootstrap 5.3** – Interface responsiva  
 - **Stimulus Rails** – Interatividade JavaScript  
@@ -48,10 +48,10 @@ https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-3
 - Sistema de login com email/senha  
 - Autenticação baseada em sessões  
 - Definição e redefinição de senha  
-- Reset de senha via token temporário  
 - Edição de senha pelo usuário autenticado  
 - Controle de acesso por departamento  
 - Autenticação e autorização em controllers  
+- Reset de senha via token temporário: **não implementado nesta sprint**  
 
 #### Gerenciamento de Templates
 - CRUD de templates de formulários  
@@ -166,8 +166,7 @@ https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-3
 - Data e hora
 
 ### ResetToken
-- Tokens para redefinição de senha
-- Expiração em 24h
+- Não implementado nesta sprint (reset via token permanece pendente)
 
 ## Controllers Implementados
 
@@ -191,9 +190,8 @@ https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-3
 ## Testes Implementados
 
 ### Cobertura de Testes
-- **Total de exemplos (testes):** 126
-- **Cobertura de linhas:** 56.53% (437/773 linhas cobertas)
-- **Força média:** 0.95 hits/line
+- **Total de exemplos (testes):** 142
+- **Cobertura de linhas:** 92.03% (693/753 linhas cobertas)
 
 ### Arquivos de Teste (23 spec files)
 
@@ -227,23 +225,15 @@ https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-3
 - `import_log_spec.rb` – Validações do ImportLog
 
 ### Resultados dos Testes
-- **126 exemplos executados**
-- **1 falha** (bug em turmas_controller esperado para correção)
-- **Tempo total:** ~5 minutos 56 segundos
-- **Cobertura:** 56.53% de linhas cobertas
+- **142 exemplos executados**
+- **0 falhas**
+- **Tempo total:** ~7 minutos 21 segundos
+- **Cobertura:** 92.03% de linhas cobertas
 
 ### Análise de Cobertura por Tipo
 
-**Controllers com 100% de cobertura:**
-- `admin/base_controller.rb`
+- Cobertura global consolidada em 92.03% de linhas com foco em services, models e controllers críticos.
 
-**Controllers com boa cobertura (>80%):**
-- `admin/gerenciamento_controller.rb` – 88.89%
-- `admin/turmas_controller.rb` – 85%+
-
-**Áreas com cobertura menor (<50%):**
-- `admin/formularios_controller.rb` – 35.29% (complexidade alta)
-- `respondente/formularios_controller.rb` – Precisa de testes
 
 ## Artefatos Entregues
 
@@ -254,8 +244,8 @@ https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-3
 
 **Testes Automatizados**
 - 23 arquivos de especificação
-- 126 exemplos de teste
-- Cobertura de 56.53% com SimpleCov
+- 142 exemplos de teste
+- Cobertura de 92.03% com SimpleCov
 
 **Documentação**
 - Documentação RDoc gerada (`/doc`)
@@ -320,9 +310,8 @@ bin/rails server
 - **Solução:** Inicialização correta de variáveis de instância
 
 ### 3. Cobertura de Testes
-- **Problema:** Começou em ~90% mas regrediu para 56.53%
-- **Razão:** Foco em funcionalidades de UI (controllers), que têm testes complexos
-- **Status:** Esperado; focus em controllers admin nos próximos sprints
+- **Problema:** Cobertura parcial em controllers/fluxos de UI nas iterações iniciais
+- **Status:** Resolvido nesta sprint com 92.03% de cobertura total (142 exemplos)
 
 ### 4. Erros de Navegação
 - **Problema:** Menu quebrado após integração
@@ -336,9 +325,9 @@ bin/rails server
 - Fluxos de autenticação e autorização
 
 **Base de Testes Sólida**
-- 126 testes implementados
-- Cobertura de 56.53%
-- Services com testes unitários bem cobertos
+- 142 testes implementados
+- Cobertura de 92.03%
+- Services e controllers críticos cobertos
 
 **Documentação Completa**
 - RDoc automático de todos os métodos públicos
@@ -349,17 +338,18 @@ bin/rails server
 - Hash seguro de senhas com BCrypt
 - Autenticação baseada em sessão
 - Controle de acesso por departamento
-- Tokens seguros para reset de senha
+- Reset via token: pendente (não implementado nesta sprint)
 
 ## Conclusão
 
-A Sprint 3 transformou a estrutura de backend da Sprint 2 em uma aplicação Rails completa, funcional e interativa. Com 42 commits, 42 funcionalidades implementadas e uma base de 126 testes, o sistema CAMAAR agora está pronto para:
+A Sprint 3 transformou a estrutura de backend da Sprint 2 em uma aplicação Rails completa, funcional e interativa. Com 42 commits, 42 funcionalidades implementadas e uma base de 142 testes, o sistema CAMAAR agora está pronto para:
 
 - Coletar formulários de avaliação
 - Gerar relatórios em CSV
 - Gerenciar turmas e usuários
 - Garantir segurança e autenticação
 - Ser testado de forma automatizada
+- Evoluir com a implementação pendente do reset de senha via token
 
 O projeto atingiu maturidade suficiente para testes em produção com as melhorias incremental de cobertura nos sprints seguintes.
 
@@ -368,4 +358,4 @@ O projeto atingiu maturidade suficiente para testes em produção com as melhori
 **Repositório:** https://github.com/GustavoHCavalcanti/CAMAAR/tree/sprint-3  
 **Kanban:** https://github.com/users/GustavoHCavalcanti/projects/1/views/1  
 **Wiki:** https://github.com/GustavoHCavalcanti/CAMAAR/wiki  
-**Data:** 12 de dezembro de 2025  
+**Data:** 14 de dezembro de 2025  

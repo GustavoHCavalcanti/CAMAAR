@@ -108,7 +108,7 @@ class TurmaImportService
   end
 
   def row_error(idx, msg)
-    { created_turmas: 0, created_users: 0, existing_users: 0, errors: ["Linha #{idx + 2}: #{msg}"] }
+    { created_turmas: 0, created_users: 0, existing_users: 0, errors: [ "Linha #{idx + 2}: #{msg}" ] }
   end
 
   def format_errors(record, idx, label)
@@ -123,8 +123,8 @@ class TurmaImportService
       turma.semestre = data["semestre"]
       turma.professor = data["professor"]
       unless turma.save
-        errors << format_errors(data['codigo'], idx, 'turma') { turma.errors.full_messages.to_sentence }
-        turma_cache.delete(data["codigo"]) 
+        errors << format_errors(data["codigo"], idx, "turma") { turma.errors.full_messages.to_sentence }
+        turma_cache.delete(data["codigo"])
         return nil
       end
       created_inc = 1
@@ -136,7 +136,7 @@ class TurmaImportService
       updates[:professor] = data["professor"] if data["professor"].present? && data["professor"] != turma.professor
       turma.update(updates) if updates.any?
     end
-    [turma, created_inc]
+    [ turma, created_inc ]
   end
 
   # user upsert moved to Users::UpsertFromCsv service

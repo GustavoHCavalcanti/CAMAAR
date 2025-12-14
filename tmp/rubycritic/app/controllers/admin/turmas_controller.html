@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2025-12-12 17:26:57 -0300'>2025-12-12 17:26:57 -0300</time>
+          Updated <time class='js-timeago' datetime='2025-12-12 19:37:24 -0300'>2025-12-12 19:37:24 -0300</time>
         
       </span>
     </div>
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">144</span><small> lines of codes</small></div>
+              <div><span class="metric">147</span><small> lines of codes</small></div>
               <div><span class="metric">18</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">5.7</span><small> complexity/method</small></div>
-              <div><span class="metric">9</span><small> churn</small></div>
+              <div><span class="metric">6.1</span><small> complexity/method</small></div>
+              <div><span class="metric">11</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">102.6</span><small> complexity</small></div>
+              <div><span class="metric">109.61</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                12
+                11
                 smells
               </a>
             </li>
@@ -99,17 +99,17 @@
 
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># Namespace de controllers administrativos para gestão de turmas.
 module Admin
-  class TurmasController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::TurmasController assumes too much for instance variable '@turma'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Admin::TurmasController has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Admin::TurmasController has at least 5 instance variables</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Methods.md" target="_blank"><b>TooManyMethods</b></a>        </span>      </div>      <span>Admin::TurmasController has at least 18 methods</span>          </div>  </li></ol>
+  class TurmasController &lt; ApplicationController<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::TurmasController assumes too much for instance variable '@alunos_disponiveis'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>Admin::TurmasController assumes too much for instance variable '@turma'</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank"><b>IrresponsibleModule</b></a>        </span>      </div>      <span>Admin::TurmasController has no descriptive comment</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank"><b>TooManyInstanceVariables</b></a>        </span>      </div>      <span>Admin::TurmasController has at least 6 instance variables</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Methods.md" target="_blank"><b>TooManyMethods</b></a>        </span>      </div>      <span>Admin::TurmasController has at least 18 methods</span>          </div>  </li></ol>
     layout &quot;admin&quot;
     before_action :require_login
     before_action :require_admin
-    before_action :load_turma, only: [:show, :edit, :update, :destroy]
-    before_action :prepare_lists, only: [:new, :edit]
+    before_action :load_turma, only: [ :show, :edit, :update, :destroy ]
+    before_action :prepare_lists, only: [ :new, :edit ]
 
     # Lista turmas cadastradas.
     # @return [void]
     def index
-      @turmas = ::Turma.all
+      @turmas = ::Turma.includes(:users).all
     end
 
     # Exibe detalhes de uma turma.
@@ -125,15 +125,14 @@ module Admin
     # Cria turma e associa alunos selecionados.
     # @return [void]
     # @side_effect Persiste Turma e TurmaUsers; redireciona ou renderiza :new com status 422
-    def create<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Admin::TurmasController#create has approx 6 statements</span>          </div>  </li></ol>
+    def create
       @turma = ::Turma.new(turma_params)
       if @turma.save
         # Associar alunos selecionados
         associar_alunos(@turma, params[:turma][:aluno_ids]) if params[:turma][:aluno_ids].present?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma]' 2 times</span>          </div>  </li>  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#create calls 'params[:turma][:aluno_ids]' 2 times</span>          </div>  </li></ol>
         redirect_to admin_turmas_path, notice: &quot;Turma criada com sucesso!&quot;
       else
-        @alunos_disponiveis = ::User.where(role: &quot;participante&quot;)
-        @professores = ::User.where(role: &quot;administrador&quot;)
+        prepare_lists
         render :new, status: :unprocessable_entity
       end
     end
@@ -146,15 +145,13 @@ module Admin
     # Atualiza turma e redefine associações de alunos conforme seleção.
     # @return [void]
     # @side_effect Limpa e recria TurmaUsers; redireciona ou renderiza :edit com status 422
-    def update<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank"><b>TooManyStatements</b></a>        </span>      </div>      <span>Admin::TurmasController#update has approx 6 statements</span>          </div>  </li></ol>
+    def update
       if @turma.update(turma_params)
         # Atualizar alunos da turma
         redefinir_associacoes_alunos(@turma, params[:turma][:aluno_ids])
         redirect_to admin_turmas_path, notice: &quot;Turma atualizada!&quot;
       else
-        @alunos_disponiveis = ::User.where(role: &quot;participante&quot;)
-        @alunos_da_turma = @turma.users
-        @professores = ::User.where(role: &quot;administrador&quot;)
+        prepare_lists
         render :edit, status: :unprocessable_entity
       end
     end
@@ -177,16 +174,16 @@ module Admin
     # @return [void]
     # @side_effect Cria/atualiza Turma e Users via serviço; redireciona com mensagem de resultado
     def import
-      return redirect_to(import_form_admin_turmas_path, alert: &quot;Envie um arquivo CSV para importar.&quot;) if params[:file].blank?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L81" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L83" class="js-smell-location">1</a>                  </div>  </li></ol>
+      return redirect_to(import_form_admin_turmas_path, alert: &quot;Envie um arquivo CSV para importar.&quot;) if params[:file].blank?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L78" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L80" class="js-smell-location">1</a>                  </div>  </li></ol>
 
-      result = ::TurmaImportService.new(file: params[:file]).call<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L81" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L83" class="js-smell-location">1</a>                  </div>  </li></ol>
+      result = ::TurmaImportService.new(file: params[:file]).call<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#import calls 'params[:file]' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L78" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L80" class="js-smell-location">1</a>                  </div>  </li></ol>
       handle_import_result(result)
     end
 
     private
 
     def load_turma
-      @turma = ::Turma.find(params[:id])
+      @turma = ::Turma.includes(:users, :turma_users).find(params[:id])
     end
 
     def prepare_lists
@@ -215,9 +212,15 @@ module Admin
     end
 
     def preparar_listas_turma(turma = nil)
-      @alunos_disponiveis = ::User.where(role: &quot;participante&quot;)
-      @professores = ::User.where(role: &quot;administrador&quot;)
+      @alunos_disponiveis = ::User.where(role: &quot;participante&quot;).select(:id, :nome, :matricula, :email).order(:nome)
+      @professores = ::User.where(role: &quot;administrador&quot;).select(:id, :nome, :email).order(:nome)
       @alunos_da_turma = turma&amp;.users if turma
+
+      # Pré-calcular contagem de turmas para evitar N+1 na view
+      aluno_ids = @alunos_disponiveis.pluck(:id)
+      @turmas_por_aluno = TurmaUser.where(user_id: aluno_ids)
+                                    .group(:user_id)
+                                    .count
     end
 
     def redefinir_associacoes_alunos(turma, aluno_ids)
@@ -235,8 +238,8 @@ module Admin
 
     def build_import_message(result)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank"><b>UtilityFunction</b></a>        </span>      </div>      <span>Admin::TurmasController#build_import_message doesn't depend on instance state (maybe move it to another class?)</span>          </div>  </li></ol>
       base = &quot;Importação concluída. Turmas novas: #{result.created_turmas}. Alunos novos: #{result.created_users}. Alunos já existentes: #{result.existing_users}.&quot;
-      return base unless result.errors.present?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#build_import_message calls 'result.errors' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L139" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L140" class="js-smell-location">1</a>                  </div>  </li></ol>
-      observacoes = result.errors.first(3).join(&#39; | &#39;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#build_import_message calls 'result.errors' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L139" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L140" class="js-smell-location">1</a>                  </div>  </li></ol>
+      return base unless result.errors.present?<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#build_import_message calls 'result.errors' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L142" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L143" class="js-smell-location">1</a>                  </div>  </li></ol>
+      observacoes = result.errors.first(3).join(&quot; | &quot;)<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank"><b>DuplicateMethodCall</b></a>        </span>      </div>      <span>Admin::TurmasController#build_import_message calls 'result.errors' 2 times</span>              <span>Locations:</span>                  <a href="turmas_controller.html#L142" class="js-smell-location">0</a>                  <a href="turmas_controller.html#L143" class="js-smell-location">1</a>                  </div>  </li></ol>
       &quot;#{base} Observações: #{observacoes}&quot;
     end
   end

@@ -48,7 +48,7 @@ class FormularioAvaliacaoCreator
         template_nome: template[:nome],
         turma_id: turma[:id],
         turma_codigo: turma[:codigo],
-        status: 'Aberto' # por exemplo
+        status: "Aberto" # por exemplo
       }
     end
 

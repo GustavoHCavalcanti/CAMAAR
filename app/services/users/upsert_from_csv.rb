@@ -13,10 +13,10 @@ module Users
       user = ::User.find_or_initialize_by(matricula: @data["matricula"])
       if user.new_record?
         assign_new_user_attributes(user)
-        return save_new_user(user)
+        save_new_user(user)
       else
         assign_existing_user_defaults(user)
-        return save_existing_user(user)
+        save_existing_user(user)
       end
     end
 
@@ -41,7 +41,7 @@ module Users
       if user.save
         Outcome.new(user: user, created_users: 1, existing_users: 0, errors: [])
       else
-        Outcome.new(user: nil, created_users: 0, existing_users: 0, errors: [error_msg(user, 'usuário')])
+        Outcome.new(user: nil, created_users: 0, existing_users: 0, errors: [ error_msg(user, "usuário") ])
       end
     end
 
@@ -49,7 +49,7 @@ module Users
       if user.save
         Outcome.new(user: user, created_users: 0, existing_users: 1, errors: [])
       else
-        Outcome.new(user: nil, created_users: 0, existing_users: 0, errors: [error_msg(user, 'usuário')])
+        Outcome.new(user: nil, created_users: 0, existing_users: 0, errors: [ error_msg(user, "usuário") ])
       end
     end
 
