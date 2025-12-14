@@ -79,7 +79,7 @@ CAMAAR é uma aplicação Rails para gerenciamento de formulários de avaliaçã
 
 ### 1. Clonar o Repositório
 ```bash
-git clone https://github.com/seu-usuario/CAMAAR.git
+git clone https://github.com/GustavoHCavalcanti/CAMAAR.git
 cd CAMAAR
 ```
 
