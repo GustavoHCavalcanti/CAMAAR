@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class ActiveRecord::ConnectionAdapters::AbstractAdapter - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,ActiveRecord::ConnectionAdapters::AbstractAdapter">
+
+
+    <meta name="description" content="class ActiveRecord::ConnectionAdapters::AbstractAdapter: Active Record Abstract Adapter Active Record supports multiple database systems. AbstractAdapter and related classes form the abstraction layer which">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#class-ActiveRecord::ConnectionAdapters::AbstractAdapter-label-Active+Record+Abstract+Adapter">Active Record Abstract Adapter</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-ActiveRecord::ConnectionAdapters::AbstractAdapter-label-Active+Record+Abstract+Adapter">Active Record Abstract Adapter</a>
+</li>
+
+
+
+  </ul>
+</div>
+
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../../Object.html">Object</a><ul><li><a href="../../BasicObject.html">BasicObject</a></li></ul></li></ul>
+</div>
+
+
+  
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="include" href="../../ActiveSupport/Callbacks.html">ActiveSupport::Callbacks</a></li>
+
+
+
+    <li><a class="include" href="DatabaseLimits.html">ActiveRecord::ConnectionAdapters::DatabaseLimits</a></li>
+
+
+
+    <li><a class="include" href="QueryCache.html">ActiveRecord::ConnectionAdapters::QueryCache</a></li>
+
+
+
+    <li><a class="include" href="Savepoints.html">ActiveRecord::ConnectionAdapters::Savepoints</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-database_exists-3F">database_exists?</a></li>
+
+      <li ><a href="#method-c-dbconsole">dbconsole</a></li>
+
+      <li ><a href="#method-c-find_cmd_and_exec">find_cmd_and_exec</a></li>
+
+      <li ><a href="#method-c-type_cast_config_to_boolean">type_cast_config_to_boolean</a></li>
+
+      <li ><a href="#method-c-type_cast_config_to_integer">type_cast_config_to_integer</a></li>
+
+      <li ><a href="#method-c-validate_default_timezone">validate_default_timezone</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-active-3F">active?</a></li>
+
+      <li ><a href="#method-i-adapter_name">adapter_name</a></li>
+
+      <li ><a href="#method-i-check_all_foreign_keys_valid-21">check_all_foreign_keys_valid!</a></li>
+
+      <li ><a href="#method-i-clear_cache-21">clear_cache!</a></li>
+
+      <li ><a href="#method-i-close">close</a></li>
+
+      <li ><a href="#method-i-connect-21">connect!</a></li>
+
+      <li ><a href="#method-i-connected-3F">connected?</a></li>
+
+      <li ><a href="#method-i-connection_retries">connection_retries</a></li>
+
+      <li ><a href="#method-i-database_exists-3F">database_exists?</a></li>
+
+      <li ><a href="#method-i-default_timezone">default_timezone</a></li>
+
+      <li ><a href="#method-i-disable_extension">disable_extension</a></li>
+
+      <li ><a href="#method-i-disable_referential_integrity">disable_referential_integrity</a></li>
+
+      <li ><a href="#method-i-discard-21">discard!</a></li>
+
+      <li ><a href="#method-i-disconnect-21">disconnect!</a></li>
+
+      <li ><a href="#method-i-enable_extension">enable_extension</a></li>
+
+      <li ><a href="#method-i-extensions">extensions</a></li>
+
+      <li ><a href="#method-i-index_algorithms">index_algorithms</a></li>
+
+      <li ><a href="#method-i-lease">lease</a></li>
+
+      <li ><a href="#method-i-log">log</a></li>
+
+      <li ><a href="#method-i-max_jitter">max_jitter</a></li>
+
+      <li ><a href="#method-i-pool-3D">pool=</a></li>
+
+      <li ><a href="#method-i-pool_jitter">pool_jitter</a></li>
+
+      <li ><a href="#method-i-prefetch_primary_key-3F">prefetch_primary_key?</a></li>
+
+      <li ><a href="#method-i-prepared_statements">prepared_statements</a></li>
+
+      <li ><a href="#method-i-prepared_statements-3F">prepared_statements?</a></li>
+
+      <li ><a href="#method-i-preventing_writes-3F">preventing_writes?</a></li>
+
+      <li ><a href="#method-i-raw_connection">raw_connection</a></li>
+
+      <li ><a href="#method-i-reconnect-21">reconnect!</a></li>
+
+      <li ><a href="#method-i-replica-3F">replica?</a></li>
+
+      <li ><a href="#method-i-requires_reloading-3F">requires_reloading?</a></li>
+
+      <li ><a href="#method-i-reset-21">reset!</a></li>
+
+      <li ><a href="#method-i-retry_deadline">retry_deadline</a></li>
+
+      <li ><a href="#method-i-role">role</a></li>
+
+      <li ><a href="#method-i-savepoint_errors_invalidate_transactions-3F">savepoint_errors_invalidate_transactions?</a></li>
+
+      <li ><a href="#method-i-schema_cache">schema_cache</a></li>
+
+      <li ><a href="#method-i-schema_version">schema_version</a></li>
+
+      <li ><a href="#method-i-shard">shard</a></li>
+
+      <li ><a href="#method-i-supports_advisory_locks-3F">supports_advisory_locks?</a></li>
+
+      <li ><a href="#method-i-supports_bulk_alter-3F">supports_bulk_alter?</a></li>
+
+      <li ><a href="#method-i-supports_check_constraints-3F">supports_check_constraints?</a></li>
+
+      <li ><a href="#method-i-supports_comments-3F">supports_comments?</a></li>
+
+      <li ><a href="#method-i-supports_comments_in_create-3F">supports_comments_in_create?</a></li>
+
+      <li ><a href="#method-i-supports_common_table_expressions-3F">supports_common_table_expressions?</a></li>
+
+      <li ><a href="#method-i-supports_concurrent_connections-3F">supports_concurrent_connections?</a></li>
+
+      <li ><a href="#method-i-supports_datetime_with_precision-3F">supports_datetime_with_precision?</a></li>
+
+      <li ><a href="#method-i-supports_ddl_transactions-3F">supports_ddl_transactions?</a></li>
+
+      <li ><a href="#method-i-supports_deferrable_constraints-3F">supports_deferrable_constraints?</a></li>
+
+      <li ><a href="#method-i-supports_disabling_indexes-3F">supports_disabling_indexes?</a></li>
+
+      <li ><a href="#method-i-supports_exclusion_constraints-3F">supports_exclusion_constraints?</a></li>
+
+      <li ><a href="#method-i-supports_explain-3F">supports_explain?</a></li>
+
+      <li ><a href="#method-i-supports_expression_index-3F">supports_expression_index?</a></li>
+
+      <li ><a href="#method-i-supports_extensions-3F">supports_extensions?</a></li>
+
+      <li ><a href="#method-i-supports_foreign_keys-3F">supports_foreign_keys?</a></li>
+
+      <li ><a href="#method-i-supports_foreign_tables-3F">supports_foreign_tables?</a></li>
+
+      <li ><a href="#method-i-supports_index_include-3F">supports_index_include?</a></li>
+
+      <li ><a href="#method-i-supports_index_sort_order-3F">supports_index_sort_order?</a></li>
+
+      <li ><a href="#method-i-supports_indexes_in_create-3F">supports_indexes_in_create?</a></li>
+
+      <li ><a href="#method-i-supports_insert_conflict_target-3F">supports_insert_conflict_target?</a></li>
+
+      <li ><a href="#method-i-supports_insert_on_duplicate_skip-3F">supports_insert_on_duplicate_skip?</a></li>
+
+      <li ><a href="#method-i-supports_insert_on_duplicate_update-3F">supports_insert_on_duplicate_update?</a></li>
+
+      <li ><a href="#method-i-supports_insert_returning-3F">supports_insert_returning?</a></li>
+
+      <li ><a href="#method-i-supports_json-3F">supports_json?</a></li>
+
+      <li ><a href="#method-i-supports_lazy_transactions-3F">supports_lazy_transactions?</a></li>
+
+      <li ><a href="#method-i-supports_materialized_views-3F">supports_materialized_views?</a></li>
+
+      <li ><a href="#method-i-supports_nulls_not_distinct-3F">supports_nulls_not_distinct?</a></li>
+
+      <li ><a href="#method-i-supports_optimizer_hints-3F">supports_optimizer_hints?</a></li>
+
+      <li ><a href="#method-i-supports_partial_index-3F">supports_partial_index?</a></li>
+
+      <li ><a href="#method-i-supports_partitioned_indexes-3F">supports_partitioned_indexes?</a></li>
+
+      <li ><a href="#method-i-supports_restart_db_transaction-3F">supports_restart_db_transaction?</a></li>
+
+      <li ><a href="#method-i-supports_savepoints-3F">supports_savepoints?</a></li>
+
+      <li ><a href="#method-i-supports_transaction_isolation-3F">supports_transaction_isolation?</a></li>
+
+      <li ><a href="#method-i-supports_unique_constraints-3F">supports_unique_constraints?</a></li>
+
+      <li ><a href="#method-i-supports_validate_constraints-3F">supports_validate_constraints?</a></li>
+
+      <li ><a href="#method-i-supports_views-3F">supports_views?</a></li>
+
+      <li ><a href="#method-i-supports_virtual_columns-3F">supports_virtual_columns?</a></li>
+
+      <li ><a href="#method-i-throw_away-21">throw_away!</a></li>
+
+      <li ><a href="#method-i-unprepared_statement">unprepared_statement</a></li>
+
+      <li ><a href="#method-i-verify-21">verify!</a></li>
+
+      <li ><a href="#method-i-verify_timeout">verify_timeout</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-ActiveRecord::ConnectionAdapters::AbstractAdapter">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../ActiveRecord.html">ActiveRecord</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../ActiveRecord/ConnectionAdapters.html">ConnectionAdapters</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>AbstractAdapter</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-ActiveRecord::ConnectionAdapters::AbstractAdapter" class="anchor-link class">
+    class ActiveRecord::ConnectionAdapters::AbstractAdapter
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-ActiveRecord::ConnectionAdapters::AbstractAdapter-label-Active+Record+Abstract+Adapter"><a href="#class-ActiveRecord::ConnectionAdapters::AbstractAdapter-label-Active+Record+Abstract+Adapter">Active Record Abstract Adapter</a></h1>
+
+<p>Active Record supports multiple database systems. <a href="AbstractAdapter.html"><code>AbstractAdapter</code></a> and related classes form the abstraction layer which makes this possible. An <a href="AbstractAdapter.html"><code>AbstractAdapter</code></a> represents a connection to a database, and provides an abstract interface for database-specific functionality such as establishing a connection, escaping values, building the right SQL fragments for <code>:offset</code> and <code>:limit</code> options, etc.</p>
+
+<p>All the concrete database adapters follow the interface laid down in this class. <a href="../ConnectionHandling.html#method-i-lease_connection">ActiveRecord::Base.lease_connection</a> returns an <a href="AbstractAdapter.html"><code>AbstractAdapter</code></a> object, which you can use.</p>
+
+<p>Most of the methods in the adapter are useful during migrations. Most notably, the instance methods provided by <a href="SchemaStatements.html"><code>SchemaStatements</code></a> are very useful.</p>
+
+<h1 id="class-ActiveRecord::ConnectionAdapters::AbstractAdapter-label-Active+Record+Abstract+Adapter"><a href="#class-ActiveRecord::ConnectionAdapters::AbstractAdapter-label-Active+Record+Abstract+Adapter">Active Record Abstract Adapter</a></h1>
+
+<p>Active Record supports multiple database systems. <a href="AbstractAdapter.html"><code>AbstractAdapter</code></a> and related classes form the abstraction layer which makes this possible. An <a href="AbstractAdapter.html"><code>AbstractAdapter</code></a> represents a connection to a database, and provides an abstract interface for database-specific functionality such as establishing a connection, escaping values, building the right SQL fragments for <code>:offset</code> and <code>:limit</code> options, etc.</p>
+
+<p>All the concrete database adapters follow the interface laid down in this class. <a href="../ConnectionHandling.html#method-i-lease_connection">ActiveRecord::Base.lease_connection</a> returns an <a href="AbstractAdapter.html"><code>AbstractAdapter</code></a> object, which you can use.</p>
+
+<p>Most of the methods in the adapter are useful during migrations. Most notably, the instance methods provided by <a href="SchemaStatements.html"><code>SchemaStatements</code></a> are very useful.</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+
+        <dt id="ADAPTER_NAME">ADAPTER_NAME</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="COMMENT_REGEX">COMMENT_REGEX</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="EXTENDED_TYPE_MAPS">EXTENDED_TYPE_MAPS</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="SIMPLE_INT">SIMPLE_INT</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+        <dt id="TYPE_MAP">TYPE_MAP</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+      </dl>
+    </section>
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-i-in_use-3F" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-in_use-3F" title="Link to this attribute">
+            <span class="method-name">in_use?</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-lock" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-lock" title="Link to this attribute">
+            <span class="method-name">lock</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-logger" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-logger" title="Link to this attribute">
+            <span class="method-name">logger</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-owner" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-owner" title="Link to this attribute">
+            <span class="method-name">owner</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-pool" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-pool" title="Link to this attribute">
+            <span class="method-name">pool</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-visitor" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-visitor" title="Link to this attribute">
+            <span class="method-name">visitor</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-database_exists-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-database_exists-3F" title="Link to this method">
+                <span class="method-name">database_exists?</span>
+                <span class="method-args">(config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="database_exists-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 403</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">database_exists?</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>).<span class="ruby-identifier">database_exists?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Does the database for this adapter exist?</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-dbconsole" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-dbconsole" title="Link to this method">
+                <span class="method-name">dbconsole</span>
+                <span class="method-args">(config, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="dbconsole-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">dbconsole</span>(<span class="ruby-identifier">config</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{self.class} should define `dbconsole` that accepts a db config and options to implement connecting to the db console&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Opens a database console session.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-find_cmd_and_exec" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-find_cmd_and_exec" title="Link to this method">
+                <span class="method-name">find_cmd_and_exec</span>
+                <span class="method-args">(commands, *args)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="find_cmd_and_exec-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">find_cmd_and_exec</span>(<span class="ruby-identifier">commands</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-comment"># :doc:</span>
+  <span class="ruby-identifier">commands</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">commands</span>)
+
+  <span class="ruby-identifier">dirs_on_path</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;PATH&quot;</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">PATH_SEPARATOR</span>)
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">ext</span> = <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-string">&quot;EXEEXT&quot;</span>]).<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">commands</span> = <span class="ruby-identifier">commands</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cmd</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{cmd}#{ext}&quot;</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">full_path_command</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">found</span> = <span class="ruby-identifier">commands</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cmd</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">dirs_on_path</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">full_path_command</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">cmd</span>)
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">stat</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-identifier">full_path_command</span>)
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">SystemCallError</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">file?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">executable?</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">found</span>
+    <span class="ruby-identifier">exec</span> <span class="ruby-identifier">full_path_command</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">abort</span>(<span class="ruby-node">&quot;Couldn&#39;t find database client: #{commands.join(&#39;, &#39;)}. Check your $PATH and try again.&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-type_cast_config_to_boolean" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-type_cast_config_to_boolean" title="Link to this method">
+                <span class="method-name">type_cast_config_to_boolean</span>
+                <span class="method-args">(config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="type_cast_config_to_boolean-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">type_cast_config_to_boolean</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;false&quot;</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">config</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-type_cast_config_to_integer" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-type_cast_config_to_integer" title="Link to this method">
+                <span class="method-name">type_cast_config_to_integer</span>
+                <span class="method-args">(config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="type_cast_config_to_integer-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">type_cast_config_to_integer</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>)
+    <span class="ruby-identifier">config</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">SIMPLE_INT</span>.<span class="ruby-identifier">match?</span>(<span class="ruby-identifier">config</span>)
+    <span class="ruby-identifier">config</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">config</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-validate_default_timezone" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-validate_default_timezone" title="Link to this method">
+                <span class="method-name">validate_default_timezone</span>
+                <span class="method-args">(config)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="validate_default_timezone-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">validate_default_timezone</span>(<span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">config</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;utc&quot;</span>, <span class="ruby-string">&quot;local&quot;</span>
+    <span class="ruby-identifier">config</span>.<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;default_timezone must be either &#39;utc&#39; or &#39;local&#39;&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-active-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-active-3F" title="Link to this method">
+                <span class="method-name">active?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="active-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 705</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">active?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Checks whether the connection to the database is still active. This includes checking whether the database is actually capable of responding, i.e. whether the connection isn’t stale.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-adapter_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-adapter_name" title="Link to this method">
+                <span class="method-name">adapter_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="adapter_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 398</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">adapter_name</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">ADAPTER_NAME</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the human-readable name of the adapter. Use mixed case - one can always use downcase if needed.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-check_all_foreign_keys_valid-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-check_all_foreign_keys_valid-21" title="Link to this method">
+                <span class="method-name">check_all_foreign_keys_valid!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="check_all_foreign_keys_valid-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 690</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_all_foreign_keys_valid!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Override to check all foreign key constraints in a database. The adapter should raise a <a href="../StatementInvalid.html"><code>ActiveRecord::StatementInvalid</code></a> if foreign key constraints are not met.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-clear_cache-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-clear_cache-21" title="Link to this method">
+                <span class="method-name">clear_cache!</span>
+                <span class="method-args">(new_connection: false)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="clear_cache-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 792</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear_cache!</span>(<span class="ruby-value">new_connection:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@statements</span>
+    <span class="ruby-ivar">@lock</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_connection</span>
+        <span class="ruby-ivar">@statements</span>.<span class="ruby-identifier">reset</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@statements</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Clear any caching the database adapter may be doing.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-close" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-close" title="Link to this method">
+                <span class="method-name">close</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="close-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 892</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+  <span class="ruby-identifier">pool</span>.<span class="ruby-identifier">checkin</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Check the connection back in to the connection pool</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-connect-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-connect-21" title="Link to this method">
+                <span class="method-name">connect!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="connect-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 833</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connect!</span>
+  <span class="ruby-identifier">verify!</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-connected-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-connected-3F" title="Link to this method">
+                <span class="method-name">connected?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="connected-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 698</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connected?</span>
+  <span class="ruby-operator">!</span><span class="ruby-ivar">@raw_connection</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Checks whether the connection to the database was established. This doesn’t include checking whether the database is actually capable of responding, i.e. whether the connection is stale.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-connection_retries" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-connection_retries" title="Link to this method">
+                <span class="method-name">connection_retries</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="connection_retries-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connection_retries</span>
+  (<span class="ruby-ivar">@config</span>[<span class="ruby-value">:connection_retries</span>] <span class="ruby-operator">||</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-database_exists-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-database_exists-3F" title="Link to this method">
+                <span class="method-name">database_exists?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="database_exists-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 407</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database_exists?</span>
+  <span class="ruby-identifier">connect!</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">NoDatabaseError</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-default_timezone" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-default_timezone" title="Link to this method">
+                <span class="method-name">default_timezone</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="default_timezone-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default_timezone</span>
+  <span class="ruby-ivar">@default_timezone</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ActiveRecord</span>.<span class="ruby-identifier">default_timezone</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-disable_extension" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-disable_extension" title="Link to this method">
+                <span class="method-name">disable_extension</span>
+                <span class="method-args">(name, **)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="disable_extension-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 617</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disable_extension</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">**</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>This is meant to be implemented by the adapters that support extensions</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-disable_referential_integrity" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-disable_referential_integrity" title="Link to this method">
+                <span class="method-name">disable_referential_integrity</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="disable_referential_integrity-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 683</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disable_referential_integrity</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Override to turn off referential integrity while executing <code>&amp;block</code>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-discard-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-discard-21" title="Link to this method">
+                <span class="method-name">discard!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="discard-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 767</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">discard!</span>
+  <span class="ruby-comment"># This should be overridden by concrete adapters.</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Immediately forget this connection ever existed. Unlike disconnect!, this will not communicate with the server.</p>
+
+<p>After calling this method, the behavior of all other methods becomes undefined. This is called internally just before a forked process gets rid of a connection that belonged to its parent.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-disconnect-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-disconnect-21" title="Link to this method">
+                <span class="method-name">disconnect!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="disconnect-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 752</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">disconnect!</span>
+  <span class="ruby-ivar">@lock</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">clear_cache!</span>(<span class="ruby-value">new_connection:</span> <span class="ruby-keyword">true</span>)
+    <span class="ruby-identifier">reset_transaction</span>
+    <span class="ruby-ivar">@raw_connection_dirty</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-ivar">@connected_since</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Disconnects from the database if already connected. Otherwise, this method does nothing.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-enable_extension" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-enable_extension" title="Link to this method">
+                <span class="method-name">enable_extension</span>
+                <span class="method-args">(name, **)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="enable_extension-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 621</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enable_extension</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">**</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>This is meant to be implemented by the adapters that support extensions</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-extensions" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-extensions" title="Link to this method">
+                <span class="method-name">extensions</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="extensions-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 671</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extensions</span>
+  []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>A list of extensions, to be filled in by adapters that support them.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-index_algorithms" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-index_algorithms" title="Link to this method">
+                <span class="method-name">index_algorithms</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="index_algorithms-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 676</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index_algorithms</span>
+  {}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>A list of index algorithms, to be filled by adapters that support them.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-lease" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-lease" title="Link to this method">
+                <span class="method-name">lease</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="lease-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 289</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lease</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">in_use?</span>
+    <span class="ruby-identifier">msg</span> = <span class="ruby-string">+&quot;Cannot lease connection, &quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@owner</span> <span class="ruby-operator">==</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">IsolatedExecutionState</span>.<span class="ruby-identifier">context</span>
+      <span class="ruby-identifier">msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;it is already leased by the current thread.&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;it is already in use by a different thread: #{@owner}. &quot;</span> \
+             <span class="ruby-node">&quot;Current thread: #{ActiveSupport::IsolatedExecutionState.context}.&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecordError</span>, <span class="ruby-identifier">msg</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@owner</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">IsolatedExecutionState</span>.<span class="ruby-identifier">context</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>this method must only be called while holding connection pool’s mutex</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-max_jitter" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-max_jitter" title="Link to this method">
+                <span class="method-name">max_jitter</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="max_jitter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_jitter</span>
+  (<span class="ruby-ivar">@config</span>[<span class="ruby-value">:pool_jitter</span>] <span class="ruby-operator">||</span> <span class="ruby-value">0.2</span>).<span class="ruby-identifier">to_f</span>.<span class="ruby-identifier">clamp</span>(<span class="ruby-constant">MAX_JITTER</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pool-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pool-3D" title="Link to this method">
+                <span class="method-name">pool=</span>
+                <span class="method-args">(value)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pool-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pool=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-ivar">@pool</span>)
+  <span class="ruby-ivar">@schema_cache</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@pool</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pool_jitter" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pool_jitter" title="Link to this method">
+                <span class="method-name">pool_jitter</span>
+                <span class="method-args">(duration)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pool_jitter-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 324</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pool_jitter</span>(<span class="ruby-identifier">duration</span>)
+  <span class="ruby-identifier">duration</span> <span class="ruby-operator">*</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@pool_jitter</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-prefetch_primary_key-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-prefetch_primary_key-3F" title="Link to this method">
+                <span class="method-name">prefetch_primary_key?</span>
+                <span class="method-args">(table_name = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="prefetch_primary_key-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 447</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prefetch_primary_key?</span>(<span class="ruby-identifier">table_name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Should primary key values be selected from their corresponding sequence before the insert statement? If true, next_sequence_value is called before each insert to set the record’s primary key.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-prepared_statements" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-prepared_statements" title="Link to this method">
+                <span class="method-name">prepared_statements</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="AbstractAdapter.html#method-i-prepared_statements-3F">prepared_statements?</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-prepared_statements-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-prepared_statements-3F" title="Link to this method">
+                <span class="method-name">prepared_statements?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="prepared_statements-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prepared_statements?</span>
+  <span class="ruby-ivar">@prepared_statements</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">prepared_statements_disabled_cache</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">object_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="AbstractAdapter.html#method-i-prepared_statements">prepared_statements</a>, prepared_statements
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-preventing_writes-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-preventing_writes-3F" title="Link to this method">
+                <span class="method-name">preventing_writes?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="preventing_writes-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 245</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">preventing_writes?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">replica?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">connection_descriptor</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">connection_descriptor</span>.<span class="ruby-identifier">current_preventing_writes</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Determines whether writes are currently being prevented.</p>
+
+<p>Returns true if the connection is a replica or returns the value of <code>current_preventing_writes</code>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-raw_connection" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-raw_connection" title="Link to this method">
+                <span class="method-name">raw_connection</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="raw_connection-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/activerecord-8.1.1/lib/active_record/connection_adapters/abstract_adapter.rb, line 860</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">raw_connection</span>
+  <span class="ruby-identifier">with_raw_connection</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">conn</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">disable_lazy_transactions!</span>
+    <span class="ruby-ivar">@raw_connection_dirty</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">conn</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          

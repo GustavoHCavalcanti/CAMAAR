@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class ActionDispatch::ExceptionWrapper - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,ActionDispatch::ExceptionWrapper">
+
+
+    <meta name="description" content="Documentation for the ActionDispatch::ExceptionWrapper class">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../Object.html">Object</a><ul><li><a href="../BasicObject.html">BasicObject</a></li></ul></li></ul>
+</div>
+
+
+  
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-new">new</a></li>
+
+      <li ><a href="#method-c-status_code_for_exception">status_code_for_exception</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-actions">actions</a></li>
+
+      <li ><a href="#method-i-annotated_source_code">annotated_source_code</a></li>
+
+      <li ><a href="#method-i-application_trace">application_trace</a></li>
+
+      <li ><a href="#method-i-corrections">corrections</a></li>
+
+      <li ><a href="#method-i-exception_id">exception_id</a></li>
+
+      <li ><a href="#method-i-exception_inspect">exception_inspect</a></li>
+
+      <li ><a href="#method-i-exception_name">exception_name</a></li>
+
+      <li ><a href="#method-i-exception_trace">exception_trace</a></li>
+
+      <li ><a href="#method-i-failures">failures</a></li>
+
+      <li ><a href="#method-i-file_name">file_name</a></li>
+
+      <li ><a href="#method-i-framework_trace">framework_trace</a></li>
+
+      <li ><a href="#method-i-full_trace">full_trace</a></li>
+
+      <li ><a href="#method-i-has_cause-3F">has_cause?</a></li>
+
+      <li ><a href="#method-i-has_corrections-3F">has_corrections?</a></li>
+
+      <li ><a href="#method-i-line_number">line_number</a></li>
+
+      <li ><a href="#method-i-message">message</a></li>
+
+      <li ><a href="#method-i-original_message">original_message</a></li>
+
+      <li ><a href="#method-i-rescue_response-3F">rescue_response?</a></li>
+
+      <li ><a href="#method-i-rescue_template">rescue_template</a></li>
+
+      <li ><a href="#method-i-routing_error-3F">routing_error?</a></li>
+
+      <li ><a href="#method-i-show-3F">show?</a></li>
+
+      <li ><a href="#method-i-source_extracts">source_extracts</a></li>
+
+      <li ><a href="#method-i-source_to_show_id">source_to_show_id</a></li>
+
+      <li ><a href="#method-i-status_code">status_code</a></li>
+
+      <li ><a href="#method-i-sub_template_message">sub_template_message</a></li>
+
+      <li ><a href="#method-i-template_error-3F">template_error?</a></li>
+
+      <li ><a href="#method-i-trace_to_show">trace_to_show</a></li>
+
+      <li ><a href="#method-i-traces">traces</a></li>
+
+      <li ><a href="#method-i-unwrapped_exception">unwrapped_exception</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-ActionDispatch::ExceptionWrapper">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../ActionDispatch.html">ActionDispatch</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>ExceptionWrapper</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-ActionDispatch::ExceptionWrapper" class="anchor-link class">
+    class ActionDispatch::ExceptionWrapper
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-i-backtrace_cleaner" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-backtrace_cleaner" title="Link to this attribute">
+            <span class="method-name">backtrace_cleaner</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-exception" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-exception" title="Link to this attribute">
+            <span class="method-name">exception</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-exception_class_name" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-exception_class_name" title="Link to this attribute">
+            <span class="method-name">exception_class_name</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-wrapped_causes" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-wrapped_causes" title="Link to this attribute">
+            <span class="method-name">wrapped_causes</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-new" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-new" title="Link to this method">
+                <span class="method-name">new</span>
+                <span class="method-args">(backtrace_cleaner, exception)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">backtrace_cleaner</span>, <span class="ruby-identifier">exception</span>)
+  <span class="ruby-ivar">@backtrace_cleaner</span> = <span class="ruby-identifier">backtrace_cleaner</span>
+  <span class="ruby-ivar">@exception_class_name</span> = <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-ivar">@wrapped_causes</span> = <span class="ruby-identifier">wrapped_causes_for</span>(<span class="ruby-identifier">exception</span>, <span class="ruby-identifier">backtrace_cleaner</span>)
+  <span class="ruby-ivar">@exception</span> = <span class="ruby-identifier">exception</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">SyntaxError</span>)
+    <span class="ruby-ivar">@exception</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">SyntaxErrorProxy</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">exception</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@backtrace</span> = <span class="ruby-identifier">build_backtrace</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-status_code_for_exception" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-status_code_for_exception" title="Link to this method">
+                <span class="method-name">status_code_for_exception</span>
+                <span class="method-args">(class_name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="status_code_for_exception-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">status_code_for_exception</span>(<span class="ruby-identifier">class_name</span>)
+  <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span>.<span class="ruby-identifier">rack_status_code</span>(<span class="ruby-identifier">@@rescue_responses</span>[<span class="ruby-identifier">class_name</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-actions" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-actions" title="Link to this method">
+                <span class="method-name">actions</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="actions-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">actions</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ActionableError</span>.<span class="ruby-identifier">actions</span>(<span class="ruby-ivar">@exception</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-annotated_source_code" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-annotated_source_code" title="Link to this method">
+                <span class="method-name">annotated_source_code</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="annotated_source_code-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">annotated_source_code</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:annotated_source_code</span>)
+    <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">annotated_source_code</span>
+  <span class="ruby-keyword">else</span>
+    []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-application_trace" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-application_trace" title="Link to this method">
+                <span class="method-name">application_trace</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="application_trace-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">application_trace</span>
+  <span class="ruby-identifier">clean_backtrace</span>(<span class="ruby-value">:silent</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-corrections" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-corrections" title="Link to this method">
+                <span class="method-name">corrections</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="corrections-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">corrections</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">corrections</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-exception_id" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-exception_id" title="Link to this method">
+                <span class="method-name">exception_id</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="exception_id-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 234</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exception_id</span>
+  <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">object_id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-exception_inspect" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-exception_inspect" title="Link to this method">
+                <span class="method-name">exception_inspect</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="exception_inspect-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 230</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exception_inspect</span>
+  <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">inspect</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-exception_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-exception_name" title="Link to this method">
+                <span class="method-name">exception_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="exception_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exception_name</span>
+  <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">cause</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-exception_trace" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-exception_trace" title="Link to this method">
+                <span class="method-name">exception_trace</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="exception_trace-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exception_trace</span>
+  <span class="ruby-identifier">trace</span> = <span class="ruby-identifier">application_trace</span>
+  <span class="ruby-identifier">trace</span> = <span class="ruby-identifier">framework_trace</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">trace</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">silent_exceptions</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@exception_class_name</span>)
+  <span class="ruby-identifier">trace</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-failures" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-failures" title="Link to this method">
+                <span class="method-name">failures</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="failures-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">failures</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">failures</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-file_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-file_name" title="Link to this method">
+                <span class="method-name">file_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="file_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">file_name</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">file_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-framework_trace" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-framework_trace" title="Link to this method">
+                <span class="method-name">framework_trace</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="framework_trace-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">framework_trace</span>
+  <span class="ruby-identifier">clean_backtrace</span>(<span class="ruby-value">:noise</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-full_trace" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-full_trace" title="Link to this method">
+                <span class="method-name">full_trace</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="full_trace-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">full_trace</span>
+  <span class="ruby-identifier">clean_backtrace</span>(<span class="ruby-value">:all</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-has_cause-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-has_cause-3F" title="Link to this method">
+                <span class="method-name">has_cause?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="has_cause-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_cause?</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">cause</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-has_corrections-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-has_corrections-3F" title="Link to this method">
+                <span class="method-name">has_corrections?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="has_corrections-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_corrections?</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:original_message</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:corrections</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-line_number" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-line_number" title="Link to this method">
+                <span class="method-name">line_number</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="line_number-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">line_number</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">line_number</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-message" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-message" title="Link to this method">
+                <span class="method-name">message</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="message-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message</span>
+  <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-original_message" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-original_message" title="Link to this method">
+                <span class="method-name">original_message</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="original_message-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">original_message</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">original_message</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rescue_response-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rescue_response-3F" title="Link to this method">
+                <span class="method-name">rescue_response?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rescue_response-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rescue_response?</span>
+  <span class="ruby-identifier">@@rescue_responses</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">exception</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rescue_template" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rescue_template" title="Link to this method">
+                <span class="method-name">rescue_template</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rescue_template-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rescue_template</span>
+  <span class="ruby-identifier">@@rescue_templates</span>[<span class="ruby-ivar">@exception_class_name</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-routing_error-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-routing_error-3F" title="Link to this method">
+                <span class="method-name">routing_error?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="routing_error-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">routing_error?</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">RoutingError</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-show-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-show-3F" title="Link to this method">
+                <span class="method-name">show?</span>
+                <span class="method-args">(request)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="show-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show?</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-comment"># We&#39;re treating `nil` as &quot;unset&quot;, and we want the default setting to be `:all`.</span>
+  <span class="ruby-comment"># This logic should be extracted to `env_config` and calculated once.</span>
+  <span class="ruby-identifier">config</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">get_header</span>(<span class="ruby-string">&quot;action_dispatch.show_exceptions&quot;</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">config</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:none</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:rescuable</span>
+    <span class="ruby-identifier">rescue_response?</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-source_extracts" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-source_extracts" title="Link to this method">
+                <span class="method-name">source_extracts</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="source_extracts-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source_extracts</span>
+  <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">trace</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">extract_source</span>(<span class="ruby-identifier">trace</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-value">trace:</span> <span class="ruby-identifier">trace</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-source_to_show_id" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-source_to_show_id" title="Link to this method">
+                <span class="method-name">source_to_show_id</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="source_to_show_id-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source_to_show_id</span>
+  (<span class="ruby-identifier">traces</span>[<span class="ruby-identifier">trace_to_show</span>].<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> {})[<span class="ruby-value">:id</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-status_code" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-status_code" title="Link to this method">
+                <span class="method-name">status_code</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="status_code-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">status_code</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">status_code_for_exception</span>(<span class="ruby-identifier">unwrapped_exception</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-sub_template_message" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-sub_template_message" title="Link to this method">
+                <span class="method-name">sub_template_message</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="sub_template_message-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sub_template_message</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">sub_template_message</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-template_error-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-template_error-3F" title="Link to this method">
+                <span class="method-name">template_error?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="template_error-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">template_error?</span>
+  <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Template</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-trace_to_show" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-trace_to_show" title="Link to this method">
+                <span class="method-name">trace_to_show</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="trace_to_show-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 210</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">trace_to_show</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">traces</span>[<span class="ruby-string">&quot;Application Trace&quot;</span>].<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">rescue_template</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;routing_error&quot;</span>
+    <span class="ruby-string">&quot;Full Trace&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&quot;Application Trace&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-traces" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-traces" title="Link to this method">
+                <span class="method-name">traces</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="traces-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">traces</span>
+  <span class="ruby-identifier">application_trace_with_ids</span> = []
+  <span class="ruby-identifier">framework_trace_with_ids</span> = []
+  <span class="ruby-identifier">full_trace_with_ids</span> = []
+  <span class="ruby-identifier">application_traces</span> = <span class="ruby-identifier">application_trace</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>)
+
+  <span class="ruby-identifier">full_trace</span> = <span class="ruby-identifier">backtrace_cleaner</span>&amp;.<span class="ruby-identifier">clean_locations</span>(<span class="ruby-identifier">backtrace</span>, <span class="ruby-value">:all</span>).<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">backtrace</span>
+  <span class="ruby-identifier">full_trace</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">trace</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">filtered_trace</span> = <span class="ruby-identifier">backtrace_cleaner</span>&amp;.<span class="ruby-identifier">clean_frame</span>(<span class="ruby-identifier">trace</span>, <span class="ruby-value">:all</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">trace</span>
+
+    <span class="ruby-identifier">trace_with_id</span> = {
+      <span class="ruby-value">exception_object_id:</span> <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">object_id</span>,
+      <span class="ruby-value">id:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">trace:</span> <span class="ruby-identifier">trace</span>,
+      <span class="ruby-value">filtered_trace:</span> <span class="ruby-identifier">filtered_trace</span>,
+    }
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">application_traces</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filtered_trace</span>.<span class="ruby-identifier">to_s</span>)
+      <span class="ruby-identifier">application_trace_with_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">trace_with_id</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">framework_trace_with_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">trace_with_id</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">full_trace_with_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">trace_with_id</span>
+  <span class="ruby-keyword">end</span>
+
+  {
+    <span class="ruby-string">&quot;Application Trace&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">application_trace_with_ids</span>,
+    <span class="ruby-string">&quot;Framework Trace&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">framework_trace_with_ids</span>,
+    <span class="ruby-string">&quot;Full Trace&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">full_trace_with_ids</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-unwrapped_exception" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-unwrapped_exception" title="Link to this method">
+                <span class="method-name">unwrapped_exception</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="unwrapped_exception-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionpack-8.1.1/lib/action_dispatch/middleware/exception_wrapper.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unwrapped_exception</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">wrapper_exceptions</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@exception_class_name</span>)
+    <span class="ruby-ivar">@exception</span>.<span class="ruby-identifier">cause</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@exception</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

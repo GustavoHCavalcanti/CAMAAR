@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class Rails::AppBuilder - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,Rails::AppBuilder">
+
+
+    <meta name="description" content="class Rails::AppBuilder: The application builder allows you to override elements of the application generator without being forced to reverse the operations of the default gen">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../Object.html">Object</a><ul><li><a href="../BasicObject.html">BasicObject</a></li></ul></li></ul>
+</div>
+
+
+  
+
+  
+
+  
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-app">app</a></li>
+
+      <li ><a href="#method-i-bin">bin</a></li>
+
+      <li ><a href="#method-i-bin_when_updating">bin_when_updating</a></li>
+
+      <li ><a href="#method-i-cifiles">cifiles</a></li>
+
+      <li ><a href="#method-i-config">config</a></li>
+
+      <li ><a href="#method-i-config_target_version">config_target_version</a></li>
+
+      <li ><a href="#method-i-config_when_updating">config_when_updating</a></li>
+
+      <li ><a href="#method-i-configru">configru</a></li>
+
+      <li ><a href="#method-i-credentials">credentials</a></li>
+
+      <li ><a href="#method-i-credentials_diff_enroll">credentials_diff_enroll</a></li>
+
+      <li ><a href="#method-i-database_yml">database_yml</a></li>
+
+      <li ><a href="#method-i-db">db</a></li>
+
+      <li ><a href="#method-i-devcontainer">devcontainer</a></li>
+
+      <li ><a href="#method-i-dockerfiles">dockerfiles</a></li>
+
+      <li ><a href="#method-i-gemfile">gemfile</a></li>
+
+      <li ><a href="#method-i-gitattributes">gitattributes</a></li>
+
+      <li ><a href="#method-i-gitignore">gitignore</a></li>
+
+      <li ><a href="#method-i-lib">lib</a></li>
+
+      <li ><a href="#method-i-log">log</a></li>
+
+      <li ><a href="#method-i-master_key">master_key</a></li>
+
+      <li ><a href="#method-i-node_version">node_version</a></li>
+
+      <li ><a href="#method-i-public_directory">public_directory</a></li>
+
+      <li ><a href="#method-i-rakefile">rakefile</a></li>
+
+      <li ><a href="#method-i-readme">readme</a></li>
+
+      <li ><a href="#method-i-rubocop">rubocop</a></li>
+
+      <li ><a href="#method-i-ruby_version">ruby_version</a></li>
+
+      <li ><a href="#method-i-script">script</a></li>
+
+      <li ><a href="#method-i-storage">storage</a></li>
+
+      <li ><a href="#method-i-system_test">system_test</a></li>
+
+      <li ><a href="#method-i-test">test</a></li>
+
+      <li ><a href="#method-i-tmp">tmp</a></li>
+
+      <li ><a href="#method-i-vendor">vendor</a></li>
+
+      <li ><a href="#method-i-version_control">version_control</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-Rails::AppBuilder">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../Rails.html">Rails</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>AppBuilder</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-Rails::AppBuilder" class="anchor-link class">
+    class Rails::AppBuilder
+  </h1>
+
+  <section class="description">
+    
+<p>The application builder allows you to override elements of the application generator without being forced to reverse the operations of the default generator.</p>
+
+<p>This allows you to override entire operations, like the creation of the <a href="../Gemfile.html">Gemfile</a>, <a href="../README_md.html">README</a>, or JavaScript files, without needing to know exactly what those operations do so you can create another template action.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">CustomAppBuilder</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">AppBuilder</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test</span>
+    <span class="ruby-ivar">@generator</span>.<span class="ruby-identifier">gem</span> <span class="ruby-string">&quot;rspec-rails&quot;</span>, <span class="ruby-value">group:</span> [<span class="ruby-value">:development</span>, <span class="ruby-value">:test</span>]
+    <span class="ruby-identifier">run</span> <span class="ruby-string">&quot;bundle install&quot;</span>
+    <span class="ruby-identifier">generate</span> <span class="ruby-string">&quot;rspec:install&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-app" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-app" title="Link to this method">
+                <span class="method-name">app</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="app-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">app</span>
+  <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;app&quot;</span>
+
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;app/assets/images&quot;</span>
+
+  <span class="ruby-identifier">keep_file</span>  <span class="ruby-string">&quot;app/controllers/concerns&quot;</span>
+  <span class="ruby-identifier">keep_file</span>  <span class="ruby-string">&quot;app/models/concerns&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-bin" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-bin" title="Link to this method">
+                <span class="method-name">bin</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="bin-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bin</span>
+  <span class="ruby-identifier">exclude_pattern</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>([(<span class="ruby-regexp">/thrust/</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_thruster?</span>), (<span class="ruby-regexp">/rubocop/</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_rubocop?</span>), (<span class="ruby-regexp">/brakeman/</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_brakeman?</span>), (<span class="ruby-regexp">/bundler-audit/</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_bundler_audit?</span>)].<span class="ruby-identifier">compact</span>)
+  <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;bin&quot;</span>, { <span class="ruby-value">exclude_pattern:</span> <span class="ruby-identifier">exclude_pattern</span> } <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">content</span><span class="ruby-operator">|</span>
+    <span class="ruby-node">&quot;#{shebang}\n&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">content</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">chmod</span> <span class="ruby-string">&quot;bin&quot;</span>, <span class="ruby-value">0755</span> <span class="ruby-operator">&amp;</span> <span class="ruby-operator">~</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">umask</span>, <span class="ruby-value">verbose:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-bin_when_updating" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-bin_when_updating" title="Link to this method">
+                <span class="method-name">bin_when_updating</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="bin_when_updating-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bin_when_updating</span>
+  <span class="ruby-identifier">bin</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-cifiles" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-cifiles" title="Link to this method">
+                <span class="method-name">cifiles</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="cifiles-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cifiles</span>
+  <span class="ruby-identifier">empty_directory</span> <span class="ruby-string">&quot;.github/workflows&quot;</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;github/ci.yml&quot;</span>, <span class="ruby-string">&quot;.github/workflows/ci.yml&quot;</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;github/dependabot.yml&quot;</span>, <span class="ruby-string">&quot;.github/dependabot.yml&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-config" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-config" title="Link to this method">
+                <span class="method-name">config</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="config-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config</span>
+  <span class="ruby-identifier">empty_directory</span> <span class="ruby-string">&quot;config&quot;</span>
+
+  <span class="ruby-identifier">inside</span> <span class="ruby-string">&quot;config&quot;</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;routes.rb&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:update</span>]
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;application.rb&quot;</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;environment.rb&quot;</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;bundler-audit.yml&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">skip_bundler_audit?</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;cable.yml&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:update</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">skip_action_cable?</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;ci.rb&quot;</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;puma.rb&quot;</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;storage.yml&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:update</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">skip_active_storage?</span>
+
+    <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;environments&quot;</span>
+    <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;initializers&quot;</span>
+    <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;locales&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:update</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-config_target_version" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-config_target_version" title="Link to this method">
+                <span class="method-name">config_target_version</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="config_target_version-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 272</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config_target_version</span>
+  <span class="ruby-ivar">@config_target_version</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span><span class="ruby-operator">::</span><span class="ruby-constant">STRING</span>.<span class="ruby-identifier">to_f</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-config_when_updating" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-config_when_updating" title="Link to this method">
+                <span class="method-name">config_when_updating</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="config_when_updating-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config_when_updating</span>
+  <span class="ruby-identifier">action_cable_config_exist</span>       = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;config/cable.yml&quot;</span>)
+  <span class="ruby-identifier">active_storage_config_exist</span>     = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;config/storage.yml&quot;</span>)
+  <span class="ruby-identifier">ci_config_exist</span>                 = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;config/ci.rb&quot;</span>)
+  <span class="ruby-identifier">bundle_audit_config_exist</span>       = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;config/bundler-audit.yml&quot;</span>)
+  <span class="ruby-identifier">rack_cors_config_exist</span>          = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;config/initializers/cors.rb&quot;</span>)
+  <span class="ruby-identifier">assets_config_exist</span>             = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;config/initializers/assets.rb&quot;</span>)
+  <span class="ruby-identifier">asset_app_stylesheet_exist</span>      = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;app/assets/stylesheets/application.css&quot;</span>)
+  <span class="ruby-identifier">csp_config_exist</span>                = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&quot;config/initializers/content_security_policy.rb&quot;</span>)
+
+  <span class="ruby-ivar">@config_target_version</span> = <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">loaded_config_version</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;5.0&quot;</span>
+
+  <span class="ruby-identifier">config</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">skip_action_cable?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">action_cable_config_exist</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;config/cable.yml&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">skip_active_storage?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">active_storage_config_exist</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;config/storage.yml&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">ci_config_exist</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;config/ci.rb&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_asset_pipeline?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">assets_config_exist</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;config/initializers/assets.rb&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_asset_pipeline?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">asset_app_stylesheet_exist</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;app/assets/stylesheets/application.css&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">rack_cors_config_exist</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;config/initializers/cors.rb&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">skip_bundler_audit?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">bundle_audit_config_exist</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;config/bundler-audit.yml&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:api</span>]
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">csp_config_exist</span>
+      <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;config/initializers/content_security_policy.rb&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-configru" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-configru" title="Link to this method">
+                <span class="method-name">configru</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="configru-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">configru</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;config.ru&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-credentials" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-credentials" title="Link to this method">
+                <span class="method-name">credentials</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="credentials-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">credentials</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:pretend</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:dummy_app</span>]
+
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;rails/generators/rails/credentials/credentials_generator&quot;</span>
+  <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Generators</span><span class="ruby-operator">::</span><span class="ruby-constant">CredentialsGenerator</span>.<span class="ruby-identifier">new</span>([], <span class="ruby-value">quiet:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">add_credentials_file</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-credentials_diff_enroll" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-credentials_diff_enroll" title="Link to this method">
+                <span class="method-name">credentials_diff_enroll</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="credentials_diff_enroll-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 206</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">credentials_diff_enroll</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_decrypted_diffs</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:dummy_app</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:pretend</span>]
+
+  <span class="ruby-ivar">@generator</span>.<span class="ruby-identifier">shell</span>.<span class="ruby-identifier">mute</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">rails_command</span> <span class="ruby-string">&quot;credentials:diff --enroll&quot;</span>, <span class="ruby-value">inline:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">shell:</span> <span class="ruby-ivar">@generator</span>.<span class="ruby-identifier">shell</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-database_yml" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-database_yml" title="Link to this method">
+                <span class="method-name">database_yml</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="database_yml-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database_yml</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-identifier">database</span>.<span class="ruby-identifier">template</span>, <span class="ruby-string">&quot;config/database.yml&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-db" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-db" title="Link to this method">
+                <span class="method-name">db</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="db-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db</span>
+  <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;db&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-devcontainer" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-devcontainer" title="Link to this method">
+                <span class="method-name">devcontainer</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="devcontainer-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 276</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">devcontainer</span>
+  <span class="ruby-identifier">devcontainer_options</span> = {
+    <span class="ruby-value">database:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:database</span>],
+    <span class="ruby-value">redis:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_solid</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_action_cable</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_active_job</span>]),
+    <span class="ruby-value">kamal:</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_kamal</span>],
+    <span class="ruby-value">system_test:</span> <span class="ruby-identifier">depends_on_system_test?</span>,
+    <span class="ruby-value">active_storage:</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_active_storage</span>],
+    <span class="ruby-value">dev:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:dev</span>],
+    <span class="ruby-value">node:</span> <span class="ruby-identifier">using_node?</span>,
+    <span class="ruby-value">app_name:</span> <span class="ruby-identifier">app_name</span>,
+    <span class="ruby-value">skip_solid:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_solid</span>],
+    <span class="ruby-value">pretend:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:pretend</span>]
+  }
+  <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Generators</span><span class="ruby-operator">::</span><span class="ruby-constant">DevcontainerGenerator</span>.<span class="ruby-identifier">new</span>([], <span class="ruby-identifier">devcontainer_options</span>).<span class="ruby-identifier">invoke_all</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-dockerfiles" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-dockerfiles" title="Link to this method">
+                <span class="method-name">dockerfiles</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="dockerfiles-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dockerfiles</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;Dockerfile&quot;</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;dockerignore&quot;</span>, <span class="ruby-string">&quot;.dockerignore&quot;</span>
+
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;docker-entrypoint&quot;</span>, <span class="ruby-string">&quot;bin/docker-entrypoint&quot;</span>
+  <span class="ruby-identifier">chmod</span> <span class="ruby-string">&quot;bin/docker-entrypoint&quot;</span>, <span class="ruby-value">0755</span> <span class="ruby-operator">&amp;</span> <span class="ruby-operator">~</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">umask</span>, <span class="ruby-value">verbose:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-gemfile" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-gemfile" title="Link to this method">
+                <span class="method-name">gemfile</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="gemfile-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gemfile</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;Gemfile&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-gitattributes" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-gitattributes" title="Link to this method">
+                <span class="method-name">gitattributes</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="gitattributes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gitattributes</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;gitattributes&quot;</span>, <span class="ruby-string">&quot;.gitattributes&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-gitignore" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-gitignore" title="Link to this method">
+                <span class="method-name">gitignore</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="gitignore-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gitignore</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;gitignore&quot;</span>, <span class="ruby-string">&quot;.gitignore&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-lib" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-lib" title="Link to this method">
+                <span class="method-name">lib</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="lib-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lib</span>
+  <span class="ruby-identifier">empty_directory</span> <span class="ruby-string">&quot;lib&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;lib/tasks&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-log" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-log" title="Link to this method">
+                <span class="method-name">log</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="log-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;log&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-master_key" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-master_key" title="Link to this method">
+                <span class="method-name">master_key</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="master_key-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">master_key</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:pretend</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:dummy_app</span>]
+
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;rails/generators/rails/master_key/master_key_generator&quot;</span>
+  <span class="ruby-identifier">master_key_generator</span> = <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Generators</span><span class="ruby-operator">::</span><span class="ruby-constant">MasterKeyGenerator</span>.<span class="ruby-identifier">new</span>([], <span class="ruby-value">quiet:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>], <span class="ruby-value">force:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:force</span>])
+  <span class="ruby-identifier">master_key_generator</span>.<span class="ruby-identifier">add_master_key_file_silently</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-node_version" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-node_version" title="Link to this method">
+                <span class="method-name">node_version</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="node_version-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">node_version</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;node-version&quot;</span>, <span class="ruby-string">&quot;.node-version&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-public_directory" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-public_directory" title="Link to this method">
+                <span class="method-name">public_directory</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="public_directory-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">public_directory</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:update</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:api</span>]
+
+  <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;public&quot;</span>, <span class="ruby-string">&quot;public&quot;</span>, <span class="ruby-value">recursive:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rakefile" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rakefile" title="Link to this method">
+                <span class="method-name">rakefile</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rakefile-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rakefile</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;Rakefile&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-readme" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-readme" title="Link to this method">
+                <span class="method-name">readme</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="readme-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">readme</span>
+  <span class="ruby-identifier">copy_file</span> <span class="ruby-string">&quot;README.md&quot;</span>, <span class="ruby-string">&quot;README.md&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rubocop" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rubocop" title="Link to this method">
+                <span class="method-name">rubocop</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rubocop-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rubocop</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;rubocop.yml&quot;</span>, <span class="ruby-string">&quot;.rubocop.yml&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-ruby_version" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-ruby_version" title="Link to this method">
+                <span class="method-name">ruby_version</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="ruby_version-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ruby_version</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;ruby-version&quot;</span>, <span class="ruby-string">&quot;.ruby-version&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-script" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-script" title="Link to this method">
+                <span class="method-name">script</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="script-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">script</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;script&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-storage" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-storage" title="Link to this method">
+                <span class="method-name">storage</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="storage-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">storage</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;storage&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;tmp/storage&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-system_test" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-system_test" title="Link to this method">
+                <span class="method-name">system_test</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="system_test-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 257</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">system_test</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;test/system&quot;</span>
+
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;test/application_system_test_case.rb&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-test" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-test" title="Link to this method">
+                <span class="method-name">test</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="test-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">test</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;test/fixtures/files&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;test/controllers&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;test/mailers&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;test/models&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;test/helpers&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;test/integration&quot;</span>
+
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;test/test_helper.rb&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-tmp" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-tmp" title="Link to this method">
+                <span class="method-name">tmp</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="tmp-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 263</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tmp</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;tmp&quot;</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;tmp/pids&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-vendor" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-vendor" title="Link to this method">
+                <span class="method-name">vendor</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="vendor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 268</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">vendor</span>
+  <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&quot;vendor&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-version_control" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-version_control" title="Link to this method">
+                <span class="method-name">version_control</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="version_control-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/railties-8.1.1/lib/rails/generators/rails/app/app_generator.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version_control</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_git</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:pretend</span>]
+    <span class="ruby-identifier">run</span> <span class="ruby-identifier">git_init_command</span>, <span class="ruby-value">capture:</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:quiet</span>], <span class="ruby-value">abort_on_failure:</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

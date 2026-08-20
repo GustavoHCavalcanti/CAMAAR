@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class Kamal::Configuration::Builder - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,Kamal::Configuration::Builder">
+
+
+    <meta name="description" content="Documentation for the Kamal::Configuration::Builder class">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../../Object.html">Object</a><ul><li><a href="../../BasicObject.html">BasicObject</a></li></ul></li></ul>
+</div>
+
+
+  
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="include" href="Validation.html">Kamal::Configuration::Validation</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-new">new</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-arches">arches</a></li>
+
+      <li ><a href="#method-i-args">args</a></li>
+
+      <li ><a href="#method-i-build_directory">build_directory</a></li>
+
+      <li ><a href="#method-i-cache_from">cache_from</a></li>
+
+      <li ><a href="#method-i-cache_to">cache_to</a></li>
+
+      <li ><a href="#method-i-cached-3F">cached?</a></li>
+
+      <li ><a href="#method-i-clone_directory">clone_directory</a></li>
+
+      <li ><a href="#method-i-cloud-3F">cloud?</a></li>
+
+      <li ><a href="#method-i-context">context</a></li>
+
+      <li ><a href="#method-i-docker_driver-3F">docker_driver?</a></li>
+
+      <li ><a href="#method-i-dockerfile">dockerfile</a></li>
+
+      <li ><a href="#method-i-driver">driver</a></li>
+
+      <li ><a href="#method-i-git_clone-3F">git_clone?</a></li>
+
+      <li ><a href="#method-i-local-3F">local?</a></li>
+
+      <li ><a href="#method-i-local_arches">local_arches</a></li>
+
+      <li ><a href="#method-i-local_disabled-3F">local_disabled?</a></li>
+
+      <li ><a href="#method-i-pack-3F">pack?</a></li>
+
+      <li ><a href="#method-i-pack_builder">pack_builder</a></li>
+
+      <li ><a href="#method-i-pack_buildpacks">pack_buildpacks</a></li>
+
+      <li ><a href="#method-i-provenance">provenance</a></li>
+
+      <li ><a href="#method-i-remote">remote</a></li>
+
+      <li ><a href="#method-i-remote-3F">remote?</a></li>
+
+      <li ><a href="#method-i-remote_arches">remote_arches</a></li>
+
+      <li ><a href="#method-i-sbom">sbom</a></li>
+
+      <li ><a href="#method-i-secrets">secrets</a></li>
+
+      <li ><a href="#method-i-ssh">ssh</a></li>
+
+      <li ><a href="#method-i-target">target</a></li>
+
+      <li ><a href="#method-i-to_h">to_h</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-Kamal::Configuration::Builder">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../Kamal.html">Kamal</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../Kamal/Configuration.html">Configuration</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>Builder</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-Kamal::Configuration::Builder" class="anchor-link class">
+    class Kamal::Configuration::Builder
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-i-builder_config" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-builder_config" title="Link to this attribute">
+            <span class="method-name">builder_config</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-config" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-config" title="Link to this attribute">
+            <span class="method-name">config</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-new" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-new" title="Link to this method">
+                <span class="method-name">new</span>
+                <span class="method-args">(config:)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">config:</span>)
+  <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
+  <span class="ruby-ivar">@builder_config</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">raw_config</span>.<span class="ruby-identifier">builder</span> <span class="ruby-operator">||</span> {}
+  <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">image</span>
+  <span class="ruby-ivar">@server</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">registry</span>.<span class="ruby-identifier">server</span>
+  <span class="ruby-ivar">@service</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">service</span>
+
+  <span class="ruby-identifier">validate!</span> <span class="ruby-identifier">builder_config</span>, <span class="ruby-value">with:</span> <span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span><span class="ruby-operator">::</span><span class="ruby-constant">Validator</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-arches" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-arches" title="Link to this method">
+                <span class="method-name">arches</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="arches-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">arches</span>
+  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">builder_config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&quot;arch&quot;</span>, <span class="ruby-identifier">default_arch</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-args" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-args" title="Link to this method">
+                <span class="method-name">args</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="args-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">args</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;args&quot;</span>] <span class="ruby-operator">||</span> {}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-build_directory" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-build_directory" title="Link to this method">
+                <span class="method-name">build_directory</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="build_directory-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_directory</span>
+  <span class="ruby-ivar">@build_directory</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">git_clone?</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">clone_directory</span>, <span class="ruby-identifier">repo_basename</span>, <span class="ruby-identifier">repo_relative_pwd</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-string">&quot;.&quot;</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-cache_from" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-cache_from" title="Link to this method">
+                <span class="method-name">cache_from</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="cache_from-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cache_from</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cached?</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;cache&quot;</span>][<span class="ruby-string">&quot;type&quot;</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;gha&quot;</span>
+      <span class="ruby-identifier">cache_from_config_for_gha</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;registry&quot;</span>
+      <span class="ruby-identifier">cache_from_config_for_registry</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-cache_to" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-cache_to" title="Link to this method">
+                <span class="method-name">cache_to</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="cache_to-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cache_to</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cached?</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;cache&quot;</span>][<span class="ruby-string">&quot;type&quot;</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;gha&quot;</span>
+      <span class="ruby-identifier">cache_to_config_for_gha</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;registry&quot;</span>
+      <span class="ruby-identifier">cache_to_config_for_registry</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-cached-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-cached-3F" title="Link to this method">
+                <span class="method-name">cached?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="cached-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cached?</span>
+  <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;cache&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-clone_directory" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-clone_directory" title="Link to this method">
+                <span class="method-name">clone_directory</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="clone_directory-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clone_directory</span>
+  <span class="ruby-ivar">@clone_directory</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">tmpdir</span>, <span class="ruby-string">&quot;kamal-clones&quot;</span>, [ <span class="ruby-identifier">service</span>, <span class="ruby-identifier">pwd_sha</span> ].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;-&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-cloud-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-cloud-3F" title="Link to this method">
+                <span class="method-name">cloud?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="cloud-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cloud?</span>
+  <span class="ruby-identifier">driver</span>.<span class="ruby-identifier">start_with?</span> <span class="ruby-string">&quot;cloud&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-context" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-context" title="Link to this method">
+                <span class="method-name">context</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="context-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">context</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;context&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;.&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-docker_driver-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-docker_driver-3F" title="Link to this method">
+                <span class="method-name">docker_driver?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="docker_driver-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">docker_driver?</span>
+  <span class="ruby-identifier">driver</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;docker&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-dockerfile" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-dockerfile" title="Link to this method">
+                <span class="method-name">dockerfile</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="dockerfile-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dockerfile</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;dockerfile&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;Dockerfile&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-driver" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-driver" title="Link to this method">
+                <span class="method-name">driver</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="driver-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">driver</span>
+  <span class="ruby-identifier">builder_config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&quot;driver&quot;</span>, <span class="ruby-string">&quot;docker-container&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-git_clone-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-git_clone-3F" title="Link to this method">
+                <span class="method-name">git_clone?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="git_clone-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">git_clone?</span>
+  <span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">used?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;context&quot;</span>].<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-local-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-local-3F" title="Link to this method">
+                <span class="method-name">local?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="local-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">local?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">local_disabled?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">arches</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">local_arches</span>.<span class="ruby-identifier">any?</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-local_arches" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-local_arches" title="Link to this method">
+                <span class="method-name">local_arches</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="local_arches-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">local_arches</span>
+  <span class="ruby-ivar">@local_arches</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">local_disabled?</span>
+    []
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">remote</span>
+    <span class="ruby-identifier">arches</span> <span class="ruby-operator">&amp;</span> [ <span class="ruby-constant">Kamal</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">docker_arch</span> ]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">arches</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-local_disabled-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-local_disabled-3F" title="Link to this method">
+                <span class="method-name">local_disabled?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="local_disabled-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">local_disabled?</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;local&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pack-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pack-3F" title="Link to this method">
+                <span class="method-name">pack?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pack-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pack?</span>
+  <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;pack&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pack_builder" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pack_builder" title="Link to this method">
+                <span class="method-name">pack_builder</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pack_builder-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pack_builder</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;pack&quot;</span>][<span class="ruby-string">&quot;builder&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">pack?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pack_buildpacks" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pack_buildpacks" title="Link to this method">
+                <span class="method-name">pack_buildpacks</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pack_buildpacks-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pack_buildpacks</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;pack&quot;</span>][<span class="ruby-string">&quot;buildpacks&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">pack?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-provenance" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-provenance" title="Link to this method">
+                <span class="method-name">provenance</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="provenance-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">provenance</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;provenance&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-remote" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-remote" title="Link to this method">
+                <span class="method-name">remote</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="remote-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remote</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;remote&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-remote-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-remote-3F" title="Link to this method">
+                <span class="method-name">remote?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="remote-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remote?</span>
+  <span class="ruby-identifier">remote_arches</span>.<span class="ruby-identifier">any?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-remote_arches" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-remote_arches" title="Link to this method">
+                <span class="method-name">remote_arches</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="remote_arches-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remote_arches</span>
+  <span class="ruby-ivar">@remote_arches</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">remote</span>
+    <span class="ruby-identifier">arches</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">local_arches</span>
+  <span class="ruby-keyword">else</span>
+    []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-sbom" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-sbom" title="Link to this method">
+                <span class="method-name">sbom</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="sbom-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sbom</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;sbom&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-secrets" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-secrets" title="Link to this method">
+                <span class="method-name">secrets</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="secrets-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">secrets</span>
+  (<span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;secrets&quot;</span>] <span class="ruby-operator">||</span> []).<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> [ <span class="ruby-identifier">key</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">secrets</span>[<span class="ruby-identifier">key</span>] ] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-ssh" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-ssh" title="Link to this method">
+                <span class="method-name">ssh</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="ssh-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ssh</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;ssh&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-target" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-target" title="Link to this method">
+                <span class="method-name">target</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="target-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target</span>
+  <span class="ruby-identifier">builder_config</span>[<span class="ruby-string">&quot;target&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-to_h" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-to_h" title="Link to this method">
+                <span class="method-name">to_h</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="to_h-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/kamal-2.9.0/lib/kamal/configuration/builder.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>
+  <span class="ruby-identifier">builder_config</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

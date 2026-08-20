@@ -1,0 +1,33 @@
+<% content_for :page_title, "Importar Turma" %>
+
+<div style="max-width: 720px; margin: 0 auto; padding: 24px;">
+  <h2 class="mb-4">Importar turma e alunos via CSV</h2>
+
+  <div style="background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.12); padding: 20px; margin-bottom: 20px;">
+    <p style="margin-bottom: 10px;">Envie um arquivo CSV com as colunas abaixo (em qualquer ordem):</p>
+    <ul style="padding-left: 20px; margin-bottom: 10px;">
+      <li><code>turma_codigo</code> (ou <code>codigo</code>)</li>
+      <li><code>turma_departamento</code> (ou <code>departamento</code>)</li>
+      <li><code>turma_semestre</code> (opcional)</li>
+      <li><code>turma_professor</code> (opcional)</li>
+      <li><code>aluno_nome</code> (ou <code>nome_aluno</code>)</li>
+      <li><code>aluno_email</code> (ou <code>email_aluno</code>)</li>
+      <li><code>aluno_matricula</code> (ou <code>matricula_aluno</code>)</li>
+      <li><code>senha</code> (opcional – se vazio, usa a matrícula como senha inicial)</li>
+    </ul>
+    <p style="margin: 0; font-size: 0.9rem; color: #555;">Separador: vírgula ou ponto-e-vírgula são aceitos.</p>
+  </div>
+
+  <%= form_with url: import_admin_turmas_path, multipart: true, local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :file, "Arquivo CSV", class: "form-label" %>
+      <%= f.file_field :file, accept: ".csv", class: "form-control" %>
+    </div>
+
+    <div style="display: flex; gap: 12px; margin-top: 12px;">
+      <%= link_to "Voltar", admin_turmas_path,
+            style: "background: #6c757d; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none;" %>
+      <%= f.submit "Importar", class: "btn btn-primary", style: "background: #5E2A86; border: none; padding: 10px 16px;" %>
+    </div>
+  <% end %>
+</div>

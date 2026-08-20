@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin · CAMAAR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <style>
+      /* ---------------- MENU LATERAL ---------------- */
+
+      #sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        width: 260px;
+        height: 100%;
+        background: #ffffff;
+        border-right: 1px solid #ddd;
+        transition: left 0.3s ease;
+        z-index: 1001;
+        padding-top: 70px;
+      }
+
+      #sidebar.open {
+        left: 0;
+      }
+
+      .sidebar-item {
+        padding: 16px 22px;
+        font-size: 18px;
+        color: #333;
+        text-decoration: none;
+        display: block;
+        transition: background 0.2s;
+      }
+
+      .sidebar-item:hover {
+        background: #f3e9ff;
+      }
+
+      .sidebar-item.active {
+        background: #6A2A8A;
+        color: #fff;
+        font-weight: bold;
+      }
+
+      /* ---------------- OVERLAY ---------------- */
+
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,0.35);
+        display: none;
+        z-index: 1000;
+      }
+
+      #overlay.show {
+        display: block;
+      }
+
+      /* ---------------- NAVBAR ---------------- */
+
+      .admin-navbar {
+        background: white;
+        border-bottom: 1px solid #ccc;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        justify-content: space-between;
+      }
+
+      .hamburger {
+        font-size: 28px;
+        cursor: pointer;
+        margin-right: 15px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .user-circle {
+        width: 36px;
+        height: 36px;
+        background: #5E2A86;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+      }
+
+      .user-circle:hover {
+        background: #7A3AA0;
+        color: white;
+        text-decoration: none;
+      }
+
+      body {
+        background-color: #dedede;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- OVERLAY PARA FECHAR MENU -->
+    <div id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- MENU LATERAL -->
+    <div id="sidebar">
+
+      <!-- Item principal: Avaliações -->
+      <%= link_to "Avaliações", admin_formularios_path,
+            class: "sidebar-item #{'active' if current_page?(admin_formularios_path)}" %>
+
+      <!-- Item principal: Gerenciamento -->
+      <%= link_to "Gerenciamento", admin_gerenciamento_path,
+            class: "sidebar-item #{'active' if current_page?(admin_gerenciamento_path)}" %>
+
+      <%= link_to "Perfil", admin_perfil_path,
+            class: "sidebar-item #{'active' if current_page?(admin_perfil_path)}" %>
+
+      <hr style="margin: 10px 0; border-color: #ccc;">
+
+      <!-- Sair -->
+      <%= button_to "Sair", logout_path,
+            method: :delete,
+            class: "sidebar-item",
+            style: "border: none; background: none; text-align: left; width: 100%; cursor: pointer;" %>
+    </div>
+
+    <!-- NAVBAR -->
+    <div class="admin-navbar">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="hamburger" onclick="openSidebar()">☰</div>
+        <h4 style="margin: 0; font-size: 18px; line-height: 1; color: #333;">
+          <%= content_for?(:page_title) ? yield(:page_title) : "Avaliações" %>
+        </h4>
+      </div>
+      
+      <% if current_page?(admin_formularios_path) %>
+        <!-- Barra de Pesquisa - Centralizada -->
+        <div style="position: absolute; left: 50%; transform: translateX(-50%); max-width: 500px; width: 40%;">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="🔍 Pesquisar avaliações..."
+            style="
+              width: 100%;
+              padding: 8px 12px;
+              border: 1px solid #ddd;
+              border-radius: 20px;
+              font-size: 14px;
+              outline: none;
+            "
+            onkeyup="filterAvaliacoes()"
+          />
+        </div>
+      <% end %>
+
+      <%= link_to admin_perfil_path, class: "user-circle", title: "Ver perfil" do %>
+        <%= current_user.nome.first.upcase %>
+      <% end %>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div style="padding: 20px;">
+      <%= yield %>
+    </div>
+
+    <script>
+      function openSidebar() {
+        document.getElementById("sidebar").classList.add("open");
+        document.getElementById("overlay").classList.add("show");
+      }
+
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("overlay").classList.remove("show");
+      }
+
+      function filterAvaliacoes() {
+        const input = document.getElementById('search-input');
+        const filter = input.value.toLowerCase();
+        const cards = document.querySelectorAll('[data-avaliacao-card]');
+        
+        let visibleCount = 0;
+        
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(filter)) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Mostrar mensagem se não houver resultados
+        let noResultsMsg = document.getElementById('no-results-message');
+        if (visibleCount === 0 && filter !== '') {
+          if (!noResultsMsg) {
+            noResultsMsg = document.createElement('div');
+            noResultsMsg.id = 'no-results-message';
+            noResultsMsg.style.cssText = 'background: #fff3cd; border-left: 3px solid #ff9800; padding: 16px; margin-top: 24px; border-radius: 4px; font-size: 0.9rem; text-align: center; grid-column: 1 / -1;';
+            noResultsMsg.textContent = `Nenhuma avaliação encontrada para "${input.value}"`;
+            const gridContainer = document.querySelector('[data-avaliacoes-grid]');
+            if (gridContainer) {
+              gridContainer.appendChild(noResultsMsg);
+            }
+          }
+        } else if (noResultsMsg) {
+          noResultsMsg.remove();
+        }
+      }
+    </script>
+
+  </body>
+</html>

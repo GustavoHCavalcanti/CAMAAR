@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class Net::IMAP::FetchStruct - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,Net::IMAP::FetchStruct">
+
+
+    <meta name="description" content="class Net::IMAP::FetchStruct: FetchStruct is the superclass for FetchData and UIDFetchData. IMAP#uid_store all return arrays of FetchStruct objects.">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+            <details open>
+              <summary>
+      <a href="#class-Net::IMAP::FetchStruct-label-Fetch+attributes">Fetch attributes</a>
+</summary>
+              <ul class="link-list" role="directory">
+                
+
+
+
+
+          <li>
+      <a href="#class-Net::IMAP::FetchStruct-label-Static+fetch+data+items">Static fetch data items</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#class-Net::IMAP::FetchStruct-label-Dynamic+message+attributes">Dynamic message attributes</a>
+</li>
+
+
+
+              </ul>
+            </details>
+          </li>
+
+
+
+
+          <li>
+      <a href="#class-Net::IMAP::FetchStruct-label-Implicitly+setting+-5CSeen+and+using+PEEK">Implicitly setting <code>\Seen</code> and using <code>PEEK</code></a>
+</li>
+
+
+
+  </ul>
+</div>
+
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../../Struct.html">Struct</a><ul><li><a href="../../Object.html">Object</a><ul><li><a href="../../BasicObject.html">BasicObject</a></li></ul></li></ul></li></ul>
+</div>
+
+
+  
+
+  
+
+  
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-attr">attr</a></li>
+
+      <li ><a href="#method-i-attr_upcase">attr_upcase</a></li>
+
+      <li ><a href="#method-i-binary">binary</a></li>
+
+      <li ><a href="#method-i-binary_size">binary_size</a></li>
+
+      <li ><a href="#method-i-body">body</a></li>
+
+      <li ><a href="#method-i-body_structure">body_structure</a></li>
+
+      <li ><a href="#method-i-bodystructure">bodystructure</a></li>
+
+      <li ><a href="#method-i-emailid">emailid</a></li>
+
+      <li ><a href="#method-i-envelope">envelope</a></li>
+
+      <li ><a href="#method-i-flags">flags</a></li>
+
+      <li ><a href="#method-i-header">header</a></li>
+
+      <li ><a href="#method-i-header_fields">header_fields</a></li>
+
+      <li ><a href="#method-i-header_fields_not">header_fields_not</a></li>
+
+      <li ><a href="#method-i-internal_date">internal_date</a></li>
+
+      <li ><a href="#method-i-internaldate">internaldate</a></li>
+
+      <li ><a href="#method-i-message">message</a></li>
+
+      <li ><a href="#method-i-mime">mime</a></li>
+
+      <li ><a href="#method-i-modseq">modseq</a></li>
+
+      <li ><a href="#method-i-part">part</a></li>
+
+      <li ><a href="#method-i-rfc822">rfc822</a></li>
+
+      <li ><a href="#method-i-rfc822_header">rfc822_header</a></li>
+
+      <li ><a href="#method-i-rfc822_size">rfc822_size</a></li>
+
+      <li ><a href="#method-i-rfc822_text">rfc822_text</a></li>
+
+      <li ><a href="#method-i-size">size</a></li>
+
+      <li ><a href="#method-i-text">text</a></li>
+
+      <li ><a href="#method-i-threadid">threadid</a></li>
+
+      <li ><a href="#method-i-uid">uid</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-Net::IMAP::FetchStruct">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../Net.html">Net</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../Net/IMAP.html">IMAP</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>FetchStruct</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-Net::IMAP::FetchStruct" class="anchor-link class">
+    class Net::IMAP::FetchStruct
+  </h1>
+
+  <section class="description">
+    
+<p><a href="FetchStruct.html"><code>Net::IMAP::FetchStruct</code></a> is the superclass for <a href="FetchData.html"><code>FetchData</code></a> and <a href="UIDFetchData.html"><code>UIDFetchData</code></a>. <a href="../IMAP.html#method-i-fetch"><code>Net::IMAP#fetch</code></a>, <a href="../IMAP.html#method-i-uid_fetch"><code>Net::IMAP#uid_fetch</code></a>, <a href="../IMAP.html#method-i-store"><code>Net::IMAP#store</code></a>, and <a href="../IMAP.html#method-i-uid_store"><code>Net::IMAP#uid_store</code></a> all return arrays of <a href="FetchStruct.html"><code>FetchStruct</code></a> objects.</p>
+
+<h3 id="class-Net::IMAP::FetchStruct-label-Fetch+attributes"><a href="#class-Net::IMAP::FetchStruct-label-Fetch+attributes">Fetch attributes</a></h3>
+
+<p>See <a href="https://www.rfc-editor.org/rfc/rfc3501.html#section-7.4.2">[IMAP4rev1 §7.4.2]</a> and <a href="https://www.rfc-editor.org/rfc/rfc9051.html#section-7.5.2">[IMAP4rev2 §7.5.2]</a> for a full description of the standard fetch response data items, and <a href="../IMAP.html#class-Net::IMAP-label-Message+envelope+and+body+structure">Message envelope and body structure at <code>Net::IMAP</code></a> for other relevant RFCs.</p>
+
+<h4 id="class-Net::IMAP::FetchStruct-label-Static+fetch+data+items"><a href="#class-Net::IMAP::FetchStruct-label-Static+fetch+data+items">Static fetch data items</a></h4>
+
+<p>Most message attributes are static, and must never change for a given <code>(server, account, mailbox, UIDVALIDITY, UID)</code> tuple.</p>
+
+<p>The static fetch data items defined by both <a href="https://www.rfc-editor.org/rfc/rfc3501.html">IMAP4rev1</a> and <a href="https://www.rfc-editor.org/rfc/rfc9051.html">IMAP4rev2</a> are:</p>
+<ul><li>
+<p><strong><code>&quot;UID&quot;</code></strong> — See <a href="FetchStruct.html#method-i-uid"><code>uid</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;BODY&quot;</code></strong> — See <a href="FetchStruct.html#method-i-body"><code>body</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;BODY[#{section_spec}]&quot;</code></strong>, <strong><code>&quot;BODY[#{section_spec}]&lt;#{offset}&gt;&quot;</code></strong> — See <a href="FetchStruct.html#method-i-message"><code>message</code></a>, <a href="FetchStruct.html#method-i-part"><code>part</code></a>, <a href="FetchStruct.html#method-i-header"><code>header</code></a>, <a href="FetchStruct.html#method-i-header_fields"><code>header_fields</code></a>, <a href="FetchStruct.html#method-i-header_fields_not"><code>header_fields_not</code></a>, <a href="FetchStruct.html#method-i-mime"><code>mime</code></a>, and <a href="FetchStruct.html#method-i-text"><code>text</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;BODYSTRUCTURE&quot;</code></strong> — See <a href="FetchStruct.html#method-i-bodystructure"><code>bodystructure</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;ENVELOPE&quot;</code></strong> — See <a href="FetchStruct.html#method-i-envelope"><code>envelope</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;INTERNALDATE&quot;</code></strong> — See <a href="FetchStruct.html#method-i-internaldate"><code>internaldate</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;RFC822.SIZE&quot;</code></strong> — See <a href="FetchStruct.html#method-i-rfc822_size"><code>rfc822_size</code></a>.</p>
+</li></ul>
+
+<p><a href="https://www.rfc-editor.org/rfc/rfc9051.html">IMAP4rev2</a> adds the additional fetch items from the <code>BINARY</code> extension <a href="https://www.rfc-editor.org/rfc/rfc3516.html">[RFC3516]</a>:</p>
+<ul><li>
+<p><strong><code>&quot;BINARY[#{part}]&quot;</code></strong>, <strong><code>&quot;BINARY[#{part}]&lt;#{offset}&gt;&quot;</code></strong> – See <a href="FetchStruct.html#method-i-binary"><code>binary</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;BINARY.SIZE[#{part}]&quot;</code></strong> – See <a href="FetchStruct.html#method-i-binary_size"><code>binary_size</code></a>.</p>
+</li></ul>
+
+<p>Several static message attributes in <a href="https://www.rfc-editor.org/rfc/rfc3501.html">IMAP4rev1</a> are obsolete and been removed from <a href="https://www.rfc-editor.org/rfc/rfc9051.html">IMAP4rev2</a>:</p>
+<ul><li>
+<p><strong><code>&quot;RFC822&quot;</code></strong> — See <a href="FetchStruct.html#method-i-rfc822"><code>rfc822</code></a> or replace with <code>&quot;BODY[]&quot;</code> and <a href="FetchStruct.html#method-i-message"><code>message</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;RFC822.HEADER&quot;</code></strong> — See <a href="FetchStruct.html#method-i-rfc822_header"><code>rfc822_header</code></a> or replace with <code>&quot;BODY[HEADER]&quot;</code> and <a href="FetchStruct.html#method-i-header"><code>header</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;RFC822.TEXT&quot;</code></strong> — See <a href="FetchStruct.html#method-i-rfc822_text"><code>rfc822_text</code></a> or replace with <code>&quot;BODY[TEXT]&quot;</code> and <a href="FetchStruct.html#method-i-text"><code>text</code></a>.</p>
+</li></ul>
+
+<p><a href="../IMAP.html"><code>Net::IMAP</code></a> supports static attributes defined by the following extensions:</p>
+<ul><li>
+<p><code>OBJECTID</code> <a href="https://www.rfc-editor.org/rfc/rfc8474.html">[RFC8474]</a></p>
+<ul><li>
+<p><strong><code>&quot;EMAILID&quot;</code></strong> — See <a href="FetchStruct.html#method-i-emailid"><code>emailid</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;THREADID&quot;</code></strong> — See <a href="FetchStruct.html#method-i-threadid"><code>threadid</code></a>.</p>
+</li></ul>
+</li><li>
+<p><code>X-GM-EXT-1</code> <a href="https://developers.google.com/gmail/imap/imap-extensions">[non-standard Gmail extension]</a></p>
+<ul><li>
+<p><strong><code>&quot;X-GM-MSGID&quot;</code></strong> — unique message ID.  Access via <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+</li><li>
+<p><strong><code>&quot;X-GM-THRID&quot;</code></strong> — <a href="../../Thread.html"><code>Thread</code></a> ID.  Access via <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+</li></ul>
+</li></ul>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>Additional static fields are defined in other IMAP extensions, but <a href="../IMAP.html"><code>Net::IMAP</code></a> can’t parse them yet.</p>
+</dd></dl>
+
+<h4 id="class-Net::IMAP::FetchStruct-label-Dynamic+message+attributes"><a href="#class-Net::IMAP::FetchStruct-label-Dynamic+message+attributes">Dynamic message attributes</a></h4>
+
+<p>Some message attributes can be dynamically changed, for example using the <a href="../IMAP.html#method-i-store">STORE command</a>.</p>
+
+<p>The only dynamic message attribute defined by <a href="https://www.rfc-editor.org/rfc/rfc3501.html">IMAP4rev1</a> and <a href="https://www.rfc-editor.org/rfc/rfc9051.html">IMAP4rev2</a> is:</p>
+<ul><li>
+<p><strong><code>&quot;FLAGS&quot;</code></strong> — See <a href="FetchStruct.html#method-i-flags"><code>flags</code></a>.</p>
+</li></ul>
+
+<p><a href="../IMAP.html"><code>Net::IMAP</code></a> supports dynamic attributes defined by the following extensions:</p>
+<ul><li>
+<p><code>CONDSTORE</code> <a href="https://www.rfc-editor.org/rfc/rfc7162.html">[RFC7162]</a>:</p>
+<ul><li>
+<p><strong><code>&quot;MODSEQ&quot;</code></strong> — See <a href="FetchStruct.html#method-i-modseq"><code>modseq</code></a>.</p>
+</li></ul>
+</li><li>
+<p><code>X-GM-EXT-1</code> <a href="https://developers.google.com/gmail/imap/imap-extensions">[non-standard Gmail extension]</a></p>
+<ul><li>
+<p><strong><code>&quot;X-GM-LABELS&quot;</code></strong> — Gmail labels.  Access via <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+</li></ul>
+</li></ul>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>Additional dynamic fields are defined in other IMAP extensions, but <a href="../IMAP.html"><code>Net::IMAP</code></a> can’t parse them yet.</p>
+</dd></dl>
+
+<h3 id="class-Net::IMAP::FetchStruct-label-Implicitly+setting+-5CSeen+and+using+PEEK"><a href="#class-Net::IMAP::FetchStruct-label-Implicitly+setting+-5CSeen+and+using+PEEK">Implicitly setting <code>\Seen</code> and using <code>PEEK</code></a></h3>
+
+<p>Unless the mailbox has been opened as read-only, fetching <code>BODY[#{section}]</code> or <code>BINARY[#{section}]</code> will implicitly set the <code>\Seen</code> flag.  To avoid this, fetch using <code>BODY.PEEK[#{section}]</code> or <code>BINARY.PEEK[#{section}]</code> instead.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>The data will always be <em>returned</em> without the <code>&quot;.PEEK&quot;</code> suffix, as <code>BODY[#{specifier}]</code> or <code>BINARY[#{section}]</code>.</p>
+</dd></dl>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-attr" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-attr" title="Link to this method">
+                  <span class="method-callseq">
+                    attr &rarr; hash
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="attr-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 107</span>
+      </pre>
+          </div>
+
+
+
+          <p>Each key specifies a message attribute, and the value is the corresponding data item.  Standard data items have corresponding accessor methods.  The definitions of each attribute type is documented on its accessor.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-attr_upcase" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-attr_upcase" title="Link to this method">
+                  <span class="method-callseq">
+                    attr_upcase &rarr; hash
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="attr_upcase-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attr_upcase</span>; <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">transform_keys</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:upcase</span>) <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>A transformation of <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>, with all the keys converted to upper case.</p>
+
+<p>Header field names are case-preserved but not case-sensitive, so this is used by <a href="FetchStruct.html#method-i-header_fields"><code>header_fields</code></a> and <a href="FetchStruct.html#method-i-header_fields_not"><code>header_fields_not</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-binary" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-binary" title="Link to this method">
+                  <span class="method-callseq">
+                    binary(*part_nums, offset: nil) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="binary-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 428</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">binary</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">part_nums</span>, <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">section_attr</span>(<span class="ruby-string">&quot;BINARY&quot;</span>, <span class="ruby-identifier">part_nums</span>, <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the binary representation of a particular MIME part, which has already been decoded according to its Content-Transfer-Encoding.</p>
+
+<p>See <a href="FetchStruct.html#method-i-part"><code>part</code></a> for a description of <code>part_nums</code> and <code>offset</code>.</p>
+
+<p>This is the same as getting the value of <code>&quot;BINARY[#{part_nums.join(&quot;.&quot;)}]&quot;</code> or <code>&quot;BINARY[#{part_nums.join(&quot;.&quot;)}]&lt;#{offset}&gt;&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>The server must support either <a href="https://www.rfc-editor.org/rfc/rfc9051.html">IMAP4rev2</a> or the <code>BINARY</code> extension <a href="https://www.rfc-editor.org/rfc/rfc3516.html">[RFC3516]</a>.</p>
+
+<p>See also: <a href="FetchStruct.html#method-i-binary_size"><code>binary_size</code></a>, <a href="FetchStruct.html#method-i-mime"><code>mime</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-binary_size" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-binary_size" title="Link to this method">
+                  <span class="method-callseq">
+                    binary_size(*part_nums) &rarr; integer or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="binary_size-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 449</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">binary_size</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">part_nums</span>)
+  <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">section_attr</span>(<span class="ruby-string">&quot;BINARY.SIZE&quot;</span>, <span class="ruby-identifier">part_nums</span>)]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the decoded size of a particular MIME part (the size to expect in response to a <code>BINARY</code> fetch request).</p>
+
+<p>See <a href="FetchStruct.html#method-i-part"><code>part</code></a> for a description of <code>part_nums</code>.</p>
+
+<p>This is the same as getting the value of <code>&quot;BINARY.SIZE[#{part_nums.join(&quot;.&quot;)}]&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>The server must support either <a href="https://www.rfc-editor.org/rfc/rfc9051.html">IMAP4rev2</a> or the <code>BINARY</code> extension <a href="https://www.rfc-editor.org/rfc/rfc3516.html">[RFC3516]</a>.</p>
+
+<p>See also: <a href="FetchStruct.html#method-i-binary"><code>binary</code></a>, <a href="FetchStruct.html#method-i-mime"><code>mime</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-body" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-body" title="Link to this method">
+                  <span class="method-callseq">
+                    body &rarr; body structure or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="body-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">body</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;BODY&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns an alternate form of <a href="FetchStruct.html#method-i-bodystructure"><code>bodystructure</code></a>, without any extension data.</p>
+
+<p>This is the same as getting the value for <code>&quot;BODY&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>Use <a href="FetchStruct.html#method-i-message"><code>message</code></a>, <a href="FetchStruct.html#method-i-part"><code>part</code></a>, <a href="FetchStruct.html#method-i-header"><code>header</code></a>, <a href="FetchStruct.html#method-i-header_fields"><code>header_fields</code></a>, <a href="FetchStruct.html#method-i-header_fields_not"><code>header_fields_not</code></a>, <a href="FetchStruct.html#method-i-text"><code>text</code></a>, or <a href="FetchStruct.html#method-i-mime"><code>mime</code></a> to retrieve <code>BODY[#{section_spec}]</code> attributes.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-body_structure" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-body_structure" title="Link to this method">
+                <span class="method-name">body_structure</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="FetchStruct.html#method-i-bodystructure">bodystructure</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-bodystructure" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-bodystructure" title="Link to this method">
+                  <span class="method-callseq">
+                    bodystructure &rarr; BodyStructure struct or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="bodystructure-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bodystructure</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;BODYSTRUCTURE&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>A <a href="BodyStructure.html"><code>BodyStructure</code></a> object that describes the message, if it was fetched.</p>
+
+<p>This is the same as getting the value for <code>&quot;BODYSTRUCTURE&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="FetchStruct.html#method-i-body_structure">body_structure</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-emailid" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-emailid" title="Link to this method">
+                  <span class="method-callseq">
+                    emailid &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="emailid-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 482</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">emailid</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;EMAILID&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>An ObjectID that uniquely identifies the immutable content of a single message.</p>
+
+<p>The server must return the same <code>EMAILID</code> for both the source and destination messages after a COPY or MOVE command.  However, it is possible for different messages with the same EMAILID to have different mutable attributes, such as flags.</p>
+
+<p>This is the same as getting the value for <code>&quot;EMAILID&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>The server must support the <code>OBJECTID</code> extension <a href="https://www.rfc-editor.org/rfc/rfc8474.html">[RFC8474]</a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-envelope" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-envelope" title="Link to this method">
+                  <span class="method-callseq">
+                    envelope &rarr; Envelope or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="envelope-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 307</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">envelope</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;ENVELOPE&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>An <a href="Envelope.html"><code>Envelope</code></a> object that describes the envelope structure of a message. See the documentation for <a href="Envelope.html"><code>Envelope</code></a> for a description of the envelope structure attributes.</p>
+
+<p>This is the same as getting the value for <code>&quot;ENVELOPE&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-flags" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-flags" title="Link to this method">
+                  <span class="method-callseq">
+                    flags &rarr; array of Symbols and Strings, or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="flags-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 320</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flags</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;FLAGS&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>A array of flags that are set for this message.  System flags are symbols that have been capitalized by String#capitalize.  Keyword flags are strings and their case is not changed.</p>
+
+<p>This is the same as getting the value for <code>&quot;FLAGS&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>The <code>FLAGS</code> field is dynamic, and can change for a uniquely identified message.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-header" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-header" title="Link to this method">
+                  <span class="method-callseq">
+                    header(*part_nums,                offset: nil) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+              <div class="method-heading">
+                <a href="#method-i-header" title="Link to this method">
+                  <span class="method-callseq">
+                    header(*part_nums, fields: names, offset: nil) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+              <div class="method-heading">
+                <a href="#method-i-header" title="Link to this method">
+                  <span class="method-callseq">
+                    header(*part_nums, except: names, offset: nil) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">part_nums</span>, <span class="ruby-value">fields:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">except:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">fields</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">except</span> <span class="ruby-keyword">and</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;conflicting &#39;fields&#39; and &#39;except&#39; arguments&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">fields</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;HEADER.FIELDS (%s)&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">fields</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>).<span class="ruby-identifier">upcase</span>]
+    <span class="ruby-identifier">attr_upcase</span>[<span class="ruby-identifier">body_section_attr</span>(<span class="ruby-identifier">part_nums</span>, <span class="ruby-identifier">text</span>, <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">except</span>
+    <span class="ruby-identifier">text</span> = <span class="ruby-string">&quot;HEADER.FIELDS.NOT (%s)&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">except</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>).<span class="ruby-identifier">upcase</span>]
+    <span class="ruby-identifier">attr_upcase</span>[<span class="ruby-identifier">body_section_attr</span>(<span class="ruby-identifier">part_nums</span>, <span class="ruby-identifier">text</span>, <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">body_section_attr</span>(<span class="ruby-identifier">part_nums</span>, <span class="ruby-string">&quot;HEADER&quot;</span>, <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The <a href="https://www.rfc-editor.org/rfc/rfc5322.html">[RFC5322]</a> header of a message or of an encapsulated <a href="https://www.rfc-editor.org/rfc/rfc2046.html">[MIME-IMT]</a> MESSAGE/RFC822 or MESSAGE/GLOBAL message.</p>
+
+<p><em>Headers can be parsed using the “mail” gem.</em></p>
+
+<p>See <a href="FetchStruct.html#method-i-part"><code>part</code></a> for a description of <code>part_nums</code> and <code>offset</code>.</p>
+
+<h4 id="method-i-header-label-Without+fields+or+except"><a href="#method-i-header-label-Without+fields+or+except">Without <code>fields</code> or <code>except</code></a></h4>
+
+<p>This is the same as getting the value from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a> for one of:</p>
+<ul><li>
+<p><code>BODY[HEADER]</code></p>
+</li><li>
+<p><code>BODY[HEADER]&lt;#{offset}&gt;</code></p>
+</li><li>
+<p><code>BODY[#{part_nums.join &quot;.&quot;}.HEADER]&quot;</code></p>
+</li><li>
+<p><code>BODY[#{part_nums.join &quot;.&quot;}.HEADER]&lt;#{offset}&gt;&quot;</code></p>
+</li></ul>
+
+<h4 id="method-i-header-label-With+fields"><a href="#method-i-header-label-With+fields">With <code>fields</code></a></h4>
+
+<p>When <code>fields</code> is sent, returns a subset of the header which contains only the header fields that match one of the names in the list.</p>
+
+<p>This is the same as getting the value from <a href="FetchStruct.html#method-i-attr_upcase"><code>attr_upcase</code></a> for one of:</p>
+<ul><li>
+<p><code>BODY[HEADER.FIELDS (#{names.join &quot; &quot;})]</code></p>
+</li><li>
+<p><code>BODY[HEADER.FIELDS (#{names.join &quot; &quot;})]&lt;#{offset}&gt;</code></p>
+</li><li>
+<p><code>BODY[#{part_nums.join &quot;.&quot;}.HEADER.FIELDS (#{names.join &quot; &quot;})]</code></p>
+</li><li>
+<p><code>BODY[#{part_nums.join &quot;.&quot;}.HEADER.FIELDS (#{names.join &quot; &quot;})]&lt;#{offset}&gt;</code></p>
+</li></ul>
+
+<p>See also: <a href="FetchStruct.html#method-i-header_fields"><code>header_fields</code></a></p>
+
+<h4 id="method-i-header-label-With+except"><a href="#method-i-header-label-With+except">With <code>except</code></a></h4>
+
+<p>When <code>except</code> is sent, returns a subset of the header which contains only the header fields that do <em>not</em> match one of the names in the list.</p>
+
+<p>This is the same as getting the value from <a href="FetchStruct.html#method-i-attr_upcase"><code>attr_upcase</code></a> for one of:</p>
+<ul><li>
+<p><code>BODY[HEADER.FIELDS.NOT (#{names.join &quot; &quot;})]</code></p>
+</li><li>
+<p><code>BODY[HEADER.FIELDS.NOT (#{names.join &quot; &quot;})]&lt;#{offset}&gt;</code></p>
+</li><li>
+<p><code>BODY[#{part_nums.join &quot;.&quot;}.HEADER.FIELDS.NOT (#{names.join &quot; &quot;})]</code></p>
+</li><li>
+<p><code>BODY[#{part_nums.join &quot;.&quot;}.HEADER.FIELDS.NOT (#{names.join &quot; &quot;})]&lt;#{offset}&gt;</code></p>
+</li></ul>
+
+<p>See also: <a href="FetchStruct.html#method-i-header_fields_not"><code>header_fields_not</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-header_fields" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-header_fields" title="Link to this method">
+                  <span class="method-callseq">
+                    header_fields(*names, part: [], offset: nil) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="header_fields-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_fields</span>(<span class="ruby-identifier">first</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rest</span>, <span class="ruby-value">part:</span> [], <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">header</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">part</span>, <span class="ruby-value">fields:</span> [<span class="ruby-identifier">first</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rest</span>], <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The result from <a href="FetchStruct.html#method-i-header"><code>header</code></a> when called with <code>fields: names</code>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-header_fields_not" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-header_fields_not" title="Link to this method">
+                  <span class="method-callseq">
+                    header_fields_not(*names, part: [], offset: nil) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="header_fields_not-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 245</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">header_fields_not</span>(<span class="ruby-identifier">first</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rest</span>, <span class="ruby-value">part:</span> [], <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">header</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">part</span>, <span class="ruby-value">except:</span> [<span class="ruby-identifier">first</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">rest</span>], <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The result from <a href="FetchStruct.html#method-i-header"><code>header</code></a> when called with <code>except: names</code>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-internal_date" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-internal_date" title="Link to this method">
+                <span class="method-name">internal_date</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="FetchStruct.html#method-i-internaldate">internaldate</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-internaldate" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-internaldate" title="Link to this method">
+                  <span class="method-callseq">
+                    internaldate &rarr; Time or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="internaldate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 335</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">internaldate</span>
+  <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;INTERNALDATE&quot;</span>]&amp;.<span class="ruby-identifier">then</span> { <span class="ruby-constant">IMAP</span>.<span class="ruby-identifier">decode_time</span> <span class="ruby-identifier">_1</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The internal date and time of the message on the server.  This is not the date and time in the [<a href="https://www.rfc-editor.org/rfc/rfc5322">RFC5322</a>] header, but rather a date and time which reflects when the message was received.</p>
+
+<p>This is similar to getting the value for <code>&quot;INTERNALDATE&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p><code>attr[&quot;INTERNALDATE&quot;]</code> returns a string, and this method returns a <a href="../../Time.html"><code>Time</code></a> object.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="FetchStruct.html#method-i-internal_date">internal_date</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-message" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-message" title="Link to this method">
+                  <span class="method-callseq">
+                    message(offset: bytes) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="message-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message</span>(<span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>) <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">body_section_attr</span>(<span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The <a href="https://www.rfc-editor.org/rfc/rfc5322.html">RFC5322</a> expression of the entire message, as a string.</p>
+
+<p>See <a href="FetchStruct.html#method-i-part"><code>part</code></a> for a description of <code>offset</code>.</p>
+
+<p><em>RFC5322 messages can be parsed using the “mail” gem.</em></p>
+
+<p>This is the same as getting the value for <code>&quot;BODY[]&quot;</code> or <code>&quot;BODY[]&lt;#{offset}&gt;&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>See also: <a href="FetchStruct.html#method-i-header"><code>header</code></a>, <a href="FetchStruct.html#method-i-text"><code>text</code></a>, and <a href="FetchStruct.html#method-i-mime"><code>mime</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-mime" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-mime" title="Link to this method">
+                  <span class="method-callseq">
+                    mime(*part_nums)                &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+              <div class="method-heading">
+                <a href="#method-i-mime" title="Link to this method">
+                  <span class="method-callseq">
+                    mime(*part_nums, offset: bytes) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="mime-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 263</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mime</span>(<span class="ruby-identifier">part</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">subparts</span>, <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">body_section_attr</span>([<span class="ruby-identifier">part</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">subparts</span>], <span class="ruby-string">&quot;MIME&quot;</span>, <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The <a href="https://www.rfc-editor.org/rfc/rfc2045.html">[MIME-IMB]</a> header for a message part, if it was fetched.</p>
+
+<p>See <a href="FetchStruct.html#method-i-part"><code>part</code></a> for a description of <code>part_nums</code> and <code>offset</code>.</p>
+
+<p>This is the same as getting the value for <code>&quot;BODY[#{part_nums}.MIME]&quot;</code> or <code>&quot;BODY[#{part_nums}.MIME]&lt;#{offset}&gt;&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>See also: <a href="FetchStruct.html#method-i-message"><code>message</code></a>, <a href="FetchStruct.html#method-i-header"><code>header</code></a>, and <a href="FetchStruct.html#method-i-text"><code>text</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-modseq" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-modseq" title="Link to this method">
+                  <span class="method-callseq">
+                    modseq &rarr; Integer or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="modseq-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 465</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modseq</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;MODSEQ&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The modification sequence number associated with this <a href="../IMAP.html"><code>IMAP</code></a> message.</p>
+
+<p>This is the same as getting the value for <code>&quot;MODSEQ&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>The server must support the <code>CONDSTORE</code> extension <a href="https://www.rfc-editor.org/rfc/rfc7162.html">[RFC7162]</a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>The <code>MODSEQ</code> field is dynamic, and can change for a uniquely identified message.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-part" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-part" title="Link to this method">
+                  <span class="method-callseq">
+                    part(*part_nums, offset: bytes) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="part-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">part</span>(<span class="ruby-identifier">index</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">subparts</span>, <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">body_section_attr</span>([<span class="ruby-identifier">index</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">subparts</span>], <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The string representation of a particular MIME part.</p>
+
+<p><code>part_nums</code> forms a path of MIME part numbers, counting up from <code>1</code>, which may specify an arbitrarily nested part, similarly to Array#dig. Messages that don’t use MIME, or MIME messages that are not multipart and don’t hold an encapsulated message, only have part <code>1</code>.</p>
+
+<p>If a zero-based <code>offset</code> is given, the returned string is a substring of the entire contents, starting at that origin octet.  This means that <code>BODY[]&lt;0&gt;</code> MAY be truncated, but <code>BODY[]</code> is never truncated.</p>
+
+<p>This is the same as getting the value of <code>&quot;BODY[#{part_nums.join(&quot;.&quot;)}]&quot;</code> or <code>&quot;BODY[#{part_nums.join(&quot;.&quot;)}]&lt;#{offset}&gt;&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>See also: <a href="FetchStruct.html#method-i-message"><code>message</code></a>, <a href="FetchStruct.html#method-i-header"><code>header</code></a>, <a href="FetchStruct.html#method-i-text"><code>text</code></a>, and <a href="FetchStruct.html#method-i-mime"><code>mime</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rfc822" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-rfc822" title="Link to this method">
+                  <span class="method-callseq">
+                    rfc822 &rarr; String or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rfc822-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 349</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rfc822</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;RFC822&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Semantically equivalent to <a href="FetchStruct.html#method-i-message"><code>message</code></a> with no arguments.</p>
+
+<p>This is the same as getting the value for <code>&quot;RFC822&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p><code>IMAP4rev2</code> deprecates <code>RFC822</code>.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rfc822_header" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-rfc822_header" title="Link to this method">
+                  <span class="method-callseq">
+                    rfc822_header &rarr; String or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rfc822_header-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 386</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rfc822_header</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;RFC822.HEADER&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Semantically equivalent to <a href="FetchStruct.html#method-i-header"><code>header</code></a>, with no arguments.</p>
+
+<p>This is the same as getting the value for <code>&quot;RFC822.HEADER&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p><code>IMAP4rev2</code> deprecates <code>RFC822.HEADER</code>.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rfc822_size" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-rfc822_size" title="Link to this method">
+                  <span class="method-callseq">
+                    rfc822_size &rarr; Integer or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rfc822_size-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 368</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rfc822_size</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;RFC822.SIZE&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>A number expressing the [<a href="https://www.rfc-editor.org/rfc/rfc5322">RFC5322</a>] size of the message.</p>
+
+<p>This is the same as getting the value for <code>&quot;RFC822.SIZE&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>IMAP was originally developed for the older <a href="https://www.rfc-editor.org/rfc/rfc822.html">RFC822</a> standard, and as a consequence several fetch items in IMAP incorporate “RFC822” in their name.  With the exception of <code>RFC822.SIZE</code>, there are more modern replacements; for example, the modern version of <code>RFC822.HEADER</code> is <code>BODY.PEEK[HEADER]</code>.  In all cases, “RFC822” should be interpreted as a reference to the updated <a href="https://www.rfc-editor.org/rfc/rfc5322.html">RFC5322</a> standard.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rfc822_text" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-rfc822_text" title="Link to this method">
+                  <span class="method-callseq">
+                    rfc822_text &rarr; String or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rfc822_text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 397</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rfc822_text</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;RFC822.TEXT&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Semantically equivalent to <a href="FetchStruct.html#method-i-text"><code>text</code></a>, with no arguments.</p>
+
+<p>This is the same as getting the value for <code>&quot;RFC822.TEXT&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p><code>IMAP4rev2</code> deprecates <code>RFC822.TEXT</code>.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-size" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-size" title="Link to this method">
+                <span class="method-name">size</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="size-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 375</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>; <span class="ruby-identifier">rfc822_size</span> <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Alias for: <a href="FetchStruct.html#method-i-rfc822_size"><code>rfc822_size</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-text" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-text" title="Link to this method">
+                  <span class="method-callseq">
+                    text(*part_nums)                &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+              <div class="method-heading">
+                <a href="#method-i-text" title="Link to this method">
+                  <span class="method-callseq">
+                    text(*part_nums, offset: bytes) &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="text-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">text</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">part</span>, <span class="ruby-value">offset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">body_section_attr</span>(<span class="ruby-identifier">part</span>, <span class="ruby-string">&quot;TEXT&quot;</span>, <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>)]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>The text body of a message or a message part, if it was fetched, omitting the <a href="https://www.rfc-editor.org/rfc/rfc5322.html">[RFC5322]</a> header.</p>
+
+<p>See <a href="FetchStruct.html#method-i-part"><code>part</code></a> for a description of <code>part_nums</code> and <code>offset</code>.</p>
+
+<p>This is the same as getting the value from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a> for one of:</p>
+<ul><li>
+<p><code>&quot;BODY[TEXT]&quot;</code>,</p>
+</li><li>
+<p><code>&quot;BODY[TEXT]&lt;#{offset}&gt;&quot;</code>,</p>
+</li><li>
+<p><code>&quot;BODY[#{section}.TEXT]&quot;</code>, or</p>
+</li><li>
+<p><code>&quot;BODY[#{section}.TEXT]&lt;#{offset}&gt;&quot;</code>.</p>
+</li></ul>
+
+<p>See also: <a href="FetchStruct.html#method-i-message"><code>message</code></a>, <a href="FetchStruct.html#method-i-header"><code>header</code></a>, and <a href="FetchStruct.html#method-i-mime"><code>mime</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-threadid" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-threadid" title="Link to this method">
+                  <span class="method-callseq">
+                    threadid &rarr; string or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="threadid-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 499</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">threadid</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;THREADID&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>An ObjectID that uniquely identifies a set of messages that the server believes should be grouped together.</p>
+
+<p>It is generally based on some combination of References, In-Reply-To, and Subject, but the exact implementation is left up to the server implementation.  The server should return the same thread identifier for related messages, even if they are in different mailboxes.</p>
+
+<p>This is the same as getting the value for <code>&quot;THREADID&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+
+<p>The server must support the <code>OBJECTID</code> extension <a href="https://www.rfc-editor.org/rfc/rfc8474.html">[RFC8474]</a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-uid" class="method-detail anchor-link ">
+        <div class="method-header">
+
+
+              <div class="method-heading">
+                <a href="#method-i-uid" title="Link to this method">
+                  <span class="method-callseq">
+                    uid &rarr; Integer or nil
+                  </span>
+                </a>
+              </div>
+
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="uid-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/net-imap-0.5.12/lib/net/imap/fetch_data.rb, line 408</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uid</span>; <span class="ruby-identifier">attr</span>[<span class="ruby-string">&quot;UID&quot;</span>] <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>A number expressing the unique identifier of the message.</p>
+
+<p>This is the same as getting the value for <code>&quot;UID&quot;</code> from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+<dl class="rdoc-list label-list"><dt>NOTE:</dt>
+<dd>
+<p>For <a href="UIDFetchData.html"><code>UIDFetchData</code></a>, this returns the uniqueid at the beginning of the <code>UIDFETCH</code> response, <em>not</em> the value from <a href="FetchStruct.html#method-i-attr"><code>attr</code></a>.</p>
+</dd></dl>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

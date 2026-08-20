@@ -1,0 +1,3663 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class RuboCop::AST::Node - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,RuboCop::AST::Node">
+
+
+    <meta name="description" content="class RuboCop::AST::Node: Node`. It provides access to parent nodes and an object-oriented way to traverse an AST with the power of `Enumerable`.">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../../Parser/AST/Node.html">Parser::AST::Node</a><ul><li><a href="../../AST/Node.html">AST::Node</a><ul><li><a href="../../Object.html">Object</a><ul><li><a href="../../BasicObject.html">BasicObject</a></li></ul></li></ul></li></ul></li></ul>
+</div>
+
+
+  
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="include" href="Sexp.html">RuboCop::AST::Sexp</a></li>
+
+
+
+    <li><a class="include" href="Descendence.html">RuboCop::AST::Descendence</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="extend" href="NodePattern/Macros.html">RuboCop::AST::NodePattern::Macros</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-def_recursive_literal_predicate">def_recursive_literal_predicate</a></li>
+
+      <li class="calls-super" ><a href="#method-c-new">new</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-ancestors">ancestors</a></li>
+
+      <li ><a href="#method-i-any_block_type-3F">any_block_type?</a></li>
+
+      <li ><a href="#method-i-any_def_type-3F">any_def_type?</a></li>
+
+      <li ><a href="#method-i-any_match_pattern_type-3F">any_match_pattern_type?</a></li>
+
+      <li ><a href="#method-i-any_str_type-3F">any_str_type?</a></li>
+
+      <li ><a href="#method-i-any_sym_type-3F">any_sym_type?</a></li>
+
+      <li ><a href="#method-i-argument-3F">argument?</a></li>
+
+      <li ><a href="#method-i-argument_type-3F">argument_type?</a></li>
+
+      <li ><a href="#method-i-assignment-3F">assignment?</a></li>
+
+      <li ><a href="#method-i-basic_conditional-3F">basic_conditional?</a></li>
+
+      <li ><a href="#method-i-basic_literal-3F">basic_literal?</a></li>
+
+      <li ><a href="#method-i-boolean_type-3F">boolean_type?</a></li>
+
+      <li ><a href="#method-i-call_type-3F">call_type?</a></li>
+
+      <li ><a href="#method-i-chained-3F">chained?</a></li>
+
+      <li ><a href="#method-i-complete-21">complete!</a></li>
+
+      <li ><a href="#method-i-complete-3F">complete?</a></li>
+
+      <li ><a href="#method-i-conditional-3F">conditional?</a></li>
+
+      <li ><a href="#method-i-const_name">const_name</a></li>
+
+      <li ><a href="#method-i-defined_module">defined_module</a></li>
+
+      <li ><a href="#method-i-defined_module_name">defined_module_name</a></li>
+
+      <li ><a href="#method-i-each_ancestor">each_ancestor</a></li>
+
+      <li ><a href="#method-i-empty_source-3F">empty_source?</a></li>
+
+      <li ><a href="#method-i-equals_asgn-3F">equals_asgn?</a></li>
+
+      <li ><a href="#method-i-falsey_literal-3F">falsey_literal?</a></li>
+
+      <li ><a href="#method-i-first_line">first_line</a></li>
+
+      <li ><a href="#method-i-guard_clause-3F">guard_clause?</a></li>
+
+      <li ><a href="#method-i-immutable_literal-3F">immutable_literal?</a></li>
+
+      <li ><a href="#method-i-keyword-3F">keyword?</a></li>
+
+      <li ><a href="#method-i-last_line">last_line</a></li>
+
+      <li ><a href="#method-i-left_sibling">left_sibling</a></li>
+
+      <li ><a href="#method-i-left_siblings">left_siblings</a></li>
+
+      <li ><a href="#method-i-line_count">line_count</a></li>
+
+      <li ><a href="#method-i-literal-3F">literal?</a></li>
+
+      <li ><a href="#method-i-loc-3F">loc?</a></li>
+
+      <li ><a href="#method-i-loc_is-3F">loc_is?</a></li>
+
+      <li ><a href="#method-i-loop_keyword-3F">loop_keyword?</a></li>
+
+      <li ><a href="#method-i-multiline-3F">multiline?</a></li>
+
+      <li ><a href="#method-i-mutable_literal-3F">mutable_literal?</a></li>
+
+      <li ><a href="#method-i-nonempty_line_count">nonempty_line_count</a></li>
+
+      <li ><a href="#method-i-numeric_type-3F">numeric_type?</a></li>
+
+      <li ><a href="#method-i-operator_keyword-3F">operator_keyword?</a></li>
+
+      <li ><a href="#method-i-parent">parent</a></li>
+
+      <li ><a href="#method-i-parent-3D">parent=</a></li>
+
+      <li ><a href="#method-i-parent-3F">parent?</a></li>
+
+      <li ><a href="#method-i-parent_module_name">parent_module_name</a></li>
+
+      <li ><a href="#method-i-parenthesized_call-3F">parenthesized_call?</a></li>
+
+      <li ><a href="#method-i-post_condition_loop-3F">post_condition_loop?</a></li>
+
+      <li ><a href="#method-i-pure-3F">pure?</a></li>
+
+      <li ><a href="#method-i-range_type-3F">range_type?</a></li>
+
+      <li ><a href="#method-i-reference-3F">reference?</a></li>
+
+      <li ><a href="#method-i-right_sibling">right_sibling</a></li>
+
+      <li ><a href="#method-i-right_siblings">right_siblings</a></li>
+
+      <li ><a href="#method-i-root-3F">root?</a></li>
+
+      <li ><a href="#method-i-send_type-3F">send_type?</a></li>
+
+      <li ><a href="#method-i-shorthand_asgn-3F">shorthand_asgn?</a></li>
+
+      <li ><a href="#method-i-sibling_index">sibling_index</a></li>
+
+      <li ><a href="#method-i-single_line-3F">single_line?</a></li>
+
+      <li ><a href="#method-i-source">source</a></li>
+
+      <li ><a href="#method-i-source_length">source_length</a></li>
+
+      <li ><a href="#method-i-source_range">source_range</a></li>
+
+      <li ><a href="#method-i-special_keyword-3F">special_keyword?</a></li>
+
+      <li ><a href="#method-i-truthy_literal-3F">truthy_literal?</a></li>
+
+      <li ><a href="#method-i-type-3F">type?</a></li>
+
+      <li ><a href="#method-i-updated">updated</a></li>
+
+      <li ><a href="#method-i-value_used-3F">value_used?</a></li>
+
+      <li ><a href="#method-i-variable-3F">variable?</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-RuboCop::AST::Node">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../RuboCop.html">RuboCop</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../RuboCop/AST.html">AST</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>Node</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-RuboCop::AST::Node" class="anchor-link class">
+    class RuboCop::AST::Node
+  </h1>
+
+  <section class="description">
+    
+<p>‘RuboCop::AST::Node` is a subclass of `Parser::AST::Node`. It provides access to parent nodes and an object-oriented way to traverse an <a href="../AST.html"><code>AST</code></a> with the power of `Enumerable`.</p>
+
+<p>It has predicate methods for every node type, like this:</p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-identifier">node</span>.<span class="ruby-identifier">send_type?</span>    <span class="ruby-comment"># Equivalent to: `node.type == :send`</span>
+<span class="ruby-identifier">node</span>.<span class="ruby-identifier">op_asgn_type?</span> <span class="ruby-comment"># Equivalent to: `node.type == :op_asgn`</span>
+
+<span class="ruby-comment"># Non-word characters (other than a-zA-Z0-9_) in type names are omitted.</span>
+<span class="ruby-identifier">node</span>.<span class="ruby-identifier">defined_type?</span> <span class="ruby-comment"># Equivalent to: `node.type == :defined?`</span>
+
+<span class="ruby-comment"># Find the first lvar node under the receiver node.</span>
+<span class="ruby-identifier">lvar_node</span> = <span class="ruby-identifier">node</span>.<span class="ruby-identifier">each_descendant</span>.<span class="ruby-identifier">find</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:lvar_type?</span>)
+</pre>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+
+        <dt id="ASSIGNMENTS">ASSIGNMENTS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="BASIC_CONDITIONALS">BASIC_CONDITIONALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="BASIC_LITERALS">BASIC_LITERALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="COMPARISON_OPERATORS">COMPARISON_OPERATORS</dt>
+
+        <dd>
+
+          <p>@api private &lt;=&gt; isn’t included here, because it doesn’t return a boolean.</p>
+        </dd>
+
+
+        <dt id="COMPOSITE_LITERALS">COMPOSITE_LITERALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="CONDITIONALS">CONDITIONALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="EQUALS_ASSIGNMENTS">EQUALS_ASSIGNMENTS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="FALSEY_LITERALS">FALSEY_LITERALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="IMMUTABLE_LITERALS">IMMUTABLE_LITERALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="KEYWORDS">KEYWORDS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="LITERALS">LITERALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="LOOP_TYPES">LOOP_TYPES</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="MUTABLE_LITERALS">MUTABLE_LITERALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="OPERATOR_KEYWORDS">OPERATOR_KEYWORDS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="POST_CONDITION_LOOP_TYPES">POST_CONDITION_LOOP_TYPES</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="REFERENCES">REFERENCES</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="SHORTHAND_ASSIGNMENTS">SHORTHAND_ASSIGNMENTS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="SPECIAL_KEYWORDS">SPECIAL_KEYWORDS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="TRUTHY_LITERALS">TRUTHY_LITERALS</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+        <dt id="VARIABLES">VARIABLES</dt>
+
+        <dd>
+
+          <p>@api private</p>
+        </dd>
+
+
+      </dl>
+    </section>
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-def_recursive_literal_predicate" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-def_recursive_literal_predicate" title="Link to this method">
+                <span class="method-name">def_recursive_literal_predicate</span>
+                <span class="method-args">(kind)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="def_recursive_literal_predicate-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 134</span>
+                           <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">def_recursive_literal_predicate</span>(<span class="ruby-identifier">kind</span>) <span class="ruby-comment"># rubocop:disable Metrics/MethodLength</span>
+        <span class="ruby-identifier">recursive_kind</span> = <span class="ruby-node">&quot;recursive_#{kind}?&quot;</span>
+        <span class="ruby-identifier">kind_filter</span> = <span class="ruby-node">&quot;#{kind}?&quot;</span>
+
+        <span class="ruby-identifier">class_eval</span> <span class="ruby-identifier">&lt;&lt;~RUBY</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="ruby-value">          def #{recursive_kind}                                     # def recursive_literal?
+            case type                                               #   case type
+            when :send                                              #   when :send
+              LITERAL_RECURSIVE_METHODS.include?(method_name) &amp;&amp;    #     LITERAL_RECURSIVE_METHODS.include?(method_name) &amp;&amp;
+                receiver.send(:#{recursive_kind}) &amp;&amp;                #       receiver.send(:recursive_literal?) &amp;&amp;
+                arguments.all?(&amp;:#{recursive_kind})                 #       arguments.all?(&amp;:recursive_literal?)
+            when LITERAL_RECURSIVE_TYPES                            #   when LITERAL_RECURSIVE_TYPES
+              children.compact.all?(&amp;:#{recursive_kind})            #     children.compact.all?(&amp;:recursive_literal?)
+            else                                                    #   else
+              send(:#{kind_filter})                                 #     send(:literal?)
+            end                                                     #   end
+          end                                                       # end
+</span><span class="ruby-identifier">        RUBY</span>
+      <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Define a <code>recursive_?</code> predicate method for the given node kind.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-new" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-new" title="Link to this method">
+                <span class="method-name">new</span>
+                <span class="method-args">(type, children = EMPTY_CHILDREN, properties = EMPTY_PROPERTIES)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">children</span> = <span class="ruby-constant">EMPTY_CHILDREN</span>, <span class="ruby-identifier">properties</span> = <span class="ruby-constant">EMPTY_PROPERTIES</span>)
+  <span class="ruby-ivar">@mutable_attributes</span> = {}
+
+  <span class="ruby-comment"># ::AST::Node#initialize freezes itself.</span>
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-comment"># #parent= may be invoked multiple times for a node because there are</span>
+  <span class="ruby-comment"># pending nodes while constructing AST and they are replaced later.</span>
+  <span class="ruby-comment"># For example, `lvar` and `send` type nodes are initially created as an</span>
+  <span class="ruby-comment"># `ident` type node and fixed to the appropriate type later.</span>
+  <span class="ruby-comment"># So, the #parent attribute needs to be mutable.</span>
+  <span class="ruby-identifier">each_child_node</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">child_node</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">child_node</span>.<span class="ruby-identifier">parent</span> = <span class="ruby-keyword">self</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">child_node</span>.<span class="ruby-identifier">complete?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@see <a href="https://www.rubydoc.info/gems/ast/AST/Node:initialize">www.rubydoc.info/gems/ast/AST/Node:initialize</a></p>
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Node.html#method-c-new"><code>AST::Node::new</code></a>
+            </div>
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-ancestors" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-ancestors" title="Link to this method">
+                <span class="method-name">ancestors</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="ancestors-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 320</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ancestors</span>
+  <span class="ruby-identifier">each_ancestor</span>.<span class="ruby-identifier">to_a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns an array of ancestor nodes. This is a shorthand for ‘node.each_ancestor.to_a`.</p>
+
+<p>@return [Array&lt;Node&gt;] an array of ancestor nodes</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-any_block_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-any_block_type-3F" title="Link to this method">
+                <span class="method-name">any_block_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="any_block_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 549</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">any_block_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:any_block</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-any_def_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-any_def_type-3F" title="Link to this method">
+                <span class="method-name">any_def_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="any_def_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 529</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">any_def_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:any_def</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-any_match_pattern_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-any_match_pattern_type-3F" title="Link to this method">
+                <span class="method-name">any_match_pattern_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="any_match_pattern_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 553</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">any_match_pattern_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:any_match_pattern</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-any_str_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-any_str_type-3F" title="Link to this method">
+                <span class="method-name">any_str_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="any_str_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 557</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">any_str_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:any_str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-any_sym_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-any_sym_type-3F" title="Link to this method">
+                <span class="method-name">any_sym_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="any_sym_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 561</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">any_sym_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:any_sym</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-argument-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-argument-3F" title="Link to this method">
+                <span class="method-name">argument?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="argument-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 525</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">argument?</span>
+  <span class="ruby-identifier">parent</span>&amp;.<span class="ruby-identifier">send_type?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-argument_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-argument_type-3F" title="Link to this method">
+                <span class="method-name">argument_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="argument_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 533</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">argument_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:argument</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-assignment-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-assignment-3F" title="Link to this method">
+                <span class="method-name">assignment?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="assignment-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 477</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assignment?</span>
+  <span class="ruby-constant">ASSIGNMENTS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-basic_conditional-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-basic_conditional-3F" title="Link to this method">
+                <span class="method-name">basic_conditional?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="basic_conditional-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 481</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">basic_conditional?</span>
+  <span class="ruby-constant">BASIC_CONDITIONALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-basic_literal-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-basic_literal-3F" title="Link to this method">
+                <span class="method-name">basic_literal?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="basic_literal-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 435</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">basic_literal?</span>
+  <span class="ruby-constant">BASIC_LITERALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-boolean_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-boolean_type-3F" title="Link to this method">
+                <span class="method-name">boolean_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="boolean_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 537</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">boolean_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:boolean</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-call_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-call_type-3F" title="Link to this method">
+                <span class="method-name">call_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="call_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 517</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:call</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-chained-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-chained-3F" title="Link to this method">
+                <span class="method-name">chained?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="chained-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 521</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chained?</span>
+  <span class="ruby-identifier">parent</span>&amp;.<span class="ruby-identifier">call_type?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">parent</span>.<span class="ruby-identifier">receiver</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-complete-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-complete-21" title="Link to this method">
+                <span class="method-name">complete!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="complete-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complete!</span>
+  <span class="ruby-ivar">@mutable_attributes</span>.<span class="ruby-identifier">freeze</span>
+  <span class="ruby-identifier">each_child_node</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:complete!</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-complete-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-complete-3F" title="Link to this method">
+                <span class="method-name">complete?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="complete-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complete?</span>
+  <span class="ruby-ivar">@mutable_attributes</span>.<span class="ruby-identifier">frozen?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-conditional-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-conditional-3F" title="Link to this method">
+                <span class="method-name">conditional?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="conditional-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 485</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">conditional?</span>
+  <span class="ruby-constant">CONDITIONALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-const_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-const_name" title="Link to this method">
+                <span class="method-name">const_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="const_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 366</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">const_name</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">const_type?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">casgn_type?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">namespace</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">namespace</span>.<span class="ruby-identifier">cbase_type?</span>
+    <span class="ruby-node">&quot;#{namespace.const_name}::#{short_name}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">short_name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-defined_module" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-defined_module" title="Link to this method">
+                <span class="method-name">defined_module</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="defined_module-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 386</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">defined_module</span>
+  <span class="ruby-identifier">namespace</span>, <span class="ruby-identifier">name</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">defined_module0</span>
+  <span class="ruby-identifier">s</span>(<span class="ruby-value">:const</span>, <span class="ruby-identifier">namespace</span>, <span class="ruby-identifier">name</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-defined_module_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-defined_module_name" title="Link to this method">
+                <span class="method-name">defined_module_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="defined_module_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 391</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">defined_module_name</span>
+  (<span class="ruby-identifier">const</span> = <span class="ruby-identifier">defined_module</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">const</span>.<span class="ruby-identifier">const_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-each_ancestor" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-each_ancestor" title="Link to this method">
+                <span class="method-name">each_ancestor</span>
+                <span class="method-args">(*types, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="each_ancestor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 308</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_ancestor</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">types</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">to_enum</span>(<span class="ruby-identifier">__method__</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">types</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block</span>
+
+  <span class="ruby-identifier">visit_ancestors</span>(<span class="ruby-identifier">types</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Calls the given block for each ancestor node from parent to root. If no block is given, an ‘Enumerator` is returned.</p>
+
+<p>@overload <a href="Node.html#method-i-each_ancestor"><code>each_ancestor</code></a></p>
+
+<pre>Yield all nodes.</pre>
+
+<p>@overload <a href="Node.html#method-i-each_ancestor"><code>each_ancestor</code></a>(type)</p>
+
+<pre>Yield only nodes matching the type.
+@param [Symbol] type a node type</pre>
+
+<p>@overload <a href="Node.html#method-i-each_ancestor"><code>each_ancestor</code></a>(type_a, type_b, …)</p>
+
+<pre>Yield only nodes matching any of the types.
+@param [Symbol] type_a a node type
+@param [Symbol] type_b a node type</pre>
+
+<p>@yieldparam [Node] node each ancestor node @return [self] if a block is given @return [Enumerator] if no block is given</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-empty_source-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-empty_source-3F" title="Link to this method">
+                <span class="method-name">empty_source?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="empty_source-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 421</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">empty_source?</span>
+  <span class="ruby-identifier">source_length</span>.<span class="ruby-identifier">zero?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-equals_asgn-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-equals_asgn-3F" title="Link to this method">
+                <span class="method-name">equals_asgn?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="equals_asgn-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 469</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">equals_asgn?</span>
+  <span class="ruby-constant">EQUALS_ASSIGNMENTS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-falsey_literal-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-falsey_literal-3F" title="Link to this method">
+                <span class="method-name">falsey_literal?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="falsey_literal-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 443</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">falsey_literal?</span>
+  <span class="ruby-constant">FALSEY_LITERALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-first_line" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-first_line" title="Link to this method">
+                <span class="method-name">first_line</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="first_line-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 334</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first_line</span>
+  <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">line</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-guard_clause-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-guard_clause-3F" title="Link to this method">
+                <span class="method-name">guard_clause?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="guard_clause-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 565</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">guard_clause?</span>
+  <span class="ruby-identifier">node</span> = <span class="ruby-identifier">operator_keyword?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">rhs</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>
+
+  <span class="ruby-identifier">node</span>.<span class="ruby-identifier">match_guard_clause?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-immutable_literal-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-immutable_literal-3F" title="Link to this method">
+                <span class="method-name">immutable_literal?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="immutable_literal-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 451</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">immutable_literal?</span>
+  <span class="ruby-constant">IMMUTABLE_LITERALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-keyword-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-keyword-3F" title="Link to this method">
+                <span class="method-name">keyword?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="keyword-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 498</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keyword?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">special_keyword?</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">send_type?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">prefix_not?</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">KEYWORDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+
+  <span class="ruby-operator">!</span><span class="ruby-constant">OPERATOR_KEYWORDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">operator</span>.<span class="ruby-identifier">is?</span>(<span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-last_line" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-last_line" title="Link to this method">
+                <span class="method-name">last_line</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="last_line-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 338</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last_line</span>
+  <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">last_line</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-left_sibling" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-left_sibling" title="Link to this method">
+                <span class="method-name">left_sibling</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="left_sibling-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 260</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">left_sibling</span>
+  <span class="ruby-identifier">i</span> = <span class="ruby-identifier">sibling_index</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">zero?</span>
+
+  <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">children</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>].<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Use is discouraged, this is a potentially slow method and can lead to even slower algorithms @return [Node, nil] the left (aka previous) sibling</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-left_siblings" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-left_siblings" title="Link to this method">
+                <span class="method-name">left_siblings</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="left_siblings-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 270</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">left_siblings</span>
+  <span class="ruby-keyword">return</span> [].<span class="ruby-identifier">freeze</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">parent</span>
+
+  <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">children</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">sibling_index</span>].<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Use is discouraged, this is a potentially slow method and can lead to even slower algorithms @return [Array&lt;Node&gt;] the left (aka previous) siblings</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-line_count" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-line_count" title="Link to this method">
+                <span class="method-name">line_count</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="line_count-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 342</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">line_count</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">source_range</span>
+
+  <span class="ruby-identifier">source_range</span>.<span class="ruby-identifier">last_line</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">source_range</span>.<span class="ruby-identifier">first_line</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-literal-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-literal-3F" title="Link to this method">
+                <span class="method-name">literal?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="literal-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 431</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">literal?</span>
+  <span class="ruby-constant">LITERALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-loc-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-loc-3F" title="Link to this method">
+                <span class="method-name">loc?</span>
+                <span class="method-args">(which_loc)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="loc-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 573</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">loc?</span>(<span class="ruby-identifier">which_loc</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">which_loc</span>)
+
+  <span class="ruby-operator">!</span><span class="ruby-identifier">loc</span>.<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">which_loc</span>).<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Shortcut to safely check if a location is present @return [Boolean]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-loc_is-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-loc_is-3F" title="Link to this method">
+                <span class="method-name">loc_is?</span>
+                <span class="method-args">(which_loc, str)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="loc_is-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 581</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">loc_is?</span>(<span class="ruby-identifier">which_loc</span>, <span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">loc?</span>(<span class="ruby-identifier">which_loc</span>)
+
+  <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">public_send</span>(<span class="ruby-identifier">which_loc</span>).<span class="ruby-identifier">is?</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Shortcut to safely test a particular location, even if this location does not exist or is ‘nil`</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-loop_keyword-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-loop_keyword-3F" title="Link to this method">
+                <span class="method-name">loop_keyword?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="loop_keyword-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 494</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">loop_keyword?</span>
+  <span class="ruby-constant">LOOP_TYPES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>NOTE: ‘loop { }` is a normal method call and thus not a loop keyword.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-multiline-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-multiline-3F" title="Link to this method">
+                <span class="method-name">multiline?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="multiline-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 413</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">multiline?</span>
+  <span class="ruby-identifier">line_count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Predicates</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-mutable_literal-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-mutable_literal-3F" title="Link to this method">
+                <span class="method-name">mutable_literal?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="mutable_literal-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 447</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mutable_literal?</span>
+  <span class="ruby-constant">MUTABLE_LITERALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-nonempty_line_count" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-nonempty_line_count" title="Link to this method">
+                <span class="method-name">nonempty_line_count</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="nonempty_line_count-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 348</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nonempty_line_count</span>
+  <span class="ruby-identifier">source</span>.<span class="ruby-identifier">lines</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-regexp">/\S/</span>).<span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-numeric_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-numeric_type-3F" title="Link to this method">
+                <span class="method-name">numeric_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="numeric_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 541</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">numeric_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:numeric</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-operator_keyword-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-operator_keyword-3F" title="Link to this method">
+                <span class="method-name">operator_keyword?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="operator_keyword-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 509</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">operator_keyword?</span>
+  <span class="ruby-constant">OPERATOR_KEYWORDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parent" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parent" title="Link to this method">
+                <span class="method-name">parent</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parent-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parent</span>
+  <span class="ruby-ivar">@mutable_attributes</span>[<span class="ruby-value">:parent</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the parent node, or ‘nil` if the receiver is a root node.</p>
+
+<p>@return [Node, nil] the parent node or ‘nil`</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parent-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parent-3F" title="Link to this method">
+                <span class="method-name">parent?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parent-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 208</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parent?</span>
+  <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">parent</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [Boolean]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parent_module_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parent_module_name" title="Link to this method">
+                <span class="method-name">parent_module_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parent_module_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 397</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parent_module_name</span>
+  <span class="ruby-comment"># what class or module is this method/constant/etc definition in?</span>
+  <span class="ruby-comment"># returns nil if answer cannot be determined</span>
+  <span class="ruby-identifier">ancestors</span> = <span class="ruby-identifier">each_ancestor</span>(<span class="ruby-value">:class</span>, <span class="ruby-value">:module</span>, <span class="ruby-value">:sclass</span>, <span class="ruby-value">:casgn</span>, <span class="ruby-value">:block</span>)
+  <span class="ruby-identifier">result</span>    = <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">filter_map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ancestor</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">parent_module_name_part</span>(<span class="ruby-identifier">ancestor</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">full_name</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">full_name</span>
+
+      <span class="ruby-identifier">full_name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;::&#39;</span>)
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;Object&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Searching the <a href="../AST.html"><code>AST</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parenthesized_call-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parenthesized_call-3F" title="Link to this method">
+                <span class="method-name">parenthesized_call?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parenthesized_call-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 513</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parenthesized_call?</span>
+  <span class="ruby-identifier">loc_is?</span>(<span class="ruby-value">:begin</span>, <span class="ruby-string">&#39;(&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-post_condition_loop-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-post_condition_loop-3F" title="Link to this method">
+                <span class="method-name">post_condition_loop?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="post_condition_loop-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 489</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post_condition_loop?</span>
+  <span class="ruby-constant">POST_CONDITION_LOOP_TYPES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pure-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pure-3F" title="Link to this method">
+                <span class="method-name">pure?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pure-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 677</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pure?</span>
+  <span class="ruby-comment"># Be conservative and return false if we&#39;re not sure</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:__FILE__</span>, <span class="ruby-value">:__LINE__</span>, <span class="ruby-value">:const</span>, <span class="ruby-value">:cvar</span>, <span class="ruby-value">:defined?</span>, <span class="ruby-value">:false</span>, <span class="ruby-value">:float</span>,
+       <span class="ruby-value">:gvar</span>, <span class="ruby-value">:int</span>, <span class="ruby-value">:ivar</span>, <span class="ruby-value">:lvar</span>, <span class="ruby-value">:nil</span>, <span class="ruby-value">:str</span>, <span class="ruby-value">:sym</span>, <span class="ruby-value">:true</span>, <span class="ruby-value">:regopt</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:and</span>, <span class="ruby-value">:array</span>, <span class="ruby-value">:begin</span>, <span class="ruby-value">:case</span>, <span class="ruby-value">:dstr</span>, <span class="ruby-value">:dsym</span>, <span class="ruby-value">:eflipflop</span>, <span class="ruby-value">:ensure</span>,
+       <span class="ruby-value">:erange</span>, <span class="ruby-value">:for</span>, <span class="ruby-value">:hash</span>, <span class="ruby-value">:if</span>, <span class="ruby-value">:iflipflop</span>, <span class="ruby-value">:irange</span>, <span class="ruby-value">:kwbegin</span>, <span class="ruby-value">:not</span>,
+       <span class="ruby-value">:or</span>, <span class="ruby-value">:pair</span>, <span class="ruby-value">:regexp</span>, <span class="ruby-value">:until</span>, <span class="ruby-value">:until_post</span>, <span class="ruby-value">:when</span>, <span class="ruby-value">:while</span>,
+       <span class="ruby-value">:while_post</span>
+    <span class="ruby-identifier">child_nodes</span>.<span class="ruby-identifier">all?</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:pure?</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Some expressions are evaluated for their value, some for their side effects, and some for both. If we know that expressions are useful only for their return values, and have no side effects, that means we can reorder them, change the number of times they are evaluated, or replace them with other expressions which are equivalent in value. So, is evaluation of this node free of side effects?</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-range_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-range_type-3F" title="Link to this method">
+                <span class="method-name">range_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="range_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 545</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range_type?</span>
+  <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:range</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-reference-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-reference-3F" title="Link to this method">
+                <span class="method-name">reference?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="reference-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 465</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reference?</span>
+  <span class="ruby-constant">REFERENCES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-right_sibling" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-right_sibling" title="Link to this method">
+                <span class="method-name">right_sibling</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="right_sibling-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">right_sibling</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">parent</span>
+
+  <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">children</span>[<span class="ruby-identifier">sibling_index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>].<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Use is discouraged, this is a potentially slow method and can lead to even slower algorithms @return [Node, nil] the right (aka next) sibling</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-right_siblings" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-right_siblings" title="Link to this method">
+                <span class="method-name">right_siblings</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="right_siblings-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">right_siblings</span>
+  <span class="ruby-keyword">return</span> [].<span class="ruby-identifier">freeze</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">parent</span>
+
+  <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">children</span>[(<span class="ruby-identifier">sibling_index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)<span class="ruby-operator">..</span>].<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Use is discouraged, this is a potentially slow method and can lead to even slower algorithms @return [Array&lt;Node&gt;] the right (aka next) siblings</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-root-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-root-3F" title="Link to this method">
+                <span class="method-name">root?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="root-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">root?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">parent</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [Boolean]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-send_type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-send_type-3F" title="Link to this method">
+                <span class="method-name">send_type?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="send_type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_type?</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Most nodes are of ‘send’ type, so this method is defined separately to make this check as fast as possible.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-shorthand_asgn-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-shorthand_asgn-3F" title="Link to this method">
+                <span class="method-name">shorthand_asgn?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="shorthand_asgn-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 473</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shorthand_asgn?</span>
+  <span class="ruby-constant">SHORTHAND_ASSIGNMENTS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-sibling_index" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-sibling_index" title="Link to this method">
+                <span class="method-name">sibling_index</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="sibling_index-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 244</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sibling_index</span>
+  <span class="ruby-identifier">parent</span>&amp;.<span class="ruby-identifier">children</span>&amp;.<span class="ruby-identifier">index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sibling</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sibling</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-keyword">self</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the index of the receiver node in its siblings. (Sibling index uses zero based numbering.) Use is discouraged, this is a potentially slow method.</p>
+
+<p>@return [Integer, nil] the index of the receiver node in its siblings</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-single_line-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-single_line-3F" title="Link to this method">
+                <span class="method-name">single_line?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="single_line-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 417</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">single_line?</span>
+  <span class="ruby-identifier">line_count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-source" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-source" title="Link to this method">
+                <span class="method-name">source</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="source-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 326</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source</span>
+  <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">expression</span>&amp;.<span class="ruby-identifier">source</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>NOTE: Some rare nodes may have no source, like ‘s(:args)` in `foo {}` @return [String, nil]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-source_length" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-source_length" title="Link to this method">
+                <span class="method-name">source_length</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="source_length-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 352</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source_length</span>
+  <span class="ruby-identifier">source_range</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">source_range</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-source_range" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-source_range" title="Link to this method">
+                <span class="method-name">source_range</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="source_range-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 330</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source_range</span>
+  <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">expression</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-special_keyword-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-special_keyword-3F" title="Link to this method">
+                <span class="method-name">special_keyword?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="special_keyword-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 505</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">special_keyword?</span>
+  <span class="ruby-constant">SPECIAL_KEYWORDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">source</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-truthy_literal-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-truthy_literal-3F" title="Link to this method">
+                <span class="method-name">truthy_literal?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="truthy_literal-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 439</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">truthy_literal?</span>
+  <span class="ruby-constant">TRUTHY_LITERALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-type-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-type-3F" title="Link to this method">
+                <span class="method-name">type?</span>
+                <span class="method-args">(*types)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="type-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">types</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+
+  <span class="ruby-identifier">group_type</span> = <span class="ruby-constant">GROUP_FOR_TYPE</span>[<span class="ruby-identifier">type</span>]
+  <span class="ruby-operator">!</span><span class="ruby-identifier">group_type</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">group_type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Determine if the node is one of several node types in a single query Allows specific single node types, as well as “grouped” types (e.g. ‘:boolean` for `:true` or `:false`)</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-updated" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-updated" title="Link to this method">
+                <span class="method-name">updated</span>
+                <span class="method-args">(type = nil, children = nil, properties = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="updated-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">updated</span>(<span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">children</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">properties</span> = {})
+  <span class="ruby-identifier">properties</span>[<span class="ruby-value">:location</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@location</span>
+  <span class="ruby-identifier">klass</span> = <span class="ruby-constant">RuboCop</span><span class="ruby-operator">::</span><span class="ruby-constant">AST</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span><span class="ruby-operator">::</span><span class="ruby-constant">NODE_MAP</span>[<span class="ruby-identifier">type</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@type</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Node</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">type</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@type</span>, <span class="ruby-identifier">children</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@children</span>, <span class="ruby-identifier">properties</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Override ‘AST::Node#updated` so that `AST::Processor` does not try to mutate our ASTs. Since we keep references from children to parents and not just the other way around, we cannot update an <a href="../AST.html"><code>AST</code></a> and share identical subtrees. Rather, the entire <a href="../AST.html"><code>AST</code></a> must be copied any time any part of it is changed.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-value_used-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-value_used-3F" title="Link to this method">
+                <span class="method-name">value_used?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="value_used-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 647</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">value_used?</span> <span class="ruby-comment"># rubocop:disable Metrics/MethodLength</span>
+  <span class="ruby-comment"># Be conservative and return true if we&#39;re not sure.</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:array</span>, <span class="ruby-value">:defined?</span>, <span class="ruby-value">:dstr</span>, <span class="ruby-value">:dsym</span>, <span class="ruby-value">:eflipflop</span>, <span class="ruby-value">:erange</span>, <span class="ruby-value">:float</span>,
+       <span class="ruby-value">:hash</span>, <span class="ruby-value">:iflipflop</span>, <span class="ruby-value">:irange</span>, <span class="ruby-value">:not</span>, <span class="ruby-value">:pair</span>, <span class="ruby-value">:regexp</span>, <span class="ruby-value">:str</span>, <span class="ruby-value">:sym</span>,
+       <span class="ruby-value">:when</span>, <span class="ruby-value">:xstr</span>
+    <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">value_used?</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:begin</span>, <span class="ruby-value">:kwbegin</span>
+    <span class="ruby-identifier">begin_value_used?</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:for</span>
+    <span class="ruby-identifier">for_value_used?</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:case</span>, <span class="ruby-value">:if</span>
+    <span class="ruby-identifier">case_if_value_used?</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:while</span>, <span class="ruby-value">:until</span>, <span class="ruby-value">:while_post</span>, <span class="ruby-value">:until_post</span>
+    <span class="ruby-identifier">while_until_value_used?</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Some expressions are evaluated for their value, some for their side effects, and some for both If we know that an expression is useful only for its side effects, that means we can transform it in ways which preserve the side effects, but change the return value So, does the return value of this node matter? If we changed it to ‘(…; nil)`, might that affect anything?</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-variable-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-variable-3F" title="Link to this method">
+                <span class="method-name">variable?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="variable-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 461</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">variable?</span>
+  <span class="ruby-constant">VARIABLES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-parent-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parent-3D" title="Link to this method">
+                <span class="method-name">parent=</span>
+                <span class="method-args">(node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parent-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rubocop-ast-1.48.0/lib/rubocop/ast/node.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parent=</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-ivar">@mutable_attributes</span>[<span class="ruby-value">:parent</span>] = <span class="ruby-identifier">node</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

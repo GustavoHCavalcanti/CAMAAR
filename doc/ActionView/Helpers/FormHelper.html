@@ -1,0 +1,2861 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>module ActionView::Helpers::FormHelper - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,module,ActionView::Helpers::FormHelper">
+
+
+    <meta name="description" content="module ActionView::Helpers::FormHelper: Action View Form \Helpers Form helpers are designed to make working with resources much easier compared to using vanilla HTML. tt&gt; parameter in the c">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+
+
+
+
+  <ul class="link-list" role="directory">
+    
+
+
+
+
+          <li>
+      <a href="#module-ActionView::Helpers::FormHelper-label-Action+View+Form+Helpers">Action View Form Helpers</a>
+</li>
+
+
+
+
+          <li>
+      <a href="#module-ActionView::Helpers::FormHelper-label-Action+View+Form+Helpers">Action View Form Helpers</a>
+</li>
+
+
+
+  </ul>
+</div>
+
+
+  
+
+  
+
+  
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="include" href="FormTagHelper.html">ActionView::Helpers::FormTagHelper</a></li>
+
+
+
+    <li><a class="include" href="UrlHelper.html">ActionView::Helpers::UrlHelper</a></li>
+
+
+
+    <li><a class="include" href="../RecordIdentifier.html">ActionView::RecordIdentifier</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+<div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="extend" href="../../ActiveSupport/Concern.html">ActiveSupport::Concern</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-check_box">check_box</a></li>
+
+      <li ><a href="#method-i-checkbox">checkbox</a></li>
+
+      <li ><a href="#method-i-color_field">color_field</a></li>
+
+      <li ><a href="#method-i-date_field">date_field</a></li>
+
+      <li ><a href="#method-i-datetime_field">datetime_field</a></li>
+
+      <li ><a href="#method-i-datetime_local_field">datetime_local_field</a></li>
+
+      <li ><a href="#method-i-email_field">email_field</a></li>
+
+      <li ><a href="#method-i-fields">fields</a></li>
+
+      <li ><a href="#method-i-fields_for">fields_for</a></li>
+
+      <li ><a href="#method-i-file_field">file_field</a></li>
+
+      <li ><a href="#method-i-form_for">form_for</a></li>
+
+      <li ><a href="#method-i-form_with">form_with</a></li>
+
+      <li ><a href="#method-i-hidden_field">hidden_field</a></li>
+
+      <li ><a href="#method-i-label">label</a></li>
+
+      <li ><a href="#method-i-month_field">month_field</a></li>
+
+      <li ><a href="#method-i-number_field">number_field</a></li>
+
+      <li ><a href="#method-i-password_field">password_field</a></li>
+
+      <li ><a href="#method-i-phone_field">phone_field</a></li>
+
+      <li ><a href="#method-i-radio_button">radio_button</a></li>
+
+      <li ><a href="#method-i-range_field">range_field</a></li>
+
+      <li ><a href="#method-i-rich_text_area">rich_text_area</a></li>
+
+      <li ><a href="#method-i-rich_textarea">rich_textarea</a></li>
+
+      <li ><a href="#method-i-search_field">search_field</a></li>
+
+      <li ><a href="#method-i-telephone_field">telephone_field</a></li>
+
+      <li ><a href="#method-i-text_area">text_area</a></li>
+
+      <li ><a href="#method-i-text_field">text_field</a></li>
+
+      <li ><a href="#method-i-textarea">textarea</a></li>
+
+      <li ><a href="#method-i-time_field">time_field</a></li>
+
+      <li ><a href="#method-i-url_field">url_field</a></li>
+
+      <li ><a href="#method-i-week_field">week_field</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="module-ActionView::Helpers::FormHelper">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../ActionView.html">ActionView</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../ActionView/Helpers.html">Helpers</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>FormHelper</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="module-ActionView::Helpers::FormHelper" class="anchor-link module">
+    module ActionView::Helpers::FormHelper
+  </h1>
+
+  <section class="description">
+    
+<h1 id="module-ActionView::Helpers::FormHelper-label-Action+View+Form+Helpers"><a href="#module-ActionView::Helpers::FormHelper-label-Action+View+Form+Helpers">Action View Form Helpers</a></h1>
+
+<p>Form helpers are designed to make working with resources much easier compared to using vanilla HTML.</p>
+
+<p>Typically, a form designed to create or update a resource reflects the identity of the resource in several ways: (i) the URL that the form is sent to (the form element’s <code>action</code> attribute) should result in a request being routed to the appropriate controller action (with the appropriate <code>:id</code> parameter in the case of an existing resource), (ii) input fields should be named in such a way that in the controller their values appear in the appropriate places within the <code>params</code> hash, and (iii) for an existing record, when the form is initially displayed, input fields corresponding to attributes of the resource should show the current values of those attributes.</p>
+
+<p>In Rails, this is usually achieved by creating the form using either <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> or <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> and a number of related helper methods. These methods generate an appropriate <code>form</code> tag and yield a form builder object that knows the model the form is about. Input fields are created by calling methods defined on the form builder, which means they are able to generate the appropriate names and default values corresponding to the model attributes, as well as convenient IDs, etc. Conventions in the generated field names allow controllers to receive form data nicely structured in <code>params</code> with no effort on your side.</p>
+
+<p>For example, to create a new person you typically set up a new instance of <a href="../../Person.html"><code>Person</code></a> in the <code>PeopleController#new</code> action, <code>@person</code>, and in the view template pass that object to <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> or <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a>:</p>
+
+<pre>&lt;%= form_with model: @person do |f| %&gt;
+  &lt;%= f.label :first_name %&gt;:
+  &lt;%= f.text_field :first_name %&gt;&lt;br /&gt;
+
+  &lt;%= f.label :last_name %&gt;:
+  &lt;%= f.text_field :last_name %&gt;&lt;br /&gt;
+
+  &lt;%= f.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>The HTML generated for this would be (modulus formatting):</p>
+
+<pre>&lt;form action=&quot;/people&quot; class=&quot;new_person&quot; id=&quot;new_person&quot; method=&quot;post&quot;&gt;
+  &lt;input name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=&quot; /&gt;
+  &lt;label for=&quot;person_first_name&quot;&gt;First name&lt;/label&gt;:
+  &lt;input id=&quot;person_first_name&quot; name=&quot;person[first_name]&quot; type=&quot;text&quot; /&gt;&lt;br /&gt;
+
+  &lt;label for=&quot;person_last_name&quot;&gt;Last name&lt;/label&gt;:
+  &lt;input id=&quot;person_last_name&quot; name=&quot;person[last_name]&quot; type=&quot;text&quot; /&gt;&lt;br /&gt;
+
+  &lt;input name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Create Person&quot; /&gt;
+&lt;/form&gt;</pre>
+
+<p>As you see, the HTML reflects knowledge about the resource in several spots, like the path the form should be submitted to, or the names of the input fields.</p>
+
+<p>In particular, thanks to the conventions followed in the generated field names, the controller gets a nested hash <code>params[:person]</code> with the person attributes set in the form. That hash is ready to be passed to <a href="../../ActiveRecord/Core.html#method-c-new"><code>Person.new</code></a>:</p>
+
+<pre class="ruby"><span class="ruby-ivar">@person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:person</span>])
+<span class="ruby-keyword">if</span> <span class="ruby-ivar">@person</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-comment"># success</span>
+<span class="ruby-keyword">else</span>
+  <span class="ruby-comment"># error handling</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Interestingly, the exact same view code in the previous example can be used to edit a person. If <code>@person</code> is an existing record with name “John Smith” and ID 256, the code above as is would yield instead:</p>
+
+<pre>&lt;form action=&quot;/people/256&quot; class=&quot;edit_person&quot; id=&quot;edit_person_256&quot; method=&quot;post&quot;&gt;
+  &lt;input name=&quot;_method&quot; type=&quot;hidden&quot; value=&quot;patch&quot; /&gt;
+  &lt;input name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=&quot; /&gt;
+  &lt;label for=&quot;person_first_name&quot;&gt;First name&lt;/label&gt;:
+  &lt;input id=&quot;person_first_name&quot; name=&quot;person[first_name]&quot; type=&quot;text&quot; value=&quot;John&quot; /&gt;&lt;br /&gt;
+
+  &lt;label for=&quot;person_last_name&quot;&gt;Last name&lt;/label&gt;:
+  &lt;input id=&quot;person_last_name&quot; name=&quot;person[last_name]&quot; type=&quot;text&quot; value=&quot;Smith&quot; /&gt;&lt;br /&gt;
+
+  &lt;input name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Update Person&quot; /&gt;
+&lt;/form&gt;</pre>
+
+<p>Note that the endpoint, default values, and submit button label are tailored for <code>@person</code>. That works that way because the involved helpers know whether the resource is a new record or not, and generate HTML accordingly.</p>
+
+<p>The controller would receive the form data again in <code>params[:person]</code>, ready to be passed to <a href="../../ActiveRecord/Persistence.html#method-i-update"><code>Person#update</code></a>:</p>
+
+<pre class="ruby"><span class="ruby-keyword">if</span> <span class="ruby-ivar">@person</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:person</span>])
+  <span class="ruby-comment"># success</span>
+<span class="ruby-keyword">else</span>
+  <span class="ruby-comment"># error handling</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>That’s how you typically work with resources.</p>
+
+<h1 id="module-ActionView::Helpers::FormHelper-label-Action+View+Form+Helpers"><a href="#module-ActionView::Helpers::FormHelper-label-Action+View+Form+Helpers">Action View Form Helpers</a></h1>
+
+<p>Form helpers are designed to make working with resources much easier compared to using vanilla HTML.</p>
+
+<p>Typically, a form designed to create or update a resource reflects the identity of the resource in several ways: (i) the URL that the form is sent to (the form element’s <code>action</code> attribute) should result in a request being routed to the appropriate controller action (with the appropriate <code>:id</code> parameter in the case of an existing resource), (ii) input fields should be named in such a way that in the controller their values appear in the appropriate places within the <code>params</code> hash, and (iii) for an existing record, when the form is initially displayed, input fields corresponding to attributes of the resource should show the current values of those attributes.</p>
+
+<p>In Rails, this is usually achieved by creating the form using either <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> or <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> and a number of related helper methods. These methods generate an appropriate <code>form</code> tag and yield a form builder object that knows the model the form is about. Input fields are created by calling methods defined on the form builder, which means they are able to generate the appropriate names and default values corresponding to the model attributes, as well as convenient IDs, etc. Conventions in the generated field names allow controllers to receive form data nicely structured in <code>params</code> with no effort on your side.</p>
+
+<p>For example, to create a new person you typically set up a new instance of <a href="../../Person.html"><code>Person</code></a> in the <code>PeopleController#new</code> action, <code>@person</code>, and in the view template pass that object to <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> or <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a>:</p>
+
+<pre>&lt;%= form_with model: @person do |f| %&gt;
+  &lt;%= f.label :first_name %&gt;:
+  &lt;%= f.text_field :first_name %&gt;&lt;br /&gt;
+
+  &lt;%= f.label :last_name %&gt;:
+  &lt;%= f.text_field :last_name %&gt;&lt;br /&gt;
+
+  &lt;%= f.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>The HTML generated for this would be (modulus formatting):</p>
+
+<pre>&lt;form action=&quot;/people&quot; class=&quot;new_person&quot; id=&quot;new_person&quot; method=&quot;post&quot;&gt;
+  &lt;input name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=&quot; /&gt;
+  &lt;label for=&quot;person_first_name&quot;&gt;First name&lt;/label&gt;:
+  &lt;input id=&quot;person_first_name&quot; name=&quot;person[first_name]&quot; type=&quot;text&quot; /&gt;&lt;br /&gt;
+
+  &lt;label for=&quot;person_last_name&quot;&gt;Last name&lt;/label&gt;:
+  &lt;input id=&quot;person_last_name&quot; name=&quot;person[last_name]&quot; type=&quot;text&quot; /&gt;&lt;br /&gt;
+
+  &lt;input name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Create Person&quot; /&gt;
+&lt;/form&gt;</pre>
+
+<p>As you see, the HTML reflects knowledge about the resource in several spots, like the path the form should be submitted to, or the names of the input fields.</p>
+
+<p>In particular, thanks to the conventions followed in the generated field names, the controller gets a nested hash <code>params[:person]</code> with the person attributes set in the form. That hash is ready to be passed to <a href="../../ActiveRecord/Core.html#method-c-new"><code>Person.new</code></a>:</p>
+
+<pre class="ruby"><span class="ruby-ivar">@person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:person</span>])
+<span class="ruby-keyword">if</span> <span class="ruby-ivar">@person</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-comment"># success</span>
+<span class="ruby-keyword">else</span>
+  <span class="ruby-comment"># error handling</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Interestingly, the exact same view code in the previous example can be used to edit a person. If <code>@person</code> is an existing record with name “John Smith” and ID 256, the code above as is would yield instead:</p>
+
+<pre>&lt;form action=&quot;/people/256&quot; class=&quot;edit_person&quot; id=&quot;edit_person_256&quot; method=&quot;post&quot;&gt;
+  &lt;input name=&quot;_method&quot; type=&quot;hidden&quot; value=&quot;patch&quot; /&gt;
+  &lt;input name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=&quot; /&gt;
+  &lt;label for=&quot;person_first_name&quot;&gt;First name&lt;/label&gt;:
+  &lt;input id=&quot;person_first_name&quot; name=&quot;person[first_name]&quot; type=&quot;text&quot; value=&quot;John&quot; /&gt;&lt;br /&gt;
+
+  &lt;label for=&quot;person_last_name&quot;&gt;Last name&lt;/label&gt;:
+  &lt;input id=&quot;person_last_name&quot; name=&quot;person[last_name]&quot; type=&quot;text&quot; value=&quot;Smith&quot; /&gt;&lt;br /&gt;
+
+  &lt;input name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Update Person&quot; /&gt;
+&lt;/form&gt;</pre>
+
+<p>Note that the endpoint, default values, and submit button label are tailored for <code>@person</code>. That works that way because the involved helpers know whether the resource is a new record or not, and generate HTML accordingly.</p>
+
+<p>The controller would receive the form data again in <code>params[:person]</code>, ready to be passed to <a href="../../ActiveRecord/Persistence.html#method-i-update"><code>Person#update</code></a>:</p>
+
+<pre class="ruby"><span class="ruby-keyword">if</span> <span class="ruby-ivar">@person</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:person</span>])
+  <span class="ruby-comment"># success</span>
+<span class="ruby-keyword">else</span>
+  <span class="ruby-comment"># error handling</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>That’s how you typically work with resources.</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-check_box" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-check_box" title="Link to this method">
+                <span class="method-name">check_box</span>
+                <span class="method-args">(object_name, method, options = {}, checked_value = &quot;1&quot;, unchecked_value = &quot;0&quot;)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="FormHelper.html#method-i-checkbox">checkbox</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-checkbox" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-checkbox" title="Link to this method">
+                <span class="method-name">checkbox</span>
+                <span class="method-args">(object_name, method, options = {}, checked_value = &quot;1&quot;, unchecked_value = &quot;0&quot;)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="checkbox-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1346</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">checkbox</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">checked_value</span> = <span class="ruby-string">&quot;1&quot;</span>, <span class="ruby-identifier">unchecked_value</span> = <span class="ruby-string">&quot;0&quot;</span>)
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">CheckBox</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">checked_value</span>, <span class="ruby-identifier">unchecked_value</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a checkbox tag tailored for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). This object must be an instance object (@object) and not a local object. It’s intended that <code>method</code> returns an integer and if that integer is above zero, then the checkbox is checked. Additional options on the input tag can be passed as a hash with <code>options</code>. The <code>checked_value</code> defaults to 1 while the default <code>unchecked_value</code> is set to 0 which is convenient for boolean values.</p>
+
+<h4 id="method-i-checkbox-label-Options"><a href="#method-i-checkbox-label-Options">Options</a></h4>
+<ul><li>
+<p>Any standard HTML attributes for the tag can be passed in, for example <code>:class</code>.</p>
+</li><li>
+<p><code>:checked</code> - <code>true</code> or <code>false</code> forces the state of the checkbox to be checked or not.</p>
+</li><li>
+<p><code>:include_hidden</code> - If set to false, the auxiliary hidden field described below will not be generated.</p>
+</li></ul>
+
+<h4 id="method-i-checkbox-label-Gotcha"><a href="#method-i-checkbox-label-Gotcha">Gotcha</a></h4>
+
+<p>The HTML specification says unchecked check boxes are not successful, and thus web browsers do not send them. Unfortunately this introduces a gotcha: if an <code>Invoice</code> model has a <code>paid</code> flag, and in the form that edits a paid invoice the user unchecks its check box, no <code>paid</code> parameter is sent. So, any mass-assignment idiom like</p>
+
+<pre class="ruby"><span class="ruby-ivar">@invoice</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:invoice</span>])
+</pre>
+
+<p>wouldn’t update the flag.</p>
+
+<p>To prevent this the helper generates an auxiliary hidden field before every check box. The hidden field has the same name and its attributes mimic an unchecked check box.</p>
+
+<p>This way, the client either sends only the hidden field (representing the check box is unchecked), or both fields. Since the HTML specification says key/value pairs have to be sent in the same order they appear in the form, and parameters extraction gets the last occurrence of any repeated key in the query string, that works for ordinary forms.</p>
+
+<p>Unfortunately that workaround does not work when the check box goes within an array-like parameter, as in</p>
+
+<pre>&lt;%= fields_for &quot;project[invoice_attributes][]&quot;, invoice, index: nil do |form| %&gt;
+  &lt;%= form.checkbox :paid %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>because parameter name repetition is precisely what Rails seeks to distinguish the elements of the array. For each item with a checked check box you get an extra ghost item with only that attribute, assigned to “0”.</p>
+
+<p>In that case it is preferable to either use <a href="FormTagHelper.html#method-i-checkbox_tag"><code>FormTagHelper#checkbox_tag</code></a> or to use hashes instead of arrays.</p>
+
+<h4 id="method-i-checkbox-label-Examples"><a href="#method-i-checkbox-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-comment"># Let&#39;s say that @article.validated? is 1:</span>
+<span class="ruby-identifier">checkbox</span>(<span class="ruby-string">&quot;article&quot;</span>, <span class="ruby-string">&quot;validated&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input name=&quot;article[validated]&quot; type=&quot;hidden&quot; value=&quot;0&quot; /&gt;</span>
+<span class="ruby-comment">#    &lt;input checked=&quot;checked&quot; type=&quot;checkbox&quot; id=&quot;article_validated&quot; name=&quot;article[validated]&quot; value=&quot;1&quot; /&gt;</span>
+
+<span class="ruby-comment"># Let&#39;s say that @puppy.gooddog is &quot;no&quot;:</span>
+<span class="ruby-identifier">checkbox</span>(<span class="ruby-string">&quot;puppy&quot;</span>, <span class="ruby-string">&quot;gooddog&quot;</span>, {}, <span class="ruby-string">&quot;yes&quot;</span>, <span class="ruby-string">&quot;no&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input name=&quot;puppy[gooddog]&quot; type=&quot;hidden&quot; value=&quot;no&quot; /&gt;</span>
+<span class="ruby-comment">#    &lt;input type=&quot;checkbox&quot; id=&quot;puppy_gooddog&quot; name=&quot;puppy[gooddog]&quot; value=&quot;yes&quot; /&gt;</span>
+
+<span class="ruby-identifier">checkbox</span>(<span class="ruby-string">&quot;eula&quot;</span>, <span class="ruby-string">&quot;accepted&quot;</span>, { <span class="ruby-value">class:</span> <span class="ruby-string">&#39;eula_check&#39;</span> }, <span class="ruby-string">&quot;yes&quot;</span>, <span class="ruby-string">&quot;no&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input name=&quot;eula[accepted]&quot; type=&quot;hidden&quot; value=&quot;no&quot; /&gt;</span>
+<span class="ruby-comment">#    &lt;input type=&quot;checkbox&quot; class=&quot;eula_check&quot; id=&quot;eula_accepted&quot; name=&quot;eula[accepted]&quot; value=&quot;yes&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="FormHelper.html#method-i-check_box">check_box</a>, check_box
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-color_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-color_field" title="Link to this method">
+                <span class="method-name">color_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="color_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1377</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">color_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">ColorField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “color”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">color_field</span>(<span class="ruby-string">&quot;car&quot;</span>, <span class="ruby-string">&quot;color&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;car_color&quot; name=&quot;car[color]&quot; type=&quot;color&quot; value=&quot;#000000&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-date_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-date_field" title="Link to this method">
+                <span class="method-name">date_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="date_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1441</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">date_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">DateField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “date”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">date_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;date&quot; /&gt;</span>
+</pre>
+
+<p>The default value is generated by trying to call <code>strftime</code> with “%Y-%m-%d” on the object’s value, which makes it behave as expected for instances of <a href="../../DateTime.html"><code>DateTime</code></a> and <a href="../../ActiveSupport/TimeWithZone.html"><code>ActiveSupport::TimeWithZone</code></a>. You can still override that by passing the “value” option explicitly, e.g.</p>
+
+<pre class="ruby"><span class="ruby-ivar">@user</span>.<span class="ruby-identifier">born_on</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1984</span>, <span class="ruby-value">1</span>, <span class="ruby-value">27</span>)
+<span class="ruby-identifier">date_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-string">&quot;1984-05-12&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;date&quot; value=&quot;1984-05-12&quot; /&gt;</span>
+</pre>
+
+<p>You can create values for the “min” and “max” attributes by passing instances of <a href="../../Date.html"><code>Date</code></a> or <a href="../../Time.html"><code>Time</code></a> to the options hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">date_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>, <span class="ruby-value">min:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;date&quot; min=&quot;2014-05-20&quot; /&gt;</span>
+</pre>
+
+<p>Alternatively, you can pass a <a href="../../String.html"><code>String</code></a> formatted as an ISO8601 date as the values for “min” and “max.”</p>
+
+<pre class="ruby"><span class="ruby-identifier">date_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>, <span class="ruby-value">min:</span> <span class="ruby-string">&quot;2014-05-20&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;date&quot; min=&quot;2014-05-20&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-datetime_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-datetime_field" title="Link to this method">
+                <span class="method-name">datetime_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="datetime_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1514</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">datetime_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">DatetimeLocalField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “datetime-local”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">datetime_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;datetime-local&quot; /&gt;</span>
+</pre>
+
+<p>The default value is generated by trying to call <code>strftime</code> with “%Y-%m-%dT%T” on the object’s value, which makes it behave as expected for instances of <a href="../../DateTime.html"><code>DateTime</code></a> and <a href="../../ActiveSupport/TimeWithZone.html"><code>ActiveSupport::TimeWithZone</code></a>.</p>
+
+<pre class="ruby"><span class="ruby-ivar">@user</span>.<span class="ruby-identifier">born_on</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1984</span>, <span class="ruby-value">1</span>, <span class="ruby-value">12</span>)
+<span class="ruby-identifier">datetime_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;datetime-local&quot; value=&quot;1984-01-12T00:00:00&quot; /&gt;</span>
+</pre>
+
+<p>You can create values for the “min” and “max” attributes by passing instances of <a href="../../Date.html"><code>Date</code></a> or <a href="../../Time.html"><code>Time</code></a> to the options hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">datetime_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>, <span class="ruby-value">min:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;datetime-local&quot; min=&quot;2014-05-20T00:00:00.000&quot; /&gt;</span>
+</pre>
+
+<p>Alternatively, you can pass a <a href="../../String.html"><code>String</code></a> formatted as an ISO8601 datetime as the values for “min” and “max.”</p>
+
+<pre class="ruby"><span class="ruby-identifier">datetime_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>, <span class="ruby-value">min:</span> <span class="ruby-string">&quot;2014-05-20T00:00:00&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;datetime-local&quot; min=&quot;2014-05-20T00:00:00.000&quot; /&gt;</span>
+</pre>
+
+<p>By default, provided datetimes will be formatted including seconds. You can render just the date, hour, and minute by passing <code>include_seconds: false</code>.</p>
+
+<pre class="ruby"><span class="ruby-ivar">@user</span>.<span class="ruby-identifier">born_on</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>
+<span class="ruby-identifier">datetime_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>, <span class="ruby-value">include_seconds:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;datetime-local&quot; value=&quot;2014-05-20T14:35&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="FormHelper.html#method-i-datetime_local_field">datetime_local_field</a>, datetime_local_field
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-datetime_local_field" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-datetime_local_field" title="Link to this method">
+                <span class="method-name">datetime_local_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="FormHelper.html#method-i-datetime_field">datetime_field</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-email_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-email_field" title="Link to this method">
+                <span class="method-name">email_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="email_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1568</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">email_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">EmailField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “email”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">email_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;address&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_address&quot; name=&quot;user[address]&quot; type=&quot;email&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-fields" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-fields" title="Link to this method">
+                <span class="method-name">fields</span>
+                <span class="method-args">(scope = nil, model: nil, **options, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="fields-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1079</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fields</span>(<span class="ruby-identifier">scope</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">model:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span> = { <span class="ruby-value">allow_method_names_outside_object:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">skip_default_ids:</span> <span class="ruby-operator">!</span><span class="ruby-identifier">form_with_generates_ids</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">model</span>
+    <span class="ruby-identifier">model</span>   = <span class="ruby-identifier">_object_for_form_builder</span>(<span class="ruby-identifier">model</span>)
+    <span class="ruby-identifier">scope</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">model</span>).<span class="ruby-identifier">param_key</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">builder</span> = <span class="ruby-identifier">instantiate_builder</span>(<span class="ruby-identifier">scope</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">capture</span>(<span class="ruby-identifier">builder</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Scopes input fields with either an explicit scope or model. Like <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> does with <code>:scope</code> or <code>:model</code>, except it doesn’t output the form tags.</p>
+
+<pre># Using a scope prefixes the input field names:
+&lt;%= fields :comment do |fields| %&gt;
+  &lt;%= fields.text_field :body %&gt;
+&lt;% end %&gt;
+# =&gt; &lt;input type=&quot;text&quot; name=&quot;comment[body]&quot;&gt;
+
+# Using a model infers the scope and assigns field values:
+&lt;%= fields model: Comment.new(body: &quot;full bodied&quot;) do |fields| %&gt;
+  &lt;%= fields.text_field :body %&gt;
+&lt;% end %&gt;
+# =&gt; &lt;input type=&quot;text&quot; name=&quot;comment[body]&quot; value=&quot;full bodied&quot;&gt;
+
+# Using `fields` with `form_with`:
+&lt;%= form_with model: @article do |form| %&gt;
+  &lt;%= form.text_field :title %&gt;
+
+  &lt;%= form.fields :comment do |fields| %&gt;
+    &lt;%= fields.text_field :body %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;</pre>
+
+<p>Much like <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> a <a href="FormBuilder.html"><code>FormBuilder</code></a> instance associated with the scope or model is yielded, so any generated field names are prefixed with either the passed scope or the scope inferred from the <code>:model</code>.</p>
+
+<h3 id="method-i-fields-label-Mixing+with+other+form+helpers"><a href="#method-i-fields-label-Mixing+with+other+form+helpers">Mixing with other form helpers</a></h3>
+
+<p>While <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> uses a <a href="FormBuilder.html"><code>FormBuilder</code></a> object it’s possible to mix and match the stand-alone <a href="FormHelper.html"><code>FormHelper</code></a> methods and methods from FormTagHelper:</p>
+
+<pre>&lt;%= fields model: @comment do |fields| %&gt;
+  &lt;%= fields.text_field :body %&gt;
+
+  &lt;%= textarea :commenter, :biography %&gt;
+  &lt;%= checkbox_tag &quot;comment[all_caps]&quot;, &quot;1&quot;, @comment.commenter.hulk_mode? %&gt;
+&lt;% end %&gt;</pre>
+
+<p>Same goes for the methods in <a href="FormOptionsHelper.html"><code>FormOptionsHelper</code></a> and <a href="DateHelper.html"><code>DateHelper</code></a> designed to work with an object as a base, like <a href="FormOptionsHelper.html#method-i-collection_select"><code>FormOptionsHelper#collection_select</code></a> and <a href="DateHelper.html#method-i-datetime_select"><code>DateHelper#datetime_select</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-fields_for" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-fields_for" title="Link to this method">
+                <span class="method-name">fields_for</span>
+                <span class="method-args">(record_name, record_object = nil, options = {}, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="fields_for-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1028</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fields_for</span>(<span class="ruby-identifier">record_name</span>, <span class="ruby-identifier">record_object</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span> = { <span class="ruby-value">model:</span> <span class="ruby-identifier">record_object</span>, <span class="ruby-value">allow_method_names_outside_object:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">skip_default_ids:</span> <span class="ruby-keyword">false</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-identifier">fields</span>(<span class="ruby-identifier">record_name</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Creates a scope around a specific model object like <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a>, but doesn’t create the form tags themselves. This makes <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> suitable for specifying additional model objects in the same form.</p>
+
+<p>Although the usage and purpose of <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> is similar to <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a>‘s, its method signature is slightly different. Like <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a>, it yields a <a href="FormBuilder.html"><code>FormBuilder</code></a> object associated with a particular model object to a block, and within the block allows methods to be called on the builder to generate fields associated with the model object. Fields may reflect a model object in two ways - how they are named (hence how submitted values appear within the <code>params</code> hash in the controller) and what default values are shown when the form fields are first displayed. In order for both of these features to be specified independently, both an object name (represented by either a symbol or string) and the object itself can be passed to the method separately -</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  First name: &lt;%= person_form.text_field :first_name %&gt;
+  Last name : &lt;%= person_form.text_field :last_name %&gt;
+
+  &lt;%= fields_for :permission, @person.permission do |permission_fields| %&gt;
+    Admin?  : &lt;%= permission_fields.checkbox :admin %&gt;
+  &lt;% end %&gt;
+
+  &lt;%= person_form.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>In this case, the checkbox field will be represented by an HTML <code>input</code> tag with the <code>name</code> attribute <code>permission[admin]</code>, and the submitted value will appear in the controller as <code>params[:permission][:admin]</code>. If <code>@person.permission</code> is an existing record with an attribute <code>admin</code>, the initial state of the checkbox when first displayed will reflect the value of <code>@person.permission.admin</code>.</p>
+
+<p>Often this can be simplified by passing just the name of the model object to <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> -</p>
+
+<pre>&lt;%= fields_for :permission do |permission_fields| %&gt;
+  Admin?: &lt;%= permission_fields.checkbox :admin %&gt;
+&lt;% end %&gt;</pre>
+
+<p>…in which case, if <code>:permission</code> also happens to be the name of an instance variable <code>@permission</code>, the initial state of the input field will reflect the value of that variable’s attribute <code>@permission.admin</code>.</p>
+
+<p>Alternatively, you can pass just the model object itself (if the first argument isn’t a string or symbol <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> will realize that the name has been omitted) -</p>
+
+<pre>&lt;%= fields_for @person.permission do |permission_fields| %&gt;
+  Admin?: &lt;%= permission_fields.checkbox :admin %&gt;
+&lt;% end %&gt;</pre>
+
+<p>and <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> will derive the required name of the field from the <em>class</em> of the model object, e.g. if <code>@person.permission</code>, is of class <code>Permission</code>, the field will still be named <code>permission[admin]</code>.</p>
+
+<p>Note: This also works for the methods in <a href="FormOptionsHelper.html"><code>FormOptionsHelper</code></a> and <a href="DateHelper.html"><code>DateHelper</code></a> that are designed to work with an object as base, like <a href="FormOptionsHelper.html#method-i-collection_select"><code>FormOptionsHelper#collection_select</code></a> and <a href="DateHelper.html#method-i-datetime_select"><code>DateHelper#datetime_select</code></a>.</p>
+
+<h3 id="method-i-fields_for-label-Nested+Attributes+Examples"><a href="#method-i-fields_for-label-Nested+Attributes+Examples">Nested Attributes Examples</a></h3>
+
+<p>When the object belonging to the current scope has a nested attribute writer for a certain attribute, <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> will yield a new scope for that attribute. This allows you to create forms that set or change the attributes of a parent object and its associations in one go.</p>
+
+<p>Nested attribute writers are normal setter methods named after an association. The most common way of defining these writers is either with <code>accepts_nested_attributes_for</code> in a model definition or by defining a method with the proper name. For example: the attribute writer for the association <code>:address</code> is called <code>address_attributes=</code>.</p>
+
+<p>Whether a one-to-one or one-to-many style form builder will be yielded depends on whether the normal reader method returns a <em>single</em> object or an <em>array</em> of objects.</p>
+
+<h4 id="method-i-fields_for-label-One-to-one"><a href="#method-i-fields_for-label-One-to-one">One-to-one</a></h4>
+
+<p>Consider a <a href="../../Person.html"><code>Person</code></a> class which returns a <em>single</em> Address from the <code>address</code> reader method and responds to the <code>address_attributes=</code> writer method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">address</span>
+    <span class="ruby-ivar">@address</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">address_attributes=</span>(<span class="ruby-identifier">attributes</span>)
+    <span class="ruby-comment"># Process the attributes hash</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This model can now be used with a nested <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a>, like so:</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  ...
+  &lt;%= person_form.fields_for :address do |address_fields| %&gt;
+    Street  : &lt;%= address_fields.text_field :street %&gt;
+    Zip code: &lt;%= address_fields.text_field :zip_code %&gt;
+  &lt;% end %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>When address is already an association on a <a href="../../Person.html"><code>Person</code></a> you can use <code>accepts_nested_attributes_for</code> to define the writer method for you:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_one</span> <span class="ruby-value">:address</span>
+  <span class="ruby-identifier">accepts_nested_attributes_for</span> <span class="ruby-value">:address</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If you want to destroy the associated model through the form, you have to enable it first using the <code>:allow_destroy</code> option for <code>accepts_nested_attributes_for</code>:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_one</span> <span class="ruby-value">:address</span>
+  <span class="ruby-identifier">accepts_nested_attributes_for</span> <span class="ruby-value">:address</span>, <span class="ruby-value">allow_destroy:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Now, when you use a form element with the <code>_destroy</code> parameter, with a value that evaluates to <code>true</code>, you will destroy the associated model (e.g. 1, ‘1’, true, or ‘true’):</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  ...
+  &lt;%= person_form.fields_for :address do |address_fields| %&gt;
+    ...
+    Delete: &lt;%= address_fields.checkbox :_destroy %&gt;
+  &lt;% end %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<h4 id="method-i-fields_for-label-One-to-many"><a href="#method-i-fields_for-label-One-to-many">One-to-many</a></h4>
+
+<p>Consider a <a href="../../Person.html"><code>Person</code></a> class which returns an <em>array</em> of Project instances from the <code>projects</code> reader method and responds to the <code>projects_attributes=</code> writer method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">projects</span>
+    [<span class="ruby-ivar">@project1</span>, <span class="ruby-ivar">@project2</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">projects_attributes=</span>(<span class="ruby-identifier">attributes</span>)
+    <span class="ruby-comment"># Process the attributes hash</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Note that the <code>projects_attributes=</code> writer method is in fact required for <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> to correctly identify <code>:projects</code> as a collection, and the correct indices to be set in the form markup.</p>
+
+<p>When projects is already an association on <a href="../../Person.html"><code>Person</code></a> you can use <code>accepts_nested_attributes_for</code> to define the writer method for you:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> <span class="ruby-value">:projects</span>
+  <span class="ruby-identifier">accepts_nested_attributes_for</span> <span class="ruby-value">:projects</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This model can now be used with a nested fields_for. The block given to the nested <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> call will be repeated for each instance in the collection:</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  ...
+  &lt;%= person_form.fields_for :projects do |project_fields| %&gt;
+    &lt;% if project_fields.object.active? %&gt;
+      Name: &lt;%= project_fields.text_field :name %&gt;
+    &lt;% end %&gt;
+  &lt;% end %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>It’s also possible to specify the instance to be used:</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  ...
+  &lt;% @person.projects.each do |project| %&gt;
+    &lt;% if project.active? %&gt;
+      &lt;%= person_form.fields_for :projects, project do |project_fields| %&gt;
+        Name: &lt;%= project_fields.text_field :name %&gt;
+      &lt;% end %&gt;
+    &lt;% end %&gt;
+  &lt;% end %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>Or a collection to be used:</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  ...
+  &lt;%= person_form.fields_for :projects, @active_projects do |project_fields| %&gt;
+    Name: &lt;%= project_fields.text_field :name %&gt;
+  &lt;% end %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>If you want to destroy any of the associated models through the form, you have to enable it first using the <code>:allow_destroy</code> option for <code>accepts_nested_attributes_for</code>:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> <span class="ruby-value">:projects</span>
+  <span class="ruby-identifier">accepts_nested_attributes_for</span> <span class="ruby-value">:projects</span>, <span class="ruby-value">allow_destroy:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This will allow you to specify which models to destroy in the attributes hash by adding a form element for the <code>_destroy</code> parameter with a value that evaluates to <code>true</code> (e.g. 1, ‘1’, true, or ‘true’):</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  ...
+  &lt;%= person_form.fields_for :projects do |project_fields| %&gt;
+    Delete: &lt;%= project_fields.checkbox :_destroy %&gt;
+  &lt;% end %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>When a collection is used you might want to know the index of each object in the array. For this purpose, the <code>index</code> method is available in the <a href="FormBuilder.html"><code>FormBuilder</code></a> object.</p>
+
+<pre>&lt;%= form_with model: @person do |person_form| %&gt;
+  ...
+  &lt;%= person_form.fields_for :projects do |project_fields| %&gt;
+    Project #&lt;%= project_fields.index %&gt;
+    ...
+  &lt;% end %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>Note that <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> will automatically generate a hidden field to store the ID of the record if it responds to <code>persisted?</code>. There are circumstances where this hidden field is not needed and you can pass <code>include_id: false</code> to prevent <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> from rendering it automatically.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-file_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-file_field" title="Link to this method">
+                <span class="method-name">file_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="file_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">file_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">options</span> = { <span class="ruby-value">include_hidden:</span> <span class="ruby-identifier">multiple_file_field_include_hidden</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">FileField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">convert_direct_upload_option_to_url</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>)).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a file upload input tag tailored for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). Additional options on the input tag can be passed as a hash with <code>options</code>. These options will be tagged onto the HTML as an HTML element attribute as in the example shown.</p>
+
+<p>Using this method inside a <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> block will set the enclosing form’s encoding to <code>multipart/form-data</code>.</p>
+
+<h4 id="method-i-file_field-label-Options"><a href="#method-i-file_field-label-Options">Options</a></h4>
+<ul><li>
+<p>Creates standard HTML attributes for the tag.</p>
+</li><li>
+<p><code>:disabled</code> - If set to true, the user will not be able to use this input.</p>
+</li><li>
+<p><code>:multiple</code> - If set to true, *in most updated browsers* the user will be allowed to select multiple files.</p>
+</li><li>
+<p><code>:include_hidden</code> - When <code>multiple: true</code> and <code>include_hidden: true</code>, the field will be prefixed with an <code>&lt;input type=&quot;hidden&quot;&gt;</code> field with an empty value to support submitting an empty collection of files.</p>
+</li><li>
+<p><code>:accept</code> - If set to one or multiple mime-types, the user will be suggested a filter when choosing a file. You still need to set up model validations.</p>
+</li></ul>
+
+<h4 id="method-i-file_field-label-Examples"><a href="#method-i-file_field-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">file_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:avatar</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;file&quot; id=&quot;user_avatar&quot; name=&quot;user[avatar]&quot; /&gt;</span>
+
+<span class="ruby-identifier">file_field</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">multiple:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;file&quot; id=&quot;article_image&quot; name=&quot;article[image][]&quot; multiple=&quot;multiple&quot; /&gt;</span>
+
+<span class="ruby-identifier">file_field</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:attached</span>, <span class="ruby-value">accept:</span> <span class="ruby-string">&#39;text/html&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;input accept=&quot;text/html&quot; type=&quot;file&quot; id=&quot;article_attached&quot; name=&quot;article[attached]&quot; /&gt;</span>
+
+<span class="ruby-identifier">file_field</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">accept:</span> <span class="ruby-string">&#39;image/png,image/gif,image/jpeg&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;file&quot; id=&quot;article_image&quot; name=&quot;article[image]&quot; accept=&quot;image/png,image/gif,image/jpeg&quot; /&gt;</span>
+
+<span class="ruby-identifier">file_field</span>(<span class="ruby-value">:attachment</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&#39;file_input&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;file&quot; id=&quot;attachment_file&quot; name=&quot;attachment[file]&quot; class=&quot;file_input&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-form_for" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-form_for" title="Link to this method">
+                <span class="method-name">form_for</span>
+                <span class="method-args">(record, options = {}, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="form_for-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 435</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">form_for</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Missing block&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">record</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+    <span class="ruby-identifier">model</span>       = <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">object_name</span> = <span class="ruby-identifier">record</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">model</span>       = <span class="ruby-identifier">record</span>
+    <span class="ruby-identifier">object</span>      = <span class="ruby-identifier">_object_for_form_builder</span>(<span class="ruby-identifier">record</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;First argument in form cannot contain nil or be empty&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">object</span>
+    <span class="ruby-identifier">object_name</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:as</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">object</span>).<span class="ruby-identifier">param_key</span>
+    <span class="ruby-identifier">apply_form_for_options!</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">remote</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:remote</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">remote</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">embed_authenticity_token_in_remote_forms</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:authenticity_token</span>].<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:authenticity_token</span>] = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:model</span>]                               = <span class="ruby-identifier">model</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:scope</span>]                               = <span class="ruby-identifier">object_name</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:local</span>]                               = <span class="ruby-operator">!</span><span class="ruby-identifier">remote</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_default_ids</span>]                    = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:allow_method_names_outside_object</span>]   = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:allow_method_names_outside_object</span>, <span class="ruby-keyword">false</span>)
+
+  <span class="ruby-identifier">form_with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Creates a form that allows the user to create or update the attributes of a specific model object.</p>
+
+<p>The method can be used in several slightly different ways, depending on how much you wish to rely on Rails to infer automatically from the model how the form should be constructed. For a generic model object, a form can be created by passing <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> a string or symbol representing the object we are concerned with:</p>
+
+<pre>&lt;%= form_for :person do |f| %&gt;
+  First name: &lt;%= f.text_field :first_name %&gt;&lt;br /&gt;
+  Last name : &lt;%= f.text_field :last_name %&gt;&lt;br /&gt;
+  Biography : &lt;%= f.textarea :biography %&gt;&lt;br /&gt;
+  Admin?    : &lt;%= f.checkbox :admin %&gt;&lt;br /&gt;
+  &lt;%= f.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>The variable <code>f</code> yielded to the block is a <a href="FormBuilder.html"><code>FormBuilder</code></a> object that incorporates the knowledge about the model object represented by <code>:person</code> passed to <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a>. Methods defined on the <a href="FormBuilder.html"><code>FormBuilder</code></a> are used to generate fields bound to this model. Thus, for example,</p>
+
+<pre>&lt;%= f.text_field :first_name %&gt;</pre>
+
+<p>will get expanded to</p>
+
+<pre>&lt;%= text_field :person, :first_name %&gt;</pre>
+
+<p>which results in an HTML <code>&lt;input&gt;</code> tag whose <code>name</code> attribute is <code>person[first_name]</code>. This means that when the form is submitted, the value entered by the user will be available in the controller as <code>params[:person][:first_name]</code>.</p>
+
+<p>For fields generated in this way using the <a href="FormBuilder.html"><code>FormBuilder</code></a>, if <code>:person</code> also happens to be the name of an instance variable <code>@person</code>, the default value of the field shown when the form is initially displayed (e.g. in the situation where you are editing an existing record) will be the value of the corresponding attribute of <code>@person</code>.</p>
+
+<p>The rightmost argument to <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> is an optional hash of options -</p>
+<ul><li>
+<p><code>:url</code> - The URL the form is to be submitted to. This may be represented in the same way as values passed to <a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a> or <code>link_to</code>. So for example you may use a named route directly. When the model is represented by a string or symbol, as in the example above, if the <code>:url</code> option is not specified, by default the form will be sent back to the current URL (We will describe below an alternative resource-oriented usage of <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> in which the URL does not need to be specified explicitly).</p>
+</li><li>
+<p><code>:namespace</code> - A namespace for your form to ensure uniqueness of id attributes on form elements. The namespace attribute will be prefixed with underscore on the generated HTML id.</p>
+</li><li>
+<p><code>:method</code> - The method to use when submitting the form, usually either “get” or “post”. If “patch”, “put”, “delete”, or another verb is used, a hidden input with name <code>_method</code> is added to simulate the verb over post.</p>
+</li><li>
+<p><code>:authenticity_token</code> - Authenticity token to use in the form. Use only if you need to pass custom authenticity token string, or to not add authenticity_token field at all (by passing <code>false</code>). Remote forms may omit the embedded authenticity token by setting <code>config.action_view.embed_authenticity_token_in_remote_forms = false</code>. This is helpful when you’re fragment-caching the form. Remote forms get the authenticity token from the <code>meta</code> tag, so embedding is unnecessary unless you support browsers without JavaScript.</p>
+</li><li>
+<p><code>:remote</code> - If set to true, will allow the Unobtrusive JavaScript drivers to control the submit behavior.</p>
+</li><li>
+<p><code>:enforce_utf8</code> - If set to false, a hidden input with name utf8 is not output.</p>
+</li><li>
+<p><code>:html</code> - Optional HTML attributes for the form tag.</p>
+</li></ul>
+
+<p>Also note that <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> doesn’t create an exclusive scope. It’s still possible to use both the stand-alone <a href="FormHelper.html"><code>FormHelper</code></a> methods and methods from <a href="FormTagHelper.html"><code>FormTagHelper</code></a>. For example:</p>
+
+<pre>&lt;%= form_for :person do |f| %&gt;
+  First name: &lt;%= f.text_field :first_name %&gt;
+  Last name : &lt;%= f.text_field :last_name %&gt;
+  Biography : &lt;%= textarea :person, :biography %&gt;
+  Admin?    : &lt;%= checkbox_tag &quot;person[admin]&quot;, &quot;1&quot;, @person.company.admin? %&gt;
+  &lt;%= f.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>This also works for the methods in <a href="FormOptionsHelper.html"><code>FormOptionsHelper</code></a> and <a href="DateHelper.html"><code>DateHelper</code></a> that are designed to work with an object as base, like <a href="FormOptionsHelper.html#method-i-collection_select"><code>FormOptionsHelper#collection_select</code></a> and <a href="DateHelper.html#method-i-datetime_select"><code>DateHelper#datetime_select</code></a>.</p>
+
+<h3 id="method-i-form_for-label-form_for+with+a+model+object"><a href="#method-i-form_for-label-form_for+with+a+model+object"><a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> with a model object</a></h3>
+
+<p>In the examples above, the object to be created or edited was represented by a symbol passed to <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a>, and we noted that a string can also be used equivalently. It is also possible, however, to pass a model object itself to <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a>. For example, if <code>@article</code> is an existing record you wish to edit, you can create the form using</p>
+
+<pre>&lt;%= form_for @article do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>This behaves in almost the same way as outlined previously, with a couple of small exceptions. First, the prefix used to name the input elements within the form (hence the key that denotes them in the <code>params</code> hash) is actually derived from the object’s <em>class</em>, e.g. <code>params[:article]</code> if the object’s class is <code>Article</code>. However, this can be overwritten using the <code>:as</code> option, e.g. -</p>
+
+<pre>&lt;%= form_for(@person, as: :client) do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>would result in <code>params[:client]</code>.</p>
+
+<p>Secondly, the field values shown when the form is initially displayed are taken from the attributes of the object passed to <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a>, regardless of whether the object is an instance variable. So, for example, if we had a <em>local</em> variable <code>article</code> representing an existing record,</p>
+
+<pre>&lt;%= form_for article do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>would produce a form with fields whose initial state reflect the current values of the attributes of <code>article</code>.</p>
+
+<h3 id="method-i-form_for-label-Resource-oriented+style"><a href="#method-i-form_for-label-Resource-oriented+style">Resource-oriented style</a></h3>
+
+<p>In the examples just shown, although not indicated explicitly, we still need to use the <code>:url</code> option in order to specify where the form is going to be sent. However, further simplification is possible if the record passed to <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> is a <em>resource</em>, i.e. it corresponds to a set of RESTful routes, e.g. defined using the <code>resources</code> method in <a href="../../config/routes_rb.html">config/routes.rb</a>. In this case Rails will simply infer the appropriate URL from the record itself. For example,</p>
+
+<pre>&lt;%= form_for @article do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>is then equivalent to something like:</p>
+
+<pre>&lt;%= form_for @article, as: :article, url: article_path(@article), method: :patch, html: { class: &quot;edit_article&quot;, id: &quot;edit_article_45&quot; } do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>And for a new record</p>
+
+<pre>&lt;%= form_for(Article.new) do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>is equivalent to something like:</p>
+
+<pre>&lt;%= form_for @article, as: :article, url: articles_path, html: { class: &quot;new_article&quot;, id: &quot;new_article&quot; } do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>However you can still overwrite individual conventions, such as:</p>
+
+<pre>&lt;%= form_for(@article, url: super_articles_path) do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>You can omit the <code>action</code> attribute by passing <code>url: false</code>:</p>
+
+<pre>&lt;%= form_for(@article, url: false) do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>You can also set the answer format, like this:</p>
+
+<pre>&lt;%= form_for(@article, format: :json) do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>For namespaced routes, like <code>admin_article_url</code>:</p>
+
+<pre>&lt;%= form_for([:admin, @article]) do |f| %&gt;
+ ...
+&lt;% end %&gt;</pre>
+
+<p>If your resource has associations defined, for example, you want to add comments to the document given that the routes are set correctly:</p>
+
+<pre>&lt;%= form_for([@document, @comment]) do |f| %&gt;
+ ...
+&lt;% end %&gt;</pre>
+
+<p>Where <code>@document = Document.find(params[:id])</code> and <code>@comment = Comment.new</code>.</p>
+
+<h3 id="method-i-form_for-label-Setting+the+method"><a href="#method-i-form_for-label-Setting+the+method">Setting the method</a></h3>
+
+<p>You can force the form to use the full array of HTTP verbs by setting</p>
+
+<pre>method: (:get|:post|:patch|:put|:delete)</pre>
+
+<p>in the options hash. If the verb is not GET or POST, which are natively supported by HTML forms, the form will be set to POST and a hidden input called _method will carry the intended verb for the server to interpret.</p>
+
+<h3 id="method-i-form_for-label-Unobtrusive+JavaScript"><a href="#method-i-form_for-label-Unobtrusive+JavaScript">Unobtrusive JavaScript</a></h3>
+
+<p>Specifying:</p>
+
+<pre>remote: true</pre>
+
+<p>in the options hash creates a form that will allow the unobtrusive JavaScript drivers to modify its behavior. The form submission will work just like a regular submission as viewed by the receiving side (all elements available in <code>params</code>).</p>
+
+<p>Example:</p>
+
+<pre>&lt;%= form_for(@article, remote: true) do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>The HTML generated for this would be:</p>
+
+<pre>&lt;form action=&#39;http://www.example.com&#39; method=&#39;post&#39; data-remote=&#39;true&#39;&gt;
+  &lt;input name=&#39;_method&#39; type=&#39;hidden&#39; value=&#39;patch&#39; /&gt;
+  ...
+&lt;/form&gt;</pre>
+
+<h3 id="method-i-form_for-label-Setting+HTML+options"><a href="#method-i-form_for-label-Setting+HTML+options">Setting HTML options</a></h3>
+
+<p>You can set data attributes directly by passing in a data hash, but all other HTML options must be wrapped in the HTML key. Example:</p>
+
+<pre>&lt;%= form_for(@article, data: { behavior: &quot;autosave&quot; }, html: { name: &quot;go&quot; }) do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>The HTML generated for this would be:</p>
+
+<pre>&lt;form action=&#39;http://www.example.com&#39; method=&#39;post&#39; data-behavior=&#39;autosave&#39; name=&#39;go&#39;&gt;
+  &lt;input name=&#39;_method&#39; type=&#39;hidden&#39; value=&#39;patch&#39; /&gt;
+  ...
+&lt;/form&gt;</pre>
+
+<h3 id="method-i-form_for-label-Removing+hidden+model+id-27s"><a href="#method-i-form_for-label-Removing+hidden+model+id-27s">Removing hidden model id’s</a></h3>
+
+<p>The <a href="FormHelper.html#method-i-form_for"><code>form_for</code></a> method automatically includes the model id as a hidden field in the form. This is used to maintain the correlation between the form data and its associated model. Some ORM systems do not use IDs on nested models so in this case you want to be able to disable the hidden id.</p>
+
+<p>In the following example the Article model has many Comments stored within it in a NoSQL database, thus there is no primary key for comments.</p>
+
+<p>Example:</p>
+
+<pre>&lt;%= form_for(@article) do |f| %&gt;
+  &lt;%= f.fields_for(:comments, include_id: false) do |cf| %&gt;
+    ...
+  &lt;% end %&gt;
+&lt;% end %&gt;</pre>
+
+<h3 id="method-i-form_for-label-Customized+form+builders"><a href="#method-i-form_for-label-Customized+form+builders">Customized form builders</a></h3>
+
+<p>You can also build forms using a customized <a href="FormBuilder.html"><code>FormBuilder</code></a> class. Subclass <a href="FormBuilder.html"><code>FormBuilder</code></a> and override or define some more helpers, then use your custom builder. For example, let’s say you made a helper to automatically add labels to form inputs.</p>
+
+<pre>&lt;%= form_for @person, url: { action: &quot;create&quot; }, builder: LabellingFormBuilder do |f| %&gt;
+  &lt;%= f.text_field :first_name %&gt;
+  &lt;%= f.text_field :last_name %&gt;
+  &lt;%= f.textarea :biography %&gt;
+  &lt;%= f.checkbox :admin %&gt;
+  &lt;%= f.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>In this case, if you use this:</p>
+
+<pre>&lt;%= render f %&gt;</pre>
+
+<p>The rendered template is <code>people/_labelling_form</code> and the local variable referencing the form builder is called <code>labelling_form</code>.</p>
+
+<p>The custom <a href="FormBuilder.html"><code>FormBuilder</code></a> class is automatically merged with the options of a nested <a href="FormHelper.html#method-i-fields_for"><code>fields_for</code></a> call, unless it’s explicitly set.</p>
+
+<p>In many cases you will want to wrap the above in another helper, so you could do something like the following:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">labelled_form_for</span>(<span class="ruby-identifier">record_or_name_or_array</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">form_for</span>(<span class="ruby-identifier">record_or_name_or_array</span>, <span class="ruby-operator">*</span>(<span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">builder:</span> <span class="ruby-constant">LabellingFormBuilder</span>)), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If you don’t need to attach a form to a model instance, then check out <a href="FormTagHelper.html#method-i-form_tag"><code>FormTagHelper#form_tag</code></a>.</p>
+
+<h3 id="method-i-form_for-label-Form+to+external+resources"><a href="#method-i-form_for-label-Form+to+external+resources">Form to external resources</a></h3>
+
+<p>When you build forms to external resources sometimes you need to set an authenticity token or just render a form without it, for example when you submit data to a payment gateway number and types of fields could be limited.</p>
+
+<p>To set an authenticity token you need to pass an <code>:authenticity_token</code> parameter</p>
+
+<pre>&lt;%= form_for @invoice, url: external_url, authenticity_token: &#39;external_token&#39; do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>If you don’t want to an authenticity token field be rendered at all just pass <code>false</code>:</p>
+
+<pre>&lt;%= form_for @invoice, url: external_url, authenticity_token: false do |f| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-form_with" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-form_with" title="Link to this method">
+                <span class="method-name">form_with</span>
+                <span class="method-args">(model: false, scope: nil, url: nil, format: nil, **options, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="form_with-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 755</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">form_with</span>(<span class="ruby-value">model:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">scope:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">url:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">format:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Passed nil to the :model argument, expect an object or false&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">options</span> = { <span class="ruby-value">allow_method_names_outside_object:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">skip_default_ids:</span> <span class="ruby-operator">!</span><span class="ruby-identifier">form_with_generates_ids</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">model</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">url</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">false</span>
+      <span class="ruby-identifier">url</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">format</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">polymorphic_path</span>(<span class="ruby-identifier">model</span>, {})
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">polymorphic_path</span>(<span class="ruby-identifier">model</span>, <span class="ruby-value">format:</span> <span class="ruby-identifier">format</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">model</span>   = <span class="ruby-identifier">convert_to_model</span>(<span class="ruby-identifier">_object_for_form_builder</span>(<span class="ruby-identifier">model</span>))
+    <span class="ruby-identifier">scope</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">model</span>).<span class="ruby-identifier">param_key</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">builder</span> = <span class="ruby-identifier">instantiate_builder</span>(<span class="ruby-identifier">scope</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">output</span>  = <span class="ruby-identifier">capture</span>(<span class="ruby-identifier">builder</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:multipart</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">multipart?</span>
+
+    <span class="ruby-identifier">html_options</span> = <span class="ruby-identifier">html_options_for_form_with</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">model</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">form_tag_with_body</span>(<span class="ruby-identifier">html_options</span>, <span class="ruby-identifier">output</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">html_options</span> = <span class="ruby-identifier">html_options_for_form_with</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">model</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">form_tag_html</span>(<span class="ruby-identifier">html_options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Creates a form tag based on mixing URLs, scopes, or models.</p>
+
+<pre># Using just a URL:
+&lt;%= form_with url: articles_path do |form| %&gt;
+  &lt;%= form.text_field :title %&gt;
+&lt;% end %&gt;
+# =&gt;
+&lt;form action=&quot;/articles&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;title&quot; /&gt;
+&lt;/form&gt;
+
+# With an intentionally empty URL:
+&lt;%= form_with url: false do |form| %&gt;
+  &lt;%= form.text_field :title %&gt;
+&lt;% end %&gt;
+# =&gt;
+&lt;form method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;title&quot; /&gt;
+&lt;/form&gt;
+
+# Adding a scope prefixes the input field names:
+&lt;%= form_with scope: :article, url: articles_path do |form| %&gt;
+  &lt;%= form.text_field :title %&gt;
+&lt;% end %&gt;
+# =&gt;
+&lt;form action=&quot;/articles&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;article[title]&quot; /&gt;
+&lt;/form&gt;
+
+# Using a model infers both the URL and scope:
+&lt;%= form_with model: Article.new do |form| %&gt;
+  &lt;%= form.text_field :title %&gt;
+&lt;% end %&gt;
+# =&gt;
+&lt;form action=&quot;/articles&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;article[title]&quot; /&gt;
+&lt;/form&gt;
+
+# An existing model makes an update form and fills out field values:
+&lt;%= form_with model: Article.first do |form| %&gt;
+  &lt;%= form.text_field :title %&gt;
+&lt;% end %&gt;
+# =&gt;
+&lt;form action=&quot;/articles/1&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;patch&quot; /&gt;
+  &lt;input type=&quot;text&quot; name=&quot;article[title]&quot; value=&quot;&lt;the title of the article&gt;&quot; /&gt;
+&lt;/form&gt;
+# Though the fields don&#39;t have to correspond to model attributes:
+&lt;%= form_with model: Cat.new do |form| %&gt;
+  &lt;%= form.text_field :cats_dont_have_gills %&gt;
+  &lt;%= form.text_field :but_in_forms_they_can %&gt;
+&lt;% end %&gt;
+# =&gt;
+&lt;form action=&quot;/cats&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;cat[cats_dont_have_gills]&quot; /&gt;
+  &lt;input type=&quot;text&quot; name=&quot;cat[but_in_forms_they_can]&quot; /&gt;
+&lt;/form&gt;</pre>
+
+<p>The parameters in the forms are accessible in controllers according to their name nesting. So inputs named <code>title</code> and <code>article[title]</code> are accessible as <code>params[:title]</code> and <code>params[:article][:title]</code> respectively.</p>
+
+<p>For ease of comparison the examples above left out the submit button, as well as the auto generated hidden fields that enable UTF-8 support and adds an authenticity token needed for cross site request forgery protection.</p>
+
+<h3 id="method-i-form_with-label-Resource-oriented+style"><a href="#method-i-form_with-label-Resource-oriented+style">Resource-oriented style</a></h3>
+
+<p>In many of the examples just shown, the <code>:model</code> passed to <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> is a <em>resource</em>. It corresponds to a set of RESTful routes, most likely defined via <code>resources</code> in <a href="../../config/routes_rb.html">config/routes.rb</a>.</p>
+
+<p>So when passing such a model record, Rails infers the URL and method.</p>
+
+<pre>&lt;%= form_with model: @article do |form| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>is then equivalent to something like:</p>
+
+<pre>&lt;%= form_with scope: :article, url: article_path(@article), method: :patch do |form| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>And for a new record</p>
+
+<pre>&lt;%= form_with model: Article.new do |form| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>is equivalent to something like:</p>
+
+<pre>&lt;%= form_with scope: :article, url: articles_path do |form| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<h4 id="method-i-form_with-label-form_with+options"><a href="#method-i-form_with-label-form_with+options"><a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> options</a></h4>
+<ul><li>
+<p><code>:url</code> - The URL the form submits to. Akin to values passed to <a href="../../vendor/bundle/ruby/3_2_0/gems/actionpack-8_1_1/lib/abstract_controller/url_for_rb.html">url_for</a> or <code>link_to</code>. For example, you may use a named route directly. When a <code>:scope</code> is passed without a <code>:url</code> the form just submits to the current URL.</p>
+</li><li>
+<p><code>:method</code> - The method to use when submitting the form, usually either “get” or “post”. If “patch”, “put”, “delete”, or another verb is used, a hidden input named <code>_method</code> is added to simulate the verb over post.</p>
+</li><li>
+<p><code>:format</code> - The format of the route the form submits to. Useful when submitting to another resource type, like <code>:json</code>. Skipped if a <code>:url</code> is passed.</p>
+</li><li>
+<p><code>:scope</code> - The scope to prefix input field names with and thereby how the submitted parameters are grouped in controllers.</p>
+</li><li>
+<p><code>:namespace</code> - A namespace for your form to ensure uniqueness of id attributes on form elements. The namespace attribute will be prefixed with underscore on the generated HTML id.</p>
+</li><li>
+<p><code>:model</code> - A model object to infer the <code>:url</code> and <code>:scope</code> by, plus fill out input field values. So if a <code>title</code> attribute is set to “Ahoy!” then a <code>title</code> input field’s value would be “Ahoy!”. If the model is a new record a create form is generated, if an existing record, however, an update form is generated. Pass <code>:scope</code> or <code>:url</code> to override the defaults. E.g. turn <code>params[:article]</code> into <code>params[:blog]</code>.</p>
+</li><li>
+<p><code>:authenticity_token</code> - Authenticity token to use in the form. Override with a custom authenticity token or pass <code>false</code> to skip the authenticity token field altogether. Useful when submitting to an external resource like a payment gateway that might limit the valid fields. Remote forms may omit the embedded authenticity token by setting <code>config.action_view.embed_authenticity_token_in_remote_forms = false</code>. This is helpful when fragment-caching the form. Remote forms get the authenticity token from the <code>meta</code> tag, so embedding is unnecessary unless you support browsers without JavaScript.</p>
+</li><li>
+<p><code>:local</code> - Whether to use standard HTTP form submission. When set to <code>true</code>, the form is submitted via standard HTTP. When set to <code>false</code>, the form is submitted as a “remote form”, which is handled by Rails UJS as an XHR. When unspecified, the behavior is derived from <code>config.action_view.form_with_generates_remote_forms</code> where the config’s value is actually the inverse of what <code>local</code>‘s value would be. As of Rails 6.1, that configuration option defaults to <code>false</code> (which has the equivalent effect of passing <code>local: true</code>). In previous versions of Rails, that configuration option defaults to <code>true</code> (the equivalent of passing <code>local: false</code>).</p>
+</li><li>
+<p><code>:skip_enforcing_utf8</code> - If set to true, a hidden input with name utf8 is not output.</p>
+</li><li>
+<p><code>:builder</code> - Override the object used to build the form.</p>
+</li><li>
+<p><code>:id</code> - Optional HTML id attribute.</p>
+</li><li>
+<p><code>:class</code> - Optional HTML class attribute.</p>
+</li><li>
+<p><code>:data</code> - Optional HTML data attributes.</p>
+</li><li>
+<p><code>:html</code> - Other optional HTML attributes for the form tag.</p>
+</li></ul>
+
+<h3 id="method-i-form_with-label-Examples"><a href="#method-i-form_with-label-Examples">Examples</a></h3>
+
+<p>When not passing a block, <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> just generates an opening form tag.</p>
+
+<pre>&lt;%= form_with(model: @article, url: super_articles_path) %&gt;
+&lt;%= form_with(model: @article, scope: :blog) %&gt;
+&lt;%= form_with(model: @article, format: :json) %&gt;
+&lt;%= form_with(model: @article, authenticity_token: false) %&gt; # Disables the token.</pre>
+
+<p>For namespaced routes, like <code>admin_article_url</code>:</p>
+
+<pre>&lt;%= form_with(model: [ :admin, @article ]) do |form| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>If your resource has associations defined, for example, you want to add comments to the document given that the routes are set correctly:</p>
+
+<pre>&lt;%= form_with(model: [ @document, Comment.new ]) do |form| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>Where <code>@document = Document.find(params[:id])</code>.</p>
+
+<h3 id="method-i-form_with-label-Mixing+with+other+form+helpers"><a href="#method-i-form_with-label-Mixing+with+other+form+helpers">Mixing with other form helpers</a></h3>
+
+<p>While <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> uses a <a href="FormBuilder.html"><code>FormBuilder</code></a> object it’s possible to mix and match the stand-alone <a href="FormHelper.html"><code>FormHelper</code></a> methods and methods from FormTagHelper:</p>
+
+<pre>&lt;%= form_with scope: :person do |form| %&gt;
+  &lt;%= form.text_field :first_name %&gt;
+  &lt;%= form.text_field :last_name %&gt;
+
+  &lt;%= textarea :person, :biography %&gt;
+  &lt;%= checkbox_tag &quot;person[admin]&quot;, &quot;1&quot;, @person.company.admin? %&gt;
+
+  &lt;%= form.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>Same goes for the methods in <a href="FormOptionsHelper.html"><code>FormOptionsHelper</code></a> and <a href="DateHelper.html"><code>DateHelper</code></a> designed to work with an object as a base, like <a href="FormOptionsHelper.html#method-i-collection_select"><code>FormOptionsHelper#collection_select</code></a> and <a href="DateHelper.html#method-i-datetime_select"><code>DateHelper#datetime_select</code></a>.</p>
+
+<h3 id="method-i-form_with-label-Setting+the+method"><a href="#method-i-form_with-label-Setting+the+method">Setting the method</a></h3>
+
+<p>You can force the form to use the full array of HTTP verbs by setting</p>
+
+<pre>method: (:get|:post|:patch|:put|:delete)</pre>
+
+<p>in the options hash. If the verb is not GET or POST, which are natively supported by HTML forms, the form will be set to POST and a hidden input called _method will carry the intended verb for the server to interpret.</p>
+
+<h3 id="method-i-form_with-label-Setting+HTML+options"><a href="#method-i-form_with-label-Setting+HTML+options">Setting HTML options</a></h3>
+
+<p>You can set data attributes directly in a data hash, but HTML options besides id and class must be wrapped in an HTML key:</p>
+
+<pre>&lt;%= form_with(model: @article, data: { behavior: &quot;autosave&quot; }, html: { name: &quot;go&quot; }) do |form| %&gt;
+  ...
+&lt;% end %&gt;</pre>
+
+<p>generates</p>
+
+<pre>&lt;form action=&quot;/articles/123&quot; method=&quot;post&quot; data-behavior=&quot;autosave&quot; name=&quot;go&quot;&gt;
+  &lt;input name=&quot;_method&quot; type=&quot;hidden&quot; value=&quot;patch&quot; /&gt;
+  ...
+&lt;/form&gt;</pre>
+
+<h3 id="method-i-form_with-label-Removing+hidden+model+id-27s"><a href="#method-i-form_with-label-Removing+hidden+model+id-27s">Removing hidden model id’s</a></h3>
+
+<p>The <a href="FormHelper.html#method-i-form_with"><code>form_with</code></a> method automatically includes the model id as a hidden field in the form. This is used to maintain the correlation between the form data and its associated model. Some ORM systems do not use IDs on nested models so in this case you want to be able to disable the hidden id.</p>
+
+<p>In the following example the Article model has many Comments stored within it in a NoSQL database, thus there is no primary key for comments.</p>
+
+<pre>&lt;%= form_with(model: @article) do |form| %&gt;
+  &lt;%= form.fields(:comments, skip_id: true) do |fields| %&gt;
+    ...
+  &lt;% end %&gt;
+&lt;% end %&gt;</pre>
+
+<h3 id="method-i-form_with-label-Customized+form+builders"><a href="#method-i-form_with-label-Customized+form+builders">Customized form builders</a></h3>
+
+<p>You can also build forms using a customized <a href="FormBuilder.html"><code>FormBuilder</code></a> class. Subclass <a href="FormBuilder.html"><code>FormBuilder</code></a> and override or define some more helpers, then use your custom builder. For example, let’s say you made a helper to automatically add labels to form inputs.</p>
+
+<pre>&lt;%= form_with model: @person, url: { action: &quot;create&quot; }, builder: LabellingFormBuilder do |form| %&gt;
+  &lt;%= form.text_field :first_name %&gt;
+  &lt;%= form.text_field :last_name %&gt;
+  &lt;%= form.textarea :biography %&gt;
+  &lt;%= form.checkbox :admin %&gt;
+  &lt;%= form.submit %&gt;
+&lt;% end %&gt;</pre>
+
+<p>In this case, if you use:</p>
+
+<pre>&lt;%= render form %&gt;</pre>
+
+<p>The rendered template is <code>people/_labelling_form</code> and the local variable referencing the form builder is called <code>labelling_form</code>.</p>
+
+<p>The custom <a href="FormBuilder.html"><code>FormBuilder</code></a> class is automatically merged with the options of a nested <code>fields</code> call, unless it’s explicitly set.</p>
+
+<p>In many cases you will want to wrap the above in another helper, so you could do something like the following:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">labelled_form_with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">form_with</span>(<span class="ruby-operator">**</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">builder:</span> <span class="ruby-constant">LabellingFormBuilder</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-hidden_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-hidden_field" title="Link to this method">
+                <span class="method-name">hidden_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="hidden_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hidden_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">HiddenField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a hidden input tag tailored for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). Additional options on the input tag can be passed as a hash with <code>options</code>. These options will be tagged onto the HTML as an HTML element attribute as in the example shown.</p>
+
+<h4 id="method-i-hidden_field-label-Examples"><a href="#method-i-hidden_field-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">hidden_field</span>(<span class="ruby-value">:signup</span>, <span class="ruby-value">:pass_confirm</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;hidden&quot; id=&quot;signup_pass_confirm&quot; name=&quot;signup[pass_confirm]&quot; value=&quot;#{@signup.pass_confirm}&quot; /&gt;</span>
+
+<span class="ruby-identifier">hidden_field</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:tag_list</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;hidden&quot; id=&quot;article_tag_list&quot; name=&quot;article[tag_list]&quot; value=&quot;#{@article.tag_list}&quot; /&gt;</span>
+
+<span class="ruby-identifier">hidden_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:token</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;hidden&quot; id=&quot;user_token&quot; name=&quot;user[token]&quot; value=&quot;#{@user.token}&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-label" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-label" title="Link to this method">
+                <span class="method-name">label</span>
+                <span class="method-args">(object_name, method, content_or_options = nil, options = nil, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="label-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">label</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">content_or_options</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">Label</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">content_or_options</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a label tag tailored for labelling an input field for a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). The text of label will default to the attribute name unless a translation is found in the current <a href="../../I18n.html"><code>I18n</code></a> locale (through <code>helpers.label.&lt;modelname&gt;.&lt;attribute&gt;</code>) or you specify it explicitly. Additional options on the label tag can be passed as a hash with <code>options</code>. These options will be tagged onto the HTML as an HTML element attribute as in the example shown, except for the <code>:value</code> option, which is designed to target labels for <a href="FormHelper.html#method-i-radio_button"><code>radio_button</code></a> tags (where the value is used in the ID of the input tag).</p>
+
+<h4 id="method-i-label-label-Examples"><a href="#method-i-label-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:title</span>)
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_title&quot;&gt;Title&lt;/label&gt;</span>
+</pre>
+
+<p>You can localize your labels based on model and attribute names. For example you can define the following in your locale (e.g. en.yml)</p>
+
+<pre>helpers:
+  label:
+    article:
+      body: &quot;Write your entire text here&quot;</pre>
+
+<p>Which then will result in</p>
+
+<pre class="ruby"><span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:body</span>)
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_body&quot;&gt;Write your entire text here&lt;/label&gt;</span>
+</pre>
+
+<p>Localization can also be based purely on the translation of the attribute-name (if you are using <a href="../../ActiveRecord.html"><code>ActiveRecord</code></a>):</p>
+
+<pre>activerecord:
+  attributes:
+    article:
+      cost: &quot;Total cost&quot;</pre>
+
+<p></p>
+
+<pre class="ruby"><span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:cost</span>)
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_cost&quot;&gt;Total cost&lt;/label&gt;</span>
+
+<span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:title</span>, <span class="ruby-string">&quot;A short title&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_title&quot;&gt;A short title&lt;/label&gt;</span>
+
+<span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:title</span>, <span class="ruby-string">&quot;A short title&quot;</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&quot;title_label&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_title&quot; class=&quot;title_label&quot;&gt;A short title&lt;/label&gt;</span>
+
+<span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:privacy</span>, <span class="ruby-string">&quot;Public Article&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-string">&quot;public&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_privacy_public&quot;&gt;Public Article&lt;/label&gt;</span>
+
+<span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:cost</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">translation</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">translation</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&quot;cost_label&quot;</span>)
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_cost&quot;&gt;&lt;span class=&quot;cost_label&quot;&gt;Total cost&lt;/span&gt;&lt;/label&gt;</span>
+
+<span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:cost</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">builder</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">translation</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&quot;cost_label&quot;</span>)
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_cost&quot;&gt;&lt;span class=&quot;cost_label&quot;&gt;Total cost&lt;/span&gt;&lt;/label&gt;</span>
+
+<span class="ruby-identifier">label</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:terms</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">raw</span>(<span class="ruby-string">&#39;Accept &lt;a href=&quot;/terms&quot;&gt;Terms&lt;/a&gt;.&#39;</span>)
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># =&gt; &lt;label for=&quot;article_terms&quot;&gt;Accept &lt;a href=&quot;/terms&quot;&gt;Terms&lt;/a&gt;.&lt;/label&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-month_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-month_field" title="Link to this method">
+                <span class="method-name">month_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="month_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1533</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">month_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">MonthField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “month”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">month_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;month&quot; /&gt;</span>
+</pre>
+
+<p>The default value is generated by trying to call <code>strftime</code> with “%Y-%m” on the object’s value, which makes it behave as expected for instances of <a href="../../DateTime.html"><code>DateTime</code></a> and <a href="../../ActiveSupport/TimeWithZone.html"><code>ActiveSupport::TimeWithZone</code></a>.</p>
+
+<pre class="ruby"><span class="ruby-ivar">@user</span>.<span class="ruby-identifier">born_on</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1984</span>, <span class="ruby-value">1</span>, <span class="ruby-value">27</span>)
+<span class="ruby-identifier">month_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;date&quot; value=&quot;1984-01&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-number_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-number_field" title="Link to this method">
+                <span class="method-name">number_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="number_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1577</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">number_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">NumberField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns an input tag of type “number”.</p>
+
+<h4 id="method-i-number_field-label-Options"><a href="#method-i-number_field-label-Options">Options</a></h4>
+
+<p>Supports the same options as <a href="FormTagHelper.html#method-i-number_field_tag"><code>FormTagHelper#number_field_tag</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-password_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-password_field" title="Link to this method">
+                <span class="method-name">password_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="password_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">password_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">PasswordField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns an input tag of the “password” type tailored for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). Additional options on the input tag can be passed as a hash with <code>options</code>. These options will be tagged onto the HTML as an HTML element attribute as in the example shown. For security reasons this field is blank by default; pass in a value via <code>options</code> if this is not desired.</p>
+
+<h4 id="method-i-password_field-label-Examples"><a href="#method-i-password_field-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">password_field</span>(<span class="ruby-value">:login</span>, <span class="ruby-value">:pass</span>, <span class="ruby-value">size:</span> <span class="ruby-value">20</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;password&quot; id=&quot;login_pass&quot; name=&quot;login[pass]&quot; size=&quot;20&quot; /&gt;</span>
+
+<span class="ruby-identifier">password_field</span>(<span class="ruby-value">:account</span>, <span class="ruby-value">:secret</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&quot;form_input&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-ivar">@account</span>.<span class="ruby-identifier">secret</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;password&quot; id=&quot;account_secret&quot; name=&quot;account[secret]&quot; value=&quot;#{@account.secret}&quot; class=&quot;form_input&quot; /&gt;</span>
+
+<span class="ruby-identifier">password_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:password</span>, <span class="ruby-value">onchange:</span> <span class="ruby-string">&quot;if ($(&#39;#user_password&#39;).val().length &gt; 30) { alert(&#39;Your password needs to be shorter!&#39;); }&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;password&quot; id=&quot;user_password&quot; name=&quot;user[password]&quot; onchange=&quot;if ($(&#39;#user_password&#39;).val().length &gt; 30) { alert(&#39;Your password needs to be shorter!&#39;); }&quot;/&gt;</span>
+
+<span class="ruby-identifier">password_field</span>(<span class="ruby-value">:account</span>, <span class="ruby-value">:pin</span>, <span class="ruby-value">size:</span> <span class="ruby-value">20</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&#39;form_input&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;password&quot; id=&quot;account_pin&quot; name=&quot;account[pin]&quot; size=&quot;20&quot; class=&quot;form_input&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-phone_field" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-phone_field" title="Link to this method">
+                <span class="method-name">phone_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          <p>aliases <a href="FormHelper.html#method-i-telephone_field"><code>telephone_field</code></a></p>
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="FormHelper.html#method-i-telephone_field">telephone_field</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-radio_button" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-radio_button" title="Link to this method">
+                <span class="method-name">radio_button</span>
+                <span class="method-args">(object_name, method, tag_value, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="radio_button-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1369</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">radio_button</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">tag_value</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">RadioButton</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">tag_value</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a radio button tag for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). If the current value of <code>method</code> is <code>tag_value</code> the radio button will be checked.</p>
+
+<p>To force the radio button to be checked pass <code>checked: true</code> in the <code>options</code> hash. You may pass HTML options there as well.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Let&#39;s say that @article.category returns &quot;rails&quot;:</span>
+<span class="ruby-identifier">radio_button</span>(<span class="ruby-string">&quot;article&quot;</span>, <span class="ruby-string">&quot;category&quot;</span>, <span class="ruby-string">&quot;rails&quot;</span>)
+<span class="ruby-identifier">radio_button</span>(<span class="ruby-string">&quot;article&quot;</span>, <span class="ruby-string">&quot;category&quot;</span>, <span class="ruby-string">&quot;java&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;radio&quot; id=&quot;article_category_rails&quot; name=&quot;article[category]&quot; value=&quot;rails&quot; checked=&quot;checked&quot; /&gt;</span>
+<span class="ruby-comment">#    &lt;input type=&quot;radio&quot; id=&quot;article_category_java&quot; name=&quot;article[category]&quot; value=&quot;java&quot; /&gt;</span>
+
+<span class="ruby-comment"># Let&#39;s say that @user.receive_newsletter returns &quot;no&quot;:</span>
+<span class="ruby-identifier">radio_button</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;receive_newsletter&quot;</span>, <span class="ruby-string">&quot;yes&quot;</span>)
+<span class="ruby-identifier">radio_button</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;receive_newsletter&quot;</span>, <span class="ruby-string">&quot;no&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;radio&quot; id=&quot;user_receive_newsletter_yes&quot; name=&quot;user[receive_newsletter]&quot; value=&quot;yes&quot; /&gt;</span>
+<span class="ruby-comment">#    &lt;input type=&quot;radio&quot; id=&quot;user_receive_newsletter_no&quot; name=&quot;user[receive_newsletter]&quot; value=&quot;no&quot; checked=&quot;checked&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-range_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-range_field" title="Link to this method">
+                <span class="method-name">range_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="range_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1586</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">RangeField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns an input tag of type “range”.</p>
+
+<h4 id="method-i-range_field-label-Options"><a href="#method-i-range_field-label-Options">Options</a></h4>
+
+<p>Supports the same options as <a href="FormTagHelper.html#method-i-range_field_tag"><code>FormTagHelper#range_field_tag</code></a>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-rich_text_area" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rich_text_area" title="Link to this method">
+                <span class="method-name">rich_text_area</span>
+                <span class="method-args">(object_name, method, options = {}, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="FormHelper.html#method-i-rich_textarea">rich_textarea</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-rich_textarea" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-rich_textarea" title="Link to this method">
+                <span class="method-name">rich_textarea</span>
+                <span class="method-args">(object_name, method, options = {}, &amp;block)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="rich_textarea-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actiontext-8.1.1/app/helpers/action_text/tag_helper.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rich_textarea</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">ActionText</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <code>trix-editor</code> tag that instantiates the <a href="../../Trix.html"><code>Trix</code></a> JavaScript editor as well as a hidden field that <a href="../../Trix.html"><code>Trix</code></a> will write to on changes, so the content will be sent on form submissions.</p>
+
+<h4 id="method-i-rich_textarea-label-Options"><a href="#method-i-rich_textarea-label-Options">Options</a></h4>
+<ul><li>
+<p><code>:class</code> - Defaults to “trix-content” which ensures default styling is applied.</p>
+</li><li>
+<p><code>:value</code> - Adds a default value to the HTML input tag.</p>
+</li><li>
+<p><code>[:data][:direct_upload_url]</code> - Defaults to <code>rails_direct_uploads_url</code>.</p>
+</li><li>
+<p><code>[:data][:blob_url_template]</code> - Defaults to <code>rails_service_blob_url(&quot;:signed_id&quot;, &quot;:filename&quot;)</code>.</p>
+</li></ul>
+
+<h4 id="method-i-rich_textarea-label-Example"><a href="#method-i-rich_textarea-label-Example">Example</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">rich_textarea</span> <span class="ruby-value">:message</span>, <span class="ruby-value">:content</span>
+<span class="ruby-comment"># &lt;input type=&quot;hidden&quot; name=&quot;message[content]&quot; id=&quot;message_content_trix_input_message_1&quot;&gt;</span>
+<span class="ruby-comment"># &lt;trix-editor id=&quot;content&quot; input=&quot;message_content_trix_input_message_1&quot; class=&quot;trix-content&quot; ...&gt;&lt;/trix-editor&gt;</span>
+
+<span class="ruby-identifier">rich_textarea</span> <span class="ruby-value">:message</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">value:</span> <span class="ruby-string">&quot;&lt;h1&gt;Default message&lt;/h1&gt;&quot;</span>
+<span class="ruby-comment"># &lt;input type=&quot;hidden&quot; name=&quot;message[content]&quot; id=&quot;message_content_trix_input_message_1&quot; value=&quot;&amp;lt;h1&amp;gt;Default message&amp;lt;/h1&amp;gt;&quot;&gt;</span>
+<span class="ruby-comment"># &lt;trix-editor id=&quot;content&quot; input=&quot;message_content_trix_input_message_1&quot; class=&quot;trix-content&quot; ...&gt;&lt;/trix-editor&gt;</span>
+
+<span class="ruby-identifier">rich_textarea</span> <span class="ruby-value">:message</span>, <span class="ruby-value">:content</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-string">&quot;&lt;h1&gt;Default message&lt;/h1&gt;&quot;</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># &lt;input type=&quot;hidden&quot; name=&quot;message[content]&quot; id=&quot;message_content_trix_input_message_1&quot; value=&quot;&amp;lt;h1&amp;gt;Default message&amp;lt;/h1&amp;gt;&quot;&gt;</span>
+<span class="ruby-comment"># &lt;trix-editor id=&quot;content&quot; input=&quot;message_content_trix_input_message_1&quot; class=&quot;trix-content&quot; ...&gt;&lt;/trix-editor&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="FormHelper.html#method-i-rich_text_area">rich_text_area</a>, rich_text_area
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-search_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-search_field" title="Link to this method">
+                <span class="method-name">search_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="search_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1400</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">SearchField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns an input of type “search” for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object_name</code>). Inputs of type “search” may be styled differently by some browsers.</p>
+
+<pre class="ruby"><span class="ruby-identifier">search_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:name</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_name&quot; name=&quot;user[name]&quot; type=&quot;search&quot; /&gt;</span>
+<span class="ruby-identifier">search_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">autosave:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-comment"># =&gt; &lt;input autosave=&quot;false&quot; id=&quot;user_name&quot; name=&quot;user[name]&quot; type=&quot;search&quot; /&gt;</span>
+<span class="ruby-identifier">search_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">results:</span> <span class="ruby-value">3</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_name&quot; name=&quot;user[name]&quot; results=&quot;3&quot; type=&quot;search&quot; /&gt;</span>
+<span class="ruby-comment">#  Assume request.host returns &quot;www.example.com&quot;</span>
+<span class="ruby-identifier">search_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">autosave:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-comment"># =&gt; &lt;input autosave=&quot;com.example.www&quot; id=&quot;user_name&quot; name=&quot;user[name]&quot; results=&quot;10&quot; type=&quot;search&quot; /&gt;</span>
+<span class="ruby-identifier">search_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">onsearch:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_name&quot; incremental=&quot;true&quot; name=&quot;user[name]&quot; onsearch=&quot;true&quot; type=&quot;search&quot; /&gt;</span>
+<span class="ruby-identifier">search_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">autosave:</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">onsearch:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-comment"># =&gt; &lt;input autosave=&quot;false&quot; id=&quot;user_name&quot; incremental=&quot;true&quot; name=&quot;user[name]&quot; onsearch=&quot;true&quot; type=&quot;search&quot; /&gt;</span>
+<span class="ruby-identifier">search_field</span>(<span class="ruby-value">:user</span>, <span class="ruby-value">:name</span>, <span class="ruby-value">autosave:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">onsearch:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-comment"># =&gt; &lt;input autosave=&quot;com.example.www&quot; id=&quot;user_name&quot; incremental=&quot;true&quot; name=&quot;user[name]&quot; onsearch=&quot;true&quot; results=&quot;10&quot; type=&quot;search&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-telephone_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-telephone_field" title="Link to this method">
+                <span class="method-name">telephone_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="telephone_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1409</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">telephone_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">TelField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “tel”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">telephone_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;phone&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_phone&quot; name=&quot;user[phone]&quot; type=&quot;tel&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="FormHelper.html#method-i-phone_field">phone_field</a>, phone_field
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-text_area" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-text_area" title="Link to this method">
+                <span class="method-name">text_area</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="FormHelper.html#method-i-textarea">textarea</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-text_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-text_field" title="Link to this method">
+                <span class="method-name">text_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="text_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">text_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">TextField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns an input tag of the “text” type tailored for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). Additional options on the input tag can be passed as a hash with <code>options</code>. These options will be tagged onto the HTML as an HTML element attribute as in the example shown.</p>
+
+<h4 id="method-i-text_field-label-Examples"><a href="#method-i-text_field-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">text_field</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">size:</span> <span class="ruby-value">20</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;text&quot; id=&quot;article_title&quot; name=&quot;article[title]&quot; size=&quot;20&quot; value=&quot;#{@article.title}&quot; /&gt;</span>
+
+<span class="ruby-identifier">text_field</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&quot;create_input&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;text&quot; id=&quot;article_title&quot; name=&quot;article[title]&quot; value=&quot;#{@article.title}&quot; class=&quot;create_input&quot; /&gt;</span>
+
+<span class="ruby-identifier">text_field</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:title</span>,  <span class="ruby-value">maxlength:</span> <span class="ruby-value">30</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&quot;title_input&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;text&quot; id=&quot;article_title&quot; name=&quot;article[title]&quot; maxlength=&quot;30&quot; size=&quot;30&quot; value=&quot;#{@article.title}&quot; class=&quot;title_input&quot; /&gt;</span>
+
+<span class="ruby-identifier">text_field</span>(<span class="ruby-value">:session</span>, <span class="ruby-value">:user</span>, <span class="ruby-value">onchange:</span> <span class="ruby-string">&quot;if ($(&#39;#session_user&#39;).val() === &#39;admin&#39;) { alert(&#39;Your login cannot be admin!&#39;); }&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;text&quot; id=&quot;session_user&quot; name=&quot;session[user]&quot; value=&quot;#{@session.user}&quot; onchange=&quot;if ($(&#39;#session_user&#39;).val() === &#39;admin&#39;) { alert(&#39;Your login cannot be admin!&#39;); }&quot;/&gt;</span>
+
+<span class="ruby-identifier">text_field</span>(<span class="ruby-value">:snippet</span>, <span class="ruby-value">:code</span>, <span class="ruby-value">size:</span> <span class="ruby-value">20</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&#39;code_input&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;input type=&quot;text&quot; id=&quot;snippet_code&quot; name=&quot;snippet[code]&quot; size=&quot;20&quot; value=&quot;#{@snippet.code}&quot; class=&quot;code_input&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-textarea" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-textarea" title="Link to this method">
+                <span class="method-name">textarea</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="textarea-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">textarea</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">TextArea</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a textarea opening and closing tag set tailored for accessing a specified attribute (identified by <code>method</code>) on an object assigned to the template (identified by <code>object</code>). Additional options on the input tag can be passed as a hash with <code>options</code>.</p>
+
+<h4 id="method-i-textarea-label-Examples"><a href="#method-i-textarea-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">textarea</span>(<span class="ruby-value">:article</span>, <span class="ruby-value">:body</span>, <span class="ruby-value">cols:</span> <span class="ruby-value">20</span>, <span class="ruby-value">rows:</span> <span class="ruby-value">40</span>)
+<span class="ruby-comment"># =&gt; &lt;textarea cols=&quot;20&quot; rows=&quot;40&quot; id=&quot;article_body&quot; name=&quot;article[body]&quot;&gt;</span>
+<span class="ruby-comment">#      #{@article.body}</span>
+<span class="ruby-comment">#    &lt;/textarea&gt;</span>
+
+<span class="ruby-identifier">textarea</span>(<span class="ruby-value">:comment</span>, <span class="ruby-value">:text</span>, <span class="ruby-value">size:</span> <span class="ruby-string">&quot;20x30&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;textarea cols=&quot;20&quot; rows=&quot;30&quot; id=&quot;comment_text&quot; name=&quot;comment[text]&quot;&gt;</span>
+<span class="ruby-comment">#      #{@comment.text}</span>
+<span class="ruby-comment">#    &lt;/textarea&gt;</span>
+
+<span class="ruby-identifier">textarea</span>(<span class="ruby-value">:application</span>, <span class="ruby-value">:notes</span>, <span class="ruby-value">cols:</span> <span class="ruby-value">40</span>, <span class="ruby-value">rows:</span> <span class="ruby-value">15</span>, <span class="ruby-value">class:</span> <span class="ruby-string">&#39;app_input&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;textarea cols=&quot;40&quot; rows=&quot;15&quot; id=&quot;application_notes&quot; name=&quot;application[notes]&quot; class=&quot;app_input&quot;&gt;</span>
+<span class="ruby-comment">#      #{@application.notes}</span>
+<span class="ruby-comment">#    &lt;/textarea&gt;</span>
+
+<span class="ruby-identifier">textarea</span>(<span class="ruby-value">:entry</span>, <span class="ruby-value">:body</span>, <span class="ruby-value">size:</span> <span class="ruby-string">&quot;20x20&quot;</span>, <span class="ruby-value">disabled:</span> <span class="ruby-string">&#39;disabled&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;textarea cols=&quot;20&quot; rows=&quot;20&quot; id=&quot;entry_body&quot; name=&quot;entry[body]&quot; disabled=&quot;disabled&quot;&gt;</span>
+<span class="ruby-comment">#      #{@entry.body}</span>
+<span class="ruby-comment">#    &lt;/textarea&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="FormHelper.html#method-i-text_area">text_area</a>, text_area
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-time_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-time_field" title="Link to this method">
+                <span class="method-name">time_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="time_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1479</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">time_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “time”.</p>
+
+<p>The default value is generated by trying to call <code>strftime</code> with “%T.%L” on the object’s value. If you pass <code>include_seconds: false</code>, it will be formatted by trying to call <code>strftime</code> with “%H:%M” on the object’s value. It is also possible to override this by passing the “value” option.</p>
+
+<h4 id="method-i-time_field-label-Options"><a href="#method-i-time_field-label-Options">Options</a></h4>
+
+<p>Supports the same options as <a href="FormTagHelper.html#method-i-time_field_tag"><code>FormTagHelper#time_field_tag</code></a>.</p>
+
+<h4 id="method-i-time_field-label-Examples"><a href="#method-i-time_field-label-Examples">Examples</a></h4>
+
+<pre class="ruby"><span class="ruby-identifier">time_field</span>(<span class="ruby-string">&quot;task&quot;</span>, <span class="ruby-string">&quot;started_at&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;task_started_at&quot; name=&quot;task[started_at]&quot; type=&quot;time&quot; /&gt;</span>
+</pre>
+
+<p>You can create values for the “min” and “max” attributes by passing instances of <a href="../../Date.html"><code>Date</code></a> or <a href="../../Time.html"><code>Time</code></a> to the options hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">time_field</span>(<span class="ruby-string">&quot;task&quot;</span>, <span class="ruby-string">&quot;started_at&quot;</span>, <span class="ruby-value">min:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;task_started_at&quot; name=&quot;task[started_at]&quot; type=&quot;time&quot; min=&quot;01:00:00.000&quot; /&gt;</span>
+</pre>
+
+<p>Alternatively, you can pass a <a href="../../String.html"><code>String</code></a> formatted as an ISO8601 time as the values for “min” and “max.”</p>
+
+<pre class="ruby"><span class="ruby-identifier">time_field</span>(<span class="ruby-string">&quot;task&quot;</span>, <span class="ruby-string">&quot;started_at&quot;</span>, <span class="ruby-value">min:</span> <span class="ruby-string">&quot;01:00:00&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;task_started_at&quot; name=&quot;task[started_at]&quot; type=&quot;time&quot; min=&quot;01:00:00.000&quot; /&gt;</span>
+</pre>
+
+<p>By default, provided times will be formatted including seconds. You can render just the hour and minute by passing <code>include_seconds: false</code>. Some browsers will render a simpler UI if you exclude seconds in the timestamp format.</p>
+
+<pre class="ruby"><span class="ruby-identifier">time_field</span>(<span class="ruby-string">&quot;task&quot;</span>, <span class="ruby-string">&quot;started_at&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>, <span class="ruby-value">include_seconds:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;task_started_at&quot; name=&quot;task[started_at]&quot; type=&quot;time&quot; value=&quot;01:00&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-url_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-url_field" title="Link to this method">
+                <span class="method-name">url_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="url_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1559</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">url_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">UrlField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “url”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">url_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;homepage&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_homepage&quot; name=&quot;user[homepage]&quot; type=&quot;url&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-week_field" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-week_field" title="Link to this method">
+                <span class="method-name">week_field</span>
+                <span class="method-args">(object_name, method, options = {})</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="week_field-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.2.0/gems/actionview-8.1.1/lib/action_view/helpers/form_helper.rb, line 1550</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">week_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">WeekField</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns a <a href="FormHelper.html#method-i-text_field"><code>text_field</code></a> of type “week”.</p>
+
+<pre class="ruby"><span class="ruby-identifier">week_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;week&quot; /&gt;</span>
+</pre>
+
+<p>The default value is generated by trying to call <code>strftime</code> with “%Y-W%W” on the object’s value, which makes it behave as expected for instances of <a href="../../DateTime.html"><code>DateTime</code></a> and <a href="../../ActiveSupport/TimeWithZone.html"><code>ActiveSupport::TimeWithZone</code></a>.</p>
+
+<pre class="ruby"><span class="ruby-ivar">@user</span>.<span class="ruby-identifier">born_on</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1984</span>, <span class="ruby-value">5</span>, <span class="ruby-value">12</span>)
+<span class="ruby-identifier">week_field</span>(<span class="ruby-string">&quot;user&quot;</span>, <span class="ruby-string">&quot;born_on&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;input id=&quot;user_born_on&quot; name=&quot;user[born_on]&quot; type=&quot;date&quot; value=&quot;1984-W19&quot; /&gt;</span>
+</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

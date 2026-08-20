@@ -1,0 +1,70 @@
+<div class="question-block" style="
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+">
+
+  <h4>Questão <%= index + 1 %></h4>
+
+  <!-- Tipo da questão -->
+  <label><strong>Tipo:</strong></label>
+  <%= f.select :tipo,
+        [["Radio", "radio"], ["Texto", "texto"]],
+        {},
+        class: "form-select mb-3 question-tipo",
+        onchange: "toggleOptions(this)",
+        style: "width: 200px;" %>
+
+  <!-- Texto da questão -->
+  <label><strong>Texto da pergunta:</strong></label>
+  <%= f.text_field :texto,
+        placeholder: "Digite a pergunta",
+        class: "form-control mb-3",
+        style: "border: none; border-bottom: 2px solid #333; width: 100%;" %>
+
+  <!-- Container de opções (visível apenas para tipo radio) -->
+  <div class="options-container" style="<%= f.object.tipo == 'radio' ? '' : 'display: none;' %>">
+    <label><strong>Opções:</strong></label>
+    <div class="options-list">
+      <% if f.object.options.present? %>
+        <% f.object.options.each_with_index do |option, opt_index| %>
+          <div class="option-item mb-2" style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" 
+                   name="<%= f.object_name %>[options][]"
+                   value="<%= option %>"
+                   placeholder="Opção <%= opt_index + 1 %>"
+                   class="form-control"
+                   style="flex: 1; border: none; border-bottom: 1px solid #999;">
+            <button type="button" onclick="this.parentElement.remove()" 
+                    style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+              ✕
+            </button>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <button type="button" 
+            onclick="addOption(this)"
+            style="background: #6A2A8A; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+      + Adicionar Opção
+    </button>
+  </div>
+
+  <!-- Botão para remover questão -->
+  <% unless index == 0 %>
+    <div style="text-align: right; margin-top: 15px;">
+      <%= f.check_box :_destroy, style: "display: none;", class: "destroy-checkbox" %>
+      <button type="button" 
+              onclick="this.previousElementSibling.checked = true; this.closest('.question-block').style.display = 'none';"
+              style="background: #dc3545; color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer;">
+        Remover Questão
+      </button>
+    </div>
+  <% end %>
+
+</div>
+    </button>
+  </div>
+
+</div>

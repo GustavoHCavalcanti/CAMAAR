@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class Concurrent::Promises::AbstractEventFuture - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,Concurrent::Promises::AbstractEventFuture">
+
+
+    <meta name="description" content="class Concurrent::Promises::AbstractEventFuture: Common ancestor of {Event} and {Future} classes, many shared methods are defined here.">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li>Synchronization::Object</li></ul>
+</div>
+
+
+  
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+
+
+    <li><a class="include" href="InternalStates.html">Concurrent::Promises::InternalStates</a></li>
+
+
+  </ul>
+</div>
+
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li class="calls-super" ><a href="#method-c-new">new</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-add_callback_clear_delayed_node">add_callback_clear_delayed_node</a></li>
+
+      <li ><a href="#method-i-add_callback_notify_blocked">add_callback_notify_blocked</a></li>
+
+      <li ><a href="#method-i-blocks">blocks</a></li>
+
+      <li ><a href="#method-i-callbacks">callbacks</a></li>
+
+      <li ><a href="#method-i-chain">chain</a></li>
+
+      <li ><a href="#method-i-chain_on">chain_on</a></li>
+
+      <li ><a href="#method-i-chain_resolvable">chain_resolvable</a></li>
+
+      <li ><a href="#method-i-default_executor">default_executor</a></li>
+
+      <li ><a href="#method-i-inspect">inspect</a></li>
+
+      <li ><a href="#method-i-on_resolution">on_resolution</a></li>
+
+      <li ><a href="#method-i-on_resolution-21">on_resolution!</a></li>
+
+      <li ><a href="#method-i-on_resolution_using">on_resolution_using</a></li>
+
+      <li ><a href="#method-i-pending-3F">pending?</a></li>
+
+      <li ><a href="#method-i-promise">promise</a></li>
+
+      <li ><a href="#method-i-resolve_with">resolve_with</a></li>
+
+      <li ><a href="#method-i-resolved-3F">resolved?</a></li>
+
+      <li ><a href="#method-i-state">state</a></li>
+
+      <li ><a href="#method-i-tangle">tangle</a></li>
+
+      <li class="calls-super" ><a href="#method-i-to_s">to_s</a></li>
+
+      <li ><a href="#method-i-touch">touch</a></li>
+
+      <li ><a href="#method-i-touched-3F">touched?</a></li>
+
+      <li ><a href="#method-i-wait">wait</a></li>
+
+      <li ><a href="#method-i-waiting_threads">waiting_threads</a></li>
+
+      <li ><a href="#method-i-with_default_executor">with_default_executor</a></li>
+
+      <li ><a href="#method-i-with_hidden_resolvable">with_hidden_resolvable</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-Concurrent::Promises::AbstractEventFuture">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../Concurrent.html">Concurrent</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../Concurrent/Promises.html">Promises</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>AbstractEventFuture</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-Concurrent::Promises::AbstractEventFuture" class="anchor-link class">
+    class Concurrent::Promises::AbstractEventFuture
+  </h1>
+
+  <section class="description">
+    
+<p>Common ancestor of {Event} and {Future} classes, many shared methods are defined here.</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-new" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-new" title="Link to this method">
+                <span class="method-name">new</span>
+                <span class="method-args">(promise, default_executor)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 522</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">promise</span>, <span class="ruby-identifier">default_executor</span>)
+  <span class="ruby-keyword">super</span>()
+  <span class="ruby-ivar">@Lock</span>               = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@Condition</span>          = <span class="ruby-constant">ConditionVariable</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@Promise</span>            = <span class="ruby-identifier">promise</span>
+  <span class="ruby-ivar">@DefaultExecutor</span>    = <span class="ruby-identifier">default_executor</span>
+  <span class="ruby-ivar">@Callbacks</span>          = <span class="ruby-constant">LockFreeStack</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@Waiters</span>            = <span class="ruby-constant">AtomicFixnum</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">internal_state</span> = <span class="ruby-constant">PENDING</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-add_callback_clear_delayed_node" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-add_callback_clear_delayed_node" title="Link to this method">
+                <span class="method-name">add_callback_clear_delayed_node</span>
+                <span class="method-args">(node)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="add_callback_clear_delayed_node-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 738</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_callback_clear_delayed_node</span>(<span class="ruby-identifier">node</span>)
+  <span class="ruby-identifier">add_callback</span>(<span class="ruby-value">:callback_clear_delayed_node</span>, <span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-add_callback_notify_blocked" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-add_callback_notify_blocked" title="Link to this method">
+                <span class="method-name">add_callback_notify_blocked</span>
+                <span class="method-args">(promise, index)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="add_callback_notify_blocked-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 733</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_callback_notify_blocked</span>(<span class="ruby-identifier">promise</span>, <span class="ruby-identifier">index</span>)
+  <span class="ruby-identifier">add_callback</span> <span class="ruby-value">:callback_notify_blocked</span>, <span class="ruby-identifier">promise</span>, <span class="ruby-identifier">index</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-blocks" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-blocks" title="Link to this method">
+                <span class="method-name">blocks</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="blocks-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 702</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">blocks</span>
+  <span class="ruby-ivar">@Callbacks</span>.<span class="ruby-identifier">each_with_object</span>([]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">args</span>), <span class="ruby-identifier">promises</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">promises</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-value">:callback_notify_blocked</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>For inspection. @!visibility private @return [Array&lt;AbstractPromise&gt;]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-callbacks" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-callbacks" title="Link to this method">
+                <span class="method-name">callbacks</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="callbacks-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 710</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">callbacks</span>
+  <span class="ruby-ivar">@Callbacks</span>.<span class="ruby-identifier">each</span>.<span class="ruby-identifier">to_a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>For inspection. @!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-chain" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-chain" title="Link to this method">
+                <span class="method-name">chain</span>
+                <span class="method-args">(*args, &amp;task)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="chain-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 596</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chain</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">task</span>)
+  <span class="ruby-identifier">chain_on</span> <span class="ruby-ivar">@DefaultExecutor</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">task</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!macro promises.shortcut.on @return [Future]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-chain_on" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-chain_on" title="Link to this method">
+                <span class="method-name">chain_on</span>
+                <span class="method-args">(executor, *args, &amp;task)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="chain_on-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 614</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chain_on</span>(<span class="ruby-identifier">executor</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">task</span>)
+  <span class="ruby-constant">ChainPromise</span>.<span class="ruby-identifier">new_blocked_by1</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">executor</span>, <span class="ruby-identifier">executor</span>, <span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">task</span>).<span class="ruby-identifier">future</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Chains the task to be executed asynchronously on executor after it is resolved.</p>
+
+<p>@!macro promises.param.executor @!macro promises.param.args @return [Future] @!macro promise.param.task-future</p>
+
+<p>@overload an_event.chain_on(executor, *args, &amp;task)</p>
+
+<pre>@yield [*args] to the task.</pre>
+
+<p>@overload a_future.chain_on(executor, *args, &amp;task)</p>
+
+<pre>@yield [fulfilled, value, reason, *args] to the task.
+@yieldparam [true, false] fulfilled
+@yieldparam [Object] value
+@yieldparam [Object] reason</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-chain_resolvable" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-chain_resolvable" title="Link to this method">
+                <span class="method-name">chain_resolvable</span>
+                <span class="method-args">(resolvable)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="chain_resolvable-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 629</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chain_resolvable</span>(<span class="ruby-identifier">resolvable</span>)
+  <span class="ruby-identifier">on_resolution!</span> { <span class="ruby-identifier">resolvable</span>.<span class="ruby-identifier">resolve_with</span> <span class="ruby-identifier">internal_state</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Resolves the resolvable when receiver is resolved.</p>
+
+<p>@param [Resolvable] resolvable @return [self]</p>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="AbstractEventFuture.html#method-i-tangle">tangle</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-default_executor" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-default_executor" title="Link to this method">
+                <span class="method-name">default_executor</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="default_executor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 590</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default_executor</span>
+  <span class="ruby-ivar">@DefaultExecutor</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns default executor. @return [Executor] default executor @see <a href="AbstractEventFuture.html#method-i-with_default_executor"><code>with_default_executor</code></a> @see <a href="FactoryMethods.html#method-i-future_on"><code>FactoryMethods#future_on</code></a> @see <a href="FactoryMethods.html#method-i-resolvable_future"><code>FactoryMethods#resolvable_future</code></a> @see <a href="FactoryMethods.html#method-i-any_fulfilled_future_on"><code>FactoryMethods#any_fulfilled_future_on</code></a> @see similar</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-inspect" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-inspect" title="Link to this method">
+                <span class="method-name">inspect</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="AbstractEventFuture.html#method-i-to_s">to_s</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-on_resolution" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-on_resolution" title="Link to this method">
+                <span class="method-name">on_resolution</span>
+                <span class="method-args">(*args, &amp;callback)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="on_resolution-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 637</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_resolution</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">callback</span>)
+  <span class="ruby-identifier">on_resolution_using</span> <span class="ruby-ivar">@DefaultExecutor</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">callback</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!macro promises.shortcut.using @return [self]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-on_resolution-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-on_resolution-21" title="Link to this method">
+                <span class="method-name">on_resolution!</span>
+                <span class="method-args">(*args, &amp;callback)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="on_resolution-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 655</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_resolution!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">callback</span>)
+  <span class="ruby-identifier">add_callback</span> <span class="ruby-value">:callback_on_resolution</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">callback</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Stores the callback to be executed synchronously on resolving thread after it is resolved.</p>
+
+<p>@!macro promises.param.args @!macro promise.param.callback @return [self]</p>
+
+<p>@overload an_event.on_resolution!(*args, &amp;callback)</p>
+
+<pre>@yield [*args] to the callback.</pre>
+
+<p>@overload a_future.on_resolution!(*args, &amp;callback)</p>
+
+<pre>@yield [fulfilled, value, reason, *args] to the callback.
+@yieldparam [true, false] fulfilled
+@yieldparam [Object] value
+@yieldparam [Object] reason</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-on_resolution_using" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-on_resolution_using" title="Link to this method">
+                <span class="method-name">on_resolution_using</span>
+                <span class="method-args">(executor, *args, &amp;callback)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="on_resolution_using-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 673</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_resolution_using</span>(<span class="ruby-identifier">executor</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">callback</span>)
+  <span class="ruby-identifier">add_callback</span> <span class="ruby-value">:async_callback_on_resolution</span>, <span class="ruby-identifier">executor</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">callback</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Stores the callback to be executed asynchronously on executor after it is resolved.</p>
+
+<p>@!macro promises.param.executor @!macro promises.param.args @!macro promise.param.callback @return [self]</p>
+
+<p>@overload an_event.on_resolution_using(executor, *args, &amp;callback)</p>
+
+<pre>@yield [*args] to the callback.</pre>
+
+<p>@overload a_future.on_resolution_using(executor, *args, &amp;callback)</p>
+
+<pre>@yield [fulfilled, value, reason, *args] to the callback.
+@yieldparam [true, false] fulfilled
+@yieldparam [Object] value
+@yieldparam [Object] reason</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-pending-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-pending-3F" title="Link to this method">
+                <span class="method-name">pending?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="pending-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 549</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pending?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">internal_state</span>.<span class="ruby-identifier">resolved?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Is it in pending state? @return [Boolean]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-promise" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-promise" title="Link to this method">
+                <span class="method-name">promise</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="promise-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 716</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">promise</span>
+  <span class="ruby-ivar">@Promise</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>For inspection. @!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-resolve_with" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-resolve_with" title="Link to this method">
+                <span class="method-name">resolve_with</span>
+                <span class="method-args">(state, raise_on_reassign = true, reserved = false)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="resolve_with-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 688</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resolve_with</span>(<span class="ruby-identifier">state</span>, <span class="ruby-identifier">raise_on_reassign</span> = <span class="ruby-keyword">true</span>, <span class="ruby-identifier">reserved</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">compare_and_set_internal_state</span>(<span class="ruby-identifier">reserved</span> <span class="ruby-operator">?</span> <span class="ruby-constant">RESERVED</span> <span class="ruby-operator">:</span> <span class="ruby-constant">PENDING</span>, <span class="ruby-identifier">state</span>)
+    <span class="ruby-comment"># go to synchronized block only if there were waiting threads</span>
+    <span class="ruby-ivar">@Lock</span>.<span class="ruby-identifier">synchronize</span> { <span class="ruby-ivar">@Condition</span>.<span class="ruby-identifier">broadcast</span> } <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@Waiters</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">call_callbacks</span> <span class="ruby-identifier">state</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">rejected_resolution</span>(<span class="ruby-identifier">raise_on_reassign</span>, <span class="ruby-identifier">state</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-resolved-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-resolved-3F" title="Link to this method">
+                <span class="method-name">resolved?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="resolved-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 555</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resolved?</span>
+  <span class="ruby-identifier">internal_state</span>.<span class="ruby-identifier">resolved?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Is it in resolved state? @return [Boolean]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-state" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-state" title="Link to this method">
+                <span class="method-name">state</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="state-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 543</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">state</span>
+  <span class="ruby-identifier">internal_state</span>.<span class="ruby-identifier">to_sym</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns its state. @return [Symbol]</p>
+
+<p>@overload an_event.state</p>
+
+<pre class="ruby"><span class="ruby-ivar">@return</span> [<span class="ruby-value">:pending</span>, <span class="ruby-value">:resolved</span>]
+</pre>
+
+<p>@overload a_future.state</p>
+
+<pre>Both :fulfilled, :rejected implies :resolved.
+@return [:pending, :fulfilled, :rejected]</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-tangle" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-tangle" title="Link to this method">
+                <span class="method-name">tangle</span>
+                <span class="method-args">(resolvable)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="AbstractEventFuture.html#method-i-chain_resolvable">chain_resolvable</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-to_s" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-to_s" title="Link to this method">
+                <span class="method-name">to_s</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 619</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+  <span class="ruby-identifier">format</span> <span class="ruby-string">&#39;%s %s&gt;&#39;</span>, <span class="ruby-keyword">super</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>], <span class="ruby-identifier">state</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@return [String] Short string representation.</p>
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="AbstractEventFuture.html#method-i-inspect">inspect</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-touch" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-touch" title="Link to this method">
+                <span class="method-name">touch</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="touch-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 562</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">touch</span>
+  <span class="ruby-ivar">@Promise</span>.<span class="ruby-identifier">touch</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Propagates touch. Requests all the delayed futures, which it depends on, to be executed. This method is called by any other method requiring resolved state, like {#wait}. @return [self]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-touched-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-touched-3F" title="Link to this method">
+                <span class="method-name">touched?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="touched-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 722</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">touched?</span>
+  <span class="ruby-identifier">promise</span>.<span class="ruby-identifier">touched?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>For inspection. @!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-wait" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-wait" title="Link to this method">
+                <span class="method-name">wait</span>
+                <span class="method-args">(timeout = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="wait-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 578</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">wait</span>(<span class="ruby-identifier">timeout</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">wait_until_resolved</span>(<span class="ruby-identifier">timeout</span>)
+  <span class="ruby-identifier">timeout</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!macro promises.method.wait</p>
+
+<pre>Wait (block the Thread) until receiver is {#resolved?}.
+@!macro promises.touches
+
+@!macro promises.warn.blocks
+@!macro promises.param.timeout
+@return [self, true, false] self implies timeout was not used, true implies timeout was used
+  and it was resolved, false implies it was not resolved within timeout.</pre>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-waiting_threads" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-waiting_threads" title="Link to this method">
+                <span class="method-name">waiting_threads</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="waiting_threads-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 728</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">waiting_threads</span>
+  <span class="ruby-ivar">@Waiters</span>.<span class="ruby-identifier">each</span>.<span class="ruby-identifier">to_a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>For inspection. @!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-with_default_executor" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-with_default_executor" title="Link to this method">
+                <span class="method-name">with_default_executor</span>
+                <span class="method-args">(executor)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="with_default_executor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 683</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_default_executor</span>(<span class="ruby-identifier">executor</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!macro promises.method.with_default_executor</p>
+
+<pre>Crates new object with same class with the executor set as its new default executor.
+Any futures depending on it will use the new default executor.</pre>
+
+<p>@!macro promises.shortcut.event-future @abstract @return [AbstractEventFuture]</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-with_hidden_resolvable" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-with_hidden_resolvable" title="Link to this method">
+                <span class="method-name">with_hidden_resolvable</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="with_hidden_resolvable-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.5/lib/concurrent-ruby/concurrent/promises.rb, line 743</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_hidden_resolvable</span>
+  <span class="ruby-comment"># TODO (pitr-ch 10-Dec-2018): documentation, better name if in edge</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@!visibility private</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

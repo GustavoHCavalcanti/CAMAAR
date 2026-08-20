@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class Capybara::Driver::Base - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,Capybara::Driver::Base">
+
+
+    <meta name="description" content="Documentation for the Capybara::Driver::Base class">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../../Object.html">Object</a><ul><li><a href="../../BasicObject.html">BasicObject</a></li></ul></li></ul>
+</div>
+
+
+  
+
+  
+
+  
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-accept_modal">accept_modal</a></li>
+
+      <li ><a href="#method-i-active_element">active_element</a></li>
+
+      <li ><a href="#method-i-close_window">close_window</a></li>
+
+      <li ><a href="#method-i-current_url">current_url</a></li>
+
+      <li ><a href="#method-i-current_window_handle">current_window_handle</a></li>
+
+      <li ><a href="#method-i-dismiss_modal">dismiss_modal</a></li>
+
+      <li ><a href="#method-i-evaluate_async_script">evaluate_async_script</a></li>
+
+      <li ><a href="#method-i-evaluate_script">evaluate_script</a></li>
+
+      <li ><a href="#method-i-execute_script">execute_script</a></li>
+
+      <li ><a href="#method-i-find_css">find_css</a></li>
+
+      <li ><a href="#method-i-find_xpath">find_xpath</a></li>
+
+      <li ><a href="#method-i-frame_title">frame_title</a></li>
+
+      <li ><a href="#method-i-frame_url">frame_url</a></li>
+
+      <li ><a href="#method-i-fullscreen_window">fullscreen_window</a></li>
+
+      <li ><a href="#method-i-go_back">go_back</a></li>
+
+      <li ><a href="#method-i-go_forward">go_forward</a></li>
+
+      <li ><a href="#method-i-html">html</a></li>
+
+      <li ><a href="#method-i-invalid_element_errors">invalid_element_errors</a></li>
+
+      <li ><a href="#method-i-maximize_window">maximize_window</a></li>
+
+      <li ><a href="#method-i-needs_server-3F">needs_server?</a></li>
+
+      <li ><a href="#method-i-no_such_window_error">no_such_window_error</a></li>
+
+      <li ><a href="#method-i-open_new_window">open_new_window</a></li>
+
+      <li ><a href="#method-i-refresh">refresh</a></li>
+
+      <li ><a href="#method-i-reset-21">reset!</a></li>
+
+      <li ><a href="#method-i-resize_window_to">resize_window_to</a></li>
+
+      <li ><a href="#method-i-response_headers">response_headers</a></li>
+
+      <li ><a href="#method-i-save_screenshot">save_screenshot</a></li>
+
+      <li ><a href="#method-i-send_keys">send_keys</a></li>
+
+      <li ><a href="#method-i-session_options">session_options</a></li>
+
+      <li ><a href="#method-i-status_code">status_code</a></li>
+
+      <li ><a href="#method-i-switch_to_frame">switch_to_frame</a></li>
+
+      <li ><a href="#method-i-switch_to_window">switch_to_window</a></li>
+
+      <li ><a href="#method-i-visit">visit</a></li>
+
+      <li ><a href="#method-i-wait-3F">wait?</a></li>
+
+      <li ><a href="#method-i-window_handles">window_handles</a></li>
+
+      <li ><a href="#method-i-window_size">window_size</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-Capybara::Driver::Base">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../../Capybara.html">Capybara</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <a href="../../Capybara/Driver.html">Driver</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>Base</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-Capybara::Driver::Base" class="anchor-link class">
+    class Capybara::Driver::Base
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-i-session" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-session" title="Link to this attribute">
+            <span class="method-name">session</span>
+            <span class="attribute-access-type">[W]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-accept_modal" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-accept_modal" title="Link to this method">
+                <span class="method-name">accept_modal</span>
+                <span class="method-args">(type, **options, &amp;blk)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="accept_modal-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accept_modal</span>(<span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#accept_modal&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Execute the block, and then accept the modal opened. @param type [:alert, :confirm, :prompt] @option options [Numeric] :wait  How long to wait for the modal to appear after executing the block. @option options [String, Regexp] :text  Text to verify is in the message shown in the modal @option options [String] :with  Text to fill in in the case of a prompt @return [String]  the message shown in the modal @raise [Capybara::ModalNotFound]  if modal dialog hasn’t been found</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-active_element" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-active_element" title="Link to this method">
+                <span class="method-name">active_element</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="active_element-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">active_element</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#active_element&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-close_window" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-close_window" title="Link to this method">
+                <span class="method-name">close_window</span>
+                <span class="method-args">(handle)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="close_window-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close_window</span>(<span class="ruby-identifier">handle</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#close_window&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-current_url" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-current_url" title="Link to this method">
+                <span class="method-name">current_url</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="current_url-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current_url</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-current_window_handle" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-current_window_handle" title="Link to this method">
+                <span class="method-name">current_window_handle</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="current_window_handle-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current_window_handle</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#current_window_handle&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-dismiss_modal" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-dismiss_modal" title="Link to this method">
+                <span class="method-name">dismiss_modal</span>
+                <span class="method-args">(type, **options, &amp;blk)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="dismiss_modal-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dismiss_modal</span>(<span class="ruby-identifier">type</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#dismiss_modal&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Execute the block, and then dismiss the modal opened. @param type [:alert, :confirm, :prompt] @option options [Numeric] :wait  How long to wait for the modal to appear after executing the block. @option options [String, Regexp] :text  Text to verify is in the message shown in the modal @return [String]  the message shown in the modal @raise [Capybara::ModalNotFound]  if modal dialog hasn’t been found</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-evaluate_async_script" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-evaluate_async_script" title="Link to this method">
+                <span class="method-name">evaluate_async_script</span>
+                <span class="method-args">(script, *args)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="evaluate_async_script-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">evaluate_async_script</span>(<span class="ruby-identifier">script</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#evaluate_script_asnyc&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-evaluate_script" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-evaluate_script" title="Link to this method">
+                <span class="method-name">evaluate_script</span>
+                <span class="method-args">(script, *args)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="evaluate_script-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">evaluate_script</span>(<span class="ruby-identifier">script</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#evaluate_script&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-execute_script" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-execute_script" title="Link to this method">
+                <span class="method-name">execute_script</span>
+                <span class="method-args">(script, *args)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="execute_script-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">execute_script</span>(<span class="ruby-identifier">script</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#execute_script&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-find_css" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-find_css" title="Link to this method">
+                <span class="method-name">find_css</span>
+                <span class="method-args">(query, **options)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="find_css-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_css</span>(<span class="ruby-identifier">query</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-find_xpath" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-find_xpath" title="Link to this method">
+                <span class="method-name">find_xpath</span>
+                <span class="method-args">(query, **options)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="find_xpath-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_xpath</span>(<span class="ruby-identifier">query</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-frame_title" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-frame_title" title="Link to this method">
+                <span class="method-name">frame_title</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="frame_title-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">frame_title</span>
+  <span class="ruby-identifier">find_xpath</span>(<span class="ruby-string">&#39;/html/head/title&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:all_text</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-frame_url" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-frame_url" title="Link to this method">
+                <span class="method-name">frame_url</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="frame_url-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">frame_url</span>
+  <span class="ruby-identifier">evaluate_script</span>(<span class="ruby-string">&#39;document.location.href&#39;</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#frame_title&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-fullscreen_window" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-fullscreen_window" title="Link to this method">
+                <span class="method-name">fullscreen_window</span>
+                <span class="method-args">(handle)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="fullscreen_window-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fullscreen_window</span>(<span class="ruby-identifier">handle</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#fullscreen_window&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-go_back" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-go_back" title="Link to this method">
+                <span class="method-name">go_back</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="go_back-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">go_back</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#go_back&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-go_forward" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-go_forward" title="Link to this method">
+                <span class="method-name">go_forward</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="go_forward-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">go_forward</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#go_forward&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-html" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-html" title="Link to this method">
+                <span class="method-name">html</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="html-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">html</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-invalid_element_errors" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-invalid_element_errors" title="Link to this method">
+                <span class="method-name">invalid_element_errors</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="invalid_element_errors-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">invalid_element_errors</span>
+  []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-maximize_window" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-maximize_window" title="Link to this method">
+                <span class="method-name">maximize_window</span>
+                <span class="method-args">(handle)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="maximize_window-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">maximize_window</span>(<span class="ruby-identifier">handle</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#maximize_window&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-needs_server-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-needs_server-3F" title="Link to this method">
+                <span class="method-name">needs_server?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="needs_server-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">needs_server?</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-no_such_window_error" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-no_such_window_error" title="Link to this method">
+                <span class="method-name">no_such_window_error</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="no_such_window_error-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">no_such_window_error</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#no_such_window_error&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-open_new_window" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-open_new_window" title="Link to this method">
+                <span class="method-name">open_new_window</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="open_new_window-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_new_window</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#open_new_window&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-refresh" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-refresh" title="Link to this method">
+                <span class="method-name">refresh</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="refresh-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">refresh</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-reset-21" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-reset-21" title="Link to this method">
+                <span class="method-name">reset!</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="reset-21-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset!</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-resize_window_to" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-resize_window_to" title="Link to this method">
+                <span class="method-name">resize_window_to</span>
+                <span class="method-args">(handle, width, height)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="resize_window_to-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resize_window_to</span>(<span class="ruby-identifier">handle</span>, <span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#resize_window_to&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-response_headers" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-response_headers" title="Link to this method">
+                <span class="method-name">response_headers</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="response_headers-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">response_headers</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#response_headers&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-save_screenshot" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-save_screenshot" title="Link to this method">
+                <span class="method-name">save_screenshot</span>
+                <span class="method-args">(path, **options)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="save_screenshot-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save_screenshot</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">**</span><span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#save_screenshot&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-send_keys" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-send_keys" title="Link to this method">
+                <span class="method-name">send_keys</span>
+                <span class="method-args">(*)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="send_keys-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_keys</span>(<span class="ruby-operator">*</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#send_keys&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-session_options" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-session_options" title="Link to this method">
+                <span class="method-name">session_options</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="session_options-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">session_options</span>
+  <span class="ruby-identifier">session</span>&amp;.<span class="ruby-identifier">config</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Capybara</span>.<span class="ruby-identifier">session_options</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-status_code" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-status_code" title="Link to this method">
+                <span class="method-name">status_code</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="status_code-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">status_code</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#status_code&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-switch_to_frame" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-switch_to_frame" title="Link to this method">
+                <span class="method-name">switch_to_frame</span>
+                <span class="method-args">(frame)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="switch_to_frame-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">switch_to_frame</span>(<span class="ruby-identifier">frame</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#switch_to_frame&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>@param frame [Capybara::Node::Element, :parent, :top]  The iframe element to switch to</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-switch_to_window" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-switch_to_window" title="Link to this method">
+                <span class="method-name">switch_to_window</span>
+                <span class="method-args">(handle)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="switch_to_window-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">switch_to_window</span>(<span class="ruby-identifier">handle</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#switch_to_window&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-visit" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-visit" title="Link to this method">
+                <span class="method-name">visit</span>
+                <span class="method-args">(path)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="visit-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visit</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-wait-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-wait-3F" title="Link to this method">
+                <span class="method-name">wait?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="wait-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">wait?</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-window_handles" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-window_handles" title="Link to this method">
+                <span class="method-name">window_handles</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="window_handles-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">window_handles</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#window_handles&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-window_size" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-window_size" title="Link to this method">
+                <span class="method-name">window_size</span>
+                <span class="method-args">(handle)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="window_size-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/capybara-3.40.0/lib/capybara/driver/base.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">window_size</span>(<span class="ruby-identifier">handle</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Capybara</span><span class="ruby-operator">::</span><span class="ruby-constant">NotSupportedByDriverError</span>, <span class="ruby-string">&#39;Capybara::Driver::Base#window_size&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

@@ -1,0 +1,2 @@
+module Respondente::DashboardHelper
+end

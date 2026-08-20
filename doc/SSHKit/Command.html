@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class SSHKit::Command - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,SSHKit::Command">
+
+
+    <meta name="description" content="class SSHKit::Command: @author Lee Hambley">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="../Object.html">Object</a><ul><li><a href="../BasicObject.html">BasicObject</a></li></ul></li></ul>
+</div>
+
+
+  
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-new">new</a></li>
+
+      <li ><a href="#method-c-shellescape_except_tilde">shellescape_except_tilde</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-complete-3F">complete?</a></li>
+
+      <li ><a href="#method-i-environment_hash">environment_hash</a></li>
+
+      <li ><a href="#method-i-environment_string">environment_string</a></li>
+
+      <li ><a href="#method-i-exit_status-3D">exit_status=</a></li>
+
+      <li ><a href="#method-i-failed-3F">failed?</a></li>
+
+      <li ><a href="#method-i-failure-3F">failure?</a></li>
+
+      <li ><a href="#method-i-finished-3F">finished?</a></li>
+
+      <li ><a href="#method-i-group">group</a></li>
+
+      <li ><a href="#method-i-host">host</a></li>
+
+      <li ><a href="#method-i-in_background">in_background</a></li>
+
+      <li ><a href="#method-i-on_stderr">on_stderr</a></li>
+
+      <li ><a href="#method-i-on_stdout">on_stdout</a></li>
+
+      <li ><a href="#method-i-runtime">runtime</a></li>
+
+      <li ><a href="#method-i-should_map-3F">should_map?</a></li>
+
+      <li ><a href="#method-i-started-3D">started=</a></li>
+
+      <li ><a href="#method-i-started-3F">started?</a></li>
+
+      <li ><a href="#method-i-stderr">stderr</a></li>
+
+      <li ><a href="#method-i-stderr-3D">stderr=</a></li>
+
+      <li ><a href="#method-i-stdout">stdout</a></li>
+
+      <li ><a href="#method-i-stdout-3D">stdout=</a></li>
+
+      <li ><a href="#method-i-success-3F">success?</a></li>
+
+      <li ><a href="#method-i-successful-3F">successful?</a></li>
+
+      <li ><a href="#method-i-to_command">to_command</a></li>
+
+      <li ><a href="#method-i-to_hash">to_hash</a></li>
+
+      <li ><a href="#method-i-to_s">to_s</a></li>
+
+      <li ><a href="#method-i-umask">umask</a></li>
+
+      <li ><a href="#method-i-user">user</a></li>
+
+      <li ><a href="#method-i-verbosity">verbosity</a></li>
+
+      <li ><a href="#method-i-with">with</a></li>
+
+      <li ><a href="#method-i-with_redaction">with_redaction</a></li>
+
+      <li ><a href="#method-i-within">within</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-SSHKit::Command">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../SSHKit.html">SSHKit</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>Command</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-SSHKit::Command" class="anchor-link class">
+    class SSHKit::Command
+  </h1>
+
+  <section class="description">
+    
+<p>@author Lee Hambley</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+
+        <dt id="Failed">Failed</dt>
+
+        <dd>
+
+          
+        </dd>
+
+
+      </dl>
+    </section>
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-i-args" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-args" title="Link to this attribute">
+            <span class="method-name">args</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-command" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-command" title="Link to this attribute">
+            <span class="method-name">command</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-exit_status" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-exit_status" title="Link to this attribute">
+            <span class="method-name">exit_status</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-full_stderr" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-full_stderr" title="Link to this attribute">
+            <span class="method-name">full_stderr</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-full_stdout" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-full_stdout" title="Link to this attribute">
+            <span class="method-name">full_stdout</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-options" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-options" title="Link to this attribute">
+            <span class="method-name">options</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-started" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-started" title="Link to this attribute">
+            <span class="method-name">started</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-started_at" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-started_at" title="Link to this attribute">
+            <span class="method-name">started_at</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+      <div id="attribute-i-uuid" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-uuid" title="Link to this attribute">
+            <span class="method-name">uuid</span>
+            <span class="attribute-access-type">[R]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-new" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-new" title="Link to this method">
+                <span class="method-name">new</span>
+                <span class="method-args">(*args)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Must pass arguments to Command.new&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">default_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>)
+  <span class="ruby-ivar">@command</span> = <span class="ruby-identifier">sanitize_command</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">shift</span>)
+  <span class="ruby-ivar">@args</span>    = <span class="ruby-identifier">args</span>
+  <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">symbolize_keys!</span>
+  <span class="ruby-ivar">@stdout</span>, <span class="ruby-ivar">@stderr</span>, <span class="ruby-ivar">@full_stdout</span>, <span class="ruby-ivar">@full_stderr</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>, <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>, <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>, <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@uuid</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">random_bytes</span>(<span class="ruby-value">10</span>))[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">7</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Initialize a new <a href="Command.html"><code>Command</code></a> object</p>
+
+<p>@param  [Array] A list of arguments, the first is considered to be the command name, with optional variadaric args @return [Command] An un-started command object with no exit staus, and nothing in stdin or stdout</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-shellescape_except_tilde" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-shellescape_except_tilde" title="Link to this method">
+                <span class="method-name">shellescape_except_tilde</span>
+                <span class="method-args">(file)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="shellescape_except_tilde-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 223</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">shellescape_except_tilde</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">file</span>.<span class="ruby-identifier">shellescape</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;\\~&quot;</span>, <span class="ruby-string">&quot;~&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>allow using home directory but escape everything else like spaces etc</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-complete-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-complete-3F" title="Link to this method">
+                <span class="method-name">complete?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="complete-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complete?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">exit_status</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="Command.html#method-i-finished-3F">finished?</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-environment_hash" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-environment_hash" title="Link to this method">
+                <span class="method-name">environment_hash</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="environment_hash-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">environment_hash</span>
+  (<span class="ruby-constant">SSHKit</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">default_env</span> <span class="ruby-operator">||</span> {}).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:env</span>] <span class="ruby-operator">||</span> {})
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-environment_string" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-environment_string" title="Link to this method">
+                <span class="method-name">environment_string</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="environment_string-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">environment_string</span>
+  <span class="ruby-identifier">environment_hash</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">key_string</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">escaped_value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&quot;/</span>, <span class="ruby-string">&#39;\&quot;&#39;</span>)
+    <span class="ruby-node">%{#{key_string}=&quot;#{escaped_value}&quot;}</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-exit_status-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-exit_status-3D" title="Link to this method">
+                <span class="method-name">exit_status=</span>
+                <span class="method-args">(new_exit_status)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="exit_status-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exit_status=</span>(<span class="ruby-identifier">new_exit_status</span>)
+  <span class="ruby-ivar">@finished_at</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-ivar">@exit_status</span> = <span class="ruby-identifier">new_exit_status</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:raise_on_non_zero_exit</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">exit_status</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">message</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{command} exit status: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">exit_status</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-identifier">message</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{command} stdout: &quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">full_stdout</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;Nothing written&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">full_stdout</span>.<span class="ruby-identifier">strip</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-identifier">message</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{command} stderr: &quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">full_stderr</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;Nothing written&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">full_stderr</span>.<span class="ruby-identifier">strip</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">Failed</span>, <span class="ruby-identifier">message</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-failed-3F" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-failed-3F" title="Link to this method">
+                <span class="method-name">failed?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="Command.html#method-i-failure-3F">failure?</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-failure-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-failure-3F" title="Link to this method">
+                <span class="method-name">failure?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="failure-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">failure?</span>
+  <span class="ruby-identifier">exit_status</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="Command.html#method-i-failed-3F">failed?</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-finished-3F" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-finished-3F" title="Link to this method">
+                <span class="method-name">finished?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="Command.html#method-i-complete-3F">complete?</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-group" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-group" title="Link to this method">
+                <span class="method-name">group</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="group-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 183</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">group</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:group</span>]
+  <span class="ruby-node">&quot;sg #{options[:group].to_s.shellescape} -c #{yield.shellescape}&quot;</span>
+  <span class="ruby-comment"># We could also use the so-called heredoc format perhaps:</span>
+  <span class="ruby-comment">#&quot;newgrp #{options[:group]} &lt;&lt;EOC \\\&quot;%s\\\&quot; EOC&quot; % %Q{#{yield}}</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-host" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-host" title="Link to this method">
+                <span class="method-name">host</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="host-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">host</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:host</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-in_background" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-in_background" title="Link to this method">
+                <span class="method-name">in_background</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="in_background-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">in_background</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:run_in_background</span>]
+  <span class="ruby-node">&quot;( nohup #{yield} &gt; /dev/null &amp; )&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-on_stderr" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-on_stderr" title="Link to this method">
+                <span class="method-name">on_stderr</span>
+                <span class="method-args">(channel, data)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="on_stderr-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_stderr</span>(<span class="ruby-identifier">channel</span>, <span class="ruby-identifier">data</span>)
+  <span class="ruby-ivar">@stderr</span> = <span class="ruby-identifier">data</span>
+  <span class="ruby-ivar">@full_stderr</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">call_interaction_handler</span>(<span class="ruby-value">:stderr</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">channel</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-on_stdout" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-on_stdout" title="Link to this method">
+                <span class="method-name">on_stdout</span>
+                <span class="method-args">(channel, data)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="on_stdout-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_stdout</span>(<span class="ruby-identifier">channel</span>, <span class="ruby-identifier">data</span>)
+  <span class="ruby-ivar">@stdout</span> = <span class="ruby-identifier">data</span>
+  <span class="ruby-ivar">@full_stdout</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>
+  <span class="ruby-identifier">call_interaction_handler</span>(<span class="ruby-value">:stdout</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">channel</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-runtime" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-runtime" title="Link to this method">
+                <span class="method-name">runtime</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="runtime-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">runtime</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">complete?</span>
+  <span class="ruby-ivar">@finished_at</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@started_at</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-should_map-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-should_map-3F" title="Link to this method">
+                <span class="method-name">should_map?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="should_map-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">should_map?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">command</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/\s/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-started-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-started-3D" title="Link to this method">
+                <span class="method-name">started=</span>
+                <span class="method-args">(new_started)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="started-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">started=</span>(<span class="ruby-identifier">new_started</span>)
+  <span class="ruby-ivar">@started_at</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-ivar">@started</span> = <span class="ruby-identifier">new_started</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-started-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-started-3F" title="Link to this method">
+                <span class="method-name">started?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="started-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">started?</span>
+  <span class="ruby-identifier">started</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-stderr" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-stderr" title="Link to this method">
+                <span class="method-name">stderr</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="stderr-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stderr</span>
+  <span class="ruby-identifier">log_reader_deprecation</span>(<span class="ruby-string">&#39;stderr&#39;</span>)
+  <span class="ruby-ivar">@stderr</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-stderr-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-stderr-3D" title="Link to this method">
+                <span class="method-name">stderr=</span>
+                <span class="method-args">(new_value)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="stderr-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stderr=</span>(<span class="ruby-identifier">new_value</span>)
+  <span class="ruby-identifier">log_writer_deprecation</span>(<span class="ruby-string">&#39;stderr&#39;</span>)
+  <span class="ruby-ivar">@stderr</span> = <span class="ruby-identifier">new_value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-stdout" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-stdout" title="Link to this method">
+                <span class="method-name">stdout</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="stdout-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stdout</span>
+  <span class="ruby-identifier">log_reader_deprecation</span>(<span class="ruby-string">&#39;stdout&#39;</span>)
+  <span class="ruby-ivar">@stdout</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-stdout-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-stdout-3D" title="Link to this method">
+                <span class="method-name">stdout=</span>
+                <span class="method-args">(new_value)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="stdout-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stdout=</span>(<span class="ruby-identifier">new_value</span>)
+  <span class="ruby-identifier">log_writer_deprecation</span>(<span class="ruby-string">&#39;stdout&#39;</span>)
+  <span class="ruby-ivar">@stdout</span> = <span class="ruby-identifier">new_value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-success-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-success-3F" title="Link to this method">
+                <span class="method-name">success?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="success-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">success?</span>
+  <span class="ruby-identifier">exit_status</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">exit_status</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="Command.html#method-i-successful-3F">successful?</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-successful-3F" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-successful-3F" title="Link to this method">
+                <span class="method-name">successful?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="Command.html#method-i-success-3F">success?</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-to_command" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-to_command" title="Link to this method">
+                <span class="method-name">to_command</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="to_command-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_command</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">command</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">should_map?</span>
+  <span class="ruby-identifier">within</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">umask</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">with</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">user</span> <span class="ruby-keyword">do</span>
+          <span class="ruby-identifier">in_background</span> <span class="ruby-keyword">do</span>
+            <span class="ruby-identifier">group</span> <span class="ruby-keyword">do</span>
+              <span class="ruby-identifier">to_s</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-to_hash" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-to_hash" title="Link to this method">
+                <span class="method-name">to_hash</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="to_hash-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
+  {
+    <span class="ruby-value">command:</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span>,
+    <span class="ruby-value">args:</span>        <span class="ruby-identifier">args</span>,
+    <span class="ruby-value">options:</span>     <span class="ruby-identifier">options</span>,
+    <span class="ruby-value">exit_status:</span> <span class="ruby-identifier">exit_status</span>,
+    <span class="ruby-value">stdout:</span>      <span class="ruby-identifier">full_stdout</span>,
+    <span class="ruby-value">stderr:</span>      <span class="ruby-identifier">full_stderr</span>,
+    <span class="ruby-value">started_at:</span>  <span class="ruby-ivar">@started_at</span>,
+    <span class="ruby-value">finished_at:</span> <span class="ruby-ivar">@finished_at</span>,
+    <span class="ruby-value">runtime:</span>     <span class="ruby-identifier">runtime</span>,
+    <span class="ruby-value">uuid:</span>        <span class="ruby-identifier">uuid</span>,
+    <span class="ruby-value">started:</span>     <span class="ruby-identifier">started?</span>,
+    <span class="ruby-value">finished:</span>    <span class="ruby-identifier">finished?</span>,
+    <span class="ruby-value">successful:</span>  <span class="ruby-identifier">successful?</span>,
+    <span class="ruby-value">failed:</span>      <span class="ruby-identifier">failed?</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-to_s" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-to_s" title="Link to this method">
+                <span class="method-name">to_s</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">should_map?</span>
+    [<span class="ruby-constant">SSHKit</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">command_map</span>[<span class="ruby-identifier">command</span>.<span class="ruby-identifier">to_sym</span>], <span class="ruby-operator">*</span><span class="ruby-constant">Array</span>(<span class="ruby-identifier">args</span>)].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">command</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-umask" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-umask" title="Link to this method">
+                <span class="method-name">umask</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="umask-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">umask</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">SSHKit</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">umask</span>
+  <span class="ruby-node">&quot;umask #{SSHKit.config.umask} &amp;&amp; #{yield}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-user" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-user" title="Link to this method">
+                <span class="method-name">user</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="user-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">user</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:user</span>]
+  <span class="ruby-identifier">env_string</span> = <span class="ruby-identifier">environment_string</span>
+  <span class="ruby-node">&quot;sudo -u #{options[:user].to_s.shellescape} #{env_string + &quot; &quot; unless env_string.empty?}-- sh -c #{yield.shellescape}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-verbosity" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-verbosity" title="Link to this method">
+                <span class="method-name">verbosity</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="verbosity-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">verbosity</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">vb</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:verbosity</span>])
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">vb</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Symbol</span> <span class="ruby-keyword">then</span> <span class="ruby-keyword">return</span> <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">vb</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Integer</span> <span class="ruby-keyword">then</span> <span class="ruby-keyword">return</span> <span class="ruby-identifier">vb</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Logger</span><span class="ruby-operator">::</span><span class="ruby-constant">INFO</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-with" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-with" title="Link to this method">
+                <span class="method-name">with</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="with-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-identifier">env_string</span> = <span class="ruby-identifier">environment_string</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">env_string</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-node">&quot;( export #{env_string} ; #{yield} )&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-with_redaction" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-with_redaction" title="Link to this method">
+                <span class="method-name">with_redaction</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="with_redaction-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 207</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_redaction</span>
+  <span class="ruby-identifier">new_args</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Redaction</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;[REDACTED]&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">arg</span> }
+  <span class="ruby-identifier">redacted_cmd</span> = <span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">redacted_cmd</span>.<span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-value">:@args</span>, <span class="ruby-identifier">new_args</span>)
+  <span class="ruby-identifier">redacted_cmd</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-within" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-within" title="Link to this method">
+                <span class="method-name">within</span>
+                <span class="method-args">() { || ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="within-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/sshkit-1.24.0/lib/sshkit/command.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">within</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">_block</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:in</span>]
+  <span class="ruby-node">&quot;cd #{self.class.shellescape_except_tilde(options[:in])} &amp;&amp; #{yield}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

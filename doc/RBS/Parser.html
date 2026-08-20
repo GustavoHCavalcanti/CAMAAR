@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class RBS::Parser - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link"><a href="../Object.html">Object</a>
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-buffer">::buffer</a>
+    <li ><a href="#method-c-lex">::lex</a>
+    <li ><a href="#method-c-magic_comment">::magic_comment</a>
+    <li ><a href="#method-c-parse_method_type">::parse_method_type</a>
+    <li ><a href="#method-c-parse_signature">::parse_signature</a>
+    <li ><a href="#method-c-parse_type">::parse_type</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-RBS::Parser">
+  <h1 id="class-RBS::Parser" class="class">
+    class RBS::Parser
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="KEYWORDS">KEYWORDS
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-buffer" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">buffer</span><span
+              class="method-args">(source)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="buffer-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rbs-3.9.5/lib/rbs/parser_aux.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">buffer</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">source</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-constant">Buffer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">content:</span> <span class="ruby-identifier">source</span>, <span class="ruby-value">name:</span> <span class="ruby-string">&quot;a.rbs&quot;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Buffer</span>
+    <span class="ruby-identifier">source</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-lex" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">lex</span><span
+              class="method-args">(source)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="lex-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rbs-3.9.5/lib/rbs/parser_aux.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lex</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-identifier">buf</span> = <span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-identifier">list</span> = <span class="ruby-identifier">_lex</span>(<span class="ruby-identifier">buf</span>, <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">last_position</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Token</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">type:</span> <span class="ruby-identifier">type</span>, <span class="ruby-value">location:</span> <span class="ruby-identifier">location</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">LexResult</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">buffer:</span> <span class="ruby-identifier">buf</span>, <span class="ruby-value">value:</span> <span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-magic_comment" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">magic_comment</span><span
+              class="method-args">(buf)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="magic_comment-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rbs-3.9.5/lib/rbs/parser_aux.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">magic_comment</span>(<span class="ruby-identifier">buf</span>)
+  <span class="ruby-identifier">start_pos</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-keyword">while</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">case</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-identifier">match</span> = <span class="ruby-regexp">/\A#\s*(?&lt;keyword&gt;resolve-type-names)\s*(?&lt;colon&gt;:)\s+(?&lt;value&gt;true|false)$/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">buf</span>.<span class="ruby-identifier">content</span>, <span class="ruby-identifier">start_pos</span>)
+      <span class="ruby-identifier">value</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">:value</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span>
+
+      <span class="ruby-identifier">kw_offset</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-value">:keyword</span>) <span class="ruby-comment">#: [Integer, Integer]</span>
+      <span class="ruby-identifier">colon_offset</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-value">:colon</span>) <span class="ruby-comment">#: [Integer, Integer]</span>
+      <span class="ruby-identifier">value_offset</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-value">:value</span>) <span class="ruby-comment">#: [Integer, Integer]</span>
+
+      <span class="ruby-identifier">location</span> = <span class="ruby-constant">Location</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">buf</span>, <span class="ruby-identifier">kw_offset</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">value_offset</span>[<span class="ruby-value">1</span>])
+      <span class="ruby-identifier">location</span>.<span class="ruby-identifier">add_required_child</span>(<span class="ruby-value">:keyword</span>, <span class="ruby-identifier">kw_offset</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">...</span><span class="ruby-identifier">kw_offset</span>[<span class="ruby-value">1</span>])
+      <span class="ruby-identifier">location</span>.<span class="ruby-identifier">add_required_child</span>(<span class="ruby-value">:colon</span>, <span class="ruby-identifier">colon_offset</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">...</span><span class="ruby-identifier">colon_offset</span>[<span class="ruby-value">1</span>])
+      <span class="ruby-identifier">location</span>.<span class="ruby-identifier">add_required_child</span>(<span class="ruby-value">:value</span>, <span class="ruby-identifier">value_offset</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">...</span><span class="ruby-identifier">value_offset</span>[<span class="ruby-value">1</span>])
+
+      <span class="ruby-keyword">return</span> <span class="ruby-constant">AST</span><span class="ruby-operator">::</span><span class="ruby-constant">Directives</span><span class="ruby-operator">::</span><span class="ruby-constant">ResolveTypeNames</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">value:</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>, <span class="ruby-value">location:</span> <span class="ruby-identifier">location</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_method_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_method_type</span><span
+              class="method-args">(source, range: 0..., variables: [], require_eof: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="parse_method_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rbs-3.9.5/lib/rbs/parser_aux.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_method_type</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">range:</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span>, <span class="ruby-value">variables:</span> [], <span class="ruby-value">require_eof:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">buf</span> = <span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-identifier">_parse_method_type</span>(<span class="ruby-identifier">buf</span>, <span class="ruby-identifier">range</span>.<span class="ruby-identifier">begin</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">range</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">last_position</span>, <span class="ruby-identifier">variables</span>, <span class="ruby-identifier">require_eof</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_signature" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_signature</span><span
+              class="method-args">(source)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="parse_signature-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rbs-3.9.5/lib/rbs/parser_aux.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_signature</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-identifier">buf</span> = <span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">source</span>)
+
+  <span class="ruby-identifier">resolved</span> = <span class="ruby-identifier">magic_comment</span>(<span class="ruby-identifier">buf</span>)
+  <span class="ruby-identifier">start_pos</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">resolved</span>
+      (<span class="ruby-identifier">resolved</span>.<span class="ruby-identifier">location</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>).<span class="ruby-identifier">end_pos</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">dirs</span>, <span class="ruby-identifier">decls</span> = <span class="ruby-identifier">_parse_signature</span>(<span class="ruby-identifier">buf</span>, <span class="ruby-identifier">start_pos</span>, <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">last_position</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resolved</span>
+    <span class="ruby-identifier">dirs</span> = <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">dup</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">frozen?</span>
+    <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">resolved</span>)
+  <span class="ruby-keyword">end</span>
+
+  [<span class="ruby-identifier">buf</span>, <span class="ruby-identifier">dirs</span>, <span class="ruby-identifier">decls</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-parse_type" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_type</span><span
+              class="method-args">(source, range: 0..., variables: [], require_eof: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="parse_type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rbs-3.9.5/lib/rbs/parser_aux.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_type</span>(<span class="ruby-identifier">source</span>, <span class="ruby-value">range:</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span>, <span class="ruby-value">variables:</span> [], <span class="ruby-value">require_eof:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">buf</span> = <span class="ruby-identifier">buffer</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-identifier">_parse_type</span>(<span class="ruby-identifier">buf</span>, <span class="ruby-identifier">range</span>.<span class="ruby-identifier">begin</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">range</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">last_position</span>, <span class="ruby-identifier">variables</span>, <span class="ruby-identifier">require_eof</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

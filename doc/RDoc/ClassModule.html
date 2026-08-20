@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>class RDoc::ClassModule - RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,class,RDoc::ClassModule">
+
+
+    <meta name="description" content="class RDoc::ClassModule: ClassModule is the base class for objects representing either a class or a module.">
+
+
+
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  
+
+  
+<div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="Context.html">RDoc::Context</a><ul><li><a href="CodeObject.html">RDoc::CodeObject</a><ul><li><a href="../Object.html">Object</a><ul><li><a href="../BasicObject.html">BasicObject</a></li></ul></li></ul></li></ul></li></ul>
+</div>
+
+
+  
+
+  
+
+  
+  <div class="nav-section">
+    <h3>Class Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-c-from_module">from_module</a></li>
+
+      <li class="calls-super" ><a href="#method-c-new">new</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+
+      <li ><a href="#method-i-add_comment">add_comment</a></li>
+
+      <li ><a href="#method-i-ancestors">ancestors</a></li>
+
+      <li ><a href="#method-i-aref">aref</a></li>
+
+      <li ><a href="#method-i-clear_comment">clear_comment</a></li>
+
+      <li ><a href="#method-i-complete">complete</a></li>
+
+      <li ><a href="#method-i-description">description</a></li>
+
+      <li ><a href="#method-i-direct_ancestors">direct_ancestors</a></li>
+
+      <li ><a href="#method-i-document_self_or_methods">document_self_or_methods</a></li>
+
+      <li ><a href="#method-i-documented-3F">documented?</a></li>
+
+      <li ><a href="#method-i-each_ancestor">each_ancestor</a></li>
+
+      <li ><a href="#method-i-embed_mixins">embed_mixins</a></li>
+
+      <li ><a href="#method-i-find_ancestor_local_symbol">find_ancestor_local_symbol</a></li>
+
+      <li ><a href="#method-i-find_class_named">find_class_named</a></li>
+
+      <li ><a href="#method-i-full_name">full_name</a></li>
+
+      <li ><a href="#method-i-fully_qualified_nesting_namespaces">fully_qualified_nesting_namespaces</a></li>
+
+      <li ><a href="#method-i-merge">merge</a></li>
+
+      <li ><a href="#method-i-module-3F">module?</a></li>
+
+      <li ><a href="#method-i-name-3D">name=</a></li>
+
+      <li ><a href="#method-i-name_for_path">name_for_path</a></li>
+
+      <li ><a href="#method-i-nesting_namespaces">nesting_namespaces</a></li>
+
+      <li ><a href="#method-i-non_aliases">non_aliases</a></li>
+
+      <li class="calls-super" ><a href="#method-i-parse">parse</a></li>
+
+      <li ><a href="#method-i-path">path</a></li>
+
+      <li ><a href="#method-i-remove_nodoc_children">remove_nodoc_children</a></li>
+
+      <li ><a href="#method-i-search_record">search_record</a></li>
+
+      <li class="calls-super" ><a href="#method-i-store-3D">store=</a></li>
+
+      <li ><a href="#method-i-super_classes">super_classes</a></li>
+
+      <li ><a href="#method-i-superclass">superclass</a></li>
+
+      <li ><a href="#method-i-superclass-3D">superclass=</a></li>
+
+      <li ><a href="#method-i-type">type</a></li>
+
+      <li ><a href="#method-i-update_aliases">update_aliases</a></li>
+
+      <li ><a href="#method-i-update_extends">update_extends</a></li>
+
+      <li ><a href="#method-i-update_includes">update_includes</a></li>
+
+    </ul>
+  </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a></p>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.17.0.</p>
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.</p>
+</footer>
+
+</nav>
+
+<main role="main" aria-labelledby="class-RDoc::ClassModule">
+  
+  
+    <ol role="navigation" aria-label="Breadcrumb navigation" class="breadcrumb">
+      
+      <li>
+        
+        <a href="../RDoc.html">RDoc</a><span>::</span>
+        
+      </li>
+      
+      <li>
+        
+        <span>ClassModule</span>
+        
+      </li>
+      
+    </ol>
+  
+
+  <h1 id="class-RDoc::ClassModule" class="anchor-link class">
+    class RDoc::ClassModule
+  </h1>
+
+  <section class="description">
+    
+<p><a href="ClassModule.html"><code>ClassModule</code></a> is the base class for objects representing either a class or a module.</p>
+
+  </section>
+
+
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
+
+
+
+
+
+
+
+    <section class="attribute-method-details method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+
+      <div id="attribute-i-comment_location" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-comment_location" title="Link to this attribute">
+            <span class="method-name">comment_location</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        <p>Comment and the location it came from.  Use <a href="ClassModule.html#method-i-add_comment"><code>add_comment</code></a> to add comments</p>
+
+        </div>
+      </div>
+
+      <div id="attribute-i-constant_aliases" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-constant_aliases" title="Link to this attribute">
+            <span class="method-name">constant_aliases</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        <p>Constants that are aliases for this class or module</p>
+
+        </div>
+      </div>
+
+      <div id="attribute-i-is_alias_for" class="method-detail anchor-link">
+        <div class="method-heading attribute-method-heading">
+          <a href="#attribute-i-is_alias_for" title="Link to this attribute">
+            <span class="method-name">is_alias_for</span>
+            <span class="attribute-access-type">[RW]</span>
+          </a>
+        </div>
+
+        <div class="method-description">
+
+
+        <p><a href="../Class.html"><code>Class</code></a> or module this constant is an alias for</p>
+
+        </div>
+      </div>
+
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+
+      <div id="method-c-from_module" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-from_module" title="Link to this method">
+                <span class="method-name">from_module</span>
+                <span class="method-args">(class_type, mod)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="from_module-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">from_module</span>(<span class="ruby-identifier">class_type</span>, <span class="ruby-identifier">mod</span>)
+  <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">class_type</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">name</span>
+
+  <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">comment_location</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">comment</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">add_comment</span> <span class="ruby-identifier">comment</span>, <span class="ruby-identifier">location</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">parent</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">parent</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">section</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">section</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">attributes</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">method_list</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">method_list</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">aliases</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">aliases</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">external_aliases</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">external_aliases</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">constants</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">includes</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">includes</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">extends</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">extends</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">methods_hash</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">methods_hash</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">constants_hash</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">constants_hash</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">current_section</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">current_section</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">in_files</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">in_files</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">sections</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">sections</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">unmatched_alias_lists</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">unmatched_alias_lists</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">current_section</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">current_section</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">visibility</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">visibility</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">classes_hash</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">classes_hash</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">modules_hash</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">modules_hash</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">metadata</span>
+
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">document_self</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">received_nodoc</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">document_self</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">document_children</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">document_children</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">force_documentation</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">force_documentation</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">done_documenting</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">done_documenting</span>
+
+  <span class="ruby-comment"># update the parent of all children</span>
+
+  (<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">attributes</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">method_list</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">aliases</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">external_aliases</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">constants</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">includes</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">extends</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">classes</span> <span class="ruby-operator">+</span>
+   <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">modules</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">parent</span> = <span class="ruby-identifier">klass</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">full_name</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">klass</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Return a <a href="ClassModule.html"><code>RDoc::ClassModule</code></a> of class <code>class_type</code> that is a copy of module <code>module</code>. Used to promote modules to classes.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-c-new" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-c-new" title="Link to this method">
+                <span class="method-name">new</span>
+                <span class="method-args">(name, superclass = nil)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">superclass</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@constant_aliases</span> = []
+  <span class="ruby-ivar">@is_alias_for</span>     = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@name</span>             = <span class="ruby-identifier">name</span>
+  <span class="ruby-ivar">@superclass</span>       = <span class="ruby-identifier">superclass</span>
+  <span class="ruby-ivar">@comment_location</span> = [] <span class="ruby-comment"># [[comment, location]]</span>
+
+  <span class="ruby-keyword">super</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Creates a new <a href="ClassModule.html"><code>ClassModule</code></a> with <code>name</code> with optional <code>superclass</code></p>
+
+<p>This is a constructor for subclasses, and must never be called directly.</p>
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Context.html#method-c-new"><code>RDoc::Context::new</code></a>
+            </div>
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+
+      <div id="method-i-add_comment" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-add_comment" title="Link to this method">
+                <span class="method-name">add_comment</span>
+                <span class="method-args">(comment, location)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="add_comment-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_comment</span>(<span class="ruby-identifier">comment</span>, <span class="ruby-identifier">location</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">document_self</span>
+
+  <span class="ruby-identifier">original</span> = <span class="ruby-identifier">comment</span>
+
+  <span class="ruby-identifier">comment</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">comment</span>
+            <span class="ruby-keyword">when</span> <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">Comment</span> <span class="ruby-keyword">then</span>
+              <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">normalize</span>
+            <span class="ruby-keyword">else</span>
+              <span class="ruby-identifier">normalize_comment</span> <span class="ruby-identifier">comment</span>
+            <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">parser</span> <span class="ruby-operator">==</span> <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">C</span>
+    <span class="ruby-ivar">@comment_location</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span>(<span class="ruby-identifier">_</span>, <span class="ruby-identifier">l</span>)<span class="ruby-operator">|</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">location</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@comment_location</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">comment</span>, <span class="ruby-identifier">location</span>]
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">comment</span> = <span class="ruby-identifier">original</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Adds <code>comment</code> to this ClassModule’s list of comments at <code>location</code>.  This method is preferred over <a href="CodeObject.html#method-i-comment-3D"><code>comment=</code></a> since it allows ri data to be updated across multiple runs.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-ancestors" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-ancestors" title="Link to this method">
+                <span class="method-name">ancestors</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="ancestors-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ancestors</span>
+  <span class="ruby-identifier">includes</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">module</span> }.<span class="ruby-identifier">reverse</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Ancestors list for this ClassModule: the list of included modules (classes will add their superclass if any).</p>
+
+<p>Returns the included classes or modules, not the includes themselves. The returned values are either <a href="../String.html"><code>String</code></a> or <a href="NormalModule.html"><code>RDoc::NormalModule</code></a> instances (see <a href="Mixin.html#method-i-module"><code>RDoc::Include#module</code></a>).</p>
+
+<p>The values are returned in reverse order of their inclusion, which is the order suitable for searching methods/attributes in the ancestors. The superclass, if any, comes last.</p>
+
+
+        </div>
+
+
+
+        <div class="aliases">
+          Also aliased as: <a href="ClassModule.html#method-i-direct_ancestors">direct_ancestors</a>
+        </div>
+
+
+
+      </div>
+
+
+      <div id="method-i-aref" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-aref" title="Link to this method">
+                <span class="method-name">aref</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="aref-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aref</span>
+  <span class="ruby-node">&quot;#{aref_prefix}-#{full_name}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>HTML fragment reference for this module or class.  See <a href="ClassModule.html#method-i-aref"><code>RDoc::NormalClass#aref</code></a> and <a href="ClassModule.html#method-i-aref"><code>RDoc::NormalModule#aref</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-clear_comment" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-clear_comment" title="Link to this method">
+                <span class="method-name">clear_comment</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="clear_comment-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear_comment</span>
+  <span class="ruby-ivar">@comment</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Clears the comment. Used by the Ruby parser.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-complete" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-complete" title="Link to this method">
+                <span class="method-name">complete</span>
+                <span class="method-args">(min_visibility)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="complete-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complete</span>(<span class="ruby-identifier">min_visibility</span>)
+  <span class="ruby-identifier">update_aliases</span>
+  <span class="ruby-identifier">remove_nodoc_children</span>
+  <span class="ruby-identifier">embed_mixins</span>
+  <span class="ruby-identifier">update_includes</span>
+  <span class="ruby-identifier">update_extends</span>
+  <span class="ruby-identifier">remove_invisible</span> <span class="ruby-identifier">min_visibility</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Prepares this <a href="ClassModule.html"><code>ClassModule</code></a> for use by a generator.</p>
+
+<p>See <a href="Store.html#method-i-complete"><code>RDoc::Store#complete</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-description" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-description" title="Link to this method">
+                <span class="method-name">description</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="description-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/generator/markup.rb, line 143</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">description</span>
+  <span class="ruby-identifier">markup</span> <span class="ruby-ivar">@comment_location</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Handy wrapper for marking up this class or module’s comment</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-direct_ancestors" class="method-detail anchor-link method-alias">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-direct_ancestors" title="Link to this method">
+                <span class="method-name">direct_ancestors</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="method-description">
+
+
+
+          <p>Ancestors of this class or module only</p>
+
+
+        </div>
+
+
+
+
+
+        <div class="aliases">
+          Alias for: <a href="ClassModule.html#method-i-ancestors">ancestors</a>
+        </div>
+
+      </div>
+
+
+      <div id="method-i-document_self_or_methods" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-document_self_or_methods" title="Link to this method">
+                <span class="method-name">document_self_or_methods</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="document_self_or_methods-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">document_self_or_methods</span>
+  <span class="ruby-identifier">document_self</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">method_list</span>.<span class="ruby-identifier">any?</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">document_self</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Does this <a href="ClassModule.html"><code>ClassModule</code></a> or any of its methods have document_self set?</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-documented-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-documented-3F" title="Link to this method">
+                <span class="method-name">documented?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="documented-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 239</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">documented?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@received_nodoc</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@comment_location</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-ivar">@comment_location</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">comment</span>, <span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">empty?</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Does this class or module have a comment with content or is <a href="CodeObject.html#attribute-i-received_nodoc"><code>received_nodoc</code></a> true?</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-each_ancestor" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-each_ancestor" title="Link to this method">
+                <span class="method-name">each_ancestor</span>
+                <span class="method-args">() { |module| ... }</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="each_ancestor-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 249</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_ancestor</span> <span class="ruby-comment"># :yields: module</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">enum_for</span> <span class="ruby-identifier">__method__</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">mod</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">mod</span>
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">mod</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Iterates the ancestors of this class or module for which an <a href="ClassModule.html"><code>RDoc::ClassModule</code></a> exists.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-embed_mixins" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-embed_mixins" title="Link to this method">
+                <span class="method-name">embed_mixins</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="embed_mixins-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 849</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">embed_mixins</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">embed_mixins</span>
+
+  <span class="ruby-identifier">includes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">include</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">include</span>.<span class="ruby-identifier">module</span>
+    <span class="ruby-identifier">include</span>.<span class="ruby-identifier">module</span>.<span class="ruby-identifier">method_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">code_object</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">add_method</span>(<span class="ruby-identifier">prepare_to_embed</span>(<span class="ruby-identifier">code_object</span>))
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">include</span>.<span class="ruby-identifier">module</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">code_object</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">add_constant</span>(<span class="ruby-identifier">prepare_to_embed</span>(<span class="ruby-identifier">code_object</span>))
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">include</span>.<span class="ruby-identifier">module</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">code_object</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">add_attribute</span>(<span class="ruby-identifier">prepare_to_embed</span>(<span class="ruby-identifier">code_object</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">extends</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">module</span>
+    <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">module</span>.<span class="ruby-identifier">method_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">code_object</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">add_method</span>(<span class="ruby-identifier">prepare_to_embed</span>(<span class="ruby-identifier">code_object</span>, <span class="ruby-keyword">true</span>))
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">module</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">code_object</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">add_attribute</span>(<span class="ruby-identifier">prepare_to_embed</span>(<span class="ruby-identifier">code_object</span>, <span class="ruby-keyword">true</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-find_ancestor_local_symbol" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-find_ancestor_local_symbol" title="Link to this method">
+                <span class="method-name">find_ancestor_local_symbol</span>
+                <span class="method-args">(symbol)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="find_ancestor_local_symbol-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 262</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_ancestor_local_symbol</span>(<span class="ruby-identifier">symbol</span>)
+  <span class="ruby-identifier">each_ancestor</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">res</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">find_local_symbol</span>(<span class="ruby-identifier">symbol</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">res</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Looks for a symbol in the <a href="ClassModule.html#method-i-ancestors"><code>ancestors</code></a>. See Context#find_local_symbol.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-find_class_named" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-find_class_named" title="Link to this method">
+                <span class="method-name">find_class_named</span>
+                <span class="method-args">(name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="find_class_named-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 274</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_class_named</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">full_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
+
+  <span class="ruby-ivar">@classes</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>
+    <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">find_class_named</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Finds a class or module with <code>name</code> in this namespace or its descendants</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-full_name" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-full_name" title="Link to this method">
+                <span class="method-name">full_name</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="full_name-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 287</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">full_name</span>
+  <span class="ruby-ivar">@full_name</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">ClassModule</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">parent</span> <span class="ruby-keyword">then</span>
+                   <span class="ruby-node">&quot;#{parent.full_name}::#{@name}&quot;</span>
+                 <span class="ruby-keyword">else</span>
+                   <span class="ruby-ivar">@name</span>
+                 <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Return the fully qualified name of this class or module</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-fully_qualified_nesting_namespaces" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-fully_qualified_nesting_namespaces" title="Link to this method">
+                <span class="method-name">fully_qualified_nesting_namespaces</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="fully_qualified_nesting_namespaces-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 307</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fully_qualified_nesting_namespaces</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">nesting_namespaces</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nesting_namespaces</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
+  <span class="ruby-ivar">@fqns</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">nesting_namespaces</span>.<span class="ruby-identifier">inject</span>([]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">list</span>, <span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">list</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{list.last}::#{n}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Return array of fully qualified nesting namespaces.</p>
+
+<p>For example, if <a href="ClassModule.html#method-i-full_name"><code>full_name</code></a> is <code>A::B::C</code>, this method returns <code>[&quot;A&quot;, &quot;A::B&quot;, &quot;A::B::C&quot;]</code></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-merge" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-merge" title="Link to this method">
+                <span class="method-name">merge</span>
+                <span class="method-args">(class_module)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="merge-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 453</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge</span>(<span class="ruby-identifier">class_module</span>)
+  <span class="ruby-ivar">@parent</span>      = <span class="ruby-identifier">class_module</span>.<span class="ruby-identifier">parent</span>
+  <span class="ruby-ivar">@parent_name</span> = <span class="ruby-identifier">class_module</span>.<span class="ruby-identifier">parent_name</span>
+
+  <span class="ruby-identifier">other_document</span> = <span class="ruby-identifier">parse</span> <span class="ruby-identifier">class_module</span>.<span class="ruby-identifier">comment_location</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">other_document</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">document</span> = <span class="ruby-identifier">parse</span> <span class="ruby-ivar">@comment_location</span>
+
+    <span class="ruby-identifier">document</span> = <span class="ruby-identifier">document</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">other_document</span>
+
+    <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">Comment</span>.<span class="ruby-identifier">from_document</span>(<span class="ruby-identifier">document</span>)
+    <span class="ruby-ivar">@comment_location</span> = <span class="ruby-identifier">document</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">cm</span> = <span class="ruby-identifier">class_module</span>
+  <span class="ruby-identifier">other_files</span> = <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">in_files</span>
+
+  <span class="ruby-identifier">merge_collections</span> <span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">other_files</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">add</span>, <span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">add_attribute</span> <span class="ruby-identifier">attr</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">attr</span>
+      <span class="ruby-ivar">@methods_hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">pretty_name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">merge_collections</span> <span class="ruby-identifier">constants</span>, <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">constants</span>, <span class="ruby-identifier">other_files</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">add</span>, <span class="ruby-identifier">const</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">add_constant</span> <span class="ruby-identifier">const</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@constants</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">const</span>
+      <span class="ruby-ivar">@constants_hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">const</span>.<span class="ruby-identifier">name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">merge_collections</span> <span class="ruby-identifier">includes</span>, <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">includes</span>, <span class="ruby-identifier">other_files</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">add</span>, <span class="ruby-identifier">incl</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">add_include</span> <span class="ruby-identifier">incl</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@includes</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">incl</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@includes</span>.<span class="ruby-identifier">uniq!</span> <span class="ruby-comment"># clean up</span>
+
+  <span class="ruby-identifier">merge_collections</span> <span class="ruby-identifier">extends</span>, <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">extends</span>, <span class="ruby-identifier">other_files</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">add</span>, <span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">add_extend</span> <span class="ruby-identifier">ext</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@extends</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">ext</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@extends</span>.<span class="ruby-identifier">uniq!</span> <span class="ruby-comment"># clean up</span>
+
+  <span class="ruby-identifier">merge_collections</span> <span class="ruby-identifier">method_list</span>, <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">method_list</span>, <span class="ruby-identifier">other_files</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">add</span>, <span class="ruby-identifier">meth</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">add</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">add_method</span> <span class="ruby-identifier">meth</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@method_list</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">meth</span>
+      <span class="ruby-ivar">@methods_hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">pretty_name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">merge_sections</span> <span class="ruby-identifier">cm</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Merges <a href="../vendor/bundle/ruby/3_3_0/gems/rdoc-6_17_0/lib/rdoc/code_object/class_module_rb.html">class_module</a> into this <a href="ClassModule.html"><code>ClassModule</code></a>.</p>
+
+<p>The data in <a href="../vendor/bundle/ruby/3_3_0/gems/rdoc-6_17_0/lib/rdoc/code_object/class_module_rb.html">class_module</a> is preferred over the receiver.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-module-3F" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-module-3F" title="Link to this method">
+                <span class="method-name">module?</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="module-3F-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 589</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">module?</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Does this object represent a module?</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-name-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-name-3D" title="Link to this method">
+                <span class="method-name">name=</span>
+                <span class="method-args">(new_name)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="name-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 598</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name=</span>(<span class="ruby-identifier">new_name</span>)
+  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">new_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Allows overriding the initial name.</p>
+
+<p>Used for modules and classes that are constant aliases.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-name_for_path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-name_for_path" title="Link to this method">
+                <span class="method-name">name_for_path</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="name_for_path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 643</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name_for_path</span>
+  <span class="ruby-identifier">is_alias_for</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">is_alias_for</span>.<span class="ruby-identifier">full_name</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">full_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Name to use to generate the url: modules and classes that are aliases for another module or class return the name of the latter.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-nesting_namespaces" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-nesting_namespaces" title="Link to this method">
+                <span class="method-name">nesting_namespaces</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="nesting_namespaces-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 298</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nesting_namespaces</span>
+  <span class="ruby-ivar">@namespaces</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">full_name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;::&quot;</span>).<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:empty?</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Return array of <a href="ClassModule.html#method-i-full_name"><code>full_name</code></a> splitted by <code>::</code>.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-non_aliases" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-non_aliases" title="Link to this method">
+                <span class="method-name">non_aliases</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="non_aliases-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 652</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">non_aliases</span>
+  <span class="ruby-ivar">@non_aliases</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">classes_and_modules</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cm</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">is_alias_for</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Returns the classes and modules that are not constants aliasing another class or module. For use by formatters only (caches its result).</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-parse" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-parse" title="Link to this method">
+                <span class="method-name">parse</span>
+                <span class="method-args">(comment_location)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 606</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">comment_location</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">comment_location</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">docs</span> = <span class="ruby-identifier">comment_location</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">comment</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">doc</span> = <span class="ruby-keyword">super</span> <span class="ruby-identifier">comment</span>
+      <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">location</span>
+      <span class="ruby-identifier">doc</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">Markup</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">docs</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">Comment</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">doc</span> = <span class="ruby-keyword">super</span> <span class="ruby-identifier">comment_location</span>.<span class="ruby-identifier">text</span>, <span class="ruby-identifier">comment_location</span>.<span class="ruby-identifier">format</span>
+    <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">comment_location</span>.<span class="ruby-identifier">location</span>
+    <span class="ruby-identifier">doc</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">Markup</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">comment_location</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;unknown comment class #{comment_location.class}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Parses <a href="ClassModule.html#attribute-i-comment_location"><code>comment_location</code></a> into an <a href="Markup/Document.html"><code>RDoc::Markup::Document</code></a> composed of multiple RDoc::Markup::Documents with their file set.</p>
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Text.html#method-i-parse"><code>RDoc::Text#parse</code></a>
+            </div>
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-path" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-path" title="Link to this method">
+                <span class="method-name">path</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="path-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 632</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
+  <span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">class_module_path_prefix</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">http_url</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">prefix</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">http_url</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Path to this class or module for use with HTML generator output.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-remove_nodoc_children" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-remove_nodoc_children" title="Link to this method">
+                <span class="method-name">remove_nodoc_children</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="remove_nodoc_children-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 664</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_nodoc_children</span>
+  <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">full_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;::&#39;</span>
+
+  <span class="ruby-identifier">modules_hash</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">full_name</span> = <span class="ruby-identifier">prefix</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">modules_hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">name</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">modules_hash</span>[<span class="ruby-identifier">full_name</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">classes_hash</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">full_name</span> = <span class="ruby-identifier">prefix</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">classes_hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">name</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">classes_hash</span>[<span class="ruby-identifier">full_name</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Updates the child modules or classes of class/module <code>parent</code> by deleting the ones that have been removed from the documentation.</p>
+
+<p><code>parent_hash</code> is either <code>parent.modules_hash</code> or <code>parent.classes_hash</code> and <code>all_hash</code> is ::all_modules_hash or ::all_classes_hash.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-search_record" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-search_record" title="Link to this method">
+                <span class="method-name">search_record</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="search_record-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 693</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_record</span>
+  [
+    <span class="ruby-identifier">name</span>,
+    <span class="ruby-identifier">full_name</span>,
+    <span class="ruby-identifier">full_name</span>,
+    <span class="ruby-string">&#39;&#39;</span>,
+    <span class="ruby-identifier">path</span>,
+    <span class="ruby-string">&#39;&#39;</span>,
+    <span class="ruby-identifier">snippet</span>(<span class="ruby-ivar">@comment_location</span>),
+  ]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Search record used by <a href="Generator/JsonIndex.html"><code>RDoc::Generator::JsonIndex</code></a></p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-store-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-store-3D" title="Link to this method">
+                <span class="method-name">store=</span>
+                <span class="method-args">(store)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="store-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 708</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">store=</span>(<span class="ruby-identifier">store</span>)
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-ivar">@attributes</span> .<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>  <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">store</span>  = <span class="ruby-identifier">store</span> <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@constants</span>  .<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">const</span><span class="ruby-operator">|</span> <span class="ruby-identifier">const</span>.<span class="ruby-identifier">store</span> = <span class="ruby-identifier">store</span> <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@includes</span>   .<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">incl</span><span class="ruby-operator">|</span>  <span class="ruby-identifier">incl</span>.<span class="ruby-identifier">store</span>  = <span class="ruby-identifier">store</span> <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@extends</span>    .<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>   <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">store</span>   = <span class="ruby-identifier">store</span> <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@method_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">meth</span><span class="ruby-operator">|</span>  <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">store</span>  = <span class="ruby-identifier">store</span> <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Sets the store for this class or module and its contained code objects.</p>
+
+
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="CodeObject.html#method-i-store-3D"><code>RDoc::CodeObject#store=</code></a>
+            </div>
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-super_classes" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-super_classes" title="Link to this method">
+                <span class="method-name">super_classes</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="super_classes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 751</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">super_classes</span>
+  <span class="ruby-identifier">result</span> = []
+  <span class="ruby-identifier">parent</span> = <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">parent</span> = <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">superclass</span>
+    <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parent</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">result</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Get all super classes of this class in an array. The last element might be a string if the name is unknown.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-superclass" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-superclass" title="Link to this method">
+                <span class="method-name">superclass</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="superclass-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 722</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">superclass</span>
+  <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">find_class_named</span>(<span class="ruby-ivar">@superclass</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@superclass</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Get the superclass of this class.  Attempts to retrieve the superclass object, returns the name if it is not known.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-superclass-3D" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-superclass-3D" title="Link to this method">
+                <span class="method-name">superclass=</span>
+                <span class="method-args">(superclass)</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="superclass-3D-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 735</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">superclass=</span>(<span class="ruby-identifier">superclass</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-node">&quot;#{full_name} is a module&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">module?</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">superclass</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">ClassModule</span>
+    <span class="ruby-ivar">@superclass</span> = <span class="ruby-identifier">superclass</span>.<span class="ruby-identifier">full_name</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>, <span class="ruby-constant">String</span>
+    <span class="ruby-ivar">@superclass</span> = <span class="ruby-identifier">superclass</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;superclass must be a String or RDoc::ClassModule, not #{superclass.class}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p><a href="../Set.html"><code>Set</code></a> the superclass of this class to <code>superclass</code></p>
+
+<p>where <code>superclass</code> is one of:</p>
+<ul><li>
+<p><code>nil</code></p>
+</li><li>
+<p>a <a href="../String.html"><code>String</code></a> containing the full name of the superclass</p>
+</li><li>
+<p>the <a href="ClassModule.html"><code>RDoc::ClassModule</code></a> representing the superclass</p>
+</li></ul>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-type" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-type" title="Link to this method">
+                <span class="method-name">type</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="type-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 772</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">type</span>
+  <span class="ruby-identifier">module?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;module&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;class&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>‘module’ or ‘class’</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-update_aliases" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-update_aliases" title="Link to this method">
+                <span class="method-name">update_aliases</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="update_aliases-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 791</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_aliases</span>
+  <span class="ruby-identifier">constants</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">const</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cm</span> = <span class="ruby-identifier">const</span>.<span class="ruby-identifier">is_alias_for</span>
+    <span class="ruby-identifier">cm_alias</span> = <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">const</span>.<span class="ruby-identifier">name</span>
+
+    <span class="ruby-comment"># Don&#39;t move top-level aliases under Object, they look ugly there</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">TopLevel</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">parent</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">parent</span> = <span class="ruby-keyword">self</span>
+      <span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">full_name</span> = <span class="ruby-keyword">nil</span> <span class="ruby-comment"># force update for new parent</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">aliases</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">is_alias_for</span> = <span class="ruby-identifier">cm</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">module?</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">modules_hash</span>[<span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">full_name</span>] = <span class="ruby-identifier">cm_alias</span>
+      <span class="ruby-identifier">modules_hash</span>[<span class="ruby-identifier">const</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">cm_alias</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">classes_hash</span>[<span class="ruby-identifier">cm_alias</span>.<span class="ruby-identifier">full_name</span>] = <span class="ruby-identifier">cm_alias</span>
+      <span class="ruby-identifier">classes_hash</span>[<span class="ruby-identifier">const</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">cm_alias</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">cm</span>.<span class="ruby-identifier">aliases</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">cm_alias</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Updates the child modules &amp; classes by replacing the ones that are aliases through a constant.</p>
+
+<p>The aliased module/class is replaced in the children and in <a href="Store.html#method-i-modules_hash"><code>RDoc::Store#modules_hash</code></a> or <a href="Store.html#method-i-classes_hash"><code>RDoc::Store#classes_hash</code></a> by a copy that has <a href="ClassModule.html#attribute-i-is_alias_for"><code>RDoc::ClassModule#is_alias_for</code></a> set to the aliased module/class, and this copy is added to <a href="Context.html#attribute-i-aliases"><code>aliases</code></a> of the aliased module/class.</p>
+
+<p>Formatters can use the <a href="ClassModule.html#method-i-non_aliases"><code>non_aliases</code></a> method to retrieve children that are not aliases, for instance to list the namespace content, since the aliased modules are included in the constants of the class/module, that are listed separately.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-update_extends" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-update_extends" title="Link to this method">
+                <span class="method-name">update_extends</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="update_extends-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 839</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_extends</span>
+  <span class="ruby-identifier">extends</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">mod</span> = <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">module</span>
+
+    <span class="ruby-operator">!</span>(<span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">mod</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">modules_hash</span>[<span class="ruby-identifier">mod</span>.<span class="ruby-identifier">full_name</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">extends</span>.<span class="ruby-identifier">uniq!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Deletes from <a href="Context.html#attribute-i-extends"><code>extends</code></a> those whose module has been removed from the documentation.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+      <div id="method-i-update_includes" class="method-detail anchor-link ">
+        <div class="method-header">
+
+            <div class="method-heading">
+              <a href="#method-i-update_includes" title="Link to this method">
+                <span class="method-name">update_includes</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
+
+        </div>
+
+
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
+
+
+
+        <div class="method-description">
+
+          <div class="method-source-code" id="update_includes-source">
+            <pre><span class="ruby-comment"># File vendor/bundle/ruby/3.3.0/gems/rdoc-6.17.0/lib/rdoc/code_object/class_module.rb, line 824</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_includes</span>
+  <span class="ruby-identifier">includes</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">include</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">mod</span> = <span class="ruby-identifier">include</span>.<span class="ruby-identifier">module</span>
+    <span class="ruby-operator">!</span>(<span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">mod</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">modules_hash</span>[<span class="ruby-identifier">mod</span>.<span class="ruby-identifier">full_name</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">includes</span>.<span class="ruby-identifier">uniq!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+
+
+
+          <p>Deletes from <a href="Context.html#attribute-i-includes"><code>includes</code></a> those whose module has been removed from the documentation.</p>
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+  </section>
+
+</main>
+</body>
+

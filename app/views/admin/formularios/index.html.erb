@@ -1,0 +1,105 @@
+<div style="padding: 20px;">
+
+  <h2 class="mb-4">Avaliações</h2>
+
+  <!-- GRID DE CARDS -->
+  <div data-avaliacoes-grid style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    ">
+
+    <% @formularios.each do |form| %>
+      <div data-avaliacao-card style="
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+          position: relative;
+          border-left: 4px solid #5E2A86;
+        ">
+
+        <h4 style="margin: 0 0 8px 0;"><%= form.titulo %></h4>
+        
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.9rem;">
+          <% if form.turma.present? %>
+            <%= form.turma.codigo %> - <%= form.turma.departamento %>
+            <% if form.turma.semestre.present? %>
+              • <%= form.turma.semestre %>
+            <% end %>
+          <% end %>
+        </p>
+
+        <p class="text-muted" style="margin: 0 0 16px 0; font-size: 0.85rem;">
+          <% if form.turma&.professor.present? %>
+            <%= form.turma.professor %>
+          <% else %>
+            Professor não informado
+          <% end %>
+        </p>
+
+        <!-- AÇÕES -->
+        <div style="
+            display: flex;
+            gap: 10px;
+          ">
+
+          <!-- RESPOSTAS -->
+          <%= link_to respostas_admin_formulario_path(form),
+              style: "flex: 1; text-align: center; padding: 8px; background: #c8e6c9; color: #2e7d32; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Respostas
+          <% end %>
+
+          <!-- VER -->
+          <%= link_to admin_formulario_path(form),
+              style: "flex: 1; text-align: center; padding: 8px; background: #e3f2fd; color: #1976d2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Ver
+          <% end %>
+
+          <!-- EDITAR -->
+          <%= link_to edit_admin_formulario_path(form),
+              style: "flex: 1; text-align: center; padding: 8px; background: #f3e5f5; color: #7b1fa2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Editar
+          <% end %>
+
+          <!-- DELETAR -->
+          <%= button_to admin_formulario_path(form),
+              method: :delete,
+              form: { data: { turbo_confirm: "Tem certeza que deseja excluir esta avaliação?" }, class: "d-inline" },
+              style: "flex: 1; background: #ffebee; color: #c62828; border: none; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: 500; font-size: 0.9rem;" do %>
+            Excluir
+          <% end %>
+
+        </div>
+
+      </div>
+    <% end %>
+
+    <!-- CARD DE CRIAÇÃO -->
+    <%= link_to new_admin_formulario_path,
+        style: "
+          background: white;
+          border-radius: 10px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 40px;
+          text-decoration: none;
+          color: #5E2A86;
+          font-weight: bold;
+          border-left: 4px solid #4CAF50;
+        " do %>
+      +
+    <% end %>
+
+  </div>
+
+  <% if @formularios.empty? %>
+    <div style="background: #e3f2fd; border-left: 3px solid #1976d2; padding: 16px; margin-top: 24px; border-radius: 4px; font-size: 0.9rem; text-align: center;">
+      Nenhuma avaliação disponível no momento. Clique no botão + para criar a primeira!
+    </div>
+  <% end %>
+
+</div>

@@ -1,0 +1,91 @@
+<% content_for :page_title, "Gerenciamento - Turmas" %>
+
+<div style="padding: 20px;">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+    <h2 class="mb-0">Gerenciamento - Turmas</h2>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <%= link_to "Importar CSV",
+          import_form_admin_turmas_path,
+          style: "background: #5E2A86; color: white; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-weight: 600;" %>
+      <%= link_to "+ Nova Turma",
+          new_admin_turma_path,
+          style: "background: #4CAF50; color: white; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-weight: 600;" %>
+    </div>
+  </div>
+
+  <!-- GRID DE CARDS -->
+  <div style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    ">
+
+    <% @turmas.each do |turma| %>
+      <div style="
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+          position: relative;
+          border-left: 4px solid #5E2A86;
+        ">
+
+        <h4 style="margin: 0 0 8px 0;"><%= turma.codigo %></h4>
+        
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.9rem;">
+          <%= turma.departamento %>
+        </p>
+
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.85rem;">
+          <strong>Professor:</strong> <%= turma.professor || "Não informado" %>
+        </p>
+
+        <p class="text-muted" style="margin: 0 0 4px 0; font-size: 0.85rem;">
+          <strong>Semestre:</strong> <%= turma.semestre || "Não informado" %>
+        </p>
+
+        <p class="text-muted" style="margin: 0 0 16px 0; font-size: 0.85rem;">
+          <strong><%= turma.users.count %></strong> aluno(s)
+        </p>
+
+        <!-- AÇÕES -->
+        <div style="
+            display: flex;
+            gap: 10px;
+          ">
+
+          <!-- VER -->
+          <%= link_to admin_turma_path(turma),
+              style: "flex: 1; text-align: center; padding: 8px; background: #e3f2fd; color: #1976d2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Ver
+          <% end %>
+
+          <!-- EDITAR -->
+          <%= link_to edit_admin_turma_path(turma),
+              style: "flex: 1; text-align: center; padding: 8px; background: #f3e5f5; color: #7b1fa2; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 0.9rem;" do %>
+            Editar
+          <% end %>
+
+          <!-- DELETAR -->
+          <%= button_to admin_turma_path(turma),
+              method: :delete,
+              form: { data: { turbo_confirm: "Tem certeza que deseja excluir esta turma?" }, class: "d-inline" },
+              style: "flex: 1; background: #ffebee; color: #c62828; border: none; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: 500; font-size: 0.9rem;" do %>
+            Excluir
+          <% end %>
+
+        </div>
+
+      </div>
+    <% end %>
+
+  </div>
+
+  <% if @turmas.empty? %>
+    <div style="background: #e3f2fd; border-left: 3px solid #1976d2; padding: 16px; margin-top: 24px; border-radius: 4px; font-size: 0.9rem; text-align: center;">
+      Nenhuma turma cadastrada. Clique no botão + para criar a primeira!
+    </div>
+  <% end %>
+
+</div>
